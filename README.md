@@ -35,10 +35,9 @@ Ralph acts as the Federal Reserve Chairman, controlling the money printer that g
 | Metric | Value |
 |--------|-------|
 | **Total Distributed** | **$31,279+ USD1** |
-| **Distributions** | 150+ cycles |
-| **Holders Receiving** | 1,231+ per distribution |
-| **Active Engagement** | 1,874+ holders tracked |
-| **Engagement Bonus Recipients** | 1,047+ holders per cycle |
+| **Distributions** | 424 distribution runs |
+| **Successful Payouts** | 71+ cycles with $10+ threshold |
+| **Holders Per Cycle** | 309-369 (growing!) |
 | **Frequency** | Every 2 minutes |
 | **Distribution Threshold** | $10 USD1 minimum |
 | **Multiplier System** | Tier × Streak × Engagement × Time Lock |
@@ -287,24 +286,19 @@ pm2 start "npx ts-node scripts/run-distribution.ts" \
 Based on latest distribution cycle (January 21, 2026):
 
 ### Tier Breakdown
-| Tier | Holders | Multiplier |
-|------|---------|------------|
-| 🏛️ Fed Chairman (50M+) | 0 | 1.5x |
-| 👔 Fed Governor (10M+) | 17+ | 1.25x |
-| 📋 Regional Director (1M+) | 164+ | 1.1x |
-| 🪪 Board Member (100K+) | 384+ | 1.05x |
-| 🌐 Fed Citizen (Any) | 666+ | 1.0x |
+| Tier | Multiplier | Description |
+|------|------------|-------------|
+| 🏛️ **Fed Chairman** (50M+) | 1.5x | Top tier - maximum rewards |
+| 👔 **Fed Governor** (10M+) | 1.25x | High-level stakeholder |
+| 📋 **Regional Director** (1M+) | 1.1x | Mid-tier holder |
+| 🪪 **Board Member** (100K+) | 1.05x | Entry-level bonus |
+| 🌐 **Fed Citizen** (Any) | 1.0x | Base rewards |
 
-### Engagement Breakdown
-| Tier | Holders | XP Range | Multiplier |
-|------|---------|----------|------------|
-| 🏆 Fed Elite | 50+ | 500+ XP | 1.2x |
-| ⭐ Fed Veteran | 200+ | 250+ XP | 1.15x |
-| 🔥 Fed Active | 800+ | 100+ XP | 1.1x |
-| 📊 Fed Regular | 234+ | 50+ XP | 1.05x |
-| 🆕 Fed Newcomer | 184+ | 0+ XP | 1.0x |
-
-**1,231+ holders receiving distributions every 2 minutes!**
+### System Status
+- **Active Distribution**: PM2 running every 2 minutes
+- **Holders Growing**: 309 → 369 per cycle (latest data)
+- **QE Progress**: $31,279 / $50,000 (62.6% to QE2)
+- **All 4 Multipliers**: Active and stacking
 
 ---
 
