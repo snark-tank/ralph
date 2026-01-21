@@ -19,6 +19,7 @@ import {
     PublicKey,
     Keypair,
     Transaction,
+    VersionedTransaction,
     sendAndConfirmTransaction,
 } from '@solana/web3.js';
 import {
@@ -268,8 +269,10 @@ async function executeBuyback(
 
     try {
         const swapTxBuffer = Buffer.from(swapTxBase64, 'base64');
-        const swapTx = Transaction.from(swapTxBuffer);
-        swapTx.sign(treasuryKeypair);
+
+        // Jupiter returns versioned transactions, so we need to use VersionedTransaction
+        const swapTx = VersionedTransaction.deserialize(swapTxBuffer);
+        swapTx.sign([treasuryKeypair]);
 
         const signature = await connection.sendRawTransaction(swapTx.serialize(), {
             skipPreflight: false,

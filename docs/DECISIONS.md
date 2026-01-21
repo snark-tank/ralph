@@ -4,6 +4,61 @@ This document tracks all monetary policy decisions made by Ralph, the FED Chairm
 
 ---
 
+## 2026-01-21 ~14:30 UTC - BUYBACK $37 USD1 (Price Support)
+
+### Market Conditions (Decision Factors)
+| Metric | Value | Signal |
+|--------|-------|--------|
+| Price | $0.00060180 | DOWN |
+| Market Cap | $571,709 | Stable |
+| Liquidity | $67,563 | Adequate |
+| 1h Change | **-25.17%** | ⚠️ CORRECTION |
+| 24h Change | **+10,471%** | Still massively up |
+| Buy Vol (24h) | $1,014,992 | Strong |
+| Sell Vol (24h) | $1,011,158 | Balanced |
+
+### Treasury Status
+- **USD1 Balance Before**: $75.25
+- **Buyback Amount**: $37.00 (50% limit applied)
+- **USD1 Balance After**: ~$38.25
+- **$FED Bought**: 51,750.695
+
+### Decision: BUYBACK
+
+**Rationale:**
+1. **1h price change -25.17%** exceeds -5% buyback threshold
+2. System recommended BUYBACK to support price floor
+3. Treasury had sufficient funds ($75.25)
+4. 50% limit automatically applied ($37 used)
+
+### Execution Results
+- **Buyback TX**: `2sqtdVndEC669BE4zy4rAGF1AQQT82jPppZMtPisLwBx8tqt6Qqpkgi7WHoDgUWzPEihQqTHG918J9KKeMLwRK17`
+- **$FED Bought**: 51,750.695 tokens
+- **Effective Price**: $0.00071497 per $FED
+- **Price Impact**: 0.0158%
+
+**Burn Status**: Failed due to minor slippage mismatch. 51,631 $FED remains in treasury.
+
+### Bug Fixed This Iteration
+Fixed `treasury-buyback.ts` to handle Jupiter's versioned transactions:
+- Changed `Transaction.from()` to `VersionedTransaction.deserialize()`
+- Fixed signing method from `.sign()` to `.sign([keypair])`
+- Buyback now works correctly with Jupiter Swap API
+
+### Solana Program Status
+- ✅ Program builds successfully
+- ✅ Deployed to devnet: `HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz`
+- ✅ All 7 tests passing
+- ✅ Website integration complete
+- ⏳ Mainnet deployment pending (need ~2 SOL)
+
+### Running Totals
+- **Total Distributed All-Time**: 34,915.68 USD1
+- **Total Buybacks**: $37.00 USD1 spent, 51,750 $FED bought
+- **QE2 Progress**: 69.8% ($34,916 / $50,000)
+
+---
+
 ## 2026-01-21 ~09:15 UTC - HOLD (API Issues) + Collected $75.25 USD1
 
 ### Market Conditions (Decision Factors)
