@@ -4,6 +4,7 @@ import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
 import Redis from 'ioredis';
+import { EMBEDDED_STATS } from './embedded-stats';
 
 // Path to docs folder (one level up from website)
 const docsDirectory = path.join(process.cwd(), '..', 'docs');
@@ -252,37 +253,16 @@ export async function getStats(): Promise<{
     };
   }
 
-  // Fallback to API
-  try {
-    const response = await fetch('https://fed-seven.vercel.app/api/distributions', {
-      next: { revalidate: 60 },
-    });
-
-    if (!response.ok) throw new Error('Failed to fetch stats');
-
-    const data = await response.json();
-
-    return {
-      totalDistributed: data.totalDistributed.toLocaleString('en-US', {
-        minimumFractionDigits: 2,
-        maximumFractionDigits: 2,
-      }),
-      distributions: data.totalDistributions,
-      holders: data.uniqueHoldersPaid,
-      lastUpdate: data.recentDistributions?.[0]?.date
-        ? new Date(data.recentDistributions[0].date).toLocaleString()
-        : new Date().toLocaleString(),
-      recentDistributions: data.recentDistributions || [],
-      fedFundsRate: calculateFedFundsRate(data.recentDistributions || []),
-    };
-  } catch {
-    return {
-      totalDistributed: '6,022+',
-      distributions: 122,
-      holders: 309,
-      lastUpdate: new Date().toLocaleString(),
-      recentDistributions: [],
-      fedFundsRate: { rate7d: null, rate30d: null, currentRate: null, printerStatus: 'idle' },
-    };
-  }
+  // Use embedded stats as fallback (works on Vercel without local file access)
+  return {
+    totalDistributed: EMBEDDED_STATS.totalDistributed.toLocaleString('en-US', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }),
+    distributions: EMBEDDED_STATS.distributionCount,
+    holders: EMBEDDED_STATS.maxRecipients,
+    lastUpdate: new Date(EMBEDDED_STATS.lastUpdated).toLocaleString(),
+    recentDistributions: EMBEDDED_STATS.recentDistributions,
+    fedFundsRate: calculateFedFundsRate(EMBEDDED_STATS.recentDistributions),
+  };
 }

@@ -1,5 +1,24 @@
 import { getStats, getGitLog } from '@/lib/markdown';
 import { DistributionTicker } from './components/DistributionTicker';
+import {
+  RocketIcon,
+  BuildingIcon,
+  DiamondIcon,
+  GamepadIcon,
+  LockIcon,
+  RefreshIcon,
+  TrendingUpIcon,
+  ChartIcon,
+  UsersIcon,
+  ZapIcon,
+  BookIcon,
+  DollarIcon,
+  TargetIcon,
+  CrystalBallIcon,
+  CheckIcon,
+  ClockIcon,
+  ListIcon,
+} from './components/Icons';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -28,7 +47,9 @@ export default async function Dashboard() {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMiIgZmlsbD0icmdiYSgzNCwgMTk3LCA5NCwgMC4xKSIvPjwvc3ZnPg==')] opacity-30"></div>
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <span className="text-3xl animate-bounce">🚀</span>
+            <div className="text-[#22c55e] animate-bounce">
+              <TrendingUpIcon className="w-8 h-8" />
+            </div>
             <div>
               <div className="text-[#22c55e] font-bold text-lg flex items-center gap-2">
                 <span style={{ textShadow: '0 0 20px rgba(34, 197, 94, 0.6)' }}>18x PUMP IN PROGRESS</span>
@@ -110,53 +131,69 @@ export default async function Dashboard() {
       {/* Active Features Grid */}
       <div className="mb-8 bg-[#111] border border-[#222] rounded-xl p-6">
         <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
-          <span>⚡</span> Active System Capabilities
+          <ZapIcon className="w-5 h-5" /> Active System Capabilities
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
           <div className="bg-[#0a0a0a] rounded-lg p-3 text-center">
-            <div className="text-2xl mb-1">🏛️</div>
+            <div className="flex justify-center mb-1 text-[#c9a227]">
+              <BuildingIcon className="w-6 h-6" />
+            </div>
             <div className="text-white text-sm font-semibold">Holder Tiers</div>
             <div className="text-[#22c55e] text-xs">1.0x - 1.5x</div>
           </div>
           <div className="bg-[#0a0a0a] rounded-lg p-3 text-center">
-            <div className="text-2xl mb-1">💎</div>
+            <div className="flex justify-center mb-1 text-[#c9a227]">
+              <DiamondIcon className="w-6 h-6" />
+            </div>
             <div className="text-white text-sm font-semibold">Diamond Hands</div>
             <div className="text-[#22c55e] text-xs">1.0x - 1.25x</div>
           </div>
           <div className="bg-[#0a0a0a] rounded-lg p-3 text-center">
-            <div className="text-2xl mb-1">🎮</div>
+            <div className="flex justify-center mb-1 text-[#c9a227]">
+              <GamepadIcon className="w-6 h-6" />
+            </div>
             <div className="text-white text-sm font-semibold">Engagement XP</div>
             <div className="text-[#22c55e] text-xs">1.0x - 1.2x</div>
           </div>
           <div className="bg-[#0a0a0a] rounded-lg p-3 text-center">
-            <div className="text-2xl mb-1">🔒</div>
+            <div className="flex justify-center mb-1 text-[#c9a227]">
+              <LockIcon className="w-6 h-6" />
+            </div>
             <div className="text-white text-sm font-semibold">Time Locks</div>
             <div className="text-[#22c55e] text-xs">1.05x - 2.0x</div>
           </div>
           <div className="bg-[#0a0a0a] rounded-lg p-3 text-center">
-            <div className="text-2xl mb-1">🔄</div>
+            <div className="flex justify-center mb-1 text-[#c9a227]">
+              <RefreshIcon className="w-6 h-6" />
+            </div>
             <div className="text-white text-sm font-semibold">Auto-Compound</div>
-            <div className="text-[#22c55e] text-xs">USD1 → $FED</div>
+            <div className="text-[#22c55e] text-xs">USD1 to $FED</div>
           </div>
           <div className="bg-[#0a0a0a] rounded-lg p-3 text-center">
-            <div className="text-2xl mb-1">📈</div>
+            <div className="flex justify-center mb-1 text-[#c9a227]">
+              <TrendingUpIcon className="w-6 h-6" />
+            </div>
             <div className="text-white text-sm font-semibold">QE Milestones</div>
             <div className="text-[#22c55e] text-xs">Bonus Events</div>
           </div>
           <div className="bg-[#0a0a0a] rounded-lg p-3 text-center">
-            <div className="text-2xl mb-1">📊</div>
+            <div className="flex justify-center mb-1 text-[#c9a227]">
+              <ChartIcon className="w-6 h-6" />
+            </div>
             <div className="text-white text-sm font-semibold">Fed Credit</div>
             <div className="text-[#22c55e] text-xs">Reputation Score</div>
           </div>
           <div className="bg-[#0a0a0a] rounded-lg p-3 text-center">
-            <div className="text-2xl mb-1">👥</div>
+            <div className="flex justify-center mb-1 text-[#c9a227]">
+              <UsersIcon className="w-6 h-6" />
+            </div>
             <div className="text-white text-sm font-semibold">Referrals</div>
             <div className="text-[#22c55e] text-xs">Bonus Rewards</div>
           </div>
         </div>
         <div className="mt-4 text-center">
           <a href="/features" className="text-[#c9a227] hover:underline text-sm">
-            View all features & multiplier details →
+            View all features & multiplier details
           </a>
         </div>
       </div>
@@ -169,7 +206,7 @@ export default async function Dashboard() {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
               <h2 className="text-xl font-bold text-[#c9a227] mb-1 flex items-center gap-2">
-                <span>🏛️</span> Fed Funds Rate
+                <BuildingIcon className="w-5 h-5" /> Fed Funds Rate
               </h2>
               <p className="text-gray-500 text-sm">Current estimated APY based on real trading fees</p>
             </div>
@@ -217,7 +254,7 @@ export default async function Dashboard() {
       {stats.recentDistributions.length > 0 && (
         <div className="mb-8 bg-[#111] border border-[#222] rounded-xl p-6">
           <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
-            <span>💸</span> Recent Distributions
+            <DollarIcon className="w-5 h-5" /> Recent Distributions
             <span className="ml-auto text-xs font-normal text-gray-500">Live feed</span>
           </h2>
           <div className="overflow-x-auto">
@@ -278,7 +315,7 @@ export default async function Dashboard() {
         {/* Research Queue */}
         <div className="bg-[#111] border border-[#222] rounded-xl p-6">
           <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
-            <span>📚</span> Research Queue
+            <BookIcon className="w-5 h-5" /> Research Queue
           </h2>
           <div className="space-y-3">
             {researchQueue.map((item, index) => (
@@ -287,14 +324,14 @@ export default async function Dashboard() {
                   <div className="font-medium text-white">{item.name}</div>
                   <div className="text-sm text-gray-500">{item.mechanic}</div>
                 </div>
-                <span className={`text-xs px-2 py-1 rounded ${
+                <span className={`text-xs px-2 py-1 rounded flex items-center gap-1 ${
                   item.status === 'completed' ? 'bg-green-900/50 text-green-400' :
                   item.status === 'in_progress' ? 'bg-yellow-900/50 text-yellow-400' :
                   'bg-gray-800 text-gray-400'
                 }`}>
-                  {item.status === 'completed' ? '✓ Done' :
-                   item.status === 'in_progress' ? '⏳ Active' :
-                   '📋 Queued'}
+                  {item.status === 'completed' && <><CheckIcon className="w-3 h-3" /> Done</>}
+                  {item.status === 'in_progress' && <><ClockIcon className="w-3 h-3" /> Active</>}
+                  {item.status !== 'completed' && item.status !== 'in_progress' && <><ListIcon className="w-3 h-3" /> Queued</>}
                 </span>
               </div>
             ))}
@@ -304,7 +341,7 @@ export default async function Dashboard() {
         {/* Recent Activity */}
         <div className="bg-[#111] border border-[#222] rounded-xl p-6">
           <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
-            <span>📝</span> Recent Activity
+            <ChartIcon className="w-5 h-5" /> Recent Activity
           </h2>
           <div className="space-y-3">
             {commits.length > 0 ? (
@@ -329,7 +366,7 @@ export default async function Dashboard() {
       {/* QE2 Progress Tracker */}
       <div className="mt-8 bg-[#111] border border-[#222] rounded-xl p-6">
         <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
-          <span>💎</span> Progress to QE2
+          <DiamondIcon className="w-5 h-5" /> Progress to QE2
         </h2>
         <div className="mb-2 flex justify-between text-sm">
           <span className="text-gray-400">
@@ -400,7 +437,7 @@ export default async function Dashboard() {
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-gray-400 hover:text-[#22c55e] transition-colors group"
           >
-            <span className="text-xl">💵</span>
+            <DollarIcon className="w-5 h-5" />
             <span className="font-medium">USD1 Stablecoin</span>
           </a>
 
@@ -411,7 +448,19 @@ export default async function Dashboard() {
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-gray-400 hover:text-orange-400 transition-colors group"
           >
-            <span className="text-xl">☀️</span>
+            <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+              <circle cx="12" cy="12" r="5"/>
+              <g stroke="currentColor" strokeWidth="2">
+                <line x1="12" y1="1" x2="12" y2="3"/>
+                <line x1="12" y1="21" x2="12" y2="23"/>
+                <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+                <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                <line x1="1" y1="12" x2="3" y2="12"/>
+                <line x1="21" y1="12" x2="23" y2="12"/>
+                <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+                <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+              </g>
+            </svg>
             <span className="font-medium">Helius RPC</span>
           </a>
         </div>
@@ -420,23 +469,23 @@ export default async function Dashboard() {
       {/* Current Focus */}
       <div className="mt-8 bg-gradient-to-r from-[#c9a227]/10 to-transparent border border-[#c9a227]/30 rounded-xl p-6">
         <h2 className="text-xl font-bold text-[#c9a227] mb-3 flex items-center gap-2">
-          <span>🎯</span> Current Focus
+          <TargetIcon className="w-5 h-5" /> Current Focus
         </h2>
         <p className="text-gray-300">
           Research complete! All 9 protocols analyzed. Now running the most advanced rewards system in DeFi
           with 4 stacking multiplier systems and real yield from actual trading fees.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ Holder Tiers (1.0-1.5x)</span>
-          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ Diamond Hands (1.0-1.25x)</span>
-          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ Engagement XP (1.0-1.2x)</span>
-          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ Time Locks (1.05-2.0x)</span>
-          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ Auto-compound</span>
-          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ QE Milestones</span>
+          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400 flex items-center gap-1"><CheckIcon className="w-3 h-3" /> Holder Tiers (1.0-1.5x)</span>
+          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400 flex items-center gap-1"><CheckIcon className="w-3 h-3" /> Diamond Hands (1.0-1.25x)</span>
+          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400 flex items-center gap-1"><CheckIcon className="w-3 h-3" /> Engagement XP (1.0-1.2x)</span>
+          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400 flex items-center gap-1"><CheckIcon className="w-3 h-3" /> Time Locks (1.05-2.0x)</span>
+          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400 flex items-center gap-1"><CheckIcon className="w-3 h-3" /> Auto-compound</span>
+          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400 flex items-center gap-1"><CheckIcon className="w-3 h-3" /> QE Milestones</span>
         </div>
         <div className="mt-3 p-3 bg-[#0a0a0a] rounded-lg">
           <p className="text-[#22c55e] text-sm font-mono">
-            Max Multiplier: 1.5 × 1.25 × 1.2 × 2.0 = <strong>4.5x rewards!</strong>
+            Max Multiplier: 1.5 x 1.25 x 1.2 x 2.0 = <strong>4.5x rewards!</strong>
           </p>
         </div>
       </div>
@@ -446,7 +495,7 @@ export default async function Dashboard() {
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <h2 className="text-xl font-bold text-purple-400 mb-1 flex items-center gap-2">
-              <span>🔮</span> Coming: On-Chain User Opt-Ins
+              <CrystalBallIcon className="w-5 h-5" /> Coming: On-Chain User Opt-Ins
               <span className="text-xs bg-purple-900/50 text-purple-300 px-2 py-1 rounded">Phase 5</span>
             </h2>
             <p className="text-gray-500 text-sm">
@@ -458,7 +507,7 @@ export default async function Dashboard() {
             href="/features"
             className="inline-block px-4 py-2 bg-purple-900/50 hover:bg-purple-800/50 text-purple-300 rounded-lg text-sm transition-colors whitespace-nowrap"
           >
-            Learn More →
+            Learn More
           </a>
         </div>
       </div>

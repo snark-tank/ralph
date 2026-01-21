@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
+import { EMBEDDED_STATS } from '@/lib/embedded-stats';
 
-// Authoritative source for distribution history
+// Local path for development - won't exist on Vercel
 const DISTRIBUTION_HISTORY_PATH = '/home/ubuntu/fed/src/token-distribution-history.json';
 
 interface Distribution {
@@ -17,37 +18,42 @@ interface DistributionHistory {
 }
 
 export async function GET() {
+  // Try local file first (development environment)
   try {
-    // Read from authoritative source
-    const content = fs.readFileSync(DISTRIBUTION_HISTORY_PATH, 'utf8');
-    const history: DistributionHistory = JSON.parse(content);
+    if (fs.existsSync(DISTRIBUTION_HISTORY_PATH)) {
+      const content = fs.readFileSync(DISTRIBUTION_HISTORY_PATH, 'utf8');
+      const history: DistributionHistory = JSON.parse(content);
 
-    // Get recent distributions (last 10)
-    const recentDistributions = history.distributions
-      .slice(-10)
-      .reverse()
-      .map(d => ({
-        date: d.timestamp,
-        amount: d.totalAmount,
-        recipients: d.recipientCount,
-        txSignature: d.txSignatures[0] || undefined,
-      }));
+      const recentDistributions = history.distributions
+        .slice(-10)
+        .reverse()
+        .map(d => ({
+          date: d.timestamp,
+          amount: d.totalAmount,
+          recipients: d.recipientCount,
+          txSignature: d.txSignatures[0] || undefined,
+        }));
 
-    // Find max recipients
-    const maxRecipients = Math.max(...history.distributions.map(d => d.recipientCount));
+      const maxRecipients = Math.max(...history.distributions.map(d => d.recipientCount));
 
-    return NextResponse.json({
-      totalDistributed: Math.round(history.totalDistributed * 100) / 100,
-      totalDistributions: history.distributions.length,
-      uniqueHoldersPaid: maxRecipients,
-      recentDistributions,
-      lastUpdated: history.distributions[history.distributions.length - 1]?.timestamp || new Date().toISOString(),
-    });
+      return NextResponse.json({
+        totalDistributed: Math.round(history.totalDistributed * 100) / 100,
+        totalDistributions: history.distributions.length,
+        uniqueHoldersPaid: maxRecipients,
+        recentDistributions,
+        lastUpdated: history.distributions[history.distributions.length - 1]?.timestamp || new Date().toISOString(),
+      });
+    }
   } catch (error) {
-    console.error('Error reading distribution history:', error);
-    return NextResponse.json(
-      { error: 'Failed to read distribution history' },
-      { status: 500 }
-    );
+    console.error('Error reading local distribution history:', error);
   }
+
+  // Fallback to embedded stats (Vercel production)
+  return NextResponse.json({
+    totalDistributed: EMBEDDED_STATS.totalDistributed,
+    totalDistributions: EMBEDDED_STATS.distributionCount,
+    uniqueHoldersPaid: EMBEDDED_STATS.maxRecipients,
+    recentDistributions: EMBEDDED_STATS.recentDistributions,
+    lastUpdated: EMBEDDED_STATS.lastUpdated,
+  });
 }

@@ -1,4 +1,5 @@
 import { getMarkdownContent } from '@/lib/markdown';
+import { CheckIcon, ClockIcon, ListIcon, CrystalBallIcon, ZapIcon } from '../components/Icons';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -79,13 +80,14 @@ export default async function RoadmapPage() {
             }`}>
               <div className="flex items-start gap-4">
                 {/* Status Icon */}
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center text-xl ${
-                  milestone.status === 'completed' ? 'bg-green-500/20' :
-                  milestone.status === 'in_progress' ? 'bg-[#c9a227]/20' :
-                  'bg-[#222]'
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${
+                  milestone.status === 'completed' ? 'bg-green-500/20 text-green-400' :
+                  milestone.status === 'in_progress' ? 'bg-[#c9a227]/20 text-[#c9a227]' :
+                  'bg-[#222] text-gray-400'
                 }`}>
-                  {milestone.status === 'completed' ? '✓' :
-                   milestone.status === 'in_progress' ? '⏳' : '📋'}
+                  {milestone.status === 'completed' && <CheckIcon className="w-6 h-6" />}
+                  {milestone.status === 'in_progress' && <ClockIcon className="w-6 h-6" />}
+                  {milestone.status === 'planned' && <ListIcon className="w-6 h-6" />}
                 </div>
 
                 <div className="flex-1">
@@ -122,7 +124,7 @@ export default async function RoadmapPage() {
       {/* Phase 5 Deep Dive: Solana Program */}
       <div className="mb-8 bg-gradient-to-r from-purple-900/20 via-[#111] to-[#111] border border-purple-500/40 rounded-xl p-6">
         <h2 className="text-2xl font-bold text-purple-400 mb-4 flex items-center gap-2">
-          <span>🔮</span> Phase 5: On-Chain User Opt-Ins
+          <CrystalBallIcon className="w-6 h-6" /> Phase 5: On-Chain User Opt-Ins
         </h2>
         <p className="text-gray-400 mb-6">
           Instead of running dozens of separate scripts, we&apos;re building a single Solana Program
@@ -132,23 +134,23 @@ export default async function RoadmapPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
           <div className="bg-[#0a0a0a] rounded-lg p-4">
             <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
-              <span className="text-purple-400">📋</span> Program Capabilities
+              <span className="text-purple-400"><ListIcon className="w-4 h-4" /></span> Program Capabilities
             </h3>
             <ul className="text-gray-400 text-sm space-y-2">
               <li className="flex items-start gap-2">
-                <span className="text-purple-400 mt-1">•</span>
-                <span><strong className="text-white">Auto-compound enrollment</strong> - Opt in to swap USD1 → $FED automatically</span>
+                <span className="text-purple-400 mt-1">-</span>
+                <span><strong className="text-white">Auto-compound enrollment</strong> - Opt in to swap USD1 to $FED automatically</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-purple-400 mt-1">•</span>
+                <span className="text-purple-400 mt-1">-</span>
                 <span><strong className="text-white">Time-lock registration</strong> - Commit to lock periods for multiplier bonuses</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-purple-400 mt-1">•</span>
+                <span className="text-purple-400 mt-1">-</span>
                 <span><strong className="text-white">Streak tracking</strong> - On-chain record of consecutive distributions received</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-purple-400 mt-1">•</span>
+                <span className="text-purple-400 mt-1">-</span>
                 <span><strong className="text-white">Referral links</strong> - Trustless referrer/referee relationships</span>
               </li>
             </ul>
@@ -156,23 +158,23 @@ export default async function RoadmapPage() {
 
           <div className="bg-[#0a0a0a] rounded-lg p-4">
             <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
-              <span className="text-purple-400">⚡</span> Technical Architecture
+              <span className="text-purple-400"><ZapIcon className="w-4 h-4" /></span> Technical Architecture
             </h3>
             <ul className="text-gray-400 text-sm space-y-2">
               <li className="flex items-start gap-2">
-                <span className="text-purple-400 mt-1">•</span>
+                <span className="text-purple-400 mt-1">-</span>
                 <span><strong className="text-white">Anchor Framework</strong> - Type-safe Rust program development</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-purple-400 mt-1">•</span>
+                <span className="text-purple-400 mt-1">-</span>
                 <span><strong className="text-white">PDA accounts</strong> - User preferences stored per-wallet</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-purple-400 mt-1">•</span>
+                <span className="text-purple-400 mt-1">-</span>
                 <span><strong className="text-white">Website integration</strong> - Connect wallet, sign once, preferences saved</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-purple-400 mt-1">•</span>
+                <span className="text-purple-400 mt-1">-</span>
                 <span><strong className="text-white">Distribution integration</strong> - Reads on-chain state instead of JSON files</span>
               </li>
             </ul>
@@ -211,19 +213,19 @@ export default async function RoadmapPage() {
         </p>
         <ul className="space-y-2 text-gray-400">
           <li className="flex items-center gap-2">
-            <span className="text-[#c9a227]">→</span>
+            <span className="text-[#c9a227]">&rarr;</span>
             <strong className="text-white">Self-sustaining</strong> - Generates enough fees to cover operations
           </li>
           <li className="flex items-center gap-2">
-            <span className="text-[#c9a227]">→</span>
+            <span className="text-[#c9a227]">&rarr;</span>
             <strong className="text-white">Self-improving</strong> - Learns from distribution patterns
           </li>
           <li className="flex items-center gap-2">
-            <span className="text-[#c9a227]">→</span>
+            <span className="text-[#c9a227]">&rarr;</span>
             <strong className="text-white">Community-driven</strong> - Responds to holder governance
           </li>
           <li className="flex items-center gap-2">
-            <span className="text-[#c9a227]">→</span>
+            <span className="text-[#c9a227]">&rarr;</span>
             <strong className="text-white">Transparent</strong> - All actions logged and verifiable
           </li>
         </ul>
