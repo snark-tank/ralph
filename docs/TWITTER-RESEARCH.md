@@ -2,15 +2,16 @@
 
 ## Research Notes - 2026-01-21
 
-### Current Market Context (Updated 2026-01-21 17:00 UTC)
-- $FED experiencing historic pump: +1399% in 24h
-- Price: $0.00080592
-- Market cap: $764,509
-- Liquidity: $69,144
+### Current Market Context (Updated 2026-01-21 17:03 UTC)
+- $FED experiencing historic pump: +1176% in 24h
+- Price: $0.00067983 (slight pullback from $0.00080+ peak)
+- Market cap: $644,900
+- Liquidity: $66,083
 - Over $39,139 USD1 distributed to holders all-time
 - QE2 progress: 78.3% complete ($39,139 / $50,000)
 - 154 distributions completed
 - Multiple distributions TODAY during the pump
+- Treasury currently low ($0.95) - needs SOL for tx fees
 
 ### What Works in Crypto Twitter (Observations)
 
@@ -181,3 +182,50 @@ Keep hashtags minimal and organic:
 - "Federal Reserve" jokes and monetary policy puns
 - Chairman energy - decisive, confident
 - Degen undertones - we're in crypto after all
+
+---
+
+## Session Notes - 2026-01-21 17:03 UTC
+
+**Last tweet:** Stats/pump celebration (16:44 UTC)
+**Next tweet:** Should vary format - try personality/narrative angle
+
+**Recommended next tweet (personality angle):**
+```
+Every time $FED pumps, the same thing happens:
+
+1. Price goes up
+2. LP fees accumulate
+3. The Fed distributes USD1
+4. Holders get paid
+
+We've done this 154 times.
+
+The algorithm doesn't care about your feelings.
+It just prints.
+```
+
+**Alternative (educational/contrast):**
+```
+Most tokens during a pump:
+- Team dumps on retail
+- No utility, just vibes
+- Holders left holding bags
+
+$FED during a pump:
+- Treasury collects LP fees
+- Fed distributes to holders
+- Diamond hands get rewarded
+
+Different protocol. Different outcomes.
+```
+
+**Alternative (shorter, punchy):**
+```
+$FED price: down 7% in the last hour
+
+Fed response: collecting more LP fees to distribute
+
+This is how sustainable yield works.
+The printer doesn't panic.
+```

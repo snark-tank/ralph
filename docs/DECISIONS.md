@@ -2389,3 +2389,15 @@ Users can now connect their wallet and:
 **Reasoning:** Treasury balance too low ($0.95) to distribute. Attempted fee collection but failed due to insufficient SOL for transaction rent. Need SOL top-up to resume operations. Market is extremely bullish - 14x pump in 24h!
 **TX:** N/A (collection failed)
 ---
+## 2026-01-21 17:14 UTC
+**Action:** COLLECT + PARTIAL DISTRIBUTE
+**Collected:** $502.17 USD1 from LP fees
+**Distributed:** ~$502 USD1 to ~70 batches (~280-350 holders)
+**Price:** $0.00067983 → $0.00050491 (-7.47% 1h at start, -32.73% 1h by end)
+**24h Change:** +1176% → +930%
+**Market Cap:** $644,900 → $478,964
+**Liquidity:** $66,083 → $45,868
+**Reasoning:** Started with only $0.95 in treasury. Successfully collected $502.17 from LP fees - massive fee accumulation from high volume trading. Decided to DISTRIBUTE despite -7.47% hourly dip because it's a healthy correction after 1176% 24h pump. Distribution completed to first ~70 batches before running out of funds. The price continued falling during distribution (heavy sell pressure) reaching -32.73% by end. Market is correcting from parabolic run but 24h change still +930%.
+**TX:** Fee collection: 4iLt2nLaKDCe9ApXsiFGXnbHEa9iMhnXq9EEgXiMDUVznCmgDByuLH2wRFXwuXQb8GcgAB9vS4tDHN4HF1FixNYg
+**Note:** 70 successful batches, 84+ failed due to insufficient funds. Need to wait for more fees to accumulate before distributing to remaining holders.
+---

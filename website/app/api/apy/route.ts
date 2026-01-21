@@ -53,7 +53,7 @@ interface FedFundsRateResponse {
 
   // Printer status
   printerStatus: 'BRRR' | 'brrr' | 'brr' | 'idle';
-  printerEmoji: string;
+  printerIndicator: string;
 
   // Meta
   lastUpdated: string;
@@ -80,11 +80,11 @@ function calculateAPY(periodDistributed: number, periodDays: number, totalSupply
   return Math.round(apy * 100) / 100;
 }
 
-function getPrinterStatus(rate7d: number): { status: 'BRRR' | 'brrr' | 'brr' | 'idle'; emoji: string } {
-  if (rate7d >= 50) return { status: 'BRRR', emoji: '🖨️💵💵💵' };
-  if (rate7d >= 25) return { status: 'brrr', emoji: '🖨️💵💵' };
-  if (rate7d >= 10) return { status: 'brr', emoji: '🖨️💵' };
-  return { status: 'idle', emoji: '🖨️' };
+function getPrinterStatus(rate7d: number): { status: 'BRRR' | 'brrr' | 'brr' | 'idle'; indicator: string } {
+  if (rate7d >= 50) return { status: 'BRRR', indicator: '||||' };
+  if (rate7d >= 25) return { status: 'brrr', indicator: '|||' };
+  if (rate7d >= 10) return { status: 'brr', indicator: '||' };
+  return { status: 'idle', indicator: '|' };
 }
 
 export async function GET(request: Request) {
@@ -172,7 +172,7 @@ export async function GET(request: Request) {
       projectedMonthly: Math.round(projectedMonthly * 100) / 100,
       projectedYearly: Math.round(projectedYearly * 100) / 100,
       printerStatus: printer.status,
-      printerEmoji: printer.emoji,
+      printerIndicator: printer.indicator,
       lastUpdated: new Date().toISOString(),
       calculationMethod: 'Real yield from trading fees - no inflation, no promises',
     };
