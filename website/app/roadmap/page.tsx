@@ -37,12 +37,13 @@ export default async function RoadmapPage() {
       'Treasury buyback & burn',
       'Season Pass tracking',
     ]},
-    { phase: 'Phase 5', title: 'Solana Program', status: 'in_progress', items: [
+    { phase: 'Phase 5', title: 'Solana Program', status: 'completed', items: [
       'On-chain user opt-ins for features',
       'Auto-compound enrollment via wallet connect',
       'Time-lock preferences stored on-chain',
       'Streak tracking with on-chain state',
       'Trustless & verifiable preferences',
+      'DEPLOYED TO MAINNET: HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz',
     ]},
     { phase: 'Phase 6', title: 'Governance', status: 'planned', items: [
       'Community voting',
