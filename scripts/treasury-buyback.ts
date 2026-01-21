@@ -43,9 +43,9 @@ const __dirname = path.dirname(__filename);
 const USD1_MINT = 'USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB';
 const FED_MINT = '132STreShuLRNgkyF1QECv37yP9Cdp8JBAgnKBgKafed';
 
-// Jupiter Ultra Swap API
-const JUPITER_ULTRA_ORDER_API = 'https://api.jup.ag/ultra/v1/order';
-const JUPITER_ULTRA_EXECUTE_API = 'https://api.jup.ag/ultra/v1/execute';
+// Jupiter Swap API
+const JUPITER_QUOTE_API = 'https://api.jup.ag/swap/v1/quote';
+const JUPITER_SWAP_API = 'https://api.jup.ag/swap/v1/swap';
 const JUPITER_API_KEY = '86a2564b-34e7-47a9-b6ba-6d99852ea252';
 
 // Burn address - using Solana's standard burn pattern (transfer to null/dead address)
@@ -143,68 +143,61 @@ interface UltraSwapExecuteResult {
     outputAmountResult: string;
 }
 
-// Get Jupiter Ultra Swap order
-async function getUltraSwapOrder(
+// Get Jupiter quote
+async function getJupiterQuote(
     amountInLamports: number,
-    takerPublicKey: string,
     slippageBps: number = 100
-): Promise<UltraSwapOrder | null> {
+): Promise<any | null> {
     try {
-        const response = await fetch(JUPITER_ULTRA_ORDER_API, {
-            method: 'POST',
+        const url = `${JUPITER_QUOTE_API}?inputMint=${USD1_MINT}&outputMint=${FED_MINT}&amount=${amountInLamports}&slippageBps=${slippageBps}`;
+        const response = await fetch(url, {
             headers: {
-                'Content-Type': 'application/json',
                 'x-api-key': JUPITER_API_KEY,
             },
-            body: JSON.stringify({
-                inputMint: USD1_MINT,
-                outputMint: FED_MINT,
-                amount: amountInLamports.toString(),
-                taker: takerPublicKey,
-                slippageBps: slippageBps,
-            }),
         });
 
         if (!response.ok) {
             const errorText = await response.text();
-            console.log(`Jupiter Ultra order failed: ${response.status} - ${errorText}`);
+            console.log(`Jupiter quote failed: ${response.status} - ${errorText}`);
             return null;
         }
 
-        return await response.json() as UltraSwapOrder;
+        return await response.json();
     } catch (error) {
-        console.log(`Jupiter Ultra order error: ${error}`);
+        console.log(`Jupiter quote error: ${error}`);
         return null;
     }
 }
 
-// Execute Ultra Swap order
-async function executeUltraSwapOrder(
-    requestId: string,
-    signedTransaction: string
-): Promise<UltraSwapExecuteResult | null> {
+// Get Jupiter swap transaction
+async function getJupiterSwapTransaction(
+    quoteResponse: any,
+    userPublicKey: string
+): Promise<string | null> {
     try {
-        const response = await fetch(JUPITER_ULTRA_EXECUTE_API, {
+        const response = await fetch(JUPITER_SWAP_API, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'x-api-key': JUPITER_API_KEY,
             },
             body: JSON.stringify({
-                requestId: requestId,
-                signedTransaction: signedTransaction,
+                quoteResponse,
+                userPublicKey,
+                wrapAndUnwrapSol: true,
             }),
         });
 
         if (!response.ok) {
             const errorText = await response.text();
-            console.log(`Jupiter Ultra execute failed: ${response.status} - ${errorText}`);
+            console.log(`Jupiter swap failed: ${response.status} - ${errorText}`);
             return null;
         }
 
-        return await response.json() as UltraSwapExecuteResult;
+        const data = await response.json();
+        return data.swapTransaction;
     } catch (error) {
-        console.log(`Jupiter Ultra execute error: ${error}`);
+        console.log(`Jupiter swap error: ${error}`);
         return null;
     }
 }
@@ -217,17 +210,14 @@ async function getQuote(usd1Amount: number, slippageBps: number): Promise<{
 } | null> {
     const amountLamports = Math.floor(usd1Amount * 1e6);
 
-    // Use a dummy public key for quote (won't execute)
-    const dummyPubkey = 'DmfXmFVMGAEdpHUwrmb3DRwqmBGjzS1Yzv3abiXQCHUi';
+    const quote = await getJupiterQuote(amountLamports, slippageBps);
 
-    const order = await getUltraSwapOrder(amountLamports, dummyPubkey, slippageBps);
-
-    if (!order) {
+    if (!quote) {
         return null;
     }
 
-    const fedAmount = Number(order.outAmount) / 1e6;
-    const priceImpact = parseFloat(order.priceImpactPct || '0');
+    const fedAmount = Number(quote.outAmount) / 1e6;
+    const priceImpact = parseFloat(quote.priceImpactPct || '0');
     const effectivePrice = usd1Amount / fedAmount;
 
     return {
@@ -246,76 +236,65 @@ async function executeBuyback(
 ): Promise<{ success: boolean; fedBought: number; signature: string; priceImpact: number; effectivePrice: number } | null> {
     const amountLamports = Math.floor(usd1Amount * 1e6);
 
-    console.log(`\n   Getting Ultra Swap order for $${usd1Amount.toFixed(2)} USD1...`);
+    console.log(`\n   Getting Jupiter quote for $${usd1Amount.toFixed(2)} USD1...`);
 
-    const order = await getUltraSwapOrder(
-        amountLamports,
-        treasuryKeypair.publicKey.toBase58(),
-        slippageBps
-    );
+    // Step 1: Get quote
+    const quote = await getJupiterQuote(amountLamports, slippageBps);
 
-    if (!order || !order.transaction) {
-        console.log('   Could not get Ultra Swap order');
+    if (!quote) {
+        console.log('   Could not get Jupiter quote');
         return null;
     }
 
-    const fedOutput = Number(order.outAmount) / 1e6;
-    const priceImpact = parseFloat(order.priceImpactPct || '0');
+    const fedOutput = Number(quote.outAmount) / 1e6;
+    const priceImpact = parseFloat(quote.priceImpactPct || '0');
     const effectivePrice = usd1Amount / fedOutput;
 
     console.log(`   Quote: $${usd1Amount.toFixed(2)} USD1 -> ${fedOutput.toLocaleString()} $FED`);
     console.log(`   Price impact: ${priceImpact.toFixed(4)}%`);
     console.log(`   Effective price: $${effectivePrice.toFixed(8)} per $FED`);
 
-    // Sign and execute
-    console.log(`   Executing swap via Jupiter Ultra...`);
+    // Step 2: Get swap transaction
+    console.log(`   Getting swap transaction...`);
+    const swapTxBase64 = await getJupiterSwapTransaction(quote, treasuryKeypair.publicKey.toBase58());
 
-    const swapTxBuffer = Buffer.from(order.transaction, 'base64');
-    const swapTx = Transaction.from(swapTxBuffer);
-    swapTx.sign(treasuryKeypair);
-    const signedTxBase64 = swapTx.serialize().toString('base64');
-
-    const executeResult = await executeUltraSwapOrder(order.requestId, signedTxBase64);
-
-    if (!executeResult || executeResult.status !== 'Success') {
-        // Fall back to direct send
-        console.log(`   Ultra execute returned ${executeResult?.status || 'null'}, trying direct send...`);
-
-        try {
-            const signature = await connection.sendRawTransaction(swapTx.serialize(), {
-                skipPreflight: false,
-                preflightCommitment: 'confirmed',
-                maxRetries: 3,
-            });
-
-            const confirmation = await connection.confirmTransaction(signature, 'confirmed');
-            if (confirmation.value.err) {
-                console.log(`   Direct send failed: ${JSON.stringify(confirmation.value.err)}`);
-                return null;
-            }
-
-            return {
-                success: true,
-                fedBought: fedOutput,
-                signature: signature,
-                priceImpact,
-                effectivePrice,
-            };
-        } catch (error) {
-            console.log(`   Direct send error: ${error}`);
-            return null;
-        }
+    if (!swapTxBase64) {
+        console.log('   Could not get swap transaction');
+        return null;
     }
 
-    const actualFedReceived = Number(executeResult.outputAmountResult) / 1e6;
+    // Step 3: Sign and send
+    console.log(`   Executing swap...`);
 
-    return {
-        success: true,
-        fedBought: actualFedReceived,
-        signature: executeResult.signature,
-        priceImpact,
-        effectivePrice: usd1Amount / actualFedReceived,
-    };
+    try {
+        const swapTxBuffer = Buffer.from(swapTxBase64, 'base64');
+        const swapTx = Transaction.from(swapTxBuffer);
+        swapTx.sign(treasuryKeypair);
+
+        const signature = await connection.sendRawTransaction(swapTx.serialize(), {
+            skipPreflight: false,
+            preflightCommitment: 'confirmed',
+            maxRetries: 3,
+        });
+
+        console.log(`   Confirming transaction...`);
+        const confirmation = await connection.confirmTransaction(signature, 'confirmed');
+        if (confirmation.value.err) {
+            console.log(`   Transaction failed: ${JSON.stringify(confirmation.value.err)}`);
+            return null;
+        }
+
+        return {
+            success: true,
+            fedBought: fedOutput,
+            signature: signature,
+            priceImpact,
+            effectivePrice,
+        };
+    } catch (error) {
+        console.log(`   Swap error: ${error}`);
+        return null;
+    }
 }
 
 // Burn $FED tokens

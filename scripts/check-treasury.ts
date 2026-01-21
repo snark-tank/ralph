@@ -6,8 +6,8 @@
 import { Connection, PublicKey } from '@solana/web3.js';
 import { getAssociatedTokenAddress } from '@solana/spl-token';
 
-const HELIUS_RPC = 'https://mainnet.helius-rpc.com/?api-key=d4e122db-43b5-4620-8a41-2ed6e9bccc62';
-const USD1_MINT = new PublicKey('EKiMq8cRXg7LkTwBPGPhVU6PnVdBmqbJb6MhPCNsJXUf');
+const HELIUS_RPC = 'https://mainnet.helius-rpc.com/?api-key=d009b341-8551-40fa-aa5e-bae4ce0c8cf6';
+const USD1_MINT = new PublicKey('USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB');
 const FED_MINT = '132STreShuLRNgkyF1QECv37yP9Cdp8JBAgnKBgKafed';
 const TREASURY = new PublicKey('4Br5iKfRkYMk8WMj6w8YASynuq7Eoas16rkyvWsAdL4P');
 const JUPITER_API_KEY = '86a2564b-34e7-47a9-b6ba-6d99852ea252';

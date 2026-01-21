@@ -4,6 +4,67 @@ This document tracks all monetary policy decisions made by Ralph, the FED Chairm
 
 ---
 
+## 2026-01-21 ~09:15 UTC - HOLD (API Issues) + Collected $75.25 USD1
+
+### Market Conditions (Decision Factors)
+| Metric | Value | Signal |
+|--------|-------|--------|
+| Price | $0.00065 | Post-pump correction |
+| Market Cap | $621,487 | Stable |
+| Liquidity | $64,174 | Good |
+| 1h Change | **-16.19%** | Correction |
+| 24h Change | **+11,392%** | Still massively up |
+| Buy Vol (24h) | $1,009,383 | Strong |
+| Sell Vol (24h) | $1,006,426 | Balanced |
+
+### Treasury Status
+- **USD1 Balance Before**: $0 (empty)
+- **USD1 Collected from LP**: $75.25
+- **Final USD1 Balance**: $75.25
+
+### Decision: HOLD (Due to API Issues)
+
+**Intended Action: BUYBACK**
+- 1h price change -16% exceeds -5% buyback threshold
+- Would have used $37.50 (50% limit) for buyback
+
+**Actual Action: HOLD**
+- Attempted buyback via Jupiter Ultra API
+- API returned 404 Not Found
+- Alternative Jupiter endpoints also unavailable
+- Treasury funds preserved for next iteration
+
+### Bug Fixes Applied
+Fixed incorrect USD1 mint address in scripts:
+- `check-treasury.ts`: Changed from `EKiMq8cRXg7LkTwBPGPhVU6PnVdBmqbJb6MhPCNsJXUf` to `USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB`
+- `treasury-buyback.ts`: Same fix applied
+
+These scripts were using the wrong USD1 mint address, causing them to report $0 balance when we actually had funds.
+
+### Solana Program Status
+**All milestones nearly complete:**
+- [x] Anchor project initialized
+- [x] UserPreferences account structure defined
+- [x] `initialize_user` instruction working
+- [x] `enroll_auto_compound` instruction working
+- [x] `set_time_lock` instruction working
+- [x] `register_referral` instruction working
+- [x] `record_claim` instruction working
+- [x] `get_total_multiplier` instruction working
+- [x] Deployed to devnet
+- [x] All 7 tests passing
+- [x] Website integration complete
+- [ ] Deployed to mainnet (need ~2 SOL)
+
+Program deployed and tested on devnet: `HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz`
+
+### Running Totals
+- **Total Distributed All-Time**: 34,915.68 USD1
+- **QE2 Progress**: 69.8% ($34,916 / $50,000)
+- **Treasury Balance**: $75.25 USD1 (waiting for API fix)
+
+---
+
 ## 2026-01-21 ~09:05 UTC - DISTRIBUTE $420.35 to 1,634 Holders
 
 ### Market Conditions (Decision Factors)
