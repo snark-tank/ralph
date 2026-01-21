@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import fs from 'fs';
-import path from 'path';
+import { EMBEDDED_STATS } from '@/lib/embedded-stats';
 
 /**
  * Fed Funds Rate API - Returns real-time APY calculations
@@ -10,9 +10,11 @@ import path from 'path';
  * - Transparent calculation methodology
  * - Multiple time period rates (7d, 30d, all-time)
  * - Projection tools for potential earnings
+ *
+ * NOTE: On Vercel, this uses embedded stats as fallback since
+ * local file paths don't exist in the serverless environment.
  */
 
-const LOGS_DIR = '/home/ubuntu/fed/script/distribution-logs';
 const HISTORY_FILE = '/home/ubuntu/fed/src/token-distribution-history.json';
 
 // $FED total supply (fixed)
@@ -95,15 +97,28 @@ export async function GET(request: Request) {
     // Custom holdings amount (default 1M $FED for projections)
     const holdingsAmount = holdingsParam ? parseInt(holdingsParam) : 1_000_000;
 
-    // Load distribution history
+    // Load distribution history - try local file first, then fallback to embedded stats
     let history: DistributionHistory = { totalDistributed: 0, distributions: [] };
 
     if (fs.existsSync(HISTORY_FILE)) {
       try {
         history = JSON.parse(fs.readFileSync(HISTORY_FILE, 'utf8'));
       } catch {
-        console.error('Failed to parse distribution history');
+        console.error('Failed to parse distribution history, using embedded stats');
       }
+    }
+
+    // Fallback to embedded stats if local file not available (Vercel deployment)
+    if (!history.distributions || history.distributions.length === 0) {
+      // Convert embedded stats format to DistributionHistory format
+      history = {
+        totalDistributed: EMBEDDED_STATS.totalDistributed,
+        distributions: EMBEDDED_STATS.recentDistributions.map(d => ({
+          timestamp: d.date,
+          totalAmount: d.amount,
+          recipientCount: d.recipients,
+        })),
+      };
     }
 
     const distributions = history.distributions || [];

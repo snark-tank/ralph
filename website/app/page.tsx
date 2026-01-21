@@ -76,47 +76,47 @@ export default async function Dashboard() {
 
       {/* Hero Section */}
       <div className="text-center mb-12">
-        <h1 className="text-4xl font-bold text-[#c9a227] mb-4">
+        <h1 className="text-4xl md:text-5xl font-bold gradient-text mb-4 tracking-tight">
           Ralph&apos;s Federal Reserve
         </h1>
-        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+        <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
           Autonomous agent building the ultimate rewards flywheel. Research, adapt, evolve.
-          The money printer goes BRRR.
+          <span className="block mt-2 text-[#c9a227] font-mono text-sm tracking-widest">THE MONEY PRINTER GOES BRRR</span>
         </p>
       </div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
-        <div className="bg-[#111] border border-[#222] rounded-xl p-6 hover:border-[#22c55e]/30 transition-colors">
-          <div className="text-gray-500 text-sm mb-1">Total Distributed</div>
+        <div className="card rounded-xl p-6 hover:border-[#22c55e]/30 transition-all duration-300 hover-lift glow-green">
+          <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs">Total Distributed</div>
           <div
-            className="text-3xl font-bold text-[#22c55e] font-mono"
+            className="text-3xl font-bold text-[#22c55e] font-mono stat-number"
             style={{ textShadow: '0 0 20px rgba(34, 197, 94, 0.5), 0 0 40px rgba(34, 197, 94, 0.2)' }}
           >
             ${stats.totalDistributed}
           </div>
-          <div className="text-gray-600 text-xs mt-1">USD1 to holders</div>
+          <div className="text-gray-600 text-xs mt-2">USD1 to holders</div>
         </div>
 
-        <div className="bg-[#111] border border-[#222] rounded-xl p-6 hover:border-[#c9a227]/30 transition-colors">
-          <div className="text-gray-500 text-sm mb-1">Distribution Runs</div>
+        <div className="card rounded-xl p-6 hover:border-[#c9a227]/30 transition-all duration-300 hover-lift glow-gold">
+          <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs">Distribution Runs</div>
           <div
-            className="text-3xl font-bold text-[#c9a227] font-mono"
+            className="text-3xl font-bold text-[#c9a227] font-mono stat-number"
             style={{ textShadow: '0 0 20px rgba(201, 162, 39, 0.4)' }}
           >
             {stats.distributions}
           </div>
-          <div className="text-gray-600 text-xs mt-1">Total cycles</div>
+          <div className="text-gray-600 text-xs mt-2">Total cycles</div>
         </div>
 
-        <div className="bg-[#111] border border-[#222] rounded-xl p-6 hover:border-white/10 transition-colors">
-          <div className="text-gray-500 text-sm mb-1">Holders Per Cycle</div>
-          <div className="text-3xl font-bold text-white font-mono">{stats.holders || '309-369'}</div>
-          <div className="text-gray-600 text-xs mt-1">Recipients each run</div>
+        <div className="card rounded-xl p-6 hover:border-white/10 transition-all duration-300 hover-lift">
+          <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs">Holders Per Cycle</div>
+          <div className="text-3xl font-bold text-white font-mono stat-number">{stats.holders || '309-369'}</div>
+          <div className="text-gray-600 text-xs mt-2">Recipients each run</div>
         </div>
 
-        <div className="bg-[#111] border border-[#222] rounded-xl p-6 hover:border-[#22c55e]/30 transition-colors">
-          <div className="text-gray-500 text-sm mb-1">System Status</div>
+        <div className="card rounded-xl p-6 hover:border-[#22c55e]/30 transition-all duration-300 hover-lift border-gradient">
+          <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs">System Status</div>
           <div className="text-2xl font-bold text-[#22c55e] flex items-center gap-2">
             <span className="relative flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22c55e] opacity-75"></span>
@@ -124,12 +124,12 @@ export default async function Dashboard() {
             </span>
             <span style={{ textShadow: '0 0 10px rgba(34, 197, 94, 0.6)' }}>LIVE</span>
           </div>
-          <div className="text-gray-600 text-xs mt-1">PM2 every 2 min</div>
+          <div className="text-gray-600 text-xs mt-2">PM2 every 2 min</div>
         </div>
       </div>
 
       {/* Active Features Grid */}
-      <div className="mb-8 bg-[#111] border border-[#222] rounded-xl p-6">
+      <div className="mb-8 card rounded-xl p-6 border-gradient">
         <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
           <ZapIcon className="w-5 h-5" /> Active System Capabilities
         </h2>
@@ -252,10 +252,16 @@ export default async function Dashboard() {
 
       {/* Recent Distributions */}
       {stats.recentDistributions.length > 0 && (
-        <div className="mb-8 bg-[#111] border border-[#222] rounded-xl p-6">
+        <div className="mb-8 card rounded-xl p-6">
           <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
             <DollarIcon className="w-5 h-5" /> Recent Distributions
-            <span className="ml-auto text-xs font-normal text-gray-500">Live feed</span>
+            <span className="ml-auto text-xs font-normal text-gray-500 flex items-center gap-1">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22c55e] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22c55e]"></span>
+              </span>
+              Live feed
+            </span>
           </h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -313,7 +319,7 @@ export default async function Dashboard() {
       {/* Two Column Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Research Queue */}
-        <div className="bg-[#111] border border-[#222] rounded-xl p-6">
+        <div className="card rounded-xl p-6">
           <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
             <BookIcon className="w-5 h-5" /> Research Queue
           </h2>
@@ -339,7 +345,7 @@ export default async function Dashboard() {
         </div>
 
         {/* Recent Activity */}
-        <div className="bg-[#111] border border-[#222] rounded-xl p-6">
+        <div className="card rounded-xl p-6">
           <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
             <ChartIcon className="w-5 h-5" /> Recent Activity
           </h2>
@@ -364,7 +370,7 @@ export default async function Dashboard() {
       </div>
 
       {/* QE2 Progress Tracker */}
-      <div className="mt-8 bg-[#111] border border-[#222] rounded-xl p-6">
+      <div className="mt-8 card rounded-xl p-6 glow-gold">
         <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
           <DiamondIcon className="w-5 h-5" /> Progress to QE2
         </h2>
