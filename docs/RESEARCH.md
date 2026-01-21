@@ -10,7 +10,7 @@ Ralph's deep dives into successful flywheel tokenomics.
 |----------|--------|--------------|
 | OHM / Olympus DAO | ✅ Complete | (3,3) game theory, bonding |
 | SAFEMOON | ✅ Complete | Reflections, auto-LP |
-| HEX | 📋 Pending | Time-locked staking |
+| HEX | ✅ Complete | Time-locked staking |
 | DRIP Network | 📋 Pending | Daily ROI, referrals |
 | Tomb Finance | 📋 Pending | Algorithmic pegging |
 | Titano | 📋 Pending | Auto-compounding |
@@ -235,6 +235,150 @@ The SafeMoon contract had several critical vulnerabilities that enabled the frau
 - [OKX - SafeMoon Tokenomics](https://www.okx.com/en-us/learn/safemoon-smoon-tokenomics-risks-future)
 - [CoinMarketCap - What Is SafeMoon](https://coinmarketcap.com/academy/article/what-is-safemoon-safemoon)
 - [Wikipedia - SafeMoon](https://en.wikipedia.org/wiki/SafeMoon)
+
+---
+
+## HEX
+
+**Date Researched:** 2026-01-21
+**Status:** Controversial (SEC Case Dismissed, Founder on Europol's Most Wanted, ~99% Down from ATH)
+
+### Overview
+
+HEX launched on December 2, 2019 by Richard Heart as the "first blockchain certificate of deposit." Built on Ethereum, HEX allows users to stake tokens for fixed periods (1-5555 days) in exchange for interest rewards. At its peak in September-November 2021, HEX reached $0.48-$0.56, giving it one of the largest market caps in crypto. The protocol introduced innovative time-lock mechanics but remains highly controversial due to centralization concerns (Origin Address controls ~90% of supply) and the founder's legal troubles across multiple jurisdictions.
+
+### Key Mechanics
+
+1. **Time-Locked Staking ("Proof of Wait")**
+   - Users lock HEX for any period from 1 to 5555 days (~15.2 years)
+   - Cannot withdraw early without severe penalties
+   - Longer locks = higher rewards (disproportionately)
+   - Stakes are burned and converted to "Shares" during lock period
+   - Creates extreme commitment and reduces selling pressure
+
+2. **"Longer Pays Better" Bonus**
+   - Stake length multiplier rewards longer commitments
+   - Maximum bonus at 5555 days (15+ years)
+   - Example: 10 HEX with 40% bonuses = 14 Shares
+   - Payout based on Share percentage, not HEX percentage
+   - Incentivizes multi-year commitments
+
+3. **"Bigger Pays Better" Bonus**
+   - Larger stakes receive additional Share bonuses
+   - Encourages concentration of holdings
+   - Compounds with time bonus for maximum rewards
+
+4. **Share Rate System**
+   - Early stakers get shares cheaper
+   - Share rate increases over time (inflation of share price)
+   - Creates early-mover advantage
+   - Rewards come from inflation pool distributed by Share ownership
+
+5. **Emergency End Stake (EES) Penalties**
+   - Severe penalties for early withdrawal
+   - Stakes <180 days: minimum 90-day penalty
+   - Longer stakes: must serve 50% of time to recover principal
+   - Can lose 100% of principal + interest if unstaking too early
+   - Example: 15-year stake EES at 1 month = 100% loss ("nuked")
+   - Half of penalties go to other stakers, half to Origin Address
+
+6. **Late End Stake Penalty**
+   - 14-day grace period after stake matures
+   - After grace period: 0.143% daily penalty on principal
+   - After ~700 days of neglect: stake worth 0 HEX
+   - Forces active management of stakes
+
+7. **Fixed Inflation Model**
+   - 3.69% annual inflation cap
+   - Only distributed to active stakers
+   - Non-stakers diluted over time
+   - Creates pressure to stake
+
+### What Worked
+
+- **Extreme Commitment Mechanics**: Long locks genuinely reduced sell pressure during bull runs
+- **Simple Value Proposition**: "Bank-like CD on blockchain" was easy to understand
+- **Self-Reinforcing Incentives**: Longer + bigger stakes = exponentially more rewards
+- **Penalty Redistribution**: Other stakers benefit when someone breaks commitment
+- **APY Attractive**: 10-37% average APY vs <2% traditional bank CDs
+- **Smart Contract Immutability**: Code cannot be changed, creating trust
+- **Community Cult**: "Hexicans" developed strong identity and HODL culture
+- **SEC Victory**: February 2025 case dismissal on jurisdictional grounds legitimized project
+
+### What Failed
+
+- **Extreme Centralization**: Origin Address received matching tokens during distribution, controls ~90% of supply
+- **Founder Legal Issues**: Richard Heart on Europol's Most Wanted list (tax fraud, assault allegations in Finland)
+- **99%+ Price Collapse**: From $0.55 ATH to ~$0.0008 current
+- **No Real Utility**: Staking rewards come from inflation, not external revenue
+- **Ponzi Characteristics**: Returns funded by new entrants and inflation
+- **Watch Seizure**: Finnish authorities seized $2.6M in watches from Heart
+- **PulseChain Complications**: Fork created confusion and split community/liquidity
+- **Reputation Damage**: Widely labeled as scam by mainstream crypto media
+
+### Legal Timeline
+
+- **December 2019**: HEX launches
+- **September 2021**: Reaches ATH ~$0.50
+- **July 2023**: SEC files lawsuit against Richard Heart
+- **September 2024**: Finnish authorities issue arrest warrant, seize assets
+- **December 2024**: Interpol Red Notice issued for Heart
+- **February 2025**: US court dismisses SEC case (lack of jurisdiction)
+- **April 2025**: SEC confirms it won't re-file
+- **Current**: Heart remains on Europol's Most Wanted, location unknown
+
+### Lessons for $FED
+
+**DO Adopt:**
+- ✅ Time-lock concepts for bonus rewards (loyalty multipliers)
+- ✅ "Longer = Better" messaging for staking tiers
+- ✅ Grace periods with clear rules
+- ✅ Penalty redistribution to loyal holders (when others exit early)
+- ✅ Simple, memorable branding ("Proof of Wait" = "Proof of Diamond Hands")
+
+**DON'T Adopt:**
+- ❌ Extreme lock periods (5555 days is absurd for most users)
+- ❌ 100% loss penalties (too punitive, creates resentment)
+- ❌ Inflation-funded rewards (not sustainable)
+- ❌ Centralized token distribution (Origin Address model)
+- ❌ Late penalties that destroy stakes (too aggressive)
+
+**Key Insight for $FED:**
+HEX's time-lock innovation was powerful but implementation was flawed:
+1. Rewards from inflation, not real yield
+2. Extreme centralization undermined trustlessness claims
+3. Penalties too severe - created anxiety, not loyalty
+
+**$FED can adopt the SPIRIT of HEX while avoiding its problems:**
+1. Implement staking tiers with USD1 reward multipliers (not inflation)
+2. Use reasonable lock periods (30/90/180 days, not 15 years)
+3. Penalty = forfeited multiplier bonus, not lost principal
+4. Rewards from REAL trading fees, sustainable regardless of new entrants
+5. No Origin Address - decentralized from start
+
+**Potential Implementation: "$FED Proof of Diamond Hands"**
+- 30-day lock: 1.1x USD1 rewards
+- 90-day lock: 1.25x USD1 rewards
+- 180-day lock: 1.5x USD1 rewards
+- 365-day lock: 2x USD1 rewards
+- Early exit: forfeit multiplier bonus only (keep base rewards)
+
+### Sources
+
+- [Supply Chain Game Changer - Understanding HEX Staking](https://supplychaingamechanger.com/understanding-hex-staking-and-rewards/)
+- [Hexicans - Contract Guide](https://hexicans.info/documentation/contract-guide/)
+- [Hexicans - Staking Deep Dive](https://hexicans.info/documentation/deep-dive/)
+- [Hexicans - End Stake Penalties](https://hexicans.info/endstake/)
+- [HEX Wiki - Penalties](http://hex.wiki/penalties)
+- [HEX.com - Official FAQ](https://hex.com/faq/)
+- [BitDegree - What Is HEX Crypto](https://www.bitdegree.org/crypto/tutorials/what-is-hex-crypto)
+- [ApeSpace - HEX Analysis](https://apespace.io/learn/hex-crypto-is-this-staking-powerhouse-worth-your-time/)
+- [BeInCrypto - HEX Investigation](https://beincrypto.com/exclusive-is-hex-token-a-rabbit-in-a-hat-or-a-sack-full-of-cats/)
+- [The Block - SEC Dismisses Lawsuit](https://www.theblock.co/post/351621/hex-richard-heart-sec-fraud-suit)
+- [CoinDesk - Judge Dismisses SEC Case](https://www.coindesk.com/policy/2025/02/28/federal-judge-dismisses-sec-case-against-richard-heart-citing-lack-of-jurisdiction)
+- [Cointelegraph - SEC Won't Re-file](https://cointelegraph.com/news/sec-wont-retry-fraud-case-against-hex-richard-heart)
+- [CoinGecko - HEX Price Data](https://www.coingecko.com/en/coins/hex)
+- [Gate.io - Richard Heart Profile](https://www.gate.com/crypto-wiki/article/richard-heart)
 
 ---
 
