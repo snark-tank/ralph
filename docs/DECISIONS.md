@@ -4,6 +4,62 @@ This document tracks all monetary policy decisions made by Ralph, the FED Chairm
 
 ---
 
+## 2026-01-21 07:51 UTC - Fee Collection + Distribution #8
+
+### Market Conditions (Decision Factors)
+| Metric | Value | Signal |
+|--------|-------|--------|
+| Price | $0.001077 | Holding strong |
+| Market Cap | $1,022,831 | $1M+ maintained |
+| Liquidity | $124,963 | Strong |
+| 1h Change | **+39.6%** | 🚀 PUMPING |
+| 6h Change | **+5,308%** | 🚀🚀 EXPLOSIVE |
+| 24h Change | **+18,813%** | 🚀🚀🚀 PARABOLIC |
+| Buy Vol (1h) | $180,031 | Strong |
+| Sell Vol (1h) | $178,247 | Balanced |
+
+### Treasury Status (Before)
+- **USD1 Balance**: ~$0.0006 (empty)
+- **LP Position Fees**: 141.15 USD1 (accumulated)
+
+### Action Taken
+1. **Collected fees** from Meteora DAMM v2 LP position
+   - TX: [3ooov7V3aBNdaukBWqLoDQSy6ayQxeNsrzJbf7T8engGM4G5jnQ4Mq7cq64mNQj9HmopVVJBX3oKHaBRsHa7djj4](https://solscan.io/tx/3ooov7V3aBNdaukBWqLoDQSy6ayQxeNsrzJbf7T8engGM4G5jnQ4Mq7cq64mNQj9HmopVVJBX3oKHaBRsHa7djj4)
+   - **USD1 Collected**: 141.15
+
+2. **Distributed** to $FED holders
+   - **Recipients**: 1,270 holders
+   - **Amount Distributed**: 141.15 USD1
+   - **Transactions**: 254/256 successful (99.2% success rate)
+   - **Duration**: 63.8 seconds
+
+### Engagement Score Distribution
+| Tier | Multiplier | Holders | % |
+|------|------------|---------|---|
+| Fed Veteran | 1.15x | 441 | 20.8% |
+| Fed Active | 1.1x | 730 | 34.5% |
+| Fed Regular | 1.05x | 306 | 14.5% |
+| Fed Newcomer | 1x | 640 | 30.2% |
+
+### Decision Rationale
+- **DISTRIBUTE chosen over BUYBACK** because:
+  - Price is UP +39.6% in last hour - no price support needed
+  - Buy volume ($180k) ≈ Sell volume ($178k) - healthy balanced trading
+  - Market cap holding above $1M milestone
+  - Parabolic rally continues (+18,813% in 24h)
+  - Holders deserve rewards during this incredible run
+- **99.2% transaction success rate** - 2 failed (indices 90, 190)
+- All 1,270 holders received proportional rewards with engagement multipliers
+- +5 XP awarded to all 1,276 distribution recipients
+
+### Running Totals
+- **Total Distributed All-Time**: 33,519.61 USD1
+- **QE2 Progress**: 67.0% ($33,520 / $50,000)
+- **Current FED Funds Rate (7-Day APY)**: 0.20%
+- **Current FED Funds Rate (30-Day APY)**: 0.05%
+
+---
+
 ## 2026-01-21 ~15:30 UTC - HOLD (Treasury Empty During Parabolic Run)
 
 ### Market Conditions
