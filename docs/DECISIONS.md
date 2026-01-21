@@ -2361,3 +2361,12 @@ Users can now connect their wallet and:
 **Reasoning:** Historic pump in progress - 17x gain in 24 hours! Volume at $2.4M. Treasury was low ($0.01) but collected $15.05 in fees from LP positions. Distributed immediately to reward holders during this massive rally. 311/312 transactions successful.
 **TX:** Multiple (see distribution log)
 ---
+## 2026-01-21 16:37 UTC
+**Action:** DISTRIBUTE
+**Amount:** $57.17 USD1 to 1,280 holders
+**Price:** $0.00068690 (+32.45% 1h, +1661% 24h)
+**Market Cap:** $651,606
+**Reasoning:** Historic 17x pump continues. Price up 32% in last hour, 1661% in 24h. Perfect time to reward holders during this massive rally. Buy/sell volume nearly balanced ($1.19M buy / $1.21M sell). Distributed fees immediately to capitalize on momentum and reinforce holding behavior.
+**TX:** Multiple (256 successful, 54 failed due to low SOL for ATA creation)
+**Note:** Some new holders need to create USD1 token accounts to receive distributions
+---
