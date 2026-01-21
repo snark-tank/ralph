@@ -21,13 +21,16 @@ export type FeatureHighlightProps = {
 const CinematicBackground: React.FC<{
   accentColor?: string;
   intensity?: number;
-}> = ({ accentColor = "#00ff88", intensity = 0.04 }) => {
+  variant?: "center" | "top" | "bottom";
+}> = ({ accentColor = "#00ff88", intensity = 0.04, variant = "center" }) => {
   const frame = useCurrentFrame();
 
   // Very subtle shift - barely perceptible
   const gradientY = interpolate(frame, [0, 300], [48, 52], {
     extrapolateRight: "clamp",
   });
+
+  const yPosition = variant === "top" ? 30 : variant === "bottom" ? 70 : gradientY;
 
   return (
     <AbsoluteFill>
@@ -37,7 +40,7 @@ const CinematicBackground: React.FC<{
       {/* Subtle centered radial */}
       <AbsoluteFill
         style={{
-          background: `radial-gradient(ellipse 80% 50% at 50% ${gradientY}%, ${accentColor}${Math.round(intensity * 255).toString(16).padStart(2, "0")} 0%, transparent 70%)`,
+          background: `radial-gradient(ellipse 80% 50% at 50% ${yPosition}%, ${accentColor}${Math.round(intensity * 255).toString(16).padStart(2, "0")} 0%, transparent 70%)`,
         }}
       />
 
@@ -51,407 +54,413 @@ const CinematicBackground: React.FC<{
   );
 };
 
-// Scene 1: Feature intro - Hook that demands attention
-const IntroScene: React.FC<{ feature: string; icon?: string }> = ({ feature, icon }) => {
+// Multiplier layer component - the visual metaphor for stacking rewards
+const MultiplierLayer: React.FC<{
+  label: string;
+  multiplier: string;
+  index: number;
+  color: string;
+}> = ({ label, multiplier, index, color }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Outer ring that expands and fades
-  const ringScale = spring({
-    frame: frame - fps * 0.1,
+  // Each layer slides in from below with stagger
+  const delay = 0.3 + index * 0.15;
+
+  const slideProgress = spring({
+    frame: frame - delay * fps,
     fps,
-    config: { damping: 200, stiffness: 60 },
+    config: { damping: 180, stiffness: 120 },
   });
-  const ringOpacity = interpolate(
+
+  const opacity = interpolate(
     frame,
-    [fps * 0.1, fps * 0.4, fps * 1.5],
-    [0, 0.15, 0.05],
+    [delay * fps, (delay + 0.2) * fps],
+    [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  // Badge fades in
-  const badgeOpacity = interpolate(frame, [fps * 0.3, fps * 0.6], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-  const badgeY = interpolate(frame, [fps * 0.3, fps * 0.7], [12, 0], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.cubic),
-  });
-
-  // Hero multiplier - dramatic entrance
-  const iconScale = spring({
-    frame: frame - fps * 0.5,
-    fps,
-    config: { damping: 200, stiffness: 100 },
-  });
-  const iconOpacity = interpolate(frame, [fps * 0.5, fps * 0.75], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-
-  // Glow builds (no pulsing) - more dramatic
-  const glowSize = interpolate(frame, [fps * 0.6, fps * 1.6], [0, 60], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.cubic),
-  });
-
-  // Feature title - word by word
-  const words = feature.split(" ");
-
-  return (
-    <AbsoluteFill>
-      <CinematicBackground accentColor="#00ff88" intensity={0.06} />
-
-      <AbsoluteFill
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          flexDirection: "column",
-        }}
-      >
-        {/* Outer ring - subtle, sophisticated */}
-        <div
-          style={{
-            position: "absolute",
-            width: 300,
-            height: 300,
-            borderRadius: "50%",
-            border: "1px solid #00ff88",
-            opacity: ringOpacity,
-            transform: `scale(${ringScale})`,
-          }}
-        />
-
-        {/* Badge */}
-        <div
-          style={{
-            opacity: badgeOpacity,
-            transform: `translateY(${badgeY}px)`,
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-            marginBottom: 28,
-          }}
-        >
-          <div
-            style={{
-              width: 6,
-              height: 6,
-              borderRadius: 3,
-              background: "#00ff88",
-            }}
-          />
-          <span
-            style={{
-              fontSize: 12,
-              fontWeight: 600,
-              color: "#555555",
-              fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: 5,
-              textTransform: "uppercase",
-            }}
-          >
-            New Feature
-          </span>
-        </div>
-
-        {/* Hero multiplier - BIG and dramatic */}
-        {icon && (
-          <div
-            style={{
-              transform: `scale(${iconScale})`,
-              opacity: iconOpacity,
-              filter: `drop-shadow(0 0 ${glowSize}px rgba(0, 255, 136, 0.5))`,
-              marginBottom: 20,
-            }}
-          >
-            <span
-              style={{
-                fontSize: 120,
-                fontWeight: 900,
-                color: "#00ff88",
-                fontFamily: "system-ui, -apple-system, sans-serif",
-                letterSpacing: -6,
-              }}
-            >
-              {icon}
-            </span>
-          </div>
-        )}
-
-        {/* Feature title - word by word */}
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "center",
-            gap: "0 16px",
-            maxWidth: 900,
-          }}
-        >
-          {words.map((word, index) => {
-            const delay = 1.0 + index * 0.07;
-            const wordOpacity = interpolate(
-              frame,
-              [delay * fps, (delay + 0.2) * fps],
-              [0, 1],
-              { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-            );
-            const wordY = interpolate(
-              frame,
-              [delay * fps, (delay + 0.3) * fps],
-              [20, 0],
-              {
-                extrapolateLeft: "clamp",
-                extrapolateRight: "clamp",
-                easing: Easing.out(Easing.cubic),
-              }
-            );
-
-            return (
-              <span
-                key={index}
-                style={{
-                  fontSize: 56,
-                  fontWeight: 900,
-                  color: "#ffffff",
-                  fontFamily: "system-ui, -apple-system, sans-serif",
-                  opacity: wordOpacity,
-                  transform: `translateY(${wordY}px)`,
-                  display: "inline-block",
-                  letterSpacing: -1,
-                  lineHeight: 1.2,
-                }}
-              >
-                {word}
-              </span>
-            );
-          })}
-        </div>
-      </AbsoluteFill>
-    </AbsoluteFill>
-  );
-};
-
-// Scene 2: Description - Clean typography, let it breathe
-const DescriptionScene: React.FC<{ description: string }> = ({ description }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  // Container fades in
-  const containerOpacity = interpolate(frame, [0, fps * 0.4], [0, 1], {
-    extrapolateRight: "clamp",
-  });
-
-  // Description text reveal
-  const textOpacity = interpolate(frame, [fps * 0.2, fps * 0.6], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-  const textY = interpolate(frame, [fps * 0.2, fps * 0.7], [30, 0], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.cubic),
-  });
-
-  // Accent line draws from center outward (top and bottom)
-  const lineHeight = interpolate(frame, [fps * 0.15, fps * 0.8], [0, 160], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.cubic),
-  });
-
-  // Line glow builds
-  const lineGlow = interpolate(frame, [fps * 0.4, fps * 1], [0, 12], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.cubic),
-  });
-
-  return (
-    <AbsoluteFill>
-      <CinematicBackground accentColor="#00d4ff" intensity={0.04} />
-
-      <AbsoluteFill
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          padding: 100,
-          opacity: containerOpacity,
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: 48,
-            maxWidth: 1000,
-          }}
-        >
-          {/* Accent line - fixed height, reveals from center */}
-          <div
-            style={{
-              width: 3,
-              height: lineHeight,
-              background: "linear-gradient(180deg, transparent 0%, #00d4ff 30%, #00ff88 70%, transparent 100%)",
-              borderRadius: 2,
-              flexShrink: 0,
-              boxShadow: `0 0 ${lineGlow}px rgba(0, 212, 255, 0.5)`,
-            }}
-          />
-
-          {/* Description text */}
-          <p
-            style={{
-              fontSize: 36,
-              color: "#ffffff",
-              fontFamily: "system-ui, -apple-system, sans-serif",
-              lineHeight: 1.6,
-              fontWeight: 400,
-              margin: 0,
-              opacity: textOpacity,
-              transform: `translateY(${textY}px)`,
-            }}
-          >
-            {description}
-          </p>
-        </div>
-      </AbsoluteFill>
-    </AbsoluteFill>
-  );
-};
-
-// Benefit item component - clean and minimal with multiplier highlight
-const BenefitItem: React.FC<{
-  benefit: string;
-  index: number;
-  totalBenefits: number;
-}> = ({ benefit, index, totalBenefits }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  const delay = 0.3 + index * 0.18;
-
-  // Smooth entrance with high damping
-  const progress = spring({
-    frame: frame - delay * fps,
-    fps,
-    config: { damping: 200, stiffness: 100 },
-  });
-
-  // Dot scales in
-  const dotScale = spring({
-    frame: frame - (delay + 0.05) * fps,
-    fps,
-    config: { damping: 150, stiffness: 200 },
-  });
-
-  // Subtle glow on dot
-  const dotGlow = interpolate(
+  // Subtle glow that builds per layer
+  const glowOpacity = interpolate(
     frame,
-    [(delay + 0.1) * fps, (delay + 0.4) * fps],
-    [0, 8],
-    {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-      easing: Easing.out(Easing.cubic),
-    }
+    [(delay + 0.2) * fps, (delay + 0.5) * fps],
+    [0, 0.4],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Parse the multiplier from the benefit text (e.g., "(1.5x)")
-  const multiplierMatch = benefit.match(/\(([0-9.]+x)\)/);
-  const multiplier = multiplierMatch ? multiplierMatch[1] : null;
-  const textWithoutMultiplier = multiplier ? benefit.replace(/\s*\([0-9.]+x\)/, "") : benefit;
+  const yOffset = interpolate(slideProgress, [0, 1], [40, 0]);
 
   return (
     <div
       style={{
         display: "flex",
         alignItems: "center",
-        gap: 20,
-        transform: `translateX(${interpolate(progress, [0, 1], [-30, 0])}px)`,
-        opacity: progress,
+        justifyContent: "space-between",
+        width: 400,
+        padding: "14px 24px",
+        background: `linear-gradient(90deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.04) 100%)`,
+        borderRadius: 8,
+        borderLeft: `3px solid ${color}`,
+        transform: `translateY(${yOffset}px)`,
+        opacity,
+        boxShadow: `0 0 30px rgba(${color === "#00ff88" ? "0,255,136" : color === "#00d4ff" ? "0,212,255" : color === "#ff6b9d" ? "255,107,157" : "255,200,87"},${glowOpacity * 0.3})`,
       }}
     >
-      {/* Dot indicator */}
-      <div
+      <span
         style={{
-          width: 8,
-          height: 8,
-          borderRadius: 4,
-          background: "#00ff88",
-          transform: `scale(${dotScale})`,
-          flexShrink: 0,
-          boxShadow: `0 0 ${dotGlow}px rgba(0, 255, 136, 0.6)`,
+          fontSize: 15,
+          color: "#888888",
+          fontFamily: "system-ui, -apple-system, sans-serif",
+          fontWeight: 500,
+          letterSpacing: 1,
         }}
-      />
-
-      {/* Benefit text with highlighted multiplier */}
-      <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-        <span
-          style={{
-            fontSize: 30,
-            color: "#ffffff",
-            fontFamily: "system-ui, -apple-system, sans-serif",
-            fontWeight: 400,
-          }}
-        >
-          {textWithoutMultiplier}
-        </span>
-        {multiplier && (
-          <span
-            style={{
-              fontSize: 28,
-              color: "#00ff88",
-              fontFamily: "system-ui, -apple-system, sans-serif",
-              fontWeight: 700,
-            }}
-          >
-            {multiplier}
-          </span>
-        )}
-      </div>
+      >
+        {label}
+      </span>
+      <span
+        style={{
+          fontSize: 22,
+          color: color,
+          fontFamily: "system-ui, -apple-system, sans-serif",
+          fontWeight: 800,
+          letterSpacing: -0.5,
+        }}
+      >
+        {multiplier}
+      </span>
     </div>
   );
 };
 
-// Scene 3: Benefits list - Clean, scannable
-const BenefitsScene: React.FC<{ benefits: string[] }> = ({ benefits }) => {
+// Scene 1: Feature intro - Dramatic visual of layers stacking
+const IntroScene: React.FC<{ feature: string; icon?: string }> = ({ feature }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Header fades in first
-  const headerOpacity = interpolate(frame, [0, fps * 0.3], [0, 1], {
+  // The layers that stack
+  const layers = [
+    { label: "Holder Tier", multiplier: "1.5x", color: "#00ff88" },
+    { label: "Diamond Hands", multiplier: "1.25x", color: "#00d4ff" },
+    { label: "Engagement", multiplier: "1.2x", color: "#ff6b9d" },
+    { label: "Time Lock", multiplier: "2.0x", color: "#ffc857" },
+  ];
+
+  // Badge appears first
+  const badgeOpacity = interpolate(frame, [fps * 0.1, fps * 0.35], [0, 1], {
+    extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
-  const headerY = interpolate(frame, [0, fps * 0.4], [15, 0], {
+  const badgeY = interpolate(frame, [fps * 0.1, fps * 0.4], [10, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+    easing: Easing.out(Easing.cubic),
+  });
+
+  // Hero multiplier appears after layers stack - the payoff
+  const heroDelay = 1.2;
+  const heroScale = spring({
+    frame: frame - heroDelay * fps,
+    fps,
+    config: { damping: 120, stiffness: 90 },
+  });
+  const heroOpacity = interpolate(
+    frame,
+    [heroDelay * fps, (heroDelay + 0.2) * fps],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+
+  // Glow builds dramatically on the hero number
+  const heroGlow = interpolate(
+    frame,
+    [(heroDelay + 0.15) * fps, (heroDelay + 0.7) * fps],
+    [0, 55],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Equals sign animation - scales in from center
+  const equalsDelay = heroDelay - 0.2;
+  const equalsScale = spring({
+    frame: frame - equalsDelay * fps,
+    fps,
+    config: { damping: 180, stiffness: 150 },
+  });
+  const equalsOpacity = interpolate(
+    frame,
+    [equalsDelay * fps, (equalsDelay + 0.15) * fps],
+    [0, 0.4],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+
+  // Subtitle appears last
+  const subtitleOpacity = interpolate(frame, [fps * 1.8, fps * 2.1], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const subtitleY = interpolate(frame, [fps * 1.8, fps * 2.2], [12, 0], {
+    extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),
   });
 
   return (
     <AbsoluteFill>
-      <CinematicBackground accentColor="#00ff88" intensity={0.04} />
+      <CinematicBackground accentColor="#00ff88" intensity={0.05} />
+
+      <AbsoluteFill
+        style={{
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 80,
+          padding: "0 80px",
+        }}
+      >
+        {/* Left side: Stacking layers */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 10,
+          }}
+        >
+          {/* Badge above layers */}
+          <div
+            style={{
+              opacity: badgeOpacity,
+              transform: `translateY(${badgeY}px)`,
+              display: "flex",
+              alignItems: "center",
+              gap: 10,
+              marginBottom: 16,
+            }}
+          >
+            <div
+              style={{
+                width: 6,
+                height: 6,
+                borderRadius: 3,
+                background: "#00ff88",
+              }}
+            />
+            <span
+              style={{
+                fontSize: 11,
+                fontWeight: 600,
+                color: "#555555",
+                fontFamily: "system-ui, -apple-system, sans-serif",
+                letterSpacing: 4,
+                textTransform: "uppercase",
+              }}
+            >
+              Multiplier Stack
+            </span>
+          </div>
+
+          {/* The layers */}
+          {layers.map((layer, index) => (
+            <MultiplierLayer
+              key={layer.label}
+              label={layer.label}
+              multiplier={layer.multiplier}
+              index={index}
+              color={layer.color}
+            />
+          ))}
+        </div>
+
+        {/* Equals sign - scales in purposefully */}
+        <div
+          style={{
+            opacity: equalsOpacity,
+            transform: `scale(${equalsScale})`,
+            fontSize: 60,
+            color: "#333333",
+            fontFamily: "system-ui, -apple-system, sans-serif",
+            fontWeight: 300,
+          }}
+        >
+          =
+        </div>
+
+        {/* Right side: Hero multiplier result */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            transform: `scale(${heroScale})`,
+            opacity: heroOpacity,
+          }}
+        >
+          <div
+            style={{
+              filter: `drop-shadow(0 0 ${heroGlow}px rgba(0, 255, 136, 0.6))`,
+            }}
+          >
+            <span
+              style={{
+                fontSize: 160,
+                fontWeight: 900,
+                color: "#ffffff",
+                fontFamily: "system-ui, -apple-system, sans-serif",
+                letterSpacing: -8,
+                lineHeight: 1,
+              }}
+            >
+              4.5
+            </span>
+            <span
+              style={{
+                fontSize: 80,
+                fontWeight: 900,
+                color: "#00ff88",
+                fontFamily: "system-ui, -apple-system, sans-serif",
+              }}
+            >
+              x
+            </span>
+          </div>
+          <div
+            style={{
+              opacity: subtitleOpacity,
+              transform: `translateY(${subtitleY}px)`,
+              marginTop: 12,
+            }}
+          >
+            <span
+              style={{
+                fontSize: 14,
+                color: "#555555",
+                fontFamily: "system-ui, -apple-system, sans-serif",
+                letterSpacing: 3,
+                textTransform: "uppercase",
+              }}
+            >
+              Maximum Rewards
+            </span>
+          </div>
+        </div>
+      </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
+// Scene 2: Description - Emphasis on key phrases with staggered reveal
+const DescriptionScene: React.FC<{ description: string }> = ({ description }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  // Split description into segments for emphasis
+  // "Stack multipliers from holder tiers, diamond hands streaks, engagement scores, and time-lock commitments for up to 4.5x rewards."
+  const segments = [
+    { text: "Stack multipliers", highlight: true },
+    { text: " from ", highlight: false },
+    { text: "holder tiers", highlight: true },
+    { text: ", ", highlight: false },
+    { text: "diamond hands", highlight: true },
+    { text: ", ", highlight: false },
+    { text: "engagement", highlight: true },
+    { text: ", and ", highlight: false },
+    { text: "time-locks", highlight: true },
+  ];
+
+  // Top line draws in
+  const topLineWidth = interpolate(frame, [fps * 0.1, fps * 0.6], [0, 100], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+    easing: Easing.out(Easing.cubic),
+  });
+
+  // Final CTA line
+  const ctaOpacity = interpolate(frame, [fps * 1.8, fps * 2.2], [0, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
+  const ctaY = interpolate(frame, [fps * 1.8, fps * 2.3], [15, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+    easing: Easing.out(Easing.cubic),
+  });
+
+  return (
+    <AbsoluteFill>
+      <CinematicBackground accentColor="#00ff88" intensity={0.03} variant="center" />
 
       <AbsoluteFill
         style={{
           justifyContent: "center",
-          alignItems: "flex-start",
-          padding: "80px 120px",
+          alignItems: "center",
+          padding: "60px 100px",
+          flexDirection: "column",
+          gap: 40,
         }}
       >
-        {/* Section header */}
+        {/* Top decorative line */}
         <div
           style={{
-            opacity: headerOpacity,
-            transform: `translateY(${headerY}px)`,
+            width: `${topLineWidth}px`,
+            height: 1,
+            background: "linear-gradient(90deg, transparent, #333333, transparent)",
+          }}
+        />
+
+        {/* Main description with highlighted segments */}
+        <div
+          style={{
+            textAlign: "center",
+            maxWidth: 900,
+            lineHeight: 1.7,
+          }}
+        >
+          {segments.map((segment, index) => {
+            const delay = 0.2 + index * 0.08;
+            const segmentOpacity = interpolate(
+              frame,
+              [delay * fps, (delay + 0.25) * fps],
+              [0, 1],
+              { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+            );
+            const segmentY = segment.highlight
+              ? interpolate(
+                  frame,
+                  [delay * fps, (delay + 0.3) * fps],
+                  [8, 0],
+                  {
+                    extrapolateLeft: "clamp",
+                    extrapolateRight: "clamp",
+                    easing: Easing.out(Easing.cubic),
+                  }
+                )
+              : 0;
+
+            return (
+              <span
+                key={index}
+                style={{
+                  fontSize: segment.highlight ? 38 : 34,
+                  fontWeight: segment.highlight ? 700 : 400,
+                  color: segment.highlight ? "#ffffff" : "#666666",
+                  fontFamily: "system-ui, -apple-system, sans-serif",
+                  opacity: segmentOpacity,
+                  transform: `translateY(${segmentY}px)`,
+                  display: "inline",
+                }}
+              >
+                {segment.text}
+              </span>
+            );
+          })}
+        </div>
+
+        {/* Final payoff line */}
+        <div
+          style={{
+            opacity: ctaOpacity,
+            transform: `translateY(${ctaY}px)`,
             display: "flex",
             alignItems: "center",
-            gap: 14,
-            marginBottom: 50,
+            gap: 12,
           }}
         >
           <div
@@ -464,110 +473,420 @@ const BenefitsScene: React.FC<{ benefits: string[] }> = ({ benefits }) => {
           />
           <span
             style={{
-              fontSize: 14,
+              fontSize: 20,
               color: "#00ff88",
               fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: 4,
-              textTransform: "uppercase",
               fontWeight: 600,
+              letterSpacing: 1,
             }}
           >
-            Why It Matters
+            Up to 4.5x rewards
           </span>
-        </div>
-
-        {/* Benefits list */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 28,
-          }}
-        >
-          {benefits.map((benefit, index) => (
-            <BenefitItem
-              key={index}
-              benefit={benefit}
-              index={index}
-              totalBenefits={benefits.length}
-            />
-          ))}
+          <div
+            style={{
+              width: 40,
+              height: 2,
+              background: "#00ff88",
+              borderRadius: 1,
+            }}
+          />
         </div>
       </AbsoluteFill>
     </AbsoluteFill>
   );
 };
 
-// Scene 4: CTA - Confident, minimal, no gimmicks
+// Individual benefit card with progress bar visualization
+const BenefitCard: React.FC<{
+  label: string;
+  multiplier: string;
+  color: string;
+  index: number;
+  maxMultiplier: number;
+}> = ({ label, multiplier, color, index, maxMultiplier }) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  const delay = 0.25 + index * 0.2;
+
+  // Card slides in
+  const slideProgress = spring({
+    frame: frame - delay * fps,
+    fps,
+    config: { damping: 180, stiffness: 100 },
+  });
+
+  const opacity = interpolate(
+    frame,
+    [delay * fps, (delay + 0.2) * fps],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+
+  // Parse multiplier value for bar width
+  const multiplierValue = parseFloat(multiplier.replace("x", ""));
+  const barWidthPercent = (multiplierValue / maxMultiplier) * 100;
+
+  // Bar fills after card appears
+  const barWidth = interpolate(
+    frame,
+    [(delay + 0.15) * fps, (delay + 0.6) * fps],
+    [0, barWidthPercent],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Multiplier number counts up
+  const displayMultiplier = interpolate(
+    frame,
+    [(delay + 0.15) * fps, (delay + 0.5) * fps],
+    [0, multiplierValue],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  const yOffset = interpolate(slideProgress, [0, 1], [30, 0]);
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 24,
+        transform: `translateY(${yOffset}px)`,
+        opacity,
+      }}
+    >
+      {/* Label */}
+      <div
+        style={{
+          width: 140,
+          fontSize: 15,
+          color: "#666666",
+          fontFamily: "system-ui, -apple-system, sans-serif",
+          fontWeight: 500,
+          textAlign: "right",
+        }}
+      >
+        {label}
+      </div>
+
+      {/* Bar container */}
+      <div
+        style={{
+          flex: 1,
+          maxWidth: 400,
+          height: 28,
+          background: "rgba(255,255,255,0.03)",
+          borderRadius: 6,
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        {/* Fill bar - using unified green with colored accent at end */}
+        <div
+          style={{
+            width: `${barWidth}%`,
+            height: "100%",
+            background: `linear-gradient(90deg, rgba(0,255,136,0.4) 0%, ${color}90 80%, ${color} 100%)`,
+            borderRadius: 6,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "flex-end",
+            paddingRight: 10,
+          }}
+        >
+          {barWidth > 20 && (
+            <span
+              style={{
+                fontSize: 13,
+                fontWeight: 700,
+                color: "#0a0a0a",
+                fontFamily: "system-ui, -apple-system, sans-serif",
+              }}
+            >
+              {displayMultiplier.toFixed(1)}x
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Multiplier badge */}
+      <div
+        style={{
+          width: 70,
+          textAlign: "left",
+        }}
+      >
+        <span
+          style={{
+            fontSize: 22,
+            fontWeight: 800,
+            color: color,
+            fontFamily: "system-ui, -apple-system, sans-serif",
+          }}
+        >
+          {displayMultiplier.toFixed(1)}x
+        </span>
+      </div>
+    </div>
+  );
+};
+
+// Scene 3: Benefits as visual chart - shows relative power of each multiplier
+const BenefitsScene: React.FC<{ benefits: string[] }> = () => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+
+  // Structured benefit data
+  const benefitData = [
+    { label: "Hold More", multiplier: "1.5x", color: "#00ff88" },
+    { label: "Hold Longer", multiplier: "1.25x", color: "#00d4ff" },
+    { label: "Engage More", multiplier: "1.2x", color: "#ff6b9d" },
+    { label: "Lock Longer", multiplier: "2.0x", color: "#ffc857" },
+  ];
+
+  const maxMultiplier = 2.0;
+
+  // Header fades in first
+  const headerOpacity = interpolate(frame, [0, fps * 0.25], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+  const headerY = interpolate(frame, [0, fps * 0.35], [12, 0], {
+    extrapolateRight: "clamp",
+    easing: Easing.out(Easing.cubic),
+  });
+
+  // Total multiplier appears at the end
+  const totalDelay = 1.2;
+  const totalOpacity = interpolate(
+    frame,
+    [totalDelay * fps, (totalDelay + 0.3) * fps],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+  const totalScale = spring({
+    frame: frame - totalDelay * fps,
+    fps,
+    config: { damping: 150, stiffness: 100 },
+  });
+
+  // Calculate running total
+  const totalMultiplier = interpolate(
+    frame,
+    [totalDelay * fps, (totalDelay + 0.5) * fps],
+    [1, 4.5],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  return (
+    <AbsoluteFill>
+      <CinematicBackground accentColor="#00ff88" intensity={0.03} />
+
+      <AbsoluteFill
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          padding: "60px 80px",
+          flexDirection: "column",
+          gap: 36,
+        }}
+      >
+        {/* Section header */}
+        <div
+          style={{
+            opacity: headerOpacity,
+            transform: `translateY(${headerY}px)`,
+            display: "flex",
+            alignItems: "center",
+            gap: 14,
+          }}
+        >
+          <div style={{ width: 30, height: 1, background: "#333333" }} />
+          <span
+            style={{
+              fontSize: 12,
+              color: "#555555",
+              fontFamily: "system-ui, -apple-system, sans-serif",
+              letterSpacing: 4,
+              textTransform: "uppercase",
+              fontWeight: 600,
+            }}
+          >
+            Four Ways to Boost
+          </span>
+          <div style={{ width: 30, height: 1, background: "#333333" }} />
+        </div>
+
+        {/* Benefits chart */}
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+            width: "100%",
+            maxWidth: 700,
+          }}
+        >
+          {benefitData.map((benefit, index) => (
+            <BenefitCard
+              key={benefit.label}
+              label={benefit.label}
+              multiplier={benefit.multiplier}
+              color={benefit.color}
+              index={index}
+              maxMultiplier={maxMultiplier}
+            />
+          ))}
+        </div>
+
+        {/* Total multiplier summary */}
+        <div
+          style={{
+            opacity: totalOpacity,
+            transform: `scale(${totalScale})`,
+            display: "flex",
+            alignItems: "baseline",
+            gap: 12,
+            marginTop: 20,
+            padding: "16px 32px",
+            background: "rgba(0,255,136,0.05)",
+            borderRadius: 12,
+            border: "1px solid rgba(0,255,136,0.15)",
+          }}
+        >
+          <span
+            style={{
+              fontSize: 14,
+              color: "#666666",
+              fontFamily: "system-ui, -apple-system, sans-serif",
+              letterSpacing: 2,
+              textTransform: "uppercase",
+            }}
+          >
+            Combined Max
+          </span>
+          <span
+            style={{
+              fontSize: 48,
+              fontWeight: 900,
+              color: "#00ff88",
+              fontFamily: "system-ui, -apple-system, sans-serif",
+              letterSpacing: -2,
+            }}
+          >
+            {totalMultiplier.toFixed(1)}x
+          </span>
+        </div>
+      </AbsoluteFill>
+    </AbsoluteFill>
+  );
+};
+
+// Scene 4: CTA - Bold, confident finish with multiplier callback
 const CTAScene = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Logo entrance - smooth and confident
-  const logoScale = spring({
+  // "4.5x" hero number appears first - callback to intro
+  const heroScale = spring({
     frame,
     fps,
-    config: { damping: 200, stiffness: 100 },
+    config: { damping: 180, stiffness: 100 },
   });
-  const logoOpacity = interpolate(frame, [0, fps * 0.3], [0, 1], {
+  const heroOpacity = interpolate(frame, [0, fps * 0.25], [0, 1], {
     extrapolateRight: "clamp",
   });
 
-  // Static glow that builds (no pulsing)
-  const logoGlow = interpolate(frame, [fps * 0.2, fps * 0.9], [0, 30], {
+  // Hero glow
+  const heroGlow = interpolate(frame, [fps * 0.1, fps * 0.6], [0, 40], {
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),
   });
 
-  // Tagline
-  const taglineOpacity = interpolate(frame, [fps * 0.4, fps * 0.8], [0, 1], {
+  // Tagline below hero
+  const taglineOpacity = interpolate(frame, [fps * 0.3, fps * 0.6], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
-  const taglineY = interpolate(frame, [fps * 0.4, fps * 0.9], [15, 0], {
+  const taglineY = interpolate(frame, [fps * 0.3, fps * 0.65], [12, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),
   });
 
-  // CTA button - appears smoothly
-  const ctaOpacity = interpolate(frame, [fps * 0.9, fps * 1.3], [0, 1], {
+  // Divider line draws
+  const lineWidth = interpolate(frame, [fps * 0.7, fps * 1.1], [0, 120], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+    easing: Easing.out(Easing.cubic),
+  });
+
+  // Logo and CTA appear together
+  const ctaOpacity = interpolate(frame, [fps * 1.0, fps * 1.4], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
-  const ctaY = interpolate(frame, [fps * 0.9, fps * 1.4], [20, 0], {
+  const ctaY = interpolate(frame, [fps * 1.0, fps * 1.5], [20, 0], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+    easing: Easing.out(Easing.cubic),
+  });
+
+  // Logo glow
+  const logoGlow = interpolate(frame, [fps * 1.2, fps * 1.8], [0, 25], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),
   });
 
   // Subtext last
-  const subOpacity = interpolate(frame, [fps * 1.3, fps * 1.7], [0, 1], {
+  const subOpacity = interpolate(frame, [fps * 1.6, fps * 2.0], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
 
   return (
     <AbsoluteFill>
-      <CinematicBackground accentColor="#00ff88" intensity={0.04} />
+      <CinematicBackground accentColor="#00ff88" intensity={0.05} />
 
       <AbsoluteFill
         style={{
           justifyContent: "center",
           alignItems: "center",
-          gap: 32,
+          gap: 24,
           flexDirection: "column",
         }}
       >
-        {/* Logo */}
+        {/* Hero multiplier - the payoff */}
         <div
           style={{
-            transform: `scale(${logoScale})`,
-            opacity: logoOpacity,
-            filter: `drop-shadow(0 0 ${logoGlow}px rgba(0, 255, 136, 0.4))`,
+            transform: `scale(${heroScale})`,
+            opacity: heroOpacity,
+            filter: `drop-shadow(0 0 ${heroGlow}px rgba(0, 255, 136, 0.5))`,
+            display: "flex",
+            alignItems: "baseline",
           }}
         >
-          <FedLogo size={100} glow={false} />
+          <span
+            style={{
+              fontSize: 100,
+              fontWeight: 900,
+              color: "#ffffff",
+              fontFamily: "system-ui, -apple-system, sans-serif",
+              letterSpacing: -4,
+            }}
+          >
+            4.5
+          </span>
+          <span
+            style={{
+              fontSize: 60,
+              fontWeight: 900,
+              color: "#00ff88",
+              fontFamily: "system-ui, -apple-system, sans-serif",
+            }}
+          >
+            x
+          </span>
         </div>
 
         {/* Tagline */}
@@ -580,33 +899,55 @@ const CTAScene = () => {
         >
           <span
             style={{
-              fontSize: 26,
-              color: "#888888",
+              fontSize: 22,
+              color: "#666666",
               fontFamily: "system-ui, -apple-system, sans-serif",
               fontWeight: 400,
+              letterSpacing: 1,
             }}
           >
-            Stack your multipliers. Maximize your yield.
+            Maximum multiplier. Maximum rewards.
           </span>
         </div>
 
-        {/* CTA button - static, no pulsing */}
+        {/* Divider */}
+        <div
+          style={{
+            width: lineWidth,
+            height: 1,
+            background: "linear-gradient(90deg, transparent, #333333, transparent)",
+            marginTop: 12,
+            marginBottom: 12,
+          }}
+        />
+
+        {/* Logo and CTA */}
         <div
           style={{
             opacity: ctaOpacity,
             transform: `translateY(${ctaY}px)`,
+            display: "flex",
+            alignItems: "center",
+            gap: 20,
           }}
         >
           <div
             style={{
-              padding: "16px 44px",
+              filter: `drop-shadow(0 0 ${logoGlow}px rgba(0, 255, 136, 0.4))`,
+            }}
+          >
+            <FedLogo size={56} glow={false} />
+          </div>
+          <div
+            style={{
+              padding: "12px 32px",
               background: "#00ff88",
               borderRadius: 50,
             }}
           >
             <span
               style={{
-                fontSize: 30,
+                fontSize: 24,
                 fontWeight: 900,
                 color: "#0a0a0a",
                 fontFamily: "system-ui, -apple-system, sans-serif",
@@ -621,15 +962,15 @@ const CTAScene = () => {
         <div
           style={{
             opacity: subOpacity,
-            marginTop: 4,
+            marginTop: 8,
           }}
         >
           <span
             style={{
-              fontSize: 13,
+              fontSize: 12,
               color: "#444444",
               fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: 2,
+              letterSpacing: 3,
               textTransform: "uppercase",
             }}
           >
@@ -651,37 +992,37 @@ export const FeatureHighlight: React.FC<FeatureHighlightProps> = ({
 
   return (
     <TransitionSeries>
-      {/* Intro: 2.5s - Hook with feature title */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(2.5 * fps)}>
+      {/* Intro: 3s - Visual hook with stacking layers and 4.5x reveal */}
+      <TransitionSeries.Sequence durationInFrames={Math.round(3 * fps)}>
         <IntroScene feature={feature} icon={icon} />
       </TransitionSeries.Sequence>
 
       <TransitionSeries.Transition
         presentation={fade()}
-        timing={linearTiming({ durationInFrames: Math.round(0.4 * fps) })}
+        timing={linearTiming({ durationInFrames: Math.round(0.35 * fps) })}
       />
 
-      {/* Description: 3s - Let the message land */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(3 * fps)}>
+      {/* Description: 2.5s - Quick but impactful */}
+      <TransitionSeries.Sequence durationInFrames={Math.round(2.5 * fps)}>
         <DescriptionScene description={description} />
       </TransitionSeries.Sequence>
 
       <TransitionSeries.Transition
         presentation={fade()}
-        timing={linearTiming({ durationInFrames: Math.round(0.4 * fps) })}
+        timing={linearTiming({ durationInFrames: Math.round(0.35 * fps) })}
       />
 
-      {/* Benefits: 4s - Scannable list */}
+      {/* Benefits: 4s - Visual chart of multipliers */}
       <TransitionSeries.Sequence durationInFrames={Math.round(4 * fps)}>
         <BenefitsScene benefits={benefits} />
       </TransitionSeries.Sequence>
 
       <TransitionSeries.Transition
         presentation={fade()}
-        timing={linearTiming({ durationInFrames: Math.round(0.4 * fps) })}
+        timing={linearTiming({ durationInFrames: Math.round(0.35 * fps) })}
       />
 
-      {/* CTA: 3s - Clean close */}
+      {/* CTA: 3s - Strong finish with 4.5x callback */}
       <TransitionSeries.Sequence durationInFrames={Math.round(3 * fps)}>
         <CTAScene />
       </TransitionSeries.Sequence>
