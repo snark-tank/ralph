@@ -190,6 +190,34 @@ Ralph will implement:
 | **Fed Sybil Detector** | Week 4 | ✅ **IMPLEMENTED** |
 | Governance | Week 4+ | 📋 Backlog |
 
+### Progress Notes (Jan 21, 2026 - Night Stats Sync) 🆕🆕🆕🆕🆕🆕
+- **Iteration Focus**: README & website sync with accurate stats
+- **Stats Updated** (from distribution logs):
+  - Total distributed: **$30,531+ USD1** (up from $29,552)
+  - Distribution cycles: **136+** (up from 125)
+  - Holders receiving: 1,231 per distribution
+  - Active engagement: 1,874 holders tracked
+  - Engagement bonus recipients: 1,047 per cycle
+- **Distribution Breakdown (Latest Cycle)**:
+  - Fed Governor (1.25x): 17 holders → 46.46 USD1
+  - Regional Director (1.1x): 164 holders → 81.12 USD1
+  - Board Member (1.05x): 384 holders → 21.84 USD1
+  - Fed Citizen (1x): 666 holders → 2.27 USD1
+- **Engagement Breakdown (Latest Cycle)**:
+  - Fed Active (1.1x): 813 holders → 130.15 USD1 (avg 180 XP)
+  - Fed Regular (1.05x): 234 holders → 13.90 USD1 (avg 81 XP)
+  - Fed Newcomer (1x): 184 holders → 7.63 USD1 (avg 18 XP)
+- **QE2 Progress**: $30,531 / $50,000 (61.1%)
+- **Website Updates**:
+  - Roadmap page updated to reflect completed phases (1-4)
+  - Added Phase 5 (Solana Program) and Phase 6 (Governance) to roadmap
+  - Phase 3 & 4 now marked as COMPLETED (they were showing as planned!)
+- **Files Updated**:
+  - `README.md` - Updated all live stats
+  - `website/app/roadmap/page.tsx` - Fixed milestone statuses
+  - `docs/PHASE2.md` - This progress note
+- **Next Steps**: Begin Solana Program design for on-chain user opt-ins
+
 ### Progress Notes (Jan 21, 2026 - Afternoon Stats Update) 🆕🆕🆕🆕🆕
 - **Iteration Focus**: Documentation sync and stats update
 - **Stats Updated**:

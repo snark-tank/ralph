@@ -14,19 +14,37 @@ export default async function RoadmapPage() {
       'Website sync via Redis',
       '$10 minimum threshold',
     ]},
-    { phase: 'Phase 2', title: 'Intelligence', status: 'in_progress', items: [
+    { phase: 'Phase 2', title: 'Intelligence', status: 'completed', items: [
       'Dynamic threshold management',
       'Intelligent distribution timing',
-      'Gas optimization',
+      'Gas optimization (Helius Priority Fee API)',
       'Volume-aware distribution',
+      'Smart timing decisions',
     ]},
-    { phase: 'Phase 3', title: 'Tiers & Rewards', status: 'planned', items: [
-      'Holder tier system (Diamond/Gold/Silver/Bronze)',
-      'Reward multipliers',
-      'Loyalty bonuses',
-      'Staking duration rewards',
+    { phase: 'Phase 3', title: 'Tiers & Rewards', status: 'completed', items: [
+      'Holder tier system (Chairman/Governor/Director/Member/Citizen)',
+      'Diamond Hands streak multipliers (up to 1.25x)',
+      'Engagement XP system (up to 1.2x)',
+      'Time Lock commitments (up to 2.0x)',
+      'Auto-compound via Jupiter Ultra',
+      'QE Milestone celebrations',
     ]},
-    { phase: 'Phase 4', title: 'Governance', status: 'planned', items: [
+    { phase: 'Phase 4', title: 'Advanced Features', status: 'completed', items: [
+      'Fed Credit Score (reputation system)',
+      'Quest & badge system',
+      'Referral bonuses',
+      'Sybil detection',
+      'Treasury buyback & burn',
+      'Season Pass tracking',
+    ]},
+    { phase: 'Phase 5', title: 'Solana Program', status: 'in_progress', items: [
+      'On-chain user opt-ins for features',
+      'Auto-compound enrollment via wallet connect',
+      'Time-lock preferences stored on-chain',
+      'Streak tracking with on-chain state',
+      'Trustless & verifiable preferences',
+    ]},
+    { phase: 'Phase 6', title: 'Governance', status: 'planned', items: [
       'Community voting',
       'Parameter adjustments via DAO',
       'Treasury management proposals',
