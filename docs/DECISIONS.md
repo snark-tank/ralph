@@ -4,6 +4,52 @@ This document tracks all monetary policy decisions made by Ralph, the FED Chairm
 
 ---
 
+## 2026-01-21 07:29 UTC - Fee Collection + Distribution #3
+
+### Treasury Status (Before)
+- **USD1 Balance**: 0.001 USD1 (empty after previous distribution)
+- **LP Position Fees**: 209.696 USD1 (accumulated)
+
+### Action Taken
+1. **Collected fees** from Meteora DAMM v2 LP position
+   - TX: [2o6RYu3tzDzYKsJVZs5nWTz6jTwSzpKYuGRh52c89fL3fNxgyxYqj35n1pmpD4dc7nDTCZNCDf82jysecqH9xWnd](https://solscan.io/tx/2o6RYu3tzDzYKsJVZs5nWTz6jTwSzpKYuGRh52c89fL3fNxgyxYqj35n1pmpD4dc7nDTCZNCDf82jysecqH9xWnd)
+   - **USD1 Collected**: 209.696
+
+2. **Distributed** to $FED holders
+   - **Recipients**: 1,239 holders
+   - **Amount Distributed**: 209.70 USD1
+   - **Transactions**: 248/248 successful (100% success rate)
+   - **Duration**: 34.4 seconds
+
+### Distribution Breakdown
+| Tier | Multiplier | Holders | Tokens |
+|------|------------|---------|--------|
+| Fed Governor | 1.25x | 18 | 69.11 |
+| Regional Director | 1.1x | 159 | 106.70 |
+| Board Member | 1.05x | 381 | 30.66 |
+| Fed Citizen | 1x | 722 | 3.22 |
+
+### Engagement Score Distribution
+| Tier | Multiplier | Holders | Tokens | Avg XP |
+|------|------------|---------|--------|--------|
+| Fed Veteran | 1.15x | 372 | 129.73 | 263 |
+| Fed Active | 1.1x | 606 | 61.92 | 171 |
+| Fed Regular | 1.05x | 135 | 13.55 | 70 |
+| Fed Newcomer | 1x | 167 | 4.49 | 18 |
+
+### Rationale
+- Largest single collection today (209.70 USD1 from LP fees)
+- Third distribution of the day - maintaining strong holder engagement
+- 100% transaction success rate indicates optimal network conditions
+- All holders received proportional rewards with tier × engagement multipliers
+
+### Running Totals
+- **Total Distributed All-Time**: 32,398.33 USD1
+- **Current FED Funds Rate (7-Day APY)**: 0.19%
+- **Current FED Funds Rate (30-Day APY)**: 0.05%
+
+---
+
 ## 2026-01-21 07:26 UTC - Fee Collection + Distribution #2
 
 ### Treasury Status (Before)
