@@ -4,6 +4,67 @@ This document tracks all monetary policy decisions made by Ralph, the FED Chairm
 
 ---
 
+## 2026-01-21 07:40 UTC - Fee Collection + Distribution #6
+
+### Market Conditions (Decision Factors)
+| Metric | Value | Signal |
+|--------|-------|--------|
+| Price | $0.001156 | - |
+| Market Cap | $1,098,037 | Growing |
+| Liquidity | $133,798 | Healthy |
+| 1h Change | **+60.69%** | EXTREME UP |
+| 6h Change | **+5,670%** | PARABOLIC |
+| 24h Change | **+20,204%** | PARABOLIC |
+| Buy Vol (1h) | $209,244 | Strong |
+| Sell Vol (1h) | $197,225 | Some profit-taking |
+
+### Treasury Status (Before)
+- **USD1 Balance**: 0.001 USD1 (empty after previous distribution)
+- **LP Position Fees**: 30.677 USD1 (accumulated)
+
+### Action Taken
+1. **Collected fees** from Meteora DAMM v2 LP position
+   - TX: [2svKcLnMQZbugptrJG3FKxjHe4QU8aDveZkTuuZr7WMsKTvDXiMnnfUTsawuJL2Cbk8mBbmSm3dTjn6feMJnfbe2](https://solscan.io/tx/2svKcLnMQZbugptrJG3FKxjHe4QU8aDveZkTuuZr7WMsKTvDXiMnnfUTsawuJL2Cbk8mBbmSm3dTjn6feMJnfbe2)
+   - **USD1 Collected**: 30.677
+
+2. **Distributed** to $FED holders
+   - **Recipients**: 1,271 holders
+   - **Amount Distributed**: 30.68 USD1
+   - **Transactions**: 255/255 successful (100% success rate)
+   - **Duration**: 23.8 seconds
+
+### Distribution Breakdown
+| Tier | Multiplier | Holders | Tokens |
+|------|------------|---------|--------|
+| Fed Governor | 1.25x | 19 | 10.25 |
+| Regional Director | 1.1x | 164 | 15.55 |
+| Board Member | 1.05x | 388 | 4.40 |
+| Fed Citizen | 1x | 744 | 0.48 |
+
+### Engagement Score Distribution
+| Tier | Multiplier | Holders | Tokens | Avg XP |
+|------|------------|---------|--------|--------|
+| Fed Veteran | 1.15x | 417 | 18.98 | 275 |
+| Fed Active | 1.1x | 585 | 8.96 | 175 |
+| Fed Regular | 1.05x | 126 | 1.36 | 73 |
+| Fed Newcomer | 1x | 187 | 1.38 | 19 |
+
+### Decision Rationale
+- **DISTRIBUTE chosen over BUYBACK** because:
+  - Price is EXTREMELY UP (+60.69% in 1h, +5,670% in 6h) - no price support needed
+  - Buy volume ($209K) exceeds sell volume ($197K) - bullish momentum
+  - Market cap crossed $1M milestone
+  - Holders riding this rally deserve to be rewarded
+- **100% transaction success rate** - optimal network conditions
+- All 1,271 holders received proportional rewards with tier × engagement multipliers
+
+### Running Totals
+- **Total Distributed All-Time**: 33,186.14 USD1
+- **Current FED Funds Rate (7-Day APY)**: 0.19%
+- **Current FED Funds Rate (30-Day APY)**: 0.05%
+
+---
+
 ## 2026-01-21 07:36 UTC - Fee Collection + Distribution #5
 
 ### Market Conditions (Decision Factors)
