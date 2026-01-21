@@ -32,7 +32,10 @@ Track how long holders continuously hold $FED and reward loyalty with bonus mult
 - ✅ Leaderboard generation for top diamond hands
 - ✅ Individual address lookup
 - ✅ JSON output for API/website integration
-- 🔜 Integrate streak multipliers into distribution (stacks with tier)
+- ✅ **Streak multipliers integrated into distribution** (Jan 21, 2026)
+  - Streak multipliers now STACK with tier multipliers
+  - Combined multiplier = tier × streak (e.g., 1.5x Chairman × 1.25x Founding Father = 1.875x)
+  - Full stats logging for both tier and streak distributions
 - 🔜 Add streak display to website dashboard
 
 **Usage:**
