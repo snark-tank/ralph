@@ -1,13 +1,31 @@
 // Embedded stats - updated at build time or via script
 // This provides fallback data when the local JSON file is not accessible (e.g., on Vercel)
-// Last updated: 2026-01-21T21:46:27.192Z
+// Last updated: 2026-01-21T21:52:38.895Z
 
 export const EMBEDDED_STATS = {
-  totalDistributed: 45848.13,
-  distributionCount: 244,
+  totalDistributed: 46011.09,
+  distributionCount: 247,
   maxRecipients: 1828,
-  lastUpdated: "2026-01-21T21:46:27.192Z",
+  lastUpdated: "2026-01-21T21:52:38.895Z",
   recentDistributions: [
+    {
+      date: "2026-01-21T21:52:38.895Z",
+      amount: 66.14,
+      recipients: 462,
+      txSignature: "4oRr3TxkGGV4RtchttZ2eLrC2SHEtDbDg9NfwZBLguUEf1ZLyYTiDYbyMCFbCYX3LWM88mShHxq4kxaGARgHKcwo"
+    },
+    {
+      date: "2026-01-21T21:50:27.249Z",
+      amount: 36.37,
+      recipients: 365,
+      txSignature: "5MR1TK5bgjru6PdPWBCg76QLSZe2bvz1GaNKDJar4MZ98Trt9nG5MWTskhcERZUmNhkBZUFUdjUxtiZFRAYt1n53"
+    },
+    {
+      date: "2026-01-21T21:48:36.766Z",
+      amount: 60.46,
+      recipients: 448,
+      txSignature: "2vUPeBRU5ztciSjw3aVt27kvrbszNbAQRH4fJxNYXUPfeHmXozUeyR5LQARLXRmMxkZXEQowGjfVTt3etJXtViF4"
+    },
     {
       date: "2026-01-21T21:46:27.192Z",
       amount: 20.78,
@@ -49,24 +67,6 @@ export const EMBEDDED_STATS = {
       amount: 35.36,
       recipients: 360,
       txSignature: "4bGWR7xCni8GdqR7CiZSY6dnMaFnWmPXWJ6Sb2eFEfjnUCyaYCBukkK7Z4QhyG4VgJ4mqB1jbTpTbBrFSm81qfUp"
-    },
-    {
-      date: "2026-01-21T21:22:32.956Z",
-      amount: 43.21,
-      recipients: 387,
-      txSignature: "2bppLaBwFamZzstduQke1QUnZfhMpSZKwwL4wW6wUfkpGwsxKzNrLiFiUpcyei5nszwjJkwZwNdoPe9s2kGFUVnm"
-    },
-    {
-      date: "2026-01-21T21:20:26.089Z",
-      amount: 21.66,
-      recipients: 301,
-      txSignature: "38t65SBs5QgM6gwKNN3sJ9sScuxZXfsLiqjLWiom9y1hwAM4x4UqyW177yrnUZeDrHyx54jvHYNtAn8cxvcCzan1"
-    },
-    {
-      date: "2026-01-21T21:19:15.099Z",
-      amount: 27.34,
-      recipients: 325,
-      txSignature: "3GeUocvkFxYgyMCh1qL5TVnANkrXFjeFfRuexC5XsdJ1FEDboies5itpH3BRpjxjKQU8hNBrQkjx4EMVbc6RQNcn"
     }
   ]
 };
