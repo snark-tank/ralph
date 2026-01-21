@@ -1713,3 +1713,49 @@ Users can now connect their wallet and:
 - **Current FED Funds Rate (30-Day APY)**: 0.05%
 
 ---
+
+---
+
+## 2026-01-21 ~09:30 UTC - DISTRIBUTE $41.98 USD1
+
+### Market Conditions (Decision Factors)
+| Metric | Value | Signal |
+|--------|-------|--------|
+| Price | $0.00068 | Stable |
+| Market Cap | $646,113 | Healthy |
+| Liquidity | $68,318 | Good |
+| 1h Change | **-2.51%** | Minor dip |
+| 24h Change | **+11,847%** | Parabolic run |
+| Buy Vol (24h) | $1,023,865 | Strong |
+| Sell Vol (24h) | $1,015,690 | Balanced |
+
+### Treasury Status
+- **USD1 Balance Before**: $0.01 (empty)
+- **USD1 Collected from LP**: $41.97
+- **USD1 Distributed**: $41.98
+- **USD1 Balance After**: ~$0
+
+### Decision: DISTRIBUTE
+
+**Rationale:**
+1. 1h price change -2.51% is **below** the -5% buyback threshold
+2. 24h still massively up (+11,847%)
+3. Buy/sell ratio balanced at 1.008x (no panic selling)
+4. Holders deserve rewards during this run
+
+### Execution Results
+- **Recipients**: 1,630 $FED holders
+- **Successful Transactions**: 326/330 (98.8% success rate)
+- **Distribution Time**: 101.3 seconds
+- **Total Distributed All-Time**: 35,143.12 USD1
+
+### Solana Program Status
+- ✅ **DEPLOYED TO MAINNET**: `HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz`
+- ✅ Program verified active with 2.0056 SOL balance
+- ✅ All instructions working: initialize, auto-compound, time-lock, referral, claim, multiplier
+- ✅ Website integration complete at fed.markets/preferences
+
+### Running Totals
+- **Total Distributed All-Time**: $35,143.12 USD1
+- **QE2 Progress**: 70.3% ($35,143 / $50,000)
+
