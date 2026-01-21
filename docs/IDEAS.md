@@ -193,19 +193,123 @@ Allow holders to opt-in to auto-reinvest their USD1 rewards back into $FED:
 
 ---
 
+### 8. "Fed Auto-BRRR" Dashboard Experience
+
+**Inspired by:** Titano's addictive UX (without the broken tokenomics)
+
+**The Concept:**
+Titano's genius was making balance growth VISIBLE and addictive. We can adopt this UX without the fake promises:
+
+**Features:**
+- **Live Accumulation Counter**: Show USD1 rewards accumulating in real-time (even between distributions)
+- **"Money Printer" Animation**: Visual of printer running when fees are being collected
+- **Countdown Timer**: "Next distribution in: 1:23:45" (when threshold is close)
+- **Push Notifications**: "You just earned $4.20 USD1!" after each distribution
+- **Rewards History Graph**: Chart showing daily/weekly/monthly USD1 earned
+- **"BRRR Rate" Display**: Current APY based on actual 24h volume (honest, variable)
+
+**Why It Works:**
+- Titano users checked wallets 48x/day - that's engagement
+- We can create same dopamine loop with REAL rewards
+- Visibility creates excitement and word-of-mouth
+- Honest variable APY builds trust (vs. fake fixed promises)
+
+**Example Dashboard:**
+```
+┌──────────────────────────────────────┐
+│  Your BRRR Status                    │
+│  ════════════════════════════════    │
+│  Current Balance: 5,000,000 $FED     │
+│  USD1 Earned Today: $2.34            │
+│  USD1 Accumulating: $0.067...        │ ← live counter
+│  Current BRRR Rate: 32.5% APY        │
+│  Next Distribution: ~1h 23m          │
+│                                      │
+│  [🖨️ BRRR BRRR BRRR...]             │ ← animation
+└──────────────────────────────────────┘
+```
+
+**Effort:** Medium (frontend development)
+**Impact:** High (engagement + retention)
+
+---
+
+### 9. Treasury Diversification Strategy
+
+**Inspired by:** LIBERO's multichain farming concept (done safely)
+
+**The Concept:**
+Don't keep all operational funds in one place. Consider:
+- Stablecoin reserves for operational continuity
+- Yield on idle treasury funds (conservative strategies only)
+- Emergency buyback fund for extreme market conditions
+
+**Key Difference from LIBERO:**
+- LIBERO farmed aggressively across chains → high risk
+- $FED should farm CONSERVATIVELY → only bluechip strategies
+- Goal: Operational sustainability, not high yields
+
+**Implementation:**
+- 80% of treasury in USD1/USDC (stable)
+- 20% in conservative yield strategies (if any)
+- Clear dashboard showing treasury health
+- No cross-chain complexity (stay on Solana)
+
+**Effort:** High (requires treasury management)
+**Impact:** Medium (operational stability)
+
+---
+
+### 10. "Rate Decision" Announcements
+
+**Inspired by:** Actual Federal Reserve FOMC meetings
+
+**The Concept:**
+Weekly or monthly "Fed Rate Decision" announcements:
+- Summary of week's volume and distributions
+- Current "Fed Funds Rate" (APY based on volume)
+- Any protocol updates or changes
+- Holder milestone celebrations
+
+**Format:**
+```
+🏛️ FED RATE DECISION - January 21, 2026
+
+The Federal Reserve Board has completed its review.
+
+Key Statistics:
+- Weekly Volume: $124,567
+- Distributions: 84
+- Total USD1 Distributed: $892.34
+- Current Fed Funds Rate: 34.2% APY
+
+The printer remains operational. BRRR.
+```
+
+**Why It Works:**
+- Creates regular touchpoints with community
+- Professional branding aligned with Fed theme
+- Marketing content that's easy to share
+- Builds anticipation for announcements
+
+**Effort:** Low (content creation)
+**Impact:** Medium (community engagement)
+
+---
+
 ## Low Priority / Future Ideas
 
-### 8. Referral Program
+### 11. Referral Program
 
 **Inspired by:** DRIP Network
 
 Simple referral tracking for organic growth. Later iteration.
 
-### 9. DAO Governance
+### 12. DAO Governance
 
 Let holders vote on distribution parameters. Complex, needs legal review.
 
-### 10. Cross-Chain Expansion
+### 13. Cross-Chain Expansion
 
 Bridge $FED to other chains. Major undertaking, future consideration.
 
@@ -233,9 +337,44 @@ Bridge $FED to other chains. Major undertaking, future consideration.
 2. **Build Fed Funds Rate Display** - Great for marketing
 3. **Create (3,3) Community Campaign** - Free, high engagement
 4. **Launch Transparency Dashboard** - Builds trust
+5. **Build "Fed Auto-BRRR" Dashboard** - Titano-style engagement with real rewards
+6. **Implement "Rate Decision" Communications** - Regular community touchpoints
+
+---
+
+## Research Complete Summary
+
+After analyzing 7 major protocols (OHM, SafeMoon, HEX, DRIP, Tomb, Titano, LIBERO), clear patterns emerge:
+
+**Why They All Failed:**
+- Promised fixed/guaranteed returns (unsustainable)
+- Rewards from inflation, not real revenue
+- Complex mechanics that confused users
+- High taxes that killed organic activity
+- Centralized control enabling rugs
+
+**Why $FED is Different:**
+- Rewards from REAL trading fees (sustainable)
+- USD1 stablecoin rewards (no inflation)
+- Simple mechanics (8% fee → distribute)
+- No fake APY promises (honest variable rates)
+- Protocol owns liquidity (no rug risk)
+
+**Best Mechanics to Adopt:**
+| Protocol | Good Idea | Adaptation for $FED |
+|----------|-----------|---------------------|
+| OHM | (3,3) game theory framing | "BRRR Together" community messaging |
+| SafeMoon | Simple "hold and earn" UX | Already implemented |
+| HEX | Time-lock loyalty bonuses | Staking tiers with multipliers |
+| DRIP | Daily visible rewards | Live accumulation counter |
+| Tomb | Epoch-based cycles | Regular distribution timing |
+| Titano | Addictive balance visibility | "Fed Auto-BRRR" dashboard |
+| LIBERO | Stablecoin + token rewards | Already doing USD1 |
+
+$FED has already learned from the best and avoided the worst. The money printer goes BRRR - sustainably.
 
 ---
 
 *This document is continuously updated by Ralph as he researches and brainstorms.*
 
-Last Updated: 2026-01-21
+Last Updated: 2026-01-21 (Titano + LIBERO research complete)

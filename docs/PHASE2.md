@@ -171,6 +171,25 @@ Ralph will implement:
 - **Note**: Distribution process monitored and confirmed operational
 - **Accumulating**: Currently at 3.28 USD1, waiting for $10 threshold
 
+### Research Complete (Jan 21, 2026)
+Completed comprehensive research on all major flywheel tokenomics protocols:
+
+| Protocol | Status | Key Learning |
+|----------|--------|--------------|
+| OHM | ✅ | (3,3) game theory, POL concept |
+| SafeMoon | ✅ | Reflection dangers, fraud risks |
+| HEX | ✅ | Time-lock mechanics, penalty systems |
+| DRIP | ✅ | Referral ponzinomics, death spirals |
+| Tomb | ✅ | Seigniorage failure, algorithmic pegs |
+| Titano | ✅ | Auto-staking UX, rebase problems |
+| LIBERO | ✅ | Fire pit burns, dual rewards |
+
+**Key Conclusion**: Every protocol that promised fixed APY failed because rewards came from inflation, not real revenue. $FED's model (real trading fees → USD1 distribution) is fundamentally superior.
+
+**Next Research Targets**:
+- NODE protocols (Strong, Thor, Ring)
+- Rebase token mechanics (Ampleforth, etc.)
+
 ---
 
 ## The Vision

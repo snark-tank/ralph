@@ -13,8 +13,8 @@ Ralph's deep dives into successful flywheel tokenomics.
 | HEX | ✅ Complete | Time-locked staking |
 | DRIP Network | ✅ Complete | Daily ROI, referrals |
 | Tomb Finance | ✅ Complete | Algorithmic pegging |
-| Titano | 📋 Pending | Auto-compounding |
-| LIBERO | 📋 Pending | Fire pit burns |
+| Titano | ✅ Complete | Auto-compounding |
+| LIBERO | ✅ Complete | Fire pit burns |
 | NODE protocols | 📋 Pending | Node rewards |
 | Rebase tokens | 📋 Pending | Supply elasticity |
 
@@ -712,6 +712,313 @@ This is essentially what $FED does - and why it's more sustainable.
 - [Smith+Crown - Seigniorage Stablecoins](https://smithandcrown.com/research/the-cryptoeconomics-of-seigniorage-shares-stablecoins-basis-and-carbon/)
 - [DailyDeFi - What Are Seigniorage Stablecoins](https://dailydefi.org/articles/what-are-seigniorage-stablecoins/)
 - [Wikipedia - Stablecoin Death Spirals](https://en.wikipedia.org/wiki/Stablecoin)
+
+---
+
+## Titano
+
+**Date Researched:** 2026-01-21
+**Status:** Dead (Exploited/Rugged February 2022, 99%+ down from ATH)
+
+### Overview
+
+Titano launched in late 2021 as "DeFi's First Automatic Fixed APY" protocol on the Binance Smart Chain. The project promised an unprecedented 102,483.58% fixed APY through its Titano Auto-Staking Protocol (TAP), which paid rebases every 30 minutes (48 times daily). At its peak, TITANO reached a $100M+ market cap with over 40,000 holders. Less than 24 hours after announcing these milestones, the protocol was exploited/rugged for approximately 4,828 BNB (~$1.9 million), causing an 80% price crash in under 20 minutes. The project never recovered.
+
+### Key Mechanics
+
+1. **Titano Auto-Staking Protocol (TAP)**
+   - Revolutionary "hold-to-earn" - no manual staking required
+   - Simply hold TITANO in wallet to receive rewards
+   - Protocol automatically adds tokens to your balance
+   - No interaction with dApps, staking contracts, or claiming
+   - Simplest possible user experience: buy → hold → earn
+
+2. **30-Minute Rebase Cycle**
+   - Industry-leading frequency: 48 rebases per day
+   - Each rebase distributes 0.03958% of your holdings as rewards
+   - Compounding effect: 1.917% daily → 102,483.58% APY
+   - Comparison: OHM rebased every 8 hours (3x daily)
+   - Faster rebases = more visible balance growth = more addictive
+
+3. **Fixed APY Structure**
+   - 1.917% daily return (fixed, not variable)
+   - 102,483.58% APY with compounding
+   - Unlike other protocols where APY fluctuates with staking ratio
+   - Marketing advantage: easy to communicate exact returns
+
+4. **Buy/Sell Tax Structure**
+   - Buy tax: 13% total
+     - 5% to Auto-LP (liquidity pool)
+     - 5% to Risk-Free Value (RFV) fund
+     - 3% to Treasury
+   - Sell tax: 18% total
+     - 5% to Auto-LP
+     - 5% to RFV fund
+     - 8% to Treasury
+   - Higher sell tax discourages selling
+
+5. **Risk-Free Value (RFV) Fund**
+   - 5% of all trades went to RFV
+   - Used to back and pay rebase rewards
+   - Intended as "insurance" for APY sustainability
+   - In theory: RFV grows → can always pay rewards
+   - In practice: Math doesn't work at 102,000% APY
+
+6. **Elastic Supply (No Max Cap)**
+   - TITANO had no maximum supply
+   - New tokens minted for every rebase
+   - Inflationary by design - rewards paid via dilution
+   - Your token count increases, but each token worth less
+
+### What Worked
+
+- **Ultimate Simplicity**: "Hold and earn" required zero user action - revolutionary UX
+- **Addictive Balance Growth**: Watching balance increase 48x daily created dopamine loop
+- **Aggressive Marketing**: Fixed APY number (102,483%) was easy to promote and created FOMO
+- **Fast Rebases**: 30-minute cycles kept users engaged and checking wallets
+- **Fork Template**: Spawned dozens of "Titano forks" across multiple chains
+- **Community Building**: "Titanoers" developed strong identity
+- **Initial Growth**: Reached $100M market cap and 40,000 holders rapidly
+
+### What Failed
+
+- **Mathematically Impossible APY**: 102,000% APY requires infinite new money
+- **Inflationary Death Spiral**: New tokens minted → supply inflates → price drops → value per token crashes
+- **Exploit/Rug (February 2022)**: 4,828 BNB (~$1.9M) drained via PrizeStrategy contract
+  - Some claim third-party exploit (same attacker hit Arbix, Bunny Finance, BitMart)
+  - Others believe inside job / rug pull
+  - Funds split across 24 wallets after extraction
+- **80% Crash in 20 Minutes**: TITANO/USDT dropped from $0.16 to $0.03 instantly
+- **No Recovery**: Project effectively abandoned after exploit
+- **High Taxes**: 13-18% transaction taxes killed trading volume
+- **False Promises**: "Fixed APY" was actually dependent on continuous new buyers
+- **RFV Inadequacy**: Fund couldn't sustain payouts during contraction
+- **Timing**: Collapsed right after celebrating $100M market cap milestone
+
+### The Math Problem Explained
+
+Titano's 102,483% APY meant:
+- $1,000 invested → $1,024,830 after 1 year
+- For EVERYONE to achieve this, market cap would need to grow 1,000x annually
+- This requires infinite new money entering the system
+- When new money stops, those still in lose everything
+
+The "Fixed APY" was a lie - it was fixed until the moment it wasn't. The RFV fund could only delay the inevitable.
+
+### Lessons for $FED
+
+**DO Adopt:**
+- ✅ Simple "hold and earn" messaging - minimize required user actions
+- ✅ Frequent reward visibility - let users see rewards accumulate
+- ✅ Clear APY/return display - make rewards tangible and comparable
+- ✅ Auto-everything philosophy - less friction = better UX
+- ✅ Community identity building - "Titanoers" → "FED Holders"
+
+**DON'T Adopt:**
+- ❌ Fixed APY promises - impossible to guarantee, always breaks
+- ❌ Rebase/inflationary rewards - dilution destroys value
+- ❌ Heavy transaction taxes - kills organic trading volume
+- ❌ No max supply - creates hyperinflation spiral
+- ❌ Centralized control over funds (PrizeStrategy-style contracts)
+
+**Key Insight for $FED:**
+
+Titano's innovation was UX, not economics. The "hold and earn" simplicity was brilliant, but the underlying tokenomics (inflation-funded rewards) were fatally flawed.
+
+**$FED's model is fundamentally superior because:**
+1. Rewards come from REAL trading fees - not inflation
+2. USD1 distribution doesn't dilute $FED supply
+3. No "fixed APY" lie - rewards scale honestly with volume
+4. No rebase mechanics - your token count stays constant
+5. Sustainable as long as trading exists
+
+**What Titano Should Have Been:**
+
+If Titano wanted sustainable auto-staking:
+- Collect fees from trading volume (like $FED)
+- Distribute stablecoin rewards (no supply inflation)
+- Display DYNAMIC APY based on actual fees collected
+- Remove the inflationary rebase entirely
+
+This is exactly what $FED does - Titano's UX with sustainable economics.
+
+**Potential $FED Enhancement - "Fed Auto-BRRR":**
+- Keep $FED's real-yield model
+- Add Titano-style UX polish:
+  - Real-time "BRRR Rate" showing current APY based on volume
+  - "Rewards accumulating" animation on dashboard
+  - Push notifications: "You earned $X.XX USD1 today"
+  - Countdown to next distribution
+- Make the reward visibility addictive WITHOUT fake promises
+
+### Sources
+
+- [Titano Official Docs](https://docs.titano.finance/)
+- [Titano FAQ](https://docs.titano.finance/guide/f.a.q.)
+- [GlobeNewswire - Titano Launches DeFi's First Automatic Fixed APY](https://www.globenewswire.com/news-release/2021/12/17/2354630/0/en/Titano-Launches-DeFi-s-First-Automatic-Fixed-APY.html)
+- [CoinTrust - DeFi Startup Titano Rolls Out Staking Token](https://www.cointrust.com/market-news/defi-startup-titano-rollsout-staking-token-with-fixed-apy)
+- [Benzinga - Titano Finance Investment Platform](https://www.benzinga.com/markets/cryptocurrency/22/03/26037894/titano-finance-a-blockchain-based-investment-platform-is-striving-to-help-everyday-investo)
+- [BitKan - What Happened To Titano Crypto?](https://bitkan.com/learn/what-happened-to-titano-crypto-is-titano-a-rugpull-17774)
+- [U.Today - Titano Finance DeFi Rug Pulled](https://u.today/titano-finance-defi-rug-pulled-titano-drops-80-in-10-minutes)
+- [TheCryptoBasic - Titano Finance Hacked For 4,828 BNB](https://thecryptobasic.com/2022/02/14/titano-finance-hacked-for-4828-bnb/)
+- [SmartBlocks - What is Titano and Why Has It Spawned So Many Forks](https://www.smartblocks.agency/blog/what-is-titano-and-why-has-it-spawned-so-many-forks)
+- [CoinMarketCap - Titano](https://coinmarketcap.com/currencies/titano/)
+- [Coinbase - Titano Price](https://www.coinbase.com/price/titano)
+
+---
+
+## LIBERO Financial
+
+**Date Researched:** 2026-01-21
+**Status:** Likely Dead (99%+ down from ATH, minimal activity)
+
+### Overview
+
+LIBERO Financial launched in early 2022 as an evolution of the Titano model, adding several new features including the "Fire Pit" burn mechanism, DeFi 3.0 multichain farming, and BUSD passive income. The project promised a "fixed" APY of 158,893.59% (later adjusted to 543.27% compounding) plus additional BUSD rewards from trading volume. LIBERO attempted to address some of Titano's sustainability concerns through aggressive burn mechanics, claiming to burn 2-4% of total supply weekly. Despite these innovations, the project followed the same trajectory as other rebase tokens - initial hype followed by a slow decline to near-zero value.
+
+### Key Mechanics
+
+1. **Auto-Staking & Auto-Compounding**
+   - Same core concept as Titano: hold tokens, earn automatically
+   - Rebase every 30 minutes (48x daily)
+   - 0.51% daily rewards → 543.27% compounding APY
+   - No manual staking or claiming required
+   - BEP-20 token on Binance Smart Chain
+
+2. **"Fire Pit" Hyper Burn System**
+   - LIBERO's key innovation over Titano
+   - 2-4% of TOTAL circulating supply burned weekly
+   - Automated linear burns (not manual pump-and-dump)
+   - Started with 1 billion LIBERO reserved for burning
+   - Goal: Deflationary pressure to counter rebase inflation
+   - Theory: Your balance grows while supply shrinks = net gain
+
+3. **Dual Reward System**
+   - Rebase rewards: 0.51% daily in LIBERO tokens
+   - BUSD rewards: 226% APR from trading volume
+   - Two income streams: token appreciation + stablecoin
+   - BUSD rewards similar to $FED's USD1 distribution
+
+4. **Fee Structure**
+   - Buy tax: 13% total
+     - 5% to Liquidity Pool
+     - 5% to Risk-Free Value (RFV)
+     - 3% to Treasury
+   - Sell tax: 20% total
+     - 5% to Liquidity Pool
+     - 5% to RFV
+     - 5% to Fire Pit burns
+     - 5% to Treasury
+   - Higher sell tax + burn allocation
+
+5. **DeFi 3.0 Multichain Farming (Treasury)**
+   - Libero Insurance Treasury (LIT) funded by portion of fees
+   - Treasury held in stablecoins
+   - Funds bridged to multiple chains
+   - Farmed at highest-yield opportunities
+   - Profits used to support LIBERO price floor
+   - Target: ~50% annual treasury growth
+
+6. **Buyback and LP Burns**
+   - Treasury used to buy back LIBERO during dips
+   - Bought tokens paired with BNB
+   - LP tokens then "burned" (locked in liquidity)
+   - Increases both price and permanent liquidity
+
+### What Worked (In Theory)
+
+- **Burn Innovation**: Fire Pit addressed Titano's pure inflation problem
+- **Dual Income Streams**: BUSD rewards provided stablecoin alongside rebase
+- **Treasury Diversification**: Multichain farming was sophisticated approach
+- **Buyback Support**: Active price support during downturns
+- **Lower APY Claims**: 543% more believable than 102,000%
+- **Linear Burns**: Automated schedule prevented pump-and-dump burn events
+
+### What Failed
+
+- **Still Unsustainable Math**: Even with burns, 543% APY requires massive growth
+- **Complex Tokenomics**: Too many mechanisms confused users
+- **High Taxes**: 13-20% fees killed organic trading
+- **Burn vs Rebase Race**: Burns couldn't outpace rebase inflation
+- **Treasury Farming Risks**: Exposed to DeFi exploits across chains
+- **Same Death Spiral**: When confidence breaks, nothing saves it
+- **99%+ Price Collapse**: From ATH to near-zero
+- **Minimal Current Activity**: Appears largely abandoned
+
+### The Burn Math Problem
+
+LIBERO tried to solve the rebase problem with burns:
+- Rebase: Your tokens increase 543% annually
+- Burn: Supply decreases 2-4% weekly (~100-200% annually)
+
+The problem:
+- If everyone holds, supply shrinks but rebases still happen
+- Rebases > Burns = net inflation
+- Burns paid from trading fees + reserves
+- When trading stops, burns stop, spiral begins
+
+The Fire Pit was a clever attempt but couldn't overcome the fundamental flaw: promising fixed returns without sustainable revenue.
+
+### Comparison: LIBERO vs Titano vs $FED
+
+| Feature | Titano | LIBERO | $FED |
+|---------|--------|--------|------|
+| APY Source | Inflation | Inflation + Burns | Real Fees |
+| Promised APY | 102,483% | 543% | Variable/Honest |
+| Stablecoin Rewards | No | Yes (BUSD) | Yes (USD1) |
+| Burn Mechanism | No | Yes (Fire Pit) | No (Fixed Supply) |
+| Transaction Tax | 13-18% | 13-20% | 8% (LP only) |
+| Sustainability | None | Low | High |
+| Status | Dead | Likely Dead | Active |
+
+### Lessons for $FED
+
+**DO Adopt:**
+- ✅ BUSD/stablecoin rewards concept - LIBERO was right to add this
+- ✅ Treasury diversification - don't keep all eggs in one basket
+- ✅ Buyback mechanisms during dips - price support helps confidence
+- ✅ Clear reward dashboards - show both token and stablecoin earnings
+- ✅ Linear/automated processes - no manual pump events
+
+**DON'T Adopt:**
+- ❌ Burn mechanics to "fix" inflation - just don't inflate in first place
+- ❌ Complex multi-mechanism tokenomics - simplicity wins
+- ❌ High transaction taxes - 20% sell tax is prohibitive
+- ❌ Fixed APY promises - always breaks eventually
+- ❌ Rebase mechanics - fundamentally unsustainable
+
+**Key Insight for $FED:**
+
+LIBERO's Fire Pit was an admission that rebase tokenomics are broken. They tried to patch inflation with burns, adding complexity without solving the core problem.
+
+**$FED's approach is cleaner:**
+1. No inflation to begin with (fixed supply)
+2. No burns needed (nothing to burn)
+3. Rewards from real trading fees (sustainable)
+4. USD1 stablecoins (no token price dependency)
+5. Simple mechanics (easy to understand)
+
+**The LIBERO Lesson:**
+Adding complexity (burns, multichain farming, dual rewards, buybacks) to fix a fundamentally broken model (rebase inflation) doesn't work. Better to start with a sound model and keep it simple.
+
+**What $FED Can Borrow:**
+- Dashboard showing "BUSD earned" equivalent → "USD1 earned"
+- Real-time APY based on actual volume (not fixed promises)
+- Treasury diversification for operational sustainability
+- Automated buyback considerations during major dips
+
+### Sources
+
+- [LIBERO Docs - Overview](https://docs.libero.financial/libero-overview/libero-auto-staking-+-multichain-farming-+-hyper-burn)
+- [CoinMarketCap - LIBERO Financial](https://coinmarketcap.com/currencies/libero-financial/)
+- [Coinbase - LIBERO Price](https://www.coinbase.com/price/libero-financial)
+- [CoinCarp - LIBERO Financial](https://www.coincarp.com/currencies/libero-financial/)
+- [ICOHolder - LIBERO Financial](https://icoholder.com/en/libero-financial-1012895)
+- [CoinWorldStory - What Is LIBERO Financial](https://coinworldstory.com/libero-financial/)
+- [AltWow - LIBERO Financial Review](https://altwow.com/libero-financial/)
+- [Medium - Is LIBERO Financial For Real?](https://medium.com/geekculture/is-libero-financial-for-real-market-mad-house-cd989dbbf18d)
+- [Binance Chain News - LIBERO Financial AMA](https://binancechain.news/libero-financial-ama-transcript/2022/02/04/)
+- [IsThisCoinAScam - LIBERO Financial](https://isthiscoinascam.com/check/libero-financial)
 
 ---
 
