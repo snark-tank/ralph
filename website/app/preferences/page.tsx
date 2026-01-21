@@ -67,7 +67,7 @@ export default function PreferencesPage() {
             <div className="flex justify-between">
               <span className="text-gray-400">Program ID:</span>
               <a
-                href="https://solscan.io/account/HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz?cluster=devnet"
+                href="https://solscan.io/account/HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="font-mono text-[#c9a227] hover:underline"
@@ -77,7 +77,7 @@ export default function PreferencesPage() {
             </div>
             <div className="flex justify-between">
               <span className="text-gray-400">Network:</span>
-              <span className="text-yellow-400">Devnet (Testing)</span>
+              <span className="text-green-400">Mainnet</span>
             </div>
             <div className="flex justify-between">
               <span className="text-gray-400">Source Code:</span>
