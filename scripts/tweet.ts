@@ -18,6 +18,53 @@ import * as path from 'path';
 // Load environment variables
 dotenv.config({ path: path.join(import.meta.dirname || __dirname, '.env') });
 
+const LAST_TWEET_FILE = path.join(import.meta.dirname || __dirname, 'last-tweet-time.txt');
+
+/**
+ * Save the current timestamp as last tweet time
+ */
+function saveLastTweetTime(): void {
+    fs.writeFileSync(LAST_TWEET_FILE, new Date().toISOString());
+}
+
+/**
+ * Get minutes since last tweet
+ */
+export function getMinutesSinceLastTweet(): number {
+    try {
+        if (!fs.existsSync(LAST_TWEET_FILE)) {
+            return Infinity; // No previous tweet, safe to tweet
+        }
+        const lastTime = new Date(fs.readFileSync(LAST_TWEET_FILE, 'utf-8').trim());
+        const now = new Date();
+        return (now.getTime() - lastTime.getTime()) / (1000 * 60);
+    } catch {
+        return Infinity;
+    }
+}
+
+/**
+ * Check if enough time has passed to tweet (30 min minimum)
+ */
+export function canTweetNow(minMinutes: number = 30): boolean {
+    const minutes = getMinutesSinceLastTweet();
+    return minutes >= minMinutes;
+}
+
+/**
+ * Get last tweet time as a string
+ */
+export function getLastTweetTimeString(): string {
+    try {
+        if (!fs.existsSync(LAST_TWEET_FILE)) {
+            return 'Never';
+        }
+        return fs.readFileSync(LAST_TWEET_FILE, 'utf-8').trim();
+    } catch {
+        return 'Unknown';
+    }
+}
+
 const {
     TWITTER_API_KEY,
     TWITTER_API_SECRET,
@@ -66,6 +113,7 @@ export async function sendTweet(text: string, replyToId?: string): Promise<strin
         }
         const tweet = await client.v2.tweet(text, options);
         console.log(`✅ Tweet posted: https://x.com/fed_USD1/status/${tweet.data.id}`);
+        saveLastTweetTime(); // Track tweet timing
         return tweet.data.id;
     } catch (error: any) {
         console.error('❌ Failed to post tweet:', error.message);
@@ -240,8 +288,18 @@ async function main() {
         console.log('Usage:');
         console.log('  npx tsx tweet.ts "Your tweet text"');
         console.log('  npx tsx tweet.ts --report \'{"action":"DISTRIBUTE","amount":100,"recipients":1230}\'');
-        console.log('  npx tsx tweet.ts --test');
+        console.log('  npx tsx tweet.ts --check    # Check if 30 min has passed since last tweet');
+        console.log('  npx tsx tweet.ts --test     # Test report format without posting');
         process.exit(1);
+    }
+
+    if (args[0] === '--check') {
+        const minutes = getMinutesSinceLastTweet();
+        const canTweet = canTweetNow();
+        console.log(`⏰ Last tweet: ${getLastTweetTimeString()}`);
+        console.log(`⏱️ Minutes since last tweet: ${minutes === Infinity ? 'Never tweeted' : minutes.toFixed(1)}`);
+        console.log(`${canTweet ? '✅ OK to tweet now' : '⏳ Wait at least 30 minutes between tweets'}`);
+        process.exit(canTweet ? 0 : 1);
     }
 
     if (args[0] === '--test') {

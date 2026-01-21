@@ -365,6 +365,10 @@ const BLACKLISTED_ADDRESSES = [
     'FaxmZj7oi9bZwLPHYPBf2zeWDY3GK4mXvMopfkvQ9kVE', // Blacklisted address
 ];
 
+// Minimum $FED holding required to receive distributions (in tokens, not lamports)
+// $FED has 6 decimals, so 1000 tokens = 1000 uiAmount
+const MIN_FED_HOLDING = 1000;
+
 // Distribution history file (in the main fed/src folder for website access)
 const DISTRIBUTION_HISTORY_FILE = path.join(__dirname, '..', 'src', 'token-distribution-history.json');
 
@@ -1091,6 +1095,7 @@ async function main() {
         let filteredCount = 0;
         let blacklistedCount = 0;
         let skippedOffCurve = 0;
+        let belowMinimumCount = 0;
 
         for (const account of tokenAccounts) {
             const parsedData = account.account.data;
@@ -1098,6 +1103,11 @@ async function main() {
             const owner = parsedData.parsed?.info?.owner;
 
             if (tokenAmount && owner && tokenAmount.uiAmount > 0) {
+                // Check minimum holding requirement (1000 $FED)
+                if (tokenAmount.uiAmount < MIN_FED_HOLDING) {
+                    belowMinimumCount++;
+                    continue;
+                }
                 // Check if address is blacklisted
                 if (BLACKLISTED_ADDRESSES.includes(owner)) {
                     blacklistedCount++;
@@ -1150,6 +1160,9 @@ async function main() {
         }
         if (skippedOffCurve > 0) {
             logger.log(`Excluded ${skippedOffCurve} off-curve/PDA addresses`);
+        }
+        if (belowMinimumCount > 0) {
+            logger.log(`Excluded ${belowMinimumCount} addresses below minimum (${MIN_FED_HOLDING.toLocaleString()} $FED required)`);
         }
         logger.log(`Eligible holders after filtering: ${holders.length}`);
 
