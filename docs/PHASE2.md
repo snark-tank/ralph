@@ -18,21 +18,26 @@ Phase 1 was about getting the basic flywheel running. Phase 2 is about Ralph bec
 
 ## Phase 2 Roadmap
 
-### 2.1 Intelligent Distribution Timing
+### 2.1 Intelligent Distribution Timing ✅ IMPLEMENTED
 
-Instead of fixed 2-minute intervals, Ralph will:
+~~Instead of fixed 2-minute intervals~~, Ralph now uses smart timing:
 
-- **Monitor gas prices** - Distribute when Solana network is cheap
-- **Batch optimization** - Wait for larger amounts to reduce tx overhead
-- **Volume awareness** - Increase frequency during high trading volume
-- **Time-based patterns** - Learn optimal distribution windows
+- ✅ **Monitor gas prices** - Uses Helius Priority Fee API to detect cheap/expensive network
+- ✅ **Batch optimization** - Dynamic thresholds scale with holder count and conditions
+- ✅ **Volume awareness** - Peak trading hours (2pm-9pm UTC) get lower thresholds
+- ✅ **Time-based patterns** - Off-peak hours have 1.5x higher thresholds
 
+```typescript
+// Smart timing pseudocode (now implemented!)
+const decision = await makeTimingDecision(connection, wallet, timingData);
+if (decision.shouldDistribute) {
+    await runDistributionPipeline();
+} else {
+    console.log(`Waiting: ${decision.reason}`);
+}
 ```
-IF gas_cheap AND balance > threshold AND volume_high:
-    distribute()
-ELSE:
-    accumulate()
-```
+
+**Scripts**: `smart-timing.ts`, `smart-distribution.ts`
 
 ### 2.2 Dynamic Threshold Management
 
@@ -163,7 +168,7 @@ Ralph will implement:
 | Basic distribution | Week 1 | ✅ Complete |
 | Website sync | Week 1 | ✅ Complete |
 | PM2 automation | Week 1 | ✅ Complete |
-| Dynamic thresholds | Week 2 | 🔄 In Progress |
+| Dynamic thresholds | Week 2 | ✅ **IMPLEMENTED** |
 | **Holder tiers** | Week 3 | ✅ **IMPLEMENTED** |
 | **Fed Funds Rate** | Week 3 | ✅ **IMPLEMENTED** |
 | **Rate Decision Generator** | Week 3 | ✅ **IMPLEMENTED** |
@@ -181,7 +186,60 @@ Ralph will implement:
 | **Fed Quests System** | Week 3 | ✅ **IMPLEMENTED** |
 | **Fed Time Lock** | Week 3 | ✅ **IMPLEMENTED** |
 | **Time Lock Distribution Integration** | Week 3 | ✅ **IMPLEMENTED** |
+| **Smart Distribution Timing** | Week 4 | ✅ **IMPLEMENTED** |
 | Governance | Week 4+ | 📋 Backlog |
+
+### Progress Notes (Jan 21, 2026 - Late Night) 🆕🆕🆕
+- **Implementation**: Smart Distribution Timing System - COMPLETED!
+- **Research**: Studied Helius Priority Fee API for optimal gas-aware distribution
+- **New Scripts Created**:
+  - `smart-timing.ts` - Intelligent timing decision engine
+  - `smart-distribution.ts` - Smart distribution runner
+- **Key Features**:
+  1. **Dynamic Priority Fee Monitoring**: Uses Helius `getPriorityFeeEstimate` API
+  2. **Network Status Classification**: cheap/normal/expensive based on micro-lamports
+  3. **Dynamic Threshold Calculation**: Adjusts based on:
+     - Holder count scaling (+$1 per 100 holders, max +$50)
+     - Network conditions (0.8x cheap, 1.5x expensive)
+     - Peak trading hours (2pm-9pm UTC)
+  4. **Time-based Controls**:
+     - Min wait: 2 minutes between distributions
+     - Max wait: 30 minutes forces distribution
+     - Max threshold: $100 forces distribution
+  5. **Decision History**: Tracks all timing decisions for analysis
+- **Technical Implementation**:
+  ```typescript
+  // Priority fee thresholds
+  lowFeeThreshold: 1000,    // Below = cheap network
+  highFeeThreshold: 50000,  // Above = expensive network
+
+  // Dynamic threshold formula
+  threshold = baseMin + holderScaling
+  if (expensive) threshold *= 1.5
+  if (cheap) threshold *= 0.8
+  if (!peakHour) threshold *= 1.5
+  ```
+- **Usage**:
+  ```bash
+  # Check timing conditions
+  npx ts-node smart-timing.ts --status
+
+  # Run with smart timing
+  npx ts-node smart-distribution.ts
+
+  # Force distribution regardless of timing
+  npx ts-node smart-distribution.ts --force
+  ```
+- **Why This Matters**:
+  - Saves gas fees by distributing when network is cheap
+  - Optimizes for peak trading hours (more volume = more fees)
+  - Prevents wasteful small distributions
+  - Creates better UX with predictable larger distributions
+- **Files Created**:
+  - `/home/ubuntu/fed/script/smart-timing.ts`
+  - `/home/ubuntu/fed/script/smart-distribution.ts`
+- **API Reference**: [Helius Priority Fee API](https://www.helius.dev/docs/priority-fee-api)
+- **Next Steps**: Integrate with PM2 to replace simple 2-minute cron
 
 ### Progress Notes (Jan 21, 2026 - Overnight) 🆕🆕
 - **Implementation**: Time Lock Distribution Integration - COMPLETED!
