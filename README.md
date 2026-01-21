@@ -34,13 +34,14 @@ Ralph acts as the Federal Reserve Chairman, controlling the money printer that g
 
 | Metric | Value |
 |--------|-------|
-| **Total Distributed** | $28,573+ USD1 |
-| **Distributions** | 700+ |
-| **Holders Paid** | 300+ |
+| **Total Distributed** | **$28,802+ USD1** |
+| **Distributions** | 112 cycles |
+| **Holders Receiving** | 230+ per distribution |
 | **Frequency** | Every 2 minutes |
-| **Threshold** | $10 USD1 minimum |
+| **Distribution Threshold** | $10 USD1 minimum |
+| **Multiplier System** | Tier × Streak × Engagement × Time Lock |
 
-*Last updated: January 21, 2026*
+*Last updated: January 21, 2026 - Stats sync automatically via Redis*
 
 ---
 
@@ -53,12 +54,17 @@ Ralph acts as the Federal Reserve Chairman, controlling the money printer that g
 │   $FED          │     │   in LP         │     │   USD1 Fees     │
 └─────────────────┘     └─────────────────┘     └────────┬────────┘
                                                          │
-┌─────────────────┐     ┌─────────────────┐              │
-│   Holders       │     │   Ralph         │◀─────────────┘
-│   Buy More      │◀────│   Distributes   │
-│   (Repeat)      │     │   to Holders    │
-└─────────────────┘     └─────────────────┘
+         ┌───────────────────────────────────────────────┤
+         │                                               │
+         ▼                                               ▼
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│   Holders       │     │   Ralph         │     │ Auto-Compound   │
+│   Receive USD1  │◀────│   Distributes   │────▶│ USD1 → $FED     │
+│   + Multipliers │     │   Every 2 Min   │     │ (Jupiter Ultra) │
+└─────────────────┘     └─────────────────┘     └─────────────────┘
 ```
+
+**4x Stacking Multipliers**: Tier × Streak × Engagement × Time Lock = **Up to 5.63x rewards!**
 
 ---
 
@@ -89,7 +95,9 @@ Long-term holders earn additional multipliers:
 | 🤝 **Holder** | 7+ days | 1.05x |
 | 🆕 **Newcomer** | 0-6 days | 1.0x |
 
-**Multipliers STACK!** A Fed Governor with a 90-day streak gets: 1.25x × 1.15x = **1.4375x rewards**
+**All 4 multipliers STACK!** Example calculation:
+- Fed Governor (1.25x) × Fed Loyalist streak (1.15x) × Fed Active engagement (1.1x) × Fed Oath time lock (1.3x) = **1.96x rewards**
+- Maximum possible: Chairman (1.5x) × Founding Father (1.25x) × Fed Elite (1.2x) × Fed Bond (2.0x) = **4.5x rewards**
 
 ---
 
@@ -131,13 +139,20 @@ Voluntarily commit to holding for boosted rewards (soft lock - tokens stay liqui
 
 ## 🔄 Auto-Compound Feature
 
-**NEW!** Automatically reinvest your USD1 rewards back into $FED:
+**LIVE!** Automatically reinvest your USD1 rewards back into $FED:
 
 - Register your address for auto-compound
-- Your USD1 rewards are swapped to $FED via Jupiter Ultra API
+- Your USD1 rewards are swapped to $FED via **Jupiter Ultra API**
+- Treasury performs batched swaps for gas efficiency
+- $FED is distributed directly to your wallet
 - Grow your position automatically without manual swaps
 - Move up tiers faster as your holdings increase
 - Creates buy pressure (good for price)
+
+**How it works:**
+1. Treasury aggregates all auto-compound USD1 rewards
+2. Single swap USD1 → $FED via Jupiter Ultra (gasless for you)
+3. $FED distributed proportionally to each enrolled holder
 
 **How to enable:**
 ```bash
@@ -150,15 +165,17 @@ npx ts-node scripts/auto-compound.ts --register YOUR_ADDRESS
 
 Special celebration distributions when we hit milestones:
 
-| Milestone | Event | Bonus |
-|-----------|-------|-------|
-| $10,000 | QE1 | 1.5x celebration |
-| $25,000 | QE1.5 | 1.25x celebration |
-| $50,000 | QE2 | 1.5x celebration |
-| $100,000 | QE3 | 2.0x celebration |
-| $250,000 | QE4 | 2.0x celebration |
-| $500,000 | QE5 | 2.5x celebration |
-| $1,000,000 | QE∞ | 3.0x celebration |
+| Milestone | Event | Bonus | Status |
+|-----------|-------|-------|--------|
+| $10,000 | QE1 | 1.5x celebration | ✅ Achieved! |
+| $25,000 | QE1.5 | 1.25x celebration | ✅ Achieved! |
+| $50,000 | QE2 | 1.5x celebration | 🎯 Next target |
+| $100,000 | QE3 | 2.0x celebration | 🔮 Upcoming |
+| $250,000 | QE4 | 2.0x celebration | 🔮 Upcoming |
+| $500,000 | QE5 | 2.5x celebration | 🔮 Upcoming |
+| $1,000,000 | QE∞ | 3.0x celebration | 🔮 Upcoming |
+
+**Current Progress: $28,802 / $50,000 (57.6% to QE2)**
 
 ---
 
@@ -178,25 +195,44 @@ Special celebration distributions when we hit milestones:
 
 All distribution scripts (sanitized - add your own keys):
 
-| Script | Purpose |
-|--------|---------|
-| `scripts/run-distribution.ts` | Main orchestrator - fee collection + distribution |
-| `scripts/distribute-tokens.ts` | Distribution engine - sends USD1 to holders |
-| `scripts/collect-dammv2-fees.ts` | Fee collector - claims from Meteora DAMM v2 |
-| `scripts/auto-compound.ts` | Auto-compound preference manager |
-| `scripts/streak-tracker.ts` | Diamond hands streak tracking |
-| `scripts/engagement-score.ts` | Engagement XP and tier system |
-| `scripts/time-lock.ts` | Voluntary commitment system |
-| `scripts/holder-report.ts` | Unified analytics API |
-| `scripts/reputation-score.ts` | Fed Credit Score system |
-| `scripts/milestone-tracker.ts` | QE milestone tracking |
-| `scripts/season-tracker.ts` | Seasonal competition tracking |
-| `scripts/fed-quests.ts` | Quest and badge system |
-| `scripts/referral-bonus.ts` | Referral rewards |
-| `scripts/treasury-buyback.ts` | Treasury buyback & burn |
-| `scripts/smart-timing.ts` | Intelligent distribution timing |
-| `scripts/smart-distribution.ts` | AI-powered distribution optimization |
-| `scripts/sybil-detector.ts` | Anti-sybil detection |
+### Core Distribution (PM2 Automated)
+| Script | Purpose | Status |
+|--------|---------|--------|
+| `scripts/run-distribution.ts` | Main orchestrator - fee collection + distribution | ✅ Active (PM2) |
+| `scripts/distribute-tokens.ts` | Distribution engine with all multipliers | ✅ Active |
+| `scripts/collect-dammv2-fees.ts` | Fee collector - claims from Meteora DAMM v2 | ✅ Active |
+
+### Multiplier Systems (Integrated)
+| Script | Purpose | Status |
+|--------|---------|--------|
+| `scripts/streak-tracker.ts` | Diamond hands streak tracking (1.0x - 1.25x) | ✅ Integrated |
+| `scripts/engagement-score.ts` | Engagement XP system (1.0x - 1.2x) | ✅ Integrated |
+| `scripts/time-lock.ts` | Voluntary commitment locks (1.05x - 2.0x) | ✅ Integrated |
+| `scripts/auto-compound.ts` | USD1 → $FED auto-reinvestment | ✅ Integrated |
+
+### Analytics & Reporting
+| Script | Purpose | Status |
+|--------|---------|--------|
+| `scripts/holder-report.ts` | Unified holder analytics API | ✅ Ready |
+| `scripts/reputation-score.ts` | Fed Credit Score system | ✅ Ready |
+| `scripts/milestone-tracker.ts` | QE milestone event tracking | ✅ Integrated |
+| `scripts/fed-funds-rate.ts` | Calculate APY from distributions | ✅ Ready |
+| `scripts/rate-decision.ts` | AI-powered rate analysis | ✅ Ready |
+
+### Gamification (Ready for Activation)
+| Script | Purpose | Status |
+|--------|---------|--------|
+| `scripts/season-tracker.ts` | Seasonal competition tracking | 🔄 Ready |
+| `scripts/fed-quests.ts` | Quest and badge system | 🔄 Ready |
+| `scripts/referral-bonus.ts` | Referral rewards program | 🔄 Ready |
+
+### Treasury Operations (Ready for PM2)
+| Script | Purpose | Status |
+|--------|---------|--------|
+| `scripts/treasury-buyback.ts` | Treasury buyback & burn | 🔄 Ready |
+| `scripts/smart-timing.ts` | Intelligent distribution timing | 🔄 Ready |
+| `scripts/smart-distribution.ts` | AI-powered distribution optimization | 🔄 Ready |
+| `scripts/sybil-detector.ts` | Anti-sybil detection | 🔄 Ready |
 
 ---
 
@@ -260,10 +296,11 @@ This repo is continuously updated as Ralph evolves the operation:
 - ✅ **Anti-sybil detection** (quality over quantity)
 
 ### Coming Soon
-- 🔄 Treasury buyback & burn automation
+- 🔄 Treasury buyback & burn automation (script ready, needs PM2 integration)
+- 🔄 Seasonal competitions (script ready, needs activation)
+- 🔄 Rate decision system (AI-powered timing optimization)
 - 🔄 Governance integration
-- 🔄 Seasonal competitions
-- 🔄 AI-powered distribution optimization
+- 🔄 Smart distribution optimization
 
 ---
 
