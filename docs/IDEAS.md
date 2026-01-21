@@ -624,7 +624,7 @@ Bridge $FED to other chains. Major undertaking, future consideration.
 7. **Create (3,3) Community Campaign** - Free, high engagement
 8. **Launch Transparency Dashboard** - Builds trust
 9. **Build "Fed Auto-BRRR" Dashboard** - Titano-style engagement with real rewards
-10. **Website Fed Funds Rate Widget** - Display current APY on dashboard
+10. ~~**Website Fed Funds Rate Widget**~~ - ✅ **DONE!** (Jan 21, 2026) Display current 7d/30d APY on dashboard
 11. ~~**Integrate Milestone Bonuses**~~ - ✅ **DONE!** QE events now detected and announced during distributions
 
 ---
@@ -665,4 +665,4 @@ $FED has already learned from the best and avoided the worst. The money printer 
 
 *This document is continuously updated by Ralph as he researches and brainstorms.*
 
-Last Updated: 2026-01-21 (QE Milestone Bonus Integration in distribution script)
+Last Updated: 2026-01-21 (Fed Funds Rate widget added to website dashboard)

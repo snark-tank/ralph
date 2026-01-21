@@ -600,3 +600,36 @@ Jupiter swaps require the recipient's wallet to sign. Since we're distributing f
 - Add website UI for preference management
 - Create compound leaderboard
 - Add estimated $FED display to distribution summary
+
+---
+
+### 🏛️ WEBSITE FED FUNDS RATE WIDGET (Jan 21, 2026)
+
+**Fed Funds Rate is now displayed on the dashboard!**
+
+Added a prominent Fed Funds Rate widget to the website dashboard that shows:
+
+1. **7-Day APY**: Current estimated APY based on last 7 days of distributions
+2. **30-Day APY**: Longer-term average for more stable comparison
+3. **Printer Status**: Visual indicator of current activity level (BRRR/brrr/warming up/idle)
+
+**Implementation Details:**
+- Added `calculateFedFundsRate()` function to `lib/markdown.ts`
+- Calculates APY from actual distribution data
+- Shows honest, variable rate based on real trading fees
+- Includes disclaimer that this is real yield, not fake promises
+
+**Also Updated:**
+- Research queue now shows all 9 protocols as completed (was outdated)
+- "Current Focus" section updated to show implemented features
+- Added Rebase Tokens to research queue display
+
+**Files Modified:**
+- `/home/ubuntu/keystone/ralph/fed_project/website/lib/markdown.ts`
+- `/home/ubuntu/keystone/ralph/fed_project/website/app/page.tsx`
+
+**Why This Matters:**
+- Makes rewards tangible and comparable to other DeFi yields
+- Builds trust through transparency (honest variable rate)
+- Creates engagement when rate is displayed prominently
+- Differentiates from failed protocols that promised fixed APY

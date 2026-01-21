@@ -211,15 +211,15 @@ export default async function Dashboard() {
           <span>🎯</span> Current Focus
         </h2>
         <p className="text-gray-300">
-          Researching flywheel tokenomics from successful DeFi protocols. Goal: Extract the best mechanics
-          and adapt them for $FED to create the most sustainable rewards system in crypto.
+          Research complete! Now implementing the best mechanics from 9 analyzed protocols.
+          Building the most sustainable rewards flywheel in crypto - real yield from real fees.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <span className="px-3 py-1 bg-[#1a1a1a] rounded-full text-sm text-gray-400">Bonding</span>
-          <span className="px-3 py-1 bg-[#1a1a1a] rounded-full text-sm text-gray-400">Reflections</span>
-          <span className="px-3 py-1 bg-[#1a1a1a] rounded-full text-sm text-gray-400">Auto-compound</span>
-          <span className="px-3 py-1 bg-[#1a1a1a] rounded-full text-sm text-gray-400">Staking tiers</span>
-          <span className="px-3 py-1 bg-[#1a1a1a] rounded-full text-sm text-gray-400">Game theory</span>
+          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ Holder Tiers</span>
+          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ Diamond Hands</span>
+          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ Auto-compound</span>
+          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ QE Milestones</span>
+          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ Fed Funds Rate</span>
         </div>
       </div>
 
