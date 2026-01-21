@@ -2,12 +2,14 @@
 
 ## Research Notes - 2026-01-21
 
-### Current Market Context (Updated 2026-01-21 16:40 UTC)
-- $FED experiencing historic pump: +1884.89% in 24h
-- Price: $0.00072152
-- Market cap: $684,450
-- Over $39,107 USD1 distributed to holders all-time
-- QE2 progress: 78.2% complete ($39,107 / $50,000)
+### Current Market Context (Updated 2026-01-21 17:00 UTC)
+- $FED experiencing historic pump: +1399% in 24h
+- Price: $0.00080592
+- Market cap: $764,509
+- Liquidity: $69,144
+- Over $39,139 USD1 distributed to holders all-time
+- QE2 progress: 78.3% complete ($39,139 / $50,000)
+- 154 distributions completed
 - Multiple distributions TODAY during the pump
 
 ### What Works in Crypto Twitter (Observations)

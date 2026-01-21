@@ -2381,3 +2381,11 @@ Users can now connect their wallet and:
 **Total Distributed All-Time:** $39,139.81
 ---
 
+## 2026-01-21 17:00 UTC
+**Action:** HOLD (Attempted COLLECT)
+**Treasury Balance:** $0.95 USD1
+**SOL Balance:** 0.0009 SOL (insufficient for tx fees)
+**Price:** $0.00080592 (+8.42% 1h, +1399% 24h)
+**Reasoning:** Treasury balance too low ($0.95) to distribute. Attempted fee collection but failed due to insufficient SOL for transaction rent. Need SOL top-up to resume operations. Market is extremely bullish - 14x pump in 24h!
+**TX:** N/A (collection failed)
+---
