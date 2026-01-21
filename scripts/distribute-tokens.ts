@@ -31,6 +31,11 @@ import type { AutoCompoundData } from './auto-compound.ts';
 import { loadEngagementData, saveEngagementData, getEngagementMultiplier, recordDistribution as recordEngagementDistribution } from './engagement-score.ts';
 import type { EngagementData } from './engagement-score.ts';
 
+// Import time lock functions
+// @ts-ignore - ts-node ESM resolution
+import { getTimeLockMultiplier, checkCommitment, TIME_LOCK_TIERS } from './time-lock.ts';
+import type { TimeLockTier } from './time-lock.ts';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -397,7 +402,11 @@ interface TokenHolder {
     engagementTier?: EngagementTier;
     engagementMultiplier?: number;
     engagementXP?: number;
-    combinedMultiplier?: number; // tier * streak * engagement
+    // Time lock bonus fields
+    timeLockMultiplier?: number;
+    timeLockTierName?: string;
+    timeLockDaysRemaining?: number;
+    combinedMultiplier?: number; // tier * streak * engagement * time lock
     // Auto-compound fields
     autoCompoundEnabled?: boolean;
 }
@@ -1214,10 +1223,11 @@ async function main() {
             logger.log('🎮 No engagement data available - using tier + streak multipliers only');
         }
 
-        // Step 1: Assign tiers, streaks, engagement, and calculate combined multipliers
+        // Step 1: Assign tiers, streaks, engagement, time locks, and calculate combined multipliers
         let totalWeightedShare = 0;
         let holdersWithStreakBonus = 0;
         let holdersWithEngagementBonus = 0;
+        let holdersWithTimeLockBonus = 0;
         for (const holder of holders) {
             // Tier multiplier (based on holdings)
             holder.tier = getHolderTier(holder.amount);
@@ -1244,8 +1254,24 @@ async function main() {
                 holder.engagementXP = 0;
             }
 
-            // Combined multiplier = tier * streak * engagement (they ALL STACK!)
-            holder.combinedMultiplier = holder.multiplier * holder.streakMultiplier * holder.engagementMultiplier;
+            // Time lock multiplier (based on voluntary commitment)
+            try {
+                const timeLockResult = checkCommitment(holder.address, holder.amount);
+                holder.timeLockMultiplier = timeLockResult.multiplier;
+                holder.timeLockDaysRemaining = timeLockResult.daysRemaining;
+                if (timeLockResult.status === 'active') {
+                    holder.timeLockTierName = timeLockResult.message.match(/Active (.+?):/)?.[1] || 'Lock';
+                }
+                if (timeLockResult.multiplier > 1.0) {
+                    holdersWithTimeLockBonus++;
+                }
+            } catch {
+                holder.timeLockMultiplier = 1.0;
+                holder.timeLockDaysRemaining = 0;
+            }
+
+            // Combined multiplier = tier * streak * engagement * time lock (they ALL STACK!)
+            holder.combinedMultiplier = holder.multiplier * holder.streakMultiplier * holder.engagementMultiplier * holder.timeLockMultiplier;
 
             if (holder.streakMultiplier > 1.0) {
                 holdersWithStreakBonus++;
@@ -1261,6 +1287,9 @@ async function main() {
         }
         if (holdersWithEngagementBonus > 0) {
             logger.log(`   🎮 ${holdersWithEngagementBonus} holders receiving engagement bonuses`);
+        }
+        if (holdersWithTimeLockBonus > 0) {
+            logger.log(`   🔒 ${holdersWithTimeLockBonus} holders receiving time lock bonuses`);
         }
 
         // Step 2: Normalize so total distributed equals available tokens
@@ -1333,6 +1362,28 @@ async function main() {
             }
         }
 
+        // Log time lock distribution stats
+        if (holdersWithTimeLockBonus > 0) {
+            const timeLockCounts: Record<string, { count: number; totalTokens: number; avgDaysRemaining: number }> = {};
+            for (const holder of holders) {
+                if (holder.timeLockMultiplier && holder.timeLockMultiplier > 1.0) {
+                    const tierKey = holder.timeLockTierName || 'Active';
+                    if (!timeLockCounts[tierKey]) {
+                        timeLockCounts[tierKey] = { count: 0, totalTokens: 0, avgDaysRemaining: 0 };
+                    }
+                    timeLockCounts[tierKey].count++;
+                    timeLockCounts[tierKey].totalTokens += holder.tokensToReceive;
+                    timeLockCounts[tierKey].avgDaysRemaining += holder.timeLockDaysRemaining || 0;
+                }
+            }
+
+            logger.log('\n🔒 Time Lock Distribution:');
+            for (const [tierName, stats] of Object.entries(timeLockCounts)) {
+                const avgDays = Math.round(stats.avgDaysRemaining / stats.count);
+                logger.log(`   🔒 ${tierName}: ${stats.count} holders → ${stats.totalTokens.toFixed(2)} tokens (avg ${avgDays} days remaining)`);
+            }
+        }
+
         // Sort by amount descending for better visibility
         holders.sort((a, b) => b.amount - a.amount);
 
@@ -1366,8 +1417,8 @@ async function main() {
             }
         }
 
-        // Show top holders with tier + streak + engagement info
-        logger.log('\nTop 10 holders (with tier × streak × engagement multipliers):');
+        // Show top holders with tier + streak + engagement + time lock info
+        logger.log('\nTop 10 holders (with tier × streak × engagement × time lock multipliers):');
         holders.slice(0, 10).forEach((holder, index) => {
             const tierName = holder.tier?.name || 'Citizen';
             const streakEmoji = holder.streakTier?.emoji || '🆕';
@@ -1375,10 +1426,12 @@ async function main() {
             const tierMult = holder.multiplier || 1.0;
             const streakMult = holder.streakMultiplier || 1.0;
             const engagementMult = holder.engagementMultiplier || 1.0;
+            const timeLockMult = holder.timeLockMultiplier || 1.0;
             const combinedMult = holder.combinedMultiplier || 1.0;
             const streakDays = holder.streakDays || 0;
             const engagementXP = holder.engagementXP || 0;
-            logger.log(`${index + 1}. ${holder.address.slice(0, 8)}...${holder.address.slice(-4)}: ${holder.percentage.toFixed(2)}% × ${combinedMult.toFixed(3)}x [${tierName} ${tierMult}x × ${streakEmoji}${streakDays}d ${streakMult}x × ${engagementEmoji}${engagementXP}xp ${engagementMult}x] = ${holder.tokensToReceive.toFixed(2)} tokens`);
+            const timeLockStr = timeLockMult > 1.0 ? ` × 🔒${timeLockMult}x` : '';
+            logger.log(`${index + 1}. ${holder.address.slice(0, 8)}...${holder.address.slice(-4)}: ${holder.percentage.toFixed(2)}% × ${combinedMult.toFixed(3)}x [${tierName} ${tierMult}x × ${streakEmoji}${streakDays}d ${streakMult}x × ${engagementEmoji}${engagementXP}xp ${engagementMult}x${timeLockStr}] = ${holder.tokensToReceive.toFixed(2)} tokens`);
         });
 
         // Filter out dust amounts

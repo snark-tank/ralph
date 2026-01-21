@@ -37,7 +37,7 @@ const DISTRIBUTION_CLAIM_POINTS = 5;  // Points per distribution received
 const CYCLE_DURATION_DAYS = 14;       // Engagement tier resets every 14 days
 
 // Engagement tiers based on XP
-interface EngagementTier {
+export interface EngagementTier {
     name: string;
     title: string;
     minXP: number;
@@ -90,7 +90,7 @@ const ENGAGEMENT_TIERS: EngagementTier[] = [
 ];
 
 // Engagement data structures
-interface HolderEngagement {
+export interface HolderEngagement {
     address: string;
     totalXP: number;
     cycleXP: number;  // XP earned in current 14-day cycle
@@ -107,7 +107,7 @@ interface HolderEngagement {
     updatedAt: string;
 }
 
-interface EngagementData {
+export interface EngagementData {
     lastUpdated: string;
     currentCycleStart: string;
     currentCycleEnd: string;
@@ -653,9 +653,6 @@ ${ENGAGEMENT_TIERS.map(t => `  ${t.emoji} ${t.title.padEnd(15)} ${t.minXP.toStri
 // Export for integration with distribution script
 export {
     ENGAGEMENT_TIERS,
-    EngagementTier,
-    HolderEngagement,
-    EngagementData,
     getTierForXP,
     updateStats,
 };

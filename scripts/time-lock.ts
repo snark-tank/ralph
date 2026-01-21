@@ -41,7 +41,7 @@ const __dirname = path.dirname(__filename);
 // TYPES AND INTERFACES
 // ═══════════════════════════════════════════════════════════════════════════
 
-interface TimeLockTier {
+export interface TimeLockTier {
     id: string;
     name: string;
     title: string;
@@ -53,7 +53,7 @@ interface TimeLockTier {
     creditScorePenalty: number;   // Penalty for breaking commitment
 }
 
-interface TimeLockCommitment {
+export interface TimeLockCommitment {
     address: string;
     tierId: string;
     tierName: string;
@@ -69,14 +69,14 @@ interface TimeLockCommitment {
     commitmentHistory: CommitmentEvent[];
 }
 
-interface CommitmentEvent {
+export interface CommitmentEvent {
     timestamp: string;
     event: 'started' | 'renewed' | 'completed' | 'broken' | 'balance_check';
     details: string;
     balanceAtEvent?: number;
 }
 
-interface HolderTimeLockData {
+export interface HolderTimeLockData {
     address: string;
     activeCommitment?: TimeLockCommitment;
     completedCommitments: number;
@@ -851,4 +851,4 @@ async function main(): Promise<void> {
 
 main().catch(console.error);
 
-export { TIME_LOCK_TIERS, TimeLockTier, TimeLockCommitment, HolderTimeLockData };
+export { TIME_LOCK_TIERS };

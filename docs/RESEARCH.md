@@ -65,6 +65,16 @@ Ralph's deep dives into successful flywheel tokenomics.
 | Meteora M3M3 | ✅ Complete | Stake-to-earn for memecoins | (3,3) inspired top-staker rewards |
 | Dynamic Lockups | ✅ Complete | Commitment-based multipliers | Token velocity reduction |
 
+### 2026 Restaking & Yield Aggregation (NEW!)
+
+| Protocol/Concept | Status | Key Mechanic | Outcome |
+|----------|--------|--------------|---------|
+| EigenLayer | ✅ Complete | Multi-AVS restaking | $19.5B TVL, 85% market share |
+| Symbiotic | ✅ Complete | Permissionless restaking | 7-8% market share in 8 months |
+| Karak | ✅ Complete | Universal multi-asset restaking | $740M+ TVL, multi-chain |
+| Solana Yield Vaults | ✅ Complete | Auto-rebalancing strategies | Kamino $2-3B TVL, AI optimization |
+| Points System Fatigue | ✅ Complete | Airdrop farming backlash | Shift to real rewards |
+
 ---
 
 ## 2026 Fee Switch Revolution (Jan 21, 2026)
@@ -2795,6 +2805,173 @@ npx ts-node time-lock.ts --stats
 
 ---
 
+---
+
+## 2026 Restaking & Yield Aggregation Revolution (Jan 21, 2026)
+
+**Date Researched:** 2026-01-21
+
+### The Restaking Era
+
+2025-2026 marks the rise of **restaking** as the dominant DeFi trend. EigenLayer pioneered the concept, allowing staked ETH to secure multiple services simultaneously, creating layered yield opportunities.
+
+### Key Players
+
+#### EigenLayer (Market Leader)
+
+**Stats:**
+- TVL: ~$19.5 billion (85%+ market share)
+- Growth: From $1.1B to $18B+ in 2024-2025
+
+**Key Mechanics:**
+1. **Multi-AVS Restaking**: Staked ETH/LSTs secure "Actively Validated Services" (oracles, DA layers, bridges)
+2. **Layered Yields**: Base staking yield + AVS rewards + potential airdrops
+3. **Verifiable Cloud**: Evolved into enterprise-focused infrastructure
+4. **Rewards Distribution**: Dec 2025 announced bigger rewards for active users
+
+**Why It Matters:**
+EigenLayer proved that capital efficiency can be maximized by using the same collateral across multiple services. This "yield stacking" concept is now industry standard.
+
+#### Symbiotic (Permissionless Challenger)
+
+**Stats:**
+- Market Share: ~7-8% (captured in 8 months of launch)
+- Focus: Maximum customization, DeFi-native applications
+
+**Key Differentiator:**
+Fully permissionless - any asset, any service, modular architecture. While EigenLayer focused on ETH ecosystem, Symbiotic targets broader DeFi composability.
+
+#### Karak (Universal Restaking)
+
+**Stats:**
+- TVL: $740-826 million across multiple chains
+- Asset Support: LSTs, stablecoins (USDe, sDAI), Pendle PT positions
+
+**Key Innovation:**
+Universal asset support - not just ETH but stablecoins and yield tokens. This makes Karak attractive for yield-seeking investors who want to maximize capital efficiency across different DeFi primitives.
+
+### Solana Yield Aggregation Landscape
+
+On Solana, the equivalent trend is **AI-powered yield optimization**:
+
+#### Kamino Finance
+- **TVL**: $2-3 billion
+- **Key Feature**: Auto-rebalancing CLMM vaults
+- **K-Lend V2**: $200M+ deposits in 3 weeks
+- **Innovation**: Gauntlet-managed CASH vault for delta-neutral strategies
+
+#### Voltr
+- **Focus**: AI-powered multi-protocol optimization
+- **Integrations**: Drift, Marginfi, Solend, Kamino
+- **Architecture**: Modular adaptors for each protocol
+
+#### Lulo
+- **Focus**: Stablecoin lending aggregation
+- **Method**: Auto-rotation between highest-yielding protocols
+- **Integrations**: Kamino, Drift, Save, MarginFi
+
+### Points System Fatigue
+
+A critical 2026 trend is **backlash against speculative points programs**:
+
+**The Problem:**
+- Industrial sybil farming (thousands of wallets per farmer)
+- Whale dominance in airdrops
+- Projects using points as marketing ploy without real value
+- Examples: Blast, ZKSync, Manta disappointed expectations
+
+**The Shift:**
+- LayerZero anti-sybil (self-reporting or forfeit)
+- Emphasis on "authentic usage" over points farming
+- Hyperliquid rewarding active traders, not passive farming
+- Users demanding REAL rewards over speculative points
+
+**Key Quote:** "Points programs have become formulaic...projects use them to lure depositors to create a semblance of activity."
+
+### Lessons for $FED
+
+**DO Adopt:**
+- ✅ **Unified analytics** - Single dashboard showing all benefits (like restaking portfolios)
+- ✅ **Real rewards over points** - $FED already does this with USD1!
+- ✅ **Multi-system multiplier stacking** - Like restaking's layered yields
+- ✅ **Quality over quantity** - Reward genuine engagement, not sybil farming
+
+**DON'T Adopt:**
+- ❌ **Complex smart contract locks** - Keeps things simple with soft commitments
+- ❌ **Speculative points programs** - Real USD1 distributions beat points
+- ❌ **Multi-chain complexity** - Stay focused on Solana ecosystem
+- ❌ **Airdrop-heavy strategies** - Direct rewards > speculative farming
+
+### Implementation: Fed Holder Report
+
+**Created:** `holder-report.ts` - Unified analytics API for comprehensive holder profiles
+
+**Key Innovation:**
+Instead of fragmented data across multiple systems, one API call returns complete holder status - inspired by how restaking dashboards show unified portfolio views.
+
+**Features:**
+- Aggregates data from ALL systems (reputation, engagement, streak, season, time lock, quests, referrals)
+- Combined multiplier calculation showing exact reward boost
+- AI-powered insights with strengths, opportunities, and recommendations
+- Next milestone tracking with progress bars
+- Risk assessment and engagement trend analysis
+- System-wide statistics and leaderboards
+
+**Usage:**
+```bash
+# Generate comprehensive holder report
+npx ts-node holder-report.ts --report <address>
+
+# System-wide statistics
+npx ts-node holder-report.ts --stats
+
+# Quick multiplier lookup (for distributions)
+npx ts-node holder-report.ts --quick <address>
+
+# JSON output for API integration
+npx ts-node holder-report.ts --report <address> --json
+```
+
+**Why This Matters:**
+- Holders see total value of their Fed membership
+- Website dashboard can use single API call
+- Distribution script has fast multiplier lookup
+- Marketing can identify top community members
+- Reduces fragmentation across multiple data files
+
+### $FED Advantages Over Restaking Protocols
+
+| Aspect | EigenLayer/Restaking | $FED |
+|--------|---------------------|------|
+| Reward Type | Token emissions + airdrops | Real USD1 stablecoins |
+| Lock Requirements | Smart contract locks | Soft commitments (optional) |
+| Complexity | High (multiple AVS) | Low (single flywheel) |
+| Risk | Slashing, smart contract | Minimal (no locks) |
+| Value Source | Speculative (AVS tokens) | Real trading fees |
+| Entry Barrier | ETH required | Any $FED amount |
+
+**The key insight:** While restaking protocols offer higher potential yields, they come with smart contract risk, slashing risk, and speculative token rewards. $FED offers simpler, safer, REAL yield through direct fee distribution.
+
+### Sources
+
+- [QuickNode - Restaking Revolution](https://blog.quicknode.com/restaking-revolution-eigenlayer-defi-yields-2025/)
+- [CoinDesk - EigenLayer Rewards for Active Users](https://www.coindesk.com/business/2025/12/19/foundation-behind-restaking-protocol-eigenlayer-plans-bigger-rewards-for-active-users)
+- [Yellow - Restaking Wars 2025](https://yellow.com/learn/restaking-wars-in-2025-eigenlayer-vs-symbiotic-vs-karak)
+- [Margex - Crypto Trends 2026](https://margex.com/en/blog/top-crypto-trends-and-new-projects-to-watch-in-2026/)
+- [ABC Money - Restaking Wars](https://www.abcmoney.co.uk/2025/06/restaking-wars-eigenlayer-vs-karak-vs-symbiotic-the-battle-for-shared-security-dominance/)
+- [Cryptonium Cloud - DeFi ROI 2026](https://cryptonium.cloud/articles/roi-projections-staking-restaking-yield-farming-2026-sophisticated-investors)
+- [Geek Metaverse - Airdrops 2026](https://www.geekmetaverse.com/crypto-airdrops-and-points-systems-in-2026-what-is-still-worth-farming/)
+- [DL News - Airdrops 2026](https://www.dlnews.com/articles/defi/how-crypto-airdrops-will-change-in-2026/)
+- [The Block - 2026 DeFi Outlook](https://www.theblock.co/post/383120/2026-defi-outlook)
+- [Eco - Top DeFi Apps Solana 2026](https://eco.com/support/en/articles/13225733-top-10-defi-apps-on-solana-in-2026-complete-guide)
+- [Backpack - Best Solana Lending 2026](https://learn.backpack.exchange/articles/best-solana-lending-protocols)
+- [CoinCodex - DeFi Yield Aggregators 2026](https://coincodex.com/article/37867/best-defi-yield-aggregators/)
+- [Solana Compass - Voltr Review](https://solanacompass.com/projects/voltr)
+- [SolaDEX - Lulo Review](https://www.soladex.io/project/lulo)
+- [Krystal - Auto Rebalance Solana](https://blog.krystal.app/krystals-auto-rebalance-officially-supports-solana/)
+
+---
+
 *This document is continuously updated by Ralph as he researches protocols.*
 
-Last Updated: 2026-01-21 (Added 2026 Token Velocity & Time-Weighted Staking research, Implemented Fed Time Lock System)
+Last Updated: 2026-01-21 (Added 2026 Restaking & Yield Aggregation research, Implemented Fed Holder Report System)
