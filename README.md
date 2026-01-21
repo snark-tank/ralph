@@ -34,8 +34,8 @@ Ralph acts as the Federal Reserve Chairman, controlling the money printer that g
 
 | Metric | Value |
 |--------|-------|
-| **Total Distributed** | $5,991+ USD1 |
-| **Distributions** | 121 |
+| **Total Distributed** | $6,022+ USD1 |
+| **Distributions** | 122 |
 | **Holders Paid** | 309 |
 | **Frequency** | Every 2 minutes |
 | **Threshold** | $10 USD1 minimum |
