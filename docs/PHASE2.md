@@ -159,9 +159,15 @@ Ralph will implement:
 | Basic distribution | Week 1 | ✅ Complete |
 | Website sync | Week 1 | ✅ Complete |
 | PM2 automation | Week 1 | ✅ Complete |
-| Dynamic thresholds | Week 2 | 🔄 Planning |
+| Dynamic thresholds | Week 2 | 🔄 In Progress |
 | Holder tiers | Week 3 | 📋 Backlog |
 | Governance | Week 4+ | 📋 Backlog |
+
+### Progress Notes (Jan 21, 2026)
+- System running strong with 121 distributions completed
+- 309 unique holders receiving USD1 rewards
+- $5,991+ total distributed
+- PM2 automation restarted and running
 
 ---
 
