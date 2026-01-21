@@ -19,93 +19,163 @@ export type MilestoneAnnouncementProps = {
   nextMilestone?: string;
 };
 
-// Refined cinematic background - no pulsing, subtle and sophisticated
+// Refined cinematic background - ultra minimal, premium feel
 const CinematicBackground: React.FC<{
   accentColor?: string;
   intensity?: number;
-}> = ({ accentColor = "#00ff88", intensity = 0.04 }) => {
+  focusY?: number;
+}> = ({ accentColor = "#00ff88", intensity = 0.03, focusY = 50 }) => {
   const frame = useCurrentFrame();
 
-  // Very subtle vertical shift - barely noticeable
-  const gradientY = interpolate(frame, [0, 300], [48, 52], {
+  // Extremely slow drift - almost imperceptible
+  const drift = interpolate(frame, [0, 600], [0, 2], {
     extrapolateRight: "clamp",
   });
 
+  // Convert hex to rgba for gradient
+  const hexToRgba = (hex: string, alpha: number) => {
+    const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+    if (!result) return `rgba(0, 255, 136, ${alpha})`;
+    const r = parseInt(result[1], 16);
+    const g = parseInt(result[2], 16);
+    const b = parseInt(result[3], 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  };
+
   return (
     <AbsoluteFill>
-      {/* Deep dark base */}
-      <AbsoluteFill style={{ background: "#0a0a0a" }} />
+      {/* Pure black base - premium foundation */}
+      <AbsoluteFill style={{ background: "#030303" }} />
 
-      {/* Subtle centered radial - no animation */}
+      {/* Primary glow - whisper-quiet presence */}
       <AbsoluteFill
         style={{
-          background: `radial-gradient(ellipse 80% 50% at 50% ${gradientY}%, ${accentColor}${Math.round(intensity * 255).toString(16).padStart(2, "0")} 0%, transparent 70%)`,
+          background: `radial-gradient(ellipse 85% 50% at 50% ${focusY + drift}%, ${hexToRgba(accentColor, intensity)} 0%, transparent 60%)`,
         }}
       />
 
-      {/* Vignette for cinematic feel */}
+      {/* Cinematic vignette - frames content elegantly */}
       <AbsoluteFill
         style={{
-          background: "radial-gradient(ellipse 70% 60% at 50% 50%, transparent 30%, rgba(0,0,0,0.5) 100%)",
+          background:
+            "radial-gradient(ellipse 75% 65% at 50% 50%, transparent 20%, rgba(0,0,0,0.6) 100%)",
         }}
       />
     </AbsoluteFill>
   );
 };
 
-// Scene 1: Build anticipation, then reveal the milestone - Apple keynote style
+// Scene 1: The Reveal - Apple keynote moment
 const RevealScene: React.FC<{ milestone: string }> = ({ milestone }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Horizontal reveal line draws first - creates anticipation, then fades as text appears
-  const revealLineWidth = interpolate(frame, [fps * 0.2, fps * 0.7], [0, 140], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.cubic),
-  });
-  const revealLineOpacity = interpolate(
+  // Initial subtle flash - draws the eye immediately
+  const flashOpacity = interpolate(
     frame,
-    [fps * 0.2, fps * 0.4, fps * 0.9, fps * 1.3],
-    [0, 0.5, 0.5, 0],
+    [0, fps * 0.05, fps * 0.15, fps * 0.4],
+    [0, 0.12, 0.06, 0],
+    { extrapolateRight: "clamp" }
+  );
+  const flashScale = interpolate(
+    frame,
+    [0, fps * 0.3],
+    [0.6, 1.8],
+    { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Converging lines - build tension before reveal
+  const lineProgress = interpolate(
+    frame,
+    [fps * 0.15, fps * 0.65],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+  const lineOpacity = interpolate(
+    frame,
+    [fps * 0.15, fps * 0.35, fps * 1.2, fps * 1.6],
+    [0, 0.6, 0.6, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+  const lineWidth = interpolate(lineProgress, [0, 1], [200, 50]);
+  const lineGap = interpolate(lineProgress, [0, 1], [400, 60]);
+
+  // Pre-title badge - subtle context
+  const badgeOpacity = interpolate(
+    frame,
+    [fps * 0.6, fps * 0.9],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+  const badgeY = interpolate(
+    frame,
+    [fps * 0.6, fps * 1.0],
+    [14, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Main milestone - THE MOMENT
+  const chars = milestone.split("");
+
+  // Glow that builds with the reveal, then holds
+  const glowSize = interpolate(
+    frame,
+    [fps * 1.3, fps * 2.4],
+    [0, 70],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Celebration accent - subtle horizontal lines after reveal
+  const accentLineWidth = interpolate(
+    frame,
+    [fps * 2.0, fps * 2.6],
+    [0, 90],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+  const accentLineOpacity = interpolate(
+    frame,
+    [fps * 2.0, fps * 2.4],
+    [0, 0.4],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  // Pre-title badge fades in after line
-  const badgeOpacity = interpolate(frame, [fps * 0.5, fps * 0.8], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-  const badgeY = interpolate(frame, [fps * 0.5, fps * 0.9], [12, 0], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.cubic),
-  });
-
-  // Main milestone number - character by character reveal for drama
-  const chars = milestone.split("");
-
-  // Subtle glow that builds (not pulses) - stays static after reaching max
-  const glowSize = interpolate(frame, [fps * 1.4, fps * 2.5], [0, 60], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.cubic),
-  });
-
-  // Tagline appears last
-  const taglineOpacity = interpolate(frame, [fps * 2.2, fps * 2.7], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-  const taglineY = interpolate(frame, [fps * 2.2, fps * 2.8], [10, 0], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.cubic),
-  });
+  // Tagline last
+  const taglineOpacity = interpolate(
+    frame,
+    [fps * 2.3, fps * 2.7],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+  const taglineY = interpolate(
+    frame,
+    [fps * 2.3, fps * 2.8],
+    [12, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
 
   return (
     <AbsoluteFill>
-      <CinematicBackground accentColor="#00ff88" intensity={0.06} />
+      <CinematicBackground accentColor="#00ff88" intensity={0.05} focusY={48} />
+
+      {/* Initial flash - immediate attention grab */}
+      <AbsoluteFill
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <div
+          style={{
+            width: 180,
+            height: 180,
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(0,255,136,0.5) 0%, transparent 65%)",
+            opacity: flashOpacity,
+            transform: `scale(${flashScale})`,
+            position: "absolute",
+          }}
+        />
+      </AbsoluteFill>
 
       <AbsoluteFill
         style={{
@@ -114,16 +184,35 @@ const RevealScene: React.FC<{ milestone: string }> = ({ milestone }) => {
           flexDirection: "column",
         }}
       >
-        {/* Reveal line - anticipation builder */}
+        {/* Converging lines - builds anticipation */}
         <div
           style={{
-            width: revealLineWidth,
-            height: 1,
-            background: "linear-gradient(90deg, transparent, #00ff88, transparent)",
-            opacity: revealLineOpacity,
-            marginBottom: 30,
+            position: "absolute",
+            display: "flex",
+            alignItems: "center",
+            gap: lineGap,
+            opacity: lineOpacity,
           }}
-        />
+        >
+          <div
+            style={{
+              width: lineWidth,
+              height: 2,
+              background: "linear-gradient(270deg, #00ff88, rgba(0, 255, 136, 0.3), transparent)",
+              borderRadius: 1,
+              boxShadow: "0 0 10px rgba(0, 255, 136, 0.3)",
+            }}
+          />
+          <div
+            style={{
+              width: lineWidth,
+              height: 2,
+              background: "linear-gradient(90deg, #00ff88, rgba(0, 255, 136, 0.3), transparent)",
+              borderRadius: 1,
+              boxShadow: "0 0 10px rgba(0, 255, 136, 0.3)",
+            }}
+          />
+        </div>
 
         {/* Pre-title badge */}
         <div
@@ -133,7 +222,7 @@ const RevealScene: React.FC<{ milestone: string }> = ({ milestone }) => {
             display: "flex",
             alignItems: "center",
             gap: 10,
-            marginBottom: 20,
+            marginBottom: 24,
           }}
         >
           <div
@@ -142,13 +231,14 @@ const RevealScene: React.FC<{ milestone: string }> = ({ milestone }) => {
               height: 6,
               borderRadius: 3,
               background: "#00ff88",
+              boxShadow: "0 0 12px rgba(0, 255, 136, 0.6)",
             }}
           />
           <span
             style={{
-              fontSize: 13,
+              fontSize: 12,
               fontWeight: 600,
-              color: "#555555",
+              color: "#505050",
               fontFamily: "system-ui, -apple-system, sans-serif",
               letterSpacing: 5,
               textTransform: "uppercase",
@@ -158,41 +248,45 @@ const RevealScene: React.FC<{ milestone: string }> = ({ milestone }) => {
           </span>
         </div>
 
-        {/* Main milestone - character by character */}
+        {/* Main milestone - character by character with springs */}
         <div
           style={{
             display: "flex",
-            gap: 4,
-            filter: `drop-shadow(0 0 ${glowSize}px rgba(0, 255, 136, 0.5))`,
+            gap: 8,
+            filter: `drop-shadow(0 0 ${glowSize}px rgba(0, 255, 136, 0.55))`,
           }}
         >
           {chars.map((char, i) => {
-            const charDelay = 0.9 + i * 0.08;
+            const charDelay = 0.85 + i * 0.1;
             const charScale = spring({
               frame: frame - charDelay * fps,
               fps,
-              config: { damping: 200, stiffness: 120 },
+              config: { damping: 150, stiffness: 180 },
             });
             const charOpacity = interpolate(
               frame,
-              [charDelay * fps, (charDelay + 0.15) * fps],
+              [charDelay * fps, (charDelay + 0.1) * fps],
               [0, 1],
               { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
             );
+
+            // Subtle Y offset that settles
+            const charY = interpolate(charScale, [0, 1], [25, 0]);
 
             return (
               <span
                 key={i}
                 style={{
-                  fontSize: 180,
+                  fontSize: 220,
                   fontWeight: 900,
                   color: "#ffffff",
                   fontFamily: "system-ui, -apple-system, sans-serif",
-                  letterSpacing: -8,
+                  letterSpacing: -12,
                   lineHeight: 1,
                   display: "inline-block",
-                  transform: `scale(${charScale})`,
+                  transform: `scale(${charScale}) translateY(${charY}px)`,
                   opacity: charOpacity,
+                  textShadow: "0 10px 60px rgba(0, 0, 0, 0.6)",
                 }}
               >
                 {char}
@@ -201,21 +295,57 @@ const RevealScene: React.FC<{ milestone: string }> = ({ milestone }) => {
           })}
         </div>
 
-        {/* Subtle tagline */}
+        {/* Celebration accent lines */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 20,
+            marginTop: 32,
+            opacity: accentLineOpacity,
+          }}
+        >
+          <div
+            style={{
+              width: accentLineWidth,
+              height: 1,
+              background: "linear-gradient(270deg, rgba(0, 255, 136, 0.5), transparent)",
+            }}
+          />
+          <div
+            style={{
+              width: 5,
+              height: 5,
+              borderRadius: "50%",
+              background: "#00ff88",
+              boxShadow: "0 0 10px rgba(0, 255, 136, 0.5)",
+            }}
+          />
+          <div
+            style={{
+              width: accentLineWidth,
+              height: 1,
+              background: "linear-gradient(90deg, rgba(0, 255, 136, 0.5), transparent)",
+            }}
+          />
+        </div>
+
+        {/* Tagline */}
         <div
           style={{
             opacity: taglineOpacity,
             transform: `translateY(${taglineY}px)`,
-            marginTop: 36,
+            marginTop: 24,
           }}
         >
           <span
             style={{
               fontSize: 18,
-              fontWeight: 400,
+              fontWeight: 500,
               color: "#00ff88",
               fontFamily: "system-ui, -apple-system, sans-serif",
               letterSpacing: 1,
+              opacity: 0.9,
             }}
           >
             Distribution target reached
@@ -226,7 +356,7 @@ const RevealScene: React.FC<{ milestone: string }> = ({ milestone }) => {
   );
 };
 
-// Scene 2: Progress visualization - refined dashboard aesthetic
+// Scene 2: Progress Dashboard - sleek data visualization
 const ProgressScene: React.FC<{
   target: string;
   current: string;
@@ -235,111 +365,182 @@ const ProgressScene: React.FC<{
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Container card fades in
-  const containerOpacity = interpolate(frame, [0, fps * 0.4], [0, 1], {
-    extrapolateRight: "clamp",
-  });
-  const containerScale = spring({
+  // Scene entrance
+  const sceneOpacity = interpolate(
     frame,
-    fps,
-    config: { damping: 200, stiffness: 100 },
-  });
+    [0, fps * 0.15],
+    [0, 1],
+    { extrapolateRight: "clamp" }
+  );
 
-  // Progress bar fill - smooth ease out
-  const barProgress = interpolate(frame, [fps * 0.4, fps * 2.8], [0, progress], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.cubic),
+  // Hero percentage - this is THE number
+  const percentDelay = 0.1;
+  const percentScale = spring({
+    frame: frame - percentDelay * fps,
+    fps,
+    config: { damping: 200, stiffness: 80 },
   });
+  const percentOpacity = interpolate(
+    frame,
+    [percentDelay * fps, (percentDelay + 0.25) * fps],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+
+  // Percentage counts up with satisfying ease-out
+  const displayPercent = interpolate(
+    frame,
+    [fps * 0.25, fps * 2.2],
+    [0, progress],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Progress bar fill
+  const barProgress = interpolate(
+    frame,
+    [fps * 0.35, fps * 2.4],
+    [0, progress],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Progress bar glow intensity builds
+  const barGlow = interpolate(
+    frame,
+    [fps * 0.5, fps * 2.0],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
 
   // Current amount counter
   const currentValue = parseFloat(current.replace(/[$,]/g, "")) || 0;
-  const displayCurrent = interpolate(frame, [fps * 0.4, fps * 2.8], [0, currentValue], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.cubic),
-  });
+  const displayCurrent = interpolate(
+    frame,
+    [fps * 0.4, fps * 2.2],
+    [0, currentValue],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
 
-  // Big percentage - hero element
-  const percentOpacity = interpolate(frame, [fps * 0.2, fps * 0.6], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
+  // Stats row stagger
+  const stat1Opacity = interpolate(
+    frame,
+    [fps * 0.5, fps * 0.85],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+  const stat1Y = interpolate(
+    frame,
+    [fps * 0.5, fps * 0.9],
+    [15, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
 
-  // Progress indicator glow
-  const indicatorGlow = interpolate(frame, [fps * 0.5, fps * 2], [0, 25], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.cubic),
-  });
+  const stat2Opacity = interpolate(
+    frame,
+    [fps * 0.7, fps * 1.05],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+  const stat2Y = interpolate(
+    frame,
+    [fps * 0.7, fps * 1.1],
+    [15, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
 
-  // Stats reveal with stagger
-  const stat1Opacity = interpolate(frame, [fps * 0.6, fps * 1], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-  const stat2Opacity = interpolate(frame, [fps * 0.8, fps * 1.2], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
+  // QE2 label
+  const labelOpacity = interpolate(
+    frame,
+    [fps * 0.2, fps * 0.5],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+  const labelY = interpolate(
+    frame,
+    [fps * 0.2, fps * 0.55],
+    [10, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
 
   return (
-    <AbsoluteFill>
-      <CinematicBackground accentColor="#00ff88" intensity={0.04} />
+    <AbsoluteFill style={{ opacity: sceneOpacity }}>
+      <CinematicBackground accentColor="#00ff88" intensity={0.035} focusY={40} />
 
       <AbsoluteFill
         style={{
           justifyContent: "center",
           alignItems: "center",
-          padding: 60,
+          padding: 70,
         }}
       >
         <div
           style={{
-            opacity: containerOpacity,
-            transform: `scale(${containerScale})`,
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            width: 900,
+            width: 850,
           }}
         >
-          {/* Hero percentage - the main focus */}
+          {/* QE2 Progress label */}
           <div
             style={{
-              opacity: percentOpacity,
-              marginBottom: 50,
-              textAlign: "center",
+              opacity: labelOpacity,
+              transform: `translateY(${labelY}px)`,
+              marginBottom: 16,
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
             }}
           >
-            <div
+            <div style={{ width: 25, height: 1, background: "#2a2a2a" }} />
+            <span
               style={{
-                fontSize: 140,
-                fontWeight: 900,
-                color: "#ffffff",
-                fontFamily: "system-ui, -apple-system, sans-serif",
-                letterSpacing: -6,
-                lineHeight: 1,
-              }}
-            >
-              {Math.round(barProgress)}
-              <span style={{ color: "#00ff88", fontSize: 100 }}>%</span>
-            </div>
-            <div
-              style={{
-                fontSize: 14,
-                color: "#555555",
+                fontSize: 12,
+                color: "#4a4a4a",
                 fontFamily: "system-ui, -apple-system, sans-serif",
                 letterSpacing: 4,
                 textTransform: "uppercase",
-                marginTop: 12,
+                fontWeight: 600,
               }}
             >
               QE2 Progress
-            </div>
+            </span>
+            <div style={{ width: 25, height: 1, background: "#2a2a2a" }} />
           </div>
 
-          {/* Progress bar - sleek, minimal */}
+          {/* Hero percentage */}
+          <div
+            style={{
+              transform: `scale(${percentScale})`,
+              opacity: percentOpacity,
+              marginBottom: 45,
+              filter: `drop-shadow(0 0 ${30 * barGlow}px rgba(0, 255, 136, 0.25))`,
+            }}
+          >
+            <span
+              style={{
+                fontSize: 150,
+                fontWeight: 900,
+                color: "#ffffff",
+                fontFamily: "system-ui, -apple-system, sans-serif",
+                letterSpacing: -8,
+                lineHeight: 1,
+              }}
+            >
+              {Math.round(displayPercent)}
+            </span>
+            <span
+              style={{
+                fontSize: 80,
+                fontWeight: 900,
+                color: "#00ff88",
+                fontFamily: "system-ui, -apple-system, sans-serif",
+              }}
+            >
+              %
+            </span>
+          </div>
+
+          {/* Progress bar */}
           <div
             style={{
               width: "100%",
@@ -350,11 +551,12 @@ const ProgressScene: React.FC<{
             <div
               style={{
                 width: "100%",
-                height: 8,
-                background: "rgba(255, 255, 255, 0.04)",
-                borderRadius: 4,
+                height: 10,
+                background: "rgba(255, 255, 255, 0.03)",
+                borderRadius: 5,
                 overflow: "hidden",
                 position: "relative",
+                border: "1px solid rgba(255, 255, 255, 0.03)",
               }}
             >
               {/* Fill */}
@@ -362,27 +564,45 @@ const ProgressScene: React.FC<{
                 style={{
                   width: `${barProgress}%`,
                   height: "100%",
-                  background: "linear-gradient(90deg, #00ff88 0%, #00ff88 90%, #00ffaa 100%)",
-                  borderRadius: 4,
-                  boxShadow: `0 0 ${indicatorGlow}px rgba(0, 255, 136, 0.5)`,
+                  background: "linear-gradient(90deg, rgba(0,255,136,0.5) 0%, rgba(0,255,136,0.8) 60%, #00ff88 95%, #00ffcc 100%)",
+                  borderRadius: 5,
+                  boxShadow: `0 0 ${25 * barGlow}px rgba(0, 255, 136, 0.45)`,
                   position: "relative",
                 }}
               >
-                {/* Leading edge glow */}
-                <div
-                  style={{
-                    position: "absolute",
-                    right: 0,
-                    top: "50%",
-                    transform: "translateY(-50%)",
-                    width: 16,
-                    height: 16,
-                    borderRadius: 8,
-                    background: "#00ff88",
-                    boxShadow: `0 0 20px rgba(0, 255, 136, 0.8)`,
-                    opacity: barProgress > 2 ? 1 : 0,
-                  }}
-                />
+                {/* Trailing glow effect */}
+                {barProgress > 15 && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      right: 0,
+                      top: 0,
+                      width: Math.min(barProgress * 2, 120),
+                      height: "100%",
+                      background: "linear-gradient(90deg, transparent, rgba(0,255,200,0.3))",
+                      borderRadius: 5,
+                    }}
+                  />
+                )}
+                {/* Leading edge indicator */}
+                {barProgress > 5 && (
+                  <div
+                    style={{
+                      position: "absolute",
+                      right: -2,
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      width: 20,
+                      height: 20,
+                      borderRadius: 10,
+                      background: "radial-gradient(circle, #00ffcc 0%, #00ff88 60%)",
+                      boxShadow: `
+                        0 0 ${18 + 12 * barGlow}px rgba(0, 255, 136, 0.9),
+                        0 0 ${35 * barGlow}px rgba(0, 255, 136, 0.5)
+                      `,
+                    }}
+                  />
+                )}
               </div>
             </div>
           </div>
@@ -393,34 +613,36 @@ const ProgressScene: React.FC<{
               display: "flex",
               justifyContent: "space-between",
               width: "100%",
-              padding: "0 20px",
+              padding: "0 30px",
             }}
           >
             <div
               style={{
                 opacity: stat1Opacity,
+                transform: `translateY(${stat1Y}px)`,
                 textAlign: "left",
               }}
             >
               <div
                 style={{
                   fontSize: 11,
-                  color: "#444444",
+                  color: "#3a3a3a",
                   fontFamily: "system-ui, -apple-system, sans-serif",
-                  letterSpacing: 2,
+                  letterSpacing: 3,
                   textTransform: "uppercase",
                   marginBottom: 10,
+                  fontWeight: 500,
                 }}
               >
                 Distributed
               </div>
               <div
                 style={{
-                  fontSize: 42,
+                  fontSize: 44,
                   fontWeight: 900,
                   color: "#00ff88",
                   fontFamily: "system-ui, -apple-system, sans-serif",
-                  letterSpacing: -1,
+                  letterSpacing: -1.5,
                 }}
               >
                 ${Math.floor(displayCurrent).toLocaleString()}
@@ -430,28 +652,30 @@ const ProgressScene: React.FC<{
             <div
               style={{
                 opacity: stat2Opacity,
+                transform: `translateY(${stat2Y}px)`,
                 textAlign: "right",
               }}
             >
               <div
                 style={{
                   fontSize: 11,
-                  color: "#444444",
+                  color: "#3a3a3a",
                   fontFamily: "system-ui, -apple-system, sans-serif",
-                  letterSpacing: 2,
+                  letterSpacing: 3,
                   textTransform: "uppercase",
                   marginBottom: 10,
+                  fontWeight: 500,
                 }}
               >
                 Target
               </div>
               <div
                 style={{
-                  fontSize: 42,
+                  fontSize: 44,
                   fontWeight: 900,
-                  color: "#666666",
+                  color: "#555555",
                   fontFamily: "system-ui, -apple-system, sans-serif",
-                  letterSpacing: -1,
+                  letterSpacing: -1.5,
                 }}
               >
                 {target}
@@ -464,7 +688,7 @@ const ProgressScene: React.FC<{
   );
 };
 
-// Scene 3: CTA - confident, minimal
+// Scene 3: CTA - Confident, minimal close
 const CTAScene: React.FC<{ nextMilestone?: string }> = ({ nextMilestone }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -473,49 +697,91 @@ const CTAScene: React.FC<{ nextMilestone?: string }> = ({ nextMilestone }) => {
   const logoScale = spring({
     frame,
     fps,
-    config: { damping: 200, stiffness: 100 },
+    config: { damping: 200, stiffness: 90 },
   });
-  const logoOpacity = interpolate(frame, [0, fps * 0.3], [0, 1], {
-    extrapolateRight: "clamp",
-  });
+  const logoOpacity = interpolate(
+    frame,
+    [0, fps * 0.25],
+    [0, 1],
+    { extrapolateRight: "clamp" }
+  );
 
-  // Static glow that builds (no pulsing)
-  const logoGlow = interpolate(frame, [fps * 0.2, fps * 0.8], [0, 30], {
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.cubic),
-  });
+  // Logo glow builds
+  const logoGlow = interpolate(
+    frame,
+    [fps * 0.15, fps * 0.7],
+    [0, 35],
+    { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
 
   // Next milestone text
-  const nextOpacity = interpolate(frame, [fps * 0.4, fps * 0.8], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-  const nextY = interpolate(frame, [fps * 0.4, fps * 0.9], [15, 0], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.cubic),
-  });
+  const nextOpacity = interpolate(
+    frame,
+    [fps * 0.35, fps * 0.7],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+  const nextY = interpolate(
+    frame,
+    [fps * 0.35, fps * 0.8],
+    [16, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Divider line
+  const lineWidth = interpolate(
+    frame,
+    [fps * 0.8, fps * 1.2],
+    [0, 100],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
 
   // CTA button
-  const ctaOpacity = interpolate(frame, [fps * 1, fps * 1.4], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
+  const ctaDelay = 0.9;
+  const ctaProgress = spring({
+    frame: frame - ctaDelay * fps,
+    fps,
+    config: { damping: 180, stiffness: 80 },
   });
-  const ctaY = interpolate(frame, [fps * 1, fps * 1.5], [20, 0], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.cubic),
-  });
+  const ctaOpacity = interpolate(
+    frame,
+    [ctaDelay * fps, (ctaDelay + 0.2) * fps],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+  const ctaY = interpolate(ctaProgress, [0, 1], [20, 0]);
+
+  // CTA glow builds
+  const ctaGlow = interpolate(
+    frame,
+    [(ctaDelay + 0.15) * fps, fps * 2],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Subtext last
+  const subOpacity = interpolate(
+    frame,
+    [fps * 1.3, fps * 1.7],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+  const subY = interpolate(
+    frame,
+    [fps * 1.3, fps * 1.75],
+    [10, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
 
   return (
     <AbsoluteFill>
-      <CinematicBackground accentColor="#00ff88" intensity={0.04} />
+      <CinematicBackground accentColor="#00ff88" intensity={0.04} focusY={50} />
 
       <AbsoluteFill
         style={{
           justifyContent: "center",
           alignItems: "center",
-          gap: 36,
+          gap: 28,
           flexDirection: "column",
         }}
       >
@@ -524,10 +790,10 @@ const CTAScene: React.FC<{ nextMilestone?: string }> = ({ nextMilestone }) => {
           style={{
             transform: `scale(${logoScale})`,
             opacity: logoOpacity,
-            filter: `drop-shadow(0 0 ${logoGlow}px rgba(0, 255, 136, 0.4))`,
+            filter: `drop-shadow(0 0 ${logoGlow}px rgba(0, 255, 136, 0.45))`,
           }}
         >
-          <FedLogo size={100} glow={false} />
+          <FedLogo size={90} glow={false} />
         </div>
 
         {/* Next milestone */}
@@ -541,19 +807,20 @@ const CTAScene: React.FC<{ nextMilestone?: string }> = ({ nextMilestone }) => {
           >
             <div
               style={{
-                fontSize: 12,
-                color: "#555555",
+                fontSize: 11,
+                color: "#4a4a4a",
                 fontFamily: "system-ui, -apple-system, sans-serif",
-                letterSpacing: 3,
+                letterSpacing: 4,
                 textTransform: "uppercase",
-                marginBottom: 10,
+                marginBottom: 12,
+                fontWeight: 500,
               }}
             >
               Next Milestone
             </div>
             <div
               style={{
-                fontSize: 36,
+                fontSize: 34,
                 fontWeight: 900,
                 color: "#ffffff",
                 fontFamily: "system-ui, -apple-system, sans-serif",
@@ -565,26 +832,43 @@ const CTAScene: React.FC<{ nextMilestone?: string }> = ({ nextMilestone }) => {
           </div>
         )}
 
+        {/* Divider */}
+        <div
+          style={{
+            width: lineWidth,
+            height: 1,
+            background: "linear-gradient(90deg, transparent, #2a2a2a, transparent)",
+            marginTop: 4,
+            marginBottom: 4,
+          }}
+        />
+
         {/* CTA */}
         <div
           style={{
             opacity: ctaOpacity,
-            transform: `translateY(${ctaY}px)`,
+            transform: `translateY(${ctaY}px) scale(${1 + 0.02 * ctaGlow})`,
           }}
         >
           <div
             style={{
-              padding: "16px 40px",
-              background: "#00ff88",
+              padding: "18px 50px",
+              background: "linear-gradient(135deg, #00ff88 0%, #00ffaa 100%)",
               borderRadius: 50,
+              boxShadow: `
+                0 8px 32px rgba(0, 255, 136, ${0.22 + 0.18 * ctaGlow}),
+                0 0 ${35 * ctaGlow}px rgba(0, 255, 136, ${0.15 * ctaGlow}),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2)
+              `,
             }}
           >
             <span
               style={{
-                fontSize: 28,
+                fontSize: 30,
                 fontWeight: 900,
-                color: "#0a0a0a",
+                color: "#020202",
                 fontFamily: "system-ui, -apple-system, sans-serif",
+                letterSpacing: -0.5,
               }}
             >
               fed.markets
@@ -592,22 +876,21 @@ const CTAScene: React.FC<{ nextMilestone?: string }> = ({ nextMilestone }) => {
           </div>
         </div>
 
-        {/* Subtle subtext */}
+        {/* Subtext */}
         <div
           style={{
-            opacity: interpolate(frame, [fps * 1.4, fps * 1.8], [0, 1], {
-              extrapolateLeft: "clamp",
-              extrapolateRight: "clamp",
-            }),
+            opacity: subOpacity,
+            transform: `translateY(${subY}px)`,
           }}
         >
           <span
             style={{
-              fontSize: 13,
-              color: "#444444",
+              fontSize: 12,
+              color: "#3a3a3a",
               fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: 2,
+              letterSpacing: 3,
               textTransform: "uppercase",
+              fontWeight: 500,
             }}
           >
             Real yield. Every 2 minutes.
@@ -618,6 +901,7 @@ const CTAScene: React.FC<{ nextMilestone?: string }> = ({ nextMilestone }) => {
   );
 };
 
+// Main composition - 11 seconds, tighter pacing
 export const MilestoneAnnouncement: React.FC<MilestoneAnnouncementProps> = ({
   milestone,
   target,
@@ -627,30 +911,33 @@ export const MilestoneAnnouncement: React.FC<MilestoneAnnouncementProps> = ({
 }) => {
   const { fps } = useVideoConfig();
 
+  // Clean, quick fades
+  const transitionFrames = Math.round(0.3 * fps);
+
   return (
     <TransitionSeries>
-      {/* Reveal: 3.5s - Build anticipation, big moment */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(3.5 * fps)}>
+      {/* Reveal: 3.2s - Build anticipation, big moment */}
+      <TransitionSeries.Sequence durationInFrames={Math.round(3.2 * fps)}>
         <RevealScene milestone={milestone} />
       </TransitionSeries.Sequence>
 
       <TransitionSeries.Transition
         presentation={fade()}
-        timing={linearTiming({ durationInFrames: Math.round(0.4 * fps) })}
+        timing={linearTiming({ durationInFrames: transitionFrames })}
       />
 
-      {/* Progress: 5s - Data visualization */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(5 * fps)}>
+      {/* Progress: 4.5s - Data visualization */}
+      <TransitionSeries.Sequence durationInFrames={Math.round(4.5 * fps)}>
         <ProgressScene target={target} current={current} progress={progress} />
       </TransitionSeries.Sequence>
 
       <TransitionSeries.Transition
         presentation={fade()}
-        timing={linearTiming({ durationInFrames: Math.round(0.4 * fps) })}
+        timing={linearTiming({ durationInFrames: transitionFrames })}
       />
 
-      {/* CTA: 3.5s - Clean close */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(3.5 * fps)}>
+      {/* CTA: 3s - Clean close */}
+      <TransitionSeries.Sequence durationInFrames={Math.round(3 * fps)}>
         <CTAScene nextMilestone={nextMilestone} />
       </TransitionSeries.Sequence>
     </TransitionSeries>
