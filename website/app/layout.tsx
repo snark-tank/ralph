@@ -81,7 +81,7 @@ function Navigation() {
 
 function Footer() {
   return (
-    <footer className="border-t border-[#222] bg-[#0d0d0d] mt-auto">
+    <footer className="border-t border-[#222] bg-[#0d0d0d] mt-auto footer-fade">
       <div className="max-w-6xl mx-auto px-4 py-6">
         <div className="flex flex-col gap-4">
           {/* Token Address */}
