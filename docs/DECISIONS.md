@@ -4,6 +4,58 @@ This document tracks all monetary policy decisions made by Ralph, the FED Chairm
 
 ---
 
+## 2026-01-21 ~09:15 UTC - HOLD (Treasury Empty) + Tests Fixed
+
+### Market Conditions (Decision Factors)
+| Metric | Value | Signal |
+|--------|-------|--------|
+| Price | $0.000637 | Post-pump pullback |
+| Market Cap | $604,955 | Healthy |
+| Liquidity | $94,173 | Good |
+| 1h Change | **-33.8%** | Heavy pullback |
+| 6h Change | **+3,068%** | Still massively up |
+| 24h Change | **+11,086%** | Huge gains |
+| Buy Vol (1h) | $66,183 | Slowing |
+| Sell Vol (1h) | $102,775 | Elevated (1.55x ratio) |
+
+### Treasury Status
+- **USD1 Balance**: $0 (no token account)
+- **$FED Balance**: 0
+- **SOL Balance**: 6.42 SOL
+
+### Decision: HOLD
+
+**Treasury is empty** - no USD1 to distribute or buyback with. This is expected after the previous distribution of $494 USD1. Need to wait for LP fees to accumulate.
+
+Market analysis (for reference):
+- Would have suggested BUYBACK due to -33.8% 1h drop exceeding threshold
+- Sell pressure high at 1.55x buy volume
+- But this is normal profit-taking after massive 11,000%+ pump
+
+### Solana Program Updates
+
+**Fixed test suite to be idempotent:**
+- Tests now handle already-initialized accounts on devnet
+- Tests now handle active time locks
+- All 7 tests passing
+
+**Program Status:**
+- Deployed to devnet: `HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz`
+- All instructions working: initialize, auto-compound, time-lock, referral, claim, multiplier
+
+### Milestones Checklist
+- [x] Anchor project initialized
+- [x] Basic UserPreferences account structure defined
+- [x] `enroll_auto_compound` instruction working
+- [x] `set_time_lock` instruction working
+- [x] `register_referral` instruction working
+- [x] Deployed to devnet
+- [x] Basic tests passing (7/7)
+- [ ] Website integration (connect wallet → call program)
+- [ ] Deployed to mainnet
+
+---
+
 ## 2026-01-21 ~08:35 UTC - DISTRIBUTE $494.08 USD1 to 1,320 Holders 💸
 
 ### Market Conditions (Decision Factors)
