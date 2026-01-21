@@ -4,7 +4,7 @@ import PreferencesPanel from '../components/PreferencesPanel';
 
 export default function PreferencesPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="max-w-4xl mx-auto px-4 py-8 page-enter">
       <div className="text-center mb-8">
         <h1 className="text-3xl font-bold text-[#c9a227] mb-2">Your $FED Preferences</h1>
         <p className="text-gray-400">

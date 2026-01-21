@@ -8,7 +8,7 @@ export default async function ResearchPage() {
   const ideas = await getMarkdownContent('IDEAS.md');
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8">
+    <div className="max-w-4xl mx-auto px-4 py-8 page-enter">
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold text-[#c9a227] mb-2">Protocol Research</h1>

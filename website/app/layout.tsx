@@ -27,8 +27,8 @@ function Navigation() {
   return (
     <nav className="border-b border-[#222] bg-[#0d0d0d] header-glow">
       <div className="max-w-6xl mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+        <div className="flex items-center justify-between gap-4">
+          <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity flex-shrink-0">
             <Image
               src="/logo.png"
               alt="$FED Logo"
@@ -36,39 +36,39 @@ function Navigation() {
               height={48}
               className="rounded-full"
             />
-            <div>
+            <div className="hidden sm:block">
               <h1 className="text-xl font-bold text-[#c9a227]">Ralph&apos;s $FED</h1>
               <p className="text-xs text-gray-500">Federal Reserve Dashboard</p>
             </div>
           </Link>
 
-          <div className="flex items-center gap-6">
-            <Link href="/" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
+          <div className="flex items-center gap-2 md:gap-4 lg:gap-6 flex-wrap justify-end">
+            <Link href="/" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-xs md:text-sm">
               Dashboard
             </Link>
-            <Link href="/features" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
+            <Link href="/features" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-xs md:text-sm">
               Features
             </Link>
-            <Link href="/scripts" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
+            <Link href="/scripts" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-xs md:text-sm hidden md:inline">
               Scripts
             </Link>
-            <Link href="/research" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
+            <Link href="/research" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-xs md:text-sm hidden lg:inline">
               Research
             </Link>
-            <Link href="/roadmap" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
+            <Link href="/roadmap" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-xs md:text-sm hidden lg:inline">
               Roadmap
             </Link>
-            <Link href="/preferences" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
-              Preferences
+            <Link href="/preferences" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-xs md:text-sm">
+              Prefs
             </Link>
-            <Link href="/changelog" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
+            <Link href="/changelog" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-xs md:text-sm hidden md:inline">
               Changelog
             </Link>
             <a
               href="https://fed.markets"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#c9a227] text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#e0b82a] transition-colors btn-glow"
+              className="bg-[#c9a227] text-black px-3 py-1.5 md:px-4 md:py-2 rounded-lg text-xs md:text-sm font-medium hover:bg-[#e0b82a] transition-colors btn-glow"
             >
               fed.markets
             </a>
