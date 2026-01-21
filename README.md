@@ -2,88 +2,139 @@
   <img src="logo.png" alt="$FED Logo" width="200" height="200" style="border-radius: 50%;">
 </p>
 
-<h1 align="center">$FED - Federal Reserve Token</h1>
+<h1 align="center">Ralph's $FED Operation</h1>
 
 <p align="center">
   <strong>The Money Printer Goes BRRR! 🖨️💵</strong>
 </p>
 
 <p align="center">
+  <a href="https://fed.markets">
+    <img src="https://img.shields.io/badge/Website-fed.markets-c9a227?style=for-the-badge" alt="Website">
+  </a>
   <a href="https://x.com/fed_USD1">
     <img src="https://img.shields.io/badge/Follow-@fed__USD1-1DA1F2?style=for-the-badge&logo=x&logoColor=white" alt="Follow on X">
   </a>
   <a href="https://jup.ag/swap/SOL-132STreShuLRNgkyF1QECv37yP9Cdp8JBAgnKBgKafed">
     <img src="https://img.shields.io/badge/Buy_on-Jupiter-9945FF?style=for-the-badge&logo=solana&logoColor=white" alt="Buy on Jupiter">
   </a>
-  <a href="https://dexscreener.com/solana/132STreShuLRNgkyF1QECv37yP9Cdp8JBAgnKBgKafed">
-    <img src="https://img.shields.io/badge/Chart-DexScreener-00D395?style=for-the-badge" alt="DexScreener">
-  </a>
 </p>
 
 ---
 
-## 🏛️ About
+## 🤖 About This Repo
 
-**$FED** is a Solana-based token that channels the spirit of the Federal Reserve - except instead of printing money for banks, we print **USD1 rewards** directly to our holders!
+This is **Ralph's operation center** for running the $FED Federal Reserve - an autonomous system that collects trading fees and distributes USD1 stablecoins to all $FED holders.
 
-Every buy and sell transaction generates an 8% tax that gets automatically converted to USD1 stablecoin and distributed to all $FED holders proportionally. The more you hold, the more you earn. It's passive income, DeFi style.
-
-<p align="center">
-  <img src="background.png" alt="Capitol Hill" width="600">
-</p>
+Ralph acts as the Federal Reserve Chairman, controlling the money printer that goes BRRR every 2 minutes.
 
 ---
 
-## 💰 Tokenomics
+## 📊 Live Stats
 
 | Metric | Value |
 |--------|-------|
-| **Token Name** | Federal Reserve ($FED) |
-| **Blockchain** | Solana |
-| **Total Supply** | 1,000,000,000 (1 Billion) |
-| **Buy Tax** | 8% → USD1 Rewards |
-| **Sell Tax** | 8% → USD1 Rewards |
-
-### Contract Address
-
-```
-132STreShuLRNgkyF1QECv37yP9Cdp8JBAgnKBgKafed
-```
+| **Total Distributed** | $5,000+ USD1 |
+| **Distributions** | 70+ |
+| **Holders Paid** | 250+ |
+| **Frequency** | Every 2 minutes |
+| **Threshold** | $10 USD1 minimum |
 
 ---
 
-## 🖨️ How It Works
+## 🔄 The Flywheel
 
 ```
 ┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
-│                 │     │                 │     │                 │
-│   Buy/Sell      │────▶│   8% Tax        │────▶│   USD1 Rewards  │
-│   $FED          │     │   Collected     │     │   to Holders    │
-│                 │     │                 │     │                 │
-└─────────────────┘     └─────────────────┘     └─────────────────┘
+│   Traders       │     │   8% Tax        │     │   Ralph         │
+│   Buy/Sell      │────▶│   Accumulates   │────▶│   Collects      │
+│   $FED          │     │   in LP         │     │   USD1 Fees     │
+└─────────────────┘     └─────────────────┘     └────────┬────────┘
+                                                         │
+┌─────────────────┐     ┌─────────────────┐              │
+│   Holders       │     │   Ralph         │◀─────────────┘
+│   Buy More      │◀────│   Distributes   │
+│   (Repeat)      │     │   to Holders    │
+└─────────────────┘     └─────────────────┘
 ```
-
-1. **Buy $FED** - Purchase tokens on Jupiter or your favorite Solana DEX
-2. **Hold & Earn** - Simply hold your tokens in your wallet (no staking required!)
-3. **Receive USD1** - Automatically receive USD1 stablecoin rewards from every transaction
-4. **Repeat** - The more you hold, the more you earn
 
 ---
 
-## 📊 Rewards Calculator
+## 📚 Documentation
 
-Estimate your potential earnings:
+| Document | Description |
+|----------|-------------|
+| [📖 Overview](docs/OVERVIEW.md) | How the $FED system works |
+| [🚀 Phase 2](docs/PHASE2.md) | Roadmap & Ralph's evolution |
+| [🛠️ Setup](docs/SETUP.md) | Technical setup guide |
 
-| Holdings | Daily Volume | Daily Reward | Monthly | Yearly |
-|----------|--------------|--------------|---------|--------|
-| 1,000,000 | $1,000 | $0.08 | $2.40 | $29.20 |
-| 1,000,000 | $10,000 | $0.80 | $24.00 | $292.00 |
-| 1,000,000 | $100,000 | $8.00 | $240.00 | $2,920.00 |
-| 10,000,000 | $100,000 | $80.00 | $2,400.00 | $29,200.00 |
+---
 
-**Formula:** `(Your Tokens / 1,000,000,000) × (Daily Volume × 0.08)`
+## 📁 Scripts
 
-> ⚠️ *Actual rewards may vary. As liquidity changes, your percentage of the total supply may fluctuate, affecting your reward share.*
+All distribution scripts (sanitized - add your own keys):
+
+| Script | Purpose |
+|--------|---------|
+| `scripts/run-distribution.ts` | Main orchestrator - fee collection + distribution |
+| `scripts/distribute-tokens.ts` | Distribution engine - sends USD1 to holders |
+| `scripts/collect-dammv2-fees.ts` | Fee collector - claims from Meteora DAMM v2 |
+
+---
+
+## ⚡ Quick Start
+
+```bash
+# Clone this repo
+git clone https://github.com/snark-tank/ralph.git
+cd ralph
+
+# Install dependencies
+npm install
+
+# Configure your keys (see docs/SETUP.md)
+export HELIUS_API_KEY=your_key
+export DISTRIBUTION_API_KEY=your_key
+
+# Run manually
+npx ts-node scripts/run-distribution.ts
+
+# Or with PM2 (every 2 minutes)
+pm2 start "npx ts-node scripts/run-distribution.ts" \
+  --name fed-distribution \
+  --cron-restart="*/2 * * * *" \
+  --no-autorestart
+```
+
+---
+
+## 🔑 Key Addresses
+
+| Item | Address |
+|------|---------|
+| **$FED Token** | `132STreShuLRNgkyF1QECv37yP9Cdp8JBAgnKBgKafed` |
+| **USD1 Token** | `USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB` |
+| **Distribution Wallet** | `4Br5iKfRkYMk8WMj6w8YASynuq7Eoas16rkyvWsAdL4P` |
+| **Meteora Pool** | `8mLRmqBVfe91twjpCF3hqTtGNMJMsukhEd6GGjXpqs2i` |
+
+---
+
+## 📝 Ralph's Update Log
+
+This repo is continuously updated as Ralph evolves the operation:
+
+### Latest
+- ✅ Automated fee collection from Meteora DAMM v2
+- ✅ Proportional USD1 distribution to all holders
+- ✅ Website sync via Redis API (fed.markets)
+- ✅ PM2 automation (2-minute cycles)
+- ✅ $10 minimum threshold before distribution
+
+### Coming Soon (Phase 2)
+- 🔄 Dynamic threshold management
+- 🔄 Intelligent distribution timing
+- 🔄 Holder tier system (Diamond/Gold/Silver/Bronze)
+- 🔄 Governance integration
 
 ---
 
@@ -91,33 +142,25 @@ Estimate your potential earnings:
 
 | Platform | Link |
 |----------|------|
-| 🐦 **X (Twitter)** | [x.com/fed_USD1](https://x.com/fed_USD1) |
-| 🪙 **Buy on Jupiter** | [jup.ag](https://jup.ag/swap/SOL-132STreShuLRNgkyF1QECv37yP9Cdp8JBAgnKBgKafed) |
-| 📈 **DexScreener** | [dexscreener.com](https://dexscreener.com/solana/132STreShuLRNgkyF1QECv37yP9Cdp8JBAgnKBgKafed) |
-
----
-
-## 🛠️ Tech Stack
-
-The $FED website is built with:
-
-- **Next.js 16** - React framework
-- **TypeScript** - Type safety
-- **Tailwind CSS** - Styling
-- **Solana** - Blockchain
+| 🌐 **Website** | [fed.markets](https://fed.markets) |
+| 🐦 **Twitter** | [@fed_USD1](https://x.com/fed_USD1) |
+| 🪙 **Buy** | [Jupiter](https://jup.ag/swap/SOL-132STreShuLRNgkyF1QECv37yP9Cdp8JBAgnKBgKafed) |
+| 📊 **Chart** | [DexScreener](https://dexscreener.com/solana/132STreShuLRNgkyF1QECv37yP9Cdp8JBAgnKBgKafed) |
 
 ---
 
 ## ⚠️ Disclaimer
 
-$FED is a meme token created for entertainment purposes. Cryptocurrency investments carry significant risk. Always do your own research (DYOR) before investing. Never invest more than you can afford to lose.
+$FED is a meme token. Cryptocurrency investments carry significant risk. DYOR. Never invest more than you can afford to lose.
 
 ---
 
 <p align="center">
   <img src="logo.png" alt="$FED" width="60">
   <br>
-  <strong>The Federal Reserve Token</strong>
+  <strong>Ralph's Federal Reserve</strong>
   <br>
-  <em>Making the Money Printer Go BRRR Since 2024</em>
+  <em>Making the Money Printer Go BRRR</em>
+  <br><br>
+  🖨️💵
 </p>
