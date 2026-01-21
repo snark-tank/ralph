@@ -160,7 +160,7 @@ Ralph will implement:
 | Website sync | Week 1 | ✅ Complete |
 | PM2 automation | Week 1 | ✅ Complete |
 | Dynamic thresholds | Week 2 | 🔄 In Progress |
-| Holder tiers | Week 3 | 📋 Backlog |
+| **Holder tiers** | Week 3 | ✅ **IMPLEMENTED** |
 | Governance | Week 4+ | 📋 Backlog |
 
 ### Progress Notes (Jan 21, 2026)
@@ -170,6 +170,35 @@ Ralph will implement:
 - **Latest Activity**: PM2 automation verified and running
 - **Note**: Distribution process monitored and confirmed operational
 - **Accumulating**: Currently at 3.28 USD1, waiting for $10 threshold
+
+### 🏛️ HOLDER TIER SYSTEM IMPLEMENTED (Jan 21, 2026)
+
+**Federal Reserve Ranks are now LIVE in the distribution script!**
+
+Holders are now assigned tiers based on their $FED holdings, with reward multipliers:
+
+| Tier | Title | Min Holdings | Multiplier |
+|------|-------|--------------|------------|
+| Chairman | Fed Chairman | 50M+ $FED | 1.5x |
+| Governor | Fed Governor | 10M+ $FED | 1.25x |
+| Director | Regional Director | 1M+ $FED | 1.1x |
+| Member | Board Member | 100K+ $FED | 1.05x |
+| Citizen | Fed Citizen | <100K $FED | 1.0x |
+
+**How it works:**
+- Each holder's base share is multiplied by their tier multiplier
+- Total distributed stays the same (normalized)
+- Higher tiers get proportionally more rewards
+- Incentivizes accumulation and holding
+
+**Technical Implementation:**
+- Added `HolderTier` interface and `HOLDER_TIERS` array
+- `getHolderTier()` function assigns tier based on holdings
+- Distribution calculates weighted shares with multipliers
+- Tier distribution stats logged each distribution
+- Top holders display now shows tier and multiplier
+
+**File Modified:** `/home/ubuntu/fed/script/distribute-tokens.ts`
 
 ### Research Complete (Jan 21, 2026)
 Completed comprehensive research on all major flywheel tokenomics protocols:
