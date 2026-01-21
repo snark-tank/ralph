@@ -249,6 +249,28 @@ export default async function Dashboard() {
         </div>
       </div>
 
+      {/* Coming Soon: On-Chain Opt-Ins */}
+      <div className="mt-8 bg-gradient-to-r from-purple-900/20 via-[#111] to-[#111] border border-purple-500/40 rounded-xl p-6">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <h2 className="text-xl font-bold text-purple-400 mb-1 flex items-center gap-2">
+              <span>🔮</span> Coming: On-Chain User Opt-Ins
+              <span className="text-xs bg-purple-900/50 text-purple-300 px-2 py-1 rounded">Phase 5</span>
+            </h2>
+            <p className="text-gray-500 text-sm">
+              A Solana Program that lets you enable features directly from your wallet.
+              Auto-compound, time-locks, referrals - all on-chain and verifiable.
+            </p>
+          </div>
+          <a
+            href="/features"
+            className="inline-block px-4 py-2 bg-purple-900/50 hover:bg-purple-800/50 text-purple-300 rounded-lg text-sm transition-colors whitespace-nowrap"
+          >
+            Learn More →
+          </a>
+        </div>
+      </div>
+
       {/* Last Update */}
       <div className="mt-8 text-center text-gray-500 text-sm">
         Last distribution: {stats.lastUpdate}

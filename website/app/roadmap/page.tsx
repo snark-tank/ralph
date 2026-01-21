@@ -118,6 +118,79 @@ export default async function RoadmapPage() {
         ))}
       </div>
 
+      {/* Phase 5 Deep Dive: Solana Program */}
+      <div className="mb-8 bg-gradient-to-r from-purple-900/20 via-[#111] to-[#111] border border-purple-500/40 rounded-xl p-6">
+        <h2 className="text-2xl font-bold text-purple-400 mb-4 flex items-center gap-2">
+          <span>🔮</span> Phase 5: On-Chain User Opt-Ins
+        </h2>
+        <p className="text-gray-400 mb-6">
+          Instead of running dozens of separate scripts, we&apos;re building a single Solana Program
+          that stores user preferences on-chain. This is the evolution from scripts to a real protocol.
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <div className="bg-[#0a0a0a] rounded-lg p-4">
+            <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
+              <span className="text-purple-400">📋</span> Program Capabilities
+            </h3>
+            <ul className="text-gray-400 text-sm space-y-2">
+              <li className="flex items-start gap-2">
+                <span className="text-purple-400 mt-1">•</span>
+                <span><strong className="text-white">Auto-compound enrollment</strong> - Opt in to swap USD1 → $FED automatically</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-purple-400 mt-1">•</span>
+                <span><strong className="text-white">Time-lock registration</strong> - Commit to lock periods for multiplier bonuses</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-purple-400 mt-1">•</span>
+                <span><strong className="text-white">Streak tracking</strong> - On-chain record of consecutive distributions received</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-purple-400 mt-1">•</span>
+                <span><strong className="text-white">Referral links</strong> - Trustless referrer/referee relationships</span>
+              </li>
+            </ul>
+          </div>
+
+          <div className="bg-[#0a0a0a] rounded-lg p-4">
+            <h3 className="text-white font-semibold mb-3 flex items-center gap-2">
+              <span className="text-purple-400">⚡</span> Technical Architecture
+            </h3>
+            <ul className="text-gray-400 text-sm space-y-2">
+              <li className="flex items-start gap-2">
+                <span className="text-purple-400 mt-1">•</span>
+                <span><strong className="text-white">Anchor Framework</strong> - Type-safe Rust program development</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-purple-400 mt-1">•</span>
+                <span><strong className="text-white">PDA accounts</strong> - User preferences stored per-wallet</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-purple-400 mt-1">•</span>
+                <span><strong className="text-white">Website integration</strong> - Connect wallet, sign once, preferences saved</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="text-purple-400 mt-1">•</span>
+                <span><strong className="text-white">Distribution integration</strong> - Reads on-chain state instead of JSON files</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="bg-[#111] border border-purple-500/20 rounded-lg p-4">
+          <h3 className="text-white font-semibold mb-2">Implementation Path</h3>
+          <div className="flex flex-wrap gap-2">
+            <span className="px-3 py-1 bg-purple-900/30 rounded text-sm text-purple-300">1. Design program accounts</span>
+            <span className="px-3 py-1 bg-purple-900/30 rounded text-sm text-purple-300">2. Write Anchor program</span>
+            <span className="px-3 py-1 bg-purple-900/30 rounded text-sm text-purple-300">3. Deploy to devnet</span>
+            <span className="px-3 py-1 bg-purple-900/30 rounded text-sm text-purple-300">4. Build website UI</span>
+            <span className="px-3 py-1 bg-purple-900/30 rounded text-sm text-purple-300">5. Deploy to mainnet</span>
+            <span className="px-3 py-1 bg-purple-900/30 rounded text-sm text-purple-300">6. Update distribution script</span>
+          </div>
+        </div>
+      </div>
+
       {/* Detailed Phase 2 Content */}
       <div className="mb-8">
         <h2 className="text-2xl font-bold text-[#c9a227] mb-4">Phase 2 Details</h2>

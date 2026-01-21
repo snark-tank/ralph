@@ -190,6 +190,28 @@ Ralph will implement:
 | **Fed Sybil Detector** | Week 4 | ✅ **IMPLEMENTED** |
 | Governance | Week 4+ | 📋 Backlog |
 
+### Progress Notes (Jan 21, 2026 - Website Phase 5 Update) 🆕🆕🆕🆕🆕🆕🆕
+- **Iteration Focus**: Website documentation of Phase 5 (Solana Program)
+- **Changes Made**:
+  - **Homepage**: Added "Coming: On-Chain User Opt-Ins" banner with link to features page
+  - **Features Page**: Added comprehensive Phase 5 section explaining:
+    - What users will be able to do (auto-compound, time-locks, referrals, streaks)
+    - Why on-chain matters (trustless, transparent, permanent, composable, user-controlled)
+    - Built with Anchor Framework
+  - **Roadmap Page**: Added Phase 5 deep dive section with:
+    - Program capabilities breakdown
+    - Technical architecture details (Anchor, PDAs, website integration)
+    - Implementation path (6-step roadmap)
+- **Why This Matters**:
+  - Users can now see the next evolution of $FED
+  - Sets expectations for upcoming Solana Program development
+  - Documents the transition from scripts to a real protocol
+- **Current Stats** (from distribution logs):
+  - Total distributed: **$31,632+ USD1** (continuing to grow)
+  - Holders receiving: 1,232 per distribution
+  - Engagement holders: 1,896 tracked (1,062 receiving bonuses)
+- **Next Steps**: Begin Solana Program design - define account structures and instruction set
+
 ### Progress Notes (Jan 21, 2026 - Night Stats Sync) 🆕🆕🆕🆕🆕🆕
 - **Iteration Focus**: README & website sync with accurate stats
 - **Stats Updated** (from distribution logs):

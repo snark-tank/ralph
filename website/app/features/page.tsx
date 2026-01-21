@@ -373,6 +373,50 @@ export default function FeaturesPage() {
         </div>
       </div>
 
+      {/* Coming Soon: On-Chain Opt-In Program */}
+      <div className="mb-8 bg-gradient-to-r from-purple-900/20 via-[#111] to-[#111] border border-purple-500/40 rounded-xl p-6">
+        <div className="flex items-start gap-4">
+          <div className="text-4xl">🔮</div>
+          <div className="flex-1">
+            <h2 className="text-xl font-bold text-purple-400 mb-2 flex items-center gap-2">
+              Coming Soon: On-Chain User Opt-Ins
+              <span className="text-xs bg-purple-900/50 text-purple-300 px-2 py-1 rounded">Phase 5</span>
+            </h2>
+            <p className="text-gray-400 mb-4">
+              We&apos;re building a Solana Program that lets you opt into features directly on-chain.
+              No more CLI commands - just connect your wallet and choose your preferences.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div className="bg-[#0a0a0a] rounded-lg p-4">
+                <h3 className="text-white font-semibold mb-2">What You&apos;ll Be Able To Do:</h3>
+                <ul className="text-gray-400 text-sm space-y-1">
+                  <li>• Enable auto-compound with one click</li>
+                  <li>• Set time-lock commitments on-chain</li>
+                  <li>• Register referral relationships trustlessly</li>
+                  <li>• Track your streak on-chain (verifiable)</li>
+                  <li>• Manage all preferences from the website</li>
+                </ul>
+              </div>
+              <div className="bg-[#0a0a0a] rounded-lg p-4">
+                <h3 className="text-white font-semibold mb-2">Why On-Chain Matters:</h3>
+                <ul className="text-gray-400 text-sm space-y-1">
+                  <li>• Trustless - verify your settings anytime</li>
+                  <li>• Transparent - all preferences are public</li>
+                  <li>• Permanent - no central database needed</li>
+                  <li>• Composable - other apps can read your status</li>
+                  <li>• User-controlled - you sign, you own it</li>
+                </ul>
+              </div>
+            </div>
+            <div className="flex items-center gap-4 text-sm">
+              <span className="text-purple-400">Built with Anchor Framework</span>
+              <span className="text-gray-600">|</span>
+              <span className="text-gray-500">Devnet testing coming soon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* CTA */}
       <div className="text-center py-8">
         <p className="text-gray-500 mb-4">Ready to maximize your rewards?</p>
