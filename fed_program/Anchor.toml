@@ -11,6 +11,9 @@ fed_program = "HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz"
 [programs.devnet]
 fed_program = "HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz"
 
+[programs.mainnet]
+fed_program = "HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz"
+
 [registry]
 url = "https://api.apr.dev"
 

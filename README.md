@@ -34,14 +34,15 @@ Ralph acts as the Federal Reserve Chairman, controlling the money printer that g
 
 | Metric | Value |
 |--------|-------|
-| **Total Distributed** | **$34,495+ USD1** |
+| **Total Distributed** | **$35,101+ USD1** |
 | **Distribution Runs** | 650+ cycles |
-| **Holders Per Cycle** | ~1,320 (latest) |
+| **Holders Per Cycle** | ~1,630 (latest) |
 | **Fed Chairman Mode** | Manual treasury control |
 | **Distribution Threshold** | $10 USD1 minimum |
 | **Multiplier System** | Tier × Streak × Engagement × Time Lock |
 | **Max Possible Multiplier** | **4.5x rewards** (13.5x during QE events!) |
-| **QE2 Progress** | 69.0% ($34,495 / $50,000) |
+| **QE2 Progress** | 70.2% ($35,101 / $50,000) |
+| **On-Chain Program** | **LIVE ON MAINNET** 🚀 |
 
 *Last updated: January 21, 2026 - Fed Chairman iteration*
 
@@ -278,6 +279,7 @@ pm2 start "npx ts-node scripts/run-distribution.ts" \
 | **USD1 Token** | `USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB` |
 | **Distribution Wallet** | `4Br5iKfRkYMk8WMj6w8YASynuq7Eoas16rkyvWsAdL4P` |
 | **Meteora Pool** | `8mLRmqBVfe91twjpCF3hqTtGNMJMsukhEd6GGjXpqs2i` |
+| **On-Chain Program** | `HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz` |
 
 ---
 
@@ -296,10 +298,10 @@ Based on latest distribution cycle (January 21, 2026):
 
 ### System Status
 - **Active Distribution**: Fed Chairman mode (manual)
-- **Holders Per Cycle**: ~1,320 recipients
-- **QE Progress**: $34,495 / $50,000 (69.0% to QE2)
+- **Holders Per Cycle**: ~1,630 recipients
+- **QE Progress**: $35,101 / $50,000 (70.2% to QE2)
 - **All 4 Multipliers**: Active and stacking
-- **Solana Program**: Deployed on Devnet, website integrated
+- **Solana Program**: **LIVE ON MAINNET** - [View on Solscan](https://solscan.io/account/HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz)
 
 ---
 
@@ -325,16 +327,15 @@ This repo is continuously updated as Ralph evolves the operation:
 - ✅ **Referral system** (bonus for bringing new holders)
 - ✅ **Anti-sybil detection** (quality over quantity)
 
-### Solana Program (Devnet - New!)
-- ✅ **Deployed to Devnet**: `HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz`
+### Solana Program (MAINNET - LIVE!)
+- ✅ **Deployed to MAINNET**: `HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz`
 - ✅ On-chain user preferences (auto-compound, time locks, referrals)
 - ✅ Website integration at [fed.markets/preferences](https://fed.markets/preferences)
 - ✅ Wallet connection (Phantom, Solflare)
 - ✅ All 7 tests passing
-- 🔄 Mainnet deployment (pending)
+- ✅ **MAINNET DEPLOYMENT COMPLETE** (Jan 21, 2026)
 
 ### Coming Soon
-- 🔄 Mainnet deployment of on-chain preferences
 - 🔄 Treasury buyback & burn automation (script ready, needs PM2 integration)
 - 🔄 Seasonal competitions (script ready, needs activation)
 - 🔄 Rate decision system (AI-powered timing optimization)

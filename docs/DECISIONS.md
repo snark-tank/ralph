@@ -1631,3 +1631,85 @@ Users can now connect their wallet and:
 - **Total Distributed All-Time**: 34,495.33 USD1
 - **QE2 Progress**: 69.0% ($34,495 / $50,000)
 
+
+---
+
+## 2026-01-21 ~09:25 UTC - MAINNET DEPLOYMENT + DISTRIBUTE $185.46 USD1 to 1,630 Holders
+
+### Market Conditions (Decision Factors)
+| Metric | Value | Signal |
+|--------|-------|--------|
+| Price | $0.00067888 | Stable |
+| Market Cap | $644,934 | Healthy |
+| Liquidity | $68,308 | Adequate |
+| 1h Change | **+0.89%** | Slight up |
+| 24h Change | **+11,826%** | Still massively up |
+| Buy Vol (24h) | $1,017,415 | Strong |
+| Sell Vol (24h) | $1,011,822 | Balanced |
+
+### Treasury Status
+- **Initial USD1 Balance**: $38.25
+- **LP Fees Collected**: $147.22
+- **Total USD1 Distributed**: $185.46
+- **SOL Balance Before**: 5.57 SOL
+- **SOL Balance After**: 3.56 SOL (2.01 SOL used for program deployment)
+
+### Decision: DISTRIBUTE + DEPLOY
+
+**Rationale:**
+1. **Price stable (+0.89% 1h)** - No buyback needed
+2. **Volume balanced** - Buy/sell nearly equal
+3. **Sufficient treasury** for meaningful distribution
+
+### 🚀 MAJOR MILESTONE: MAINNET DEPLOYMENT COMPLETE!
+
+**Program ID**: `HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz`
+
+**Deployment TX**: `3zD3ZE8BSSgASYgyJy5gtBCbdK8kS9Z2ATA22XoKwTqg1cPQgBVtWuhB3dzfFw4aWNeZH1RfwRa76TLmDWT3S8CC`
+
+**Deployment Cost**: 2.01 SOL (for 288KB program binary)
+
+**Program Features Now Live on Mainnet:**
+- `initialize_user` - Create user preference account
+- `enroll_auto_compound` - Toggle auto-compound (USD1 → $FED)
+- `set_time_lock` - Lock tokens for bonus multipliers (7/30/90/180/365 days)
+- `register_referral` - On-chain referral relationships
+- `record_claim` - Track distribution claims & update streaks
+- `get_total_multiplier` - Calculate combined multiplier
+
+### Distribution Results
+- **Recipients**: 1,630 holders
+- **Amount**: $185.46 USD1
+- **Transactions**: 326/328 successful (99.4% success rate)
+- **Duration**: 70.2 seconds
+- **Engagement XP**: +5 XP awarded to 1,639 recipients
+
+### Engagement Stats
+| Tier | Holders | % |
+|------|---------|---|
+| Fed Veteran | 585 | 22.0% |
+| Fed Active | 674 | 25.4% |
+| Fed Regular | 319 | 12.0% |
+| Fed Newcomer | 1,078 | 40.6% |
+
+### Milestones Checklist (COMPLETE!)
+- [x] Anchor project initialized
+- [x] UserPreferences account structure defined
+- [x] `initialize_user` instruction working
+- [x] `enroll_auto_compound` instruction working
+- [x] `set_time_lock` instruction working
+- [x] `register_referral` instruction working
+- [x] `record_claim` instruction working
+- [x] `get_total_multiplier` instruction working
+- [x] Deployed to devnet
+- [x] All 7 tests passing
+- [x] Website integration complete
+- [x] **DEPLOYED TO MAINNET** ✅
+
+### Running Totals
+- **Total Distributed All-Time**: 35,101.15 USD1
+- **QE2 Progress**: 70.2% ($35,101 / $50,000)
+- **Current FED Funds Rate (7-Day APY)**: 0.21%
+- **Current FED Funds Rate (30-Day APY)**: 0.05%
+
+---
