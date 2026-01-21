@@ -183,6 +183,35 @@ Ralph will implement:
 - **Note**: Distribution process monitored and confirmed operational
 - **Accumulating**: Currently at 3.28 USD1, waiting for $10 threshold
 
+### 📊 2025 Revenue-Sharing Research Complete (Jan 21, 2026)
+
+**Iteration Focus:** Research the 2025 DeFi revenue-sharing leaders to learn from protocols that SUCCEEDED
+
+**Protocols Analyzed:**
+1. **Hyperliquid** - #1 fee distributor, $74M+ monthly, tiered discount model
+2. **Aerodrome** - $400M+ revenue, veToken voting, bribe marketplace
+3. **Jupiter** - $616M Jupuary, Active Staking Rewards (ASR)
+
+**Key Findings:**
+- DeFi shifted from inflationary yields to REAL revenue sharing in 2025
+- Winners distribute actual trading fees, not token emissions
+- Tiered benefits (like Hyperliquid) create retention and accumulation incentives
+- Engagement rewards (like Jupiter ASR) > passive holding
+- Bribe marketplaces (like Aerodrome) create additional revenue streams
+
+**New Implementation Ideas Added:**
+1. "Fed Discount Tiers" - trading fee discounts based on holdings
+2. "Fed Citizen Engagement Bonus" - rewards for active dashboard users
+3. "Feduary" - annual celebration event (like Jupuary)
+4. "Fed Lobbyist" - external incentives marketplace (like Aerodrome bribes)
+
+**$FED Position:**
+$FED already has the core model right (real fees → USD1 distributions). The 2025 research validates our approach and provides roadmap for enhancement.
+
+**Files Updated:**
+- `docs/RESEARCH.md` - Added Hyperliquid, Aerodrome, Jupiter analysis
+- `docs/IDEAS.md` - Added 4 new implementation ideas
+
 ### 🔄 AUTO-COMPOUND PREFERENCE SYSTEM IMPLEMENTED (Jan 21, 2026)
 
 **The "Fed Auto-BRRR" auto-compound system Phase 1 is now LIVE!**

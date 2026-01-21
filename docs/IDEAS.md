@@ -579,19 +579,143 @@ Create a satisfying daily ritual around claiming/viewing rewards:
 
 ---
 
+## New Ideas from 2025 Research (Jan 21, 2026)
+
+Based on analysis of Hyperliquid, Aerodrome, and Jupiter - the 2025 revenue-sharing leaders.
+
+### 14. "Fed Discount Tiers" - Trading Fee Discounts for Holders
+
+**Inspired by:** Hyperliquid's Tiered Staking Discounts
+
+**The Concept:**
+Give $FED holders discounts on future trading fees. The more you hold, the less you pay.
+
+| Tier | Holdings | Fee Discount |
+|------|----------|--------------|
+| Fed Chairman | 50M+ $FED | 40% discount |
+| Fed Governor | 10M+ $FED | 25% discount |
+| Regional Director | 1M+ $FED | 15% discount |
+| Board Member | 100K+ $FED | 10% discount |
+| Fed Citizen | <100K $FED | 5% discount |
+
+**Why It Works:**
+- Hyperliquid saw massive retention with this model
+- Creates IMMEDIATE utility for holding (not just future rewards)
+- Incentivizes accumulation to reach next tier
+- Works with any future $FED products (if we launch new pools, NFTs, etc.)
+
+**Implementation:**
+- Add tier check to any fee-based products
+- Display tier discount on website dashboard
+- "Save X% on fees with your Fed Chairman status"
+
+**Effort:** Medium (requires fee products)
+**Impact:** High (retention + accumulation)
+
+---
+
+### 15. "Fed Lobbyist" Incentive Marketplace
+
+**Inspired by:** Aerodrome's Bribe System
+
+**The Concept:**
+Other projects can PAY $FED holders to add liquidity to their tokens on Meteora. Creates additional revenue streams beyond trading fees.
+
+**How It Works:**
+1. Project XYZ wants deeper liquidity for their token
+2. XYZ offers $1,000 in "lobbying fees" to $FED holders
+3. $FED holders vote on where to provide liquidity
+4. Holders who vote for XYZ pool receive share of $1,000
+5. XYZ gets deeper liquidity, holders earn extra income
+
+**Why It Works:**
+- Aerodrome generates millions in "bribes" for veAERO holders
+- Creates revenue BEYOND just $FED trading fees
+- Establishes $FED as liquidity kingmaker on Solana
+- Projects compete to attract $FED holder votes
+
+**Implementation:**
+- Build simple voting mechanism for liquidity direction
+- Create "Lobbyist Dashboard" showing active incentives
+- Weekly voting epochs (like Aerodrome)
+
+**Effort:** High (requires voting infrastructure)
+**Impact:** Very High (new revenue stream)
+
+---
+
+### 16. "Fed Citizen Engagement Bonus"
+
+**Inspired by:** Jupiter's Active Staking Rewards (ASR)
+
+**The Concept:**
+Reward holders who actively engage with the protocol, not just passive hodlers. BUT don't require voting (learned from Jupiter's governance pause).
+
+**Engagement Actions:**
+- Check dashboard weekly: +5% bonus
+- Connect wallet and verify holdings: +3% bonus
+- Share distribution results on Twitter: +5% bonus
+- Refer new holder (verified): +10% bonus on their first distribution
+
+**Why It Works:**
+- Jupiter's ASR proved engagement > passive holding
+- BUT mandatory voting caused fatigue → governance breakdown
+- Solution: OPTIONAL engagement, BONUS rewards
+- Creates active community without forcing participation
+
+**Implementation:**
+- Add engagement tracking to website
+- Weekly engagement score calculation
+- Bonus multiplier applied to distributions
+
+**Effort:** Medium (website + tracking)
+**Impact:** High (engagement + virality)
+
+---
+
+### 17. "Feduary" Annual Celebration Event
+
+**Inspired by:** Jupiter's Jupuary Airdrop
+
+**The Concept:**
+Annual bonus distribution event celebrating $FED's anniversary. Creates massive engagement and FOMO.
+
+**Structure:**
+- Feduary 2027: 10% bonus distribution for all holders
+- Extra bonuses for: Founding Father streak holders, Top 100 holders, Active dashboard users
+- Special "Fed Employee of the Year" NFTs
+- Twitter campaign: "What did YOU earn in Feduary?"
+
+**Why It Works:**
+- Jupiter's Jupuary created massive engagement (2M wallets)
+- Creates annual tradition and countdown anticipation
+- Marketing event that generates organic content
+- Rewards loyal long-term holders
+
+**Implementation:**
+- Plan for Feb 2027 (one year anniversary)
+- Build anticipation starting Jan 2027
+- Create celebratory distribution with bonuses
+
+**Effort:** Low (just a special distribution + marketing)
+**Impact:** Very High (marketing + retention)
+
+---
+
 ## Low Priority / Future Ideas
 
-### 13. Referral Program
+### 18. Referral Program
 
 **Inspired by:** DRIP Network
 
 Simple referral tracking for organic growth. Later iteration.
 
-### 12. DAO Governance
+### 19. DAO Governance
 
 Let holders vote on distribution parameters. Complex, needs legal review.
+**Updated Note (Jan 21, 2026):** Jupiter paused their DAO citing "not working as intended." Be cautious with complex governance.
 
-### 13. Cross-Chain Expansion
+### 20. Cross-Chain Expansion
 
 Bridge $FED to other chains. Major undertaking, future consideration.
 
@@ -627,11 +751,21 @@ Bridge $FED to other chains. Major undertaking, future consideration.
 10. ~~**Website Fed Funds Rate Widget**~~ - ✅ **DONE!** (Jan 21, 2026) Display current 7d/30d APY on dashboard
 11. ~~**Integrate Milestone Bonuses**~~ - ✅ **DONE!** QE events now detected and announced during distributions
 
+### New Items from 2025 Research (Jan 21, 2026)
+
+12. **Implement "Fed Discount Tiers"** - Trading fee discounts based on holdings (inspired by Hyperliquid)
+13. **Build "Fed Citizen Engagement Bonus"** - Reward active dashboard users (inspired by Jupiter ASR)
+14. **Plan "Feduary" Event** - Annual celebration airdrop for Feb 2027 (inspired by Jupuary)
+15. **Research "Fed Lobbyist" Marketplace** - External incentives for liquidity direction (inspired by Aerodrome bribes)
+
 ---
 
 ## Research Complete Summary
 
-After analyzing 8 major protocols/sectors (OHM, SafeMoon, HEX, DRIP, Tomb, Titano, LIBERO, NaaS/NODE protocols), clear patterns emerge:
+After analyzing **12 major protocols/sectors**, clear patterns emerge:
+
+**Failed Protocols (2021-2023 Era):**
+- OHM, SafeMoon, HEX, DRIP, Tomb, Titano, LIBERO, NaaS/NODE, Rebase tokens
 
 **Why They All Failed:**
 - Promised fixed/guaranteed returns (unsustainable)
@@ -640,29 +774,43 @@ After analyzing 8 major protocols/sectors (OHM, SafeMoon, HEX, DRIP, Tomb, Titan
 - High taxes that killed organic activity
 - Centralized control enabling rugs
 
-**Why $FED is Different:**
-- Rewards from REAL trading fees (sustainable)
-- USD1 stablecoin rewards (no inflation)
-- Simple mechanics (8% fee → distribute)
-- No fake APY promises (honest variable rates)
-- Protocol owns liquidity (no rug risk)
+**Successful Protocols (2025 Era):**
+- Hyperliquid ($74M+ monthly distributions)
+- Aerodrome ($400M+ annualized revenue, 13x gains)
+- Jupiter ($616M Jupuary airdrop, 2M wallets)
+
+**What 2025 Winners Do Differently:**
+- Real fees → distributions (not inflation)
+- Tiered benefits for retention
+- Engagement rewards > passive holding
+- Transparent on-chain metrics
+
+**Why $FED is Positioned Correctly:**
+- ✅ Rewards from REAL trading fees (sustainable)
+- ✅ USD1 stablecoin rewards (no inflation)
+- ✅ Simple mechanics (8% fee → distribute)
+- ✅ No fake APY promises (honest variable rates)
+- ✅ Protocol owns liquidity (no rug risk)
+- ✅ Tier multipliers (like Hyperliquid)
+- ✅ Streak bonuses (like HEX, but better)
 
 **Best Mechanics to Adopt:**
 | Protocol | Good Idea | Adaptation for $FED |
 |----------|-----------|---------------------|
 | OHM | (3,3) game theory framing | "BRRR Together" community messaging |
 | SafeMoon | Simple "hold and earn" UX | Already implemented |
-| HEX | Time-lock loyalty bonuses | Staking tiers with multipliers |
+| HEX | Time-lock loyalty bonuses | ✅ Diamond Hands streaks (done) |
 | DRIP | Daily visible rewards | Live accumulation counter |
-| Tomb | Epoch-based cycles | Regular distribution timing |
 | Titano | Addictive balance visibility | "Fed Auto-BRRR" dashboard |
-| LIBERO | Stablecoin + token rewards | Already doing USD1 |
-| NaaS | "Node" ownership psychology | "Fed Nodes" gamified staking language |
+| **Hyperliquid** | Tiered fee discounts | "Fed Discount Tiers" (to implement) |
+| **Aerodrome** | Bribe marketplace | "Fed Lobbyist" system (to implement) |
+| **Jupiter** | Active staking rewards | "Engagement Bonus" (to implement) |
+| **Jupiter** | Annual celebration events | "Feduary" event (to implement) |
 
-$FED has already learned from the best and avoided the worst. The money printer goes BRRR - sustainably.
+$FED has already learned from the 2021-2023 failures and is adopting the 2025 winner playbook. The money printer goes BRRR - sustainably.
 
 ---
 
 *This document is continuously updated by Ralph as he researches and brainstorms.*
 
-Last Updated: 2026-01-21 (Fed Funds Rate widget added to website dashboard)
+Last Updated: 2026-01-21 (Added 2025 revenue-sharing research: Hyperliquid, Aerodrome, Jupiter)

@@ -6,17 +6,27 @@ Ralph's deep dives into successful flywheel tokenomics.
 
 ## Research Queue
 
-| Protocol | Status | Key Mechanic |
-|----------|--------|--------------|
-| OHM / Olympus DAO | ✅ Complete | (3,3) game theory, bonding |
-| SAFEMOON | ✅ Complete | Reflections, auto-LP |
-| HEX | ✅ Complete | Time-locked staking |
-| DRIP Network | ✅ Complete | Daily ROI, referrals |
-| Tomb Finance | ✅ Complete | Algorithmic pegging |
-| Titano | ✅ Complete | Auto-compounding |
-| LIBERO | ✅ Complete | Fire pit burns |
-| NODE protocols | ✅ Complete | Node rewards, NaaS |
-| Rebase tokens | ✅ Complete | Supply elasticity |
+### Failed Protocols (2021-2023 Era)
+
+| Protocol | Status | Key Mechanic | Outcome |
+|----------|--------|--------------|---------|
+| OHM / Olympus DAO | ✅ Complete | (3,3) game theory, bonding | 97% down from ATH |
+| SAFEMOON | ✅ Complete | Reflections, auto-LP | Founder arrested (fraud) |
+| HEX | ✅ Complete | Time-locked staking | Controversial, declining |
+| DRIP Network | ✅ Complete | Daily ROI, referrals | Death spiral |
+| Tomb Finance | ✅ Complete | Algorithmic pegging | Lost peg, collapsed |
+| Titano | ✅ Complete | Auto-compounding | 99%+ down |
+| LIBERO | ✅ Complete | Fire pit burns | 99%+ down |
+| NODE protocols | ✅ Complete | Node rewards, NaaS | All dead |
+| Rebase tokens | ✅ Complete | Supply elasticity | Death spirals |
+
+### Successful Protocols (2025 Era) - NEW!
+
+| Protocol | Status | Key Mechanic | Outcome |
+|----------|--------|--------------|---------|
+| Hyperliquid | ✅ Complete | Fee buybacks, tiered discounts | $74M+ monthly distributions |
+| Aerodrome | ✅ Complete | veToken voting, bribes | $400M+ revenue, 13x gains |
+| Jupiter | ✅ Complete | Active staking rewards | $616M Jupuary airdrop |
 
 ---
 
@@ -1372,6 +1382,329 @@ The rebase experiment taught us: **simple is better**. Users understand "hold to
 
 ---
 
+---
+
+## 2025 Revenue-Sharing Leaders (New Research: Jan 21, 2026)
+
+The DeFi landscape has fundamentally shifted in 2025. Protocols that promised fake yields are dead. The winners now share REAL revenue with holders. Here's Ralph's analysis of the leading revenue-sharing models.
+
+---
+
+## Hyperliquid (HYPE)
+
+**Date Researched:** 2026-01-21
+**Status:** Active Leader - $74M+ monthly distributions
+
+### Overview
+
+Hyperliquid is a high-performance perpetual futures DEX built on its own L1 chain. In 2025, it became the #1 protocol for fee distribution, channeling over $74 million monthly to stakeholders. Its model represents the gold standard for sustainable DeFi revenue sharing.
+
+### Key Mechanics
+
+1. **Fee Buyback Flywheel**
+   - 97% of platform trading fees go toward token buybacks or rewards
+   - No inflation - rewards come from REAL revenue
+   - Buybacks reduce supply, creating natural price support
+   - As volume grows, buybacks increase, price rises, more users join → virtuous cycle
+
+2. **Tiered Staking Discounts (May 2025)**
+   - 6 staking tiers from Wood (10+ HYPE, 5% discount) to Diamond (500K+ HYPE, 40% discount)
+   - Rewards larger stakeholders with progressively better trading fees
+   - Creates strong incentives for long-term holding + immediate utility
+   - Spot volume counts DOUBLE toward tier calculations
+
+3. **Validator Staking Rewards**
+   - Delegated proof of stake with 10K HYPE minimum for validators
+   - Reward rate inversely proportional to √(total staked)
+   - At 400M staked: ~2.37% annual reward rate
+   - Rewards from future emissions reserve (not inflation)
+   - Auto-compound: rewards automatically redelegated
+
+4. **HyperEVM Gas Revenue Share**
+   - 20% of gas fees from large blocks return to HYPE stakers
+   - Creates additional revenue stream beyond trading
+   - EVM apps contribute to the buyback flywheel
+
+5. **Community-First Fee Structure**
+   - Fees entirely directed to community (HLP, assistance fund, deployers)
+   - Deployers can keep up to 50% of trading fees from their assets
+   - Record single-day distribution: $9.8M on October 10, 2025
+
+### What Worked
+
+- **Real Revenue, Real Distribution**: No fake APY - actual trading fees distributed
+- **Sustainable Tokenomics**: 97% of fees to stakeholders, no inflation
+- **Volume Leadership**: Became the dominant perps DEX through actual product-market fit
+- **Transparent Mechanics**: All distributions on-chain and verifiable
+- **Tier System Creates Stickiness**: Discounts make it costly to leave
+- **Deflationary Pressure**: Buybacks reduce circulating supply
+
+### What Failed
+
+- **High Concentration Risk**: Large portion of value from single product (perps)
+- **Complexity**: Multiple reward mechanisms may confuse new users
+- **30-Day Unstaking Period**: Can be frustrating for users who need liquidity
+
+### Lessons for $FED
+
+**DO Adopt:**
+- ✅ Real revenue distribution model - $FED already does this via trading fees
+- ✅ **IMPLEMENT: Tiered fee discounts for holders** - larger holders could get better rates on future products
+- ✅ Transparent fee-to-distribution pipeline - already done
+- ✅ **IMPLEMENT: Volume-based rewards weighting** - reward active traders more
+
+**DON'T Adopt:**
+- ❌ Complex validator staking (overkill for token distribution)
+- ❌ 30-day unstaking period (would hurt liquidity)
+
+**Key Insight:**
+
+Hyperliquid proves the model: **Real fees → Token buybacks/distributions → Price support → More users → More fees**
+
+This is EXACTLY what $FED does, but Hyperliquid does it at scale. Their tiered discount system is worth implementing.
+
+### Sources
+
+- [Hyperliquid Docs - Fees](https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees)
+- [Hyperliquid Docs - Staking](https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/staking)
+- [Artemis Analytics - Hyperliquid Valuation](https://www.artemisanalytics.com/resources/hyperliquid-a-valuation-model-and-bull-case)
+- [DeFi Planet - Hyperliquid Fee Discounts](https://defi-planet.com/2025/04/hyperliquid-to-introduce-enhanced-fee-discounts-and-account-linking-feature/)
+- [LeveX - HYPE Staking Tiers](https://levex.com/en/blog/hype-staking-tiers-rewards)
+
+---
+
+## Aerodrome Finance (AERO)
+
+**Date Researched:** 2026-01-21
+**Status:** Active Leader - $400M+ annualized revenue, 13x gains
+
+### Overview
+
+Aerodrome is the dominant DEX on Base chain, generating $100.7M revenue in Q4 2024 alone (>$400M annualized). Its veToken model creates powerful alignment between protocol growth and holder rewards. The AERO token is up ~13x since launch (Feb 2024).
+
+### Key Mechanics
+
+1. **Vote-Escrowed Tokens (veAERO)**
+   - Lock AERO tokens to receive veAERO (voting power)
+   - Lock up to 4 years: 100 AERO × 4 years = 100 veAERO
+   - Shorter locks = less voting power (linear decay)
+   - **Auto-Max Lock**: Set locks to never decay (always max power)
+
+2. **100% Fee Distribution to Voters**
+   - ALL trading fees from voted pools go to veAERO holders
+   - Proportional to vote weight in each pool
+   - 10% of votes in a pool = 10% of that pool's fees
+   - Weekly epoch-based distributions
+
+3. **External Incentives (Bribes)**
+   - Projects pay veAERO holders to vote for their pools
+   - Creates additional revenue stream beyond trading fees
+   - Bribe market creates competitive liquidity acquisition
+   - Virtuous cycle: more bribes → more voting → deeper liquidity → more volume → more fees
+
+4. **Anti-Dilution Rebase**
+   - veAERO holders receive weekly rebase proportional to emissions
+   - Reduces voting power dilution from new token issuance
+   - Rewards veAERO holders most when locking rates decrease
+   - Incentivizes new lockers during low lock periods
+
+5. **Aero Fed Governance (Post-Epoch 67)**
+   - When emissions drop below 9M/epoch, veAERO voters control monetary policy
+   - Three choices each epoch: increase (+0.01%), decrease (-0.01%), or maintain
+   - Max rate: 1%/week (52% annualized), Min: 0.01%/week (0.52%)
+   - True decentralized monetary policy
+
+### What Worked
+
+- **Fee Revenue Dominance**: $4.6M in one week (Aug 2025), beating PancakeSwap + Meteora + Pump.fun COMBINED
+- **TVL Growth**: $602M TVL as of Aug 2025, #1 on Base
+- **Incentive Alignment**: veToken model aligns long-term holder interests
+- **Sustainable Yields**: Real fees, not inflation, power returns
+- **Governance Innovation**: Aero Fed gives community monetary policy control
+- **Price Performance**: 13x gains show model works
+
+### What Failed
+
+- **Lock-Up Rigidity**: 4-year max lock is very long commitment
+- **Complexity**: veToken mechanics not intuitive for new users
+- **Single Chain Risk**: Entirely on Base chain
+- **Vote Gaming**: Sophisticated players can game vote distribution
+
+### Lessons for $FED
+
+**DO Adopt:**
+- ✅ **IMPLEMENT: "Fed Voting" System** - let holders vote on distribution parameters
+- ✅ 100% fee distribution concept - $FED already does this
+- ✅ **IMPLEMENT: Bribe/Incentive Marketplace** - other projects could pay $FED holders to add liquidity to their pools
+- ✅ Weekly epoch-based distribution schedule (similar to our current system)
+
+**DON'T Adopt:**
+- ❌ Long mandatory lock periods (hurts liquidity and user experience)
+- ❌ Voting power decay (too complex, punishes passive holders)
+- ❌ Emissions control governance (we have fixed supply)
+
+**Key Insight:**
+
+Aerodrome's genius is making fee distribution competitive. Projects COMPETE to attract votes by offering bribes. This creates additional revenue for token holders beyond just trading fees.
+
+For $FED, we could create a "Fed Lobbyist" system where projects pay holders to provide liquidity for their tokens.
+
+### Sources
+
+- [Aerodrome Docs](https://aero.drome.eth.limo/docs)
+- [Nansen - What Is Aerodrome Finance](https://www.nansen.ai/post/what-is-aerodrome-finance)
+- [CoinGecko - Aerodrome Finance Guide](https://www.coingecko.com/learn/what-is-aerodrome-finance-aero-base)
+- [DWF Labs - Aerodrome Finance Growth](https://www.dwf-labs.com/research/has-aerodrome-finance-become-the-leading-defi-protocol-on-base)
+- [Aerodrome GitHub - Contract Specification](https://github.com/aerodrome-finance/contracts/blob/main/SPECIFICATION.md)
+
+---
+
+## Jupiter (JUP)
+
+**Date Researched:** 2026-01-21
+**Status:** Active - Largest Solana DEX aggregator, governance under restructuring
+
+### Overview
+
+Jupiter is the dominant DEX aggregator on Solana, processing billions in trading volume. Its Active Staking Rewards (ASR) system combines staking with governance participation, rewarding engaged community members. In 2025, Jupiter distributed $616M worth of JUP in their "Jupuary" airdrop.
+
+### Key Mechanics
+
+1. **Active Staking Rewards (ASR)**
+   - Unlike passive staking, ASR requires governance participation
+   - Must vote on proposals to earn rewards
+   - 75M JUP allocated to stakers quarterly
+   - Additional bonuses for consistent voting participation
+   - Creates engaged community, not passive holders
+
+2. **Staking-to-Voting Power (1:1 Ratio)**
+   - One staked token = one vote
+   - More stake = more governance power
+   - Simple, transparent, no complex lock mechanics
+   - 30-day unstaking period
+
+3. **Revenue Sources for ASR**
+   - 75% of FLG Launchpad fees fund rewards
+   - 100M JUP tokens distributed over two quarters
+   - 50M JUP per quarter ongoing rate
+   - Real revenue, not just inflation
+
+4. **Jupuary Airdrop (Jan 2025)**
+   - 700M JUP to 2M eligible wallets
+   - $616M total value distributed
+   - Rewarded active users and stakers
+   - Created massive community engagement
+
+5. **15-Day Reward Cooldown**
+   - ASR rewards locked with 15-day release period
+   - Gradual distribution supports price stability
+   - Prevents dump-after-claim behavior
+
+### What Worked
+
+- **Engagement-Based Rewards**: Requiring votes creates active community
+- **Massive Distribution Scale**: 2M wallets in airdrop = huge network effect
+- **Simple Mechanics**: 1:1 stake-to-vote is easy to understand
+- **Real Revenue Backing**: Launchpad fees fund rewards
+- **Solana Native**: Built on fastest, cheapest chain
+
+### What Failed
+
+- **Governance Breakdown (June 2025)**: DAO votes paused, "not working as intended"
+- **Trust Issues**: Structure required fundamental rethinking
+- **No Work Groups Until 2026**: Development centralized during pause
+- **Vote Fatigue**: Requiring votes for rewards can feel like a chore
+
+### Lessons for $FED
+
+**DO Adopt:**
+- ✅ **IMPLEMENT: Active participation bonuses** - reward holders who engage (check wallet, vote on parameters)
+- ✅ Cooldown period concept - our 2-min distribution already provides regular rhythm
+- ✅ Simple 1:1 staking mechanics (we use proportional distribution)
+- ✅ **IMPLEMENT: "Jupuary"-style celebration events** - periodic bonus distributions for active holders
+
+**DON'T Adopt:**
+- ❌ Complex governance structure (caused Jupiter's pause)
+- ❌ Mandatory voting for rewards (creates fatigue)
+- ❌ Long unstaking periods (30 days too long)
+
+**Key Insight:**
+
+Jupiter's ASR proves that **rewarding engagement > rewarding passive holding**. But they went too far with mandatory voting. The sweet spot is:
+- Base rewards for holding
+- Bonus rewards for engagement
+- Optional (not required) participation
+
+For $FED, we could add a "Fed Citizen Bonus" for holders who interact with the protocol (check rewards, use dashboard) without requiring votes.
+
+### Sources
+
+- [Jupiter Vote - ASR](https://vote.jup.ag/asr)
+- [99Bitcoins - Jupiter Staking Guide 2026](https://99bitcoins.com/cryptocurrency/best-crypto-staking-coins/jupiter/)
+- [KuCoin - Jupiter $616M Airdrop Guide](https://www.kucoin.com/news/articles/jupiter-s-616m-solana-airdrop-the-2025-jup-token-guide)
+- [CoinCodex - Jupiter Staking](https://coincodex.com/article/66087/jupiter-staking/)
+- [SolanaFloor - ASR Participation Guide](https://solanafloor.com/news/earn-more-jup-on-jupiter-what-is-asr-active-staking-rewards-and-how-to-participate)
+- [CoinDesk - Jupiter Pauses DAO Votes](https://www.coindesk.com/business/2025/06/20/solana-dex-jupiter-pauses-dao-votes-citing-breakdown-in-trust)
+
+---
+
+## 2025 DeFi Revenue-Sharing Meta Summary
+
+**Date Compiled:** 2026-01-21
+
+### The Market Has Spoken
+
+DeFi protocols in 2025 have fundamentally shifted from inflationary yield farming to real revenue distribution:
+
+| Metric | 2021-2023 Era | 2025 Era |
+|--------|---------------|----------|
+| Yield Source | Token emissions (inflation) | Trading fees (real revenue) |
+| Promised APY | 1,000-100,000% (fake) | 3-50% (real) |
+| Distribution Method | Rebasing, staking rewards | Fee sharing, buybacks |
+| User Retention | Mercenary (chase highest APY) | Sticky (aligned incentives) |
+| Protocol Survival | ~95% failed | Leaders thriving |
+
+### Top Performers (Real Revenue)
+
+According to DeFi Llama and industry research:
+- **Hyperliquid**: $74M+ monthly distributions (record: $9.8M single day)
+- **Aerodrome**: $400M+ annualized revenue, 13x token gains
+- **Aave**: $42.47B TVL, $96M monthly fees, dynamic rates
+
+### Key Trends for $FED
+
+1. **Real Yield Wins**: Protocols with actual revenue are the 2025 winners
+2. **Tiered Benefits**: Hyperliquid, Aerodrome all use tiers for retention
+3. **Engagement Rewards**: Active participation > passive holding
+4. **Fee Buybacks**: Direct mechanism for price support
+5. **Transparent Metrics**: On-chain verifiable distributions build trust
+
+### $FED Competitive Position
+
+$FED already has the core model right:
+- ✅ Real trading fees → USD1 distributions
+- ✅ Proportional distribution to holders
+- ✅ Tier multipliers (Chairman → Citizen)
+- ✅ Streak bonuses (Diamond Hands)
+- ✅ Transparent on-chain distributions
+
+**To match 2025 leaders, implement:**
+1. **Fee Discount Tiers** (like Hyperliquid) - holder tiers get trading fee discounts
+2. **Voting/Governance** (simplified from Aerodrome) - let holders vote on parameters
+3. **Engagement Bonuses** (like Jupiter ASR) - reward active dashboard users
+4. **Celebration Events** (like Jupuary) - periodic bonus distributions at milestones
+
+### Sources
+
+- [DL News - State of DeFi 2025](https://www.dlnews.com/research/internal/state-of-defi-2025/)
+- [CFA Institute - Revenue-Sharing Tokens](https://blogs.cfainstitute.org/investor/2025/01/24/beyond-speculation-the-rise-of-revenue-sharing-tokens/)
+- [Bitcoin Ethereum News - DeFi Fee Sharing 2025](https://bitcoinethereumnews.com/tech/defi-protocols-triple-fee-sharing-to-holders-in-2025-hyperliquid-leads-distributions/)
+- [AInvest - DeFi Profitability 2025](https://www.ainvest.com/news/profitability-sustainability-defi-protocols-2025-2512/)
+- [Medium - DeFi in 2026](https://medium.com/@ancilartech/defi-in-2026-what-comes-after-yield-farming-and-liquidity-wars-de05c4f710ea)
+- [CoinLaw - DeFi Market Statistics 2025](https://coinlaw.io/decentralized-finance-market-statistics/)
+
+---
+
 ## Template for Research Entry
 
 ```markdown
@@ -1408,3 +1741,5 @@ Brief description of what the protocol does.
 ---
 
 *This document is continuously updated by Ralph as he researches protocols.*
+
+Last Updated: 2026-01-21 (Added 2025 Revenue-Sharing Leaders: Hyperliquid, Aerodrome, Jupiter)
