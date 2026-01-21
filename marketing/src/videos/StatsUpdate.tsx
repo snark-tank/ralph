@@ -32,8 +32,8 @@ const CinematicBackground: React.FC<{
 }> = ({ accentColor = "#00ff88", intensity = 0.02, focusY = 50 }) => {
   const frame = useCurrentFrame();
 
-  // Extremely slow, imperceptible drift
-  const drift = interpolate(frame, [0, 600], [0, 3], {
+  // Extremely slow, imperceptible drift - creates subtle life
+  const drift = interpolate(frame, [0, 600], [0, 2.5], {
     extrapolateRight: "clamp",
   });
 
@@ -50,20 +50,27 @@ const CinematicBackground: React.FC<{
   return (
     <AbsoluteFill>
       {/* Pure black base - premium foundation */}
-      <AbsoluteFill style={{ background: "#020202" }} />
+      <AbsoluteFill style={{ background: "#010101" }} />
 
-      {/* Primary glow - whisper-quiet presence */}
+      {/* Primary glow - whisper-quiet presence, centered */}
       <AbsoluteFill
         style={{
-          background: `radial-gradient(ellipse 90% 45% at 50% ${focusY + drift}%, ${hexToRgba(accentColor, intensity)} 0%, transparent 65%)`,
+          background: `radial-gradient(ellipse 85% 50% at 50% ${focusY + drift}%, ${hexToRgba(accentColor, intensity)} 0%, transparent 60%)`,
         }}
       />
 
-      {/* Cinematic vignette - frames the content */}
+      {/* Secondary ambient wash - adds depth without distraction */}
+      <AbsoluteFill
+        style={{
+          background: `radial-gradient(ellipse 100% 25% at 50% 5%, ${hexToRgba(accentColor, intensity * 0.15)} 0%, transparent 40%)`,
+        }}
+      />
+
+      {/* Cinematic vignette - frames the content elegantly */}
       <AbsoluteFill
         style={{
           background:
-            "radial-gradient(ellipse 80% 70% at 50% 50%, transparent 25%, rgba(0,0,0,0.65) 100%)",
+            "radial-gradient(ellipse 82% 72% at 50% 50%, transparent 30%, rgba(0,0,0,0.6) 100%)",
         }}
       />
     </AbsoluteFill>
