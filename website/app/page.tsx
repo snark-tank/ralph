@@ -79,46 +79,73 @@ export default async function Dashboard() {
       </div>
 
       {/* Hero Section */}
-      <div className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold gradient-text mb-4 tracking-tight">
+      <div className="text-center mb-12 relative">
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#c9a227]/5 via-transparent to-transparent rounded-3xl blur-3xl"></div>
+        <h1 className="text-4xl md:text-6xl font-bold hero-gradient-text mb-4 tracking-tight">
           Ralph&apos;s Federal Reserve
         </h1>
         <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
           Autonomous agent building the ultimate rewards flywheel. Research, adapt, evolve.
-          <span className="block mt-2 text-[#c9a227] font-mono text-sm tracking-widest">THE MONEY PRINTER GOES BRRR</span>
         </p>
+        <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-[#0a0a0a] border border-[#222] rounded-full">
+          <span className="text-gray-500 text-sm uppercase tracking-widest">Status:</span>
+          <span className="text-[#22c55e] font-mono text-sm font-semibold tracking-widest" style={{ textShadow: '0 0 10px rgba(34, 197, 94, 0.5)' }}>
+            MONEY PRINTER ACTIVE
+          </span>
+          <span className="relative flex h-2 w-2 ml-1">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22c55e] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22c55e]"></span>
+          </span>
+        </div>
       </div>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
-        <div className="card rounded-xl p-6 hover:border-[#22c55e]/30 transition-all duration-300 hover-lift glow-green stat-shine">
-          <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs">Total Distributed</div>
-          <div
-            className="text-3xl font-bold text-[#22c55e] font-mono stat-number text-glow-green"
-          >
+        <div className="stat-card-premium rounded-xl p-6 hover:border-[#22c55e]/30 transition-all duration-300 hover-lift glow-green stat-shine">
+          <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs flex items-center gap-1">
+            <DollarIcon className="w-3 h-3" />
+            Total Distributed
+          </div>
+          <div className="text-3xl font-bold text-[#22c55e] font-mono stat-number distributed-glow">
             ${stats.totalDistributed}
           </div>
-          <div className="text-gray-600 text-xs mt-2">USD1 to holders</div>
+          <div className="text-gray-600 text-xs mt-2 flex items-center gap-1">
+            <span className="inline-block w-1.5 h-1.5 bg-[#22c55e] rounded-full"></span>
+            USD1 to holders
+          </div>
         </div>
 
-        <div className="card rounded-xl p-6 hover:border-[#c9a227]/30 transition-all duration-300 hover-lift glow-gold stat-shine">
-          <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs">Distribution Runs</div>
-          <div
-            className="text-3xl font-bold text-[#c9a227] font-mono stat-number text-glow-gold"
-          >
+        <div className="stat-card-premium rounded-xl p-6 hover:border-[#c9a227]/30 transition-all duration-300 hover-lift glow-gold stat-shine">
+          <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs flex items-center gap-1">
+            <ChartIcon className="w-3 h-3" />
+            Distribution Runs
+          </div>
+          <div className="text-3xl font-bold text-[#c9a227] font-mono stat-number text-glow-gold">
             {stats.distributions}
           </div>
-          <div className="text-gray-600 text-xs mt-2">Total cycles</div>
+          <div className="text-gray-600 text-xs mt-2 flex items-center gap-1">
+            <span className="inline-block w-1.5 h-1.5 bg-[#c9a227] rounded-full"></span>
+            Total cycles
+          </div>
         </div>
 
-        <div className="card rounded-xl p-6 hover:border-white/10 transition-all duration-300 hover-lift">
-          <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs">Holders Per Cycle</div>
-          <div className="text-3xl font-bold text-white font-mono stat-number">{stats.holders || '309-369'}</div>
-          <div className="text-gray-600 text-xs mt-2">Recipients each run</div>
+        <div className="stat-card-premium rounded-xl p-6 hover:border-white/10 transition-all duration-300 hover-lift">
+          <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs flex items-center gap-1">
+            <UsersIcon className="w-3 h-3" />
+            Max Holders Paid
+          </div>
+          <div className="text-3xl font-bold text-white font-mono stat-number">{stats.holders?.toLocaleString() || '1,828'}</div>
+          <div className="text-gray-600 text-xs mt-2 flex items-center gap-1">
+            <span className="inline-block w-1.5 h-1.5 bg-white rounded-full"></span>
+            In single cycle
+          </div>
         </div>
 
-        <div className="card rounded-xl p-6 hover:border-[#22c55e]/30 transition-all duration-300 hover-lift border-gradient">
-          <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs">System Status</div>
+        <div className="stat-card-premium rounded-xl p-6 hover:border-[#22c55e]/30 transition-all duration-300 hover-lift border-gradient">
+          <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs flex items-center gap-1">
+            <ZapIcon className="w-3 h-3" />
+            System Status
+          </div>
           <div className="text-2xl font-bold text-[#22c55e] flex items-center gap-2">
             <span className="relative flex h-3 w-3">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22c55e] opacity-75"></span>
@@ -126,7 +153,10 @@ export default async function Dashboard() {
             </span>
             <span style={{ textShadow: '0 0 10px rgba(34, 197, 94, 0.6)' }}>LIVE</span>
           </div>
-          <div className="text-gray-600 text-xs mt-2">PM2 every 2 min</div>
+          <div className="text-gray-600 text-xs mt-2 flex items-center gap-1">
+            <span className="inline-block w-1.5 h-1.5 bg-[#22c55e] rounded-full animate-pulse"></span>
+            Auto-runs every 2 min
+          </div>
         </div>
       </div>
 
@@ -372,37 +402,53 @@ export default async function Dashboard() {
       </div>
 
       {/* QE2 Progress Tracker */}
-      <div className="mt-8 card rounded-xl p-6 glow-gold">
-        <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
-          <DiamondIcon className="w-5 h-5" /> Progress to QE2
-        </h2>
-        <div className="mb-2 flex justify-between text-sm">
-          <span className="text-gray-400">
-            <span className="font-mono text-white">${stats.totalDistributed}</span> distributed
-          </span>
-          <span className="text-[#c9a227] font-mono">$50,000 target</span>
-        </div>
-        <div className="w-full bg-[#222] rounded-full h-5 overflow-hidden relative">
-          <div
-            className="bg-gradient-to-r from-[#c9a227] via-[#22c55e] to-[#22c55e] h-full rounded-full transition-all duration-500 relative"
-            style={{
-              width: `${Math.min((parseFloat(stats.totalDistributed.replace(/,/g, '')) / 50000) * 100, 100)}%`,
-              boxShadow: '0 0 20px rgba(34, 197, 94, 0.4)'
-            }}
-          >
-            {/* Animated shine effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-pulse"></div>
+      <div className="mt-8 stat-card-premium rounded-xl p-6 glow-gold relative overflow-hidden">
+        {/* Animated background grid */}
+        <div className="absolute inset-0 grid-bg opacity-50"></div>
+        <div className="relative z-10">
+          <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
+            <DiamondIcon className="w-5 h-5" /> Progress to QE2
+            <span className="ml-auto text-xs font-normal bg-[#c9a227]/20 text-[#c9a227] px-2 py-1 rounded-full">
+              1.5x Bonus Event
+            </span>
+          </h2>
+          <div className="mb-3 flex justify-between items-end">
+            <div>
+              <span className="text-gray-500 text-sm block">Current</span>
+              <span className="font-mono text-2xl text-white font-bold">${stats.totalDistributed}</span>
+            </div>
+            <div className="text-right">
+              <span className="text-gray-500 text-sm block">Target</span>
+              <span className="text-[#c9a227] font-mono text-2xl font-bold">$50,000</span>
+            </div>
           </div>
-          {/* Percentage label */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <span className="text-xs font-bold text-white font-mono drop-shadow-lg">
-              {Math.min((parseFloat(stats.totalDistributed.replace(/,/g, '')) / 50000) * 100, 100).toFixed(1)}%
+          <div className="w-full bg-[#1a1a1a] rounded-full h-6 overflow-hidden relative border border-[#333]">
+            <div
+              className="bg-gradient-to-r from-[#c9a227] via-[#22c55e] to-[#22c55e] h-full rounded-full transition-all duration-500 relative"
+              style={{
+                width: `${Math.min((parseFloat(stats.totalDistributed.replace(/,/g, '')) / 50000) * 100, 100)}%`,
+                boxShadow: '0 0 30px rgba(34, 197, 94, 0.5), inset 0 1px 0 rgba(255,255,255,0.2)'
+              }}
+            >
+              {/* Animated shine effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent" style={{ animation: 'stat-shine 3s ease-in-out infinite' }}></div>
+            </div>
+            {/* Percentage label */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <span className="text-sm font-bold text-white font-mono drop-shadow-lg" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.8)' }}>
+                {Math.min((parseFloat(stats.totalDistributed.replace(/,/g, '')) / 50000) * 100, 100).toFixed(1)}%
+              </span>
+            </div>
+          </div>
+          <div className="mt-4 flex items-center justify-between">
+            <p className="text-gray-500 text-sm">
+              QE2 triggers a <span className="text-[#c9a227] font-semibold">1.5x celebration bonus</span> for all holders
+            </p>
+            <span className="text-[#22c55e] font-mono text-sm">
+              ${(50000 - parseFloat(stats.totalDistributed.replace(/,/g, ''))).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} to go
             </span>
           </div>
         </div>
-        <p className="mt-3 text-gray-500 text-sm">
-          QE2 triggers a <span className="text-[#c9a227] font-semibold">1.5x celebration bonus</span> distribution for all holders!
-        </p>
       </div>
 
       {/* Built On Section - Trust Signals */}
