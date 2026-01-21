@@ -18,7 +18,7 @@ export default function PreferencesPage() {
 
         {/* Info Cards */}
         <div className="grid md:grid-cols-2 gap-4">
-          <div className="bg-gray-900 rounded-xl p-6 border border-gray-800">
+          <div className="bg-[#111] rounded-xl p-6 border border-[#222]">
             <h3 className="text-lg font-bold text-white mb-2">Auto-Compound</h3>
             <p className="text-gray-400 text-sm">
               When enabled, your USD1 distributions will be automatically converted to $FED
@@ -27,7 +27,7 @@ export default function PreferencesPage() {
             </p>
           </div>
 
-          <div className="bg-gray-900 rounded-xl p-6 border border-gray-800">
+          <div className="bg-[#111] rounded-xl p-6 border border-[#222]">
             <h3 className="text-lg font-bold text-white mb-2">Time Lock</h3>
             <p className="text-gray-400 text-sm">
               Commit to holding your tokens for a period of time to earn bonus multipliers
@@ -42,7 +42,7 @@ export default function PreferencesPage() {
             </ul>
           </div>
 
-          <div className="bg-gray-900 rounded-xl p-6 border border-gray-800">
+          <div className="bg-[#111] rounded-xl p-6 border border-[#222]">
             <h3 className="text-lg font-bold text-white mb-2">Streak Bonus</h3>
             <p className="text-gray-400 text-sm">
               Claim distributions within 48 hours of each other to build a streak.
@@ -51,7 +51,7 @@ export default function PreferencesPage() {
             </p>
           </div>
 
-          <div className="bg-gray-900 rounded-xl p-6 border border-gray-800">
+          <div className="bg-[#111] rounded-xl p-6 border border-[#222]">
             <h3 className="text-lg font-bold text-white mb-2">Referrals</h3>
             <p className="text-gray-400 text-sm">
               Coming soon: Refer friends to earn bonus distributions when they claim.
@@ -61,7 +61,7 @@ export default function PreferencesPage() {
         </div>
 
         {/* Program Info */}
-        <div className="bg-gray-900 rounded-xl p-6 border border-gray-800">
+        <div className="bg-[#111] rounded-xl p-6 border border-[#222]">
           <h3 className="text-lg font-bold text-white mb-2">Program Details</h3>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
