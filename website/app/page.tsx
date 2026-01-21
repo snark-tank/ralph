@@ -30,19 +30,19 @@ export default async function Dashboard() {
             <span className="text-3xl animate-bounce">🚀</span>
             <div>
               <div className="text-[#22c55e] font-bold text-lg flex items-center gap-2">
-                <span style={{ textShadow: '0 0 20px rgba(34, 197, 94, 0.6)' }}>17x PUMP IN PROGRESS</span>
+                <span style={{ textShadow: '0 0 20px rgba(34, 197, 94, 0.6)' }}>18x PUMP IN PROGRESS</span>
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22c55e] opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22c55e]"></span>
                 </span>
               </div>
-              <p className="text-gray-400 text-sm">Historic +1,600% in 24h! Distributing fees to all holders during the rally.</p>
+              <p className="text-gray-400 text-sm">Historic +1,800% in 24h! Distributing fees to all holders during the rally.</p>
             </div>
           </div>
           <div className="text-right">
             <div className="text-[#c9a227] font-mono text-sm">Just distributed</div>
-            <div className="text-[#22c55e] font-bold text-xl font-mono" style={{ textShadow: '0 0 15px rgba(34, 197, 94, 0.5)' }}>$57.17 USD1</div>
-            <div className="text-gray-500 text-xs">to 1,280 holders</div>
+            <div className="text-[#22c55e] font-bold text-xl font-mono" style={{ textShadow: '0 0 15px rgba(34, 197, 94, 0.5)' }}>$32.48 USD1</div>
+            <div className="text-gray-500 text-xs">to 415 holders</div>
           </div>
         </div>
       </div>
