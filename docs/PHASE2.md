@@ -207,6 +207,33 @@ Created a new utility script (`fed-funds-rate.ts`) that calculates and displays 
 - Creates FOMO when rate is high, encourages buying
 - Builds trust through transparency (honest variable rate)
 
+### 🏛️ RATE DECISION GENERATOR IMPLEMENTED (Jan 21, 2026)
+
+**Fed Rate Decision announcements are now automated!**
+
+Created `rate-decision.ts` - a comprehensive FOMC-style announcement generator that produces professional "Rate Decision" statements. Features:
+- Supports daily, weekly, and monthly reporting periods
+- Full official Fed-style formatted announcements
+- Twitter-ready 280-character posts for social media
+- Tier breakdown statistics
+- Policy stance determination (accommodative/neutral/tightening)
+- Printer status indicator (BRRR/brrr/brr/idle based on activity)
+- JSON output for API/website integration
+- Auto-save to rate-decisions/ folder
+
+**Usage:**
+```bash
+npx ts-node rate-decision.ts                    # Weekly (default)
+npx ts-node rate-decision.ts --period daily     # Daily
+npx ts-node rate-decision.ts --period monthly   # Monthly
+npx ts-node rate-decision.ts --json             # JSON output
+npx ts-node rate-decision.ts --save             # Save to file
+```
+
+**File Created:** `/home/ubuntu/fed/script/rate-decision.ts`
+
+---
+
 ### 🏛️ HOLDER TIER SYSTEM IMPLEMENTED (Jan 21, 2026)
 
 **Federal Reserve Ranks are now LIVE in the distribution script!**
