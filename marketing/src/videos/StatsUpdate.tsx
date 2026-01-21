@@ -70,48 +70,78 @@ const CinematicBackground: React.FC<{
   );
 };
 
-// Scene 1: The Hook - Logo emerges with cinematic gravitas
+// Scene 1: The Hook - Cinematic reveal with dramatic tension
 const IntroScene = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Cinematic light sweep - horizontal line that draws attention
-  const sweepProgress = interpolate(
+  // Phase 1: Dramatic curtain lift - vertical reveal (0-0.6s)
+  const curtainProgress = interpolate(
     frame,
-    [0, fps * 0.4],
+    [0, fps * 0.5],
     [0, 1],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
-  const sweepOpacity = interpolate(
+
+  // Ambient glow intensifies during reveal
+  const ambientGlow = interpolate(
     frame,
-    [0, fps * 0.1, fps * 0.3, fps * 0.5],
-    [0, 0.6, 0.4, 0],
+    [0, fps * 0.3, fps * 0.8],
+    [0, 0.08, 0.04],
     { extrapolateRight: "clamp" }
   );
 
-  // Logo: Emerges from darkness with gravitas
-  const logoDelay = 0.15;
+  // Logo: Fades up with scale from darkness - THE moment
+  const logoDelay = 0.25;
   const logoProgress = spring({
     frame: frame - logoDelay * fps,
     fps,
-    config: { damping: 200, stiffness: 50, mass: 1.2 },
+    config: { damping: 180, stiffness: 40, mass: 1.5 },
   });
 
   const logoOpacity = interpolate(
     frame,
-    [logoDelay * fps, (logoDelay + 0.35) * fps],
+    [logoDelay * fps, (logoDelay + 0.5) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  const logoScale = interpolate(logoProgress, [0, 1], [0.85, 1]);
-  const logoY = interpolate(logoProgress, [0, 1], [15, 0]);
+  const logoScale = interpolate(logoProgress, [0, 1], [0.75, 1]);
 
-  // Logo glow builds to create presence
+  // Outer ring - expands outward creating depth
+  const ringDelay = 0.4;
+  const ringOpacity = interpolate(
+    frame,
+    [ringDelay * fps, (ringDelay + 0.15) * fps, fps * 1.3, fps * 1.8],
+    [0, 0.25, 0.15, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+  const ringScale = interpolate(
+    frame,
+    [ringDelay * fps, fps * 1.8],
+    [0.6, 2.2],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Inner accent ring - tighter
+  const innerRingOpacity = interpolate(
+    frame,
+    [fps * 0.5, fps * 0.7, fps * 1.1, fps * 1.5],
+    [0, 0.4, 0.2, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+  const innerRingScale = interpolate(
+    frame,
+    [fps * 0.5, fps * 1.5],
+    [0.9, 1.4],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Logo glow builds majestically
   const logoGlow = interpolate(
     frame,
-    [fps * 0.4, fps * 1.5],
-    [0, 55],
+    [fps * 0.5, fps * 1.6],
+    [0, 70],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
@@ -119,47 +149,33 @@ const IntroScene = () => {
     }
   );
 
-  // Ring pulse around logo - adds depth
-  const ringOpacity = interpolate(
-    frame,
-    [fps * 0.5, fps * 0.8, fps * 1.4],
-    [0, 0.15, 0],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-  const ringScale = interpolate(
-    frame,
-    [fps * 0.5, fps * 1.4],
-    [0.8, 1.6],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  );
-
-  // $FED text - appears after logo settles
-  const fedDelay = 0.7;
+  // $FED text - appears with measured confidence
+  const fedDelay = 0.85;
   const fedProgress = spring({
     frame: frame - fedDelay * fps,
     fps,
-    config: { damping: 200, stiffness: 80 },
+    config: { damping: 200, stiffness: 60 },
   });
   const fedOpacity = interpolate(
     frame,
-    [fedDelay * fps, (fedDelay + 0.2) * fps],
+    [fedDelay * fps, (fedDelay + 0.25) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const fedY = interpolate(fedProgress, [0, 1], [12, 0]);
+  const fedY = interpolate(fedProgress, [0, 1], [18, 0]);
 
-  // Tagline - final beat
-  const tagDelay = 1.05;
+  // Tagline - final beat, elegant fade
+  const tagDelay = 1.2;
   const tagOpacity = interpolate(
     frame,
-    [tagDelay * fps, (tagDelay + 0.25) * fps],
+    [tagDelay * fps, (tagDelay + 0.35) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const tagY = interpolate(
     frame,
-    [tagDelay * fps, (tagDelay + 0.3) * fps],
-    [8, 0],
+    [tagDelay * fps, (tagDelay + 0.4) * fps],
+    [12, 0],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
@@ -167,30 +183,26 @@ const IntroScene = () => {
     }
   );
 
+  // Decorative side lines - frame the composition
+  const lineWidth = interpolate(
+    frame,
+    [fps * 1.0, fps * 1.5],
+    [0, 80],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
   return (
     <AbsoluteFill>
-      <CinematicBackground accentColor="#00ff88" intensity={0.03} focusY={50} />
+      <CinematicBackground accentColor="#00ff88" intensity={0.025} focusY={50} />
 
-      {/* Cinematic light sweep - horizontal line */}
+      {/* Ambient glow layer - breathes life */}
       <AbsoluteFill
         style={{
-          justifyContent: "center",
-          alignItems: "center",
-          pointerEvents: "none",
+          background: `radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0, 255, 136, ${ambientGlow}) 0%, transparent 60%)`,
         }}
-      >
-        <div
-          style={{
-            width: `${sweepProgress * 400}px`,
-            height: 1,
-            background: "linear-gradient(90deg, transparent, rgba(0,255,136,0.8) 30%, rgba(0,255,136,1) 50%, rgba(0,255,136,0.8) 70%, transparent)",
-            opacity: sweepOpacity,
-            boxShadow: "0 0 20px rgba(0,255,136,0.4)",
-            position: "absolute",
-          }}
-        />
-      </AbsoluteFill>
+      />
 
+      {/* Content container */}
       <AbsoluteFill
         style={{
           justifyContent: "center",
@@ -202,12 +214,27 @@ const IntroScene = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: 18,
+            gap: 20,
+            opacity: curtainProgress,
           }}
         >
-          {/* Logo with ring pulse */}
+          {/* Logo container with rings */}
           <div style={{ position: "relative" }}>
-            {/* Ring pulse */}
+            {/* Outer expanding ring */}
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                width: 180,
+                height: 180,
+                borderRadius: "50%",
+                border: "1px solid rgba(0, 255, 136, 0.2)",
+                transform: `translate(-50%, -50%) scale(${ringScale})`,
+                opacity: ringOpacity,
+              }}
+            />
+            {/* Inner accent ring */}
             <div
               style={{
                 position: "absolute",
@@ -216,24 +243,25 @@ const IntroScene = () => {
                 width: 160,
                 height: 160,
                 borderRadius: "50%",
-                border: "1px solid rgba(0, 255, 136, 0.3)",
-                transform: `translate(-50%, -50%) scale(${ringScale})`,
-                opacity: ringOpacity,
+                border: "2px solid rgba(0, 255, 136, 0.35)",
+                transform: `translate(-50%, -50%) scale(${innerRingScale})`,
+                opacity: innerRingOpacity,
+                boxShadow: "0 0 30px rgba(0, 255, 136, 0.15)",
               }}
             />
             {/* Logo */}
             <div
               style={{
-                transform: `scale(${logoScale}) translateY(${logoY}px)`,
+                transform: `scale(${logoScale})`,
                 opacity: logoOpacity,
-                filter: `drop-shadow(0 0 ${logoGlow}px rgba(0, 255, 136, 0.5))`,
+                filter: `drop-shadow(0 0 ${logoGlow}px rgba(0, 255, 136, 0.55))`,
               }}
             >
-              <FedLogo size={140} glow={false} />
+              <FedLogo size={150} glow={false} />
             </div>
           </div>
 
-          {/* $FED */}
+          {/* $FED text with sophisticated typography */}
           <div
             style={{
               opacity: fedOpacity,
@@ -242,36 +270,54 @@ const IntroScene = () => {
           >
             <span
               style={{
-                fontSize: 56,
+                fontSize: 62,
                 fontWeight: 900,
                 color: "#ffffff",
                 fontFamily: "system-ui, -apple-system, sans-serif",
-                letterSpacing: -2,
+                letterSpacing: -2.5,
+                textShadow: "0 4px 40px rgba(0, 0, 0, 0.4)",
               }}
             >
-              <span style={{ color: "#00ff88" }}>$</span>FED
+              <span style={{ color: "#00ff88", textShadow: "0 0 35px rgba(0, 255, 136, 0.4)" }}>$</span>FED
             </span>
           </div>
 
-          {/* Tagline */}
+          {/* Tagline with decorative lines */}
           <div
             style={{
               opacity: tagOpacity,
               transform: `translateY(${tagY}px)`,
+              display: "flex",
+              alignItems: "center",
+              gap: 16,
             }}
           >
+            <div
+              style={{
+                width: lineWidth,
+                height: 1,
+                background: "linear-gradient(270deg, rgba(0, 255, 136, 0.3), transparent)",
+              }}
+            />
             <span
               style={{
-                fontSize: 12,
-                color: "#505050",
+                fontSize: 11,
+                color: "#4a4a4a",
                 fontFamily: "system-ui, -apple-system, sans-serif",
-                letterSpacing: 4.5,
+                letterSpacing: 5,
                 textTransform: "uppercase",
-                fontWeight: 500,
+                fontWeight: 600,
               }}
             >
-              Quantitative Easing for the people
+              Quantitative Easing for the People
             </span>
+            <div
+              style={{
+                width: lineWidth,
+                height: 1,
+                background: "linear-gradient(90deg, rgba(0, 255, 136, 0.3), transparent)",
+              }}
+            />
           </div>
         </div>
       </AbsoluteFill>
@@ -279,40 +325,62 @@ const IntroScene = () => {
   );
 };
 
-// Scene 2: Headline - Typography that commands attention
+// Scene 2: Headline - Typography with dramatic impact
 const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
   const words = headline.split(" ");
 
-  // Scene fade in - quick
-  const sceneFade = interpolate(frame, [0, fps * 0.06], [0, 1], {
+  // Scene builds in
+  const sceneFade = interpolate(frame, [0, fps * 0.1], [0, 1], {
     extrapolateRight: "clamp",
   });
 
-  // Accent lines - subtle framing that builds
-  const lineWidth = interpolate(
+  // Background glow intensifies with BRRR
+  const bgGlow = interpolate(
     frame,
-    [fps * 0.08, fps * 0.5],
-    [0, 60],
+    [fps * 0.5, fps * 1.2],
+    [0.03, 0.05],
+    { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Top decorative element - draws with words
+  const topLineWidth = interpolate(
+    frame,
+    [fps * 0.1, fps * 0.55],
+    [0, 70],
     {
       extrapolateRight: "clamp",
       easing: Easing.out(Easing.cubic),
     }
   );
+  const dotOpacity = interpolate(
+    frame,
+    [fps * 0.2, fps * 0.45],
+    [0, 0.7],
+    { extrapolateRight: "clamp" }
+  );
 
-  // Underline for BRRR - draws after the word appears
+  // BRRR underline - dramatic draw after word appears
+  const brrrWordIndex = words.findIndex(w => w === "BRRR");
+  const brrrDelay = 0.15 + brrrWordIndex * 0.1;
   const brrrUnderline = interpolate(
     frame,
-    [fps * 0.7, fps * 1.0],
+    [(brrrDelay + 0.25) * fps, (brrrDelay + 0.65) * fps],
     [0, 100],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+  const underlineGlow = interpolate(
+    frame,
+    [(brrrDelay + 0.4) * fps, (brrrDelay + 0.8) * fps],
+    [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   return (
     <AbsoluteFill style={{ opacity: sceneFade }}>
-      <CinematicBackground accentColor="#00ff88" intensity={0.035} focusY={48} />
+      <CinematicBackground accentColor="#00ff88" intensity={bgGlow} focusY={48} />
 
       <AbsoluteFill
         style={{
@@ -320,81 +388,88 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
           alignItems: "center",
           padding: 70,
           flexDirection: "column",
-          gap: 16,
+          gap: 18,
         }}
       >
-        {/* Top accent */}
+        {/* Top decorative accent */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
             gap: 18,
-            marginBottom: 8,
+            marginBottom: 12,
           }}
         >
           <div
             style={{
-              width: lineWidth,
+              width: topLineWidth,
               height: 1,
-              background: "linear-gradient(270deg, rgba(0, 255, 136, 0.35), transparent)",
+              background: "linear-gradient(270deg, rgba(0, 255, 136, 0.4), transparent)",
             }}
           />
           <div
             style={{
-              width: 5,
-              height: 5,
+              width: 6,
+              height: 6,
               borderRadius: "50%",
               background: "#00ff88",
-              opacity: interpolate(frame, [fps * 0.15, fps * 0.35], [0, 0.6], {
-                extrapolateRight: "clamp",
-              }),
-              boxShadow: "0 0 8px rgba(0, 255, 136, 0.4)",
+              opacity: dotOpacity,
+              boxShadow: "0 0 12px rgba(0, 255, 136, 0.5)",
             }}
           />
           <div
             style={{
-              width: lineWidth,
+              width: topLineWidth,
               height: 1,
-              background: "linear-gradient(90deg, rgba(0, 255, 136, 0.35), transparent)",
+              background: "linear-gradient(90deg, rgba(0, 255, 136, 0.4), transparent)",
             }}
           />
         </div>
 
-        {/* Headline - word by word with precise rhythm */}
+        {/* Headline - word by word with perfect rhythm */}
         <div
           style={{
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
-            gap: "0 22px",
-            maxWidth: 1050,
+            gap: "0 24px",
+            maxWidth: 1100,
             position: "relative",
           }}
         >
           {words.map((word, index) => {
-            // Tight stagger - 80ms between words
-            const delay = 0.12 + index * 0.08;
+            // Stagger with slightly more time for words to land
+            const delay = 0.15 + index * 0.1;
             const wordProgress = spring({
               frame: frame - delay * fps,
               fps,
-              config: { damping: 180, stiffness: 120 },
+              config: { damping: 200, stiffness: 100, mass: 1.1 },
             });
             const wordOpacity = interpolate(
               frame,
-              [delay * fps, (delay + 0.1) * fps],
+              [delay * fps, (delay + 0.15) * fps],
               [0, 1],
               { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
             );
-            const wordY = interpolate(wordProgress, [0, 1], [18, 0]);
+            const wordY = interpolate(wordProgress, [0, 1], [25, 0]);
+            const wordScale = interpolate(wordProgress, [0, 1], [0.97, 1]);
 
-            // BRRR gets special treatment - it's the payoff
+            // BRRR gets special treatment - it's the payoff moment
             const isEmphasis = word === "BRRR";
 
-            // Glow builds on BRRR
+            // BRRR scale pulse when it lands
+            const emphasisScale = isEmphasis ? interpolate(
+              frame,
+              [(delay + 0.2) * fps, (delay + 0.35) * fps],
+              [1.05, 1],
+              { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+            ) * wordScale : wordScale;
+
+            // Glow builds majestically on BRRR
             const emphasisGlow = isEmphasis ? interpolate(
               frame,
-              [(delay + 0.15) * fps, fps * 1.2],
-              [0, 45],
+              [(delay + 0.2) * fps, fps * 1.4],
+              [0, 55],
               { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
             ) : 0;
 
@@ -402,35 +477,36 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
               <span
                 key={index}
                 style={{
-                  fontSize: 78,
+                  fontSize: 82,
                   fontWeight: 900,
                   color: isEmphasis ? "#00ff88" : "#ffffff",
                   fontFamily: "system-ui, -apple-system, sans-serif",
                   opacity: wordOpacity,
-                  transform: `translateY(${wordY}px)`,
+                  transform: `translateY(${wordY}px) scale(${emphasisScale})`,
                   display: "inline-block",
-                  letterSpacing: -3.5,
-                  lineHeight: 1.08,
+                  letterSpacing: -4,
+                  lineHeight: 1.05,
                   textShadow: isEmphasis
-                    ? `0 0 ${emphasisGlow}px rgba(0, 255, 136, 0.5)`
-                    : "0 4px 35px rgba(0, 0, 0, 0.45)",
+                    ? `0 0 ${emphasisGlow}px rgba(0, 255, 136, 0.55)`
+                    : "0 5px 40px rgba(0, 0, 0, 0.5)",
                   position: "relative",
                 }}
               >
                 {word}
-                {/* Underline accent for BRRR */}
+                {/* Dramatic underline accent for BRRR */}
                 {isEmphasis && (
                   <div
                     style={{
                       position: "absolute",
-                      bottom: -8,
+                      bottom: -10,
                       left: "50%",
                       transform: "translateX(-50%)",
                       width: `${brrrUnderline}%`,
                       height: 3,
-                      background: "linear-gradient(90deg, transparent, #00ff88, transparent)",
+                      background: "linear-gradient(90deg, transparent 5%, #00ff88 50%, transparent 95%)",
                       borderRadius: 2,
-                      opacity: 0.7,
+                      opacity: 0.8,
+                      boxShadow: `0 0 ${15 * underlineGlow}px rgba(0, 255, 136, ${0.5 * underlineGlow})`,
                     }}
                   />
                 )}
@@ -443,7 +519,7 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
   );
 };
 
-// Stat card - Premium glass card with hero number and counting animation
+// Stat card - Premium glass morphism with hero number and luxurious counting
 const StatCard: React.FC<{
   stat: StatsUpdateProps["stats"][0];
   delay: number;
@@ -452,24 +528,25 @@ const StatCard: React.FC<{
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Card entrance - smooth spring
+  // Card entrance - deliberate, weighty spring
   const cardProgress = spring({
     frame: frame - delay * fps,
     fps,
-    config: { damping: 180, stiffness: 60 },
+    config: { damping: 200, stiffness: 45, mass: 1.3 },
   });
 
-  // Number counting with very satisfying deceleration
-  const countDuration = 1.8;
+  // Number counting with exponential deceleration for maximum satisfaction
+  const countDuration = 2.0;
+  const countStart = delay + 0.18;
   const numberProgress = interpolate(
     frame,
-    [(delay + 0.12) * fps, (delay + 0.12 + countDuration) * fps],
+    [countStart * fps, (countStart + countDuration) * fps],
     [0, 1],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
-      // Custom easing for more dramatic slow-down at the end
-      easing: (t) => 1 - Math.pow(1 - t, 4),
+      // Quintic ease-out for that "slowing to a stop" feel
+      easing: (t) => 1 - Math.pow(1 - t, 5),
     }
   );
 
@@ -480,35 +557,15 @@ const StatCard: React.FC<{
   const prefix = stat.prefix ?? (stat.value.startsWith("$") ? "$" : "");
   const suffix = stat.suffix ?? (stat.value.includes("+") ? "+" : "");
 
-  const cardOpacity = interpolate(cardProgress, [0, 0.5], [0, 1], {
+  const cardOpacity = interpolate(cardProgress, [0, 0.4], [0, 1], {
     extrapolateRight: "clamp",
   });
-  const cardY = interpolate(cardProgress, [0, 1], [35, 0]);
-  const cardScale = interpolate(cardProgress, [0, 1], [0.97, 1]);
+  const cardY = interpolate(cardProgress, [0, 1], [40, 0]);
+  const cardScale = interpolate(cardProgress, [0, 1], [0.95, 1]);
 
-  // Color system - FED brand palette with distinct colors
+  // Color system - FED brand palette
   const accentColors = ["#00ff88", "#00d4ff", "#ff6b9d"];
   const accentColor = stat.color || accentColors[index % accentColors.length];
-
-  // Top accent line draws from left
-  const accentWidth = interpolate(
-    frame,
-    [(delay + 0.1) * fps, (delay + 0.55) * fps],
-    [0, 100],
-    {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-      easing: Easing.out(Easing.cubic),
-    }
-  );
-
-  // Card glow builds after number lands
-  const glowIntensity = interpolate(
-    frame,
-    [(delay + 1.2) * fps, (delay + 2.0) * fps],
-    [0, 1],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  );
 
   const hexToRgb = (hex: string) => {
     const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -518,13 +575,57 @@ const StatCard: React.FC<{
   };
   const accentRgb = hexToRgb(accentColor);
 
-  // Subtle pulse on the number when it lands
-  const landedPulse = numberProgress >= 0.98 ? interpolate(
+  // Top accent line draws elegantly from left
+  const accentWidth = interpolate(
     frame,
-    [(delay + 0.12 + countDuration) * fps, (delay + 0.12 + countDuration + 0.15) * fps],
-    [1.02, 1],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+    [(delay + 0.15) * fps, (delay + 0.7) * fps],
+    [0, 100],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+      easing: Easing.out(Easing.cubic),
+    }
+  );
+
+  // Left border glow builds with count
+  const borderGlow = interpolate(
+    frame,
+    [(delay + 0.3) * fps, (delay + 1.5) * fps],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Card ambient glow after number lands
+  const cardGlow = interpolate(
+    frame,
+    [(countStart + countDuration - 0.3) * fps, (countStart + countDuration + 0.5) * fps],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Number "lands" with subtle scale pulse
+  const landedPulse = numberProgress >= 0.97 ? interpolate(
+    frame,
+    [(countStart + countDuration) * fps, (countStart + countDuration + 0.12) * fps],
+    [1.03, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
+
+  // Number glow intensifies as it lands
+  const numberGlow = interpolate(
+    frame,
+    [(countStart + countDuration - 0.5) * fps, (countStart + countDuration + 0.3) * fps],
+    [0, 20],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Label fades in after card settles
+  const labelOpacity = interpolate(
+    frame,
+    [(delay + 0.35) * fps, (delay + 0.6) * fps],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
 
   return (
     <div
@@ -535,22 +636,22 @@ const StatCard: React.FC<{
     >
       <div
         style={{
-          padding: "30px 40px",
+          padding: "28px 38px",
           background:
-            "linear-gradient(165deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.008) 100%)",
+            "linear-gradient(165deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.008) 100%)",
           borderRadius: 16,
-          minWidth: 270,
+          minWidth: 280,
           position: "relative",
           overflow: "hidden",
-          border: "1px solid rgba(255, 255, 255, 0.05)",
+          border: "1px solid rgba(255, 255, 255, 0.06)",
           boxShadow: `
-            0 25px 60px rgba(0, 0, 0, 0.45),
-            0 0 ${35 * glowIntensity}px rgba(${accentRgb}, ${0.05 * glowIntensity}),
-            inset 0 1px 0 rgba(255, 255, 255, 0.03)
+            0 30px 70px rgba(0, 0, 0, 0.5),
+            0 0 ${45 * cardGlow}px rgba(${accentRgb}, ${0.08 * cardGlow}),
+            inset 0 1px 0 rgba(255, 255, 255, 0.04)
           `,
         }}
       >
-        {/* Top accent line */}
+        {/* Top accent line - full width draw */}
         <div
           style={{
             position: "absolute",
@@ -558,64 +659,88 @@ const StatCard: React.FC<{
             left: 0,
             width: `${accentWidth}%`,
             height: 2,
-            background: `linear-gradient(90deg, ${accentColor} 0%, ${accentColor}50 80%, transparent 100%)`,
+            background: `linear-gradient(90deg, ${accentColor} 0%, ${accentColor}80 70%, transparent 100%)`,
             borderRadius: "2px 0 0 0",
+            boxShadow: `0 0 ${12 * borderGlow}px ${accentColor}60`,
           }}
         />
 
-        {/* Hero number */}
+        {/* Left accent bar - vertical */}
         <div
           style={{
-            fontSize: 52,
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: 3,
+            height: "100%",
+            background: `linear-gradient(180deg, ${accentColor} 0%, ${accentColor}40 70%, transparent 100%)`,
+            opacity: borderGlow * 0.7,
+            boxShadow: `0 0 ${15 * borderGlow}px ${accentColor}50`,
+          }}
+        />
+
+        {/* Hero number with glow */}
+        <div
+          style={{
+            fontSize: 56,
             fontWeight: 900,
             color: "#ffffff",
             fontFamily: "system-ui, -apple-system, sans-serif",
-            letterSpacing: -2,
+            letterSpacing: -2.5,
             lineHeight: 1,
-            marginBottom: 14,
+            marginBottom: 16,
             transform: `scale(${landedPulse})`,
             transformOrigin: "left center",
+            filter: `drop-shadow(0 0 ${numberGlow}px rgba(${accentRgb}, 0.3))`,
           }}
         >
-          <span style={{ color: accentColor, opacity: 0.95 }}>{prefix}</span>
+          <span
+            style={{
+              color: accentColor,
+              textShadow: `0 0 ${15 * cardGlow}px ${accentColor}60`,
+            }}
+          >
+            {prefix}
+          </span>
           {displayValue.toLocaleString()}
           <span
             style={{
               color: "#3a3a3a",
-              fontSize: 26,
+              fontSize: 28,
               fontWeight: 700,
-              marginLeft: 2,
+              marginLeft: 3,
             }}
           >
             {suffix}
           </span>
         </div>
 
-        {/* Label with indicator */}
+        {/* Label with animated indicator */}
         <div
           style={{
             display: "flex",
             alignItems: "center",
             gap: 10,
+            opacity: labelOpacity,
           }}
         >
           <div
             style={{
-              width: 5,
-              height: 5,
+              width: 6,
+              height: 6,
               borderRadius: "50%",
               background: accentColor,
-              opacity: 0.4 + glowIntensity * 0.4,
-              boxShadow: `0 0 ${6 * glowIntensity}px ${accentColor}`,
+              opacity: 0.5 + cardGlow * 0.5,
+              boxShadow: `0 0 ${8 * cardGlow}px ${accentColor}`,
             }}
           />
           <div
             style={{
               fontSize: 11,
-              color: "#555555",
+              color: "#505050",
               fontFamily: "system-ui, -apple-system, sans-serif",
               textTransform: "uppercase",
-              letterSpacing: 2.5,
+              letterSpacing: 3,
               fontWeight: 600,
             }}
           >
@@ -627,73 +752,74 @@ const StatCard: React.FC<{
   );
 };
 
-// Scene 3: Stats - The meat of the video with dramatic reveals
+// Scene 3: Stats - The showcase with compelling number reveals
 const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const sceneFade = interpolate(frame, [0, fps * 0.06], [0, 1], {
+  // Scene builds in smoothly
+  const sceneFade = interpolate(frame, [0, fps * 0.1], [0, 1], {
     extrapolateRight: "clamp",
   });
 
-  // Section header
-  const headerOpacity = interpolate(frame, [fps * 0.04, fps * 0.22], [0, 1], {
+  // Section header - refined entrance
+  const headerOpacity = interpolate(frame, [fps * 0.06, fps * 0.28], [0, 1], {
     extrapolateRight: "clamp",
   });
   const headerY = interpolate(
     frame,
-    [fps * 0.04, fps * 0.28],
-    [10, 0],
+    [fps * 0.06, fps * 0.35],
+    [12, 0],
     {
       extrapolateRight: "clamp",
       easing: Easing.out(Easing.cubic),
     }
   );
 
-  // Live indicator pulse
-  const livePulse = interpolate(
-    (frame - fps * 0.25) % (fps * 1.5),
-    [0, fps * 0.3, fps * 1.5],
-    [0.5, 1, 0.5],
+  // Live indicator with elegant pulse
+  const pulseBase = interpolate(
+    (frame - fps * 0.3) % (fps * 1.8),
+    [0, fps * 0.35, fps * 1.8],
+    [0.45, 1, 0.45],
     { extrapolateLeft: "clamp" }
   );
-  const indicatorOpacity = frame > fps * 0.2 ? livePulse : interpolate(
+  const indicatorOpacity = frame > fps * 0.25 ? pulseBase : interpolate(
     frame,
-    [fps * 0.08, fps * 0.2],
-    [0, 0.5],
+    [fps * 0.1, fps * 0.25],
+    [0, 0.45],
     { extrapolateRight: "clamp" }
   );
 
-  // Accent lines - draws outward
+  // Accent lines - draw outward symmetrically
   const lineWidth = interpolate(
     frame,
-    [fps * 0.05, fps * 0.38],
-    [0, 55],
+    [fps * 0.08, fps * 0.45],
+    [0, 60],
     {
       extrapolateRight: "clamp",
       easing: Easing.out(Easing.cubic),
     }
   );
 
-  // Background glow intensifies as numbers count
+  // Background glow intensifies as numbers count up - creates energy
   const bgGlowIntensity = interpolate(
     frame,
-    [fps * 1.0, fps * 2.5],
-    [0.025, 0.04],
+    [fps * 0.8, fps * 2.8],
+    [0.025, 0.045],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   return (
     <AbsoluteFill style={{ opacity: sceneFade }}>
-      <CinematicBackground accentColor="#00ff88" intensity={bgGlowIntensity} focusY={42} />
+      <CinematicBackground accentColor="#00ff88" intensity={bgGlowIntensity} focusY={40} />
 
       <AbsoluteFill
         style={{
           justifyContent: "center",
           alignItems: "center",
-          padding: 50,
+          padding: 55,
           flexDirection: "column",
-          gap: 45,
+          gap: 48,
         }}
       >
         {/* Header with live indicator */}
@@ -703,35 +829,35 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
             transform: `translateY(${headerY}px)`,
             display: "flex",
             alignItems: "center",
-            gap: 16,
+            gap: 18,
           }}
         >
           <div
             style={{
               width: lineWidth,
               height: 1,
-              background: "linear-gradient(270deg, #333333, transparent)",
+              background: "linear-gradient(270deg, rgba(0, 255, 136, 0.25), transparent)",
             }}
           />
 
-          {/* Live dot with glow */}
+          {/* Live indicator with glow */}
           <div
             style={{
-              width: 6,
-              height: 6,
+              width: 7,
+              height: 7,
               borderRadius: "50%",
               background: "#00ff88",
               opacity: indicatorOpacity,
-              boxShadow: `0 0 ${8 + 6 * indicatorOpacity}px rgba(0, 255, 136, ${0.5 + 0.3 * indicatorOpacity})`,
+              boxShadow: `0 0 ${10 + 8 * indicatorOpacity}px rgba(0, 255, 136, ${0.45 + 0.35 * indicatorOpacity})`,
             }}
           />
 
           <span
             style={{
               fontSize: 11,
-              color: "#555555",
+              color: "#4a4a4a",
               fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: 4.5,
+              letterSpacing: 5,
               textTransform: "uppercase",
               fontWeight: 600,
             }}
@@ -743,26 +869,26 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
             style={{
               width: lineWidth,
               height: 1,
-              background: "linear-gradient(90deg, #333333, transparent)",
+              background: "linear-gradient(90deg, rgba(0, 255, 136, 0.25), transparent)",
             }}
           />
         </div>
 
-        {/* Stats row - tighter stagger for rhythm */}
+        {/* Stats row - deliberate stagger for impact */}
         <div
           style={{
             display: "flex",
-            gap: 24,
+            gap: 26,
             flexWrap: "wrap",
             justifyContent: "center",
-            maxWidth: 950,
+            maxWidth: 980,
           }}
         >
           {stats.map((stat, index) => (
             <StatCard
               key={stat.label}
               stat={stat}
-              delay={0.18 + index * 0.2}
+              delay={0.22 + index * 0.22}
               index={index}
             />
           ))}
@@ -772,45 +898,69 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
   );
 };
 
-// Scene 4: CTA - Confident, memorable close that sticks
+// Scene 4: CTA - Commanding, memorable close with gravitas
 const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const sceneFade = interpolate(frame, [0, fps * 0.08], [0, 1], {
+  // Scene builds from darkness
+  const sceneFade = interpolate(frame, [0, fps * 0.12], [0, 1], {
     extrapolateRight: "clamp",
   });
 
-  // Logo with spring entrance
+  // Background glow intensifies throughout
+  const bgIntensity = interpolate(
+    frame,
+    [0, fps * 1.5],
+    [0.03, 0.06],
+    { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Logo - powerful entrance with weight
   const logoProgress = spring({
     frame,
     fps,
-    config: { damping: 200, stiffness: 60, mass: 1.1 },
+    config: { damping: 180, stiffness: 50, mass: 1.3 },
   });
-  const logoOpacity = interpolate(frame, [0, fps * 0.18], [0, 1], {
+  const logoOpacity = interpolate(frame, [0, fps * 0.25], [0, 1], {
     extrapolateRight: "clamp",
   });
+  const logoScale = interpolate(logoProgress, [0, 1], [0.85, 1]);
   const logoGlow = interpolate(
     frame,
-    [fps * 0.12, fps * 0.7],
-    [0, 45],
+    [fps * 0.2, fps * 0.9],
+    [0, 60],
     {
       extrapolateRight: "clamp",
       easing: Easing.out(Easing.cubic),
     }
   );
 
-  // Tagline - slightly earlier
+  // Outer ring pulse - adds presence
+  const ringOpacity = interpolate(
+    frame,
+    [fps * 0.15, fps * 0.3, fps * 0.8, fps * 1.2],
+    [0, 0.25, 0.15, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+  const ringScale = interpolate(
+    frame,
+    [fps * 0.15, fps * 1.2],
+    [0.7, 1.8],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Tagline - confident timing
   const taglineOpacity = interpolate(
     frame,
-    [fps * 0.3, fps * 0.55],
+    [fps * 0.38, fps * 0.65],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const taglineY = interpolate(
     frame,
-    [fps * 0.3, fps * 0.58],
-    [12, 0],
+    [fps * 0.38, fps * 0.7],
+    [15, 0],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
@@ -818,23 +968,26 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
     }
   );
 
-  // CTA button - the main action
-  const ctaDelay = fps * 0.55;
+  // CTA button - THE action moment, slightly delayed for impact
+  const ctaDelay = fps * 0.65;
   const ctaProgress = spring({
     frame: frame - ctaDelay,
     fps,
-    config: { damping: 170, stiffness: 80 },
+    config: { damping: 180, stiffness: 70, mass: 1.1 },
   });
   const ctaOpacity = interpolate(
     frame,
-    [ctaDelay, ctaDelay + fps * 0.18],
+    [ctaDelay, ctaDelay + fps * 0.22],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const ctaY = interpolate(ctaProgress, [0, 1], [20, 0]);
+  const ctaY = interpolate(ctaProgress, [0, 1], [25, 0]);
+  const ctaScale = interpolate(ctaProgress, [0, 1], [0.95, 1]);
+
+  // CTA glow builds dramatically
   const ctaGlow = interpolate(
     frame,
-    [ctaDelay + fps * 0.15, fps * 1.4],
+    [ctaDelay + fps * 0.2, fps * 1.6],
     [0, 1],
     {
       extrapolateLeft: "clamp",
@@ -843,17 +996,24 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
     }
   );
 
-  // Bottom text - final beat
+  // Subtle pulsing glow on CTA after it lands
+  const ctaPulse = frame > fps * 1.2 ? interpolate(
+    (frame - fps * 1.2) % (fps * 2),
+    [0, fps * 1, fps * 2],
+    [0.85, 1, 0.85]
+  ) : 1;
+
+  // Bottom text - final beat with gravitas
   const bottomOpacity = interpolate(
     frame,
-    [fps * 1.0, fps * 1.35],
+    [fps * 1.15, fps * 1.5],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const bottomY = interpolate(
     frame,
-    [fps * 1.0, fps * 1.4],
-    [8, 0],
+    [fps * 1.15, fps * 1.55],
+    [10, 0],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
@@ -861,35 +1021,58 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
     }
   );
 
-  // Subtle decorative lines
+  // Decorative lines frame the bottom text
   const lineWidth = interpolate(
     frame,
-    [fps * 1.2, fps * 1.7],
-    [0, 40],
+    [fps * 1.35, fps * 1.85],
+    [0, 55],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   return (
     <AbsoluteFill style={{ opacity: sceneFade }}>
-      <CinematicBackground accentColor="#00ff88" intensity={0.045} focusY={50} />
+      <CinematicBackground accentColor="#00ff88" intensity={bgIntensity} focusY={50} />
+
+      {/* Additional ambient glow behind CTA */}
+      <AbsoluteFill
+        style={{
+          background: `radial-gradient(ellipse 50% 40% at 50% 55%, rgba(0, 255, 136, ${0.04 * ctaGlow}) 0%, transparent 60%)`,
+        }}
+      />
 
       <AbsoluteFill
         style={{
           justifyContent: "center",
           alignItems: "center",
-          gap: 24,
+          gap: 26,
           flexDirection: "column",
         }}
       >
-        {/* Logo */}
-        <div
-          style={{
-            transform: `scale(${logoProgress})`,
-            opacity: logoOpacity,
-            filter: `drop-shadow(0 0 ${logoGlow}px rgba(0, 255, 136, 0.45))`,
-          }}
-        >
-          <FedLogo size={95} glow={false} />
+        {/* Logo with ring */}
+        <div style={{ position: "relative" }}>
+          {/* Expanding ring */}
+          <div
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              width: 120,
+              height: 120,
+              borderRadius: "50%",
+              border: "1px solid rgba(0, 255, 136, 0.3)",
+              transform: `translate(-50%, -50%) scale(${ringScale})`,
+              opacity: ringOpacity,
+            }}
+          />
+          <div
+            style={{
+              transform: `scale(${logoScale})`,
+              opacity: logoOpacity,
+              filter: `drop-shadow(0 0 ${logoGlow}px rgba(0, 255, 136, 0.5))`,
+            }}
+          >
+            <FedLogo size={100} glow={false} />
+          </div>
         </div>
 
         {/* Tagline */}
@@ -901,43 +1084,45 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
         >
           <span
             style={{
-              fontSize: 22,
-              color: "#606060",
+              fontSize: 24,
+              color: "#555555",
               fontFamily: "system-ui, -apple-system, sans-serif",
               fontWeight: 400,
-              letterSpacing: 0.3,
+              letterSpacing: 0.5,
             }}
           >
             {tagline}
           </span>
         </div>
 
-        {/* CTA Button - prominent and glowing */}
+        {/* CTA Button - commanding presence */}
         <div
           style={{
             opacity: ctaOpacity,
-            transform: `translateY(${ctaY}px)`,
+            transform: `translateY(${ctaY}px) scale(${ctaScale})`,
           }}
         >
           <div
             style={{
-              padding: "17px 52px",
-              background: "linear-gradient(135deg, #00ff88 0%, #00ffaa 100%)",
+              padding: "18px 58px",
+              background: "linear-gradient(140deg, #00ff88 0%, #00ffaa 50%, #00ff88 100%)",
               borderRadius: 50,
               boxShadow: `
-                0 6px 26px rgba(0, 255, 136, ${0.22 + 0.14 * ctaGlow}),
-                0 0 ${32 * ctaGlow}px rgba(0, 255, 136, ${0.12 * ctaGlow}),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15)
+                0 8px 32px rgba(0, 255, 136, ${(0.25 + 0.15 * ctaGlow) * ctaPulse}),
+                0 0 ${40 * ctaGlow * ctaPulse}px rgba(0, 255, 136, ${0.15 * ctaGlow * ctaPulse}),
+                inset 0 2px 0 rgba(255, 255, 255, 0.2),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1)
               `,
             }}
           >
             <span
               style={{
-                fontSize: 34,
+                fontSize: 36,
                 fontWeight: 900,
-                color: "#030303",
+                color: "#020202",
                 fontFamily: "system-ui, -apple-system, sans-serif",
                 letterSpacing: -0.5,
+                textShadow: "0 1px 0 rgba(255, 255, 255, 0.2)",
               }}
             >
               {cta}
@@ -945,32 +1130,32 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
           </div>
         </div>
 
-        {/* Bottom proposition with decorative lines */}
+        {/* Bottom proposition - final authority */}
         <div
           style={{
             opacity: bottomOpacity,
             transform: `translateY(${bottomY}px)`,
-            marginTop: 10,
+            marginTop: 12,
             display: "flex",
             alignItems: "center",
-            gap: 14,
+            gap: 16,
           }}
         >
           <div
             style={{
               width: lineWidth,
               height: 1,
-              background: "linear-gradient(270deg, #2a2a2a, transparent)",
+              background: "linear-gradient(270deg, rgba(0, 255, 136, 0.25), transparent)",
             }}
           />
           <span
             style={{
-              fontSize: 12,
-              color: "#454545",
+              fontSize: 11,
+              color: "#3a3a3a",
               fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: 3.5,
+              letterSpacing: 4,
               textTransform: "uppercase",
-              fontWeight: 500,
+              fontWeight: 600,
             }}
           >
             Real yield. Every 2 minutes.
@@ -979,7 +1164,7 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
             style={{
               width: lineWidth,
               height: 1,
-              background: "linear-gradient(90deg, #2a2a2a, transparent)",
+              background: "linear-gradient(90deg, rgba(0, 255, 136, 0.25), transparent)",
             }}
           />
         </div>
