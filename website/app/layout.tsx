@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
 import Image from "next/image";
 import { CopyButton } from "./components/CopyButton";
+import WalletProvider from "./components/WalletProvider";
 import "./globals.css";
 
 const FED_TOKEN_ADDRESS = "132STreShuLRNgkyF1QECv37yP9Cdp8JBAgnKBgKafed";
@@ -56,6 +57,9 @@ function Navigation() {
             </Link>
             <Link href="/roadmap" className="text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
               Roadmap
+            </Link>
+            <Link href="/preferences" className="text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
+              Preferences
             </Link>
             <Link href="/changelog" className="text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
               Changelog
@@ -140,11 +144,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}>
-        <Navigation />
-        <main className="flex-1">
-          {children}
-        </main>
-        <Footer />
+        <WalletProvider>
+          <Navigation />
+          <main className="flex-1">
+            {children}
+          </main>
+          <Footer />
+        </WalletProvider>
       </body>
     </html>
   );

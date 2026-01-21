@@ -1,0 +1,618 @@
+{
+  "address": "HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz",
+  "metadata": {
+    "name": "fed_program",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "enroll_auto_compound",
+      "docs": [
+        "Enroll user in auto-compound feature",
+        "When enabled, USD1 distributions are automatically converted to $FED"
+      ],
+      "discriminator": [
+        109,
+        202,
+        252,
+        77,
+        158,
+        241,
+        161,
+        225
+      ],
+      "accounts": [
+        {
+          "name": "user_preferences",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114,
+                  95,
+                  112,
+                  114,
+                  101,
+                  102,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "enabled",
+          "type": "bool"
+        }
+      ]
+    },
+    {
+      "name": "get_total_multiplier",
+      "docs": [
+        "Get the user's current multiplier based on all factors"
+      ],
+      "discriminator": [
+        246,
+        143,
+        179,
+        147,
+        121,
+        104,
+        23,
+        11
+      ],
+      "accounts": [
+        {
+          "name": "user_preferences",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114,
+                  95,
+                  112,
+                  114,
+                  101,
+                  102,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user_preferences.owner",
+                "account": "UserPreferences"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [],
+      "returns": "u16"
+    },
+    {
+      "name": "initialize_user",
+      "docs": [
+        "Initialize a new user preferences account"
+      ],
+      "discriminator": [
+        111,
+        17,
+        185,
+        250,
+        60,
+        122,
+        38,
+        254
+      ],
+      "accounts": [
+        {
+          "name": "user_preferences",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114,
+                  95,
+                  112,
+                  114,
+                  101,
+                  102,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "record_claim",
+      "docs": [
+        "Record a distribution claim (called by distribution script/authority)",
+        "Updates streak tracking and total claimed amounts"
+      ],
+      "discriminator": [
+        111,
+        123,
+        69,
+        192,
+        195,
+        228,
+        137,
+        30
+      ],
+      "accounts": [
+        {
+          "name": "user_preferences",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114,
+                  95,
+                  112,
+                  114,
+                  101,
+                  102,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user_preferences.owner",
+                "account": "UserPreferences"
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "docs": [
+            "Authority that can record claims (distribution script wallet)"
+          ],
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "register_referral",
+      "docs": [
+        "Register a referral relationship",
+        "Referrer earns bonus on referee's distributions"
+      ],
+      "discriminator": [
+        158,
+        196,
+        134,
+        102,
+        193,
+        102,
+        184,
+        86
+      ],
+      "accounts": [
+        {
+          "name": "referee_preferences",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114,
+                  95,
+                  112,
+                  114,
+                  101,
+                  102,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "referee"
+              }
+            ]
+          }
+        },
+        {
+          "name": "referrer"
+        },
+        {
+          "name": "referee",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "set_time_lock",
+      "docs": [
+        "Set a time lock on tokens for bonus multipliers",
+        "Longer locks = higher multipliers on distributions",
+        "Valid lock periods: 7, 30, 90, 180, 365 days"
+      ],
+      "discriminator": [
+        85,
+        222,
+        133,
+        216,
+        147,
+        157,
+        164,
+        71
+      ],
+      "accounts": [
+        {
+          "name": "user_preferences",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  117,
+                  115,
+                  101,
+                  114,
+                  95,
+                  112,
+                  114,
+                  101,
+                  102,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "user"
+              }
+            ]
+          }
+        },
+        {
+          "name": "user",
+          "writable": true,
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "days",
+          "type": "u16"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "UserPreferences",
+      "discriminator": [
+        214,
+        189,
+        21,
+        234,
+        14,
+        61,
+        156,
+        81
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "AutoCompoundToggled",
+      "discriminator": [
+        191,
+        113,
+        220,
+        252,
+        243,
+        157,
+        121,
+        194
+      ]
+    },
+    {
+      "name": "ClaimRecorded",
+      "discriminator": [
+        46,
+        183,
+        32,
+        80,
+        59,
+        171,
+        138,
+        224
+      ]
+    },
+    {
+      "name": "ReferralRegistered",
+      "discriminator": [
+        210,
+        150,
+        27,
+        227,
+        209,
+        161,
+        7,
+        232
+      ]
+    },
+    {
+      "name": "TimeLockSet",
+      "discriminator": [
+        85,
+        200,
+        239,
+        102,
+        27,
+        147,
+        87,
+        167
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "Unauthorized",
+      "msg": "Unauthorized access"
+    },
+    {
+      "code": 6001,
+      "name": "InvalidLockPeriod",
+      "msg": "Invalid lock period. Valid periods: 0, 7, 30, 90, 180, 365 days"
+    },
+    {
+      "code": 6002,
+      "name": "LockNotExpired",
+      "msg": "Cannot modify lock until current lock expires"
+    },
+    {
+      "code": 6003,
+      "name": "ReferrerAlreadySet",
+      "msg": "Referrer already set - cannot change"
+    },
+    {
+      "code": 6004,
+      "name": "CannotReferSelf",
+      "msg": "Cannot refer yourself"
+    }
+  ],
+  "types": [
+    {
+      "name": "AutoCompoundToggled",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "enabled",
+            "type": "bool"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ClaimRecorded",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "streak_count",
+            "type": "u32"
+          },
+          {
+            "name": "total_claimed",
+            "type": "u64"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ReferralRegistered",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "referee",
+            "type": "pubkey"
+          },
+          {
+            "name": "referrer",
+            "type": "pubkey"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TimeLockSet",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "user",
+            "type": "pubkey"
+          },
+          {
+            "name": "days",
+            "type": "u16"
+          },
+          {
+            "name": "lock_start",
+            "type": "i64"
+          },
+          {
+            "name": "multiplier",
+            "type": "u16"
+          },
+          {
+            "name": "timestamp",
+            "type": "i64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "UserPreferences",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "docs": [
+              "Owner of this preferences account"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "auto_compound",
+            "docs": [
+              "Whether auto-compound is enabled (USD1 -> $FED)"
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "time_lock_days",
+            "docs": [
+              "Time lock period in days (0, 7, 30, 90, 180, 365)"
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "lock_start",
+            "docs": [
+              "Unix timestamp when lock started"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "enrolled_at",
+            "docs": [
+              "Unix timestamp when account was created"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "referrer",
+            "docs": [
+              "Referrer's public key (if any)"
+            ],
+            "type": {
+              "option": "pubkey"
+            }
+          },
+          {
+            "name": "streak_count",
+            "docs": [
+              "Consecutive distribution claims without missing"
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "last_claim_timestamp",
+            "docs": [
+              "Timestamp of last claim"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "total_claimed",
+            "docs": [
+              "Total amount claimed (in base units)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "PDA bump seed"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ]
+}
