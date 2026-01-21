@@ -4,6 +4,81 @@ This document tracks all monetary policy decisions made by Ralph, the FED Chairm
 
 ---
 
+## 2026-01-21 ~15:15 UTC - BUYBACK & BURN $500 + DISTRIBUTE $2,483 to 1,710 Holders
+
+### Market Conditions (Decision Factors)
+| Metric | Value | Signal |
+|--------|-------|--------|
+| Price | $0.00032076 | DOWN |
+| Market Cap | $304,720 | Down from peak |
+| Liquidity | $34,887 | Adequate |
+| 1h Change | **-29.96%** | ⚠️ MAJOR CORRECTION |
+| 24h Change | **+1128.32%** | Still massively up |
+| Buy Vol (24h) | $1,137,284 | Strong |
+| Sell Vol (24h) | $1,173,784 | Slight selling pressure |
+
+### Treasury Status
+- **USD1 Balance Before**: $0 (empty)
+- **USD1 Collected from LP**: $2,983.16
+- **Buyback Amount**: $500 (manual allocation for price support)
+- **Distribution Amount**: $2,483.16
+- **USD1 Balance After**: ~$0
+
+### Decision: SPLIT - BUYBACK $500 + DISTRIBUTE $2,483
+
+**Rationale:**
+1. **1h price change -29.96%** significantly exceeds -5% buyback threshold
+2. **Large treasury balance** ($2,983) allows meaningful action on both fronts
+3. **Buyback $500** to support price floor during heavy correction
+4. **Distribute remaining** to reward holders during volatility
+5. **Burn the bought $FED** to reduce supply permanently
+
+### Execution Results - BUYBACK & BURN
+- **Buyback TX**: `3vw9BLuaj4DXhfmDAD8tVjzfNdYe3tuneL2C7ndQ1yVEUzbRsFB57V84ieghXA6bB4c7yzE56mACGXK28iaF9CTM`
+- **USD1 Spent**: $500.00
+- **$FED Bought**: 1,374,966.462 tokens
+- **Effective Price**: $0.00036365 per $FED
+- **Price Impact**: 0.0121%
+- **Burn TX**: `3F7Z3i3pAHMH5mz1roTZMkZYZaSNgCePCqVgXVhN12VTwSqE8hRn3x2EQjC8KDJW1k7sepvNrhLWqgPXGkMUD2Rh`
+- **$FED Burned**: 1,374,966.462 tokens (100% of purchase)
+
+### Execution Results - DISTRIBUTION
+- **Recipients**: 1,710 $FED holders
+- **Amount Distributed**: $2,483.16 USD1
+- **Transactions**: 342/368 successful (93% success rate)
+- **Duration**: 261 seconds
+- **Engagement XP**: +5 XP awarded to all 1,836 eligible recipients
+
+### Holder Tier Distribution
+| Tier | Multiplier | Holders | Tokens |
+|------|-----------|---------|--------|
+| Fed Governor | 1.25x | 22 | $1,022.22 |
+| Regional Director | 1.1x | 144 | $1,111.95 |
+| Board Member | 1.05x | 354 | $308.43 |
+| Fed Citizen | 1x | 1,401 | $40.56 |
+
+### Engagement Score Distribution
+| Tier | Multiplier | Holders | Tokens | Avg XP |
+|------|-----------|---------|--------|--------|
+| Fed Veteran | 1.15x | 480 | $1,453.64 | 313 |
+| Fed Active | 1.1x | 323 | $440.18 | 187 |
+| Fed Regular | 1.05x | 94 | $114.74 | 71 |
+| Fed Newcomer | 1x | 1,024 | $474.60 | 8 |
+
+### Solana Program Status
+- ✅ **DEPLOYED TO MAINNET**: `HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz`
+- ✅ All instructions working: initialize, auto-compound, time-lock, referral, claim, multiplier
+- ✅ Website integration complete at fed.markets/preferences
+
+### Running Totals
+- **Total Distributed All-Time**: $37,626.28 USD1
+- **Total Buybacks & Burns**: $537.00 USD1 spent, 1,426,716 $FED burned
+- **QE2 Progress**: 75.3% ($37,626 / $50,000)
+- **Current FED Funds Rate (7-Day APY)**: 0.23%
+- **Current FED Funds Rate (30-Day APY)**: 0.05%
+
+---
+
 ## 2026-01-21 ~14:30 UTC - BUYBACK $37 USD1 (Price Support)
 
 ### Market Conditions (Decision Factors)
