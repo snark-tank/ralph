@@ -6,7 +6,63 @@ Ralph's brainstorm board for making $FED the ultimate rewards flywheel.
 
 ## High Priority Ideas
 
-### 1. The $FED (3,3) - "BRRR Together"
+### 1. Diamond Hands Streak Tracker ✅ IMPLEMENTED
+
+**Inspired by:** HEX Time-Lock + NaaS Daily Engagement
+
+**Status:** ✅ **LIVE IN PRODUCTION** (Jan 21, 2026)
+
+**The Concept:**
+Track how long holders continuously hold $FED and reward loyalty with bonus multipliers. Unlike HEX's harsh penalties for early exit, we simply reward consistency.
+
+**Streak Tiers:**
+| Tier | Days | Multiplier | Title |
+|------|------|------------|-------|
+| 🏛️ Founding Father | 365+ | 1.25x | Elite OG status |
+| 💎 OG Fed | 180+ | 1.2x | Six-month diamond hands |
+| 🔷 Fed Loyalist | 90+ | 1.15x | Quarterly commitment |
+| 💠 Diamond Hands | 30+ | 1.1x | Monthly holder |
+| 🤝 Holder | 7+ | 1.05x | Weekly commitment |
+| 🆕 Newcomer | 0+ | 1.0x | Welcome aboard |
+
+**Implementation:** ✅ DONE
+- ✅ Created `streak-tracker.ts` standalone utility
+- ✅ Tracks first seen date, streak length, peak balance
+- ✅ Tier calculation with multipliers
+- ✅ Leaderboard generation for top diamond hands
+- ✅ Individual address lookup
+- ✅ JSON output for API/website integration
+- 🔜 Integrate streak multipliers into distribution (stacks with tier)
+- 🔜 Add streak display to website dashboard
+
+**Usage:**
+```bash
+# Update streak data from blockchain
+npx ts-node streak-tracker.ts --update
+
+# Show top 20 streaks
+npx ts-node streak-tracker.ts --top 20
+
+# Check specific address
+npx ts-node streak-tracker.ts --address <wallet>
+
+# Get JSON output for API
+npx ts-node streak-tracker.ts --json
+```
+
+**Why It Works:**
+- Rewards loyalty without harsh penalties (unlike HEX)
+- Creates engagement through visible progress
+- Stacks with existing tier system for maximum BRRR
+- Encourages long-term holding behavior
+- Provides leaderboard for community competition
+
+**Effort:** ✅ Complete
+**Impact:** High (retention + engagement)
+
+---
+
+### 2. The $FED (3,3) - "BRRR Together"
 
 **Inspired by:** Olympus DAO
 
@@ -26,7 +82,7 @@ Sell      (-1,1)    (-3,-3)
 - Website widget showing current "community stance" based on holder behavior
 - Daily/weekly "BRRR Score" based on net holder count change
 - Discord role for diamond hands: "Federal Reserve Board Members"
-- Leaderboard for longest holding streaks
+- Leaderboard for longest holding streaks ✅ (via streak-tracker.ts)
 
 **Why It Works for $FED:**
 - OHM used this for ponzi pressure; we use it for community building
@@ -38,7 +94,7 @@ Sell      (-1,1)    (-3,-3)
 
 ---
 
-### 2. "Fed Funds Rate" Dynamic APY Display ✅ IMPLEMENTED
+### 3. "Fed Funds Rate" Dynamic APY Display ✅ IMPLEMENTED
 
 **Inspired by:** Actual Federal Reserve + OHM's APY marketing
 
@@ -80,7 +136,7 @@ npx ts-node fed-funds-rate.ts --json
 
 ---
 
-### 3. Holder Tier System: "Federal Reserve Ranks" ✅ IMPLEMENTED
+### 4. Holder Tier System: "Federal Reserve Ranks" ✅ IMPLEMENTED
 
 **Inspired by:** Olympus DAO + HEX
 
@@ -118,7 +174,7 @@ Create tiered multipliers for reward distribution:
 
 ---
 
-### 4. "Quantitative Easing" Events ✅ IMPLEMENTED
+### 5. "Quantitative Easing" Events ✅ IMPLEMENTED
 
 **Inspired by:** Actual Fed policy + marketing psychology
 
