@@ -18,8 +18,8 @@ fed_program = "HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz"
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "devnet"
-wallet = "/home/ubuntu/claude_game/keypair.json"
+cluster = "mainnet"
+wallet = "/home/ubuntu/fed/script/keypair_distro.json"
 
 [scripts]
 test = "yarn run mocha -t 1000000 tests/"
