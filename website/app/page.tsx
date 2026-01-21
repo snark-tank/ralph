@@ -88,14 +88,18 @@ export default async function Dashboard() {
                       {dist.recipients}
                     </td>
                     <td className="py-3 px-3">
-                      <a
-                        href={`https://solscan.io/tx/${dist.txSignature}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[#c9a227] hover:underline font-mono text-xs"
-                      >
-                        {dist.txSignature.slice(0, 8)}...
-                      </a>
+                      {dist.txSignature ? (
+                        <a
+                          href={`https://solscan.io/tx/${dist.txSignature}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-[#c9a227] hover:underline font-mono text-xs"
+                        >
+                          {dist.txSignature.slice(0, 8)}...
+                        </a>
+                      ) : (
+                        <span className="text-gray-500 text-xs">-</span>
+                      )}
                     </td>
                   </tr>
                 ))}

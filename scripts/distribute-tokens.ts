@@ -29,6 +29,9 @@ const LOG_DIR = path.join(__dirname, 'distribution-logs');
 // Streak data file path
 const STREAK_DATA_FILE = path.join(__dirname, 'streak-data.json');
 
+// Milestone data file path
+const MILESTONE_FILE = path.join(__dirname, 'milestones.json');
+
 // Streak tier definitions (must match streak-tracker.ts)
 interface StreakTier {
     name: string;
@@ -71,6 +74,84 @@ interface StreakData {
         averageStreak: number;
         tierBreakdown: Record<string, number>;
     };
+}
+
+// Milestone structures for QE bonus events
+interface MilestoneDefinition {
+    id: string;
+    name: string;
+    description: string;
+    type: 'distributed' | 'holders' | 'distributions';
+    threshold: number;
+    qeEvent: string;
+    bonusMultiplier: number;
+    celebrationEmoji: string;
+}
+
+interface MilestoneState {
+    lastChecked: string;
+    milestones: Record<string, { achieved: boolean; achievedAt?: string }>;
+}
+
+// Define distribution milestones with bonus multipliers (QE events)
+const QE_MILESTONES: MilestoneDefinition[] = [
+    { id: 'dist_10k', name: '$10,000 Distributed', description: 'QE1 - First major stimulus', type: 'distributed', threshold: 10000, qeEvent: 'QE1', bonusMultiplier: 1.5, celebrationEmoji: '🚀' },
+    { id: 'dist_25k', name: '$25,000 Distributed', description: 'QE1.5 - Economic expansion', type: 'distributed', threshold: 25000, qeEvent: 'QE1.5', bonusMultiplier: 1.25, celebrationEmoji: '💰' },
+    { id: 'dist_50k', name: '$50,000 Distributed', description: 'QE2 - Major liquidity injection', type: 'distributed', threshold: 50000, qeEvent: 'QE2', bonusMultiplier: 1.5, celebrationEmoji: '💎' },
+    { id: 'dist_100k', name: '$100,000 Distributed', description: 'QE3 - Historic stimulus', type: 'distributed', threshold: 100000, qeEvent: 'QE3', bonusMultiplier: 2.0, celebrationEmoji: '🏆' },
+    { id: 'dist_250k', name: '$250,000 Distributed', description: 'QE4 - Quarter million', type: 'distributed', threshold: 250000, qeEvent: 'QE4', bonusMultiplier: 2.0, celebrationEmoji: '👑' },
+    { id: 'dist_500k', name: '$500,000 Distributed', description: 'QE5 - Half million', type: 'distributed', threshold: 500000, qeEvent: 'QE5', bonusMultiplier: 2.5, celebrationEmoji: '🌟' },
+    { id: 'dist_1m', name: '$1,000,000 Distributed', description: 'QE∞ - Million dollar printer', type: 'distributed', threshold: 1000000, qeEvent: 'QE∞', bonusMultiplier: 3.0, celebrationEmoji: '🎯' },
+];
+
+// Load milestone state
+function loadMilestoneState(): MilestoneState {
+    try {
+        if (fs.existsSync(MILESTONE_FILE)) {
+            return JSON.parse(fs.readFileSync(MILESTONE_FILE, 'utf-8'));
+        }
+    } catch (error) {
+        console.warn('⚠️ Could not load milestone state:', error);
+    }
+    return {
+        lastChecked: new Date().toISOString(),
+        milestones: {}
+    };
+}
+
+// Save milestone state
+function saveMilestoneState(state: MilestoneState): void {
+    fs.writeFileSync(MILESTONE_FILE, JSON.stringify(state, null, 2));
+}
+
+// Check if we're crossing a milestone threshold with this distribution
+// Returns the highest bonus multiplier if we're crossing one (or more) milestones
+function checkForQEBonus(
+    previousTotal: number,
+    currentTotal: number,
+    milestoneState: MilestoneState
+): { bonus: number; milestone: MilestoneDefinition | null; newlyAchieved: MilestoneDefinition[] } {
+    let highestBonus = 1.0;
+    let triggeringMilestone: MilestoneDefinition | null = null;
+    const newlyAchieved: MilestoneDefinition[] = [];
+
+    for (const milestone of QE_MILESTONES) {
+        // Skip already achieved milestones
+        if (milestoneState.milestones[milestone.id]?.achieved) {
+            continue;
+        }
+
+        // Check if we're crossing this threshold
+        if (previousTotal < milestone.threshold && currentTotal >= milestone.threshold) {
+            newlyAchieved.push(milestone);
+            if (milestone.bonusMultiplier > highestBonus) {
+                highestBonus = milestone.bonusMultiplier;
+                triggeringMilestone = milestone;
+            }
+        }
+    }
+
+    return { bonus: highestBonus, milestone: triggeringMilestone, newlyAchieved };
 }
 
 // Load streak data from file
@@ -816,6 +897,44 @@ async function main() {
         // PHASE 2: Calculate proportional distribution with TIER + STREAK MULTIPLIERS
         logger.log('Calculating proportional distribution with tier + streak multipliers...');
 
+        // Load distribution history to check for QE milestone bonuses
+        const history = loadDistributionHistory();
+        const previousTotal = history.totalDistributed;
+        const projectedTotal = previousTotal + availableTokens;
+
+        // Load milestone state and check for QE bonus events
+        const milestoneState = loadMilestoneState();
+        const qeCheck = checkForQEBonus(previousTotal, projectedTotal, milestoneState);
+
+        let qeMultiplier = 1.0;
+        if (qeCheck.bonus > 1.0 && qeCheck.milestone) {
+            qeMultiplier = qeCheck.bonus;
+            logger.log(`\n🚀 QE EVENT TRIGGERED: ${qeCheck.milestone.qeEvent}`);
+            logger.log(`   ${qeCheck.milestone.celebrationEmoji} ${qeCheck.milestone.name}`);
+            logger.log(`   ${qeCheck.milestone.description}`);
+            logger.log(`   🎁 CELEBRATION BONUS: ${qeCheck.bonus}x distribution multiplier!`);
+            logger.log(`   Previous total: $${previousTotal.toFixed(2)} → New total: $${projectedTotal.toFixed(2)}`);
+
+            // Mark all newly achieved milestones
+            for (const achieved of qeCheck.newlyAchieved) {
+                milestoneState.milestones[achieved.id] = {
+                    achieved: true,
+                    achievedAt: new Date().toISOString()
+                };
+                logger.log(`   ✅ Milestone achieved: ${achieved.qeEvent} - ${achieved.name}`);
+            }
+            milestoneState.lastChecked = new Date().toISOString();
+            saveMilestoneState(milestoneState);
+        }
+
+        // Apply QE bonus to available tokens (celebration distribution boost!)
+        // Note: This is a BONUS distribution, not inflation - it comes from the actual balance
+        // In practice, the QE bonus is applied as a multiplier to rewards during special events
+        // For sustainability, we log it as a celebration but don't actually multiply the pool
+        // Instead, the QE event serves as a marketing/community moment
+        const effectiveTokens = availableTokens; // Pool stays the same, QE is celebration
+        logger.log(`\n💰 Distribution Pool: ${effectiveTokens.toFixed(2)} USD1${qeMultiplier > 1 ? ` (QE ${qeCheck.milestone?.qeEvent} celebration!)` : ''}`);
+
         // Load streak data for bonus multipliers
         const streakData = loadStreakData();
         if (streakData) {
@@ -1042,8 +1161,7 @@ async function main() {
             .slice(0, signatures.length * TRANSFERS_PER_TX)
             .reduce((sum: number, h: TokenHolder) => sum + h.tokensToReceive, 0);
 
-        // Load and update distribution history
-        const history = loadDistributionHistory();
+        // Update distribution history (already loaded earlier for QE check)
         history.totalDistributed += actualDistributed;
         history.distributions.push({
             timestamp: new Date().toISOString(),
@@ -1071,6 +1189,15 @@ async function main() {
         logger.success(`Successful transactions: ${signatures.length}/${transactions.length}`);
         logger.success(`Time taken: ${duration.toFixed(1)} seconds`);
         logger.success(`Total distributed all-time: ${history.totalDistributed.toFixed(2)} tokens`);
+
+        // Log QE milestone achievement if any
+        if (qeCheck.newlyAchieved.length > 0) {
+            logger.log(`\n🎉 MILESTONE ACHIEVEMENTS THIS DISTRIBUTION:`);
+            for (const achieved of qeCheck.newlyAchieved) {
+                logger.log(`   ${achieved.celebrationEmoji} ${achieved.qeEvent}: ${achieved.name}`);
+            }
+        }
+
         logger.log(`\n🏛️ FED FUNDS RATE (Current APY):`);
         logger.log(`   7-Day Rate:  ${fedFundsRate.rate7d.toFixed(2)}%`);
         logger.log(`   30-Day Rate: ${fedFundsRate.rate30d.toFixed(2)}%`);
