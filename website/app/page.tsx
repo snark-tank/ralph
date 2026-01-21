@@ -187,6 +187,7 @@ export default async function Dashboard() {
         <div className="mb-8 bg-[#111] border border-[#222] rounded-xl p-6">
           <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
             <span>💸</span> Recent Distributions
+            <span className="ml-auto text-xs font-normal text-gray-500">Live feed</span>
           </h2>
           <div className="overflow-x-auto">
             <table className="w-full text-sm">
@@ -200,15 +201,24 @@ export default async function Dashboard() {
               </thead>
               <tbody>
                 {stats.recentDistributions.slice(0, 5).map((dist, index) => (
-                  <tr key={index} className="border-b border-[#1a1a1a] hover:bg-[#0a0a0a]">
+                  <tr
+                    key={index}
+                    className={`border-b border-[#1a1a1a] hover:bg-[#0a0a0a] transition-colors ${index === 0 ? 'bg-[#22c55e]/5' : ''}`}
+                  >
                     <td className="py-3 px-3 text-gray-400">
+                      {index === 0 && <span className="inline-block w-2 h-2 bg-[#22c55e] rounded-full mr-2 animate-pulse"></span>}
                       {new Date(dist.date).toLocaleString()}
                     </td>
-                    <td className="py-3 px-3 text-right text-[#22c55e] font-mono">
-                      ${dist.amount.toFixed(2)}
+                    <td className="py-3 px-3 text-right font-mono">
+                      <span
+                        className="text-[#22c55e]"
+                        style={index === 0 ? { textShadow: '0 0 10px rgba(34, 197, 94, 0.3)' } : {}}
+                      >
+                        ${dist.amount.toFixed(2)}
+                      </span>
                     </td>
-                    <td className="py-3 px-3 text-right text-white">
-                      {dist.recipients}
+                    <td className="py-3 px-3 text-right text-white font-mono">
+                      {dist.recipients.toLocaleString()}
                     </td>
                     <td className="py-3 px-3">
                       {dist.txSignature ? (
@@ -216,7 +226,7 @@ export default async function Dashboard() {
                           href={`https://solscan.io/tx/${dist.txSignature}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[#c9a227] hover:underline font-mono text-xs"
+                          className="text-[#c9a227] hover:text-[#e0b93d] font-mono text-xs transition-colors"
                         >
                           {dist.txSignature.slice(0, 8)}...
                         </a>
