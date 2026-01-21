@@ -43,25 +43,25 @@ function Navigation() {
           </Link>
 
           <div className="flex items-center gap-6">
-            <Link href="/" className="text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
+            <Link href="/" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
               Dashboard
             </Link>
-            <Link href="/features" className="text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
+            <Link href="/features" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
               Features
             </Link>
-            <Link href="/scripts" className="text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
+            <Link href="/scripts" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
               Scripts
             </Link>
-            <Link href="/research" className="text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
+            <Link href="/research" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
               Research
             </Link>
-            <Link href="/roadmap" className="text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
+            <Link href="/roadmap" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
               Roadmap
             </Link>
-            <Link href="/preferences" className="text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
+            <Link href="/preferences" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
               Preferences
             </Link>
-            <Link href="/changelog" className="text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
+            <Link href="/changelog" className="nav-link text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
               Changelog
             </Link>
             <a

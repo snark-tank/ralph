@@ -35,10 +35,10 @@ body::before {
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
-  opacity: 0.06;
+  opacity: 0.04;
   pointer-events: none;
   z-index: -1;
-  filter: grayscale(20%) sepia(10%);
+  filter: grayscale(60%) sepia(30%) brightness(0.8);
 }
 
 /* Subtle vignette effect */
@@ -738,4 +738,163 @@ tbody tr:hover {
   right: 0;
   height: 1px;
   background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.3), transparent);
+}
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 768px) {
+  .hero-gradient-text {
+    font-size: 2rem;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+  }
+
+  .stat-card-premium {
+    padding: 1rem;
+  }
+}
+
+/* Premium animated gradient border */
+@keyframes gradient-border {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animated-border {
+  position: relative;
+}
+
+.animated-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    rgba(201, 162, 39, 0.5),
+    rgba(34, 197, 94, 0.3),
+    rgba(201, 162, 39, 0.5)
+  );
+  background-size: 200% 200%;
+  animation: gradient-border 4s ease infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Subtle parallax scrolling effect for background */
+@supports (background-attachment: fixed) {
+  body::before {
+    background-attachment: fixed;
+  }
+}
+
+/* Enhanced link hover with golden underline */
+.nav-link {
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #c9a227, #22c55e);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Improved table styling */
+.data-table {
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.data-table th {
+  background: linear-gradient(180deg, rgba(17, 17, 17, 1) 0%, rgba(10, 10, 10, 1) 100%);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.data-table tr:hover td {
+  background: rgba(201, 162, 39, 0.05);
+}
+
+/* Smooth entrance animations for page content */
+.page-enter {
+  animation: fade-in-up 0.5s ease-out;
+}
+
+/* Glowing divider line */
+.glow-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 162, 39, 0.5),
+    rgba(34, 197, 94, 0.4),
+    rgba(201, 162, 39, 0.5),
+    transparent
+  );
+  box-shadow: 0 0 10px rgba(201, 162, 39, 0.3);
+}
+
+/* Loading skeleton animation */
+@keyframes skeleton-loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgba(26, 26, 26, 1) 25%,
+    rgba(40, 40, 40, 1) 50%,
+    rgba(26, 26, 26, 1) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+/* Premium money counter effect */
+.money-value {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' on, 'lnum' on;
+}
+
+/* Improved focus states */
+*:focus-visible {
+  outline: 2px solid rgba(201, 162, 39, 0.8);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Subtle text selection color */
+::selection {
+  background: rgba(201, 162, 39, 0.3);
+  color: #fff;
+}
+
+::-moz-selection {
+  background: rgba(201, 162, 39, 0.3);
+  color: #fff;
 }

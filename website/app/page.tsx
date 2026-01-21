@@ -41,7 +41,7 @@ export default async function Dashboard() {
   ];
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
+    <div className="max-w-6xl mx-auto px-4 py-8 page-enter">
       {/* Active Distribution Banner */}
       <div className="mb-8 bg-gradient-to-r from-[#22c55e]/20 via-[#c9a227]/20 to-[#22c55e]/20 border border-[#22c55e]/50 rounded-xl p-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMiIgZmlsbD0icmdiYSgzNCwgMTk3LCA5NCwgMC4xKSIvPjwvc3ZnPg==')] opacity-30"></div>
@@ -106,7 +106,7 @@ export default async function Dashboard() {
             <DollarIcon className="w-3 h-3" />
             Total Distributed
           </div>
-          <div className="text-3xl font-bold text-[#22c55e] font-mono stat-number distributed-glow">
+          <div className="text-3xl font-bold text-[#22c55e] font-mono stat-number money-value distributed-glow">
             ${stats.totalDistributed}
           </div>
           <div className="text-gray-600 text-xs mt-2 flex items-center gap-1">
