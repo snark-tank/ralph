@@ -66,31 +66,55 @@ export async function getGitLog(limit: number = 20): Promise<{ hash: string; dat
   }
 }
 
-export function getStats(): { totalDistributed: string; distributions: number; holders: number; lastUpdate: string } {
-  // Read from README or a stats file
-  const readmePath = path.join(process.cwd(), '..', 'README.md');
+export interface DistributionStats {
+  totalDistributed: number;
+  totalDistributions: number;
+  uniqueHoldersPaid: number;
+  recentDistributions: {
+    date: string;
+    amount: number;
+    recipients: number;
+    txSignature: string;
+  }[];
+}
 
+export async function getStats(): Promise<{
+  totalDistributed: string;
+  distributions: number;
+  holders: number;
+  lastUpdate: string;
+  recentDistributions: DistributionStats['recentDistributions'];
+}> {
   try {
-    const content = fs.readFileSync(readmePath, 'utf8');
+    const response = await fetch('https://fed-seven.vercel.app/api/distributions', {
+      next: { revalidate: 60 }, // Cache for 60 seconds
+    });
 
-    // Parse stats from README
-    const distributedMatch = content.match(/\*\*Total Distributed\*\*\s*\|\s*\$?([\d,]+)/);
-    const distributionsMatch = content.match(/\*\*Distributions\*\*\s*\|\s*(\d+)/);
-    const holdersMatch = content.match(/\*\*Holders Paid\*\*\s*\|\s*(\d+)/);
-    const dateMatch = content.match(/Last updated:\s*(.+)/);
+    if (!response.ok) {
+      throw new Error('Failed to fetch stats');
+    }
+
+    const data: DistributionStats = await response.json();
 
     return {
-      totalDistributed: distributedMatch ? distributedMatch[1] : '6,022+',
-      distributions: distributionsMatch ? parseInt(distributionsMatch[1]) : 122,
-      holders: holdersMatch ? parseInt(holdersMatch[1]) : 309,
-      lastUpdate: dateMatch ? dateMatch[1].trim() : new Date().toLocaleDateString(),
+      totalDistributed: data.totalDistributed.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }),
+      distributions: data.totalDistributions,
+      holders: data.uniqueHoldersPaid,
+      lastUpdate: data.recentDistributions[0]?.date
+        ? new Date(data.recentDistributions[0].date).toLocaleString()
+        : new Date().toLocaleString(),
+      recentDistributions: data.recentDistributions,
     };
   } catch {
     return {
       totalDistributed: '6,022+',
       distributions: 122,
       holders: 309,
-      lastUpdate: new Date().toLocaleDateString(),
+      lastUpdate: new Date().toLocaleString(),
+      recentDistributions: [],
     };
   }
 }

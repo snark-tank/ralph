@@ -4,16 +4,16 @@ export const dynamic = 'force-dynamic';
 export const revalidate = 0;
 
 export default async function Dashboard() {
-  const stats = getStats();
+  const stats = await getStats();
   const commits = await getGitLog(10);
 
   // Research queue - Ralph will update this as he progresses
   const researchQueue = [
-    { name: 'OHM / Olympus DAO', mechanic: '(3,3) game theory, bonding', status: 'pending' },
-    { name: 'SAFEMOON', mechanic: 'Reflections, auto-LP', status: 'pending' },
-    { name: 'HEX', mechanic: 'Time-locked staking', status: 'pending' },
-    { name: 'DRIP Network', mechanic: 'Daily ROI, referrals', status: 'pending' },
-    { name: 'Tomb Finance', mechanic: 'Algorithmic pegging', status: 'pending' },
+    { name: 'OHM / Olympus DAO', mechanic: '(3,3) game theory, bonding', status: 'completed' },
+    { name: 'SAFEMOON', mechanic: 'Reflections, auto-LP', status: 'completed' },
+    { name: 'HEX', mechanic: 'Time-locked staking', status: 'completed' },
+    { name: 'DRIP Network', mechanic: 'Daily ROI, referrals', status: 'completed' },
+    { name: 'Tomb Finance', mechanic: 'Algorithmic pegging', status: 'completed' },
     { name: 'Titano', mechanic: 'Auto-compounding', status: 'pending' },
     { name: 'LIBERO', mechanic: 'Fire pit burns', status: 'pending' },
     { name: 'NODE protocols', mechanic: 'Node rewards', status: 'pending' },
@@ -58,6 +58,52 @@ export default async function Dashboard() {
           <div className="text-gray-600 text-xs mt-1">Distribution cycle</div>
         </div>
       </div>
+
+      {/* Recent Distributions */}
+      {stats.recentDistributions.length > 0 && (
+        <div className="mb-8 bg-[#111] border border-[#222] rounded-xl p-6">
+          <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
+            <span>💸</span> Recent Distributions
+          </h2>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="text-gray-500 border-b border-[#222]">
+                  <th className="text-left py-2 px-3">Time</th>
+                  <th className="text-right py-2 px-3">Amount</th>
+                  <th className="text-right py-2 px-3">Recipients</th>
+                  <th className="text-left py-2 px-3">Transaction</th>
+                </tr>
+              </thead>
+              <tbody>
+                {stats.recentDistributions.slice(0, 5).map((dist, index) => (
+                  <tr key={index} className="border-b border-[#1a1a1a] hover:bg-[#0a0a0a]">
+                    <td className="py-3 px-3 text-gray-400">
+                      {new Date(dist.date).toLocaleString()}
+                    </td>
+                    <td className="py-3 px-3 text-right text-[#22c55e] font-mono">
+                      ${dist.amount.toFixed(2)}
+                    </td>
+                    <td className="py-3 px-3 text-right text-white">
+                      {dist.recipients}
+                    </td>
+                    <td className="py-3 px-3">
+                      <a
+                        href={`https://solscan.io/tx/${dist.txSignature}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[#c9a227] hover:underline font-mono text-xs"
+                      >
+                        {dist.txSignature.slice(0, 8)}...
+                      </a>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
 
       {/* Two Column Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -132,7 +178,7 @@ export default async function Dashboard() {
 
       {/* Last Update */}
       <div className="mt-8 text-center text-gray-500 text-sm">
-        Last updated: {stats.lastUpdate}
+        Last distribution: {stats.lastUpdate}
       </div>
     </div>
   );
