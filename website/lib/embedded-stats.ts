@@ -1,28 +1,34 @@
 // Embedded stats - updated at build time or via script
 // This provides fallback data when the local JSON file is not accessible (e.g., on Vercel)
-// Last updated: 2026-01-21T21:22:32.956Z
+// Last updated: 2026-01-21T21:28:30.297Z
 
 export const EMBEDDED_STATS = {
-  totalDistributed: 45575.02,
-  distributionCount: 237,
+  totalDistributed: 45610.38,
+  distributionCount: 238,
   maxRecipients: 1828,
-  lastUpdated: "2026-01-21T21:22:32.956Z",
+  lastUpdated: "2026-01-21T21:28:30.297Z",
   recentDistributions: [
     {
+      date: "2026-01-21T21:28:30.297Z",
+      amount: 35.36,
+      recipients: 360,
+      txSignature: "4bGWR7xCni8GdqR7CiZSY6dnMaFnWmPXWJ6Sb2eFEfjnUCyaYCBukkK7Z4QhyG4VgJ4mqB1jbTpTbBrFSm81qfUp"
+    },
+    {
       date: "2026-01-21T21:22:32.956Z",
-      amount: 43.20,
+      amount: 43.21,
       recipients: 387,
       txSignature: "2bppLaBwFamZzstduQke1QUnZfhMpSZKwwL4wW6wUfkpGwsxKzNrLiFiUpcyei5nszwjJkwZwNdoPe9s2kGFUVnm"
     },
     {
       date: "2026-01-21T21:20:26.089Z",
-      amount: 21.65,
+      amount: 21.66,
       recipients: 301,
       txSignature: "38t65SBs5QgM6gwKNN3sJ9sScuxZXfsLiqjLWiom9y1hwAM4x4UqyW177yrnUZeDrHyx54jvHYNtAn8cxvcCzan1"
     },
     {
       date: "2026-01-21T21:19:15.099Z",
-      amount: 27.33,
+      amount: 27.34,
       recipients: 325,
       txSignature: "3GeUocvkFxYgyMCh1qL5TVnANkrXFjeFfRuexC5XsdJ1FEDboies5itpH3BRpjxjKQU8hNBrQkjx4EMVbc6RQNcn"
     },
@@ -34,7 +40,7 @@ export const EMBEDDED_STATS = {
     },
     {
       date: "2026-01-21T21:14:49.740Z",
-      amount: 317.06,
+      amount: 317.07,
       recipients: 756,
       txSignature: "55H3WbnqJU2VfFKxC8H85cjv49vXEJmnvf6yW89tejusNM5KL284Si5iqsqaw7pegHjjtyZH4BNg7XMJWwSeBMfc"
     },
@@ -61,12 +67,6 @@ export const EMBEDDED_STATS = {
       amount: 13.11,
       recipients: 231,
       txSignature: "2TLmTjciuAv2tu5k35xb6Epqu3jci41D5px2WFAUMwdrqwy8N2Uudi4BUNiUUMfHJmJ6Y8DBQH7pphDfC45WCU55"
-    },
-    {
-      date: "2026-01-21T21:00:32.770Z",
-      amount: 33.75,
-      recipients: 352,
-      txSignature: "4HqjMouQW4XsNJHZRnqzaUmBLkV2t9Lv5mrnXxLXVuxuMP4deGPpHfmP4R4U7rWxD1MThPUGeCdPmUn58T4Bq29J"
     }
   ]
 };

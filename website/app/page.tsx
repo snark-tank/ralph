@@ -101,7 +101,7 @@ export default async function Dashboard() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
-        <div className="stat-card-premium rounded-xl p-6 hover:border-[#22c55e]/30 transition-all duration-300 hover-lift glow-green stat-shine">
+        <div className="stat-card-premium rounded-xl p-6 hover:border-[#22c55e]/30 transition-all duration-300 hover-lift glow-green stat-shine card-depth money-pulse">
           <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs flex items-center gap-1">
             <DollarIcon className="w-3 h-3" />
             Total Distributed
@@ -110,12 +110,12 @@ export default async function Dashboard() {
             ${stats.totalDistributed}
           </div>
           <div className="text-gray-600 text-xs mt-2 flex items-center gap-1">
-            <span className="inline-block w-1.5 h-1.5 bg-[#22c55e] rounded-full"></span>
+            <span className="inline-block w-1.5 h-1.5 bg-[#22c55e] rounded-full breathing"></span>
             USD1 to holders
           </div>
         </div>
 
-        <div className="stat-card-premium rounded-xl p-6 hover:border-[#c9a227]/30 transition-all duration-300 hover-lift glow-gold stat-shine">
+        <div className="stat-card-premium rounded-xl p-6 hover:border-[#c9a227]/30 transition-all duration-300 hover-lift glow-gold stat-shine card-depth">
           <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs flex items-center gap-1">
             <ChartIcon className="w-3 h-3" />
             Distribution Runs
@@ -124,7 +124,7 @@ export default async function Dashboard() {
             {stats.distributions}
           </div>
           <div className="text-gray-600 text-xs mt-2 flex items-center gap-1">
-            <span className="inline-block w-1.5 h-1.5 bg-[#c9a227] rounded-full"></span>
+            <span className="inline-block w-1.5 h-1.5 bg-[#c9a227] rounded-full breathing"></span>
             Total cycles
           </div>
         </div>
@@ -162,7 +162,7 @@ export default async function Dashboard() {
 
       {/* Active Features Grid */}
       <div className="mb-8 card rounded-xl p-6 border-gradient">
-        <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
+        <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2 section-header">
           <ZapIcon className="w-5 h-5" /> Active System Capabilities
         </h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
@@ -285,7 +285,7 @@ export default async function Dashboard() {
       {/* Recent Distributions */}
       {stats.recentDistributions.length > 0 && (
         <div className="mb-8 card rounded-xl p-6">
-          <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
+          <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2 section-header">
             <DollarIcon className="w-5 h-5" /> Recent Distributions
             <span className="ml-auto text-xs font-normal text-gray-500 flex items-center gap-1">
               <span className="relative flex h-2 w-2">
@@ -332,7 +332,7 @@ export default async function Dashboard() {
                           href={`https://solscan.io/tx/${dist.txSignature}`}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-[#c9a227] hover:text-[#e0b93d] font-mono text-xs transition-colors"
+                          className="text-[#c9a227] hover:text-[#e0b93d] font-mono text-xs transition-colors tx-link"
                         >
                           {dist.txSignature.slice(0, 8)}...
                         </a>
@@ -352,7 +352,7 @@ export default async function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Research Queue */}
         <div className="card rounded-xl p-6">
-          <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
+          <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2 section-header">
             <BookIcon className="w-5 h-5" /> Research Queue
           </h2>
           <div className="space-y-3">
@@ -378,7 +378,7 @@ export default async function Dashboard() {
 
         {/* Recent Activity */}
         <div className="card rounded-xl p-6">
-          <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
+          <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2 section-header">
             <ChartIcon className="w-5 h-5" /> Recent Activity
           </h2>
           <div className="space-y-3">
@@ -522,7 +522,7 @@ export default async function Dashboard() {
 
       {/* Current Focus */}
       <div className="mt-8 bg-gradient-to-r from-[#c9a227]/10 to-transparent border border-[#c9a227]/30 rounded-xl p-6">
-        <h2 className="text-xl font-bold text-[#c9a227] mb-3 flex items-center gap-2">
+        <h2 className="text-xl font-bold text-[#c9a227] mb-3 flex items-center gap-2 section-header">
           <TargetIcon className="w-5 h-5" /> Current Focus
         </h2>
         <p className="text-gray-300">

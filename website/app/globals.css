@@ -35,10 +35,10 @@ body::before {
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
-  opacity: 0.04;
+  opacity: 0.06;
   pointer-events: none;
   z-index: -1;
-  filter: grayscale(60%) sepia(30%) brightness(0.8);
+  filter: grayscale(50%) sepia(40%) brightness(0.7) contrast(1.1);
 }
 
 /* Subtle vignette effect */
@@ -897,4 +897,124 @@ tbody tr:hover {
 ::-moz-selection {
   background: rgba(201, 162, 39, 0.3);
   color: #fff;
+}
+
+/* Premium floating dot grid overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle at center, rgba(201, 162, 39, 0.015) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Enhanced stat card with micro-interactions */
+.stat-card-premium:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+}
+
+.stat-card-premium:hover::before {
+  background: linear-gradient(180deg, rgba(201, 162, 39, 0.35) 0%, rgba(34, 197, 94, 0.2) 50%, transparent 100%);
+}
+
+/* Animated money pulse for live stats */
+@keyframes money-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.02);
+  }
+}
+
+.money-pulse:hover {
+  animation: money-pulse 0.6s ease-in-out;
+}
+
+/* Premium card inner shadow */
+.card-depth {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+    0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Subtle breathing animation for live indicator */
+@keyframes breathing {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(0.95);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.breathing {
+  animation: breathing 3s ease-in-out infinite;
+}
+
+/* Premium section header underline */
+.section-header {
+  position: relative;
+  display: inline-block;
+}
+
+.section-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 40px;
+  height: 2px;
+  background: linear-gradient(90deg, #c9a227, transparent);
+}
+
+/* Hover reveal for transaction links */
+.tx-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.tx-link::before {
+  content: '';
+  position: absolute;
+  left: -100%;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c9a227, transparent);
+  transition: left 0.3s ease;
+}
+
+.tx-link:hover::before {
+  left: 100%;
+}
+
+/* Enhanced mobile nav */
+@media (max-width: 1024px) {
+  nav .flex.items-center.gap-6 {
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  nav a.nav-link {
+    padding: 0.5rem;
+  }
+}
+
+/* Improved focus ring for accessibility */
+.focus-ring:focus-visible {
+  outline: none;
+  ring: 2px solid rgba(201, 162, 39, 0.8);
+  ring-offset: 2px;
+  ring-offset-color: #0a0a0a;
 }
