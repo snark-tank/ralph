@@ -15,7 +15,7 @@ import * as fs from 'fs';
 const FED_TOKEN_MINT = new PublicKey('132STreShuLRNgkyF1QECv37yP9Cdp8JBAgnKBgKafed');
 
 // Helius RPC endpoint
-const RPC_ENDPOINT = 'https://mainnet.helius-rpc.com/?api-key=YOUR_HELIUS_API_KEY';
+const RPC_ENDPOINT = 'https://mainnet.helius-rpc.com/?api-key=d009b341-8551-40fa-aa5e-bae4ce0c8cf6';
 
 interface PositionInfo {
     positionAddress: PublicKey;

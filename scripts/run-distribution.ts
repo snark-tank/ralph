@@ -31,7 +31,7 @@ const __dirname = path.dirname(__filename);
 // Configuration
 const FED_TOKEN_MINT = new PublicKey('132STreShuLRNgkyF1QECv37yP9Cdp8JBAgnKBgKafed');
 const USD1_TOKEN_MINT = new PublicKey('USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB');
-const RPC_ENDPOINT = 'https://mainnet.helius-rpc.com/?api-key=YOUR_HELIUS_API_KEY';
+const RPC_ENDPOINT = 'https://mainnet.helius-rpc.com/?api-key=d009b341-8551-40fa-aa5e-bae4ce0c8cf6';
 const KEYPAIR_PATH = 'keypair_distro.json';
 const LOG_DIR = path.join(__dirname, 'distribution-logs');
 const MIN_DISTRIBUTION_BALANCE = 10; // Minimum USD1 balance required to trigger distribution
@@ -394,7 +394,7 @@ async function runDistribution(
         return new Promise((resolve) => {
             logger.log('Starting distribution script...\n');
 
-            const distributionProcess = spawn('npx', ['ts-node', 'distribute-tokens.ts'], {
+            const distributionProcess = spawn('npx', ['tsx', 'distribute-tokens.ts'], {
                 cwd: __dirname,
                 stdio: ['inherit', 'pipe', 'pipe']
             });

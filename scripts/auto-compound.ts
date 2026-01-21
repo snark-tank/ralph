@@ -477,11 +477,16 @@ export {
     unregisterAddress,
     checkAddress,
     getActiveAddresses,
-    AutoCompoundData,
-    AutoCompoundPreference,
 };
 
-main().catch((error) => {
-    console.error('❌ Error:', error.message);
-    process.exit(1);
-});
+// Export types separately for ESM compatibility
+export type { AutoCompoundData, AutoCompoundPreference };
+
+// Only run main() when executed directly, not when imported
+const isMainModule = process.argv[1]?.includes('auto-compound');
+if (isMainModule) {
+    main().catch((error) => {
+        console.error('❌ Error:', error.message);
+        process.exit(1);
+    });
+}

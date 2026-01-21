@@ -793,9 +793,160 @@ Bridge $FED to other chains. Major undertaking, future consideration.
 ### New Items from 2025 Research (Jan 21, 2026)
 
 12. **Implement "Fed Discount Tiers"** - Trading fee discounts based on holdings (inspired by Hyperliquid)
-13. **Build "Fed Citizen Engagement Bonus"** - Reward active dashboard users (inspired by Jupiter ASR)
+13. ~~**Build "Fed Citizen Engagement Bonus"**~~ - ✅ **DONE!** Engagement score system fully integrated (Jan 21, 2026)
 14. **Plan "Feduary" Event** - Annual celebration airdrop for Feb 2027 (inspired by Jupuary)
 15. **Research "Fed Lobbyist" Marketplace** - External incentives for liquidity direction (inspired by Aerodrome bribes)
+
+### New Items from 2026 Fee Switch Research (Jan 21, 2026)
+
+16. **"Fed Buyback & Burn" Optional Mechanism** - Small % of fees to buy/burn $FED (inspired by Uniswap UNIfication)
+17. **"FedUSD" Yield-Bearing Wrapper** - Wrapper for USD1 rewards that auto-compounds (inspired by JupUSD)
+18. **"Fed Treasury Dashboard"** - Public dashboard showing all fee metrics, distribution history (inspired by Uniswap's transparency)
+19. **"Fed Season Pass"** - Seasonal distribution bonuses for consistent holders (inspired by Meteora S1)
+
+---
+
+## New Ideas from 2026 Fee Switch Revolution
+
+### 18. "Fed Buyback & Burn" Optional Mechanism
+
+**Inspired by:** Uniswap UNIfication
+
+**The Concept:**
+Optionally allocate a small percentage of collected fees to buy and burn $FED tokens, creating deflationary pressure alongside USD1 distributions.
+
+**Proposed Structure:**
+- 85% of fees → USD1 distribution to holders (current model)
+- 10% of fees → $FED buyback and burn
+- 5% of fees → Treasury reserve
+
+**Why It Could Work:**
+- Uniswap showed fee-funded burns create real value accrual
+- Deflationary pressure rewards long-term holders
+- Doesn't require inflation - uses actual revenue
+- Creates dual benefit: income (USD1) + appreciation (burns)
+
+**Why It Might NOT Be Needed:**
+- $FED already has fixed supply (no inflation to counteract)
+- Direct USD1 is simpler and more transparent
+- Burns complicate the "money printer" narrative
+- Holders may prefer 100% income vs mixed approach
+
+**Implementation Consideration:**
+- Could be governance decision for holders to vote on
+- Start with small % (5%) as test
+- Track burn impact on price/sentiment
+
+**Effort:** Medium (requires swap integration)
+**Impact:** Medium (marginal improvement on already good model)
+
+---
+
+### 19. "FedUSD" Yield-Bearing Wrapper
+
+**Inspired by:** Jupiter's JupUSD (yield-bearing stablecoin)
+
+**The Concept:**
+Create a wrapped token (fUSD1) that represents USD1 + accrued distribution rights. Holders deposit USD1, receive fUSD1 that automatically accrues rewards.
+
+**How It Would Work:**
+1. Holder deposits USD1 → receives fUSD1 (1:1 initially)
+2. fUSD1 appreciates over time as distributions add to pool
+3. fUSD1 can be used as collateral in other DeFi protocols
+4. Redeem fUSD1 → get USD1 + accrued rewards
+
+**Why It Could Work:**
+- JupUSD showed demand for yield-bearing stablecoins
+- Composable with other Solana DeFi
+- "Streaming yield" vs episodic distributions
+- Tax efficiency (no constant income events)
+
+**Complexity Warning:**
+- Requires smart contract development
+- Adds custody risk
+- May not align with current architecture
+- Over-engineering for current stage
+
+**Verdict:** Future consideration, not priority
+
+**Effort:** Very High (smart contract development)
+**Impact:** High (new product category)
+
+---
+
+### 20. "Fed Treasury Dashboard" - Full Transparency
+
+**Inspired by:** Uniswap's fee metrics, Meteora's transparent tokenomics
+
+**The Concept:**
+Public, real-time dashboard showing every aspect of $FED's economics:
+
+**Metrics to Display:**
+- Total fees collected (all-time, 24h, 7d, 30d)
+- Total distributed (all-time, by period)
+- Current treasury balance
+- Fee breakdown by LP pool
+- Holder distribution by tier
+- Streak distribution stats
+- Engagement leaderboard
+- Historical distribution chart
+- Current "Fed Funds Rate" (APY)
+- Next distribution estimate
+
+**Why This Matters:**
+- Uniswap's fee switch success came from transparent metrics
+- Builds trust through radical transparency
+- Provides data for marketing ("$X distributed!")
+- Helps holders make informed decisions
+- Creates community engagement (checking stats)
+
+**Implementation:**
+- Website page at /stats or /treasury
+- Real-time data from distribution history
+- Charts using existing tracking data
+- Mobile-friendly design
+
+**Effort:** Medium (frontend + existing data)
+**Impact:** High (trust + marketing + engagement)
+
+---
+
+### 21. "Fed Season Pass" - Seasonal Loyalty Bonuses
+
+**Inspired by:** Meteora S1 (Season 1) distribution model
+
+**The Concept:**
+Create quarterly "seasons" with bonus multipliers for consistent participation. Holders who stay through an entire season earn bonus distributions.
+
+**Season Structure:**
+- Q1 2026 (Jan-Mar): "Season 1" - Founding Season
+- Bonus pool: 5% extra from treasury for season completers
+- Requirements: Hold continuously, engage weekly, receive X distributions
+- Rewards: Proportional share of season bonus pool
+
+**Season Tiers:**
+| Tier | Requirements | Season Bonus |
+|------|-------------|--------------|
+| 🏆 Season Champion | 100% participation + top 10 engagement | 3x bonus share |
+| 🥇 Season All-Star | 90%+ participation + engaged | 2x bonus share |
+| 🥈 Season Player | 75%+ participation | 1.5x bonus share |
+| 🥉 Season Participant | 50%+ participation | 1x bonus share |
+
+**Why It Works:**
+- Meteora's season model creates clear milestones
+- Gamifies holding with visible progress
+- Creates urgency (don't miss the season!)
+- Rewards consistency, not just size
+- Generates marketing moments (season ends, new season starts)
+
+**Implementation:**
+- Track participation per quarter
+- Calculate season bonus at quarter end
+- Special season-end distribution event
+- Season badges/NFTs for completion
+
+**Effort:** Medium (tracking + special distribution)
+**Impact:** High (retention + engagement)
 
 ---
 
@@ -813,16 +964,21 @@ After analyzing **12 major protocols/sectors**, clear patterns emerge:
 - High taxes that killed organic activity
 - Centralized control enabling rugs
 
-**Successful Protocols (2025 Era):**
+**Successful Protocols (2025-2026 Era):**
 - Hyperliquid ($74M+ monthly distributions)
 - Aerodrome ($400M+ annualized revenue, 13x gains)
-- Jupiter ($616M Jupuary airdrop, 2M wallets)
+- Jupiter ($616M Jupuary airdrop, JupUSD stablecoin launch)
+- Uniswap (100M UNI burned, fee switch activated)
+- Meteora (48% community TGE, fee sharing model)
 
-**What 2025 Winners Do Differently:**
+**What 2025-2026 Winners Do Differently:**
 - Real fees → distributions (not inflation)
+- Fee switches activating across major protocols
+- Token burns funded by actual revenue
 - Tiered benefits for retention
 - Engagement rewards > passive holding
 - Transparent on-chain metrics
+- Yield-bearing stablecoins emerging
 
 **Why $FED is Positioned Correctly:**
 - ✅ Rewards from REAL trading fees (sustainable)
@@ -843,13 +999,15 @@ After analyzing **12 major protocols/sectors**, clear patterns emerge:
 | Titano | Addictive balance visibility | "Fed Auto-BRRR" dashboard |
 | **Hyperliquid** | Tiered fee discounts | "Fed Discount Tiers" (to implement) |
 | **Aerodrome** | Bribe marketplace | "Fed Lobbyist" system (to implement) |
-| **Jupiter** | Active staking rewards | "Engagement Bonus" (to implement) |
+| **Jupiter** | Active staking rewards | ✅ Engagement Bonus (done) |
 | **Jupiter** | Annual celebration events | "Feduary" event (to implement) |
+| **Uniswap** | Fee switch + burns | "Fed Buyback & Burn" (optional) |
+| **Meteora** | Seasonal distributions | "Fed Season Pass" (to implement) |
 
-$FED has already learned from the 2021-2023 failures and is adopting the 2025 winner playbook. The money printer goes BRRR - sustainably.
+$FED has already learned from the 2021-2023 failures and is adopting the 2025-2026 winner playbook. The fee switch revolution validates our approach - we were early! The money printer goes BRRR - sustainably.
 
 ---
 
 *This document is continuously updated by Ralph as he researches and brainstorms.*
 
-Last Updated: 2026-01-21 (Added 2025 revenue-sharing research: Hyperliquid, Aerodrome, Jupiter)
+Last Updated: 2026-01-21 (Added 2026 fee switch research: Uniswap UNIfication, Jupiter JupUSD, Meteora MET)
