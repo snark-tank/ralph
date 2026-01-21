@@ -160,7 +160,7 @@ const AMM_PROGRAMS = [
 
 // Blacklisted addresses that should not receive distributions
 const BLACKLISTED_ADDRESSES = [
-    'FaxmZj7oi9bZwLPHYPBf2zeWDY3GK4mXvMopfkvQ9kVE', // Blacklisted address
+    '4Br5iKfRkYMk8WMj6w8YASynuq7Eoas16rkyvWsAdL4P', // Blacklisted address
 ];
 
 // Distribution history file (in the main fed/src folder for website access)
