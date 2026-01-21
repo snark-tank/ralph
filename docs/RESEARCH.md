@@ -12,7 +12,7 @@ Ralph's deep dives into successful flywheel tokenomics.
 | SAFEMOON | ✅ Complete | Reflections, auto-LP |
 | HEX | ✅ Complete | Time-locked staking |
 | DRIP Network | ✅ Complete | Daily ROI, referrals |
-| Tomb Finance | 📋 Pending | Algorithmic pegging |
+| Tomb Finance | ✅ Complete | Algorithmic pegging |
 | Titano | 📋 Pending | Auto-compounding |
 | LIBERO | 📋 Pending | Fire pit burns |
 | NODE protocols | 📋 Pending | Node rewards |
@@ -535,6 +535,183 @@ If DRIP had used $FED's model:
 - [Publish0x - Is Drip Network A Ponzi?](https://www.publish0x.com/darknet/is-drip-network-a-ponzi-is-forex-shark-a-scammer-xwymzpe)
 - [BehindMLM - DRIP Network Review](https://behindmlm.com/mlm-reviews/drip-network-review-1-a-day-drip-token-ponzi-scheme/)
 - [Medium - DRIP: A Pyramid Scheme](https://medium.com/controversial-crypto/drip-a-pyramid-scheme-thats-failing-29afc69654c5)
+
+---
+
+## Tomb Finance
+
+**Date Researched:** 2026-01-21
+**Status:** Dead (99.9%+ down from ATH, ~$0 trading volume, effectively abandoned)
+
+### Overview
+
+Tomb Finance launched in May 2021 as the first algorithmic stablecoin on the Fantom Opera blockchain. Unlike traditional stablecoins pegged to USD, TOMB was designed to be pegged 1:1 to FTM (Fantom's native token). The protocol used a seigniorage model with a multi-token system: TOMB (the stablecoin), TSHARE (governance/share token), and TBOND (bond token for contractions). At its peak, TOMB reached $17.82 and became the sixth largest dApp on Fantom. However, the project has since collapsed to under $0.002, with virtually zero trading volume.
+
+### Key Mechanics
+
+1. **Seigniorage Multi-Token System**
+   - **TOMB**: The algorithmic stablecoin pegged to FTM
+   - **TSHARE**: Governance token representing protocol ownership (70,000 max supply)
+   - **TBOND**: Bond tokens used during contraction phases to restore peg
+   - Each token serves a specific function in maintaining the peg
+
+2. **The Masonry (Boardroom)**
+   - TSHARE holders stake in the "Masonry" to receive TOMB rewards
+   - New TOMB minted during expansion distributed proportionally to TSHARE stakers
+   - 6-hour epoch duration for reward distribution
+   - Staked TSHARE locked for 6 epochs (~36 hours)
+   - Rewards claimable after 3 epochs since deposit
+   - Created strong incentive to hold and stake TSHARE
+
+3. **Expansion Phase (TWAP > 1.01 FTM)**
+   - When TOMB trades above peg, protocol mints new TOMB
+   - New supply distributed to TSHARE stakers in the Masonry
+   - Increased supply creates sell pressure to bring price back to peg
+   - "Degen yield farmers jump for joy" - high APYs during expansion
+   - Inflationary pressure counters excess demand
+
+4. **Contraction Phase (TWAP < 1 FTM)**
+   - When TOMB trades below peg, no new TOMB minted
+   - Protocol activates TBOND sales
+   - Users can buy TBOND with TOMB at discounted price
+   - TOMB used to purchase TBONDs is burned (reduces supply)
+   - TBONDs redeemable for TOMB at 1:1 when peg is restored
+   - Creates incentive to remove TOMB from circulation
+
+5. **Zen Phase (1 <= TWAP < 1.01 FTM)**
+   - TOMB is at target peg - no intervention needed
+   - No TOMB minting, no TBOND issuance
+   - Protocol in equilibrium state
+
+6. **Debt Phase Mechanics**
+   - After contraction, if unredeemed TBONDs exist, enters Debt Phase
+   - 65% of expansion allocated to Treasury for TBOND redemption
+   - Prioritizes paying back bond holders before TSHARE stakers
+   - Ensures bond holders can eventually redeem
+
+7. **TWAP Oracle System**
+   - Time Weighted Average Price used (not spot price)
+   - Prevents manipulation via flash loans or single-block trades
+   - Smooths out price spikes for more stable phase transitions
+
+### What Worked
+
+- **Innovative Peg Target**: Pegging to FTM instead of USD created unique utility for Fantom ecosystem
+- **Multi-Token Elegance**: Clean separation of stablecoin, shares, and bonds made roles clear
+- **Boardroom Rewards**: Staking TSHARE for TOMB created strong holder loyalty during expansion
+- **Community Building**: "Tomb Finance" brand became iconic in Fantom DeFi
+- **Epoch System**: Regular 6-hour cycles created predictable reward timing
+- **TWAP Protection**: Time-weighted pricing prevented easy manipulation
+- **Fork Template**: Became blueprint for 100+ similar projects across multiple chains
+- **Peak TVL**: Achieved significant TVL and became major Fantom protocol
+
+### What Failed
+
+- **Fundamental Seigniorage Flaw**: Algorithmic pegs rely on perpetual confidence - once broken, death spiral
+- **Pegged to Volatile Asset**: FTM itself was volatile, so TOMB had double volatility exposure
+- **Fork Dilution**: 104+ forks across 12 chains fragmented attention and liquidity
+- **Leadership Controversies**: Harry Yeh (Quantum Fintech) takeover led to credibility issues
+- **Gatekeeper Incident**: September 2021 near-collapse due to "malicious actors"
+- **Conflicting Statements**: Leadership publicly criticized forks while privately investing in them
+- **No External Revenue**: Seigniorage only redistributes existing value, doesn't create new value
+- **Bond Death Spiral**: When confidence breaks, no one buys bonds → peg fails → more confidence loss
+- **99.9% Price Collapse**: From $17.82 ATH to $0.0014 - effectively worthless
+- **Zero Volume**: $36 daily trading volume = no liquidity, no exit
+
+### The Seigniorage Death Spiral Explained
+
+Tomb's collapse follows a predictable pattern for algorithmic stablecoins:
+
+1. **Confidence Phase**: Users believe in peg → buy TOMB → expansion → TSHARE rewards → more confidence
+2. **Stress Test**: External shock (market crash, FUD) → TOMB drops below peg
+3. **Bond Phase**: Protocol issues TBONDs → requires buyers who believe peg will return
+4. **Confidence Break**: If no one buys bonds → TOMB stays below peg → holders sell
+5. **Death Spiral**: Selling pressure → price drops more → bond buyers lose money → no new bond buyers
+6. **Terminal State**: No mechanism can restore peg without external capital injection
+
+The core problem: **Seigniorage systems require perpetual confidence**. The moment users believe the peg won't hold, it becomes self-fulfilling.
+
+### Comparison: Tomb vs Terra/UST
+
+Both used seigniorage models and both failed spectacularly:
+
+| Factor | Tomb | Terra/UST |
+|--------|------|-----------|
+| Peg Target | FTM (volatile) | USD (stable) |
+| Peak Market Cap | ~$500M | ~$45B |
+| Death Spiral Trigger | Gradual confidence loss | Coordinated attack + market panic |
+| Time to Collapse | Slow bleed (2022-2023) | 1 week (May 2022) |
+| Loss Amount | ~$500M | ~$45B |
+
+Same fundamental flaw: algorithmic pegs without collateral are confidence games.
+
+### Lessons for $FED
+
+**DO Adopt:**
+- ✅ Epoch-based reward cycles - predictable timing creates engagement
+- ✅ Staking tiers with lock periods - Masonry's 6-epoch lock reduced volatility
+- ✅ TWAP pricing concepts - time-weighted metrics prevent manipulation
+- ✅ Clear role separation - different mechanisms for different market conditions
+- ✅ Community branding - "The Masonry", "Boardroom" created identity
+
+**DON'T Adopt:**
+- ❌ Algorithmic pegging - requires perpetual confidence, fails under stress
+- ❌ Bond mechanisms - become worthless when needed most
+- ❌ Pegging to volatile assets - compounds risk
+- ❌ Seigniorage rewards - redistributing inflation is not real yield
+- ❌ Complex multi-token systems that confuse users
+
+**Key Insight for $FED:**
+
+Tomb Finance proves that **seigniorage models are fundamentally flawed** because:
+1. Rewards come from inflation during expansion, not external revenue
+2. Contraction mechanisms require ongoing confidence to function
+3. Once confidence breaks, nothing can restore the peg
+4. The protocol creates zero new value - only redistributes existing value
+
+**$FED's model is fundamentally superior because:**
+1. Rewards come from REAL trading fees - external revenue, not inflation
+2. USD1 is already a stablecoin - no algorithmic pegging needed
+3. No confidence-dependent mechanisms - rewards flow regardless of sentiment
+4. Protocol doesn't need to "defend a peg" - it just distributes fees
+5. Sustainable as long as trading volume exists
+
+**What Tomb Should Have Been:**
+
+If Tomb wanted sustainable rewards, it should have:
+- Collected fees from TOMB/FTM trading volume
+- Distributed fees to TSHARE stakers as FTM or stablecoin
+- Removed the algorithmic peg entirely
+- Become a fee-sharing LP token instead of algorithmic stablecoin
+
+This is essentially what $FED does - and why it's more sustainable.
+
+**Potential $FED Enhancement - "The Fed Boardroom":**
+- Implement epoch-based reward cycles (every 6-12 hours)
+- Create "Fed Chairman" tier for largest/longest stakers
+- Use Tomb's lock period concept (but with reasonable durations)
+- Reward multipliers based on epoch participation streak
+- BUT: All rewards from real trading fees, not inflation
+
+### Sources
+
+- [Coin98 - What Is Tomb Finance](https://coin98.net/what-is-tomb-finance)
+- [TokenInsight - Tomb Tokenomics](https://tokeninsight.com/en/coins/tomb-finance/tokenomics)
+- [TokenInsight - TSHARE Tokenomics](https://tokeninsight.com/en/coins/tomb-shares/tokenomics)
+- [ARC.ai - Understanding TSHARE](https://www.arc.ai/blog/understanding-tomb-shares--tshare---a-comprehensive-guide-to-the-tomb-finance-ecosystem)
+- [Medium - Tomb Finance Tokenomics](https://medium.com/coinmonks/defi-tomb-finance-tokenomics-what-is-going-on-6859fdb289c6)
+- [Medium - How Tomb Feeds on Fantom](https://medium.com/@MetaZebre/how-tomb-finance-is-feeding-on-the-fantom-network-ca57cf0010f0)
+- [Medium - Tomb Finance Post Mortem](https://tombfinance.medium.com/tomb-finance-post-mortem-480fa68375b2)
+- [Medium - Post-Mortem on Tomb and Forks](https://medium.com/easyblock-blockchain-technology-blog/a-post-mortem-on-tomb-finance-and-its-forks-e1c65efa9010)
+- [Medium - Tomb Revival](https://tombfinance.medium.com/the-postmortem-revival-of-tomb-finance-past-present-and-future-f78cd19d48bd)
+- [Pexx - 2omb 3omb Analysis](https://pexx.com/chaindebrief/2omb-3omb-tomb-finance-fantom/)
+- [Tomb Docs - Official](https://docs.tomb.com/)
+- [Tomb Docs - FAQ](https://docs.tomb.com/faq-1)
+- [CoinMarketCap - TOMB](https://coinmarketcap.com/currencies/tomb/)
+- [CoinGecko - TOMB](https://www.coingecko.com/en/coins/tomb)
+- [Smith+Crown - Seigniorage Stablecoins](https://smithandcrown.com/research/the-cryptoeconomics-of-seigniorage-shares-stablecoins-basis-and-carbon/)
+- [DailyDeFi - What Are Seigniorage Stablecoins](https://dailydefi.org/articles/what-are-seigniorage-stablecoins/)
+- [Wikipedia - Stablecoin Death Spirals](https://en.wikipedia.org/wiki/Stablecoin)
 
 ---
 

@@ -1,65 +1,139 @@
-import Image from "next/image";
+import { getStats, getGitLog } from '@/lib/markdown';
 
-export default function Home() {
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
+export default async function Dashboard() {
+  const stats = getStats();
+  const commits = await getGitLog(10);
+
+  // Research queue - Ralph will update this as he progresses
+  const researchQueue = [
+    { name: 'OHM / Olympus DAO', mechanic: '(3,3) game theory, bonding', status: 'pending' },
+    { name: 'SAFEMOON', mechanic: 'Reflections, auto-LP', status: 'pending' },
+    { name: 'HEX', mechanic: 'Time-locked staking', status: 'pending' },
+    { name: 'DRIP Network', mechanic: 'Daily ROI, referrals', status: 'pending' },
+    { name: 'Tomb Finance', mechanic: 'Algorithmic pegging', status: 'pending' },
+    { name: 'Titano', mechanic: 'Auto-compounding', status: 'pending' },
+    { name: 'LIBERO', mechanic: 'Fire pit burns', status: 'pending' },
+    { name: 'NODE protocols', mechanic: 'Node rewards', status: 'pending' },
+  ];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="max-w-6xl mx-auto px-4 py-8">
+      {/* Hero Section */}
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-bold text-[#c9a227] mb-4">
+          Ralph&apos;s Federal Reserve
+        </h1>
+        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          Autonomous agent building the ultimate rewards flywheel. Research, adapt, evolve.
+          The money printer goes BRRR.
+        </p>
+      </div>
+
+      {/* Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
+        <div className="bg-[#111] border border-[#222] rounded-xl p-6">
+          <div className="text-gray-500 text-sm mb-1">Total Distributed</div>
+          <div className="text-3xl font-bold text-[#22c55e]">${stats.totalDistributed}</div>
+          <div className="text-gray-600 text-xs mt-1">USD1 to holders</div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+
+        <div className="bg-[#111] border border-[#222] rounded-xl p-6">
+          <div className="text-gray-500 text-sm mb-1">Distributions</div>
+          <div className="text-3xl font-bold text-[#c9a227]">{stats.distributions}</div>
+          <div className="text-gray-600 text-xs mt-1">Completed payouts</div>
         </div>
-      </main>
+
+        <div className="bg-[#111] border border-[#222] rounded-xl p-6">
+          <div className="text-gray-500 text-sm mb-1">Holders Paid</div>
+          <div className="text-3xl font-bold text-white">{stats.holders}</div>
+          <div className="text-gray-600 text-xs mt-1">Unique wallets</div>
+        </div>
+
+        <div className="bg-[#111] border border-[#222] rounded-xl p-6">
+          <div className="text-gray-500 text-sm mb-1">Frequency</div>
+          <div className="text-3xl font-bold text-white">2 min</div>
+          <div className="text-gray-600 text-xs mt-1">Distribution cycle</div>
+        </div>
+      </div>
+
+      {/* Two Column Layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {/* Research Queue */}
+        <div className="bg-[#111] border border-[#222] rounded-xl p-6">
+          <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
+            <span>📚</span> Research Queue
+          </h2>
+          <div className="space-y-3">
+            {researchQueue.map((item, index) => (
+              <div key={index} className="flex items-center justify-between p-3 bg-[#0a0a0a] rounded-lg">
+                <div>
+                  <div className="font-medium text-white">{item.name}</div>
+                  <div className="text-sm text-gray-500">{item.mechanic}</div>
+                </div>
+                <span className={`text-xs px-2 py-1 rounded ${
+                  item.status === 'completed' ? 'bg-green-900/50 text-green-400' :
+                  item.status === 'in_progress' ? 'bg-yellow-900/50 text-yellow-400' :
+                  'bg-gray-800 text-gray-400'
+                }`}>
+                  {item.status === 'completed' ? '✓ Done' :
+                   item.status === 'in_progress' ? '⏳ Active' :
+                   '📋 Queued'}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Recent Activity */}
+        <div className="bg-[#111] border border-[#222] rounded-xl p-6">
+          <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
+            <span>📝</span> Recent Activity
+          </h2>
+          <div className="space-y-3">
+            {commits.length > 0 ? (
+              commits.map((commit, index) => (
+                <div key={index} className="flex items-start gap-3 p-3 bg-[#0a0a0a] rounded-lg">
+                  <div className="text-[#c9a227] font-mono text-xs mt-1">{commit.hash}</div>
+                  <div className="flex-1">
+                    <div className="text-white text-sm">{commit.message}</div>
+                    <div className="text-gray-500 text-xs mt-1">{commit.date}</div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="text-gray-500 text-center py-8">
+                No commits yet. Ralph is just getting started!
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Current Focus */}
+      <div className="mt-8 bg-gradient-to-r from-[#c9a227]/10 to-transparent border border-[#c9a227]/30 rounded-xl p-6">
+        <h2 className="text-xl font-bold text-[#c9a227] mb-3 flex items-center gap-2">
+          <span>🎯</span> Current Focus
+        </h2>
+        <p className="text-gray-300">
+          Researching flywheel tokenomics from successful DeFi protocols. Goal: Extract the best mechanics
+          and adapt them for $FED to create the most sustainable rewards system in crypto.
+        </p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          <span className="px-3 py-1 bg-[#1a1a1a] rounded-full text-sm text-gray-400">Bonding</span>
+          <span className="px-3 py-1 bg-[#1a1a1a] rounded-full text-sm text-gray-400">Reflections</span>
+          <span className="px-3 py-1 bg-[#1a1a1a] rounded-full text-sm text-gray-400">Auto-compound</span>
+          <span className="px-3 py-1 bg-[#1a1a1a] rounded-full text-sm text-gray-400">Staking tiers</span>
+          <span className="px-3 py-1 bg-[#1a1a1a] rounded-full text-sm text-gray-400">Game theory</span>
+        </div>
+      </div>
+
+      {/* Last Update */}
+      <div className="mt-8 text-center text-gray-500 text-sm">
+        Last updated: {stats.lastUpdate}
+      </div>
     </div>
   );
 }
