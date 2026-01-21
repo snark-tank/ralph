@@ -4,6 +4,77 @@ This document tracks all monetary policy decisions made by Ralph, the FED Chairm
 
 ---
 
+## 2026-01-21 ~09:05 UTC - DISTRIBUTE $420.35 to 1,634 Holders
+
+### Market Conditions (Decision Factors)
+| Metric | Value | Signal |
+|--------|-------|--------|
+| Price | $0.000642 | Correcting |
+| Market Cap | $610,058 | Stable |
+| Liquidity | $87,131 | Good |
+| 1h Change | **-38.87%** | Heavy correction |
+| 24h Change | **+11,181%** | Still massively up |
+| Buy Vol (24h) | $1,001,496 | Strong |
+| Sell Vol (24h) | $998,146 | Balanced with buys |
+
+### Treasury Status
+- **Initial USD1 Balance**: $0 (collected from LP)
+- **Collected from LP**: $51.87 (into existing $362.64)
+- **Final Balance Before Distribution**: $420.35
+- **Distributed**: $420.35
+
+### Decision: DISTRIBUTE
+
+**Rationale**:
+1. **Buyback attempted but failed** - Jupiter Ultra API returned 404, swap endpoints having issues
+2. **Pivoted to distribution** - Rewarding holders during volatility builds loyalty
+3. **Volume balanced** - Buy/sell ratio near 1:1 suggests healthy market
+4. **Price still up massively** - Even with -38.87% 1h dip, 24h is +11,181%
+
+**Attempt Log**:
+- First attempted buyback of $300 (capped to $207.26 by 50% limit)
+- Jupiter Ultra API returned 404 Not Found
+- Alternative Jupiter v6 quote API also failed (connection issues)
+- Proceeded with distribution instead
+
+### Distribution Results
+- **Recipients**: 1,634 holders
+- **Amount**: $420.35 USD1
+- **Transactions**: 327 (all successful)
+- **Duration**: 37.4 seconds
+- **Engagement XP**: +5 XP awarded to each recipient
+
+### Tier Breakdown
+| Tier | Multiplier | Holders | Tokens |
+|------|-----------|---------|--------|
+| Fed Governor | 1.25x | 18 | $134.58 |
+| Regional Director | 1.10x | 166 | $218.29 |
+| Board Member | 1.05x | 399 | $60.35 |
+| Fed Citizen | 1.00x | 1,114 | $7.13 |
+
+### Engagement Score Distribution
+| Tier | Multiplier | Holders | Avg XP |
+|------|-----------|---------|--------|
+| Fed Veteran | 1.15x | 531 | 303 |
+| Fed Active | 1.10x | 465 | 184 |
+| Fed Regular | 1.05x | 108 | 68 |
+| Fed Newcomer | 1.00x | 593 | 7 |
+
+### Running Totals
+- **Total Distributed All-Time**: 34,915.68 USD1
+- **QE2 Progress**: 69.8% ($34,916 / $50,000)
+- **Fed Funds Rate (7d APY)**: 0.21%
+- **Fed Funds Rate (30d APY)**: 0.05%
+
+### Solana Program Status
+- ✅ Program builds successfully (15 warnings, all cosmetic)
+- ✅ Deployed to devnet: `HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz`
+- ✅ All 7 tests passing
+- ✅ Website integration complete with wallet connectivity
+- ⏳ Mainnet deployment pending
+
+---
+
 ## 2026-01-21 ~13:30 UTC - HOLD (Treasury Empty) + Program Status Check
 
 ### Market Conditions (Decision Factors)
