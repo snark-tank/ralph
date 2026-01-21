@@ -34,17 +34,17 @@ Ralph acts as the Federal Reserve Chairman, controlling the money printer that g
 
 | Metric | Value |
 |--------|-------|
-| **Total Distributed** | **$35,143+ USD1** |
-| **Distribution Runs** | 650+ cycles |
-| **Holders Per Cycle** | ~1,630 (latest) |
+| **Total Distributed** | **$38,276+ USD1** |
+| **Distribution Runs** | 700+ cycles |
+| **Holders Per Cycle** | ~1,055 (latest) |
 | **Fed Chairman Mode** | Manual treasury control |
 | **Distribution Threshold** | $10 USD1 minimum |
 | **Multiplier System** | Tier × Streak × Engagement × Time Lock |
 | **Max Possible Multiplier** | **4.5x rewards** (13.5x during QE events!) |
-| **QE2 Progress** | 70.3% ($35,143 / $50,000) |
+| **QE2 Progress** | 76.6% ($38,276 / $50,000) |
 | **On-Chain Program** | **LIVE ON MAINNET** 🚀 |
 
-*Last updated: January 21, 2026 - Fed Chairman iteration*
+*Last updated: January 21, 2026 15:45 UTC - Fed Chairman iteration*
 
 ---
 
@@ -184,7 +184,7 @@ Special celebration distributions when we hit milestones:
 | $500,000 | QE5 | 2.5x celebration | 🔮 Upcoming |
 | $1,000,000 | QE∞ | 3.0x celebration | 🔮 Upcoming |
 
-**Current Progress: $34,495 / $50,000 (69.0% to QE2)**
+**Current Progress: $38,276 / $50,000 (76.6% to QE2)**
 
 ---
 
@@ -298,8 +298,8 @@ Based on latest distribution cycle (January 21, 2026):
 
 ### System Status
 - **Active Distribution**: Fed Chairman mode (manual)
-- **Holders Per Cycle**: ~1,630 recipients
-- **QE Progress**: $35,101 / $50,000 (70.2% to QE2)
+- **Holders Per Cycle**: ~1,055 recipients
+- **QE Progress**: $38,276 / $50,000 (76.6% to QE2)
 - **All 4 Multipliers**: Active and stacking
 - **Solana Program**: **LIVE ON MAINNET** - [View on Solscan](https://solscan.io/account/HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz)
 
