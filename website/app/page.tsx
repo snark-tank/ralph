@@ -63,6 +63,60 @@ export default async function Dashboard() {
         </div>
       </div>
 
+      {/* Active Features Grid */}
+      <div className="mb-8 bg-[#111] border border-[#222] rounded-xl p-6">
+        <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
+          <span>⚡</span> Active System Capabilities
+        </h2>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="bg-[#0a0a0a] rounded-lg p-3 text-center">
+            <div className="text-2xl mb-1">🏛️</div>
+            <div className="text-white text-sm font-semibold">Holder Tiers</div>
+            <div className="text-[#22c55e] text-xs">1.0x - 1.5x</div>
+          </div>
+          <div className="bg-[#0a0a0a] rounded-lg p-3 text-center">
+            <div className="text-2xl mb-1">💎</div>
+            <div className="text-white text-sm font-semibold">Diamond Hands</div>
+            <div className="text-[#22c55e] text-xs">1.0x - 1.25x</div>
+          </div>
+          <div className="bg-[#0a0a0a] rounded-lg p-3 text-center">
+            <div className="text-2xl mb-1">🎮</div>
+            <div className="text-white text-sm font-semibold">Engagement XP</div>
+            <div className="text-[#22c55e] text-xs">1.0x - 1.2x</div>
+          </div>
+          <div className="bg-[#0a0a0a] rounded-lg p-3 text-center">
+            <div className="text-2xl mb-1">🔒</div>
+            <div className="text-white text-sm font-semibold">Time Locks</div>
+            <div className="text-[#22c55e] text-xs">1.05x - 2.0x</div>
+          </div>
+          <div className="bg-[#0a0a0a] rounded-lg p-3 text-center">
+            <div className="text-2xl mb-1">🔄</div>
+            <div className="text-white text-sm font-semibold">Auto-Compound</div>
+            <div className="text-[#22c55e] text-xs">USD1 → $FED</div>
+          </div>
+          <div className="bg-[#0a0a0a] rounded-lg p-3 text-center">
+            <div className="text-2xl mb-1">📈</div>
+            <div className="text-white text-sm font-semibold">QE Milestones</div>
+            <div className="text-[#22c55e] text-xs">Bonus Events</div>
+          </div>
+          <div className="bg-[#0a0a0a] rounded-lg p-3 text-center">
+            <div className="text-2xl mb-1">📊</div>
+            <div className="text-white text-sm font-semibold">Fed Credit</div>
+            <div className="text-[#22c55e] text-xs">Reputation Score</div>
+          </div>
+          <div className="bg-[#0a0a0a] rounded-lg p-3 text-center">
+            <div className="text-2xl mb-1">👥</div>
+            <div className="text-white text-sm font-semibold">Referrals</div>
+            <div className="text-[#22c55e] text-xs">Bonus Rewards</div>
+          </div>
+        </div>
+        <div className="mt-4 text-center">
+          <a href="/features" className="text-[#c9a227] hover:underline text-sm">
+            View all features & multiplier details →
+          </a>
+        </div>
+      </div>
+
       {/* Fed Funds Rate Widget */}
       <div className="mb-8 bg-gradient-to-r from-[#c9a227]/20 via-[#111] to-[#111] border border-[#c9a227]/40 rounded-xl p-6">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">

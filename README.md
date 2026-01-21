@@ -34,16 +34,16 @@ Ralph acts as the Federal Reserve Chairman, controlling the money printer that g
 
 | Metric | Value |
 |--------|-------|
-| **Total Distributed** | **$31,279+ USD1** |
-| **Distributions** | 424 distribution runs |
-| **Successful Payouts** | 71+ cycles with $10+ threshold |
+| **Total Distributed** | **$31,482+ USD1** |
+| **Distribution Runs** | 575+ log entries |
+| **Successful Distributions** | 124 verified distributions |
 | **Holders Per Cycle** | 309-369 (growing!) |
 | **Frequency** | Every 2 minutes |
 | **Distribution Threshold** | $10 USD1 minimum |
 | **Multiplier System** | Tier × Streak × Engagement × Time Lock |
 | **Max Possible Multiplier** | **4.5x rewards** (13.5x during QE events!) |
 
-*Last updated: January 21, 2026 - Stats sync automatically via Redis*
+*Last updated: January 21, 2026 - Stats sync from distribution history*
 
 ---
 
@@ -183,7 +183,7 @@ Special celebration distributions when we hit milestones:
 | $500,000 | QE5 | 2.5x celebration | 🔮 Upcoming |
 | $1,000,000 | QE∞ | 3.0x celebration | 🔮 Upcoming |
 
-**Current Progress: $31,279 / $50,000 (62.6% to QE2)**
+**Current Progress: $31,482 / $50,000 (63.0% to QE2)**
 
 ---
 
@@ -297,7 +297,7 @@ Based on latest distribution cycle (January 21, 2026):
 ### System Status
 - **Active Distribution**: PM2 running every 2 minutes
 - **Holders Growing**: 309 → 369 per cycle (latest data)
-- **QE Progress**: $31,279 / $50,000 (62.6% to QE2)
+- **QE Progress**: $31,482 / $50,000 (63.0% to QE2)
 - **All 4 Multipliers**: Active and stacking
 
 ---
