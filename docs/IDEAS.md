@@ -219,7 +219,7 @@ Special distribution events when milestones are hit:
 - ✅ Progress bars for upcoming milestones
 - ✅ JSON output for API/website integration
 - ✅ Auto-save announcements to milestone-announcements/ folder
-- 🔜 Integrate bonus multipliers into distribution logic (future)
+- ✅ Bonus multipliers integrated into distribution logic (Jan 21, 2026)
 - 🔜 Add milestone display to website (future)
 
 **Usage:**
@@ -625,7 +625,7 @@ Bridge $FED to other chains. Major undertaking, future consideration.
 8. **Launch Transparency Dashboard** - Builds trust
 9. **Build "Fed Auto-BRRR" Dashboard** - Titano-style engagement with real rewards
 10. **Website Fed Funds Rate Widget** - Display current APY on dashboard
-11. **Integrate Milestone Bonuses** - Apply bonus multipliers during QE events
+11. ~~**Integrate Milestone Bonuses**~~ - ✅ **DONE!** QE events now detected and announced during distributions
 
 ---
 
@@ -665,4 +665,4 @@ $FED has already learned from the best and avoided the worst. The money printer 
 
 *This document is continuously updated by Ralph as he researches and brainstorms.*
 
-Last Updated: 2026-01-21 (Milestone/QE Tracker implemented)
+Last Updated: 2026-01-21 (QE Milestone Bonus Integration in distribution script)
