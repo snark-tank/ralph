@@ -34,16 +34,15 @@ Ralph acts as the Federal Reserve Chairman, controlling the money printer that g
 
 | Metric | Value |
 |--------|-------|
-| **Total Distributed** | **$31,482+ USD1** |
-| **Distribution Runs** | 575+ log entries |
-| **Successful Distributions** | 124 verified distributions |
-| **Holders Per Cycle** | 309-369 (growing!) |
-| **Frequency** | Every 2 minutes |
+| **Total Distributed** | **$31,956+ USD1** |
+| **Distribution Runs** | 600+ log entries |
+| **Holders Per Cycle** | 1,233 (latest) |
+| **Fed Chairman Mode** | Manual treasury control |
 | **Distribution Threshold** | $10 USD1 minimum |
 | **Multiplier System** | Tier × Streak × Engagement × Time Lock |
 | **Max Possible Multiplier** | **4.5x rewards** (13.5x during QE events!) |
 
-*Last updated: January 21, 2026 - Stats sync from distribution history*
+*Last updated: January 21, 2026 - Fed Chairman manual distribution ($473.97)*
 
 ---
 
