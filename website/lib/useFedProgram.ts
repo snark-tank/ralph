@@ -53,7 +53,21 @@ export function useFedProgram() {
       const pda = getUserPreferencesPDA(wallet.publicKey);
       // Use type assertion since IDL types are dynamically generated
       const account = await (program.account as any).userPreferences.fetch(pda);
-      return account as unknown as UserPreferences;
+
+      // Convert BN (BigNumber) values to JavaScript numbers
+      // Anchor returns i64/u64/u32/u16 as BN objects which can't be rendered in React
+      return {
+        owner: account.owner,
+        autoCompound: account.autoCompound,
+        timeLockDays: account.timeLockDays?.toNumber ? account.timeLockDays.toNumber() : Number(account.timeLockDays) || 0,
+        lockStart: account.lockStart?.toNumber ? account.lockStart.toNumber() : Number(account.lockStart) || 0,
+        enrolledAt: account.enrolledAt?.toNumber ? account.enrolledAt.toNumber() : Number(account.enrolledAt) || 0,
+        referrer: account.referrer,
+        streakCount: account.streakCount?.toNumber ? account.streakCount.toNumber() : Number(account.streakCount) || 0,
+        lastClaimTimestamp: account.lastClaimTimestamp?.toNumber ? account.lastClaimTimestamp.toNumber() : Number(account.lastClaimTimestamp) || 0,
+        totalClaimed: account.totalClaimed?.toNumber ? account.totalClaimed.toNumber() : Number(account.totalClaimed) || 0,
+        bump: account.bump?.toNumber ? account.bump.toNumber() : Number(account.bump) || 0,
+      } as UserPreferences;
     } catch (e) {
       // Account doesn't exist yet
       return null;
