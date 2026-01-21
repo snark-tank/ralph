@@ -5,7 +5,7 @@
 export const EMBEDDED_STATS = {
   totalDistributed: 39139.81,
   distributionCount: 154,
-  maxRecipients: 1560,
+  maxRecipients: 1828,
   lastUpdated: "2026-01-21T16:50:42.956Z",
   recentDistributions: [
     {

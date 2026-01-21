@@ -42,30 +42,34 @@ export default async function Dashboard() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
-      {/* Pump Celebration Banner */}
+      {/* Active Distribution Banner */}
       <div className="mb-8 bg-gradient-to-r from-[#22c55e]/20 via-[#c9a227]/20 to-[#22c55e]/20 border border-[#22c55e]/50 rounded-xl p-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMiIgZmlsbD0icmdiYSgzNCwgMTk3LCA5NCwgMC4xKSIvPjwvc3ZnPg==')] opacity-30"></div>
         <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3">
-            <div className="text-[#22c55e] animate-bounce">
+            <div className="text-[#22c55e]">
               <TrendingUpIcon className="w-8 h-8" />
             </div>
             <div>
               <div className="text-[#22c55e] font-bold text-lg flex items-center gap-2">
-                <span style={{ textShadow: '0 0 20px rgba(34, 197, 94, 0.6)' }}>18x PUMP IN PROGRESS</span>
+                <span style={{ textShadow: '0 0 20px rgba(34, 197, 94, 0.6)' }}>MONEY PRINTER ACTIVE</span>
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22c55e] opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22c55e]"></span>
                 </span>
               </div>
-              <p className="text-gray-400 text-sm">Historic +1,800% in 24h! Distributing fees to all holders during the rally.</p>
+              <p className="text-gray-400 text-sm">Real yield from trading fees, distributed automatically every 2 minutes.</p>
             </div>
           </div>
-          <div className="text-right">
-            <div className="text-[#c9a227] font-mono text-sm">Just distributed</div>
-            <div className="text-[#22c55e] font-bold text-xl font-mono" style={{ textShadow: '0 0 15px rgba(34, 197, 94, 0.5)' }}>$32.48 USD1</div>
-            <div className="text-gray-500 text-xs">to 415 holders</div>
-          </div>
+          {stats.recentDistributions[0] && (
+            <div className="text-right">
+              <div className="text-[#c9a227] font-mono text-sm">Latest distribution</div>
+              <div className="text-[#22c55e] font-bold text-xl font-mono" style={{ textShadow: '0 0 15px rgba(34, 197, 94, 0.5)' }}>
+                ${stats.recentDistributions[0].amount.toFixed(2)} USD1
+              </div>
+              <div className="text-gray-500 text-xs">to {stats.recentDistributions[0].recipients.toLocaleString()} holders</div>
+            </div>
+          )}
         </div>
       </div>
 
