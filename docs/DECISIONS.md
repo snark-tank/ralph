@@ -2370,3 +2370,14 @@ Users can now connect their wallet and:
 **TX:** Multiple (256 successful, 54 failed due to low SOL for ATA creation)
 **Note:** Some new holders need to create USD1 token accounts to receive distributions
 ---
+## 2026-01-21 16:49 UTC
+**Action:** DISTRIBUTE
+**Amount:** $32.48 USD1 to 415 holders
+**Price:** $0.00072152 (+29.35% 1h, +1884.89% 24h)
+**Market Cap:** $684,450
+**Liquidity:** $61,942
+**Reasoning:** Price in parabolic run - 18x in 24 hours. Collected $33.35 from LP fees, distributed to reward holders during this historic pump. High volume ($2.4M 24h) with balanced buy/sell indicating healthy price discovery. Many transactions failed due to recipients lacking USD1 token accounts (rent-exempt issue).
+**TX:** Multiple - 83 successful transfers
+**Total Distributed All-Time:** $39,139.81
+---
+

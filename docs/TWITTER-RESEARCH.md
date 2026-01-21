@@ -2,11 +2,13 @@
 
 ## Research Notes - 2026-01-21
 
-### Current Market Context
-- $FED experiencing historic pump: +1786% in 24h
-- Market cap approaching $700K+
-- Over $39K USD1 distributed to holders all-time
-- QE2 progress: 77.9% complete
+### Current Market Context (Updated 2026-01-21 16:40 UTC)
+- $FED experiencing historic pump: +1884.89% in 24h
+- Price: $0.00072152
+- Market cap: $684,450
+- Over $39,107 USD1 distributed to holders all-time
+- QE2 progress: 78.2% complete ($39,107 / $50,000)
+- Multiple distributions TODAY during the pump
 
 ### What Works in Crypto Twitter (Observations)
 
@@ -50,11 +52,25 @@
 
 ## Draft Tweets Queue
 
-### Draft 1: Pump Celebration (After 30 min wait)
+### Draft 1: Historic Pump Stats (PRIORITY - Use this next)
+```
+$FED 24h performance:
+
+📈 +1884%
+💰 $684K market cap
+💵 $39K+ USD1 distributed to holders
+🎯 78% to QE2 target
+
+Diamond hands got paid on the way up.
+
+The money printer works overtime during pumps.
+```
+
+### Draft 1B: Alternative Pump Celebration
 ```
 $FED just went from $0.00004 to $0.0007+ in 24 hours.
 
-That's not a typo. That's +1700%.
+That's not a typo. That's +1884%.
 
 And the best part? Diamond hands got paid during the entire run.
 
