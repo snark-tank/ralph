@@ -1,14 +1,26 @@
 // Embedded stats - updated at build time or via script
 // This provides fallback data when the local JSON file is not accessible (e.g., on Vercel)
 // Run `npm run update-stats` to refresh these values from the source
-// Last updated: 2026-01-21T20:38:49.392Z
+// Last updated: 2026-01-21T20:48:24.436Z
 
 export const EMBEDDED_STATS = {
-  totalDistributed: 44477.75,
-  distributionCount: 221,
+  totalDistributed: 44500.93,
+  distributionCount: 223,
   maxRecipients: 1828,
-  lastUpdated: "2026-01-21T20:38:49.392Z",
+  lastUpdated: "2026-01-21T20:48:24.436Z",
   recentDistributions: [
+    {
+      date: "2026-01-21T20:48:24.436Z",
+      amount: 13.49,
+      recipients: 233,
+      txSignature: "WN7ufwMxW2aN8WczRuswPuu6dF1WppUJ4sa36gWDyYGGznerukoriqkhLiHzabEj5d6U3igHiWz2fi5ximkQUjh"
+    },
+    {
+      date: "2026-01-21T20:44:19.460Z",
+      amount: 9.67,
+      recipients: 202,
+      txSignature: "5ELiRhwiE3t7qVpDbAJmkPgWMCFtjHwkAvx7qEdz6BqyPmYEoVuFeviqDCaac8HUrAhNHEJg3eEyt4YJ67YYC8Xu"
+    },
     {
       date: "2026-01-21T20:38:49.392Z",
       amount: 126.04,
@@ -17,7 +29,7 @@ export const EMBEDDED_STATS = {
     },
     {
       date: "2026-01-21T20:36:56.078Z",
-      amount: 307.13,
+      amount: 307.12,
       recipients: 708,
       txSignature: "67RGjfnuWZtgEhYXkb74y8841nxX9rLsvbvp9zrr1T8qV2cnStcBLjCfgyt2SBNQ5cVK5TbtYfkayyprTvQMbonq"
     },
@@ -29,7 +41,7 @@ export const EMBEDDED_STATS = {
     },
     {
       date: "2026-01-21T20:32:37.788Z",
-      amount: 118.74,
+      amount: 118.73,
       recipients: 533,
       txSignature: "4nkk1qE5f3sR9QmzmRud4TcxGqqtu83Uf4uiSsuETgzTdmNGhLmU9m7P1MsabmTsf1Mf4peHKGYiJS4t7gbGJca7"
     },
@@ -41,33 +53,21 @@ export const EMBEDDED_STATS = {
     },
     {
       date: "2026-01-21T20:28:54.039Z",
-      amount: 216.04,
+      amount: 216.03,
       recipients: 638,
       txSignature: "VQXhZWmKfEJFdqr6Qfdsov9g4rFr1kEMpfTJR7bKZMfaQekXV7YpfKeZowah4Hh85TaLTRtkKxC6CtsVjR9UiA3"
     },
     {
       date: "2026-01-21T20:26:35.671Z",
-      amount: 84.78,
+      amount: 84.77,
       recipients: 486,
       txSignature: "VjVaWis1vX4jcG7hX1AJFCDnDwQNoFJ8Cz8ZFUYcshcAGwzSXXRYDMbtCHsUxS5aQC8oHni7TwWMTHLwSf4wRcK"
     },
     {
       date: "2026-01-21T20:24:50.694Z",
-      amount: 440.71,
+      amount: 440.70,
       recipients: 778,
       txSignature: "51H8rHxs7Lhq9LXzJNmma2VjUAGzwHCnRrS6Yvqx7xp1Xzu29ga2SvGDxG2DSEfBKfMpi5djxELQYNPtGuycvVcx"
-    },
-    {
-      date: "2026-01-21T20:22:47.275Z",
-      amount: 232.79,
-      recipients: 669,
-      txSignature: "2qgoqpYC5YPDZ9BpTLJKdvGpMxfvJRCSqECNAmE2FpmAFFMaCLpsPBQDDzsW1i7Y5sSa7fj1hX3Q423epYdwsMw8"
-    },
-    {
-      date: "2026-01-21T20:20:53.796Z",
-      amount: 280.36,
-      recipients: 697,
-      txSignature: "cqvatXY9yyu3AkEi1qqySV5pBRtkhxyUYYkjDAwLT36KV2RRPpcuY2sPW2AHXuT7Hyd52B6xHQEtJcdBpn7yRou"
     }
   ]
 };
