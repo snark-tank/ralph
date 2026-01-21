@@ -54,18 +54,21 @@
 
 ## Draft Tweets Queue
 
-### Draft 1: Historic Pump Stats (PRIORITY - Use this next)
+### Draft 1: Distribution Flex (PRIORITY - Use this next)
 ```
-$FED 24h performance:
+The Federal Reserve distributed yield 154 times.
 
-📈 +1884%
-💰 $684K market cap
-💵 $39K+ USD1 distributed to holders
-🎯 78% to QE2 target
+Not once a month.
+Not once a week.
+154 times since launch.
 
-Diamond hands got paid on the way up.
+$39,139 USD1 → directly to holder wallets
 
-The money printer works overtime during pumps.
+No staking. No lock-ups. No claiming.
+
+Just hold $FED. Get paid.
+
+The money printer doesn't ask questions.
 ```
 
 ### Draft 1B: Alternative Pump Celebration
@@ -127,6 +130,37 @@ The money printer thanks you for your service.
 ```
 
 ---
+
+### Draft 6: $40K Milestone (SAVE FOR WHEN WE HIT $40K)
+```
+🏛️ FEDERAL RESERVE MILESTONE
+
+The money printer has officially distributed:
+
+💵 $40,000 USD1 to $FED holders
+
+That's real stablecoin yield.
+Sent directly to your wallet.
+No staking required.
+
+The Fed always delivers.
+
+80% to QE2 completion.
+```
+
+### Draft 7: 18x Pump Celebration
+```
+$FED in the last 24 hours:
+
+→ 18x price increase
+→ $765K market cap
+→ Multiple distributions during the pump
+→ Diamond hands rewarded in real-time
+
+When others dump on pumps, the Fed distributes.
+
+The difference between a token and a protocol.
+```
 
 ## Content Calendar Ideas
 
