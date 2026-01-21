@@ -34,9 +34,10 @@ import type { EngagementData } from './engagement-score.ts';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Auto-compound settings
-const JUPITER_QUOTE_API = 'https://quote-api.jup.ag/v6/quote';
-const JUPITER_SWAP_API = 'https://quote-api.jup.ag/v6/swap';
+// Auto-compound settings - Jupiter Ultra Swap API
+const JUPITER_ULTRA_ORDER_API = 'https://api.jup.ag/ultra/v1/order';
+const JUPITER_ULTRA_EXECUTE_API = 'https://api.jup.ag/ultra/v1/execute';
+const JUPITER_API_KEY = '86a2564b-34e7-47a9-b6ba-6d99852ea252';
 const USD1_MINT = 'USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB';
 const FED_MINT = '132STreShuLRNgkyF1QECv37yP9Cdp8JBAgnKBgKafed';
 
@@ -401,74 +402,167 @@ interface TokenHolder {
     autoCompoundEnabled?: boolean;
 }
 
-// Jupiter quote response interface
-interface JupiterQuote {
+// Jupiter Ultra Swap API response interfaces
+interface UltraSwapOrder {
+    requestId: string;
     inputMint: string;
-    inAmount: string;
     outputMint: string;
+    inAmount: string;
     outAmount: string;
     otherAmountThreshold: string;
-    swapMode: string;
-    slippageBps: number;
-    platformFee: null | object;
+    swapType: string;
     priceImpactPct: string;
-    routePlan: object[];
+    transaction: string; // Base64 encoded transaction
+    expireAt: number;
 }
 
-// Get Jupiter quote for USD1 → FED swap
-async function getJupiterQuote(
+interface UltraSwapExecuteResult {
+    signature: string;
+    status: string;
+    inputAmountResult: string;
+    outputAmountResult: string;
+}
+
+// Get Jupiter Ultra Swap order (quote + transaction in one call)
+// This is called by the TREASURY to do batched swaps
+async function getUltraSwapOrder(
     amountInLamports: number,
+    takerPublicKey: string, // The wallet doing the swap (treasury)
     slippageBps: number = 100 // 1% default slippage
-): Promise<JupiterQuote | null> {
+): Promise<UltraSwapOrder | null> {
     try {
-        const params = new URLSearchParams({
-            inputMint: USD1_MINT,
-            outputMint: FED_MINT,
-            amount: amountInLamports.toString(),
-            slippageBps: slippageBps.toString(),
-            swapMode: 'ExactIn',
-        });
-
-        const response = await fetch(`${JUPITER_QUOTE_API}?${params}`);
-        if (!response.ok) {
-            console.log(`⚠️ Jupiter quote failed: ${response.status}`);
-            return null;
-        }
-
-        const quote = await response.json();
-        return quote as JupiterQuote;
-    } catch (error) {
-        console.log(`⚠️ Jupiter quote error: ${error}`);
-        return null;
-    }
-}
-
-// Get Jupiter swap transaction
-async function getJupiterSwapTransaction(
-    quote: JupiterQuote,
-    userPublicKey: string
-): Promise<{ swapTransaction: string } | null> {
-    try {
-        const response = await fetch(JUPITER_SWAP_API, {
+        const response = await fetch(JUPITER_ULTRA_ORDER_API, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': JUPITER_API_KEY,
+            },
             body: JSON.stringify({
-                quoteResponse: quote,
-                userPublicKey,
-                wrapAndUnwrapSol: false,
-                dynamicComputeUnitLimit: true,
-                prioritizationFeeLamports: 'auto',
+                inputMint: USD1_MINT,
+                outputMint: FED_MINT,
+                amount: amountInLamports.toString(),
+                taker: takerPublicKey,
+                slippageBps: slippageBps,
             }),
         });
 
         if (!response.ok) {
-            console.log(`⚠️ Jupiter swap failed: ${response.status}`);
+            const errorText = await response.text();
+            console.log(`⚠️ Jupiter Ultra order failed: ${response.status} - ${errorText}`);
             return null;
         }
 
-        return await response.json();
+        const order = await response.json();
+        return order as UltraSwapOrder;
     } catch (error) {
-        console.log(`⚠️ Jupiter swap error: ${error}`);
+        console.log(`⚠️ Jupiter Ultra order error: ${error}`);
+        return null;
+    }
+}
+
+// Execute a signed Ultra Swap order
+async function executeUltraSwapOrder(
+    requestId: string,
+    signedTransaction: string // Base64 encoded signed transaction
+): Promise<UltraSwapExecuteResult | null> {
+    try {
+        const response = await fetch(JUPITER_ULTRA_EXECUTE_API, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-api-key': JUPITER_API_KEY,
+            },
+            body: JSON.stringify({
+                requestId: requestId,
+                signedTransaction: signedTransaction,
+            }),
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.log(`⚠️ Jupiter Ultra execute failed: ${response.status} - ${errorText}`);
+            return null;
+        }
+
+        return await response.json() as UltraSwapExecuteResult;
+    } catch (error) {
+        console.log(`⚠️ Jupiter Ultra execute error: ${error}`);
+        return null;
+    }
+}
+
+// Perform a batched treasury swap: USD1 → $FED
+// Treasury swaps the aggregated USD1 for all auto-compound users
+async function executeTreasurySwap(
+    connection: Connection,
+    treasuryKeypair: Keypair,
+    totalUsd1Lamports: number,
+    slippageBps: number,
+    logger: { log: (msg: string) => void; warn: (msg: string) => void; success: (msg: string) => void }
+): Promise<{ success: boolean; fedReceived: number; signature: string } | null> {
+    try {
+        logger.log(`   🔄 Getting Ultra Swap order for ${(totalUsd1Lamports / 1e6).toFixed(2)} USD1...`);
+
+        // Step 1: Get order (includes quote and unsigned transaction)
+        const order = await getUltraSwapOrder(
+            totalUsd1Lamports,
+            treasuryKeypair.publicKey.toBase58(),
+            slippageBps
+        );
+
+        if (!order || !order.transaction) {
+            logger.warn(`   ⚠️ Could not get Ultra Swap order`);
+            return null;
+        }
+
+        const fedOutput = Number(order.outAmount) / 1e6; // $FED has 6 decimals
+        const priceImpact = parseFloat(order.priceImpactPct || '0');
+        logger.log(`   📊 Quote: ${(totalUsd1Lamports / 1e6).toFixed(2)} USD1 → ${fedOutput.toLocaleString()} $FED (impact: ${priceImpact.toFixed(4)}%)`);
+
+        // Step 2: Decode, sign, and encode the transaction
+        const swapTxBuffer = Buffer.from(order.transaction, 'base64');
+        const swapTx = Transaction.from(swapTxBuffer);
+        swapTx.sign(treasuryKeypair);
+        const signedTxBase64 = swapTx.serialize().toString('base64');
+
+        // Step 3: Execute the order through Jupiter
+        logger.log(`   🚀 Executing swap via Jupiter Ultra...`);
+        const executeResult = await executeUltraSwapOrder(order.requestId, signedTxBase64);
+
+        if (!executeResult || executeResult.status !== 'Success') {
+            // Fall back to sending directly to Solana
+            logger.warn(`   ⚠️ Ultra execute returned ${executeResult?.status || 'null'}, trying direct send...`);
+
+            const signature = await connection.sendRawTransaction(swapTx.serialize(), {
+                skipPreflight: false,
+                preflightCommitment: 'confirmed',
+                maxRetries: 3,
+            });
+
+            const confirmation = await connection.confirmTransaction(signature, 'confirmed');
+            if (confirmation.value.err) {
+                logger.warn(`   ❌ Direct send failed: ${JSON.stringify(confirmation.value.err)}`);
+                return null;
+            }
+
+            logger.success(`   ✅ Swap complete (direct): ${signature}`);
+            return {
+                success: true,
+                fedReceived: fedOutput,
+                signature: signature,
+            };
+        }
+
+        logger.success(`   ✅ Swap complete: ${executeResult.signature}`);
+        const actualFedReceived = Number(executeResult.outputAmountResult) / 1e6;
+        return {
+            success: true,
+            fedReceived: actualFedReceived,
+            signature: executeResult.signature,
+        };
+
+    } catch (error) {
+        logger.warn(`   ⚠️ Treasury swap error: ${error}`);
         return null;
     }
 }
@@ -1423,188 +1517,201 @@ async function main() {
             .reduce((sum: number, h: TokenHolder) => sum + h.tokensToReceive, 0);
 
         // ============================================
-        // AUTO-COMPOUND EXECUTION
+        // AUTO-COMPOUND EXECUTION (Batched Treasury Swap)
         // ============================================
+        // NEW APPROACH: Treasury swaps aggregated USD1 → $FED, then distributes $FED
+        // This works because treasury owns the USD1 and can sign the swap
         let compoundedUSD1 = 0;
         let compoundedFED = 0;
         const compoundSignatures: string[] = [];
 
         if (compoundRecipients.length > 0 && autoCompoundData.settings.compoundEnabled) {
             logger.log(`\n🔄 ========================================`);
-            logger.log(`🔄 AUTO-COMPOUND EXECUTION`);
+            logger.log(`🔄 AUTO-COMPOUND EXECUTION (Batched Swap)`);
             logger.log(`🔄 ========================================`);
             logger.log(`Processing ${compoundRecipients.length} auto-compound holders...`);
 
-            // For each auto-compound holder, aggregate their USD1 and swap to $FED
-            // Note: We batch small amounts together for efficiency
+            // Step 1: Calculate total USD1 to swap
+            const totalUsd1ToSwap = compoundRecipients.reduce((sum, h) => sum + h.tokensToReceive, 0);
+            const totalUsd1Lamports = Math.floor(totalUsd1ToSwap * Math.pow(10, TOKEN_DECIMALS));
             const slippageBps = Math.round(autoCompoundData.settings.maxSlippage * 100);
 
-            for (const holder of compoundRecipients) {
-                const usd1Amount = holder.tokensToReceive;
-                const amountLamports = Math.floor(usd1Amount * Math.pow(10, TOKEN_DECIMALS));
+            logger.log(`   📊 Total USD1 to compound: $${totalUsd1ToSwap.toFixed(2)}`);
+            logger.log(`   👥 Recipients: ${compoundRecipients.length} holders`);
 
-                logger.log(`\n   Processing ${holder.address.slice(0, 8)}...${holder.address.slice(-4)}: $${usd1Amount.toFixed(2)} USD1`);
+            // Step 2: Execute batched treasury swap via Jupiter Ultra API
+            const swapResult = await executeTreasurySwap(
+                connection,
+                distributorKeypair,
+                totalUsd1Lamports,
+                slippageBps,
+                logger
+            );
 
-                // Get Jupiter quote
-                const quote = await getJupiterQuote(amountLamports, slippageBps);
+            if (swapResult && swapResult.success) {
+                // Step 3: Swap succeeded! Now distribute $FED to compound recipients
+                const totalFedReceived = swapResult.fedReceived;
+                compoundedFED = totalFedReceived;
+                compoundedUSD1 = totalUsd1ToSwap;
 
-                if (!quote) {
-                    logger.warn(`   ⚠️ Could not get quote, falling back to direct USD1 transfer`);
-                    // Fallback: transfer USD1 directly instead
-                    // Create a single transfer transaction as fallback
-                    const fallbackTx = new Transaction();
-                    const { blockhash } = await connection.getLatestBlockhash();
-                    fallbackTx.recentBlockhash = blockhash;
-                    fallbackTx.feePayer = distributorKeypair.publicKey;
+                logger.log(`\n   💰 Swap successful! Received ${totalFedReceived.toLocaleString()} $FED`);
+                logger.log(`   📤 Now distributing $FED to ${compoundRecipients.length} holders...`);
 
-                    const recipientPubkey = new PublicKey(holder.address);
-                    const recipientTokenAccount = getAssociatedTokenAddressSync(
-                        distributionMint,
-                        recipientPubkey,
-                        false,
-                        distributionTokenProgram,
-                        ASSOCIATED_TOKEN_PROGRAM_ID
-                    );
+                // Get $FED token info for transfers
+                const fedMint = new PublicKey(FED_MINT);
+                const fedTokenProgram = TOKEN_PROGRAM_ID; // $FED uses regular SPL
 
-                    // Check if account exists
-                    try {
-                        await getAccount(connection, recipientTokenAccount, 'confirmed', distributionTokenProgram);
-                    } catch {
-                        fallbackTx.add(
-                            createAssociatedTokenAccountInstruction(
-                                distributorKeypair.publicKey,
-                                recipientTokenAccount,
-                                recipientPubkey,
-                                distributionMint,
-                                distributionTokenProgram,
-                                ASSOCIATED_TOKEN_PROGRAM_ID
-                            )
-                        );
-                    }
+                // Get treasury's $FED token account
+                const treasuryFedAccount = getAssociatedTokenAddressSync(
+                    fedMint,
+                    distributorKeypair.publicKey,
+                    false,
+                    fedTokenProgram,
+                    ASSOCIATED_TOKEN_PROGRAM_ID
+                );
 
-                    fallbackTx.add(
-                        createTransferInstruction(
-                            distributorTokenAccount,
-                            recipientTokenAccount,
-                            distributorKeypair.publicKey,
-                            amountLamports,
-                            [],
-                            distributionTokenProgram
-                        )
-                    );
+                // Distribute $FED proportionally to each compound recipient
+                for (const holder of compoundRecipients) {
+                    const holderProportion = holder.tokensToReceive / totalUsd1ToSwap;
+                    const fedToSend = totalFedReceived * holderProportion;
+                    const fedLamports = Math.floor(fedToSend * Math.pow(10, 6)); // $FED has 6 decimals
 
-                    const fallbackSig = await retryTransaction(
-                        async () => sendAndConfirmTransaction(connection, fallbackTx, [distributorKeypair]),
-                        logger
-                    );
-
-                    if (fallbackSig) {
-                        compoundSignatures.push(fallbackSig);
-                        compoundedUSD1 += usd1Amount;
-                        logger.success(`   Fallback USD1 transfer: ${fallbackSig.slice(0, 12)}...`);
-                    }
-                    continue;
-                }
-
-                // Log quote details
-                const fedOutput = Number(quote.outAmount) / Math.pow(10, 6); // Assuming 6 decimals
-                const priceImpact = parseFloat(quote.priceImpactPct);
-                logger.log(`   📊 Quote: ${usd1Amount.toFixed(2)} USD1 → ${fedOutput.toLocaleString()} $FED (impact: ${priceImpact.toFixed(4)}%)`);
-
-                if (priceImpact > autoCompoundData.settings.maxSlippage) {
-                    logger.warn(`   ⚠️ Price impact too high (${priceImpact.toFixed(2)}%), falling back to USD1 transfer`);
-                    continue;
-                }
-
-                // Get swap transaction
-                const swapResult = await getJupiterSwapTransaction(quote, holder.address);
-
-                if (!swapResult || !swapResult.swapTransaction) {
-                    logger.warn(`   ⚠️ Could not build swap transaction, skipping`);
-                    continue;
-                }
-
-                // The Jupiter swap returns a base64 encoded transaction
-                // We need to deserialize and send it
-                try {
-                    const swapTransactionBuf = Buffer.from(swapResult.swapTransaction, 'base64');
-                    const swapTx = Transaction.from(swapTransactionBuf);
-
-                    // The swap is built for the user, but we're sending from distributor
-                    // This won't work directly - Jupiter expects the user to sign
-                    // Instead, we need to: 1) Transfer USD1 to user, 2) They swap later
-                    // OR we use the aggregated swap approach
-
-                    // For now, log that auto-compound was attempted but needs direct user signing
-                    logger.warn(`   ⚠️ Jupiter swap requires user signature - transferring USD1 instead`);
-                    logger.log(`   💡 Holder can manually swap USD1 → $FED at https://jup.ag`);
-
-                    // Fallback: Transfer USD1 directly and track for potential future batched swap
-                    const fallbackTx = new Transaction();
-                    const { blockhash } = await connection.getLatestBlockhash();
-                    fallbackTx.recentBlockhash = blockhash;
-                    fallbackTx.feePayer = distributorKeypair.publicKey;
-
-                    const recipientPubkey = new PublicKey(holder.address);
-                    const recipientTokenAccount = getAssociatedTokenAddressSync(
-                        distributionMint,
-                        recipientPubkey,
-                        false,
-                        distributionTokenProgram,
-                        ASSOCIATED_TOKEN_PROGRAM_ID
-                    );
+                    if (fedLamports <= 0) continue;
 
                     try {
-                        await getAccount(connection, recipientTokenAccount, 'confirmed', distributionTokenProgram);
-                    } catch {
-                        fallbackTx.add(
-                            createAssociatedTokenAccountInstruction(
-                                distributorKeypair.publicKey,
-                                recipientTokenAccount,
-                                recipientPubkey,
-                                distributionMint,
-                                distributionTokenProgram,
-                                ASSOCIATED_TOKEN_PROGRAM_ID
-                            )
+                        const recipientPubkey = new PublicKey(holder.address);
+                        const recipientFedAccount = getAssociatedTokenAddressSync(
+                            fedMint,
+                            recipientPubkey,
+                            false,
+                            fedTokenProgram,
+                            ASSOCIATED_TOKEN_PROGRAM_ID
                         );
-                    }
 
-                    fallbackTx.add(
-                        createTransferInstruction(
-                            distributorTokenAccount,
-                            recipientTokenAccount,
-                            distributorKeypair.publicKey,
-                            amountLamports,
-                            [],
-                            distributionTokenProgram
-                        )
-                    );
+                        const transferTx = new Transaction();
+                        const { blockhash } = await connection.getLatestBlockhash();
+                        transferTx.recentBlockhash = blockhash;
+                        transferTx.feePayer = distributorKeypair.publicKey;
 
-                    const sig = await retryTransaction(
-                        async () => sendAndConfirmTransaction(connection, fallbackTx, [distributorKeypair]),
-                        logger
-                    );
-
-                    if (sig) {
-                        compoundSignatures.push(sig);
-                        compoundedUSD1 += usd1Amount;
-                        logger.success(`   USD1 transfer complete: ${sig.slice(0, 12)}...`);
-
-                        // Update holder's compound stats
-                        if (autoCompoundData.preferences[holder.address]) {
-                            autoCompoundData.preferences[holder.address].lastCompoundedAt = new Date().toISOString();
-                            autoCompoundData.preferences[holder.address].totalCompounded =
-                                (autoCompoundData.preferences[holder.address].totalCompounded || 0) + usd1Amount;
-                            autoCompoundData.preferences[holder.address].compoundCount =
-                                (autoCompoundData.preferences[holder.address].compoundCount || 0) + 1;
+                        // Create recipient's $FED account if needed
+                        try {
+                            await getAccount(connection, recipientFedAccount, 'confirmed', fedTokenProgram);
+                        } catch {
+                            transferTx.add(
+                                createAssociatedTokenAccountInstruction(
+                                    distributorKeypair.publicKey,
+                                    recipientFedAccount,
+                                    recipientPubkey,
+                                    fedMint,
+                                    fedTokenProgram,
+                                    ASSOCIATED_TOKEN_PROGRAM_ID
+                                )
+                            );
                         }
+
+                        transferTx.add(
+                            createTransferInstruction(
+                                treasuryFedAccount,
+                                recipientFedAccount,
+                                distributorKeypair.publicKey,
+                                fedLamports,
+                                [],
+                                fedTokenProgram
+                            )
+                        );
+
+                        const sig = await retryTransaction(
+                            async () => sendAndConfirmTransaction(connection, transferTx, [distributorKeypair]),
+                            logger
+                        );
+
+                        if (sig) {
+                            compoundSignatures.push(sig);
+                            logger.success(`   ✅ ${holder.address.slice(0, 8)}...${holder.address.slice(-4)}: ${fedToSend.toLocaleString()} $FED`);
+
+                            // Update holder's compound stats
+                            if (autoCompoundData.preferences[holder.address]) {
+                                autoCompoundData.preferences[holder.address].lastCompoundedAt = new Date().toISOString();
+                                autoCompoundData.preferences[holder.address].totalCompounded =
+                                    (autoCompoundData.preferences[holder.address].totalCompounded || 0) + holder.tokensToReceive;
+                                autoCompoundData.preferences[holder.address].compoundCount =
+                                    (autoCompoundData.preferences[holder.address].compoundCount || 0) + 1;
+                            }
+                        }
+                    } catch (error) {
+                        logger.warn(`   ⚠️ Failed to send $FED to ${holder.address.slice(0, 8)}: ${error}`);
                     }
-                } catch (error) {
-                    logger.warn(`   ⚠️ Swap execution failed: ${error}`);
+
+                    // Small delay to avoid rate limits
+                    await new Promise(resolve => setTimeout(resolve, 200));
                 }
 
-                // Add small delay between compound operations to avoid rate limits
-                await new Promise(resolve => setTimeout(resolve, 500));
+            } else {
+                // Swap failed - fall back to distributing USD1 directly
+                logger.warn(`\n   ⚠️ Treasury swap failed - falling back to USD1 distribution`);
+                logger.log(`   💡 Holders can manually swap USD1 → $FED at https://jup.ag`);
+
+                for (const holder of compoundRecipients) {
+                    const usd1Amount = holder.tokensToReceive;
+                    const amountLamports = Math.floor(usd1Amount * Math.pow(10, TOKEN_DECIMALS));
+
+                    try {
+                        const recipientPubkey = new PublicKey(holder.address);
+                        const recipientTokenAccount = getAssociatedTokenAddressSync(
+                            distributionMint,
+                            recipientPubkey,
+                            false,
+                            distributionTokenProgram,
+                            ASSOCIATED_TOKEN_PROGRAM_ID
+                        );
+
+                        const fallbackTx = new Transaction();
+                        const { blockhash } = await connection.getLatestBlockhash();
+                        fallbackTx.recentBlockhash = blockhash;
+                        fallbackTx.feePayer = distributorKeypair.publicKey;
+
+                        try {
+                            await getAccount(connection, recipientTokenAccount, 'confirmed', distributionTokenProgram);
+                        } catch {
+                            fallbackTx.add(
+                                createAssociatedTokenAccountInstruction(
+                                    distributorKeypair.publicKey,
+                                    recipientTokenAccount,
+                                    recipientPubkey,
+                                    distributionMint,
+                                    distributionTokenProgram,
+                                    ASSOCIATED_TOKEN_PROGRAM_ID
+                                )
+                            );
+                        }
+
+                        fallbackTx.add(
+                            createTransferInstruction(
+                                distributorTokenAccount,
+                                recipientTokenAccount,
+                                distributorKeypair.publicKey,
+                                amountLamports,
+                                [],
+                                distributionTokenProgram
+                            )
+                        );
+
+                        const sig = await retryTransaction(
+                            async () => sendAndConfirmTransaction(connection, fallbackTx, [distributorKeypair]),
+                            logger
+                        );
+
+                        if (sig) {
+                            compoundSignatures.push(sig);
+                            compoundedUSD1 += usd1Amount;
+                            logger.success(`   USD1 transfer: ${holder.address.slice(0, 8)}...${holder.address.slice(-4)}: $${usd1Amount.toFixed(2)}`);
+                        }
+                    } catch (error) {
+                        logger.warn(`   ⚠️ Failed to send USD1 to ${holder.address.slice(0, 8)}: ${error}`);
+                    }
+
+                    await new Promise(resolve => setTimeout(resolve, 200));
+                }
             }
 
             // Update auto-compound stats
@@ -1615,7 +1722,12 @@ async function main() {
 
             logger.log(`\n🔄 AUTO-COMPOUND SUMMARY:`);
             logger.log(`   Processed: ${compoundRecipients.length} holders`);
-            logger.log(`   USD1 distributed: $${compoundedUSD1.toFixed(2)}`);
+            if (compoundedFED > 0) {
+                logger.log(`   $FED distributed: ${compoundedFED.toLocaleString()} $FED (via swap)`);
+                logger.log(`   USD1 equivalent: $${compoundedUSD1.toFixed(2)}`);
+            } else {
+                logger.log(`   USD1 distributed: $${compoundedUSD1.toFixed(2)} (fallback)`);
+            }
             logger.log(`   Successful txns: ${compoundSignatures.length}`);
             logger.log(`🔄 ========================================\n`);
         }

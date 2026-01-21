@@ -804,6 +804,10 @@ Bridge $FED to other chains. Major undertaking, future consideration.
 18. **"Fed Treasury Dashboard"** - Public dashboard showing all fee metrics, distribution history (inspired by Uniswap's transparency)
 19. ~~**"Fed Season Pass"**~~ - ✅ **DONE!** Seasonal loyalty bonuses with tier system, achievements, and leaderboards (Jan 21, 2026)
 
+### New Items from 2026 Reputation Research (Jan 21, 2026)
+
+20. ~~**"Fed Credit Score"**~~ - ✅ **DONE!** Unified reputation scoring system (300-850 scale) aggregating all holder metrics (Jan 21, 2026)
+
 ---
 
 ## New Ideas from 2026 Fee Switch Revolution
@@ -986,6 +990,121 @@ npx ts-node season-tracker.ts --json
 
 ---
 
+### 22. "Fed Credit Score" - Unified Reputation System ✅ IMPLEMENTED
+
+**Inspired by:** Providence (Andre Cronje), Soulbound Tokens, zkCredit
+
+**Status:** ✅ **LIVE IN PRODUCTION** (Jan 21, 2026)
+
+**The Concept:**
+Create a unified on-chain reputation score (300-850 scale, like traditional FICO credit) that aggregates all holder metrics into a single "Fed Credit Score" representing trustworthiness and engagement.
+
+**Key Innovation:**
+- Score is **NON-TRANSFERABLE** - tied to wallet address, not tokens
+- Even if you sell all $FED, your reputation persists
+- Inspired by 2026's trend toward soulbound reputation systems
+
+**Score Components:** ✅ IMPLEMENTED
+| Component | Weight | What It Measures |
+|-----------|--------|------------------|
+| Holdings | 25% | How much $FED you hold |
+| Longevity | 25% | How long you've held |
+| Engagement | 20% | XP from check-ins, activity |
+| Loyalty | 15% | Season participation |
+| Consistency | 15% | Balance stability (not panic selling) |
+
+**Reputation Tiers:** ✅ IMPLEMENTED
+| Score | Tier | Multiplier | Title |
+|-------|------|------------|-------|
+| 800-850 | Exceptional | 1.30x | Fed Prime Member |
+| 740-799 | Excellent | 1.20x | Fed Elite |
+| 670-739 | Good | 1.12x | Fed Trusted |
+| 580-669 | Fair | 1.05x | Fed Member |
+| 300-579 | Building | 1.00x | Fed Citizen |
+
+**Additional Metrics:**
+- **Trustworthiness Index** (0-100): How reliable is this holder?
+- **Badges**: Whale, Diamond Hands, Engaged, Loyal
+- **Score History**: Track changes over time
+- **Peak Score**: Highest score ever achieved
+
+**Usage:**
+```bash
+# Update all holder reputations
+npx ts-node reputation-score.ts --update
+
+# Get detailed credit report for address
+npx ts-node reputation-score.ts --report <address>
+
+# Check reputation for specific address
+npx ts-node reputation-score.ts --check <address>
+
+# Show leaderboard
+npx ts-node reputation-score.ts --leaderboard 20
+
+# Get stats (JSON for API)
+npx ts-node reputation-score.ts --stats --json
+```
+
+**Example Credit Report:**
+```
+╔══════════════════════════════════════════════════════════════════╗
+║                  🏛️ FED CREDIT REPORT 🏛️                          ║
+╚══════════════════════════════════════════════════════════════════╝
+
+Address: 4Br5iKfR...AdL4P
+Report Date: 2026-01-21
+
+┌─────────────────────────────────────────┐
+│  FED CREDIT SCORE: 785                  │
+│  🏆 Fed Elite                           │
+└─────────────────────────────────────────┘
+
+📊 COMPONENT SCORES
+────────────────────────────────────────
+  Holdings:    █████████████████░░░ 85/100
+  Longevity:   ██████████████░░░░░░ 70/100
+  Engagement:  ████████████████████ 100/100
+  Loyalty:     ████████████░░░░░░░░ 60/100
+  Consistency: █████████████████░░░ 85/100
+
+🔐 TRUSTWORTHINESS INDEX
+────────────────────────────────────────
+  Index: 82/100
+  High trustworthiness - Reliable community member
+
+🎖️ BADGES
+────────────────────────────────────────
+  💎 Diamond Hands (30+ days)
+  🔥 Engaged Member (100+ XP)
+
+💰 BENEFITS AT THIS TIER
+────────────────────────────────────────
+  ✓ High distribution multiplier (1.2x)
+  ✓ Early access to new features
+  ✓ Fed Elite badge on dashboard
+```
+
+**Why This Works:**
+- Aggregates ALL existing systems (tiers, streaks, engagement, seasons)
+- Creates a single, understandable score everyone knows (credit scores)
+- Non-transferable = must be earned, can't be bought
+- Trustworthiness index = behavioral pattern recognition
+- Transparent formula (no black box algorithms)
+- Future-proofed for undercollateralized lending features
+
+**Key Differentiators from Other Protocols:**
+- **Providence**: Privacy-focused, cross-chain → $FED is Solana-native, transparent formula
+- **Soulbound Tokens**: NFT-based → $FED is data-based (no NFT needed)
+- **zkCredit**: ZK-proof verification → $FED is fully open and auditable
+
+**File Created:** `/home/ubuntu/fed/script/reputation-score.ts`
+
+**Effort:** ✅ Complete
+**Impact:** Very High (trust + differentiation + future lending)
+
+---
+
 ## Research Complete Summary
 
 After analyzing **12 major protocols/sectors**, clear patterns emerge:
@@ -1038,7 +1157,9 @@ After analyzing **12 major protocols/sectors**, clear patterns emerge:
 | **Jupiter** | Active staking rewards | ✅ Engagement Bonus (done) |
 | **Jupiter** | Annual celebration events | "Feduary" event (to implement) |
 | **Uniswap** | Fee switch + burns | "Fed Buyback & Burn" (optional) |
-| **Meteora** | Seasonal distributions | "Fed Season Pass" (to implement) |
+| **Meteora** | Seasonal distributions | ✅ "Fed Season Pass" (done) |
+| **Providence** | On-chain credit scoring | ✅ "Fed Credit Score" (done) |
+| **Soulbound Tokens** | Non-transferable reputation | ✅ Fed reputation (done) |
 
 $FED has already learned from the 2021-2023 failures and is adopting the 2025-2026 winner playbook. The fee switch revolution validates our approach - we were early! The money printer goes BRRR - sustainably.
 
@@ -1046,4 +1167,4 @@ $FED has already learned from the 2021-2023 failures and is adopting the 2025-20
 
 *This document is continuously updated by Ralph as he researches and brainstorms.*
 
-Last Updated: 2026-01-21 (Added 2026 fee switch research: Uniswap UNIfication, Jupiter JupUSD, Meteora MET)
+Last Updated: 2026-01-21 (Added 2026 reputation research: Fed Credit Score, Providence, SBTs, zkCredit)
