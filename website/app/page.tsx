@@ -91,22 +91,20 @@ export default async function Dashboard() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
-        <div className="card rounded-xl p-6 hover:border-[#22c55e]/30 transition-all duration-300 hover-lift glow-green">
+        <div className="card rounded-xl p-6 hover:border-[#22c55e]/30 transition-all duration-300 hover-lift glow-green stat-shine">
           <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs">Total Distributed</div>
           <div
-            className="text-3xl font-bold text-[#22c55e] font-mono stat-number"
-            style={{ textShadow: '0 0 20px rgba(34, 197, 94, 0.5), 0 0 40px rgba(34, 197, 94, 0.2)' }}
+            className="text-3xl font-bold text-[#22c55e] font-mono stat-number text-glow-green"
           >
             ${stats.totalDistributed}
           </div>
           <div className="text-gray-600 text-xs mt-2">USD1 to holders</div>
         </div>
 
-        <div className="card rounded-xl p-6 hover:border-[#c9a227]/30 transition-all duration-300 hover-lift glow-gold">
+        <div className="card rounded-xl p-6 hover:border-[#c9a227]/30 transition-all duration-300 hover-lift glow-gold stat-shine">
           <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs">Distribution Runs</div>
           <div
-            className="text-3xl font-bold text-[#c9a227] font-mono stat-number"
-            style={{ textShadow: '0 0 20px rgba(201, 162, 39, 0.4)' }}
+            className="text-3xl font-bold text-[#c9a227] font-mono stat-number text-glow-gold"
           >
             {stats.distributions}
           </div>

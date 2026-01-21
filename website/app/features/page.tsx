@@ -456,7 +456,7 @@ export default function FeaturesPage() {
           href="https://jup.ag/swap/SOL-132STreShuLRNgkyF1QECv37yP9Cdp8JBAgnKBgKafed"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block bg-[#c9a227] text-black px-6 py-3 rounded-lg font-bold hover:bg-[#e0b82a] transition-colors"
+          className="inline-block bg-[#c9a227] text-black px-6 py-3 rounded-lg font-bold hover:bg-[#e0b82a] transition-colors btn-glow"
         >
           Buy $FED on Jupiter
         </a>

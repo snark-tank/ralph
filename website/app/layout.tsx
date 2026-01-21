@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 function Navigation() {
   return (
-    <nav className="border-b border-[#222] bg-[#0d0d0d]">
+    <nav className="border-b border-[#222] bg-[#0d0d0d] header-glow">
       <div className="max-w-6xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
@@ -68,7 +68,7 @@ function Navigation() {
               href="https://fed.markets"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#c9a227] text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#e0b82a] transition-colors"
+              className="bg-[#c9a227] text-black px-4 py-2 rounded-lg text-sm font-medium hover:bg-[#e0b82a] transition-colors btn-glow"
             >
               fed.markets
             </a>
@@ -124,7 +124,7 @@ function Footer() {
                 href={`https://jup.ag/swap/SOL-${FED_TOKEN_ADDRESS}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#c9a227] text-black px-3 py-1 rounded text-xs font-medium hover:bg-[#e0b82a]"
+                className="bg-[#c9a227] text-black px-3 py-1 rounded text-xs font-medium hover:bg-[#e0b82a] btn-glow"
               >
                 Buy $FED
               </a>

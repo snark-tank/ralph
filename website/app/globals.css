@@ -35,10 +35,10 @@ body::before {
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
-  opacity: 0.04;
+  opacity: 0.06;
   pointer-events: none;
   z-index: -1;
-  filter: grayscale(30%) sepia(15%);
+  filter: grayscale(20%) sepia(10%);
 }
 
 /* Subtle vignette effect */
@@ -383,4 +383,131 @@ a.link-gold:hover::after {
   background: rgba(168, 85, 247, 0.15);
   color: #a855f7;
   border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+/* Premium header glow effect */
+.header-glow {
+  position: relative;
+}
+
+.header-glow::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.4), transparent);
+}
+
+/* Stat card shine effect */
+@keyframes stat-shine {
+  0% {
+    transform: translateX(-100%) skewX(-15deg);
+  }
+  100% {
+    transform: translateX(200%) skewX(-15deg);
+  }
+}
+
+.stat-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.03),
+    transparent
+  );
+  animation: stat-shine 4s ease-in-out infinite;
+}
+
+/* Button hover glow */
+.btn-glow {
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.btn-glow:hover {
+  box-shadow: 0 0 20px rgba(201, 162, 39, 0.4);
+  transform: translateY(-1px);
+}
+
+/* Table row hover highlight */
+tr.row-highlight:hover {
+  background: linear-gradient(90deg, rgba(201, 162, 39, 0.05), transparent);
+}
+
+/* Section divider */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(34, 34, 34, 0.8), transparent);
+  margin: 2rem 0;
+}
+
+/* Subtle text glow for important numbers */
+.text-glow-green {
+  text-shadow: 0 0 20px rgba(34, 197, 94, 0.5);
+}
+
+.text-glow-gold {
+  text-shadow: 0 0 20px rgba(201, 162, 39, 0.4);
+}
+
+/* Animated border for featured cards */
+@keyframes border-glow {
+  0%, 100% {
+    border-color: rgba(201, 162, 39, 0.3);
+  }
+  50% {
+    border-color: rgba(201, 162, 39, 0.6);
+  }
+}
+
+.border-glow-animated {
+  animation: border-glow 3s ease-in-out infinite;
+}
+
+/* Smooth content fade-in */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in-up 0.4s ease-out forwards;
+}
+
+/* Link underline animation */
+.link-underline {
+  position: relative;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.2s ease;
+}
+
+.link-underline:hover::after {
+  width: 100%;
 }

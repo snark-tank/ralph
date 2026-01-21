@@ -1,14 +1,32 @@
 // Embedded stats - updated at build time or via script
 // This provides fallback data when the local JSON file is not accessible (e.g., on Vercel)
 // Run `npm run update-stats` to refresh these values from the source
-// Last updated: 2026-01-21T19:33:42.875Z
+// Last updated: 2026-01-21T19:38:25.479Z
 
 export const EMBEDDED_STATS = {
-  totalDistributed: 40320.70,
-  distributionCount: 188,
+  totalDistributed: 40425.71,
+  distributionCount: 191,
   maxRecipients: 1828,
-  lastUpdated: "2026-01-21T19:33:42.875Z",
+  lastUpdated: "2026-01-21T19:38:25.479Z",
   recentDistributions: [
+    {
+      date: "2026-01-21T19:38:25.479Z",
+      amount: 12.86,
+      recipients: 216,
+      txSignature: "3mKbKDWZa8Je2Po1Dcg8owxj8Vf6McNqNWM3RkTpCwcYqMZBYw89hGfB9Pqg4NdGzUSGcgV8zpFbSyWavzq9GZup"
+    },
+    {
+      date: "2026-01-21T19:36:25.017Z",
+      amount: 17.65,
+      recipients: 253,
+      txSignature: "3BqDDFYWBBMcYda1vaYSboW5y4ptWUN5v4bjvgRLvPE2fqwaHTH3Prv8BKeqkc442sUTwNE8xArU6NgdyRK96caL"
+    },
+    {
+      date: "2026-01-21T19:35:29.007Z",
+      amount: 74.49,
+      recipients: 410,
+      txSignature: "4txzLR1WQSY6s5gx8yY96i21tLSJr59QzkLpDja47ut68UxHcR3QFqXBauvw7jGkiv8GTLwK3Kpm73X5LWKFfaMK"
+    },
     {
       date: "2026-01-21T19:33:42.875Z",
       amount: 32.14,
@@ -50,24 +68,6 @@ export const EMBEDDED_STATS = {
       amount: 15.21,
       recipients: 223,
       txSignature: "5YGbASBTf8K29bYGh1RPP8F1pgTAbszxoHfSYvKfcNsHpMpukbpmjbPTq3dVzmhrSKRukyB2doy33AR5stNJXXUS"
-    },
-    {
-      date: "2026-01-21T19:10:21.118Z",
-      amount: 15.31,
-      recipients: 225,
-      txSignature: "5nNjuCHawZWRzZyTKHyhGomZTBVvrSLJiGJPHpS7o3KJjZGrMYfnVmT76zZDoQLAfbVDQK9DTfyBYhGRWWYJd2AC"
-    },
-    {
-      date: "2026-01-21T19:08:24.855Z",
-      amount: 20.04,
-      recipients: 262,
-      txSignature: "8iuxrAkJ1WfeKkv3JX3mGFtmWHYmcJuVVdWvfSd9Kr42QTemZfr71jQmMTguU9AKzuLz2VriUVG9LwvANEKwXBW"
-    },
-    {
-      date: "2026-01-21T19:06:23.093Z",
-      amount: 18.04,
-      recipients: 248,
-      txSignature: "Jx2BozXgC13NJ1ypBXGsCtJWMszvrvu3SFQM8HbhYqRwx2K8TB2QS8w8TQ4rj4TLveaKpRP9RajkbdmrzzA6YNm"
     }
   ]
 };
