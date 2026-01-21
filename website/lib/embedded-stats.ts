@@ -1,14 +1,32 @@
 // Embedded stats - updated at build time or via script
 // This provides fallback data when the local JSON file is not accessible (e.g., on Vercel)
 // Run `npm run update-stats` to refresh these values from the source
-// Last updated: 2026-01-21T19:38:25.479Z
+// Last updated: 2026-01-21T19:44:32.813Z
 
 export const EMBEDDED_STATS = {
-  totalDistributed: 40425.71,
-  distributionCount: 191,
+  totalDistributed: 40513.91,
+  distributionCount: 194,
   maxRecipients: 1828,
-  lastUpdated: "2026-01-21T19:38:25.479Z",
+  lastUpdated: "2026-01-21T19:44:32.813Z",
   recentDistributions: [
+    {
+      date: "2026-01-21T19:44:32.813Z",
+      amount: 57.78,
+      recipients: 409,
+      txSignature: "3CcCdDt2DmwVTM9ETfWot849j25ABpcgSAb5gtbRgs4xAxrnN5CEiaU2yEkvarmuc2QrjBg9znWuxtfwThdZdJGX"
+    },
+    {
+      date: "2026-01-21T19:42:27.633Z",
+      amount: 11.71,
+      recipients: 205,
+      txSignature: "2iDDp8Bp5oPAAyS1WpChz7Hw9C5xyGwiFmy8hCSSgqroZyNWLrvkRk73D9uZy7MkU1xnjqAECX4SRPt5NLZN8TSN"
+    },
+    {
+      date: "2026-01-21T19:41:51.255Z",
+      amount: 18.72,
+      recipients: 235,
+      txSignature: "wcXMfGRkXEwcVHAcuoyuCraMkefPFKxNcWrK7THZKDhkJ1NWM6L1jVBMaPcn9TSLuVfhSxcwB3PqZxvMhV1rjNy"
+    },
     {
       date: "2026-01-21T19:38:25.479Z",
       amount: 12.86,
@@ -50,24 +68,6 @@ export const EMBEDDED_STATS = {
       amount: 57.59,
       recipients: 403,
       txSignature: "4eYzYandrYZr9PZpVA4djwsobLFk6tq1JJdybFQ69ZFhcdoRGpgpt4kH9uWqmUXNWWURDTMTGqVEN8U3rsCSwbsD"
-    },
-    {
-      date: "2026-01-21T19:18:26.357Z",
-      amount: 30.08,
-      recipients: 311,
-      txSignature: "5LnDstVFkvqZPXDZQRnvHAvAvpxJFSTsSH2a9HX5pzGeL2fBDuBdxgD7WqthWPLXaud6QXUtFrcvegaTMqaWPTZy"
-    },
-    {
-      date: "2026-01-21T19:16:30.408Z",
-      amount: 61.56,
-      recipients: 406,
-      txSignature: "3t1ufBffzdRn44LDgMurW6dqbeBK2jbYfDgaiaJZCaHYmWMwmUx6jgTQox3KoZheTXQmeXqNKp4n4Q3oi48JLr9"
-    },
-    {
-      date: "2026-01-21T19:12:22.611Z",
-      amount: 15.21,
-      recipients: 223,
-      txSignature: "5YGbASBTf8K29bYGh1RPP8F1pgTAbszxoHfSYvKfcNsHpMpukbpmjbPTq3dVzmhrSKRukyB2doy33AR5stNJXXUS"
     }
   ]
 };
