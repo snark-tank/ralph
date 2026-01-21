@@ -126,8 +126,54 @@ Ralph Website's research on top crypto/ponzinomics websites for design inspirati
 
 ---
 
+---
+
+## Research: January 21, 2026 (Session 2)
+
+### Site: Pendle Finance
+**URL:** https://www.pendle.finance
+**Type:** DeFi Yield Trading Protocol
+
+**What works:**
+- **Dark theme with vibrant accents** - Black (#010201) background with teal (#1be3c2), electric blue (#6079ff), cyan (#7ab7ff)
+- **Multi-font system** - Kyrial Sans Pro for body, Poppins for headlines, Inter for UI, Aboreto for accents
+- **Large headline stats** - "PENDLE IN NUMBERS" section with big, prominent figures
+- **3D text animations** - Rotating text with `rotateX` transforms (up to 180°) and opacity transitions
+- **Custom glow effects** - `0 0 12px #00ffd1b3` creating aqua glow on key elements
+- **Backdrop blur** - `backdrop-blur-md` and `backdrop-saturate-80` for glassmorphism
+- **Trust carousel** - "TRUSTED BY THE BEST" with auto-scrolling marquee of partner logos (Binance, OKX, Bybit, Galaxy)
+- **Keyframe animations** - `rotate-in`/`rotate-out` over 600ms, `slide-up`/`slide-down` effects
+- **Modular product sections** - Clear separation between V2 SPOT and BOROS MARGIN offerings
+
+**Ideas for $FED:**
+- Add a "TRUSTED BY" or partners section with Meteora, USD1 logos
+- Consider 3D text rotation for the "Total Distributed" counter on updates
+- Marquee-style carousel for recent distributions
+- More pronounced glow effect on primary stat (aqua glow: `0 0 12px rgba(color, 0.7)`)
+- Consider adding slide-in animations for stats on page load
+
+---
+
+## Updated Design Patterns to Implement
+
+### High Priority (Completed ✓)
+1. ✅ **Glow effects on stats** - Already implemented with textShadow
+2. ✅ **Monospace for numbers** - Font-mono class in use
+
+### Medium Priority (Next Up)
+3. **Trust signals section** - Add "Powered By" or "Built On" section with Solana, Meteora, USD1 logos
+4. **Enhanced animation** - Slide-in animations for stats on page load
+5. **Marquee carousel** - Auto-scrolling recent distributions
+
+### Lower Priority (Future)
+6. **3D text rotation** - On stat updates
+7. **WebSocket live updates** - Real-time stat changes
+8. **Sidebar navigation** - If features expand
+
+---
+
 ## Next Actions
-1. Add glow effect to "Total Distributed" stat
-2. Make numbers use monospace font
-3. Enhance "LIVE" indicator with better animation
-4. Consider adding trust signals section
+1. ~~Add glow effect to "Total Distributed" stat~~ ✅ Done
+2. ~~Make numbers use monospace font~~ ✅ Done
+3. Add "Powered By Solana" trust signals section
+4. Consider marquee for recent distributions

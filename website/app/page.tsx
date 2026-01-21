@@ -329,6 +329,63 @@ export default async function Dashboard() {
         </p>
       </div>
 
+      {/* Built On Section - Trust Signals */}
+      <div className="mt-8 text-center">
+        <p className="text-gray-500 text-sm mb-4 uppercase tracking-wider">Built On</p>
+        <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+          {/* Solana */}
+          <a
+            href="https://solana.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors group"
+          >
+            <svg className="w-6 h-6" viewBox="0 0 128 128" fill="currentColor">
+              <path d="M93.94 42.63H13.78c-1.75 0-3.3 1.06-3.96 2.67a4.256 4.256 0 00.83 4.6l20.16 20.16c1.29 1.29 3.05 2.02 4.88 2.02h80.16c1.75 0 3.3-1.06 3.96-2.67.66-1.62.29-3.47-.83-4.6L98.82 44.65c-1.29-1.29-3.05-2.02-4.88-2.02z"/>
+              <path d="M93.94 79.93H13.78c-1.75 0-3.3 1.06-3.96 2.67-.66 1.62-.29 3.47.83 4.6l20.16 20.16c1.29 1.29 3.05 2.02 4.88 2.02h80.16c1.75 0 3.3-1.06 3.96-2.67.66-1.62.29-3.47-.83-4.6L98.82 81.95c-1.29-1.29-3.05-2.02-4.88-2.02z"/>
+              <path d="M98.82 18.68L78.66 38.84a4.256 4.256 0 00-.83 4.6c.66 1.62 2.21 2.67 3.96 2.67h80.16c1.83 0 3.59-.73 4.88-2.02l20.16-20.16c1.12-1.12 1.49-2.98.83-4.6-.66-1.62-2.21-2.67-3.96-2.67H103.7c-1.83 0-3.59.73-4.88 2.02z"/>
+            </svg>
+            <span className="font-medium">Solana</span>
+          </a>
+
+          {/* Meteora */}
+          <a
+            href="https://meteora.ag"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-gray-400 hover:text-[#14F195] transition-colors group"
+          >
+            <svg className="w-6 h-6" viewBox="0 0 32 32" fill="currentColor">
+              <circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" strokeWidth="2"/>
+              <circle cx="16" cy="16" r="6"/>
+            </svg>
+            <span className="font-medium">Meteora</span>
+          </a>
+
+          {/* USD1 */}
+          <a
+            href="https://solscan.io/token/USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-gray-400 hover:text-[#22c55e] transition-colors group"
+          >
+            <span className="text-xl">💵</span>
+            <span className="font-medium">USD1 Stablecoin</span>
+          </a>
+
+          {/* Helius */}
+          <a
+            href="https://helius.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-gray-400 hover:text-orange-400 transition-colors group"
+          >
+            <span className="text-xl">☀️</span>
+            <span className="font-medium">Helius RPC</span>
+          </a>
+        </div>
+      </div>
+
       {/* Current Focus */}
       <div className="mt-8 bg-gradient-to-r from-[#c9a227]/10 to-transparent border border-[#c9a227]/30 rounded-xl p-6">
         <h2 className="text-xl font-bold text-[#c9a227] mb-3 flex items-center gap-2">
