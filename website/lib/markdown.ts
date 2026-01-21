@@ -67,84 +67,53 @@ export async function getGitLog(limit: number = 20): Promise<{ hash: string; dat
   }
 }
 
-export interface DistributionLog {
+// Authoritative source for distribution history
+const DISTRIBUTION_HISTORY_PATH = '/home/ubuntu/fed/src/token-distribution-history.json';
+
+interface Distribution {
   timestamp: string;
-  usd1Distributed: number;
-  recipients: number;
-  status: 'success' | 'failed' | 'skipped';
+  totalAmount: number;
+  recipientCount: number;
+  txSignatures: string[];
 }
 
-const LOGS_DIR = '/home/ubuntu/fed/script/distribution-logs';
-
-function parseLogFile(content: string, filename: string): DistributionLog | null {
-  try {
-    // Extract timestamp from filename: unified-run-2026-01-21T04-52-03-471Z.log
-    const timestampMatch = filename.match(/unified-run-(\d{4}-\d{2}-\d{2}T[\d-]+Z)\.log/);
-    const timestamp = timestampMatch
-      ? timestampMatch[1].replace(/-(\d{2})-(\d{2})-(\d{3})Z/, ':$1:$2.$3Z')
-      : new Date().toISOString();
-
-    // Check if distribution was skipped
-    if (content.includes('Below minimum threshold') || content.includes('Skipping distribution')) {
-      return { timestamp, usd1Distributed: 0, recipients: 0, status: 'skipped' };
-    }
-
-    // Parse successful distribution
-    const distributedMatch = content.match(/USD1 distributed: ([\d.]+)/);
-    const recipientsMatch = content.match(/Recipients: (\d+)/);
-
-    if (distributedMatch && recipientsMatch) {
-      return {
-        timestamp,
-        usd1Distributed: parseFloat(distributedMatch[1]),
-        recipients: parseInt(recipientsMatch[1]),
-        status: 'success',
-      };
-    }
-    return null;
-  } catch {
-    return null;
-  }
+interface DistributionHistory {
+  totalDistributed: number;
+  distributions: Distribution[];
 }
 
-function getStatsFromLogs(): {
+function getStatsFromHistory(): {
   totalDistributed: number;
   distributions: number;
   holders: number;
-  recentDistributions: { date: string; amount: number; recipients: number }[];
+  recentDistributions: { date: string; amount: number; recipients: number; txSignature?: string }[];
 } | null {
   try {
-    if (!fs.existsSync(LOGS_DIR)) return null;
+    if (!fs.existsSync(DISTRIBUTION_HISTORY_PATH)) return null;
 
-    const files = fs.readdirSync(LOGS_DIR)
-      .filter(f => f.startsWith('unified-run-') && f.endsWith('.log'))
-      .sort()
-      .reverse();
+    const content = fs.readFileSync(DISTRIBUTION_HISTORY_PATH, 'utf8');
+    const history: DistributionHistory = JSON.parse(content);
 
-    let totalDistributed = 0;
-    let totalDistributions = 0;
-    let maxRecipients = 0;
-    const recent: { date: string; amount: number; recipients: number }[] = [];
+    // Get recent distributions (last 10)
+    const recentDistributions = history.distributions
+      .slice(-10)
+      .reverse()
+      .map(d => ({
+        date: d.timestamp,
+        amount: d.totalAmount,
+        recipients: d.recipientCount,
+        txSignature: d.txSignatures[0] || undefined,
+      }));
 
-    for (const file of files) {
-      const content = fs.readFileSync(path.join(LOGS_DIR, file), 'utf8');
-      const parsed = parseLogFile(content, file);
+    // Find max recipients
+    const maxRecipients = Math.max(...history.distributions.map(d => d.recipientCount));
 
-      if (parsed?.status === 'success' && parsed.usd1Distributed > 0) {
-        totalDistributed += parsed.usd1Distributed;
-        totalDistributions++;
-        if (parsed.recipients > maxRecipients) maxRecipients = parsed.recipients;
-        if (recent.length < 10) {
-          recent.push({
-            date: parsed.timestamp,
-            amount: parsed.usd1Distributed,
-            recipients: parsed.recipients,
-          });
-        }
-      }
-    }
-
-    return { totalDistributed, distributions: totalDistributions, holders: maxRecipients, recentDistributions: recent };
+    return {
+      totalDistributed: history.totalDistributed,
+      distributions: history.distributions.length,
+      holders: maxRecipients,
+      recentDistributions,
+    };
   } catch {
     return null;
   }
@@ -156,6 +125,13 @@ async function getStatsFromRedis(): Promise<{
   holders: number;
   recentDistributions: { date: string; amount: number; recipients: number; txSignature?: string }[];
 } | null> {
+  // First try authoritative local file (fastest, most accurate)
+  const historyStats = getStatsFromHistory();
+  if (historyStats && historyStats.distributions > 0) {
+    return historyStats;
+  }
+
+  // Fall back to Redis if local file not available
   const redisUrl = process.env.REDIS_URL;
   if (!redisUrl) return null;
 
@@ -258,21 +234,21 @@ export async function getStats(): Promise<{
     };
   }
 
-  // Try local logs (for local/dev environment)
-  const localStats = getStatsFromLogs();
-  if (localStats && localStats.distributions > 0) {
+  // Try authoritative history file (for local/dev environment)
+  const historyStats = getStatsFromHistory();
+  if (historyStats && historyStats.distributions > 0) {
     return {
-      totalDistributed: localStats.totalDistributed.toLocaleString('en-US', {
+      totalDistributed: historyStats.totalDistributed.toLocaleString('en-US', {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
       }),
-      distributions: localStats.distributions,
-      holders: localStats.holders,
-      lastUpdate: localStats.recentDistributions[0]?.date
-        ? new Date(localStats.recentDistributions[0].date).toLocaleString()
+      distributions: historyStats.distributions,
+      holders: historyStats.holders,
+      lastUpdate: historyStats.recentDistributions[0]?.date
+        ? new Date(historyStats.recentDistributions[0].date).toLocaleString()
         : new Date().toLocaleString(),
-      recentDistributions: localStats.recentDistributions,
-      fedFundsRate: calculateFedFundsRate(localStats.recentDistributions),
+      recentDistributions: historyStats.recentDistributions,
+      fedFundsRate: calculateFedFundsRate(historyStats.recentDistributions),
     };
   }
 
