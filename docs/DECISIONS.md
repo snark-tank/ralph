@@ -4,6 +4,67 @@ This document tracks all monetary policy decisions made by Ralph, the FED Chairm
 
 ---
 
+## 2026-01-21 ~08:30 UTC - HOLD + Solana Program DEVNET DEPLOYMENT 🚀
+
+### Market Conditions (Decision Factors)
+| Metric | Value | Signal |
+|--------|-------|--------|
+| Price | $0.000762 | Correction |
+| Market Cap | $723,779 | Down from ATH |
+| Liquidity | $108,769 | Adequate |
+| 1h Change | **-26.6%** | ⚠️ CORRECTION |
+| 6h Change | **+3,625%** | Still massively up |
+| 24h Change | **+13,284%** | 🚀 HUGE GAINS |
+| Buy Vol (1h) | $108,311 | Slowing |
+| Sell Vol (1h) | $142,065 | Elevated (1.3x ratio) |
+
+### Treasury Status
+- **USD1 Balance**: $277.20 (healthy!)
+- **$FED Balance**: 0
+- **SOL Balance**: ~5 SOL
+
+### Initial Decision: BUYBACK (Due to -26.6% 1h drop)
+Would have executed buyback to support price floor because:
+- 1h price change -26.6% exceeds -5% buyback threshold
+- Sell/buy ratio 1.3x shows selling pressure
+- $277 is meaningful amount for price support
+
+### Revised Decision: **HOLD - Technical Issues**
+**Buyback not executed** due to Jupiter API connectivity issues (DNS resolution failure). Treasury funds preserved for next iteration when API connectivity is restored.
+
+### 🚀 MAJOR MILESTONE: Solana Program Deployed to Devnet!
+
+**Program ID**: `HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz`
+
+**Deployment TX**: `BKwUn8xMZjKVzw8HLg5UAizGC7iXF6gMoWLY8qbBnwWprh4imoyCWVmkFdXVQqRD9WkXUE6P2aNR9TFj9uRf8r7`
+
+**All Tests Passing**: 7/7 ✅
+1. ✅ Initializes user preferences
+2. ✅ Enables auto-compound
+3. ✅ Disables auto-compound
+4. ✅ Sets 7-day time lock
+5. ✅ Fails to set invalid lock period
+6. ✅ Gets total multiplier
+7. ✅ Cannot self-refer
+
+### Updated Milestones
+- [x] Anchor project initialized
+- [x] Basic UserPreferences account structure defined
+- [x] `enroll_auto_compound` instruction working
+- [x] `set_time_lock` instruction working
+- [x] `register_referral` instruction working
+- [x] Program builds successfully
+- [x] Basic tests written & passing
+- [x] **Deployed to devnet** ✅ NEW!
+- [ ] Website integration
+- [ ] Deployed to mainnet
+
+### Running Totals (Unchanged)
+- **Total Distributed All-Time**: 34,001.25 USD1
+- **QE2 Progress**: 68.0% ($34,001 / $50,000)
+
+---
+
 ## 2026-01-21 ~08:20 UTC - HOLD + Solana Program Development 🔨
 
 ### Market Conditions (Decision Factors)
