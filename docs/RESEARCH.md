@@ -9,7 +9,7 @@ Ralph's deep dives into successful flywheel tokenomics.
 | Protocol | Status | Key Mechanic |
 |----------|--------|--------------|
 | OHM / Olympus DAO | ✅ Complete | (3,3) game theory, bonding |
-| SAFEMOON | 📋 Pending | Reflections, auto-LP |
+| SAFEMOON | ✅ Complete | Reflections, auto-LP |
 | HEX | 📋 Pending | Time-locked staking |
 | DRIP Network | 📋 Pending | Daily ROI, referrals |
 | Tomb Finance | 📋 Pending | Algorithmic pegging |
@@ -118,6 +118,123 @@ The core $FED model is BETTER than OHM because:
 - [CoinDesk - Olympus DAO Future of Money or Ponzi](https://www.coindesk.com/policy/2021/12/05/olympus-dao-might-be-the-future-money-or-it-might-be-a-ponzi)
 
 ---
+
+## SAFEMOON
+
+**Date Researched:** 2026-01-21
+**Status:** Dead (Chapter 7 Bankruptcy, Executives Charged with Fraud)
+
+### Overview
+
+SafeMoon launched in March 2021 as a "deflationary reflection token with automated liquidity acquisition" on the BNB Chain. It became one of the most hyped meme tokens of the 2021 bull run, reaching a $6 billion market cap at its peak. The core innovation was "reflection tokenomics" - automatic redistribution of transaction fees to holders. However, the project ended in disaster: SEC fraud charges, DOJ arrests, and Chapter 7 bankruptcy in December 2023. CEO John Karony was convicted of conspiracy to commit securities fraud, wire fraud, and money laundering.
+
+### Key Mechanics
+
+1. **Static Reflections (5% Transaction Tax)**
+   - Every buy/sell transaction charged 10% fee
+   - 5% redistributed proportionally to ALL existing holders
+   - Holders earn passive rewards simply by holding
+   - More tokens you hold = more reflection rewards
+   - No staking required - rewards accumulate automatically in wallet
+
+2. **Automatic Liquidity Pool (Auto-LP)**
+   - Remaining 5% split: half sold for BNB, half paired as liquidity
+   - Smart contract automatically adds to PancakeSwap LP
+   - Threshold trigger: accumulates until 500B tokens, then auto-converts
+   - Goal: Build permanent liquidity, reduce volatility
+
+3. **SafeMoon V2 Updated Tokenomics**
+   - 4% reflection to holders
+   - 3% to liquidity pool
+   - 2% to burn address (deflationary)
+   - 1% to "Ecosystem Growth Fund"
+   - 1000:1 token consolidation to reduce supply
+
+4. **Technical Implementation (RFI Model)**
+   - Based on Reflect Finance (RFI) smart contract
+   - Dual accounting: `_rOwned` (reflection) and `_tOwned` (token) balances
+   - Fee calculated and distributed during transfer function
+   - LP tokens sent to contract owner wallet (security flaw)
+
+### What Worked
+
+- **Viral Marketing**: "SafeMoon Army" cult following created massive FOMO
+- **Simple Value Prop**: "Hold and earn" was easy to understand
+- **Passive Income Appeal**: Watching token balance grow was addictive
+- **Disincentivized Selling**: 10% tax made short-term trading unattractive
+- **Auto-LP Building**: Successfully accumulated deep liquidity pools
+- **Mobile App/Wallet**: Created user-friendly ecosystem (before collapse)
+
+### What Failed
+
+- **Outright Fraud**: Founders stole $200M+ for luxury cars, homes, travel
+- **Unlocked Liquidity**: Promised "locked LP" was never actually locked
+- **SEC Violations**: Sold unregistered securities, made false statements
+- **Unsustainable Model**: Needed constant new money (Ponzi structure)
+- **Smart Contract Bugs**: LP mechanism leaked ~$2M in BNB to contract
+- **Centralized Control**: Owner could drain LP at any time
+- **99.9% Price Collapse**: From peak to bankruptcy filing
+- **Leadership Failure**: CEO arrested, CTO testified against him, creator fled to Russia
+
+### The Fraud Timeline
+
+- **March 2021**: SafeMoon launches, explodes in popularity
+- **May 2021**: Peaks at $6B market cap
+- **2021-2023**: Gradual decline, broken promises (exchange, blockchain never delivered)
+- **November 2023**: SEC charges filed, DOJ arrests CEO and CTO
+- **December 2023**: Chapter 7 bankruptcy filed
+- **2024**: CEO Karony convicted by Brooklyn jury
+- **Creator Kyle Nagy**: Remains at large, believed to be in Russia
+
+### Lessons for $FED
+
+**DO Adopt (Modified):**
+- ✅ Simple "hold and earn" messaging - but with REAL yield, not Ponzi mechanics
+- ✅ Disincentivize short-term flipping through fee structure
+- ✅ Build community identity ("FED Army" parallel to "SafeMoon Army")
+- ✅ Mobile-friendly interface for tracking rewards
+
+**DON'T Adopt:**
+- ❌ Reflection tax on every transaction - kills trading volume long-term
+- ❌ Complex smart contract mechanics that can be exploited
+- ❌ Centralized control over liquidity (use locked/burned LP)
+- ❌ Promises of features that don't exist yet
+- ❌ Any structure that requires new money to pay old holders
+
+**Key Insight for $FED:**
+SafeMoon's reflection model was innovative but FUNDAMENTALLY FLAWED because:
+1. Rewards came from transaction taxes, not external revenue
+2. As volume decreased, rewards decreased → death spiral
+3. High tax killed organic trading activity
+4. Required constant new buyers (Ponzi)
+
+**$FED's model is superior because:**
+1. Rewards come from REAL trading fees, not holder taxes
+2. No tax on transfers - encourages trading volume
+3. USD1 stablecoin rewards maintain value
+4. Sustainable as long as DEX volume exists
+5. No smart contract custody of LP (safer architecture)
+
+### Smart Contract Warning
+
+The SafeMoon contract had several critical vulnerabilities that enabled the fraud:
+- LP tokens sent to owner wallet, not locked
+- Owner could bypass transfer restrictions
+- No timelock on admin functions
+- Centralized upgrade capability
+
+**For $FED**: The current architecture of distributing from trading fees WITHOUT holding user funds in smart contracts is inherently safer than SafeMoon's model.
+
+### Sources
+
+- [SEC Press Release - SafeMoon Fraud Charges](https://www.sec.gov/newsroom/press-releases/2023-229)
+- [CoinDesk - SafeMoon Execs Arrested](https://www.coindesk.com/policy/2023/11/01/sec-charges-safemoon-team-with-fraud-offering-unregistered-crypto-securities)
+- [Fortune - SEC Says Executives Withdrew $200M](https://fortune.com/crypto/2023/11/01/sec-allegations-safemoon-200-million-mcclarens-luxury-homes-travel/)
+- [CoinBureau - SafeMoon Review](https://coinbureau.com/review/safemoon/)
+- [Medium - SafeMoon's Broken Auto LP](https://medium.com/@shillmoondev/safemoons-broken-automatic-lp-and-how-to-fix-it-1bea156bbda5)
+- [OKX - SafeMoon Tokenomics](https://www.okx.com/en-us/learn/safemoon-smoon-tokenomics-risks-future)
+- [CoinMarketCap - What Is SafeMoon](https://coinmarketcap.com/academy/article/what-is-safemoon-safemoon)
+- [Wikipedia - SafeMoon](https://en.wikipedia.org/wiki/SafeMoon)
 
 ---
 
