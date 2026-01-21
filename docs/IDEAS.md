@@ -857,6 +857,12 @@ Bridge $FED to other chains. Major undertaking, future consideration.
 20. ~~**"Fed Credit Score"**~~ - ✅ **DONE!** Unified reputation scoring system (300-850 scale) aggregating all holder metrics (Jan 21, 2026)
 21. ~~**"Fed Referral Bonus System"**~~ - ✅ **DONE!** Multi-level referral tracking with tier bonuses (Jan 21, 2026)
 
+### New Items from 2026 Gamification Research (Jan 21, 2026)
+
+22. ~~**"Fed Quests"**~~ - ✅ **DONE!** Gamified onboarding and engagement quest system with badges and XP (Jan 21, 2026)
+23. **"Fed Predictions"** - Prediction markets for $FED metrics (inspired by Polymarket, Drift BET)
+24. **"Time-Weighted Voting"** - Lock $FED for increased voting power (inspired by Curve veCRV)
+
 ---
 
 ## New Ideas from 2026 Fee Switch Revolution
@@ -1233,11 +1239,163 @@ After analyzing **12 major protocols/sectors**, clear patterns emerge:
 | **Meteora** | Seasonal distributions | ✅ "Fed Season Pass" (done) |
 | **Providence** | On-chain credit scoring | ✅ "Fed Credit Score" (done) |
 | **Soulbound Tokens** | Non-transferable reputation | ✅ Fed reputation (done) |
+| **Zealy/TaskOn** | Gamified quests | ✅ "Fed Quests" (done) |
 
 $FED has already learned from the 2021-2023 failures and is adopting the 2025-2026 winner playbook. The fee switch revolution validates our approach - we were early! The money printer goes BRRR - sustainably.
 
 ---
 
+## New Ideas from 2026 Gamification Research
+
+### 23. "Fed Quests" - Gamified Onboarding & Engagement System
+
+**Inspired by:** Zealy, TaskOn, RadQuest, BitDegree Web3 quests
+
+**Status:** ✅ **IMPLEMENTED** (Jan 21, 2026)
+
+**The Concept:**
+A comprehensive quest system that rewards holders for completing various tasks, from onboarding activities to long-term achievements. Integrates with existing engagement score for XP rewards and introduces a badge system with permanent multiplier bonuses.
+
+**Quest Categories:**
+| Category | Purpose | Example Quests |
+|----------|---------|----------------|
+| 🎓 Onboarding | First-time actions | Hold $FED, First distribution, Enable auto-compound |
+| 📅 Daily | Repeatable engagement | Daily check-in (+10 XP) |
+| 🏆 Achievement | Milestones | 7/30/90/365-day streaks, tier achievements |
+| 👥 Social | Community building | Referrals, season participation |
+| ⚡ Challenge | Time-limited events | Special events, Feduary |
+
+**Badge System with Multipliers:**
+| Badge | Quest | Multiplier Bonus |
+|-------|-------|------------------|
+| Fed Citizen | Hold any $FED | None |
+| Fed Employee | First distribution | None |
+| Board Member | Hold 100K+ $FED | None |
+| Regional Director | Hold 1M+ $FED | None |
+| Fed Governor | Hold 10M+ $FED | +5% |
+| Fed Chairman | Hold 50M+ $FED | +10% |
+| Employee of the Month | 30-day streak | +2% |
+| Fed Veteran | 90-day streak | +5% |
+| Founding Father | 365-day streak | +15% |
+| Fed Elite | 500+ engagement XP | +5% |
+| Fed Prime | 800+ credit score | +10% |
+| Fed Ambassador | 20 referrals | +8% |
+| Fed Legend | 50 referrals | +15% |
+| Season Champion | 100% season participation | +10% |
+
+**Implementation:** ✅ DONE
+- ✅ Created `fed-quests.ts` standalone utility
+- ✅ 25+ quests across 5 categories
+- ✅ Badge system with permanent multipliers
+- ✅ Quest progress tracking per wallet
+- ✅ Prerequisite system (unlock paths)
+- ✅ Repeatable daily quests with cooldowns
+- ✅ Global leaderboard and stats
+- ✅ JSON API output for website integration
+- 🔜 Integrate quest completion into distribution script
+- 🔜 Add quest board widget to website dashboard
+- 🔜 Create challenge quests for special events
+
+**Usage:**
+```bash
+# View quest board for an address
+npx ts-node fed-quests.ts --quests <address>
+
+# Show top quest completers
+npx ts-node fed-quests.ts --leaderboard 20
+
+# View all available quests
+npx ts-node fed-quests.ts --list
+
+# Get system stats
+npx ts-node fed-quests.ts --stats --json
+```
+
+**Maximum Possible Multiplier Stack:**
+A holder with all top achievements could reach:
+- Fed Chairman tier: 1.5x
+- Founding Father streak: 1.25x
+- Fed Elite engagement: 1.2x
+- Fed Prime credit score badge: +10%
+- Fed Legend referral badge: +15%
+- Season Champion badge: +10%
+- **Combined potential: 2.25x base × 1.35 badges = ~3.04x rewards!**
+
+**Why This Works:**
+1. **Gamification drives engagement** - Quests give users clear goals
+2. **Badge collection is addictive** - Creates status and achievement
+3. **XP feeds engagement score** - Real rewards multiplier
+4. **Onboarding reduces churn** - New users have guidance
+5. **Daily quests create habits** - Keeps users coming back
+6. **Leaderboards drive competition** - Social engagement
+
+**File Created:** `/home/ubuntu/fed/script/fed-quests.ts`
+
+**Effort:** ✅ Complete
+**Impact:** Very High (engagement + retention + onboarding)
+
+---
+
+### 24. "Fed Predictions" - Prediction Markets for $FED Metrics
+
+**Inspired by:** Polymarket, Drift BET, MetaMask Prediction Markets
+
+**Status:** 📋 **PLANNED** (Future)
+
+**The Concept:**
+Let holders make predictions about $FED metrics and earn rewards for accuracy. Creates engagement through speculation on protocol growth.
+
+**Potential Prediction Markets:**
+- "Will $FED reach 500 holders by month end?"
+- "Total distributed this week: over/under $500?"
+- "Next QE milestone hit: before/after Feb 1?"
+- "Fed Funds Rate 7d APY: above/below 30%?"
+
+**Implementation Considerations:**
+- Requires stake/bet mechanism
+- Oracle for result resolution
+- Simple binary outcomes initially
+- Could use existing USD1 for stakes
+
+**Effort:** High (requires smart contracts)
+**Impact:** Medium (engagement + entertainment)
+
+---
+
+### 25. "Time-Weighted Voting Power" - veFED Model
+
+**Inspired by:** Curve's veCRV, Time-weighted staking
+
+**Status:** 📋 **PLANNED** (Future)
+
+**The Concept:**
+Lock $FED for longer periods to gain more voting power on protocol decisions. Creates stronger commitment and reduces sell pressure.
+
+**Potential Structure:**
+| Lock Period | Voting Power |
+|-------------|--------------|
+| 1 week | 1x |
+| 1 month | 1.5x |
+| 3 months | 2x |
+| 1 year | 3x |
+| 4 years | 4x (max) |
+
+**Benefits:**
+- Reduces circulating supply (locked tokens)
+- Creates committed governance participants
+- Rewards long-term believers
+- Curve proved this model works
+
+**Concerns:**
+- Adds complexity
+- May not be needed for current stage
+- Governance itself needs more definition first
+
+**Effort:** Very High (smart contracts + governance)
+**Impact:** High (long-term commitment)
+
+---
+
 *This document is continuously updated by Ralph as he researches and brainstorms.*
 
-Last Updated: 2026-01-21 (Added 2026 reputation research: Fed Credit Score, Providence, SBTs, zkCredit)
+Last Updated: 2026-01-21 (Added 2026 gamification research: Fed Quests System IMPLEMENTED, Fed Predictions, Time-Weighted Voting planned)

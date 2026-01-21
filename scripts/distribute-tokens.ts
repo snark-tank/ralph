@@ -1428,19 +1428,30 @@ async function main() {
                     ASSOCIATED_TOKEN_PROGRAM_ID
                 );
 
-                // Check if recipient token account exists
+                // Check if recipient token account exists and is valid
                 let accountExists = false;
+                let accountValid = true;
                 try {
-                    await getAccount(connection, recipientTokenAccount, 'confirmed', distributionTokenProgram);
+                    const account = await getAccount(connection, recipientTokenAccount, 'confirmed', distributionTokenProgram);
                     accountExists = true;
+                    // Verify the account is for the correct mint
+                    if (!account.mint.equals(distributionMint)) {
+                        logger.warn(`⚠️ Skipping ${recipientPubkey.toBase58().slice(0, 8)}... - token account has wrong mint`);
+                        accountValid = false;
+                    }
                 } catch (error) {
                     if (error instanceof TokenAccountNotFoundError) {
                         accountExists = false;
                     } else {
-                        // Log unexpected errors but continue
-                        logger.warn(`Unexpected error checking token account for ${recipientPubkey.toBase58().slice(0, 8)}...`);
-                        accountExists = false;
+                        // Log unexpected errors and skip this recipient
+                        logger.warn(`⚠️ Skipping ${recipientPubkey.toBase58().slice(0, 8)}... - error checking account: ${error}`);
+                        accountValid = false;
                     }
+                }
+
+                // Skip this recipient if account is invalid
+                if (!accountValid) {
+                    continue;
                 }
 
                 // Add create account instruction if needed
