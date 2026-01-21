@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Build cache
+.remotion/
+dist/
+
+# Logs
+*.log
+
+# Keep renders but ignore large intermediate files
+renders/*.tmp

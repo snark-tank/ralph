@@ -1,0 +1,27 @@
+{
+  "name": "fed-marketing",
+  "version": "1.0.0",
+  "description": "FED Marketing Video Generation System",
+  "main": "index.js",
+  "scripts": {
+    "studio": "remotion studio",
+    "render:stats": "remotion render StatsUpdate renders/stats-update.mp4",
+    "render:milestone": "remotion render MilestoneAnnouncement renders/milestone.mp4",
+    "render:feature": "remotion render FeatureHighlight renders/feature.mp4",
+    "render:all": "npm run render:stats && npm run render:milestone && npm run render:feature"
+  },
+  "keywords": ["remotion", "video", "marketing", "fed"],
+  "author": "Ralph",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@remotion/bundler": "^4.0.407",
+    "@remotion/cli": "^4.0.407",
+    "@remotion/transitions": "^4.0.407",
+    "@types/react": "^19.2.9",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "remotion": "^4.0.407",
+    "typescript": "^5.9.3"
+  }
+}
