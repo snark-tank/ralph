@@ -295,9 +295,11 @@ Real-time dashboard showing:
 
 ---
 
-### 7. Auto-Compound Option
+### 7. Auto-Compound Option ✅ IMPLEMENTED (Phase 1)
 
 **Inspired by:** Titano / LIBERO
+
+**Status:** ✅ **PREFERENCE SYSTEM LIVE** (Jan 21, 2026)
 
 **The Concept:**
 Allow holders to opt-in to auto-reinvest their USD1 rewards back into $FED:
@@ -307,13 +309,42 @@ Allow holders to opt-in to auto-reinvest their USD1 rewards back into $FED:
 3. On distribution, swap USD1 -> $FED
 4. Send $FED instead of USD1
 
+**Implementation (Phase 1):** ✅ DONE
+- ✅ Created `auto-compound.ts` preference manager
+- ✅ Register/unregister addresses for auto-compound
+- ✅ Preference persistence in JSON file
+- ✅ Address validation (valid Solana addresses only)
+- ✅ Statistics tracking (total registered, compound history)
+- ✅ JSON output for API/website integration
+- ✅ Comprehensive CLI interface
+- 🔜 Phase 2: Jupiter swap integration in distribution script
+- 🔜 Phase 3: Website UI for preference management
+
+**Usage:**
+```bash
+# Enable auto-compound for your wallet
+npx ts-node auto-compound.ts --register <address>
+
+# Check your status
+npx ts-node auto-compound.ts --check <address>
+
+# Disable auto-compound
+npx ts-node auto-compound.ts --unregister <address>
+
+# View all registered addresses
+npx ts-node auto-compound.ts --list
+
+# Get statistics
+npx ts-node auto-compound.ts --stats
+```
+
 **Why It Works:**
 - Reduces sell pressure (no USD1 hitting market)
 - Increases $FED buy pressure
 - Compounds holder positions automatically
 - Savings on gas (one swap vs many small ones)
 
-**Effort:** High (requires swap integration + preference storage)
+**Effort:** Phase 1 ✅ Complete, Phase 2 Pending (swap integration)
 **Impact:** High (price support + holder growth)
 
 ---
@@ -588,11 +619,13 @@ Bridge $FED to other chains. Major undertaking, future consideration.
 2. ~~**Build Fed Funds Rate Display**~~ - ✅ **DONE!** Calculator + distribution integration complete
 3. ~~**Implement "Rate Decision" Communications**~~ - ✅ **DONE!** FOMC-style announcements generator
 4. ~~**Implement QE/Milestone Tracker**~~ - ✅ **DONE!** Milestone tracking with celebration announcements
-5. **Create (3,3) Community Campaign** - Free, high engagement
-6. **Launch Transparency Dashboard** - Builds trust
-7. **Build "Fed Auto-BRRR" Dashboard** - Titano-style engagement with real rewards
-8. **Website Fed Funds Rate Widget** - Display current APY on dashboard
-9. **Integrate Milestone Bonuses** - Apply bonus multipliers during QE events
+5. ~~**Build Auto-Compound Preferences**~~ - ✅ **DONE!** Phase 1 preference manager complete
+6. **Integrate Auto-Compound Swaps** - Jupiter integration for actual swaps (Phase 2)
+7. **Create (3,3) Community Campaign** - Free, high engagement
+8. **Launch Transparency Dashboard** - Builds trust
+9. **Build "Fed Auto-BRRR" Dashboard** - Titano-style engagement with real rewards
+10. **Website Fed Funds Rate Widget** - Display current APY on dashboard
+11. **Integrate Milestone Bonuses** - Apply bonus multipliers during QE events
 
 ---
 

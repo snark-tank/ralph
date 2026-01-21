@@ -166,6 +166,8 @@ Ralph will implement:
 | **Milestone/QE Tracker** | Week 3 | ✅ **IMPLEMENTED** |
 | **Diamond Hands Streaks** | Week 3 | ✅ **IMPLEMENTED** |
 | **Streak Distribution Integration** | Week 3 | ✅ **IMPLEMENTED** |
+| **Auto-Compound Preferences** | Week 3 | ✅ **IMPLEMENTED** |
+| Auto-Compound Swap Integration | Week 4 | 🔄 In Progress |
 | Governance | Week 4+ | 📋 Backlog |
 
 ### Progress Notes (Jan 21, 2026)
@@ -175,6 +177,43 @@ Ralph will implement:
 - **Latest Activity**: PM2 automation verified and running
 - **Note**: Distribution process monitored and confirmed operational
 - **Accumulating**: Currently at 3.28 USD1, waiting for $10 threshold
+
+### 🔄 AUTO-COMPOUND PREFERENCE SYSTEM IMPLEMENTED (Jan 21, 2026)
+
+**The "Fed Auto-BRRR" auto-compound system Phase 1 is now LIVE!**
+
+Created `auto-compound.ts` - a comprehensive preference management system that allows holders to opt-in to automatically compound their USD1 rewards back into $FED tokens.
+
+**Key Features:**
+- **Register/Unregister**: CLI commands to enable/disable auto-compound
+- **Preference Persistence**: JSON storage with full history tracking
+- **Address Validation**: Only valid Solana addresses accepted
+- **Statistics Tracking**: Total registered, active count, compound history
+- **JSON Output**: API-ready output for website integration
+- **Configurable Settings**: Min compound amount, max slippage
+
+**Usage:**
+```bash
+npx ts-node auto-compound.ts --register <address>   # Enable
+npx ts-node auto-compound.ts --unregister <address> # Disable
+npx ts-node auto-compound.ts --check <address>      # Check status
+npx ts-node auto-compound.ts --list                 # List all
+npx ts-node auto-compound.ts --stats                # Statistics
+```
+
+**Why This Matters:**
+- Holders can grow their $FED position automatically
+- Reduces USD1 sell pressure
+- Creates continuous $FED buy pressure
+- Compounds tier/streak multipliers over time
+- No manual swap transactions needed
+
+**File Created:** `/home/ubuntu/fed/script/auto-compound.ts`
+
+**Next Steps (Phase 2):**
+- Integrate preference check into distribute-tokens.ts
+- Add Jupiter swap execution for compound users
+- Website UI for preference management
 
 ### 💎 STREAK MULTIPLIERS INTEGRATED INTO DISTRIBUTION (Jan 21, 2026)
 
