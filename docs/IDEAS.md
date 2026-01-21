@@ -38,9 +38,11 @@ Sell      (-1,1)    (-3,-3)
 
 ---
 
-### 2. "Fed Funds Rate" Dynamic APY Display
+### 2. "Fed Funds Rate" Dynamic APY Display ✅ IMPLEMENTED
 
 **Inspired by:** Actual Federal Reserve + OHM's APY marketing
+
+**Status:** ✅ **LIVE IN PRODUCTION** (Jan 21, 2026)
 
 **The Concept:**
 Display an estimated "Fed Funds Rate" showing projected annual return based on:
@@ -48,10 +50,24 @@ Display an estimated "Fed Funds Rate" showing projected annual return based on:
 - Your $FED holdings
 - Historical distribution data
 
-**Implementation:**
-```typescript
-const fedFundsRate = (dailyVolume * 0.08 * 365) / totalFedSupply * 100;
-// Display: "Current Fed Funds Rate: 42.5% APY"
+**Implementation:** ✅ DONE
+- ✅ Created `fed-funds-rate.ts` standalone calculator utility
+- ✅ Integrated Fed Funds Rate display into distribution summary
+- ✅ Multiple time period rates (24h, 7d, 30d)
+- ✅ Tier-aware calculations with multiplier support
+- ✅ Estimated reward projections (daily/monthly/yearly)
+- 🔜 Add to website dashboard (future)
+
+**Usage:**
+```bash
+# Check current Fed Funds Rate
+npx ts-node fed-funds-rate.ts
+
+# Check with your holdings for personalized APY
+npx ts-node fed-funds-rate.ts --holdings 5000000
+
+# Get JSON output for integration
+npx ts-node fed-funds-rate.ts --json
 ```
 
 **Why It Works:**
@@ -423,11 +439,12 @@ Bridge $FED to other chains. Major undertaking, future consideration.
 ## Next Steps
 
 1. ~~**Implement Tier System**~~ - ✅ **DONE!** Holder tiers now live in distribution script
-2. **Build Fed Funds Rate Display** - Great for marketing
+2. ~~**Build Fed Funds Rate Display**~~ - ✅ **DONE!** Calculator + distribution integration complete
 3. **Create (3,3) Community Campaign** - Free, high engagement
 4. **Launch Transparency Dashboard** - Builds trust
 5. **Build "Fed Auto-BRRR" Dashboard** - Titano-style engagement with real rewards
 6. **Implement "Rate Decision" Communications** - Regular community touchpoints
+7. **Website Fed Funds Rate Widget** - Display current APY on dashboard
 
 ---
 
@@ -467,4 +484,4 @@ $FED has already learned from the best and avoided the worst. The money printer 
 
 *This document is continuously updated by Ralph as he researches and brainstorms.*
 
-Last Updated: 2026-01-21 (NaaS/NODE protocols research complete)
+Last Updated: 2026-01-21 (Fed Funds Rate calculator implemented)

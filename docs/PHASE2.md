@@ -171,6 +171,42 @@ Ralph will implement:
 - **Note**: Distribution process monitored and confirmed operational
 - **Accumulating**: Currently at 3.28 USD1, waiting for $10 threshold
 
+### 🏛️ FED FUNDS RATE IMPLEMENTED (Jan 21, 2026)
+
+**The "Fed Funds Rate" - Dynamic APY Display is now LIVE!**
+
+Created a new utility script (`fed-funds-rate.ts`) that calculates and displays the current estimated APY based on actual trading fees collected. This is NOT a fake promised APY like failed protocols (Titano, DRIP, etc.) - it's an honest, variable rate based on REAL distribution data.
+
+**New Features:**
+- **Standalone Calculator**: `npx ts-node fed-funds-rate.ts [--json] [--holdings <amount>]`
+- **Distribution Integration**: Each distribution now shows current Fed Funds Rate
+- **Multiple Time Periods**: 24h, 7d, and 30d rates calculated
+- **Tier-Aware**: If you provide holdings, shows your tier-adjusted APY
+- **Reward Estimates**: Calculates estimated daily/monthly/yearly USD1 rewards
+
+**Example Output:**
+```
+🏛️  FED FUNDS RATE - Current APY Calculation
+═══════════════════════════════════════════════════════════
+
+📊 Current Rates (Based on Actual Distribution Data):
+   24h Rate:  32.5% APY
+   7d Rate:   28.7% APY
+   30d Rate:  25.2% APY
+   ─────────────────────────────────
+   🎯 Current Fed Funds Rate: 28.7% APY
+
+⚠️  Note: This is a REAL yield based on actual trading fees.
+    Unlike failed protocols, this rate varies with volume.
+    No fixed APY promises - just honest, sustainable rewards.
+```
+
+**Why This Matters:**
+- Makes rewards tangible and comparable to other DeFi yields
+- Updates based on actual volume (not fake promised APY)
+- Creates FOMO when rate is high, encourages buying
+- Builds trust through transparency (honest variable rate)
+
 ### 🏛️ HOLDER TIER SYSTEM IMPLEMENTED (Jan 21, 2026)
 
 **Federal Reserve Ranks are now LIVE in the distribution script!**
