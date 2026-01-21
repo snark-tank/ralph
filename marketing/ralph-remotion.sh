@@ -76,22 +76,41 @@ run_claude_agent() {
 
     local PROMPT="You are Ralph, the FED marketing video agent working in $MARKETING_DIR
 
+CRITICAL: Your goal is to create IMMACULATE, PROFESSIONAL quality videos. Think Apple keynote, Stripe demo, Linear launch video quality. NOT generic AI slop. These videos represent \$FED and must look world-class.
+
 Your task for this iteration:
-1. Check the current videos in renders/ - watch them mentally or review the code
-2. Pick ONE video type to improve (StatsUpdate, MilestoneAnnouncement, or FeatureHighlight)
-3. Make meaningful improvements to the animation, timing, or visual design in src/videos/
-4. The components in src/components/ have reusable animations and visuals you can use
-5. After improvements, render the video: npx remotion render [CompositionId] renders/[name].mp4
-6. Review your changes and make sure they improve engagement
+1. Review the current video code in src/videos/ - understand what exists
+2. Pick ONE video to perfect (StatsUpdate, MilestoneAnnouncement, or FeatureHighlight)
+3. Make SUBSTANTIAL improvements - don't just tweak, actually elevate the quality
+4. Render it: npx remotion render [CompositionId] renders/[name].mp4
+5. If it's not perfect yet, KEEP ITERATING on the same video. Quality > quantity.
 
-Focus on:
-- Smoother spring animations (try different damping values)
-- Better timing/pacing between scenes
-- More impactful stat reveals
-- Stronger visual hierarchy
-- The hook in the first 2 seconds
+Quality standards you MUST hit:
+- Buttery smooth 60fps-feeling animations (use spring with careful damping tuning)
+- Perfect timing - each element should breathe, not feel rushed or draggy
+- Sophisticated color palette - dark mode with tasteful accent colors, no garish neon
+- Typography that commands attention - proper hierarchy, spacing, weight
+- Cinematic transitions - not cheesy fades, but purposeful motion
+- The first 2 seconds must HOOK - dramatic, intriguing, professional
+- Every frame should look like it belongs in a tech company's launch video
 
-Read CLAUDE.md for full guidelines. Make real improvements, not just tweaks."
+What makes videos look like AI slop (AVOID):
+- Generic gradient backgrounds
+- Cheesy particle effects
+- Over-animated everything
+- Bad timing/pacing
+- Inconsistent visual language
+- Looking like a template
+
+What makes videos look professional (DO THIS):
+- Restraint and intentionality in animation
+- Consistent design system
+- Perfect easing curves
+- Breathing room between elements
+- Confident, minimal aesthetic
+- Motion that serves the content
+
+Read CLAUDE.md for technical details. Take your time. Make it perfect."
 
     log "Running Claude Code agent..."
     echo "$PROMPT" | claude --dangerously-skip-permissions 2>&1 | tee -a "$LOG_FILE"
@@ -117,8 +136,8 @@ main_loop() {
 
         iteration=$((iteration + 1))
 
-        log "Sleeping 10 minutes before next iteration..."
-        sleep 600
+        log "Sleeping 5 minutes before next iteration..."
+        sleep 300
     done
 }
 
