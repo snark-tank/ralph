@@ -8,13 +8,13 @@ const TWITTER_WIDTH = 1280;
 const TWITTER_HEIGHT = 720;
 const FPS = 30;
 
-// Default props for each video type
+// Default props for each video type - Updated with latest stats
 const defaultStatsProps: StatsUpdateProps = {
   headline: "THE MONEY PRINTER GOES BRRR",
   stats: [
-    { value: "$45,848+", numericValue: 45848, prefix: "$", suffix: "+", label: "USD1 Distributed", color: "#00ff88" },
-    { value: "244+", numericValue: 244, suffix: "+", label: "Distributions", color: "#00d4ff" },
-    { value: "1,077+", numericValue: 1077, suffix: "+", label: "Holders Earning", color: "#ff6b6b" },
+    { value: "$46,267+", numericValue: 46267, prefix: "$", suffix: "+", label: "USD1 Distributed", color: "#00ff88" },
+    { value: "260+", numericValue: 260, suffix: "+", label: "Distributions", color: "#00d4ff" },
+    { value: "1,077+", numericValue: 1077, suffix: "+", label: "Holders Earning", color: "#ff6b9d" },
   ],
   tagline: "Real yield from real trading fees",
   cta: "fed.markets",
