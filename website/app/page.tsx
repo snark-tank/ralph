@@ -22,6 +22,31 @@ export default async function Dashboard() {
 
   return (
     <div className="max-w-6xl mx-auto px-4 py-8">
+      {/* Pump Celebration Banner */}
+      <div className="mb-8 bg-gradient-to-r from-[#22c55e]/20 via-[#c9a227]/20 to-[#22c55e]/20 border border-[#22c55e]/50 rounded-xl p-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMiIgZmlsbD0icmdiYSgzNCwgMTk3LCA5NCwgMC4xKSIvPjwvc3ZnPg==')] opacity-30"></div>
+        <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <span className="text-3xl animate-bounce">🚀</span>
+            <div>
+              <div className="text-[#22c55e] font-bold text-lg flex items-center gap-2">
+                <span style={{ textShadow: '0 0 20px rgba(34, 197, 94, 0.6)' }}>17x PUMP IN PROGRESS</span>
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22c55e] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22c55e]"></span>
+                </span>
+              </div>
+              <p className="text-gray-400 text-sm">Historic +1,600% in 24h! Distributing fees to all holders during the rally.</p>
+            </div>
+          </div>
+          <div className="text-right">
+            <div className="text-[#c9a227] font-mono text-sm">Just distributed</div>
+            <div className="text-[#22c55e] font-bold text-xl font-mono" style={{ textShadow: '0 0 15px rgba(34, 197, 94, 0.5)' }}>$57.17 USD1</div>
+            <div className="text-gray-500 text-xs">to 1,280 holders</div>
+          </div>
+        </div>
+      </div>
+
       {/* Hero Section */}
       <div className="text-center mb-12">
         <h1 className="text-4xl font-bold text-[#c9a227] mb-4">
