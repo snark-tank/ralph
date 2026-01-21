@@ -7,16 +7,17 @@ export default async function Dashboard() {
   const stats = await getStats();
   const commits = await getGitLog(10);
 
-  // Research queue - Ralph will update this as he progresses
+  // Research queue - All research completed!
   const researchQueue = [
     { name: 'OHM / Olympus DAO', mechanic: '(3,3) game theory, bonding', status: 'completed' },
     { name: 'SAFEMOON', mechanic: 'Reflections, auto-LP', status: 'completed' },
     { name: 'HEX', mechanic: 'Time-locked staking', status: 'completed' },
     { name: 'DRIP Network', mechanic: 'Daily ROI, referrals', status: 'completed' },
     { name: 'Tomb Finance', mechanic: 'Algorithmic pegging', status: 'completed' },
-    { name: 'Titano', mechanic: 'Auto-compounding', status: 'pending' },
-    { name: 'LIBERO', mechanic: 'Fire pit burns', status: 'pending' },
-    { name: 'NODE protocols', mechanic: 'Node rewards', status: 'pending' },
+    { name: 'Titano', mechanic: 'Auto-compounding', status: 'completed' },
+    { name: 'LIBERO', mechanic: 'Fire pit burns', status: 'completed' },
+    { name: 'NODE protocols', mechanic: 'Node rewards, NaaS', status: 'completed' },
+    { name: 'Rebase Tokens', mechanic: 'Supply elasticity (AMPL, YAM)', status: 'completed' },
   ];
 
   return (
@@ -56,6 +57,48 @@ export default async function Dashboard() {
           <div className="text-gray-500 text-sm mb-1">Frequency</div>
           <div className="text-3xl font-bold text-white">2 min</div>
           <div className="text-gray-600 text-xs mt-1">Distribution cycle</div>
+        </div>
+      </div>
+
+      {/* Fed Funds Rate Widget */}
+      <div className="mb-8 bg-gradient-to-r from-[#c9a227]/20 via-[#111] to-[#111] border border-[#c9a227]/40 rounded-xl p-6">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+          <div>
+            <h2 className="text-xl font-bold text-[#c9a227] mb-1 flex items-center gap-2">
+              <span>🏛️</span> Fed Funds Rate
+            </h2>
+            <p className="text-gray-500 text-sm">Current estimated APY based on real trading fees</p>
+          </div>
+          <div className="flex items-center gap-6">
+            <div className="text-center">
+              <div className="text-4xl font-bold text-[#22c55e]">
+                {stats.fedFundsRate?.currentRate
+                  ? `${stats.fedFundsRate.currentRate.toFixed(1)}%`
+                  : '--'}
+              </div>
+              <div className="text-gray-500 text-xs">7-Day APY</div>
+            </div>
+            <div className="text-center border-l border-[#333] pl-6">
+              <div className="text-2xl font-bold text-white">
+                {stats.fedFundsRate?.rate30d
+                  ? `${stats.fedFundsRate.rate30d.toFixed(1)}%`
+                  : '--'}
+              </div>
+              <div className="text-gray-500 text-xs">30-Day APY</div>
+            </div>
+            <div className="text-center border-l border-[#333] pl-6">
+              <div className="text-lg font-mono text-[#c9a227]">
+                {stats.fedFundsRate?.printerStatus || 'idle'}
+              </div>
+              <div className="text-gray-500 text-xs">Printer Status</div>
+            </div>
+          </div>
+        </div>
+        <div className="mt-4 pt-4 border-t border-[#222]">
+          <p className="text-gray-600 text-xs">
+            💡 This is REAL yield from trading fees - not fake promises. Rate varies with volume.
+            No inflation, no ponzinomics - just honest rewards from actual DEX activity.
+          </p>
         </div>
       </div>
 

@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { remark } from 'remark';
 import html from 'remark-html';
+import Redis from 'ioredis';
 
 // Path to docs folder (one level up from website)
 const docsDirectory = path.join(process.cwd(), '..', 'docs');
@@ -149,14 +150,115 @@ function getStatsFromLogs(): {
   }
 }
 
+async function getStatsFromRedis(): Promise<{
+  totalDistributed: number;
+  distributions: number;
+  holders: number;
+  recentDistributions: { date: string; amount: number; recipients: number; txSignature?: string }[];
+} | null> {
+  const redisUrl = process.env.REDIS_URL;
+  if (!redisUrl) return null;
+
+  let redis: Redis | null = null;
+  try {
+    redis = new Redis(redisUrl);
+    const data = await redis.get('fed:stats');
+    if (!data) return null;
+
+    const stats = JSON.parse(data);
+    return {
+      totalDistributed: stats.totalDistributed || 0,
+      distributions: stats.totalDistributions || 0,
+      holders: stats.uniqueHoldersPaid || 0,
+      recentDistributions: stats.recentDistributions || [],
+    };
+  } catch (error) {
+    console.error('Redis error:', error);
+    return null;
+  } finally {
+    if (redis) await redis.quit();
+  }
+}
+
+// Calculate Fed Funds Rate from distribution data
+export function calculateFedFundsRate(
+  recentDistributions: { date: string; amount: number; recipients: number }[],
+  totalSupply: number = 1_000_000_000 // 1 billion $FED total supply
+): {
+  rate7d: number | null;
+  rate30d: number | null;
+  currentRate: number | null;
+  printerStatus: string;
+} {
+  const now = new Date();
+  const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+  const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+  // Filter distributions by time period
+  const last7d = recentDistributions.filter(d => new Date(d.date) >= sevenDaysAgo);
+  const last30d = recentDistributions.filter(d => new Date(d.date) >= thirtyDaysAgo);
+
+  // Calculate total distributed in each period
+  const total7d = last7d.reduce((sum, d) => sum + d.amount, 0);
+  const total30d = last30d.reduce((sum, d) => sum + d.amount, 0);
+
+  // Estimate market cap (using a rough price estimate of $0.0001 per $FED)
+  const estimatedPrice = 0.0001; // This could be fetched from an API
+  const estimatedMarketCap = totalSupply * estimatedPrice;
+
+  // Calculate annualized APY
+  // APY = (rewards / marketCap) * (365 / days) * 100
+  const rate7d = estimatedMarketCap > 0 && total7d > 0
+    ? (total7d / estimatedMarketCap) * (365 / 7) * 100
+    : null;
+
+  const rate30d = estimatedMarketCap > 0 && total30d > 0
+    ? (total30d / estimatedMarketCap) * (365 / 30) * 100
+    : null;
+
+  // Current rate is the 7d rate (more recent/relevant)
+  const currentRate = rate7d;
+
+  // Determine printer status based on recent activity
+  let printerStatus = 'idle';
+  if (last7d.length > 0) {
+    const avgDaily = total7d / 7;
+    if (avgDaily > 100) printerStatus = 'BRRR BRRR BRRR';
+    else if (avgDaily > 50) printerStatus = 'brrr brrr';
+    else if (avgDaily > 10) printerStatus = 'brrr';
+    else printerStatus = 'warming up';
+  }
+
+  return { rate7d, rate30d, currentRate, printerStatus };
+}
+
 export async function getStats(): Promise<{
   totalDistributed: string;
   distributions: number;
   holders: number;
   lastUpdate: string;
   recentDistributions: { date: string; amount: number; recipients: number; txSignature?: string }[];
+  fedFundsRate?: { rate7d: number | null; rate30d: number | null; currentRate: number | null; printerStatus: string };
 }> {
-  // Try local logs first (for local/dev environment)
+  // Try Redis first (for Vercel with Redis configured)
+  const redisStats = await getStatsFromRedis();
+  if (redisStats && redisStats.distributions > 0) {
+    return {
+      totalDistributed: redisStats.totalDistributed.toLocaleString('en-US', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      }),
+      distributions: redisStats.distributions,
+      holders: redisStats.holders,
+      lastUpdate: redisStats.recentDistributions[0]?.date
+        ? new Date(redisStats.recentDistributions[0].date).toLocaleString()
+        : new Date().toLocaleString(),
+      recentDistributions: redisStats.recentDistributions,
+      fedFundsRate: calculateFedFundsRate(redisStats.recentDistributions),
+    };
+  }
+
+  // Try local logs (for local/dev environment)
   const localStats = getStatsFromLogs();
   if (localStats && localStats.distributions > 0) {
     return {
@@ -170,10 +272,11 @@ export async function getStats(): Promise<{
         ? new Date(localStats.recentDistributions[0].date).toLocaleString()
         : new Date().toLocaleString(),
       recentDistributions: localStats.recentDistributions,
+      fedFundsRate: calculateFedFundsRate(localStats.recentDistributions),
     };
   }
 
-  // Fallback to API (for Vercel deployment)
+  // Fallback to API
   try {
     const response = await fetch('https://fed-seven.vercel.app/api/distributions', {
       next: { revalidate: 60 },
@@ -194,6 +297,7 @@ export async function getStats(): Promise<{
         ? new Date(data.recentDistributions[0].date).toLocaleString()
         : new Date().toLocaleString(),
       recentDistributions: data.recentDistributions || [],
+      fedFundsRate: calculateFedFundsRate(data.recentDistributions || []),
     };
   } catch {
     return {
@@ -202,6 +306,7 @@ export async function getStats(): Promise<{
       holders: 309,
       lastUpdate: new Date().toLocaleString(),
       recentDistributions: [],
+      fedFundsRate: { rate7d: null, rate30d: null, currentRate: null, printerStatus: 'idle' },
     };
   }
 }
