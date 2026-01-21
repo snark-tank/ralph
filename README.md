@@ -34,15 +34,16 @@ Ralph acts as the Federal Reserve Chairman, controlling the money printer that g
 
 | Metric | Value |
 |--------|-------|
-| **Total Distributed** | **$33,378+ USD1** |
-| **Distribution Runs** | 600+ log entries |
-| **Holders Per Cycle** | 1,233 (latest) |
+| **Total Distributed** | **$34,495+ USD1** |
+| **Distribution Runs** | 650+ cycles |
+| **Holders Per Cycle** | ~1,320 (latest) |
 | **Fed Chairman Mode** | Manual treasury control |
 | **Distribution Threshold** | $10 USD1 minimum |
 | **Multiplier System** | Tier × Streak × Engagement × Time Lock |
 | **Max Possible Multiplier** | **4.5x rewards** (13.5x during QE events!) |
+| **QE2 Progress** | 69.0% ($34,495 / $50,000) |
 
-*Last updated: January 21, 2026 - Fed Chairman iteration (7 distributions today, $1,222+ USD1)*
+*Last updated: January 21, 2026 - Fed Chairman iteration*
 
 ---
 
@@ -182,7 +183,7 @@ Special celebration distributions when we hit milestones:
 | $500,000 | QE5 | 2.5x celebration | 🔮 Upcoming |
 | $1,000,000 | QE∞ | 3.0x celebration | 🔮 Upcoming |
 
-**Current Progress: $33,378 / $50,000 (66.8% to QE2)**
+**Current Progress: $34,495 / $50,000 (69.0% to QE2)**
 
 ---
 
@@ -294,10 +295,11 @@ Based on latest distribution cycle (January 21, 2026):
 | 🌐 **Fed Citizen** (Any) | 1.0x | Base rewards |
 
 ### System Status
-- **Active Distribution**: PM2 running every 2 minutes
-- **Holders Growing**: 1,230 → 1,272 per cycle (latest data)
-- **QE Progress**: $33,378 / $50,000 (66.8% to QE2)
+- **Active Distribution**: Fed Chairman mode (manual)
+- **Holders Per Cycle**: ~1,320 recipients
+- **QE Progress**: $34,495 / $50,000 (69.0% to QE2)
 - **All 4 Multipliers**: Active and stacking
+- **Solana Program**: Deployed on Devnet, website integrated
 
 ---
 
@@ -323,7 +325,16 @@ This repo is continuously updated as Ralph evolves the operation:
 - ✅ **Referral system** (bonus for bringing new holders)
 - ✅ **Anti-sybil detection** (quality over quantity)
 
+### Solana Program (Devnet - New!)
+- ✅ **Deployed to Devnet**: `HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz`
+- ✅ On-chain user preferences (auto-compound, time locks, referrals)
+- ✅ Website integration at [fed.markets/preferences](https://fed.markets/preferences)
+- ✅ Wallet connection (Phantom, Solflare)
+- ✅ All 7 tests passing
+- 🔄 Mainnet deployment (pending)
+
 ### Coming Soon
+- 🔄 Mainnet deployment of on-chain preferences
 - 🔄 Treasury buyback & burn automation (script ready, needs PM2 integration)
 - 🔄 Seasonal competitions (script ready, needs activation)
 - 🔄 Rate decision system (AI-powered timing optimization)
