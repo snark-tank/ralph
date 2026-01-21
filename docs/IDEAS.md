@@ -1461,6 +1461,121 @@ Lock $FED for longer periods to gain more voting power on protocol decisions. Cr
 
 ---
 
+## New Ideas from 2026 Anti-Sybil Research
+
+### 27. "Fed Sybil Detector" - Anti-Sybil Wallet Analysis System
+
+**Inspired by:** Nomis Protocol, Jupiter Anti-Sybil, Bubblemaps behavioral analysis
+
+**Status:** ✅ **IMPLEMENTED** (Jan 21, 2026)
+
+**The Concept:**
+A comprehensive wallet analysis system that detects potential Sybil attackers by analyzing behavioral patterns. Assigns a "legitimacy score" (0-100) to each holder based on multiple factors.
+
+**Why This Matters (2026 Context):**
+- Sybil attacks are now the #1 security threat to token launches
+- Solana's WET presale: 1,000+ bot wallets sniped entire token sale
+- Apriori airdrop: 80% claimed by clustered 5,800 wallets
+- Jupiter, Hyperliquid, and others now require wallet age + activity checks
+- Industry standard is shifting to "quality over quantity"
+
+**Detection Components (5 factors):**
+| Component | Weight | Description |
+|-----------|--------|-------------|
+| Wallet Age | 25% | Older wallets score higher |
+| Activity Diversity | 20% | Varied activity patterns |
+| Funding Source | 25% | Unique vs clustered funding |
+| Transaction Pattern | 15% | Organic vs bot-like behavior |
+| Balance Stability | 15% | Consistent holding patterns |
+
+**Risk Levels:**
+| Risk Level | Score | Action |
+|------------|-------|--------|
+| ✅ Low | 80-100 | Full rewards |
+| ⚠️ Medium | 50-79 | Monitor |
+| 🚨 High | 25-49 | Reduced rewards |
+| 🔴 Critical | 0-24 | Consider exclusion |
+
+**Detection Flags:**
+- `YOUNG_WALLET` - Under 7 days old (danger)
+- `NEW_WALLET` - Under 21 days old (warning)
+- `LOW_ACTIVITY` - Under 3 transactions (danger)
+- `FUNDING_CLUSTER` - Part of 3+ wallet cluster (warning/danger)
+- `REPETITIVE_INTERACTIONS` - Low diversity (warning)
+- `DUST_EARNER` - Very small earnings (info)
+- `ZERO_BALANCE` - No longer holds $FED (warning)
+- `STREAK_BROKEN` - Holding streak was broken (info)
+
+**Implementation:** ✅ DONE
+- ✅ Created `sybil-detector.ts` standalone analyzer
+- ✅ 5-component legitimacy scoring system
+- ✅ 4 risk levels with clear action recommendations
+- ✅ 8 detection flag types
+- ✅ Funding cluster detection
+- ✅ Individual wallet analysis
+- ✅ Full holder report generation
+- ✅ JSON API output for website integration
+- 🔜 Integrate into distribution script for reward penalties
+- 🔜 Add sybil status to website dashboard
+- 🔜 Implement funding cluster auto-detection from blockchain
+
+**Usage:**
+```bash
+# Analyze all holders
+npx ts-node sybil-detector.ts --analyze
+
+# Check specific wallet
+npx ts-node sybil-detector.ts --check <address>
+
+# View full report
+npx ts-node sybil-detector.ts --report
+
+# Get stats as JSON
+npx ts-node sybil-detector.ts --stats --json
+```
+
+**Integration Potential:**
+- **Fed Credit Score:** Legitimacy score can reduce credit rating
+- **Distribution Script:** High-risk wallets get reduced multiplier
+- **Website:** Display "Verified Holder" badge for low-risk wallets
+- **Future Airdrops:** Exclude critical-risk wallets automatically
+
+**Why This Works for $FED:**
+1. Protects legitimate holders from reward dilution
+2. Builds community trust through transparency
+3. Aligns with 2026 industry best practices
+4. Prepares for any future token events
+5. No KYC required - purely behavioral analysis
+
+**Effort:** ✅ Complete
+**Impact:** High (security + trust + fair distribution)
+
+---
+
+### 28. "Fed Verified" Badge System
+
+**Inspired by:** Nomis SBTs, X/Twitter verification, Discord verification
+
+**Status:** 📋 **PLANNED**
+
+**The Concept:**
+Award "Fed Verified" badges to wallets that pass anti-sybil checks with high legitimacy scores. Badges visible on dashboard and potentially as on-chain attestations.
+
+**Badge Tiers:**
+- 🔵 Fed Verified (80+ legitimacy)
+- ⭐ Fed Trusted (90+ legitimacy + 30+ days)
+- 👑 Fed OG (95+ legitimacy + 90+ days + Chairman tier)
+
+**Why It Works:**
+- Creates social proof for legitimate holders
+- Visible status symbol drives engagement
+- Can be used for gated access to features
+
+**Effort:** Medium (frontend + optional SBT mint)
+**Impact:** Medium (social engagement)
+
+---
+
 *This document is continuously updated by Ralph as he researches and brainstorms.*
 
-Last Updated: 2026-01-21 (Added Fed Time Lock IMPLEMENTED, 2026 Token Velocity research)
+Last Updated: 2026-01-21 (Added Fed Sybil Detector IMPLEMENTED, Fed Verified Badge planned)
