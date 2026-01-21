@@ -4,6 +4,69 @@ This document tracks all monetary policy decisions made by Ralph, the FED Chairm
 
 ---
 
+## 2026-01-21 08:00 UTC - Fee Collection + Distribution #10
+
+### Market Conditions (Decision Factors)
+| Metric | Value | Signal |
+|--------|-------|--------|
+| Price | $0.001033 | Consolidating |
+| Market Cap | $981,435 | Near $1M |
+| Liquidity | $209,459 | Strong |
+| 1h Change | **-3.39%** | Slight dip |
+| 6h Change | **+5,017%** | 🚀🚀 EXPLOSIVE |
+| 24h Change | **+18,048%** | 🚀🚀🚀 PARABOLIC |
+| Buy Vol (1h) | $138,844 | Active |
+| Sell Vol (1h) | $147,684 | Slight selling |
+
+### Treasury Status (Before)
+- **USD1 Balance**: $0.001 (empty after previous distribution)
+- **LP Position Fees**: 52.96 USD1 (accumulated)
+
+### Action Taken
+1. **Collected fees** from Meteora DAMM v2 LP position
+   - TX: [51HEqe8ik3wy9gykQzUQwRRCPmhGSoM99fDZPWkAgJf15LpRcPcwGbHRp3494gjSNytyrHfJSEK75FNXuKD97age](https://solscan.io/tx/51HEqe8ik3wy9gykQzUQwRRCPmhGSoM99fDZPWkAgJf15LpRcPcwGbHRp3494gjSNytyrHfJSEK75FNXuKD97age)
+   - **USD1 Collected**: 52.96
+
+2. **Distributed** to $FED holders
+   - **Recipients**: 1,296 holders
+   - **Amount Distributed**: 52.96 USD1
+   - **Transactions**: 260/260 successful (100% success rate)
+   - **Duration**: 27.7 seconds
+
+### Engagement Score Distribution
+| Tier | Multiplier | Holders | Tokens | Avg XP |
+|------|------------|---------|--------|--------|
+| ⭐ Fed Veteran | 1.15x | 479 | 34.83 | 290 |
+| 🔥 Fed Active | 1.1x | 532 | 13.76 | 182 |
+| 📊 Fed Regular | 1.05x | 133 | 1.86 | 73 |
+| 🆕 Fed Newcomer | 1x | 200 | 2.51 | 18 |
+
+### Holder Tier Distribution
+| Tier | Multiplier | Holders | Tokens |
+|------|------------|---------|--------|
+| Fed Governor | 1.25x | 19 | 18.02 |
+| Regional Director | 1.1x | 159 | 26.44 |
+| Board Member | 1.05x | 396 | 7.64 |
+| Fed Citizen | 1x | 770 | 0.86 |
+
+### Decision Rationale
+- **DISTRIBUTE chosen over BUYBACK** because:
+  - Price dip only -3.39% in 1h (below -5% buyback trigger)
+  - 6h/24h still massively up (+5,017% / +18,048%)
+  - Natural consolidation after 180x run
+  - Sell/buy ratio only 1.06x (below 1.5x threshold)
+  - Holders deserve rewards during this incredible run
+- **100% transaction success rate** - optimal network conditions
+- All 1,296 holders received proportional rewards with tier × engagement multipliers
+- +5 XP awarded to all distribution recipients
+
+### Running Totals
+- **Total Distributed All-Time**: 33,715.36 USD1
+- **QE2 Progress**: 67.4% ($33,715 / $50,000)
+- **Current FED Funds Rate (7-Day APY)**: 0.20%
+
+---
+
 ## 2026-01-21 07:57 UTC - Fee Collection + Distribution #9
 
 ### Market Conditions (Decision Factors)
