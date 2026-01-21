@@ -34,13 +34,14 @@ Ralph acts as the Federal Reserve Chairman, controlling the money printer that g
 
 | Metric | Value |
 |--------|-------|
-| **Total Distributed** | **$28,890+ USD1** |
-| **Distributions** | 113 cycles |
-| **Holders Receiving** | 230+ per distribution |
+| **Total Distributed** | **$29,231+ USD1** |
+| **Distributions** | 115+ cycles |
+| **Holders Receiving** | 1,155+ per distribution |
+| **Active Engagement** | 1,798 holders tracked |
 | **Frequency** | Every 2 minutes |
 | **Distribution Threshold** | $10 USD1 minimum |
 | **Multiplier System** | Tier × Streak × Engagement × Time Lock |
-| **Max Possible Multiplier** | **5.63x rewards** |
+| **Max Possible Multiplier** | **4.5x rewards** (5.63x with time lock!) |
 
 *Last updated: January 21, 2026 - Stats sync automatically via Redis*
 
@@ -182,7 +183,7 @@ Special celebration distributions when we hit milestones:
 | $500,000 | QE5 | 2.5x celebration | 🔮 Upcoming |
 | $1,000,000 | QE∞ | 3.0x celebration | 🔮 Upcoming |
 
-**Current Progress: $28,890 / $50,000 (57.8% to QE2)**
+**Current Progress: $29,231 / $50,000 (58.5% to QE2)**
 
 ---
 
@@ -277,6 +278,29 @@ pm2 start "npx ts-node scripts/run-distribution.ts" \
 | **USD1 Token** | `USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB` |
 | **Distribution Wallet** | `4Br5iKfRkYMk8WMj6w8YASynuq7Eoas16rkyvWsAdL4P` |
 | **Meteora Pool** | `8mLRmqBVfe91twjpCF3hqTtGNMJMsukhEd6GGjXpqs2i` |
+
+---
+
+## 📈 Current Holder Distribution (Live)
+
+Based on latest distribution cycle (January 21, 2026):
+
+### Tier Breakdown
+| Tier | Holders | Tokens Distributed |
+|------|---------|-------------------|
+| 🏛️ Fed Governor (1.25x) | 16 | 27.24 USD1 |
+| 📋 Regional Director (1.1x) | 164 | 50.34 USD1 |
+| 🪪 Board Member (1.05x) | 367 | 12.74 USD1 |
+| 🌐 Fed Citizen (1x) | 648 | 1.40 USD1 |
+
+### Engagement Breakdown
+| Tier | Holders | Tokens | Avg XP |
+|------|---------|--------|--------|
+| 🔥 Fed Active (1.1x) | 733 | 76.68 USD1 | 169 XP |
+| 📊 Fed Regular (1.05x) | 281 | 10.16 USD1 | 77 XP |
+| 🆕 Fed Newcomer (1x) | 181 | 4.88 USD1 | 21 XP |
+
+**1,014 holders receiving engagement bonuses this cycle!**
 
 ---
 
