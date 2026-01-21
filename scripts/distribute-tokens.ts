@@ -26,6 +26,87 @@ const __dirname = path.dirname(__filename);
 // Log directory for detailed logging
 const LOG_DIR = path.join(__dirname, 'distribution-logs');
 
+// Streak data file path
+const STREAK_DATA_FILE = path.join(__dirname, 'streak-data.json');
+
+// Streak tier definitions (must match streak-tracker.ts)
+interface StreakTier {
+    name: string;
+    title: string;
+    minDays: number;
+    multiplier: number;
+    emoji: string;
+}
+
+const STREAK_TIERS: StreakTier[] = [
+    { name: 'FoundingFather', title: 'Founding Father', minDays: 365, multiplier: 1.25, emoji: '🏛️' },
+    { name: 'OGFed', title: 'OG Fed', minDays: 180, multiplier: 1.2, emoji: '💎' },
+    { name: 'FedLoyalist', title: 'Fed Loyalist', minDays: 90, multiplier: 1.15, emoji: '🔷' },
+    { name: 'DiamondHands', title: 'Diamond Hands', minDays: 30, multiplier: 1.1, emoji: '💠' },
+    { name: 'Holder', title: 'Holder', minDays: 7, multiplier: 1.05, emoji: '🤝' },
+    { name: 'Newcomer', title: 'Newcomer', minDays: 0, multiplier: 1.0, emoji: '🆕' },
+];
+
+// Streak data structures
+interface HolderStreak {
+    address: string;
+    firstSeen: string;
+    lastSeen: string;
+    currentBalance: number;
+    peakBalance: number;
+    streakDays: number;
+    longestStreak: number;
+    streakBroken: boolean;
+    tier: string;
+    multiplier: number;
+}
+
+interface StreakData {
+    lastUpdated: string;
+    holders: Record<string, HolderStreak>;
+    stats: {
+        totalTracked: number;
+        activeStreaks: number;
+        longestCurrentStreak: number;
+        averageStreak: number;
+        tierBreakdown: Record<string, number>;
+    };
+}
+
+// Load streak data from file
+function loadStreakData(): StreakData | null {
+    try {
+        if (fs.existsSync(STREAK_DATA_FILE)) {
+            const data = JSON.parse(fs.readFileSync(STREAK_DATA_FILE, 'utf-8'));
+            return data as StreakData;
+        }
+    } catch (error) {
+        console.warn('⚠️ Could not load streak data:', error);
+    }
+    return null;
+}
+
+// Get streak multiplier for an address
+function getStreakMultiplier(address: string, streakData: StreakData | null): { multiplier: number; tier: StreakTier; streakDays: number } {
+    const defaultTier = STREAK_TIERS[STREAK_TIERS.length - 1]; // Newcomer
+
+    if (!streakData || !streakData.holders[address]) {
+        return { multiplier: 1.0, tier: defaultTier, streakDays: 0 };
+    }
+
+    const holderStreak = streakData.holders[address];
+    const streakDays = holderStreak.streakDays || 0;
+
+    // Find the appropriate tier
+    for (const tier of STREAK_TIERS) {
+        if (streakDays >= tier.minDays) {
+            return { multiplier: tier.multiplier, tier, streakDays };
+        }
+    }
+
+    return { multiplier: 1.0, tier: defaultTier, streakDays };
+}
+
 // Ensure log directory exists
 function ensureLogDir(): void {
     if (!fs.existsSync(LOG_DIR)) {
@@ -160,7 +241,7 @@ const AMM_PROGRAMS = [
 
 // Blacklisted addresses that should not receive distributions
 const BLACKLISTED_ADDRESSES = [
-    '4Br5iKfRkYMk8WMj6w8YASynuq7Eoas16rkyvWsAdL4P', // Blacklisted address
+    'FaxmZj7oi9bZwLPHYPBf2zeWDY3GK4mXvMopfkvQ9kVE', // Blacklisted address
 ];
 
 // Distribution history file (in the main fed/src folder for website access)
@@ -168,7 +249,7 @@ const DISTRIBUTION_HISTORY_FILE = path.join(__dirname, '..', 'src', 'token-distr
 
 // Website API for live updates
 const WEBSITE_API_URL = process.env.WEBSITE_API_URL || 'https://fed.markets/api/distributions';
-const DISTRIBUTION_API_KEY = process.env.DISTRIBUTION_API_KEY || 'YOUR_DISTRIBUTION_API_KEY';
+const DISTRIBUTION_API_KEY = process.env.DISTRIBUTION_API_KEY || '546c3e1b3cdce901910414eb80c3a0f934fa8477cb33e45290d70f0fa0e474cf';
 
 interface DistributionHistory {
     totalDistributed: number;
@@ -187,6 +268,70 @@ interface TokenHolder {
     amount: number;
     percentage: number;
     tokensToReceive: number;
+    tier?: HolderTier;
+    multiplier?: number;
+    // Streak bonus fields
+    streakTier?: StreakTier;
+    streakMultiplier?: number;
+    streakDays?: number;
+    combinedMultiplier?: number; // tier * streak
+}
+
+// Holder Tier System - Federal Reserve Ranks
+// Multipliers redistribute rewards within the pool (total stays same)
+interface HolderTier {
+    name: string;
+    title: string;
+    minHolding: number;
+    multiplier: number;
+}
+
+const HOLDER_TIERS: HolderTier[] = [
+    { name: 'Chairman', title: 'Fed Chairman', minHolding: 50_000_000, multiplier: 1.5 },
+    { name: 'Governor', title: 'Fed Governor', minHolding: 10_000_000, multiplier: 1.25 },
+    { name: 'Director', title: 'Regional Director', minHolding: 1_000_000, multiplier: 1.1 },
+    { name: 'Member', title: 'Board Member', minHolding: 100_000, multiplier: 1.05 },
+    { name: 'Citizen', title: 'Fed Citizen', minHolding: 0, multiplier: 1.0 },
+];
+
+// Get tier for a holder based on their holdings
+function getHolderTier(amount: number): HolderTier {
+    for (const tier of HOLDER_TIERS) {
+        if (amount >= tier.minHolding) {
+            return tier;
+        }
+    }
+    return HOLDER_TIERS[HOLDER_TIERS.length - 1]; // Default to Citizen
+}
+
+// Calculate Fed Funds Rate (estimated APY) from distribution history
+function calculateFedFundsRate(history: DistributionHistory, totalSupplyHeld: number): { rate7d: number; rate30d: number } {
+    if (history.distributions.length === 0 || totalSupplyHeld === 0) {
+        return { rate7d: 0, rate30d: 0 };
+    }
+
+    const now = Date.now();
+    const sevenDaysAgo = now - (7 * 24 * 60 * 60 * 1000);
+    const thirtyDaysAgo = now - (30 * 24 * 60 * 60 * 1000);
+
+    let total7d = 0;
+    let total30d = 0;
+
+    for (const dist of history.distributions) {
+        const distTime = new Date(dist.timestamp).getTime();
+        if (distTime >= sevenDaysAgo) {
+            total7d += dist.totalAmount;
+        }
+        if (distTime >= thirtyDaysAgo) {
+            total30d += dist.totalAmount;
+        }
+    }
+
+    // APY = (Total Distributed / Total Supply) * (365 / Days) * 100
+    const rate7d = total7d > 0 ? (total7d / totalSupplyHeld) * (365 / 7) * 100 : 0;
+    const rate30d = total30d > 0 ? (total30d / totalSupplyHeld) * (365 / 30) * 100 : 0;
+
+    return { rate7d, rate30d };
 }
 
 // Load or create distribution history
@@ -427,7 +572,7 @@ async function main() {
         logger.log(`Distribution Token (to send): ${distributionMint.toBase58()}`);
 
         // Create connection
-        const connection = new Connection('https://mainnet.helius-rpc.com/?api-key=YOUR_HELIUS_API_KEY', 'confirmed');
+        const connection = new Connection('https://mainnet.helius-rpc.com/?api-key=d009b341-8551-40fa-aa5e-bae4ce0c8cf6', 'confirmed');
 
         // Auto-detect token program type for distribution token
         let distributionTokenProgram: PublicKey = TOKEN_PROGRAM_ID;
@@ -668,20 +813,109 @@ async function main() {
         const totalSupplyHeld = holders.reduce((sum, h) => sum + h.amount, 0);
         logger.log(`Total snapshot tokens held by eligible users: ${totalSupplyHeld.toLocaleString()}\n`);
 
-        // PHASE 2: Calculate proportional distribution based on ELIGIBLE holders only
-        logger.log('Calculating proportional distribution (based on eligible holders only)...');
+        // PHASE 2: Calculate proportional distribution with TIER + STREAK MULTIPLIERS
+        logger.log('Calculating proportional distribution with tier + streak multipliers...');
+
+        // Load streak data for bonus multipliers
+        const streakData = loadStreakData();
+        if (streakData) {
+            logger.log(`💎 Streak data loaded: ${Object.keys(streakData.holders).length} holders tracked`);
+            logger.log(`   Last updated: ${streakData.lastUpdated}`);
+        } else {
+            logger.log('💎 No streak data available - using tier multipliers only');
+        }
+
+        // Step 1: Assign tiers, streaks, and calculate combined multipliers
+        let totalWeightedShare = 0;
+        let holdersWithStreakBonus = 0;
         for (const holder of holders) {
+            // Tier multiplier (based on holdings)
+            holder.tier = getHolderTier(holder.amount);
+            holder.multiplier = holder.tier.multiplier;
+
+            // Streak multiplier (based on holding duration)
+            const streakInfo = getStreakMultiplier(holder.address, streakData);
+            holder.streakTier = streakInfo.tier;
+            holder.streakMultiplier = streakInfo.multiplier;
+            holder.streakDays = streakInfo.streakDays;
+
+            // Combined multiplier = tier * streak (they STACK!)
+            holder.combinedMultiplier = holder.multiplier * holder.streakMultiplier;
+
+            if (holder.streakMultiplier > 1.0) {
+                holdersWithStreakBonus++;
+            }
+
             holder.percentage = (holder.amount / totalSupplyHeld) * 100;
-            holder.tokensToReceive = availableTokens * (holder.amount / totalSupplyHeld);
+            // Weighted share = base share * combined multiplier
+            totalWeightedShare += (holder.amount / totalSupplyHeld) * holder.combinedMultiplier;
+        }
+
+        if (holdersWithStreakBonus > 0) {
+            logger.log(`   ${holdersWithStreakBonus} holders receiving streak bonuses`);
+        }
+
+        // Step 2: Normalize so total distributed equals available tokens
+        // Each holder gets: (their base share * combined multiplier / total weighted share) * available tokens
+        for (const holder of holders) {
+            const baseShare = holder.amount / totalSupplyHeld;
+            const weightedShare = baseShare * (holder.combinedMultiplier || 1.0);
+            holder.tokensToReceive = availableTokens * (weightedShare / totalWeightedShare);
+        }
+
+        // Log tier distribution stats
+        const tierCounts: Record<string, { count: number; totalTokens: number }> = {};
+        for (const holder of holders) {
+            const tierName = holder.tier?.name || 'Unknown';
+            if (!tierCounts[tierName]) {
+                tierCounts[tierName] = { count: 0, totalTokens: 0 };
+            }
+            tierCounts[tierName].count++;
+            tierCounts[tierName].totalTokens += holder.tokensToReceive;
+        }
+
+        logger.log('\n🏛️ Holder Tier Distribution:');
+        for (const tier of HOLDER_TIERS) {
+            const stats = tierCounts[tier.name];
+            if (stats && stats.count > 0) {
+                logger.log(`   ${tier.title} (${tier.multiplier}x): ${stats.count} holders → ${stats.totalTokens.toFixed(2)} tokens`);
+            }
+        }
+
+        // Log streak distribution stats
+        if (streakData) {
+            const streakCounts: Record<string, { count: number; totalTokens: number }> = {};
+            for (const holder of holders) {
+                const streakName = holder.streakTier?.name || 'Newcomer';
+                if (!streakCounts[streakName]) {
+                    streakCounts[streakName] = { count: 0, totalTokens: 0 };
+                }
+                streakCounts[streakName].count++;
+                streakCounts[streakName].totalTokens += holder.tokensToReceive;
+            }
+
+            logger.log('\n💎 Diamond Hands Streak Distribution:');
+            for (const tier of STREAK_TIERS) {
+                const stats = streakCounts[tier.name];
+                if (stats && stats.count > 0) {
+                    logger.log(`   ${tier.emoji} ${tier.title} (${tier.multiplier}x): ${stats.count} holders → ${stats.totalTokens.toFixed(2)} tokens`);
+                }
+            }
         }
 
         // Sort by amount descending for better visibility
         holders.sort((a, b) => b.amount - a.amount);
 
-        // Show top holders
-        logger.log('\nTop 10 holders (recalculated after filtering):');
+        // Show top holders with tier + streak info
+        logger.log('\nTop 10 holders (with tier + streak multipliers):');
         holders.slice(0, 10).forEach((holder, index) => {
-            logger.log(`${index + 1}. ${holder.address.slice(0, 8)}...${holder.address.slice(-4)}: ${holder.percentage.toFixed(2)}% = ${holder.tokensToReceive.toFixed(2)} tokens`);
+            const tierName = holder.tier?.name || 'Citizen';
+            const streakEmoji = holder.streakTier?.emoji || '🆕';
+            const tierMult = holder.multiplier || 1.0;
+            const streakMult = holder.streakMultiplier || 1.0;
+            const combinedMult = holder.combinedMultiplier || 1.0;
+            const streakDays = holder.streakDays || 0;
+            logger.log(`${index + 1}. ${holder.address.slice(0, 8)}...${holder.address.slice(-4)}: ${holder.percentage.toFixed(2)}% × ${combinedMult.toFixed(2)}x [${tierName} ${tierMult}x + ${streakEmoji}${streakDays}d ${streakMult}x] = ${holder.tokensToReceive.toFixed(2)} tokens`);
         });
 
         // Filter out dust amounts
@@ -825,6 +1059,9 @@ async function main() {
         const recipientCount = Math.min(signatures.length * TRANSFERS_PER_TX, validRecipients.length);
         await syncToWebsite(actualDistributed, recipientCount, signatures[0] || '');
 
+        // Calculate Fed Funds Rate (current APY)
+        const fedFundsRate = calculateFedFundsRate(history, totalSupplyHeld);
+
         // Final summary
         logger.log(`\n========================================`);
         logger.log(`DISTRIBUTION COMPLETE`);
@@ -834,6 +1071,9 @@ async function main() {
         logger.success(`Successful transactions: ${signatures.length}/${transactions.length}`);
         logger.success(`Time taken: ${duration.toFixed(1)} seconds`);
         logger.success(`Total distributed all-time: ${history.totalDistributed.toFixed(2)} tokens`);
+        logger.log(`\n🏛️ FED FUNDS RATE (Current APY):`);
+        logger.log(`   7-Day Rate:  ${fedFundsRate.rate7d.toFixed(2)}%`);
+        logger.log(`   30-Day Rate: ${fedFundsRate.rate30d.toFixed(2)}%`);
         logger.log(`Log file: ${logger.getLogPath()}`);
         logger.log(`========================================`);
 
