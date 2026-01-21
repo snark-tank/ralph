@@ -644,31 +644,66 @@ Other projects can PAY $FED holders to add liquidity to their tokens on Meteora.
 
 ---
 
-### 16. "Fed Citizen Engagement Bonus"
+### 16. "Fed Citizen Engagement Bonus" - Fed Engagement Score System
 
-**Inspired by:** Jupiter's Active Staking Rewards (ASR)
+**Inspired by:** Jupiter's Active Staking Rewards (ASR), Trust Wallet Premium XP
+
+**Status:** ✅ **IMPLEMENTED** (Jan 21, 2026)
 
 **The Concept:**
 Reward holders who actively engage with the protocol, not just passive hodlers. BUT don't require voting (learned from Jupiter's governance pause).
 
-**Engagement Actions:**
-- Check dashboard weekly: +5% bonus
-- Connect wallet and verify holdings: +3% bonus
-- Share distribution results on Twitter: +5% bonus
-- Refer new holder (verified): +10% bonus on their first distribution
+**Engagement Actions (Implemented):**
+- Daily check-in: +10 XP
+- 3-day streak: +5 XP bonus
+- 7-day streak: +10 XP bonus
+- 14-day streak: +25 XP bonus
+- 30-day streak: +50 XP bonus
+- Per distribution received: +5 XP
+
+**Engagement Tiers (14-day cycles):**
+| Tier | XP Required | Multiplier | Title |
+|------|-------------|------------|-------|
+| 🏆 Fed Elite | 500+ XP | 1.2x | Maximum engagement |
+| ⭐ Fed Veteran | 250+ XP | 1.15x | High engagement |
+| 🔥 Fed Active | 100+ XP | 1.1x | Active engagement |
+| 📊 Fed Regular | 50+ XP | 1.05x | Regular engagement |
+| 🆕 Fed Newcomer | 0+ XP | 1.0x | Base rewards |
 
 **Why It Works:**
 - Jupiter's ASR proved engagement > passive holding
 - BUT mandatory voting caused fatigue → governance breakdown
 - Solution: OPTIONAL engagement, BONUS rewards
 - Creates active community without forcing participation
+- XP multiplies REAL rewards (not inflation)
+- 14-day cycles create urgency and fresh starts
 
-**Implementation:**
-- Add engagement tracking to website
-- Weekly engagement score calculation
-- Bonus multiplier applied to distributions
+**Implementation:** ✅ DONE
+- ✅ Created `engagement-score.ts` standalone utility
+- ✅ Check-in system with streak tracking
+- ✅ 5 engagement tiers with multipliers
+- ✅ 14-day cycle system with auto-reset
+- ✅ Leaderboard generation
+- ✅ JSON output for API/website integration
+- 🔜 Integrate into distribution script
+- 🔜 Add engagement widget to website dashboard
 
-**Effort:** Medium (website + tracking)
+**Usage:**
+```bash
+# Daily check-in
+npx ts-node engagement-score.ts --checkin <address>
+
+# Check engagement status
+npx ts-node engagement-score.ts --status <address>
+
+# View leaderboard
+npx ts-node engagement-score.ts --leaderboard 20
+
+# Get stats (JSON for API)
+npx ts-node engagement-score.ts --stats --json
+```
+
+**Effort:** ✅ Complete (Phase 1)
 **Impact:** High (engagement + virality)
 
 ---

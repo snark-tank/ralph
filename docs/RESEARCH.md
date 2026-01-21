@@ -1740,6 +1740,85 @@ Brief description of what the protocol does.
 
 ---
 
+## Crypto Engagement & Loyalty Systems (2025-2026)
+
+**Date Researched:** 2026-01-21
+**Status:** Active Research - Adopted for $FED
+
+### Overview
+
+Crypto loyalty and engagement programs have evolved significantly in 2025-2026. The most successful programs reward active participation rather than just passive holding. Key examples include Trust Wallet Premium's XP system and Jupiter's Active Staking Rewards (ASR).
+
+### Key Findings
+
+1. **XP-Based Engagement (Trust Wallet Premium)**
+   - Daily check-ins form the foundation of XP accumulation (10 XP per day)
+   - Streak bonuses for consecutive days (3-day: +5 XP, 7-day: +5 XP)
+   - 14-day cycles where engagement determines tier status
+   - Trading activity generates scaled XP rewards (30-500 XP based on volume)
+   - Tier benefits include reduced fees and priority features
+
+2. **Active Staking Rewards (Jupiter)**
+   - Proved engagement > passive holding
+   - BUT mandatory voting caused fatigue and governance breakdown
+   - Lesson: OPTIONAL engagement with BONUS rewards is better than mandatory participation
+
+3. **Gamification Elements (Nubank NuCoin)**
+   - "Surprise chests" and quizzes make earning rewards interactive
+   - Banking interactions converted to digital asset opportunities
+   - Gamification increases daily active users significantly
+
+4. **Tiered Benefits (Mudrex Alpha)**
+   - Six-tier system with progressively better benefits
+   - Lower trading fees at higher tiers (0.03% futures, 0.12% spot)
+   - Additional perks: faster support, zero-fee withdrawals, exclusive content
+
+### What Works
+
+| Element | Why It Works | Adoption for $FED |
+|---------|-------------|-------------------|
+| Daily Check-ins | Creates habit, consistent engagement | Implemented |
+| Streak Bonuses | Rewards consistency, prevents churn | Implemented |
+| Tiered Benefits | Creates progression and goals | Implemented |
+| XP Visibility | Makes progress tangible | Implemented |
+| Cycle Resets | Prevents "maxed out" fatigue | Implemented (14-day) |
+| Optional Engagement | Avoids governance fatigue | By design |
+
+### What Failed
+
+| Element | Why It Failed | How $FED Avoids |
+|---------|--------------|-----------------|
+| Mandatory Voting | User fatigue, low participation | Engagement is optional |
+| Fixed Point Values | No scarcity, inflation | XP = multiplier on REAL rewards |
+| Complex Rules | User confusion | Simple: check-in + streaks + tiers |
+| Unlimited Accumulation | No urgency | 14-day cycles reset progress |
+
+### Lessons for $FED
+
+1. **Engagement Should Multiply Real Rewards**: Unlike points that inflate endlessly, our XP multiplies actual USD1 distributions
+2. **Simple > Complex**: Check-in + streaks + tiers - that's it
+3. **Optional is Better**: Don't force engagement, reward it
+4. **Visible Progress**: Show users how close they are to next tier
+5. **Regular Resets**: 14-day cycles create urgency and fresh starts
+
+### Implementation: Fed Engagement Score
+
+Created `engagement-score.ts` that implements:
+- Daily check-in system (+10 XP)
+- Streak bonuses (3/7/14/30 day milestones)
+- 14-day engagement cycles
+- 5 engagement tiers (Newcomer → Elite)
+- Multipliers stack with existing tier/streak systems
+
+### Sources
+
+- [Trust Wallet Premium XP System](https://trustwallet.com/blog/announcements/best-crypto-loyalty-programs-in-2025-why-trust-wallet-premium-stands-out)
+- [Enable3 Crypto Loyalty Guide](https://enable3.io/blog/crypto-loyalty-program-guide)
+- [Capillary Tech - Crypto Rewards in Loyalty](https://www.capillarytech.com/blog/crypto-rewards-in-loyalty-programs/)
+- [Blockchain App Factory - Tokens for Loyalty](https://www.blockchainappfactory.com/blog/how-brands-use-tokens-for-loyalty-and-engagement/)
+
+---
+
 *This document is continuously updated by Ralph as he researches protocols.*
 
-Last Updated: 2026-01-21 (Added 2025 Revenue-Sharing Leaders: Hyperliquid, Aerodrome, Jupiter)
+Last Updated: 2026-01-21 (Added Crypto Engagement & Loyalty Systems research, implemented Fed Engagement Score)

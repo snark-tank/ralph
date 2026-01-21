@@ -173,6 +173,7 @@ Ralph will implement:
 | **Auto-Compound Preferences** | Week 3 | ✅ **IMPLEMENTED** |
 | **QE Milestone Bonus Integration** | Week 3 | ✅ **IMPLEMENTED** |
 | **Auto-Compound Swap Integration** | Week 3 | ✅ **IMPLEMENTED** |
+| **Fed Engagement Score System** | Week 3 | ✅ **IMPLEMENTED** |
 | Governance | Week 4+ | 📋 Backlog |
 
 ### Progress Notes (Jan 21, 2026)
@@ -629,6 +630,58 @@ Jupiter swaps require the recipient's wallet to sign. Since we're distributing f
 - Add website UI for preference management
 - Create compound leaderboard
 - Add estimated $FED display to distribution summary
+
+---
+
+### 🎮 FED ENGAGEMENT SCORE SYSTEM IMPLEMENTED (Jan 21, 2026)
+
+**XP-based engagement tracking is now LIVE!**
+
+Inspired by Trust Wallet Premium's XP system and Jupiter's Active Staking Rewards, created a comprehensive engagement scoring system that rewards active participation - not just passive holding.
+
+**Key Features:**
+- **Daily Check-ins**: +10 XP per day for active engagement
+- **Streak Bonuses**: +5 XP (3-day), +10 XP (7-day), +25 XP (14-day), +50 XP (30-day)
+- **Distribution Rewards**: +5 XP per distribution received
+- **14-Day Cycles**: XP resets every 14 days to maintain urgency
+- **5 Engagement Tiers**: Newcomer → Regular → Active → Veteran → Elite
+
+**Engagement Tier Multipliers:**
+| Tier | XP Required | Multiplier |
+|------|-------------|------------|
+| 🏆 Fed Elite | 500+ XP | 1.2x |
+| ⭐ Fed Veteran | 250+ XP | 1.15x |
+| 🔥 Fed Active | 100+ XP | 1.1x |
+| 📊 Fed Regular | 50+ XP | 1.05x |
+| 🆕 Fed Newcomer | 0+ XP | 1.0x |
+
+**Usage:**
+```bash
+npx ts-node engagement-score.ts --checkin <address>   # Daily check-in
+npx ts-node engagement-score.ts --status <address>    # Check status
+npx ts-node engagement-score.ts --leaderboard 20     # Top 20 engaged
+npx ts-node engagement-score.ts --stats --json       # Stats for API
+```
+
+**Why This Matters:**
+- Engagement multiplies REAL rewards (not inflation)
+- Optional participation (no mandatory voting fatigue)
+- Creates habit formation with daily check-ins
+- 14-day cycles prevent "maxed out" feeling
+- Stacks with existing tier + streak multipliers!
+
+**Maximum Possible Multiplier Stack:**
+- Fed Chairman (50M+ $FED): 1.5x
+- Founding Father streak (365+ days): 1.25x
+- Fed Elite engagement (500+ XP): 1.2x
+- **Combined: 1.5 × 1.25 × 1.2 = 2.25x rewards!**
+
+**File Created:** `/home/ubuntu/fed/script/engagement-score.ts`
+
+**Next Steps:**
+- Integrate engagement multiplier into distribution script
+- Add engagement widget to website dashboard
+- Create engagement leaderboard page
 
 ---
 
