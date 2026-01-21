@@ -1,14 +1,32 @@
 // Embedded stats - updated at build time or via script
 // This provides fallback data when the local JSON file is not accessible (e.g., on Vercel)
 // Run `npm run update-stats` to refresh these values from the source
-// Last updated: 2026-01-21T20:20:53.796Z
+// Last updated: 2026-01-21T20:26:35.671Z
 
 export const EMBEDDED_STATS = {
-  totalDistributed: 42282.18,
-  distributionCount: 212,
+  totalDistributed: 43040.46,
+  distributionCount: 215,
   maxRecipients: 1828,
-  lastUpdated: "2026-01-21T20:20:53.796Z",
+  lastUpdated: "2026-01-21T20:26:35.671Z",
   recentDistributions: [
+    {
+      date: "2026-01-21T20:26:35.671Z",
+      amount: 84.78,
+      recipients: 486,
+      txSignature: "VjVaWis1vX4jcG7hX1AJFCDnDwQNoFJ8Cz8ZFUYcshcAGwzSXXRYDMbtCHsUxS5aQC8oHni7TwWMTHLwSf4wRcK"
+    },
+    {
+      date: "2026-01-21T20:24:50.694Z",
+      amount: 440.71,
+      recipients: 778,
+      txSignature: "51H8rHxs7Lhq9LXzJNmma2VjUAGzwHCnRrS6Yvqx7xp1Xzu29ga2SvGDxG2DSEfBKfMpi5djxELQYNPtGuycvVcx"
+    },
+    {
+      date: "2026-01-21T20:22:47.275Z",
+      amount: 232.79,
+      recipients: 669,
+      txSignature: "2qgoqpYC5YPDZ9BpTLJKdvGpMxfvJRCSqECNAmE2FpmAFFMaCLpsPBQDDzsW1i7Y5sSa7fj1hX3Q423epYdwsMw8"
+    },
     {
       date: "2026-01-21T20:20:53.796Z",
       amount: 280.36,
@@ -50,24 +68,6 @@ export const EMBEDDED_STATS = {
       amount: 102.20,
       recipients: 531,
       txSignature: "5BL2rbwP8whEjYc9qsSrKJpsqciFBGBUmoDcCkm4H5heFrvF2iqVWCH2riDqanqDF2tC91i3UondrBWUPSUj59so"
-    },
-    {
-      date: "2026-01-21T20:06:42.435Z",
-      amount: 124.07,
-      recipients: 556,
-      txSignature: "3PTz4ByyJbU9p63Hyq1YTPvmprFaEEAJ9jipdZnHYwhDZ9uoA57b3DarsHXSyCy7BzVgaKQWpxPgciduRYnuHoc6"
-    },
-    {
-      date: "2026-01-21T20:04:37.580Z",
-      amount: 132.65,
-      recipients: 563,
-      txSignature: "5jEDxfZXpxGBFjEag9L9zPrmfEa9frrpG3uiXkUeJd4MgXZdj4ixaUs3jFBSWg3TBtCZub7Hug9ry9k3RahTXgky"
-    },
-    {
-      date: "2026-01-21T20:02:31.452Z",
-      amount: 31.86,
-      recipients: 347,
-      txSignature: "46M9dvHjgzazd9UyKiMKKv9PdMFcqEycSsaEeXgA8GAUE3bZzv4zLtrk3N6SwUABimJPoh3KqER4LQ7dQCNnCRbE"
     }
   ]
 };
