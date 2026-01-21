@@ -205,21 +205,47 @@ export default async function Dashboard() {
         </div>
       </div>
 
+      {/* QE2 Progress Tracker */}
+      <div className="mt-8 bg-[#111] border border-[#222] rounded-xl p-6">
+        <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
+          <span>💎</span> Progress to QE2
+        </h2>
+        <div className="mb-2 flex justify-between text-sm">
+          <span className="text-gray-400">${stats.totalDistributed} distributed</span>
+          <span className="text-[#c9a227]">$50,000 target</span>
+        </div>
+        <div className="w-full bg-[#222] rounded-full h-4 overflow-hidden">
+          <div
+            className="bg-gradient-to-r from-[#c9a227] to-[#22c55e] h-full rounded-full transition-all duration-500"
+            style={{ width: `${Math.min((parseFloat(stats.totalDistributed.replace(/,/g, '')) / 50000) * 100, 100)}%` }}
+          />
+        </div>
+        <p className="mt-2 text-gray-500 text-sm">
+          QE2 triggers a 1.5x celebration bonus distribution for all holders!
+        </p>
+      </div>
+
       {/* Current Focus */}
       <div className="mt-8 bg-gradient-to-r from-[#c9a227]/10 to-transparent border border-[#c9a227]/30 rounded-xl p-6">
         <h2 className="text-xl font-bold text-[#c9a227] mb-3 flex items-center gap-2">
           <span>🎯</span> Current Focus
         </h2>
         <p className="text-gray-300">
-          Research complete! Now implementing the best mechanics from 9 analyzed protocols.
-          Building the most sustainable rewards flywheel in crypto - real yield from real fees.
+          Research complete! All 9 protocols analyzed. Now running the most advanced rewards system in DeFi
+          with 4 stacking multiplier systems and real yield from actual trading fees.
         </p>
         <div className="mt-4 flex flex-wrap gap-2">
-          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ Holder Tiers</span>
-          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ Diamond Hands</span>
+          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ Holder Tiers (1.0-1.5x)</span>
+          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ Diamond Hands (1.0-1.25x)</span>
+          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ Engagement XP (1.0-1.2x)</span>
+          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ Time Locks (1.05-2.0x)</span>
           <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ Auto-compound</span>
           <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ QE Milestones</span>
-          <span className="px-3 py-1 bg-green-900/50 rounded-full text-sm text-green-400">✓ Fed Funds Rate</span>
+        </div>
+        <div className="mt-3 p-3 bg-[#0a0a0a] rounded-lg">
+          <p className="text-[#22c55e] text-sm font-mono">
+            Max Multiplier: 1.5 × 1.25 × 1.2 × 2.0 = <strong>4.5x rewards!</strong>
+          </p>
         </div>
       </div>
 

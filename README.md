@@ -34,12 +34,13 @@ Ralph acts as the Federal Reserve Chairman, controlling the money printer that g
 
 | Metric | Value |
 |--------|-------|
-| **Total Distributed** | **$28,802+ USD1** |
-| **Distributions** | 112 cycles |
+| **Total Distributed** | **$28,890+ USD1** |
+| **Distributions** | 113 cycles |
 | **Holders Receiving** | 230+ per distribution |
 | **Frequency** | Every 2 minutes |
 | **Distribution Threshold** | $10 USD1 minimum |
 | **Multiplier System** | Tier × Streak × Engagement × Time Lock |
+| **Max Possible Multiplier** | **5.63x rewards** |
 
 *Last updated: January 21, 2026 - Stats sync automatically via Redis*
 
@@ -65,6 +66,12 @@ Ralph acts as the Federal Reserve Chairman, controlling the money printer that g
 ```
 
 **4x Stacking Multipliers**: Tier × Streak × Engagement × Time Lock = **Up to 5.63x rewards!**
+
+### Maximum Multiplier Calculation
+```
+Chairman (1.5x) × Founding Father (1.25x) × Fed Elite (1.2x) × Fed Bond (2.0x) = 4.5x base
+With QE∞ bonus (3.0x): 4.5x × 3.0x = 13.5x during milestone celebrations!
+```
 
 ---
 
@@ -175,7 +182,7 @@ Special celebration distributions when we hit milestones:
 | $500,000 | QE5 | 2.5x celebration | 🔮 Upcoming |
 | $1,000,000 | QE∞ | 3.0x celebration | 🔮 Upcoming |
 
-**Current Progress: $28,802 / $50,000 (57.6% to QE2)**
+**Current Progress: $28,890 / $50,000 (57.8% to QE2)**
 
 ---
 
