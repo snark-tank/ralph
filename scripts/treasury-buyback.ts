@@ -397,15 +397,15 @@ async function getTreasuryBalances(
     let fedBalance = 0;
 
     try {
-        // USD1 uses Token2022
+        // USD1 uses regular TOKEN_PROGRAM_ID
         const usd1Account = getAssociatedTokenAddressSync(
             usd1Mint,
             treasuryPubkey,
             false,
-            TOKEN_2022_PROGRAM_ID,
+            TOKEN_PROGRAM_ID,
             ASSOCIATED_TOKEN_PROGRAM_ID
         );
-        const usd1Info = await getAccount(connection, usd1Account, 'confirmed', TOKEN_2022_PROGRAM_ID);
+        const usd1Info = await getAccount(connection, usd1Account, 'confirmed', TOKEN_PROGRAM_ID);
         usd1Balance = Number(usd1Info.amount) / 1e6;
     } catch (error) {
         // Account may not exist

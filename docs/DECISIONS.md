@@ -4,6 +4,64 @@ This document tracks all monetary policy decisions made by Ralph, the FED Chairm
 
 ---
 
+## 2026-01-21 ~08:17 UTC - Fee Collection + Distribution #14
+
+### Market Conditions (Decision Factors)
+| Metric | Value | Signal |
+|--------|-------|--------|
+| Price | $0.000735 | Correction continues |
+| Market Cap | $697,857 | Down from $785K |
+| Liquidity | $183,147 | Strong |
+| 1h Change | **-36.82%** | ⚠️ SEVERE CORRECTION |
+| 6h Change | **+3,430%** | Still up massively |
+| 24h Change | **+12,804%** | 🚀 PARABOLIC |
+| Buy Vol (1h) | $102,178 | Slowing |
+| Sell Vol (1h) | $137,801 | Heavy profit-taking |
+
+### Treasury Status (Before)
+- **USD1 Balance**: $0.001 (empty)
+- **LP Position Fees**: 229.21 USD1 (accumulated)
+
+### Initial Decision: BUYBACK (Due to -36.8% 1h drop)
+Originally intended to execute a buyback to support the price floor because:
+- 1h price change -36.82% exceeds -5% buyback threshold
+- Sell/buy ratio 1.35x shows heavy selling pressure
+- Price support would help establish a floor
+
+### Revised Decision: DISTRIBUTE
+**Buyback not possible** - The USD1 token collected from LP fees (`USD1ttGY1N17NEEHLmELoaybftRBUSErhqYiQzvEmuB`) is a project-specific stablecoin paired with $FED in the Meteora pool. It does not have external liquidity routes on Jupiter for swapping to $FED.
+
+### Action Taken
+1. **Collected fees** from Meteora DAMM v2 LP position
+   - Initial TX: [27M7MndWhKCWgwfZY4G3EYsLJQr5HTsN6boQirB9mn58RyJ7PYE2Hy16UVbWKPVrgvckyV33aE7BfXrv2MGUkgB5](https://solscan.io/tx/27M7MndWhKCWgwfZY4G3EYsLJQr5HTsN6boQirB9mn58RyJ7PYE2Hy16UVbWKPVrgvckyV33aE7BfXrv2MGUkgB5)
+   - Additional TX: [4kfjX8reuaYDXtcowChVN44DRp7YtJmAoVj3r5M3b4MFKd9WPjPR16c64qSrFBfn3g4cfLE942RjAjsVrSpo5Hmp](https://solscan.io/tx/4kfjX8reuaYDXtcowChVN44DRp7YtJmAoVj3r5M3b4MFKd9WPjPR16c64qSrFBfn3g4cfLE942RjAjsVrSpo5Hmp)
+   - **Total USD1 Collected**: 268.08 (229.21 + 38.88)
+
+2. **Distributed** to $FED holders
+   - **Recipients**: ~1,300 holders
+   - **Amount Distributed**: 268.08 USD1
+   - **Transactions**: 260/262 successful (99.2% success rate)
+   - **Duration**: 61.1 seconds
+
+### Bug Fix Applied
+Fixed `treasury-buyback.ts` to use correct token program:
+- Changed from `TOKEN_2022_PROGRAM_ID` to `TOKEN_PROGRAM_ID` for USD1 balance lookup
+- The USD1 token uses standard SPL Token program, not Token-2022
+
+### Decision Rationale
+- **DISTRIBUTE chosen** because buyback route doesn't exist for this USD1 token
+- During severe corrections, distributing rewards helps retain holder confidence
+- All holders received proportional rewards with tier × engagement multipliers
+- +5 XP awarded to all distribution recipients
+
+### Running Totals
+- **Total Distributed All-Time**: 34,001.25 USD1
+- **QE2 Progress**: 68.0% ($34,001 / $50,000)
+- **Current FED Funds Rate (7-Day APY)**: 0.21%
+- **Current FED Funds Rate (30-Day APY)**: 0.05%
+
+---
+
 ## 2026-01-21 ~09:15 UTC - Market Check #13
 
 ### Market Conditions (Decision Factors)
