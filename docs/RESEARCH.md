@@ -16,7 +16,7 @@ Ralph's deep dives into successful flywheel tokenomics.
 | Titano | ✅ Complete | Auto-compounding |
 | LIBERO | ✅ Complete | Fire pit burns |
 | NODE protocols | ✅ Complete | Node rewards, NaaS |
-| Rebase tokens | 📋 Pending | Supply elasticity |
+| Rebase tokens | ✅ Complete | Supply elasticity |
 
 ---
 
@@ -1216,6 +1216,159 @@ If StrongBlock had used $FED's model:
 - [IsThisCoinAScam - Ring Financial](https://isthiscoinascam.com/?dm=ring-financial)
 - [Chainalysis - 2021 Rug Pulls Revenue](https://www.chainalysis.com/blog/2021-crypto-scam-revenues/)
 - [Coinbase - Thor Price](https://www.coinbase.com/price/thor)
+
+---
+
+## Rebase Tokens (AMPL, BASE, YAM)
+
+**Date Researched:** 2026-01-21
+**Status:** Largely Failed (AMPL alive but volatile, BASE/YAM abandoned)
+
+### Overview
+
+Rebase tokens (also called elastic supply tokens) represent one of crypto's most innovative yet problematic experiments in achieving price stability. Unlike fixed-supply tokens like Bitcoin, rebase tokens dynamically adjust their circulating supply in response to price movements - expanding supply when price is high, contracting when price is low. The goal is to algorithmically maintain a target price (usually $1) without collateral backing.
+
+The concept is elegant: if demand increases and pushes price above target, mint more tokens to dilute the price back down. If demand decreases and price falls below target, burn tokens to create scarcity and push price back up. These supply adjustments ("rebases") happen proportionally across all wallets, so your percentage ownership remains constant even as your token count changes.
+
+In practice, rebase tokens have been plagued by extreme volatility, user confusion, smart contract bugs, and death spiral dynamics that have caused most implementations to fail or become niche products.
+
+### Key Protocols Analyzed
+
+**1. Ampleforth (AMPL) - The Pioneer**
+
+Launched in 2019, AMPL targets a price of ~$1.03 (CPI-adjusted). Every day at 02:00 UTC, the smart contract checks if price is more than ±5% from target and executes a proportional rebase. The rebase formula is:
+
+```
+Rebase % = (((Oracle Rate — Price Target) / Price Target) * 100) / 10
+```
+
+AMPL promotes itself as "non-dilutive" because your percentage of total supply never changes - only the raw token count. In reality, this is psychological framing; your USD value still fluctuates wildly.
+
+**2. BASE Protocol - Crypto Market Index**
+
+BASE attempted something unique: a rebase token pegged to the entire crypto market cap at a 1:1,000,000,000,000 ratio. If crypto market cap was $580B, BASE should be worth $0.58. The idea was to let users trade the entire crypto market as a single asset.
+
+In December 2020, BASE's first rebase exposed a critical vulnerability in how rebase tokens interact with Uniswap liquidity pools. A 136% supply expansion was triggered, but an exploit allowed 931,027 tokens to be siphoned from the pool during the atomic rebase transaction.
+
+**3. YAM Finance - The 48-Hour Disaster**
+
+YAM launched in August 2020 as a "DeFi governance experiment" combining Ampleforth's rebasing with Compound's governance. Within 48 hours:
+
+- Day 1: $500M+ in TVL, price peaks at $167.72
+- Day 2: Critical bug discovered in rebase function
+- The bug: Code divided by 10^18 was missing, causing supply to be calculated 10^18x larger than intended
+- Result: Governance became impossible (couldn't reach quorum), treasury funds permanently locked
+- Price crashed from $167.72 to $0.81
+- Total loss: $750,000 treasury + $500M locked in protocol
+
+The YAM team famously tweeted: "i'm sorry everyone. i've failed."
+
+### Key Mechanics
+
+1. **Supply Elasticity**
+   - Total supply expands or contracts based on price vs target
+   - Rebases occur at fixed intervals (daily, hourly, etc.)
+   - All wallets affected proportionally (no dilution of ownership %)
+   - Smart contract executes automatically - no user action needed
+
+2. **Target Price Pegging**
+   - Most target $1 USD (or CPI-adjusted equivalent)
+   - BASE uniquely targeted total crypto market cap
+   - Threshold bands prevent constant micro-rebases (e.g., ±5% for AMPL)
+
+3. **Rebase Types**
+   - **Positive rebase**: Price above target → supply increases → your balance increases
+   - **Negative rebase**: Price below target → supply contracts → your balance decreases
+   - **Neutral**: Price within threshold → no rebase
+
+4. **Wallet Balance Changes**
+   - Unique UX where token balance changes without transactions
+   - Confusing for users expecting static balances
+   - Creates tax accounting nightmare (every rebase is taxable event)
+
+### What Worked
+
+- **Non-Dilutive Property**: Your % ownership stays constant regardless of supply changes
+- **Innovation Spark**: Inspired entire category of algorithmic experiments (OHM rebases descended from this)
+- **AMPL Persistence**: Still alive since 2019, has survived extreme volatility and returned to target
+- **DeFi Collateral Use Case**: Can be used in lending/borrowing when combined with stable wrapper tokens
+- **No Collateral Required**: Unlike USDC/DAI, doesn't require backing assets
+
+### What Failed
+
+- **Extreme Volatility**: AMPL crashed 75% in 3 days (July 2020, from $2.80 to $0.70)
+- **Death Spiral Risk**: Negative rebases + price decline = amplified losses (lose tokens AND value)
+- **User Confusion**: Balance changing without transactions feels "scammy" to casual users
+- **Smart Contract Bugs**: YAM's fatal bug proved unaudited rebasing code is dangerous
+- **LP Pool Exploits**: BASE showed rebase tokens can be exploited during atomic supply changes
+- **Centralization Issues**: AMPL team can pause rebases and freeze tokens - not truly decentralized
+- **Tax Nightmare**: Every rebase is potentially taxable, creating accounting burden
+- **Failure as Stable Asset**: Despite targeting $1, price routinely swings 50-200%
+- **Limited Adoption**: Remains niche product, never achieved mainstream DeFi usage
+
+### Death Spiral Dynamics
+
+The fundamental flaw with rebase tokens:
+
+1. Price drops below target
+2. Negative rebase reduces everyone's token balances
+3. Users panic seeing fewer tokens
+4. Selling pressure increases
+5. Price drops further
+6. More negative rebases
+7. Cycle continues until confidence completely breaks
+
+This is the opposite of what was intended - rather than stabilizing price, rebase mechanics can amplify panic and accelerate crashes.
+
+### Lessons for $FED
+
+**DO Adopt:**
+- ✅ The concept of "sustainable real yield" - but from fees, not supply manipulation
+- ✅ Transparent on-chain mechanics that users can verify
+- ✅ Daily/regular distribution schedule (creates routine like rebases)
+- ✅ Non-dilutive ownership concept - $FED supply stays constant
+
+**DON'T Adopt:**
+- ❌ Supply elasticity - fixed supply is more trustworthy and understandable
+- ❌ Algorithmic price pegging - let market determine price
+- ❌ Automatic wallet balance changes - too confusing for users
+- ❌ Complex smart contract mechanics vulnerable to bugs
+- ❌ Any mechanism that can death spiral
+
+**Key Insight for $FED:**
+
+Rebase tokens tried to solve the wrong problem. They wanted "price stability through supply manipulation" but created systems that were:
+1. Confusing to users
+2. Vulnerable to death spirals
+3. Exploitable by sophisticated traders
+4. Tax nightmares for holders
+
+$FED solves yield differently:
+1. **Fixed supply** - no confusing balance changes
+2. **Real yield from fees** - not algorithmic manipulation
+3. **USD1 distributions** - separate token, clear value
+4. **No peg target** - market prices $FED naturally
+
+The rebase experiment taught us: **simple is better**. Users understand "hold tokens, receive stablecoins" far better than "your balance will algorithmically adjust based on market conditions."
+
+### Sources
+
+- [Ampleforth Official](https://www.ampleforth.org/)
+- [Gemini Cryptopedia - Ampleforth Protocol](https://www.gemini.com/cryptopedia/ampleforth-protocol-ampl-coin-stablecoin)
+- [Documenting AMPL - Technical Guide](https://documentingampl.medium.com/technical-guide-to-ampl-for-beginners-be19f0fa97ca)
+- [Binance Academy - Elastic Supply Tokens Explained](https://academy.binance.com/en/articles/elastic-supply-tokens-explained)
+- [BeInCrypto - Rebase Tokens Problems](https://beincrypto.com/rebase-tokens-the-problems-and-how-to-solve-them/)
+- [Coindesk - What Is a Rebase Token](https://www.coindesk.com/learn/what-is-a-rebaseelastic-token/)
+- [Collab+Currency - Rise and Fall of Ampleforth](https://medium.com/collab-currency/the-rise-and-fall-and-rise-and-fall-of-ampleforth-part-i-cda716dea663)
+- [Cryptonomist - AMPL Cryptocurrency Crashed](https://en.cryptonomist.ch/2020/07/30/ampleforth-ampl-cryptocurrency-crashed/)
+- [Coin Bureau - Ampleforth Review](https://coinbureau.com/review/ampleforth-ampl/)
+- [Base Protocol Medium - Uniswap LP Update](https://medium.com/@BaseProtocol/base-uniswap-liquidity-pool-update-3bbf2581a2b9)
+- [Boxmining - Base Protocol](https://www.boxmining.com/base-protocol/)
+- [CoinDesk - YAM Succumbs to Fatal Rebase Bug](https://www.coindesk.com/markets/2020/08/13/defi-meme-coin-yam-succumbs-to-fatal-rebase-bug-makes-plans-for-yam-20/)
+- [CertiK - YAM Finance Bug Analysis](https://www.certik.com/resources/blog/yam-finance-smart-contract-bug-analysis-future-prevention)
+- [Boxmining - YAM Finance Elastic Supply Gone Wrong](https://www.boxmining.com/yam-finance/)
+- [Finematics - Meteoric Rise and Fall of YAM](https://finematics.com/yam-explained/)
+- [SlowMist - Analysis of YAM Attack](https://slowmist.medium.com/analysis-of-yam-attack-b4f7c0139692)
 
 ---
 

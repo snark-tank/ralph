@@ -183,12 +183,16 @@ Completed comprehensive research on all major flywheel tokenomics protocols:
 | Tomb | ✅ | Seigniorage failure, algorithmic pegs |
 | Titano | ✅ | Auto-staking UX, rebase problems |
 | LIBERO | ✅ | Fire pit burns, dual rewards |
+| NODE/NaaS | ✅ | Node psychology, sustainable yield illusion |
+| Rebase Tokens | ✅ | Supply elasticity failures, death spirals |
 
 **Key Conclusion**: Every protocol that promised fixed APY failed because rewards came from inflation, not real revenue. $FED's model (real trading fees → USD1 distribution) is fundamentally superior.
 
-**Next Research Targets**:
-- NODE protocols (Strong, Thor, Ring)
-- Rebase token mechanics (Ampleforth, etc.)
+**Completed All Research Targets** (Jan 21, 2026):
+- ✅ NODE protocols (Strong, Thor, Ring) - NaaS death spiral analysis
+- ✅ Rebase token mechanics (AMPL, BASE, YAM) - Supply elasticity failures
+
+**Research Queue Now Complete!** All 9 major protocol categories analyzed. Key finding from rebase research: Supply manipulation creates user confusion and death spiral risks. $FED's fixed supply + real yield model is the right approach.
 
 ---
 
