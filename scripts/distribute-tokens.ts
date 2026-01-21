@@ -6,6 +6,7 @@ import {
     sendAndConfirmTransaction,
     SendTransactionError,
 } from '@solana/web3.js';
+import Redis from 'ioredis';
 import {
     TOKEN_PROGRAM_ID,
     TOKEN_2022_PROGRAM_ID,
@@ -341,6 +342,9 @@ const DISTRIBUTION_HISTORY_FILE = path.join(__dirname, '..', 'src', 'token-distr
 const WEBSITE_API_URL = process.env.WEBSITE_API_URL || 'https://fed.markets/api/distributions';
 const DISTRIBUTION_API_KEY = process.env.DISTRIBUTION_API_KEY || '546c3e1b3cdce901910414eb80c3a0f934fa8477cb33e45290d70f0fa0e474cf';
 
+// Redis for Ralph's dashboard (stats sync)
+const RALPH_REDIS_URL = process.env.RALPH_REDIS_URL || process.env.REDIS_URL;
+
 interface DistributionHistory {
     totalDistributed: number;
     distributions: Array<{
@@ -546,6 +550,56 @@ async function syncToWebsite(totalAmount: number, recipientCount: number, txSign
     } catch (error) {
         console.log(`⚠️ Error syncing to website: ${error}`);
         return false;
+    }
+}
+
+// Sync stats to Ralph's dashboard Redis
+async function syncToRalphDashboard(totalAmount: number, recipientCount: number, txSignature: string): Promise<boolean> {
+    if (!RALPH_REDIS_URL) {
+        console.log('⚠️ RALPH_REDIS_URL not set, skipping Ralph dashboard sync');
+        return false;
+    }
+
+    let redis: Redis | null = null;
+    try {
+        redis = new Redis(RALPH_REDIS_URL);
+
+        // Get current stats
+        const currentStats = await redis.get('fed:stats');
+        let stats = currentStats ? JSON.parse(currentStats) : {
+            totalDistributed: 0,
+            totalDistributions: 0,
+            uniqueHoldersPaid: 0,
+            recentDistributions: [],
+        };
+
+        // Update stats
+        stats.totalDistributed = (stats.totalDistributed || 0) + totalAmount;
+        stats.totalDistributions = (stats.totalDistributions || 0) + 1;
+        stats.uniqueHoldersPaid = Math.max(stats.uniqueHoldersPaid || 0, recipientCount);
+        stats.lastUpdated = new Date().toISOString();
+
+        // Add to recent distributions (keep last 20)
+        const newDistribution = {
+            date: new Date().toISOString(),
+            amount: totalAmount,
+            recipients: recipientCount,
+            txSignature: txSignature,
+        };
+        stats.recentDistributions = [newDistribution, ...(stats.recentDistributions || [])].slice(0, 20);
+
+        // Save back to Redis
+        await redis.set('fed:stats', JSON.stringify(stats));
+
+        console.log('✅ Synced to Ralph dashboard Redis');
+        return true;
+    } catch (error) {
+        console.log(`⚠️ Error syncing to Ralph dashboard: ${error}`);
+        return false;
+    } finally {
+        if (redis) {
+            await redis.quit();
+        }
     }
 }
 
@@ -1502,6 +1556,9 @@ async function main() {
         // Sync to website (Vercel KV)
         const recipientCount = regularRecipients.slice(0, signatures.length * TRANSFERS_PER_TX).length + compoundSignatures.length;
         await syncToWebsite(actualDistributed, recipientCount, signatures[0] || '');
+
+        // Sync to Ralph's dashboard (Redis)
+        await syncToRalphDashboard(actualDistributed, recipientCount, signatures[0] || '');
 
         // Calculate Fed Funds Rate (current APY)
         const fedFundsRate = calculateFedFundsRate(history, totalSupplyHeld);
