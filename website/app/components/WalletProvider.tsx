@@ -14,9 +14,9 @@ interface WalletProviderProps {
 }
 
 export default function WalletProvider({ children }: WalletProviderProps) {
-  // Using mainnet - program is deployed!
+  // Using mainnet with Helius RPC for reliable access
   const endpoint = useMemo(() =>
-    process.env.NEXT_PUBLIC_RPC_URL || clusterApiUrl('mainnet-beta'),
+    process.env.NEXT_PUBLIC_RPC_URL || 'https://mainnet.helius-rpc.com/?api-key=44f45b27-421a-4be2-8b2a-acf26da542c0',
     []
   );
 
