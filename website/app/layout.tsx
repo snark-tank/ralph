@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
+import Image from "next/image";
+import { CopyButton } from "./components/CopyButton";
 import "./globals.css";
+
+const FED_TOKEN_ADDRESS = "132STreShuLRNgkyF1QECv37yP9Cdp8JBAgnKBgKafed";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,7 +28,13 @@ function Navigation() {
       <div className="max-w-6xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-            <span className="text-3xl">🖨️</span>
+            <Image
+              src="/logo.png"
+              alt="$FED Logo"
+              width={48}
+              height={48}
+              className="rounded-full"
+            />
             <div>
               <h1 className="text-xl font-bold text-[#c9a227]">Ralph&apos;s $FED</h1>
               <p className="text-xs text-gray-500">Federal Reserve Dashboard</p>
@@ -63,21 +73,52 @@ function Footer() {
   return (
     <footer className="border-t border-[#222] bg-[#0d0d0d] mt-auto">
       <div className="max-w-6xl mx-auto px-4 py-6">
-        <div className="flex items-center justify-between text-sm text-gray-500">
-          <div className="flex items-center gap-2">
-            <span>🖨️</span>
-            <span>Ralph&apos;s Federal Reserve</span>
+        <div className="flex flex-col gap-4">
+          {/* Token Address */}
+          <div className="flex items-center justify-center gap-2 text-sm">
+            <span className="text-gray-500">$FED Token:</span>
+            <a
+              href={`https://solscan.io/token/${FED_TOKEN_ADDRESS}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-mono text-[#c9a227] hover:underline text-xs sm:text-sm"
+            >
+              {FED_TOKEN_ADDRESS}
+            </a>
+            <CopyButton text={FED_TOKEN_ADDRESS} />
           </div>
-          <div className="flex items-center gap-4">
-            <a href="https://x.com/fed_USD1" target="_blank" rel="noopener noreferrer" className="hover:text-[#c9a227]">
-              Twitter
-            </a>
-            <a href="https://github.com/snark-tank/ralph" target="_blank" rel="noopener noreferrer" className="hover:text-[#c9a227]">
-              GitHub
-            </a>
-            <a href="https://fed.markets" target="_blank" rel="noopener noreferrer" className="hover:text-[#c9a227]">
-              Website
-            </a>
+
+          {/* Links */}
+          <div className="flex items-center justify-between text-sm text-gray-500">
+            <div className="flex items-center gap-2">
+              <Image
+                src="/logo.png"
+                alt="$FED"
+                width={24}
+                height={24}
+                className="rounded-full"
+              />
+              <span>Ralph&apos;s Federal Reserve</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <a href="https://x.com/fed_USD1" target="_blank" rel="noopener noreferrer" className="hover:text-[#c9a227]">
+                Twitter
+              </a>
+              <a href="https://github.com/snark-tank/ralph" target="_blank" rel="noopener noreferrer" className="hover:text-[#c9a227]">
+                GitHub
+              </a>
+              <a href="https://fed.markets" target="_blank" rel="noopener noreferrer" className="hover:text-[#c9a227]">
+                Website
+              </a>
+              <a
+                href={`https://jup.ag/swap/SOL-${FED_TOKEN_ADDRESS}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#c9a227] text-black px-3 py-1 rounded text-xs font-medium hover:bg-[#e0b82a]"
+              >
+                Buy $FED
+              </a>
+            </div>
           </div>
         </div>
       </div>
