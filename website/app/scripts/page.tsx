@@ -1,3 +1,42 @@
+import {
+  ZapIcon,
+  RefreshIcon,
+  ChartIcon,
+  GamepadIcon,
+  DollarIcon,
+  BuildingIcon,
+} from '../components/Icons';
+
+// Custom icons for this page
+function TerminalIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <polyline points="4 17 10 11 4 5"/>
+      <line x1="12" y1="19" x2="20" y2="19"/>
+    </svg>
+  );
+}
+
+function MultiplierIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="18" y1="6" x2="6" y2="18"/>
+      <line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  );
+}
+
+function VaultIcon({ className = "w-5 h-5" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="3" width="18" height="18" rx="2"/>
+      <circle cx="12" cy="12" r="4"/>
+      <line x1="12" y1="8" x2="12" y2="12"/>
+      <line x1="12" y1="12" x2="14" y2="14"/>
+    </svg>
+  );
+}
+
 export default function ScriptsPage() {
   const coreScripts = [
     {
@@ -151,7 +190,7 @@ export default function ScriptsPage() {
       {/* Core Distribution */}
       <div className="mb-8 bg-[#111] border border-green-500/30 rounded-xl p-6">
         <h2 className="text-xl font-bold text-[#22c55e] mb-4 flex items-center gap-2">
-          <span>&#9889;</span> Core Distribution (PM2 Automated)
+          <ZapIcon className="w-5 h-5" /> Core Distribution (PM2 Automated)
         </h2>
         <p className="text-gray-500 mb-4">These scripts run automatically via PM2 cron every 2 minutes</p>
         <div className="space-y-3">
@@ -175,7 +214,7 @@ export default function ScriptsPage() {
       {/* Multiplier Systems */}
       <div className="mb-8 bg-[#111] border border-[#c9a227]/30 rounded-xl p-6">
         <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
-          <span>&#10006;</span> Multiplier Systems (Integrated)
+          <MultiplierIcon className="w-5 h-5" /> Multiplier Systems (Integrated)
         </h2>
         <p className="text-gray-500 mb-4">These scripts are integrated directly into distribute-tokens.ts</p>
         <div className="space-y-3">
@@ -199,7 +238,7 @@ export default function ScriptsPage() {
       {/* Analytics & Reporting */}
       <div className="mb-8 bg-[#111] border border-[#222] rounded-xl p-6">
         <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-          <span>&#128202;</span> Analytics & Reporting
+          <ChartIcon className="w-5 h-5 text-gray-400" /> Analytics & Reporting
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {analyticsScripts.map((script, index) => (
@@ -217,7 +256,7 @@ export default function ScriptsPage() {
       {/* Gamification */}
       <div className="mb-8 bg-[#111] border border-purple-500/30 rounded-xl p-6">
         <h2 className="text-xl font-bold text-purple-400 mb-4 flex items-center gap-2">
-          <span>&#127918;</span> Gamification (Ready for Activation)
+          <GamepadIcon className="w-5 h-5" /> Gamification (Ready for Activation)
         </h2>
         <p className="text-gray-500 mb-4">These scripts are ready but need PM2 cron setup to activate</p>
         <div className="space-y-3">
@@ -238,7 +277,7 @@ export default function ScriptsPage() {
       {/* Treasury Operations */}
       <div className="mb-8 bg-[#111] border border-[#222] rounded-xl p-6">
         <h2 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
-          <span>&#128176;</span> Treasury Operations (Ready for PM2)
+          <VaultIcon className="w-5 h-5 text-gray-400" /> Treasury Operations (Ready for PM2)
         </h2>
         <p className="text-gray-500 mb-4">Advanced treasury management scripts ready for deployment</p>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -257,7 +296,7 @@ export default function ScriptsPage() {
       {/* How to Run */}
       <div className="mb-8 bg-gradient-to-r from-[#c9a227]/10 to-transparent border border-[#c9a227]/30 rounded-xl p-6">
         <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
-          <span>&#128187;</span> How Scripts Run
+          <TerminalIcon className="w-5 h-5" /> How Scripts Run
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="bg-[#0a0a0a] rounded-lg p-4">
