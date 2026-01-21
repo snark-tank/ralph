@@ -1,14 +1,32 @@
 // Embedded stats - updated at build time or via script
 // This provides fallback data when the local JSON file is not accessible (e.g., on Vercel)
 // Run `npm run update-stats` to refresh these values from the source
-// Last updated: 2026-01-21T19:55:00.467Z
+// Last updated: 2026-01-21T20:00:39.198Z
 
 export const EMBEDDED_STATS = {
-  totalDistributed: 40976.46,
-  distributionCount: 199,
+  totalDistributed: 41100.53,
+  distributionCount: 201,
   maxRecipients: 1828,
-  lastUpdated: "2026-01-21T19:55:00.467Z",
+  lastUpdated: "2026-01-21T20:00:39.198Z",
   recentDistributions: [
+    {
+      date: "2026-01-21T20:00:39.198Z",
+      amount: 83.20,
+      recipients: 489,
+      txSignature: "5qdugFwLXq1YFA9frVJEoYhuXKmpq4uQSXUWvovSdu7gi1adcVymvv4AGgA1WmU8QzEos4MJ5GnBt2eGuJJqF627"
+    },
+    {
+      date: "2026-01-21T19:58:22.018Z",
+      amount: 11.69,
+      recipients: 213,
+      txSignature: "55nH8UZzeuEdZjRcnuvvW7NF6Mgn1MGEvVsqiETBDQnkcmcp6Crq8MK1XxtS8835YVMeTQzstxNgYCN7NFuQeeAB"
+    },
+    {
+      date: "2026-01-21T19:56:53.459Z",
+      amount: 112.39,
+      recipients: 539,
+      txSignature: "5tynq77BysU4ikFc5ps6A4Cmz7rswb7u6zNhqUNr4KiAUTfmPSU9pTKFNqmMqJDfhgtfRJF6Urnk2pPt1sZsdF95"
+    },
     {
       date: "2026-01-21T19:55:00.467Z",
       amount: 162.35,
@@ -50,24 +68,6 @@ export const EMBEDDED_STATS = {
       amount: 11.71,
       recipients: 205,
       txSignature: "2iDDp8Bp5oPAAyS1WpChz7Hw9C5xyGwiFmy8hCSSgqroZyNWLrvkRk73D9uZy7MkU1xnjqAECX4SRPt5NLZN8TSN"
-    },
-    {
-      date: "2026-01-21T19:41:51.255Z",
-      amount: 18.72,
-      recipients: 235,
-      txSignature: "wcXMfGRkXEwcVHAcuoyuCraMkefPFKxNcWrK7THZKDhkJ1NWM6L1jVBMaPcn9TSLuVfhSxcwB3PqZxvMhV1rjNy"
-    },
-    {
-      date: "2026-01-21T19:38:25.479Z",
-      amount: 12.86,
-      recipients: 216,
-      txSignature: "3mKbKDWZa8Je2Po1Dcg8owxj8Vf6McNqNWM3RkTpCwcYqMZBYw89hGfB9Pqg4NdGzUSGcgV8zpFbSyWavzq9GZup"
-    },
-    {
-      date: "2026-01-21T19:36:25.017Z",
-      amount: 17.65,
-      recipients: 253,
-      txSignature: "3BqDDFYWBBMcYda1vaYSboW5y4ptWUN5v4bjvgRLvPE2fqwaHTH3Prv8BKeqkc442sUTwNE8xArU6NgdyRK96caL"
     }
   ]
 };
