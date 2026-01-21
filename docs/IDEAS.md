@@ -865,33 +865,57 @@ Bridge $FED to other chains. Major undertaking, future consideration.
 
 **Inspired by:** Uniswap UNIfication
 
+**Status:** ✅ **IMPLEMENTED** (Jan 21, 2026)
+
 **The Concept:**
 Optionally allocate a small percentage of collected fees to buy and burn $FED tokens, creating deflationary pressure alongside USD1 distributions.
 
 **Proposed Structure:**
 - 85% of fees → USD1 distribution to holders (current model)
-- 10% of fees → $FED buyback and burn
+- 10% of fees → $FED buyback and burn (optional, manual trigger)
 - 5% of fees → Treasury reserve
 
-**Why It Could Work:**
+**Implementation:** ✅ DONE
+- ✅ Created `treasury-buyback.ts` standalone utility
+- ✅ Uses Jupiter Ultra Swap API for USD1 → $FED swaps
+- ✅ SPL Token burn instruction for permanent supply reduction
+- ✅ Configurable amount (fixed or % of balance)
+- ✅ Simulation mode for quote-only checks
+- ✅ Stats tracking (total burned, average price, history)
+- ✅ Safety limits (min amount, max % per buyback)
+- 🔜 Auto-scheduled buybacks (future consideration)
+- 🔜 Governance voting for buyback % (future)
+
+**Usage:**
+```bash
+# Buy back $100 worth of $FED and burn
+npx ts-node treasury-buyback.ts --amount 100
+
+# Buy back 10% of treasury USD1 balance
+npx ts-node treasury-buyback.ts --percent 10
+
+# Simulate a buyback (get quote only)
+npx ts-node treasury-buyback.ts --simulate 50
+
+# View buyback stats and history
+npx ts-node treasury-buyback.ts --status
+```
+
+**Why It Works:**
 - Uniswap showed fee-funded burns create real value accrual
 - Deflationary pressure rewards long-term holders
 - Doesn't require inflation - uses actual revenue
 - Creates dual benefit: income (USD1) + appreciation (burns)
+- Manual trigger allows strategic timing (buy dips!)
 
-**Why It Might NOT Be Needed:**
+**Why Use It Sparingly:**
 - $FED already has fixed supply (no inflation to counteract)
 - Direct USD1 is simpler and more transparent
-- Burns complicate the "money printer" narrative
-- Holders may prefer 100% income vs mixed approach
+- Burns are OPTIONAL - core model remains USD1 distribution
+- Best used for special occasions or strategic price support
 
-**Implementation Consideration:**
-- Could be governance decision for holders to vote on
-- Start with small % (5%) as test
-- Track burn impact on price/sentiment
-
-**Effort:** Medium (requires swap integration)
-**Impact:** Medium (marginal improvement on already good model)
+**Effort:** ✅ Complete
+**Impact:** Medium (strategic tool for price support and community events)
 
 ---
 

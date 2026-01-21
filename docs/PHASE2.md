@@ -185,7 +185,19 @@ Ralph will implement:
 - **Note**: Distribution process monitored and confirmed operational
 - **Accumulating**: Currently at 3.28 USD1, waiting for $10 threshold
 
-### Progress Notes (Jan 21, 2026 - Afternoon) 🆕
+### Progress Notes (Jan 21, 2026 - Evening) 🆕
+- **Implementation**: Fed Treasury Buyback & Burn mechanism - COMPLETED!
+- **New Script**: `treasury-buyback.ts` - Uses Jupiter Ultra API for USD1 → $FED swaps + SPL burn
+- **Capabilities**:
+  - Buy back $FED with configurable USD1 amount (fixed or % of balance)
+  - Permanent token burn using SPL burn instruction (reduces total supply)
+  - Quote simulation mode for checking price impact without executing
+  - Full stats tracking (total burned, average price, history)
+  - Safety limits: min buyback amount, max % per operation
+- **Inspiration**: Uniswap's UNIfication event (100M UNI burned using fee revenue)
+- **Strategic Use**: Optional tool for price support during dips, celebration events, or community votes
+
+### Progress Notes (Jan 21, 2026 - Afternoon)
 - **Research Focus**: 2026 Fee Switch Revolution - The Future of DeFi Tokenomics
 - **Key Discovery**: Uniswap's UNIfication proposal validated $FED's model
   - Uniswap just NOW activated fee sharing (Dec 2025) - $FED had it from Day 1!
@@ -893,4 +905,78 @@ npx ts-node season-tracker.ts --json
 - Add season progress widget to website dashboard
 - Create season-end celebration announcements
 - Build season NFT badges for tier achievements
+
+---
+
+### 🔥 FED TREASURY BUYBACK & BURN IMPLEMENTED (Jan 21, 2026)
+
+**The deflationary mechanism from Uniswap's UNIfication is now available for $FED!**
+
+Created `treasury-buyback.ts` - a complete buyback and burn system that:
+1. Uses accumulated USD1 from the treasury
+2. Swaps USD1 → $FED via Jupiter Ultra API
+3. Permanently burns the purchased $FED (reduces total supply)
+
+**Key Features:**
+- **Configurable Amount**: Fixed USD1 amount or percentage of balance
+- **Simulation Mode**: Get quote without executing (for checking price impact)
+- **SPL Burn Instruction**: Proper on-chain burn that reduces circulating supply
+- **Stats Tracking**: Total burned, average price, full history
+- **Safety Limits**: Min amount ($10), max % per buyback (50%)
+
+**Usage:**
+```bash
+# Execute a $100 buyback and burn
+npx ts-node treasury-buyback.ts --amount 100
+
+# Buyback 10% of treasury balance
+npx ts-node treasury-buyback.ts --percent 10
+
+# Simulate buyback (quote only, no execution)
+npx ts-node treasury-buyback.ts --simulate 50
+
+# View buyback stats and history
+npx ts-node treasury-buyback.ts --status
+```
+
+**When to Use:**
+- **Price Support**: Buy back during market dips to provide floor
+- **Celebration Events**: QE milestones, Feduary, community votes
+- **Supply Reduction**: Strategic burns to increase scarcity
+- **Holder Rewards**: Burning benefits all holders through deflation
+
+**Technical Details:**
+- Uses existing Jupiter Ultra API integration (same as auto-compound)
+- SPL `createBurnInstruction` for permanent supply reduction
+- JSON state file for tracking (`buyback-data.json`)
+- Slippage configurable (default 1%)
+
+**Why This Matters:**
+- Uniswap's UNIfication showed fee-funded burns create value
+- Provides OPTIONAL deflationary pressure alongside USD1 distributions
+- Creates dual benefit: income (USD1) + appreciation (burns)
+- Strategic tool for price support during market weakness
+- Manual trigger allows timing optimization (buy dips!)
+
+**Important Notes:**
+- This is OPTIONAL - core model remains USD1 distribution
+- Burns are permanent and irreversible
+- Use strategically, not as routine operation
+- Best for special occasions or community-voted events
+
+**Comparison to Uniswap UNIfication:**
+| Aspect | Uniswap | $FED |
+|--------|---------|------|
+| Fee Source | Protocol fees | Trading fees |
+| Burn Amount | 100M UNI (16% supply) | Variable (manual) |
+| Timing | One-time event | On-demand |
+| Governance | DAO vote required | Manual (future: governance) |
+
+**File Created:** `/home/ubuntu/fed/script/treasury-buyback.ts`
+
+**Next Steps:**
+- Test simulation mode with current quotes
+- Document recommended buyback scenarios
+- Consider auto-scheduled burns (% of each distribution?)
+- Add buyback announcements to website/Twitter
 
