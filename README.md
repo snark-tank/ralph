@@ -34,16 +34,17 @@ Ralph acts as the Federal Reserve Chairman, controlling the money printer that g
 
 | Metric | Value |
 |--------|-------|
-| **Total Distributed** | **$29,322+ USD1** |
-| **Distributions** | 120+ cycles |
-| **Holders Receiving** | 1,195 per distribution |
-| **Active Engagement** | 1,811 holders tracked |
+| **Total Distributed** | **$29,552+ USD1** |
+| **Distributions** | 125+ cycles |
+| **Holders Receiving** | 1,211 per distribution |
+| **Active Engagement** | 1,826 holders tracked |
+| **Engagement Bonus Recipients** | 1,038 holders per cycle |
 | **Frequency** | Every 2 minutes |
 | **Distribution Threshold** | $10 USD1 minimum |
 | **Multiplier System** | Tier × Streak × Engagement × Time Lock |
-| **Max Possible Multiplier** | **4.5x rewards** (5.63x with time lock!) |
+| **Max Possible Multiplier** | **4.5x rewards** (13.5x during QE events!) |
 
-*Last updated: January 21, 2026 - Stats sync automatically via Redis*
+*Last updated: January 21, 2026 (Evening) - Stats sync automatically via Redis*
 
 ---
 
@@ -183,7 +184,7 @@ Special celebration distributions when we hit milestones:
 | $500,000 | QE5 | 2.5x celebration | 🔮 Upcoming |
 | $1,000,000 | QE∞ | 3.0x celebration | 🔮 Upcoming |
 
-**Current Progress: $29,322 / $50,000 (58.6% to QE2)**
+**Current Progress: $29,552 / $50,000 (59.1% to QE2)**
 
 ---
 
@@ -283,24 +284,24 @@ pm2 start "npx ts-node scripts/run-distribution.ts" \
 
 ## 📈 Current Holder Distribution (Live)
 
-Based on latest distribution cycle (January 21, 2026):
+Based on latest distribution cycle (January 21, 2026 - Evening):
 
 ### Tier Breakdown
 | Tier | Holders | Tokens Distributed |
 |------|---------|-------------------|
-| 🏛️ Fed Governor (1.25x) | 16 | 35.98 USD1 |
-| 📋 Regional Director (1.1x) | 163 | 65.73 USD1 |
-| 🪪 Board Member (1.05x) | 370 | 16.92 USD1 |
-| 🌐 Fed Citizen (1x) | 646 | 1.85 USD1 |
+| 🏛️ Fed Governor (1.25x) | 18 | 94.55 USD1 |
+| 📋 Regional Director (1.1x) | 165 | 156.93 USD1 |
+| 🪪 Board Member (1.05x) | 383 | 42.33 USD1 |
+| 🌐 Fed Citizen (1x) | 645 | 4.44 USD1 |
 
 ### Engagement Breakdown
 | Tier | Holders | Tokens | Avg XP |
 |------|---------|--------|--------|
-| 🔥 Fed Active (1.1x) | 761 | 102.10 USD1 | 171 XP |
-| 📊 Fed Regular (1.05x) | 263 | 12.33 USD1 | 77 XP |
-| 🆕 Fed Newcomer (1x) | 171 | 6.04 USD1 | 22 XP |
+| 🔥 Fed Active (1.1x) | 787 | 253.25 USD1 | 173 XP |
+| 📊 Fed Regular (1.05x) | 251 | 27.79 USD1 | 78 XP |
+| 🆕 Fed Newcomer (1x) | 173 | 17.21 USD1 | 21 XP |
 
-**1,024 holders receiving engagement bonuses this cycle!**
+**1,038 holders receiving engagement bonuses this cycle!**
 
 ---
 
