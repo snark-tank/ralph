@@ -679,9 +679,74 @@ npx ts-node engagement-score.ts --stats --json       # Stats for API
 **File Created:** `/home/ubuntu/fed/script/engagement-score.ts`
 
 **Next Steps:**
-- Integrate engagement multiplier into distribution script
+- ✅ **DONE** Integrate engagement multiplier into distribution script (Jan 21, 2026)
 - Add engagement widget to website dashboard
 - Create engagement leaderboard page
+
+---
+
+### 🎮 ENGAGEMENT SCORE DISTRIBUTION INTEGRATION (Jan 21, 2026)
+
+**Engagement multipliers now STACK with tier and streak multipliers!**
+
+The distribution script has been updated to include engagement score as a THIRD multiplier:
+
+**Combined Multiplier Formula:**
+```
+combinedMultiplier = tierMultiplier × streakMultiplier × engagementMultiplier
+```
+
+**Maximum Possible Stack:**
+- Fed Chairman (50M+ $FED): 1.5x
+- Founding Father streak (365+ days): 1.25x
+- Fed Elite engagement (500+ XP): 1.2x
+- **Combined: 1.5 × 1.25 × 1.2 = 2.25x rewards!**
+
+**New Distribution Features:**
+1. **Engagement Data Loading**: Loads engagement data from `engagement-data.json`
+2. **Triple Multiplier Calculation**: tier × streak × engagement
+3. **Engagement Stats Logging**: Shows tier breakdown and average XP per tier
+4. **Distribution XP Tracking**: Each recipient earns +5 XP per distribution received
+5. **Enhanced Top 10 Display**: Shows all three multiplier components
+
+**Example Log Output:**
+```
+🎮 Engagement data loaded: 45 holders tracked
+   Active this cycle: 12 | Cycle ends: 2026-02-04
+
+🎮 12 holders receiving engagement bonuses
+
+🎮 Engagement Score Distribution:
+   🏆 Fed Elite (1.2x): 2 holders → 45.23 tokens (avg 523 XP)
+   ⭐ Fed Veteran (1.15x): 3 holders → 32.11 tokens (avg 287 XP)
+   🔥 Fed Active (1.1x): 7 holders → 89.45 tokens (avg 134 XP)
+   📊 Fed Regular (1.05x): 15 holders → 112.34 tokens (avg 67 XP)
+   🆕 Fed Newcomer (1.0x): 282 holders → 520.87 tokens (avg 0 XP)
+
+Top 10 holders (with tier × streak × engagement multipliers):
+1. 4Br5iKfL...3L4P: 15.23% × 2.250x [Chairman 1.5x × 🏛️365d 1.25x × 🏆523xp 1.2x] = 342.67 tokens
+
+🎮 Updated engagement scores for 309 distribution recipients (+5 XP each)
+```
+
+**Technical Changes:**
+- Added engagement imports from `engagement-score.ts`
+- Added `EngagementTier` interface and tiers array
+- Extended `TokenHolder` interface with engagement fields
+- Triple multiplier calculation in distribution loop
+- Engagement tier stats logging section
+- `recordEngagementDistribution()` called for each recipient
+
+**Files Modified:**
+- `/home/ubuntu/fed/script/distribute-tokens.ts` - Full engagement integration
+- `/home/ubuntu/fed/script/engagement-score.ts` - Already had exports
+
+**Why This Matters:**
+- Rewards ACTIVE participation, not just passive holding
+- Engagement multiplies REAL rewards (not inflation)
+- Creates habit formation with daily check-ins
+- Stacks with existing tier + streak for maximum BRRR
+- 2.25x max bonus for the most engaged Fed Citizens
 
 ---
 

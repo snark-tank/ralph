@@ -22,7 +22,14 @@ import * as path from 'path';
 import { fileURLToPath } from 'url';
 
 // Import auto-compound functions
-import { loadPreferences, savePreferences, getActiveAddresses, AutoCompoundData } from './auto-compound.js';
+// @ts-ignore - ts-node ESM resolution
+import { loadPreferences, savePreferences, getActiveAddresses } from './auto-compound.ts';
+import type { AutoCompoundData } from './auto-compound.ts';
+
+// Import engagement score functions
+// @ts-ignore - ts-node ESM resolution
+import { loadEngagementData, saveEngagementData, getEngagementMultiplier, recordDistribution as recordEngagementDistribution } from './engagement-score.ts';
+import type { EngagementData } from './engagement-score.ts';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -58,6 +65,23 @@ const STREAK_TIERS: StreakTier[] = [
     { name: 'DiamondHands', title: 'Diamond Hands', minDays: 30, multiplier: 1.1, emoji: '💠' },
     { name: 'Holder', title: 'Holder', minDays: 7, multiplier: 1.05, emoji: '🤝' },
     { name: 'Newcomer', title: 'Newcomer', minDays: 0, multiplier: 1.0, emoji: '🆕' },
+];
+
+// Engagement tier definitions (must match engagement-score.ts)
+interface EngagementTier {
+    name: string;
+    title: string;
+    minXP: number;
+    multiplier: number;
+    emoji: string;
+}
+
+const ENGAGEMENT_TIERS: EngagementTier[] = [
+    { name: 'FedElite', title: 'Fed Elite', minXP: 500, multiplier: 1.2, emoji: '🏆' },
+    { name: 'FedVeteran', title: 'Fed Veteran', minXP: 250, multiplier: 1.15, emoji: '⭐' },
+    { name: 'FedActive', title: 'Fed Active', minXP: 100, multiplier: 1.1, emoji: '🔥' },
+    { name: 'FedRegular', title: 'Fed Regular', minXP: 50, multiplier: 1.05, emoji: '📊' },
+    { name: 'FedNew', title: 'Fed Newcomer', minXP: 0, multiplier: 1.0, emoji: '🆕' },
 ];
 
 // Streak data structures
@@ -368,7 +392,11 @@ interface TokenHolder {
     streakTier?: StreakTier;
     streakMultiplier?: number;
     streakDays?: number;
-    combinedMultiplier?: number; // tier * streak
+    // Engagement bonus fields
+    engagementTier?: EngagementTier;
+    engagementMultiplier?: number;
+    engagementXP?: number;
+    combinedMultiplier?: number; // tier * streak * engagement
     // Auto-compound fields
     autoCompoundEnabled?: boolean;
 }
@@ -1081,9 +1109,21 @@ async function main() {
             logger.log('💎 No streak data available - using tier multipliers only');
         }
 
-        // Step 1: Assign tiers, streaks, and calculate combined multipliers
+        // Load engagement data for engagement bonus multipliers
+        let engagementData: EngagementData | null = null;
+        try {
+            engagementData = loadEngagementData();
+            const activeEngaged = Object.values(engagementData.holders).filter(h => h.cycleXP > 0).length;
+            logger.log(`🎮 Engagement data loaded: ${Object.keys(engagementData.holders).length} holders tracked`);
+            logger.log(`   Active this cycle: ${activeEngaged} | Cycle ends: ${engagementData.currentCycleEnd?.split('T')[0] || 'N/A'}`);
+        } catch (error) {
+            logger.log('🎮 No engagement data available - using tier + streak multipliers only');
+        }
+
+        // Step 1: Assign tiers, streaks, engagement, and calculate combined multipliers
         let totalWeightedShare = 0;
         let holdersWithStreakBonus = 0;
+        let holdersWithEngagementBonus = 0;
         for (const holder of holders) {
             // Tier multiplier (based on holdings)
             holder.tier = getHolderTier(holder.amount);
@@ -1095,8 +1135,23 @@ async function main() {
             holder.streakMultiplier = streakInfo.multiplier;
             holder.streakDays = streakInfo.streakDays;
 
-            // Combined multiplier = tier * streak (they STACK!)
-            holder.combinedMultiplier = holder.multiplier * holder.streakMultiplier;
+            // Engagement multiplier (based on XP earned this cycle)
+            if (engagementData) {
+                const engagementInfo = getEngagementMultiplier(holder.address, engagementData);
+                holder.engagementTier = engagementInfo.tier;
+                holder.engagementMultiplier = engagementInfo.multiplier;
+                holder.engagementXP = engagementInfo.cycleXP;
+
+                if (engagementInfo.multiplier > 1.0) {
+                    holdersWithEngagementBonus++;
+                }
+            } else {
+                holder.engagementMultiplier = 1.0;
+                holder.engagementXP = 0;
+            }
+
+            // Combined multiplier = tier * streak * engagement (they ALL STACK!)
+            holder.combinedMultiplier = holder.multiplier * holder.streakMultiplier * holder.engagementMultiplier;
 
             if (holder.streakMultiplier > 1.0) {
                 holdersWithStreakBonus++;
@@ -1108,7 +1163,10 @@ async function main() {
         }
 
         if (holdersWithStreakBonus > 0) {
-            logger.log(`   ${holdersWithStreakBonus} holders receiving streak bonuses`);
+            logger.log(`   💎 ${holdersWithStreakBonus} holders receiving streak bonuses`);
+        }
+        if (holdersWithEngagementBonus > 0) {
+            logger.log(`   🎮 ${holdersWithEngagementBonus} holders receiving engagement bonuses`);
         }
 
         // Step 2: Normalize so total distributed equals available tokens
@@ -1159,6 +1217,28 @@ async function main() {
             }
         }
 
+        // Log engagement distribution stats
+        if (engagementData) {
+            const engagementCounts: Record<string, { count: number; totalTokens: number; totalXP: number }> = {};
+            for (const holder of holders) {
+                const engagementName = holder.engagementTier?.name || 'FedNew';
+                if (!engagementCounts[engagementName]) {
+                    engagementCounts[engagementName] = { count: 0, totalTokens: 0, totalXP: 0 };
+                }
+                engagementCounts[engagementName].count++;
+                engagementCounts[engagementName].totalTokens += holder.tokensToReceive;
+                engagementCounts[engagementName].totalXP += holder.engagementXP || 0;
+            }
+
+            logger.log('\n🎮 Engagement Score Distribution:');
+            for (const tier of ENGAGEMENT_TIERS) {
+                const stats = engagementCounts[tier.name];
+                if (stats && stats.count > 0) {
+                    logger.log(`   ${tier.emoji} ${tier.title} (${tier.multiplier}x): ${stats.count} holders → ${stats.totalTokens.toFixed(2)} tokens (avg ${Math.round(stats.totalXP / stats.count)} XP)`);
+                }
+            }
+        }
+
         // Sort by amount descending for better visibility
         holders.sort((a, b) => b.amount - a.amount);
 
@@ -1192,16 +1272,19 @@ async function main() {
             }
         }
 
-        // Show top holders with tier + streak info
-        logger.log('\nTop 10 holders (with tier + streak multipliers):');
+        // Show top holders with tier + streak + engagement info
+        logger.log('\nTop 10 holders (with tier × streak × engagement multipliers):');
         holders.slice(0, 10).forEach((holder, index) => {
             const tierName = holder.tier?.name || 'Citizen';
             const streakEmoji = holder.streakTier?.emoji || '🆕';
+            const engagementEmoji = holder.engagementTier?.emoji || '🆕';
             const tierMult = holder.multiplier || 1.0;
             const streakMult = holder.streakMultiplier || 1.0;
+            const engagementMult = holder.engagementMultiplier || 1.0;
             const combinedMult = holder.combinedMultiplier || 1.0;
             const streakDays = holder.streakDays || 0;
-            logger.log(`${index + 1}. ${holder.address.slice(0, 8)}...${holder.address.slice(-4)}: ${holder.percentage.toFixed(2)}% × ${combinedMult.toFixed(2)}x [${tierName} ${tierMult}x + ${streakEmoji}${streakDays}d ${streakMult}x] = ${holder.tokensToReceive.toFixed(2)} tokens`);
+            const engagementXP = holder.engagementXP || 0;
+            logger.log(`${index + 1}. ${holder.address.slice(0, 8)}...${holder.address.slice(-4)}: ${holder.percentage.toFixed(2)}% × ${combinedMult.toFixed(3)}x [${tierName} ${tierMult}x × ${streakEmoji}${streakDays}d ${streakMult}x × ${engagementEmoji}${engagementXP}xp ${engagementMult}x] = ${holder.tokensToReceive.toFixed(2)} tokens`);
         });
 
         // Filter out dust amounts
@@ -1559,6 +1642,17 @@ async function main() {
 
         // Sync to Ralph's dashboard (Redis)
         await syncToRalphDashboard(actualDistributed, recipientCount, signatures[0] || '');
+
+        // Update engagement scores for all recipients who received a distribution
+        if (engagementData) {
+            let engagementUpdates = 0;
+            for (const recipient of validRecipients) {
+                recordEngagementDistribution(recipient.address, engagementData);
+                engagementUpdates++;
+            }
+            saveEngagementData(engagementData);
+            logger.log(`🎮 Updated engagement scores for ${engagementUpdates} distribution recipients (+${5} XP each)`);
+        }
 
         // Calculate Fed Funds Rate (current APY)
         const fedFundsRate = calculateFedFundsRate(history, totalSupplyHeld);

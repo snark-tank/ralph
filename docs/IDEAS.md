@@ -685,7 +685,11 @@ Reward holders who actively engage with the protocol, not just passive hodlers. 
 - ✅ 14-day cycle system with auto-reset
 - ✅ Leaderboard generation
 - ✅ JSON output for API/website integration
-- 🔜 Integrate into distribution script
+- ✅ **Integrated into distribution script** (Jan 21, 2026)
+  - Engagement multiplier now STACKS with tier + streak
+  - Combined: tier × streak × engagement (max 2.25x)
+  - +5 XP awarded per distribution received
+  - Full engagement tier stats in distribution logs
 - 🔜 Add engagement widget to website dashboard
 
 **Usage:**
