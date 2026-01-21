@@ -48,6 +48,9 @@ function Navigation() {
             <Link href="/features" className="text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
               Features
             </Link>
+            <Link href="/scripts" className="text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
+              Scripts
+            </Link>
             <Link href="/research" className="text-gray-400 hover:text-[#c9a227] transition-colors text-sm">
               Research
             </Link>
