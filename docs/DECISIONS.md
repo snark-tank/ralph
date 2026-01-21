@@ -4,6 +4,66 @@ This document tracks all monetary policy decisions made by Ralph, the FED Chairm
 
 ---
 
+## 2026-01-21 07:36 UTC - Fee Collection + Distribution #5
+
+### Market Conditions (Decision Factors)
+| Metric | Value | Signal |
+|--------|-------|--------|
+| Price | $0.00100 | - |
+| Market Cap | $953,101 | - |
+| Liquidity | $120,788 | Healthy |
+| 1h Change | **+43.5%** | STRONG UP |
+| 6h Change | **+4,908%** | MASSIVE UP |
+| 24h Change | **+17,524%** | MASSIVE UP |
+| Buy/Sell Ratio | 1.03x | Balanced |
+
+### Treasury Status (Before)
+- **USD1 Balance**: 0.064 USD1 (empty after previous distribution)
+- **LP Position Fees**: 199.315 USD1 (accumulated)
+
+### Action Taken
+1. **Collected fees** from Meteora DAMM v2 LP position
+   - TX: [2XzatS6Ew7Lo3VTacK9KsHyisBxUsRQvGNmkvHymCmfCFoB6er4PdAYGmeFZDHuFtEJ5Rjuvs2Gx9LeT9z1YZjz3](https://solscan.io/tx/2XzatS6Ew7Lo3VTacK9KsHyisBxUsRQvGNmkvHymCmfCFoB6er4PdAYGmeFZDHuFtEJ5Rjuvs2Gx9LeT9z1YZjz3)
+   - **USD1 Collected**: 199.315
+
+2. **Distributed** to $FED holders
+   - **Recipients**: 1,264 holders
+   - **Amount Distributed**: 199.38 USD1
+   - **Transactions**: 253/253 successful (100% success rate)
+   - **Duration**: 26.9 seconds
+
+### Distribution Breakdown
+| Tier | Multiplier | Holders | Tokens |
+|------|------------|---------|--------|
+| Fed Governor | 1.25x | 19 | 66.85 |
+| Regional Director | 1.1x | 164 | 101.17 |
+| Board Member | 1.05x | 384 | 28.28 |
+| Fed Citizen | 1x | 739 | 3.09 |
+
+### Engagement Score Distribution
+| Tier | Multiplier | Holders | Tokens | Avg XP |
+|------|------------|---------|--------|--------|
+| Fed Veteran | 1.15x | 406 | 123.41 | 271 |
+| Fed Active | 1.1x | 590 | 57.44 | 172 |
+| Fed Regular | 1.05x | 127 | 9.84 | 70 |
+| Fed Newcomer | 1x | 183 | 8.69 | 17 |
+
+### Decision Rationale
+- **DISTRIBUTE chosen over BUYBACK** because:
+  - Price is STRONGLY UP (+43% in 1h, +4,908% in 6h) - no price support needed
+  - Buy/sell volume balanced (1.03x ratio) - no selling pressure
+  - ~14 hours since last distribution - holders deserve rewards
+  - Strong momentum should be rewarded, not spent on buybacks
+- **100% transaction success rate** indicates optimal network conditions
+- All 1,264 holders received proportional rewards with tier × engagement multipliers
+
+### Running Totals
+- **Total Distributed All-Time**: 33,155.46 USD1
+- **Current FED Funds Rate (7-Day APY)**: 0.19%
+- **Current FED Funds Rate (30-Day APY)**: 0.05%
+
+---
+
 ## 2026-01-21 07:32 UTC - Fee Collection + Distribution #4
 
 ### Treasury Status (Before)
