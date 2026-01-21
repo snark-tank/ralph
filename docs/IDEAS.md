@@ -743,11 +743,59 @@ Annual bonus distribution event celebrating $FED's anniversary. Creates massive 
 
 ## Low Priority / Future Ideas
 
-### 18. Referral Program
+### 18. Referral Program ✅ IMPLEMENTED
 
-**Inspired by:** DRIP Network
+**Inspired by:** DRIP Network, Bybit, KuCoin, Crypto.com
 
-Simple referral tracking for organic growth. Later iteration.
+**Status:** ✅ **LIVE IN PRODUCTION** (Jan 21, 2026)
+
+**The Concept:**
+Multi-level referral tracking that rewards $FED holders for bringing new members into the ecosystem. Referrers earn bonus multipliers on their own distributions plus a percentage of their referrals' rewards.
+
+**Referral Tiers:**
+| Tier | Min Referrals | Multiplier | L1 Bonus | L2 Bonus |
+|------|---------------|------------|----------|----------|
+| 👑 Fed Ambassador | 50+ | 1.25x | 5% | 1% |
+| ⭐ Fed Recruiter | 20+ | 1.15x | 4% | 0.5% |
+| 🔥 Fed Advocate | 10+ | 1.1x | 3% | - |
+| 💪 Fed Supporter | 5+ | 1.05x | 2% | - |
+| 🤝 Fed Member | 1+ | 1.02x | 1% | - |
+
+**Implementation:** ✅ DONE
+- ✅ Created `referral-bonus.ts` standalone utility
+- ✅ Multi-level referral tracking (L1 and L2)
+- ✅ Bonus multipliers on own distributions
+- ✅ Network bonus: % of referrals' rewards
+- ✅ Retention rate tracking per referrer
+- ✅ Leaderboard generation for top referrers
+- ✅ JSON API output for website integration
+- 🔜 Website referral link generator (future)
+- 🔜 Integration into distribution script (next iteration)
+
+**Usage:**
+```bash
+# Show top referrers leaderboard
+npx ts-node referral-bonus.ts --leaderboard
+
+# Check specific referrer's stats
+npx ts-node referral-bonus.ts --address ABC123...
+
+# Register a referral relationship
+npx ts-node referral-bonus.ts --register NewWallet,ReferrerWallet
+
+# Get JSON for API/website
+npx ts-node referral-bonus.ts --json
+```
+
+**Why It Works:**
+- Bybit shows lifetime commissions drive long-term promotion
+- KuCoin's 16K+ affiliates and $100M+ payouts prove the model
+- Multi-level creates network effects (referrals of referrals)
+- Real USD1 rewards (not points) make it tangible
+- Stacks with existing tier/streak/engagement multipliers
+
+**Effort:** ✅ Phase 1 Complete
+**Impact:** High (organic growth + network effects)
 
 ### 19. DAO Governance
 
@@ -807,6 +855,7 @@ Bridge $FED to other chains. Major undertaking, future consideration.
 ### New Items from 2026 Reputation Research (Jan 21, 2026)
 
 20. ~~**"Fed Credit Score"**~~ - ✅ **DONE!** Unified reputation scoring system (300-850 scale) aggregating all holder metrics (Jan 21, 2026)
+21. ~~**"Fed Referral Bonus System"**~~ - ✅ **DONE!** Multi-level referral tracking with tier bonuses (Jan 21, 2026)
 
 ---
 

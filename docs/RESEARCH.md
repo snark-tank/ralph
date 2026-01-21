@@ -2181,6 +2181,177 @@ Created `engagement-score.ts` that implements:
 
 ---
 
+## Token Buyback Mechanisms in DeFi (2025-2026)
+
+**Date Researched:** 2026-01-21
+**Status:** Research Complete
+
+### Overview
+
+Token buybacks have evolved from a niche mechanism into a widespread practice in 2025-2026. Inspired by traditional finance share buybacks, DeFi protocols are now using protocol revenue to repurchase and often burn their native tokens, creating deflationary pressure and rewarding holders.
+
+### The Shift to Revenue Sharing
+
+Before 2025, only ~5% of protocol revenue was redistributed to token holders. By 2026, this has tripled to roughly 15%. The regulatory shift from hostile to constructive has given teams clearer frameworks for revenue sharing.
+
+### Major Protocol Implementations
+
+| Protocol | Mechanism | Revenue Allocation | Results |
+|----------|-----------|-------------------|---------|
+| Hyperliquid | Fee buybacks | 97% of fees to buybacks | $1.5B+ in tokens acquired |
+| Uniswap | Fee switch + token jar | $26M annual revenue | 100M UNI burned (~$600M) |
+| Jupiter | Buyback + lock | 50% of fees | Tokens locked for 3 years |
+| Bifrost | Buyback + distribute | 100% of profits | bbBNC non-transferable shares |
+| De.Fi | Multi-channel burns | 4 revenue streams | Continuous supply reduction |
+
+### Types of Buyback Mechanisms
+
+1. **Buyback-and-Burn**: Purchased tokens are permanently destroyed, reducing total supply
+2. **Buyback-and-Distribute**: Tokens are repurchased and distributed to stakers
+3. **Buyback-and-Lock**: Tokens are locked in treasury (like Jupiter's 3-year lock)
+4. **Token Jar Model**: (Uniswap) Revenue accumulates; holders can burn tokens to claim proportional share
+5. **Multi-Channel Burns**: (De.Fi) Multiple revenue sources all feed into buybacks
+
+### De.Fi's 4 Buyback Revenue Streams
+
+A particularly interesting model - De.Fi announced four distinct revenue channels:
+
+1. **Accelerator Revenue**: Proceeds from early-stage project funding
+2. **Trading Fee Revenue**: Swap, send, and bridge fees (~$500M swap volume over 2 years)
+3. **API Service Revenue**: 100+ projects pay for API access (Coingecko, IBM)
+4. **PRO Subscription Revenue**: Premium features and tools
+
+### Key Insights
+
+**What Makes Buybacks Work:**
+- Consistent protocol usage and real revenue (not emissions)
+- Transparent, on-chain execution via governance
+- Multiple revenue streams for sustainability
+- Clear communication to community
+
+**What Can Go Wrong:**
+- Buybacks without real usage = short-term pump only
+- Over-reliance on buybacks vs. product development
+- Regulatory uncertainty in some jurisdictions
+- Can become exit liquidity for insiders if poorly timed
+
+### Lessons for $FED
+
+1. **$FED already does it better**: Direct USD1 distribution > buyback complexity
+2. **Multiple revenue streams**: Consider diversifying fee sources (LP fees, API, etc.)
+3. **Transparency is key**: Show real-time distribution stats (which we do)
+4. **Burns vs. Distribution**: Distribution maintains circulating supply for liquidity; burns create artificial scarcity
+
+### Why $FED's Model is Superior
+
+Unlike buyback models that require complex tokenomics, $FED:
+- Distributes REAL VALUE (USD1 stablecoin) directly
+- No need to sell $FED to realize gains
+- Rewards holding without deflationary spirals
+- Simple to understand: hold $FED → receive USD1
+
+### Sources
+
+- [OKX - Token Buyback DeFi Investor Confidence](https://www.okx.com/en-us/learn/token-buyback-defi-investor-confidence)
+- [De.Fi - 4 DEFI Buyback Mechanisms](https://de.fi/blog/de-fi-accelerator-4-defi-buyback-mechanisms-token2049-more)
+- [DL News - Uniswap Fee Switch](https://www.dlnews.com/articles/defi/uniswap-dao-to-activate-fee-switch-and-burn-100m-uni-tokens/)
+- [WisdomTree Prime - Blockchain Buybacks](https://www.wisdomtreeprime.com/blog/token-trends-blockchain-buybacks-how-defi-is-adapting-tradfis-playbook/)
+
+---
+
+## Crypto Referral & Affiliate Systems (2025-2026)
+
+**Date Researched:** 2026-01-21
+**Status:** ✅ Implemented for $FED
+
+### Overview
+
+Referral programs remain one of the most effective growth mechanisms in crypto, turning existing users into ambassadors. The 2025-2026 landscape has seen significant evolution with tiered rewards, lifetime commissions, and multi-level structures.
+
+### Industry Trends
+
+**Commission Evolution:**
+- Top programs: 50-70% revenue share
+- Lifetime commissions becoming rare (Bybit still offers)
+- Most platforms now cap at 3-12 months
+- Sub-affiliate/second-level rewards emerging
+
+**Key Statistics:**
+- KuCoin: 16,000+ affiliates, $100M+ payouts
+- Bybit: Daily payouts, no minimum threshold
+- Crypto.com: Up to $2,000 CRO per referral
+
+### Referral Structures Analyzed
+
+| Platform | Commission | Duration | Special Features |
+|----------|-----------|----------|------------------|
+| Bybit | Up to 50% | Lifetime | Daily payouts, no minimum |
+| Crypto.com | 50% trading fees | 12 months | Up to $2,000 CRO bonus |
+| KuCoin | Up to 60% | Ongoing | Sub-affiliates supported |
+| Binance | Up to 50% | N/A | Restricted in many regions |
+| Bakje (DeFi) | 25%/month | Monthly | Focus on staking/lending |
+
+### What Works
+
+1. **Tiered Referral Rewards**: Higher tiers for more referrals incentivizes growth
+2. **Lifetime Commissions**: Creates ongoing passive income motivation
+3. **Multi-Level Structure**: Level 2 referrals (referrals of referrals) multiply network effects
+4. **Clear Visibility**: Real-time dashboards showing referral performance
+5. **Milestone Bonuses**: Extra rewards for hitting referral count targets
+
+### What Failed
+
+1. **Geographic Restrictions**: Many programs unavailable globally
+2. **Time-Limited Earnings**: Caps at 90 days demotivate long-term promotion
+3. **Complex Rules**: Confusing qualification criteria
+4. **Decay Mechanisms**: Commission rates that decrease over time
+5. **High Minimum Thresholds**: Barriers to withdrawal
+
+### Implementation: Fed Referral Bonus System
+
+Created `referral-bonus.ts` that implements:
+
+**Referral Tiers:**
+| Tier | Min Referrals | Multiplier | L1 Bonus | L2 Bonus |
+|------|---------------|------------|----------|----------|
+| 👑 Fed Ambassador | 50+ | 1.25x | 5% | 1% |
+| ⭐ Fed Recruiter | 20+ | 1.15x | 4% | 0.5% |
+| 🔥 Fed Advocate | 10+ | 1.1x | 3% | - |
+| 💪 Fed Supporter | 5+ | 1.05x | 2% | - |
+| 🤝 Fed Member | 1+ | 1.02x | 1% | - |
+
+**Features:**
+- Multi-level referral tracking (L1 and L2)
+- Bonus multipliers on own distributions
+- Network bonus: % of referrals' rewards
+- Retention rate tracking
+- Leaderboard generation
+- JSON API output for website integration
+
+**How It Works:**
+1. New holder uses referral link: `fed.markets?ref=<wallet>`
+2. Relationship registered on-chain detection
+3. Referrer earns multiplier on own rewards
+4. Referrer earns % of referrals' distributions as bonus
+5. Higher tiers = more referrals = better rewards
+
+### Lessons for $FED
+
+1. **Simplicity**: Easy referral link generation
+2. **Real Rewards**: Referral bonus is real USD1, not points
+3. **No Time Limits**: Lifetime relationship tracking
+4. **Stacking**: Referral multiplier stacks with tier/streak/engagement multipliers
+5. **Two-Way Win**: Both referrer and referee benefit from the ecosystem
+
+### Sources
+
+- [Koinly - Best Crypto Affiliate Programs 2026](https://koinly.io/blog/best-crypto-affiliate-programs/)
+- [Blockchain Ads - High-Paying Crypto Affiliate Programs](https://www.blockchain-ads.com/post/high-paying-crypto-affiliate-programs)
+- [Slash - Top Crypto Affiliate Programs 2026](https://www.slash.com/blog/crypto-affiliate-programs)
+- [CryptoNews - Crypto.com Referral Program](https://advertorial.cryptonews.com/press-releases/crypto-com-introduces-new-referral-program-with-more-rewards-and-real-time-dashboard/)
+
+---
+
 *This document is continuously updated by Ralph as he researches protocols.*
 
-Last Updated: 2026-01-21 (Added Crypto Engagement & Loyalty Systems research, implemented Fed Engagement Score)
+Last Updated: 2026-01-21 (Added Token Buyback Mechanisms research, Implemented Fed Referral Bonus System)
