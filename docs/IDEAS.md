@@ -1362,34 +1362,99 @@ Let holders make predictions about $FED metrics and earn rewards for accuracy. C
 
 ---
 
-### 25. "Time-Weighted Voting Power" - veFED Model
+### 25. "Fed Time Lock" - Boosted Rewards Through Voluntary Commitment ✅ IMPLEMENTED
 
-**Inspired by:** Curve's veCRV, Time-weighted staking
+**Inspired by:** Curve's veCRV, Pendle vePENDLE, 2026 soft lock trends
+
+**Status:** ✅ **LIVE IN PRODUCTION** (Jan 21, 2026)
+
+**The Concept:**
+A voluntary commitment system where holders can "lock" their intention to hold for a specified period in exchange for additional reward multipliers. Unlike veCRV, this is a "soft lock" - tokens remain in the user's wallet.
+
+**Key Innovation:**
+- NO actual token locking (tokens remain fully liquid in wallet)
+- Commitment is tracked off-chain via acknowledgment
+- Breaking commitment (selling) removes the bonus retroactively
+- "Soft lock" approach - trust-based with reputation consequences
+
+**Time Lock Tiers:**
+| Tier | Name | Duration | Multiplier | CS Bonus | CS Penalty |
+|------|------|----------|------------|----------|------------|
+| 📝 | Fed Pledge | 7 days | 1.05x | +5 | -10 |
+| 🤝 | Fed Promise | 30 days | 1.15x | +15 | -25 |
+| ⚖️ | Fed Oath | 90 days | 1.3x | +35 | -50 |
+| 💍 | Fed Vow | 180 days | 1.5x | +60 | -80 |
+| 📜 | Fed Covenant | 365 days | 1.75x | +100 | -120 |
+| 🏛️ | Fed Bond | 730 days | 2.0x | +200 | -250 |
+
+*CS = Credit Score*
+
+**How It Works:**
+1. Holder commits to a tier (e.g., "Fed Oath" for 90 days)
+2. System records their balance at commitment time
+3. During commitment: Holder earns boosted multiplier (e.g., 1.3x)
+4. If holder maintains balance: Commitment completes, credit score bonus
+5. If holder sells: Commitment broken, credit score penalty
+
+**Badge Achievements:**
+- First Commitment: Complete any time lock
+- Promise Keeper: 3 completions, 0 breaks
+- Oath Taker: Complete 90-day commitment
+- Sacred Vow: Complete 180-day commitment
+- Covenant Holder: Complete 365-day commitment
+- Bonded Forever: Complete 730-day commitment
+- Perfect Record: 10 completions, 0 breaks
+- Multi-Term: 5+ consecutive commitments
+
+**Maximum Multiplier Stack with Time Lock:**
+A Fed Chairman (1.5x) with Founding Father streak (1.25x), Fed Elite engagement (1.2x), and Fed Covenant lock (1.75x):
+- Combined: 1.5 × 1.25 × 1.2 × 1.75 = **3.94x rewards!**
+
+**Why Soft Lock vs Hard Lock:**
+| Aspect | veCRV (Hard Lock) | Fed Time Lock (Soft Lock) |
+|--------|-------------------|---------------------------|
+| Lock type | Smart contract | Off-chain tracking |
+| Token location | Locked in contract | User's wallet |
+| Liquidity | Zero | Full (with consequences) |
+| Complexity | High (gas, management) | Low (simple commitment) |
+| Risk | Smart contract risk | Reputation risk only |
+| Rewards | Token emissions + fees | Real USD1 multiplier |
+
+**Usage:**
+```bash
+# View available tiers
+npx ts-node time-lock.ts --tiers
+
+# Create a commitment
+npx ts-node time-lock.ts --create <address> promise 5000000
+
+# Check commitment status
+npx ts-node time-lock.ts --check <address> 5000000
+
+# View holder status
+npx ts-node time-lock.ts --status <address>
+
+# Leaderboard
+npx ts-node time-lock.ts --leaderboard 20
+```
+
+**File Created:** `/home/ubuntu/fed/script/time-lock.ts`
+
+**Effort:** ✅ Complete
+**Impact:** Very High (token velocity reduction + massive multiplier stacking)
+
+---
+
+### 26. "Time-Weighted Voting Power" - veFED Model
+
+**Inspired by:** Curve's veCRV governance voting
 
 **Status:** 📋 **PLANNED** (Future)
 
 **The Concept:**
 Lock $FED for longer periods to gain more voting power on protocol decisions. Creates stronger commitment and reduces sell pressure.
 
-**Potential Structure:**
-| Lock Period | Voting Power |
-|-------------|--------------|
-| 1 week | 1x |
-| 1 month | 1.5x |
-| 3 months | 2x |
-| 1 year | 3x |
-| 4 years | 4x (max) |
-
-**Benefits:**
-- Reduces circulating supply (locked tokens)
-- Creates committed governance participants
-- Rewards long-term believers
-- Curve proved this model works
-
-**Concerns:**
-- Adds complexity
-- May not be needed for current stage
-- Governance itself needs more definition first
+**Note:** Fed Time Lock (above) handles the reward multiplier aspect. This idea is for governance voting power specifically, if/when governance is implemented.
 
 **Effort:** Very High (smart contracts + governance)
 **Impact:** High (long-term commitment)
@@ -1398,4 +1463,4 @@ Lock $FED for longer periods to gain more voting power on protocol decisions. Cr
 
 *This document is continuously updated by Ralph as he researches and brainstorms.*
 
-Last Updated: 2026-01-21 (Added 2026 gamification research: Fed Quests System IMPLEMENTED, Fed Predictions, Time-Weighted Voting planned)
+Last Updated: 2026-01-21 (Added Fed Time Lock IMPLEMENTED, 2026 Token Velocity research)

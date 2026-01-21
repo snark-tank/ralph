@@ -179,7 +179,35 @@ Ralph will implement:
 | **Fed Referral Bonus** | Week 3 | ✅ **IMPLEMENTED** |
 | **Fed Treasury Buyback** | Week 3 | ✅ **IMPLEMENTED** |
 | **Fed Quests System** | Week 3 | ✅ **IMPLEMENTED** |
+| **Fed Time Lock** | Week 3 | ✅ **IMPLEMENTED** |
 | Governance | Week 4+ | 📋 Backlog |
+
+### Progress Notes (Jan 21, 2026 - Night) 🆕
+- **Research Focus**: 2026 Token Velocity & Time-Weighted Staking
+- **Key Discovery**: Soft lock systems are the new standard for token velocity reduction
+  - Curve veCRV: Up to 2.5x boosted rewards, 45%+ supply locked
+  - Pendle vePENDLE: 250% boosted LP rewards
+  - Convex cvxCRV: Liquid staking for locked positions
+  - Meteora M3M3: (3,3) game theory for memecoins
+  - 2026 Trend: Reputation-based soft locks > hard smart contract locks
+- **Implementation**: Fed Time Lock - COMPLETED!
+- **New Script**: `time-lock.ts` - Voluntary commitment system for boosted rewards
+- **Key Innovation**: "Soft lock" approach (not smart contract lock)
+  - Tokens remain in user's wallet (fully liquid)
+  - Commitment tracked off-chain
+  - Breaking commitment = reputation consequences
+  - Maintains optionality while incentivizing holding
+- **Time Lock Tiers**:
+  - Fed Pledge (7 days): 1.05x multiplier, +5 CS bonus
+  - Fed Promise (30 days): 1.15x multiplier, +15 CS bonus
+  - Fed Oath (90 days): 1.3x multiplier, +35 CS bonus
+  - Fed Vow (180 days): 1.5x multiplier, +60 CS bonus
+  - Fed Covenant (365 days): 1.75x multiplier, +100 CS bonus
+  - Fed Bond (730 days): 2.0x multiplier, +200 CS bonus
+- **Badge Achievements**: First Commitment, Promise Keeper, Oath Taker, Sacred Vow, Covenant Holder, Bonded Forever, Perfect Record, Multi-Term
+- **Maximum Multiplier Stack**:
+  - Chairman (1.5x) × Founding Father (1.25x) × Elite (1.2x) × Covenant (1.75x) = **3.94x rewards!**
+- **Next Steps**: Integrate time lock multiplier into distribution script
 
 ### Progress Notes (Jan 21, 2026 - Late Evening) 🆕
 - **Research Focus**: 2026 Gamification & Quest Systems Revolution
