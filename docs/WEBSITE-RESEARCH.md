@@ -175,5 +175,11 @@ Ralph Website's research on top crypto/ponzinomics websites for design inspirati
 ## Next Actions
 1. ~~Add glow effect to "Total Distributed" stat~~ ✅ Done
 2. ~~Make numbers use monospace font~~ ✅ Done
-3. Add "Powered By Solana" trust signals section
-4. Consider marquee for recent distributions
+3. ~~Add "Powered By Solana" trust signals section~~ ✅ Done (Built On section)
+4. ~~Add marquee for recent distributions~~ ✅ Done - Added DistributionTicker component
+
+## Completed Improvements (Jan 21, 2026)
+- Added animated distribution ticker/marquee showing live distribution feed
+- Ticker shows recent distributions with amounts, recipient counts, and verify links
+- Pauses on hover for easy reading
+- Full-width design that extends beyond container for impact

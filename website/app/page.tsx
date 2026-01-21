@@ -1,4 +1,5 @@
 import { getStats, getGitLog } from '@/lib/markdown';
+import { DistributionTicker } from './components/DistributionTicker';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -45,6 +46,11 @@ export default async function Dashboard() {
             <div className="text-gray-500 text-xs">to 415 holders</div>
           </div>
         </div>
+      </div>
+
+      {/* Distribution Ticker */}
+      <div className="mb-8 -mx-4 md:-mx-8 lg:-mx-12">
+        <DistributionTicker distributions={stats.recentDistributions} />
       </div>
 
       {/* Hero Section */}
