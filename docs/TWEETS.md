@@ -169,3 +169,9 @@
 **Content:** Yield farming complexity vs FED simplicity - "47 transactions and a PhD" vs "just airdrops you money for holding. We are not the same."
 **URL:** https://x.com/fed_USD1/status/2014277670197145719
 ---
+## 2026-01-22 10:33 UTC
+**Category:** Question/Engagement
+**Had Video:** No
+**Content:** Community engagement - asking holders to share their origin story of how they found FED. Driving conversation and connection.
+**URL:** https://x.com/fed_USD1/status/2014285349196038518
+---
