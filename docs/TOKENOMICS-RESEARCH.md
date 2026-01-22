@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $56,042+ USD1
-- **Distribution Count:** 464 distributions
+- **Total Distributed:** $56,111+ USD1
+- **Distribution Count:** 468 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -6135,3 +6135,225 @@ FED is positioned opposite to this:
 
 *Research completed: 2026-01-22 15:45 UTC*
 
+
+---
+
+## 2026-01-22: Gains Network (gTrade) Deep Dive
+
+### Research Focus
+How does Gains Network's gTrade perp DEX distribute value to token holders? What can FED learn from their evolution from direct staking rewards to buyback & burn?
+
+---
+
+### Protocol Overview
+
+**What is Gains Network?**
+- Oracle-based perpetual futures DEX on Arbitrum and Polygon
+- Launched 2021 by anonymous founder "Seb"
+- Allows trading of crypto, forex, stocks, indices, commodities
+- Leverage up to 1,000x (forex) down to 2x (stocks)
+
+**Protocol Scale (2025):**
+| Metric | Value |
+|--------|-------|
+| Lifetime Trading Volume (Arbitrum) | $58 billion |
+| Daily Trading Volume (2024 avg) | $80M |
+| TVL | $27M (45% growth in H2 2025) |
+| Daily Protocol Revenue (Dec 2025) | $130K |
+| DEGEN Markets Volume (2025) | $14.3B |
+
+**Key Insight:** gTrade generates $130K/day in revenue - *exceeding Uniswap's $95K despite 178x smaller FDV*. This is exceptional capital efficiency.
+
+---
+
+### Tokenomics Evolution: The Pivotal Shift
+
+**The GNS Journey:**
+
+| Phase | Model | Staker Benefit |
+|-------|-------|----------------|
+| Pre-2024 | Single-Sided Staking (SSS) | Direct DAI/USDC yield |
+| July 2024 | Buyback & Distribute (BB&D) | 55% revenue → buyback → distribute GNS |
+| Current | Buyback & Burn (BB&B) | 55% revenue → buyback → burn (value via deflation) |
+
+**Why the Evolution?**
+1. **SSS (Direct Yield):** Simple but required constant selling pressure from protocol
+2. **BB&D (Buyback + Distribute):** Created buy pressure before distributing to stakers
+3. **BB&B (Buyback + Burn):** Maximum deflation, benefits ALL holders not just stakers
+
+**Current Fee Distribution:**
+- **55% of fees:** Buyback & Burn (via 1hr TWAP + 1% premium)
+- **~40% of fees:** Liquidity providers (gToken vaults)
+- **Remaining:** Bots, governance, etc.
+
+---
+
+### The "Hyper-Deflationary" Results
+
+**2025 Burn Statistics:**
+- **$10.8 million** in protocol revenue allocated to buybacks/burns
+- **Average buyback price:** ~$1.58 per GNS
+- **25.7% of total supply burned** by end of 2025
+- **55K+ GNS burned daily** (0.2% of supply/day)
+- **12 consecutive months** of uninterrupted buyback & burn
+
+**Supply Trajectory:**
+| Date | Circulating Supply | Notes |
+|------|-------------------|-------|
+| Launch | 38.5M GNS | Initial supply |
+| Mid-2025 | 28.9M GNS | After 1M burned in 67 days |
+| Jan 2026 | ~26M GNS | "Road to 1 GNS" campaign |
+| Hard Cap | 100M GNS | Failsafe, never expected to reach |
+
+**Key Quote from Team:**
+"By any objective measure, this represents one of the most aggressive deflationary outcomes in crypto."
+
+---
+
+### Staking Model Analysis
+
+**Current GNS Staking:**
+- **No lock period** - withdraw anytime
+- **No direct yield** - value accrues via token deflation
+- **Option to compound** - harvest or auto-compound in single tx
+- **gGNS Vault** - stake GNS as trading collateral (new feature)
+
+**Staked GNS Perks:**
+1. Reduced trading fees (fee discounts for stakers)
+2. Trading collateral utility (gGNS vault)
+3. Governance participation (future DAO)
+
+**Historical Yield:**
+- SSS model delivered ~5% APY in DAI (non-inflationary real yield)
+- Current model: no direct APY, value through deflation only
+
+---
+
+### gTrade v10 Innovations (August 2025)
+
+**Major Upgrades:**
+1. **Funding Fees** - Replaced volatile "borrowing fees" on core markets
+2. **90% Lower Holding Costs** - Made long-term positions viable
+3. **2x Improved Price Impact** - Better execution for traders
+4. **Synthetic Architecture Improvements** - More capital efficient
+
+**Result:** Core markets now behave like proper perpetual futures - scalable, balanced, resilient under stress.
+
+**$200K Trading Competition** launched to drive v10 adoption.
+
+---
+
+### Comparison: Gains Network vs FED
+
+| Dimension | Gains Network (GNS) | FED |
+|-----------|--------------------|----|
+| **Primary Value** | Leveraged trading platform | Fee distribution to holders |
+| **Revenue Source** | Trading fees | LP trading fees |
+| **Distribution Model** | Buyback & Burn (indirect) | Direct USD1 distribution |
+| **Staker Yield** | None (deflation only) | ~2-minute direct payouts |
+| **Lock Period** | None | None |
+| **Multipliers** | Fee discounts for stakers | Tier/streak/XP multipliers |
+| **Supply Dynamics** | Hyper-deflationary (25%+ burned) | Fixed supply, buyback during dips |
+| **Daily Revenue** | $130K | Variable (fee-dependent) |
+
+---
+
+### Key Insights for FED
+
+**What GNS Teaches Us:**
+
+#### 1. The Buyback Evolution is Instructive
+GNS moved: Direct Yield → Buyback & Distribute → Buyback & Burn
+
+**Why?**
+- Direct yield required selling pressure from protocol
+- Buyback creates buy pressure + benefits
+- Burn is "purest" value accrual (all holders benefit)
+
+**FED Context:** We chose direct distribution (USD1 stablecoins). This is DIFFERENT from GNS because:
+- USD1 doesn't require selling FED to distribute (no sell pressure)
+- Immediate gratification > delayed deflation for memecoin psychology
+- "Cash in your wallet every 2 minutes" is more tangible than "supply is shrinking"
+
+**Conclusion:** FED's direct distribution model is CORRECT for a memecoin. GNS's burn model works for a utility platform where users care about long-term fundamentals.
+
+#### 2. Extreme Deflation Works (With Revenue)
+25.7% of GNS supply burned in one year is remarkable. But it requires:
+- **Consistent revenue** ($130K/day)
+- **Long time horizon** (users accept no yield for appreciation)
+- **Utility beyond holding** (trading platform engagement)
+
+**FED Context:** We don't have GNS-level revenue consistency (fee income is volatile). Extreme deflation strategy would be risky. Our hybrid (distribute mostly, buyback on dips) is more appropriate.
+
+#### 3. No Lock Periods Work
+GNS has no lock period and thrives. Validates FED's approach:
+- Locks create friction
+- Diamond hands self-select without force
+- Pendle just removed locks too (trend)
+
+#### 4. Trading Collateral Utility is Interesting
+GNS's gGNS vault lets stakers use GNS as trading collateral. This creates:
+- Utility beyond passive holding
+- Reason to accumulate more
+- Engagement with platform
+
+**FED Consideration:** Could FED ever have utility beyond yield? (Future research topic)
+
+#### 5. The Capital Efficiency Story
+GNS generates MORE daily revenue than Uniswap with 178x smaller FDV. This is because perp trading is high-velocity capital.
+
+**FED Context:** We benefit from similar dynamics - high-frequency trading on our LP generates consistent fees despite smaller market cap.
+
+---
+
+### What NOT to Copy from GNS
+
+1. **Don't switch to pure burn model**
+   - GNS holders accept no yield for deflation
+   - FED holders expect direct income (our value prop)
+   - Different audience, different expectations
+
+2. **Don't add complex vault structures yet**
+   - gGNS vault is sophisticated
+   - FED's simplicity is a feature
+   - "Just hold = earn" should remain core
+
+3. **Don't promise GNS-level deflation**
+   - Their 25% annual burn requires $130K/day revenue
+   - FED's revenue is variable
+   - Overpromising burns → disappointment
+
+---
+
+### Recommendations for FED
+
+**Keep Current:**
+- ✅ Direct USD1 distribution (vs burn model) - better for memecoin
+- ✅ No lock periods - validated by GNS success
+- ✅ Buyback on dips (vs continuous burn) - appropriate for volatile revenue
+
+**Consider for QE4:**
+- 🔄 **Track deflation metrics** - document all buyback/burns like GNS does
+- 🔄 **Capital efficiency narrative** - we're efficient like GNS (high fee generation per FDV)
+- 🔄 **Staking perks** - could FED stakers get fee discounts like GNS? (requires utility expansion)
+
+**Future Research:**
+- What would "gFED" look like? (FED as collateral/utility)
+- Can we create engagement beyond passive holding?
+- RWA integration like GNS 2026 roadmap?
+
+---
+
+### Sources
+
+- [Gains Network Docs - GNS Staking](https://docs.gains.trade/liquidity-farming-pools/gns-staking)
+- [Gains Network Docs - GNS Token](https://docs.gains.trade/what-is-gains-network/gfarm2-token)
+- [CoinGecko - Gains Network](https://www.coingecko.com/en/coins/gains-network)
+- [CoinMarketCap - Gains Network Latest Updates](https://coinmarketcap.com/cmc-ai/gains-network/latest-updates/)
+- [CoinMarketCap - What is Gains Network](https://coinmarketcap.com/cmc-ai/gains-network/what-is/)
+- [DefiLlama - Gains Network](https://defillama.com/protocol/gains-network)
+- [Captain Altcoin - Gains Network Review 2026](https://captainaltcoin.com/gains-network-review/)
+
+---
+
+*Research completed: 2026-01-22 14:15 UTC*
