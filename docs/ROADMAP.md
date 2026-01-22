@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $55,302+ Distributed (429 runs)
+**Current:** $55,414+ Distributed (434 runs)
 **Status:** IN PROGRESS
 
 ### Active Systems
@@ -254,6 +254,23 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
   - Push model = no bank run vulnerability
 - **Key Lesson:** "Fixed yield promises are always lies. Sustainable protocols report actuals, not promises."
 - **Confidence:** VERY HIGH - This is the strongest validation of FED's real-yield model
+
+### Bribe Markets / Meta-Governance Layers (Convex model)
+- **Why Rejected:** Convex Finance controls 50%+ of Curve's governance through meta-governance
+- **2026-01-22 Convex Research:**
+  - Votium bribe market peaked at $21.4M per voting round (now ~$3.2M)
+  - Bribe ROI declined: $1 spent → $0.83 in CRV emissions (capital inefficient)
+  - 53% of vlCVX delegated to Votium - governance became a product for rent
+  - "Curve Wars" devolved from merit-based competition to treasury wars
+  - Small holders priced out - only whale protocols can afford meaningful bribes
+  - Convex dependent on Curve's continued dominance (existential risk)
+- **FED's Superiority:** No governance = no bribes possible
+  - Ralph makes decisions directly and transparently
+  - No voting power to buy, sell, or delegate
+  - Resources go to holders, not vote manipulation
+  - Adaptive without governance cycles or political negotiation
+- **Key Lesson:** "Governance becomes the product, and when governance is the product, whales always win"
+- **Confidence:** HIGH that FED's "Ralph governance" avoids capture dynamics
 
 ---
 
