@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $51,735+ USD1
-- **Distribution Count:** 380 distributions
+- **Total Distributed:** $51,900+ USD1
+- **Distribution Count:** 384 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -822,4 +822,317 @@ FED's push distribution model scales to ~10K holders with optimization. Beyond t
 - [GMX Tokenomics](https://gmxio.gitbook.io/gmx/tokenomics)
 - [Solana Roadmap 2025-2026](https://www.btcc.com/en-US/square/D3V1L/1183808)
 - [Solana Fees Documentation](https://solana.com/docs/core/fees)
+
+---
+
+## 2026-01-22: Buyback Strategy Optimization Deep Dive
+
+### Research Focus
+How should FED optimize its buyback mechanism? When to buyback vs distribute? What do the most successful protocols do?
+
+---
+
+### The 2025 Buyback Wave: Industry Context
+
+**Key Stats:**
+- $800M+ deployed on buybacks and revenue sharing in 2025 (4x jump from 2024)
+- August 2025 saw record $166M in DeFi buybacks (led by Hyperliquid, Pump.fun)
+- Protocol revenue redistribution to holders: 5% (pre-2025) → 15% (2025)
+- Regulatory clarity has enabled more aggressive value accrual strategies
+
+**The Shift:** Buybacks evolved from niche mechanism to industry standard. Projects at all stages now consider buyback/burn as core tokenomics.
+
+**Source:** [DWF Labs: Token Buybacks in Web3](https://www.dwf-labs.com/research/547-token-buybacks-in-web3)
+
+---
+
+### Top Protocol Buyback Models Compared
+
+| Protocol | Revenue Allocation | Mechanism | 2025 Spent | Key Insight |
+|----------|-------------------|-----------|------------|-------------|
+| **Hyperliquid** | 97% of fees | Automated AF | $644M+ | Most aggressive model, 46% of ALL crypto buybacks |
+| **Raydium** | 12% of fees | Ongoing | $196M | 26.4% of circulating supply repurchased |
+| **Jupiter** | 50% of fees | 3-year lock | - | Lock creates long-term price floor |
+| **Aave** | $1M/week treasury | Weekly | $15.7M | Conservative, sustainable treasury-funded |
+| **Sky (MakerDAO)** | Treasury-funded | Structured | $96M | Consistent deployment for supply mgmt |
+| **Pendle** | Up to 80% revenue | Post-sPENDLE | - | Buyback → distribute as governance rewards |
+| **Jito** | Pilot program | 10-day TWAP | $1M | Structured 4-phase deployment |
+
+**FED Current:** Threshold-based buyback during price dips (Ralph Treasury discretion)
+
+**Source:** [WisdomTree: Token Buybacks TradFi Playbook](https://www.wisdomtreeprime.com/blog/token-trends-blockchain-buybacks-how-defi-is-adapting-tradfis-playbook/)
+
+---
+
+### Hyperliquid Deep Dive: The 97% Model
+
+**How It Works:**
+- Virtually ALL platform fees (97%) go to Assistance Fund (AF)
+- AF continuously repurchases HYPE tokens on-chain
+- No votes, no proposals, no human coordination - pure algorithm
+- Creates "backstop" during volatility (exchange revenue surges → buyback surges)
+
+**Results:**
+- 21.36M HYPE repurchased at avg $30.18 each
+- Monthly allocation: $39M-$110M (peaks during volatility)
+- December 2025: $1B token burn approved (AF holdings)
+- 46% of ALL token buyback spending in 2025
+
+**Key Mechanism:**
+- During volatility → exchange revenue surges → more buyback pressure
+- Creates counter-cyclical support (buy more when prices stressed)
+- Compression of supply as platform grows
+
+**FED Application:**
+Hyperliquid's model is elegant but extreme (97% allocation). FED already distributes 100% of fees to holders. The question is: should we RESERVE some % for buyback instead?
+
+**Trade-off:**
+- Current FED: 100% direct distribution → maximum immediate holder value
+- Hyperliquid: 97% buyback → supply compression, price support, but no direct yield
+
+**My Take:** FED's "direct yield" differentiator is more valuable for a memecoin than supply compression. Hyperliquid is a perp DEX - different context.
+
+**Source:** [Hyperliquid Crushes Competition](https://cryptopotato.com/hyperliquid-crushes-competition-with-46-of-all-token-buybacks-in-2025/)
+
+---
+
+### Timing Strategies: TWAP vs Threshold vs Continuous
+
+#### 1. TWAP (Time-Weighted Average Price)
+
+**How it works:** Spread purchases evenly over time to prevent price swings
+
+**Example - Jito:**
+- $1M buyback over 10 days
+- 4 structured phases via TWAP orders
+- Minimizes slippage and signaling
+
+**Pros:**
+- Predictable, trustless execution
+- Reduces market impact
+- Transparent value distribution
+
+**Cons:**
+- Forfeits optimal timing
+- Lagging indicator - can be exploited
+- Premium paid for predictability
+
+**FED Application:** If we adopt scheduled buybacks, TWAP would be appropriate for larger amounts. But our current opportunistic approach (buyback during dips) is more capital efficient.
+
+#### 2. Threshold-Based (FED Current Model)
+
+**How it works:** Trigger buyback when price falls below moving average
+
+**Example - Some protocols use:**
+- Buyback when current price < 30-day average
+- Creates counter-cyclical buying pattern
+
+**Pros:**
+- Capital efficient (buy low)
+- Counter-cyclical price support
+- Intuitive "buy the dip" logic
+
+**Cons:**
+- Complexity in defining thresholds
+- Can create perceived "price ceiling" (signaling effect)
+- Requires discretion
+
+**FED Current:** Ralph Treasury makes discretionary buyback decisions during dips (recent: -37% to -40% hourly drops triggered buybacks)
+
+**Source:** [Coin Republic: Buyback Timing Flaws](https://www.thecoinrepublic.com/2025/08/29/crypto-news-token-buybacks-face-timing-flaws-new-models-propose-solution/)
+
+#### 3. Continuous/Automated
+
+**How it works:** Fixed % of revenue, always buying
+
+**Example - Raydium:**
+- 12% of ALL trading fees → buyback
+- No timing decisions
+- Pure algorithmic execution
+
+**Pros:**
+- No discretion needed
+- Transparent and predictable
+- Alignment signaling (fixed % = clear commitment)
+
+**Cons:**
+- Buys at all price levels (including tops)
+- Less capital efficient than threshold-based
+- May create selling pressure if price ceiling perceived
+
+**FED Application:** Could implement "5% of fees always go to buyback" as baseline, with threshold-based amplification during dips.
+
+---
+
+### Critical Research Finding: Sustainability > Aggression
+
+**Warning Signs from 2025:**
+
+1. **Pump.fun's 99.32% Allocation**
+   - Critics warn this creates financial strain
+   - Leaves nothing for growth/operations
+   - Market distortion risk in bear cycles
+
+2. **GMX/Metaplex Paradox**
+   - Despite active buybacks, tokens dropped 76-77%
+   - Buybacks don't guarantee price stability
+   - Market conditions trump mechanism design
+
+3. **Treasury-Funded vs Revenue-Funded**
+   - Treasury-funded buybacks create "false signals of financial health"
+   - Revenue-funded (recurring) offers more durable model
+   - FED: 100% revenue-funded (fees from LP) - CORRECT approach
+
+**Key Quote:**
+"The ultimate impact of buybacks depends on execution—buybacks must be sustainable and funded by genuine protocol revenue, not speculative treasury drawdowns."
+
+**Source:** [AInvest: DeFi Buybacks Paradigm](https://www.ainvest.com/news/defi-buybacks-paradigm-token-accrual-2511/)
+
+---
+
+### Lido's "Dynamic Buyback Program" Framework
+
+Lido proposed one of the more sophisticated buyback frameworks:
+
+**Key Features:**
+1. **Percentage-based:** Up to 70% of net new liquid treasury inflows
+2. **Circuit breakers:** Buybacks pause if treasury < $2M
+3. **Thresholds:** Ensure treasury sustainability before buyback
+4. **Risk controls:** Built-in safety mechanisms
+
+**FED Application:**
+- We don't have a DAO treasury - all fees go directly to distribution/buyback
+- But the "circuit breaker" concept is valuable
+- **Recommendation:** Never buyback if SOL balance for operations < threshold
+
+**Source:** [Blockworks: Buybacks Get Pushback](https://blockworks.co/news/buybacks-get-pushback)
+
+---
+
+### FED Buyback Analysis: Current State
+
+**What FED Currently Does:**
+- Collects LP fees in USD1
+- Distributes to all holders (100%)
+- Discretionary buyback during significant dips (Ralph Treasury decision)
+- Recent: Buyback triggered at -37% and -40% hourly drops
+
+**What Works:**
+- Counter-cyclical support during dumps (correct timing)
+- 100% distribution maintains "yield" narrative
+- Burn mechanism reduces supply permanently
+
+**What Could Improve:**
+- No formalized threshold (currently discretionary)
+- No split allocation (100% one or the other)
+- No scheduled component (all reactive)
+
+---
+
+### Recommendations for FED Buyback Strategy
+
+#### Option A: Keep Current (Recommended for QE3)
+
+**Rationale:**
+- Discretionary buyback during dips is working
+- 100% distribution to holders is our differentiation
+- Ralph's judgment on timing has been good (14x pump, managed 40% correction)
+
+**No changes for QE3.** Monitor and document buyback effectiveness.
+
+#### Option B: Hybrid Model (Consider for QE4)
+
+**Structure:**
+- **90% of fees:** Distribute to holders (core value prop)
+- **10% of fees:** Automatic buyback reserve
+- **Threshold trigger:** If price drops >20% in 1h, deploy reserve
+- **If no trigger:** Reserve accumulates for larger buyback
+
+**Pros:**
+- Maintains yield narrative (90% still distributed)
+- Creates reliable price support mechanism
+- Reduces Ralph discretion (more algorithmic)
+
+**Cons:**
+- 10% less immediate yield to holders
+- Adds complexity
+- May not be worth it at current scale
+
+**My Recommendation:** Research this for QE4, but don't implement yet. Current model is working.
+
+#### Option C: Counter-Cyclical Enhancement (Future Research)
+
+**Concept from research:**
+- Use 30-day moving average as reference
+- Price > 30-day avg: 100% distribute (holders get full yield during pumps)
+- Price < 30-day avg: 80% distribute, 20% buyback (support during dips)
+
+**Pros:**
+- Automatically counter-cyclical
+- No manual discretion needed
+- Aligns with "buy low, distribute high"
+
+**Cons:**
+- Complexity
+- Moving average can be manipulated
+- Lagging indicator
+
+**Status:** Interesting concept for future consideration. Not urgent.
+
+---
+
+### What NOT to Do
+
+Based on 2025 research failures:
+
+1. **Don't allocate >50% to buyback** (Pump.fun criticism applies)
+2. **Don't buyback from treasury reserves** (only from revenue)
+3. **Don't create perceived price ceiling** (no public threshold announcements)
+4. **Don't expect buybacks alone to support price** (GMX/Metaplex lesson)
+5. **Don't sacrifice distribution yield** (our differentiation)
+
+---
+
+### Key Research Conclusions
+
+**FED's Current Approach is Sound:**
+- Discretionary buyback during dips: CORRECT
+- 100% distribution as default: CORRECT (differentiator)
+- Burn mechanism: CORRECT (permanent supply reduction)
+- Revenue-funded (not treasury): CORRECT (sustainable)
+
+**Minor Optimizations for QE4:**
+1. Formalize buyback threshold (e.g., >25% 1h drop = trigger)
+2. Consider small fixed % allocation (5-10%) for consistent support
+3. Document all buybacks for transparency
+
+**Major Insight:**
+The strongest argument for programmatic buybacks is "transparency and alignment signaling" - not optimization. A fixed % flowing to buybacks creates clear, auditable value transfer. But FED already has this through 100% fee distribution. We don't NEED buyback complexity - it's a supplementary tool for price support during stress.
+
+**Bottom Line:**
+FED should NOT copy Hyperliquid's 97% buyback model. Our "direct yield to holders" is more valuable for a memecoin than supply compression. Keep distribution as primary, buyback as secondary/reactive.
+
+---
+
+### Action Items
+
+1. [x] Document buyback strategy research findings
+2. [ ] Track buyback effectiveness (price impact, recovery time)
+3. [ ] Formalize buyback threshold trigger for consistency
+4. [ ] Model 90/10 split economics (distribution/buyback)
+5. [ ] Research moving average-based counter-cyclical model
+
+---
+
+*Sources:*
+- [DWF Labs: Token Buybacks in Web3](https://www.dwf-labs.com/research/547-token-buybacks-in-web3)
+- [WisdomTree: Token Buybacks TradFi Playbook](https://www.wisdomtreeprime.com/blog/token-trends-blockchain-buybacks-how-defi-is-adapting-tradfis-playbook/)
+- [Hyperliquid Crushes Competition](https://cryptopotato.com/hyperliquid-crushes-competition-with-46-of-all-token-buybacks-in-2025/)
+- [OKX: Hype Token Buyback Strategy](https://www.okx.com/en-us/learn/hype-token-buyback-strategy-crypto)
+- [AInvest: Rise of DeFi Buyback Strategies 2025](https://www.ainvest.com/news/rise-defi-buyback-strategies-pillar-tokenomics-2025-2509/)
+- [AInvest: DeFi Buybacks Paradigm](https://www.ainvest.com/news/defi-buybacks-paradigm-token-accrual-2511/)
+- [Coin Republic: Buyback Timing Flaws](https://www.thecoinrepublic.com/2025/08/29/crypto-news-token-buybacks-face-timing-flaws-new-models-propose-solution/)
+- [Blockworks: Buybacks Get Pushback](https://blockworks.co/news/buybacks-get-pushback)
+- [Millionero: 2025 Buyback Wave](https://blog.millionero.com/blog/the-2025-buyback-wave-in-crypto-whos-buying-how-to-track-it/)
+- [Chainlink: TWAP vs VWAP](https://chain.link/education-hub/twap-vs-vwap)
 

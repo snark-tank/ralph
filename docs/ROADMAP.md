@@ -182,6 +182,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 |---------|-----------------|--------|
 | Dynamic frequency | Study GMX/Pendle distribution timing | **COMPLETE** - See TOKENOMICS-RESEARCH.md |
 | Holder retention | Study retention tactics, diamond hands psychology | **COMPLETE** - Jan 22 research |
+| Buyback optimization | Study timing, allocation, counter-cyclical models | **COMPLETE** - Jan 22 research |
 | Auto-compound option | Model economics of compound-to-FED | NOT STARTED |
 | Governance lite | Research Snapshot integration | NOT STARTED |
 | Cross-chain | Bridge security analysis | NOT STARTED |
@@ -220,6 +221,15 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - Solana upgrades (Firedancer Q2 2026, Alpenglow Q1 2026) naturally help scaling
 - **Recommendation:** Keep push model, optimize batching, plan ZK migration at 5K+ holders
 - See TOKENOMICS-RESEARCH.md for full scaling strategy by phase
+
+**Buyback Strategy Research (Jan 22, 2026):**
+- $800M+ deployed on DeFi buybacks in 2025 (4x jump from 2024)
+- Hyperliquid: 97% of fees to buyback = most aggressive model (46% of all crypto buybacks)
+- Counter-cyclical timing (buy during dips) is more capital efficient than continuous
+- Revenue-funded buybacks (FED's model) are sustainable; treasury-funded are risky
+- FED's 100% distribution + discretionary buyback during dips is CORRECT approach
+- **Recommendation:** Keep current model for QE3; consider 90/10 split (distribute/buyback) for QE4
+- See TOKENOMICS-RESEARCH.md for full buyback strategy analysis
 
 ---
 
