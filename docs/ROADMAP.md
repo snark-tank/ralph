@@ -10,8 +10,8 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $58,729+ Distributed (539 runs)
-**Status:** IN PROGRESS (58.7%)
+**Current:** $58,833+ Distributed (542 runs)
+**Status:** IN PROGRESS (58.8%)
 
 ### Active Systems
 
@@ -692,6 +692,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Stablecoin yield distribution models | Rebase vs push vs appreciation, Ethena/OUSD/Sky | **COMPLETE** - Jan 22 research (VALIDATES FED push model) |
 | Jupiter $70M buyback failure | Buyback vs distribution effectiveness, pivot to user incentives | **COMPLETE** - Jan 22 research (MAJOR VALIDATION for FED distribution model) |
 | Memecoin community building | Discord/Telegram best practices, engagement tactics | **COMPLETE** - Jan 22 research (Launch plan ready) |
+| Pendle sPENDLE transition | vePENDLE abandonment, liquid staking shift, complexity failures | **COMPLETE** - Jan 22 research (MAJOR VALIDATION - $5.7B protocol admits complexity failed) |
 
 ### Research Findings Summary (Jan 22, 2026)
 
@@ -708,10 +709,14 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - **MAJOR VALIDATION:** FED's distribution-first model is what Jupiter is now pivoting toward
 - Key lesson: Direct USD1 distribution > abstract price support via buybacks
 
-**Pendle sPENDLE Transition (Jan 2026):**
-- Pendle removed complex vePENDLE locking in favor of simple liquid staking
-- Validates FED's "just hold = earn" approach
-- Their 80% revenue-to-buyback model mirrors our strategy
+**Pendle sPENDLE Transition (Jan 2026 - MAJOR UPDATE):**
+- Pendle ($5.7B TVL, $37M 2025 revenue) ABANDONED vePENDLE complex locking
+- **Only 20% of PENDLE was actively engaged** due to complexity/long lock requirements
+- Rewards "concentrated among vePENDLE holders with enough expertise" - governance oligarchy formed
+- New sPENDLE: 14-day unstake (or 5% instant fee), fully composable, passive rewards
+- 80% revenue to buybacks → sPENDLE rewards (FED does 100% direct distribution)
+- **STRONGEST VALIDATION YET:** $5.7B protocol reversing course toward FED's model
+- Key quote: "Long lock-ups, complexity and lack of interoperability... became 'significant barriers'"
 
 **GMX Model:**
 - 70% fees to LPs, 30% to stakers - real yield proven at scale
