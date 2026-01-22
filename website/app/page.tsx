@@ -101,7 +101,7 @@ export default async function Dashboard() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
-        <div className="stat-card-premium rounded-xl p-6 hover:border-[#22c55e]/30 transition-all duration-300 hover-lift glow-green stat-shine card-depth money-pulse relative overflow-hidden">
+        <div className="stat-card-premium rounded-xl p-6 hover:border-[#22c55e]/30 transition-all duration-300 hover-lift glow-green stat-shine card-depth money-pulse relative overflow-hidden hero-stat-glow">
           <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#22c55e]/10 to-transparent rounded-bl-full"></div>
           <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs flex items-center gap-1">
             <DollarIcon className="w-3 h-3" />
