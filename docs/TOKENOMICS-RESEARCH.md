@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $52,525+ USD1
-- **Distribution Count:** 401 distributions
+- **Total Distributed:** $54,063+ USD1
+- **Distribution Count:** 410 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -2289,3 +2289,189 @@ The only similarity between FED and OHM is that both involve "holding and earnin
 - [Olympus DAO Official](https://www.olympusdao.finance/)
 
 ---
+## 2026-01-22 Research: Frax Finance Model Analysis
+
+### Project Overview
+
+**Frax Finance** is one of DeFi's most ambitious protocol ecosystems, evolving from an innovative "fractional-algorithmic" stablecoin into a full-scale DeFi matrix with multiple products.
+
+**Current Metrics (Jan 2026):**
+- **TVL:** $433.82M (down from peak, but stable)
+- **Annualized Revenue:** $7.21M
+- **Cumulative Revenue:** $9.38M
+- **Primary Chains:** Ethereum ($426M), Fraxtal L2 ($7M)
+
+---
+
+### The Frax Model Evolution
+
+**Phase 1: Fractional-Algorithmic (2020-2023)**
+
+Frax launched with a groundbreaking hybrid model:
+- Stablecoin partially backed by collateral (USDC)
+- Partially backed by algorithmic mechanics (FXS burning)
+- "Collateral Ratio" dynamically adjusted based on market demand
+- Example: At 50% CR, minting $1 FRAX required $0.50 USDC + $0.50 FXS
+
+**Why It Was Interesting:**
+- Attempted to solve the "stablecoin trilemma" (decentralization, stability, capital efficiency)
+- More capital efficient than fully-collateralized stablecoins
+- Less fragile than pure algorithmic stablecoins
+
+**What Happened:**
+- After UST/LUNA collapse (May 2022), trust in algorithmic components evaporated
+- In Feb 2023, 98% of governance voted to move to 100% collateralization
+- Frax recognized that "trust" in stablecoins > capital efficiency
+
+**Lesson for FED:** Market sentiment can shift rapidly against innovative but risky mechanisms. FED's simple "real yield from fees" model doesn't carry this reputational risk.
+
+---
+
+### Phase 2: Full Collateralization & Revenue Sharing (2023-2024)
+
+**The Pivot:**
+- FIP-188 proposal moved FRAX to 100% collateralization ratio
+- Protocol earnings used to build reserves
+- Focus shifted from "algorithmic innovation" to "yield generation"
+
+**Fee Switch Activation (April 2024):**
+- After turning off staking rewards in 2022, Frax reversed course
+- Inspired by Uniswap's proposed fee switch
+- 50% of protocol yield → veFXS stakers
+- 50% → FXS buybacks + protocol-owned liquidity
+
+**Revenue Numbers:**
+- $400K weekly to veFXS stakers (first week)
+- $20.8M projected annual yield to stakers
+- $47.4M total protocol revenue (365-day trailing at activation)
+
+**veFXS Mechanics:**
+- Lock FXS for 1 week to 4 years
+- Longer lock = higher veFXS balance (4-year lock = 4x multiplier)
+- veFXS decays linearly as unlock approaches
+- Non-transferable (prevents liquid staking workarounds)
+
+---
+
+### Phase 3: North Star & Institutional Integration (2025-2026)
+
+**North Star Upgrade (April 2025):**
+- FXS renamed to FRAX (native gas token for Fraxtal L2)
+- veFXS → veFRAX (preserving governance + revenue mechanics)
+- 8% annual emission starting, declining 1%/year to 3% floor
+
+**frxUSD Launch (Jan 2025):**
+- New stablecoin backed by BlackRock's BUIDL tokenized fund
+- Fiat-redeemable with institutional-grade backing
+- "Enshrined custodian" model for minting/redemption
+- Represents DeFi's increasing integration with TradFi
+
+**Fraxtal L2 Ambitions:**
+- Target: $100B TVL by end of 2026 (aggressive\!)
+- Plan: 23 Layer-3s within a year
+- New assets: frxNEAR, frxTIA, frxMETIS
+- "Crypto Strategic Reserve" (BTC + ETH) on Fraxtal
+
+---
+
+### Comparison: Frax vs FED
+
+| Aspect | Frax | FED |
+|--------|------|-----|
+| **Complexity** | High (multiple tokens, AMOs, L2) | Low (hold = earn) |
+| **Lock Required** | Yes (veFXS for rewards) | No (just hold) |
+| **Distribution Frequency** | Variable (depends on staking) | ~2 minutes |
+| **Revenue Source** | AMOs, lending, swaps | LP trading fees |
+| **TVL Required** | $433M to generate $7M/year | N/A (fee-based) |
+| **Yield to Stakers** | ~$20.8M/year (projected) | $54K+ and growing |
+| **Token Lock Mechanism** | 4-year max, linear decay | Optional soft locks |
+| **Governance** | Heavy (DAO voting) | Minimal (Ralph decides) |
+
+---
+
+### What FED Can Learn from Frax
+
+**Positive Lessons:**
+
+1. **Real Yield Wins Long-Term**
+   - Frax pivoted from algorithmic innovation to real yield
+   - Fee switch activation drove significant holder value
+   - FED was built on real yield from day one ✅
+
+2. **Revenue Sharing Works**
+   - 50/50 split (distribute/buyback) is a proven model
+   - FED currently does 100% distribution + discretionary buyback
+   - Consider: Formalized split could provide predictability
+
+3. **Institutional Integration is Coming**
+   - frxUSD + BlackRock BUIDL shows where DeFi is heading
+   - USD1 distribution positions FED well for this future
+   - Stablecoin backing credibility matters
+
+**Warning Signs:**
+
+1. **Complexity Kills Adoption**
+   - Frax ecosystem is powerful but intimidating
+   - AMOs, veFXS, sfrxETH, frxUSD, Fraxtal... too many concepts
+   - FED's simplicity ("hold = earn") is a competitive advantage
+
+2. **Aggressive Roadmaps Often Fail**
+   - $100B TVL target for Fraxtal is extremely ambitious
+   - Current Fraxtal TVL: only $7M
+   - FED should keep targets realistic and achievable
+
+3. **Time-Lock Decay is User-Hostile**
+   - veFXS decays linearly = must constantly re-lock for max rewards
+   - Creates engagement but also frustration
+   - FED's streak system rewards loyalty without forcing re-commitment
+
+---
+
+### Application to FED Roadmap
+
+**No major changes recommended.** Research validates current approach:
+
+1. **Real Yield Model** - FED's fee distribution is proven by Frax's pivot ✅
+2. **Simplicity** - FED's "just hold" model beats veFXS complexity ✅
+3. **Direct Distribution** - 100% fee distribution is more generous than Frax's 50% ✅
+4. **Optional Locks** - Soft time-lock bonuses are less punitive than veFXS decay ✅
+
+**Minor Considerations for QE4:**
+
+- **50/50 Split Formalization:** Frax's 50% distribute / 50% buyback model is elegant. FED currently does 100% distribute with discretionary buybacks. A formalized split could provide more predictable price support. However, 100% distribution is a stronger narrative for memecoins.
+
+- **Institutional Readiness:** Frax integrating with BlackRock shows where the industry is going. FED distributing USD1 (a compliant stablecoin) positions us well. No action needed, but worth monitoring.
+
+---
+
+### Key Takeaways
+
+1. **Frax's Pivot Validates FED:** Moving from algorithmic to real yield proves the market wants sustainable mechanics. FED was built on this principle.
+
+2. **Complexity is Frax's Weakness:** Multiple products, tokens, and mechanisms create confusion. FED's simplicity is an asset.
+
+3. **Revenue Sharing Works:** Frax's fee switch generated $20M+ annual yield. Proves that fee distribution is a viable long-term model.
+
+4. **Lock Mechanisms are Double-Edged:** veFXS provides protocol stickiness but creates friction. FED's optional time-locks are the right balance.
+
+5. **Institutional Integration is Coming:** BlackRock backing shows DeFi maturation. USD1 distributions keep FED compatible.
+
+---
+
+### Research Confidence
+
+**HIGH** - Frax is a well-documented protocol with verifiable on-chain data. The comparison validates FED's approach while highlighting areas where FED's simpler model may actually be superior for a memecoin audience.
+
+---
+
+*Sources:*
+- [Frax Ecosystem Overview (Official Docs)](https://docs.frax.finance/)
+- [Frax Finance TVL - DeFiLlama](https://defillama.com/protocol/frax-finance)
+- [Frax Fee Switch Activation - The Defiant](https://thedefiant.io/frax-stakers-on-track-to-earn-usd20-8m-annually-after-fee-switch-activation)
+- [Frax Singularity Roadmap - CoinDesk](https://www.coindesk.com/markets/2024/03/22/frax-finance-targets-100b-value-locked-in-singularity-roadmap)
+- [frxUSD Launch - PR Newswire](https://www.prnewswire.com/news-releases/frax-launches-frxusd-stablecoin-backed-by-the-blackrocks-usd-institutional-digital-liquidity-fund-buidl-tokenized-by-securitize-302341497.html)
+- [Frax Votes for Full Collateralization - CoinDesk](https://www.coindesk.com/markets/2023/02/22/frax-finance-votes-to-fully-collateralize-its-1-billion-stablecoin)
+- [Frax Finance IQ Wiki](https://iq.wiki/wiki/frax-finance)
+
+---
+

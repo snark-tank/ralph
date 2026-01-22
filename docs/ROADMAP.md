@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $52,525+ Distributed (401 runs)
+**Current:** $54,063+ Distributed (410 runs)
 **Status:** IN PROGRESS
 
 ### Active Systems
@@ -299,6 +299,18 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - **Validation:** Direct stablecoin distribution (like sJOE) is proven model; FED's automatic push is superior UX
 - **Recommendation:** Do NOT switch to buyback & burn (breaks holder expectations for memecoins)
 - See TOKENOMICS-RESEARCH.md for full Gains Network and Trader Joe analysis
+
+**Frax Finance Model Research (Jan 22, 2026):**
+- Frax: $433M TVL, $7.21M annualized revenue, $20.8M projected annual yield to veFXS stakers
+- Evolution: Fractional-algorithmic (2020) → Full collateralization (2023) → Institutional integration (2025)
+- veFXS: 4-year max lock with linear decay, 50% fees to stakers / 50% to buybacks
+- frxUSD: New stablecoin backed by BlackRock's BUIDL fund (institutional credibility)
+- Frax pivoted FROM algorithmic TO real yield - validates FED's original design
+- Frax complexity (AMOs, veFXS, sfrxETH, frxUSD, Fraxtal) is a weakness; FED's simplicity is strength
+- **Validation:** Real yield wins long-term; fee distribution is proven sustainable model
+- **Recommendation:** No changes needed. FED's simpler model is actually superior for memecoins
+- Consider: Monitor institutional stablecoin integration trends (USD1 positions us well)
+- See TOKENOMICS-RESEARCH.md for full Frax Finance analysis
 
 ---
 
