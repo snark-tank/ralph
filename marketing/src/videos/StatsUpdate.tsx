@@ -361,17 +361,17 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
     { extrapolateRight: "clamp" }
   );
 
-  // Single elegant shockwave - restraint
+  // Elegant shockwave - satisfying expansion
   const shockOpacity = interpolate(
     frame,
-    [brrrLandTime, brrrLandTime + fps * 0.04, brrrLandTime + fps * 0.35],
-    [0.5, 0.2, 0],
+    [brrrLandTime, brrrLandTime + fps * 0.05, brrrLandTime + fps * 0.4],
+    [0.6, 0.25, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const shockScale = interpolate(
     frame,
-    [brrrLandTime, brrrLandTime + fps * 0.35],
-    [0.3, 2.8],
+    [brrrLandTime, brrrLandTime + fps * 0.4],
+    [0.25, 3.2],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
@@ -435,19 +435,19 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
 
             const isBrrr = word === "BRRR";
 
-            // BRRR scale - confident punch, controlled overshoot
+            // BRRR scale - confident punch with satisfying overshoot
             const brrrScale = isBrrr ? interpolate(
               frame,
-              [delay * fps, (delay + 0.02) * fps, (delay + 0.08) * fps, (delay + 0.18) * fps],
-              [0.6, 1.12, 0.96, 1],
+              [delay * fps, (delay + 0.025) * fps, (delay + 0.1) * fps, (delay + 0.22) * fps],
+              [0.55, 1.18, 0.94, 1],
               { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
             ) : 1;
 
-            // BRRR glow - builds then settles
+            // BRRR glow - dramatic burst then elegant settle
             const brrrGlow = isBrrr ? interpolate(
               frame,
-              [(delay + 0.02) * fps, (delay + 0.06) * fps, (delay + 0.2) * fps, fps * 1.1],
-              [0, 65, 35, 25],
+              [(delay + 0.02) * fps, (delay + 0.07) * fps, (delay + 0.22) * fps, fps * 1.1],
+              [0, 85, 45, 30],
               { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
             ) : 0;
 
@@ -536,42 +536,53 @@ const StatCard: React.FC<{
   const hasLanded = numberProgress >= 0.97;
   const landTime = (countStart + countDuration) * fps;
 
-  // Scale pulse on landing - subtle but noticeable
+  // Scale pulse on landing - satisfying, noticeable pop
   const landPulse = hasLanded ? interpolate(
     frame,
-    [landTime - fps * 0.03, landTime + fps * 0.05, landTime + fps * 0.18],
-    [1, 1.035, 1],
+    [landTime - fps * 0.03, landTime + fps * 0.06, landTime + fps * 0.22],
+    [1, 1.055, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
-  // Number glow - builds during count, flares on landing, settles elegantly
+  // Number glow - builds during count, flares dramatically on landing, settles elegantly
   const countGlow = interpolate(
     frame,
     [(countStart + 0.2) * fps, (countStart + countDuration * 0.7) * fps, landTime],
-    [0, 10, 12],
+    [0, 14, 18],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const landGlow = hasLanded ? interpolate(
     frame,
-    [landTime - fps * 0.05, landTime + fps * 0.06, landTime + fps * 0.35],
-    [12, 28, 12],
+    [landTime - fps * 0.05, landTime + fps * 0.08, landTime + fps * 0.4],
+    [18, 42, 16],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   ) : 0;
   const numberGlow = hasLanded ? landGlow : countGlow;
 
-  // Top accent bar - draws across elegantly
+  // Top accent bar - draws across elegantly with landing glow
   const accentWidth = interpolate(
     frame,
-    [(delay + 0.08) * fps, (delay + 0.4) * fps],
+    [(delay + 0.08) * fps, (delay + 0.45) * fps],
     [0, 100],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
+  const accentGlow = hasLanded ? interpolate(
+    frame,
+    [landTime - fps * 0.03, landTime + fps * 0.1, landTime + fps * 0.35],
+    [12, 28, 14],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : 12;
 
-  // Card border glow - subtle ambient
-  const borderOpacity = interpolate(
+  // Card border glow - refined ambient with landing burst
+  const borderOpacity = hasLanded ? interpolate(
+    frame,
+    [landTime - fps * 0.05, landTime + fps * 0.08, landTime + fps * 0.35],
+    [0.06, 0.12, 0.07],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : interpolate(
     frame,
     [(delay + 0.1) * fps, (delay + 0.5) * fps],
-    [0.03, 0.06],
+    [0.04, 0.07],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
@@ -621,33 +632,33 @@ const StatCard: React.FC<{
           `,
         }}
       >
-        {/* Top accent bar - elegant line with glow */}
+        {/* Top accent bar - elegant line with dynamic glow */}
         <div
           style={{
             position: "absolute",
             top: 0,
             left: 0,
             width: `${accentWidth}%`,
-            height: 2,
-            background: `linear-gradient(90deg, ${mutedColor} 0%, ${mutedColor}80 60%, transparent 100%)`,
+            height: 2.5,
+            background: `linear-gradient(90deg, ${mutedColor} 0%, ${mutedColor}90 55%, transparent 100%)`,
             borderRadius: "16px 0 0 0",
-            boxShadow: `0 0 12px ${mutedColor}40`,
+            boxShadow: `0 0 ${accentGlow}px ${mutedColor}50`,
           }}
         />
 
         {/* Number - the hero element */}
         <div
           style={{
-            fontSize: 52,
+            fontSize: 58,
             fontWeight: 900,
             color: "#ffffff",
             fontFamily: "system-ui, -apple-system, sans-serif",
-            letterSpacing: -2.8,
+            letterSpacing: -3,
             lineHeight: 1,
             marginBottom: 14,
             transform: `scale(${landPulse})`,
             transformOrigin: "left center",
-            filter: `drop-shadow(0 0 ${numberGlow}px rgba(${accentRgb}, 0.4))`,
+            filter: `drop-shadow(0 0 ${numberGlow}px rgba(${accentRgb}, 0.45))`,
           }}
         >
           <span
@@ -661,10 +672,10 @@ const StatCard: React.FC<{
           {displayValue.toLocaleString()}
           <span
             style={{
-              color: "#2a2a2a",
-              fontSize: 18,
-              fontWeight: 700,
-              marginLeft: 3,
+              color: "#4a4a4a",
+              fontSize: 22,
+              fontWeight: 800,
+              marginLeft: 4,
             }}
           >
             {suffix}
@@ -865,12 +876,12 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
   const ctaY = interpolate(ctaProgress, [0, 1], [28, 0]);
   const ctaScale = interpolate(ctaProgress, [0, 1], [0.9, 1]);
 
-  // CTA land pulse - subtle, satisfying
+  // CTA land pulse - satisfying pop that draws attention
   const ctaLandTime = ctaDelay + fps * 0.32;
   const ctaLandPulse = frame > ctaLandTime ? interpolate(
     frame,
-    [ctaLandTime, ctaLandTime + fps * 0.08, ctaLandTime + fps * 0.2],
-    [1, 1.03, 1],
+    [ctaLandTime, ctaLandTime + fps * 0.09, ctaLandTime + fps * 0.24],
+    [1, 1.045, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
@@ -991,10 +1002,10 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
               position: "relative",
               overflow: "hidden",
               boxShadow: `
-                0 14px 45px rgba(0, 180, 100, ${0.3 + 0.12 * ctaGlow}),
-                0 6px 20px rgba(0, 160, 90, ${0.2 + 0.1 * ctaGlow}),
-                0 0 ${30 * ctaGlow}px rgba(0, 200, 110, ${0.06 * ctaGlow}),
-                inset 0 1px 0 rgba(255, 255, 255, 0.2)
+                0 16px 50px rgba(0, 180, 100, ${0.35 + 0.15 * ctaGlow}),
+                0 6px 22px rgba(0, 160, 90, ${0.22 + 0.12 * ctaGlow}),
+                0 0 ${35 * ctaGlow}px rgba(0, 200, 110, ${0.08 * ctaGlow}),
+                inset 0 1px 0 rgba(255, 255, 255, 0.22)
               `,
             }}
           >
