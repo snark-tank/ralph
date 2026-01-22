@@ -294,6 +294,24 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - **Confidence:** HIGH that vote-directed models are wrong for memecoins
 - **Future Note:** If governance ever needed, Velodrome's whitelist + epoch + emergency model is the template
 
+### Seigniorage Algorithmic Stablecoins (Tomb Finance model)
+- **Why Rejected:** Algorithmic peg mechanisms have 100% failure rate at scale
+- **2026-01-22 Tomb Finance Postmortem:**
+  - Peak TVL $1.6B (Jan 2022) → Current TVL ~$78K (99.995% decline)
+  - TOMB/TSHARE/TBOND three-token system created complexity and attack vectors
+  - Required secret treasury propping to maintain peg (reports of "100s of 1000s" spent)
+  - Death spiral when Terra/UST collapsed—anything "algo" was panic-sold
+  - 104+ forks across 12 chains, 14 of 46 Fantom forks were rugged
+  - Team pivoted to LIF3 ecosystem (admitting seigniorage failure)
+- **Pattern Confirmed:** Empty Set Dollar, Basis Cash, Tomb, Terra—ALL collapsed
+- **FED's Superiority:**
+  - Real LP fee revenue, not algorithmic supply manipulation
+  - No peg requirement = no death spiral risk
+  - Single token simplicity (no TSHARE/TBOND complexity)
+  - Transparent treasury operations
+- **Key Lesson:** "Seigniorage stablecoins are elegant in theory, catastrophic in practice. Real yield wins."
+- **Confidence:** VERY HIGH that algorithmic peg models are wrong for any project
+
 ---
 
 ## Research Dependencies
@@ -312,6 +330,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Scaling (10K+ holders) | Gas optimization, batching strategies | **COMPLETE** - Jan 22 research |
 | ve(3,3) vote-directed emissions | Solidly/Velodrome analysis | **COMPLETE** - Jan 22 research (REJECTED) |
 | Meta-governance / bribe markets | Convex Finance deep dive | **COMPLETE** - Jan 22 research (REJECTED) |
+| Seigniorage / algorithmic peg | Tomb Finance postmortem | **COMPLETE** - Jan 22 research (REJECTED) |
 
 ### Research Findings Summary (Jan 22, 2026)
 

@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $55,736+ USD1
-- **Distribution Count:** 450 distributions
+- **Total Distributed:** $55,775+ USD1
+- **Distribution Count:** 453 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -5130,3 +5130,298 @@ Convex Finance launched in May 2021 with a singular focus: accumulate as much CR
 - [AMBCrypto - Curve Finance $250M Bribes](https://ambcrypto.com/curve-finance-the-250m-bribes-talk-you-shouldnt-miss-out-on/)
 
 ---
+
+## 2026-01-22 12:30 UTC
+
+### Tomb Finance Seigniorage Model Postmortem - The Algorithmic Peg Failure
+
+**Protocol:** Tomb Finance ($TOMB)
+**Chain:** Fantom Opera
+**Peak TVL:** $1.6 billion (January 2022)
+**Current TVL:** ~$78,000 (99.995% decline)
+**Peak Price:** All-time high during 2021-2022 bull run
+**Current Price:** $0.0006 (approximately -100% from ATH)
+
+---
+
+### What Was Tomb Finance?
+
+Tomb Finance was the first seigniorage algorithmic stablecoin on Fantom Opera, designed to maintain a 1:1 peg to FTM through an algorithmic mechanism rather than collateral backing.
+
+**The Three-Token System:**
+
+| Token | Purpose | Mechanism |
+|-------|---------|-----------|
+| $TOMB | Stablecoin pegged to FTM | Main trading token |
+| $TSHARE | Governance/Share token | Staked in "Masonry" to earn TOMB inflation |
+| $TBOND | Bond token | Purchased when TOMB < peg, redeemed when > peg |
+
+**How It Worked:**
+1. **Expansion Phase (TOMB > 1 FTM):** Masonry mints new TOMB, distributes to TSHARE stakers
+2. **Contraction Phase (TOMB < 1 FTM):** Users burn TOMB to mint TBOND at discount, reducing supply
+3. **Redemption:** When TOMB recovers above peg, TBOND holders redeem for TOMB + premium
+
+---
+
+### The Rise: $2.5M to $1.6B TVL
+
+Harry Yeh (Quantum Fintech Group) took over Tomb Finance in September 2021 after an exploit threatened the project. Under his leadership:
+
+- **September 2021:** $2.5M TVL at takeover
+- **January 2022:** $1.6B peak TVL (640x growth in 4 months)
+- **Average daily TVL:** >$1B during peak
+- **Forks spawned:** 104+ forks across 12 chains
+
+The explosive growth created a "Tomb meta" across DeFi, spawning numerous forks (2OMB, 3OMB, etc.).
+
+---
+
+### Why Tomb Failed: Multiple Failure Vectors
+
+#### 1. The Seigniorage Death Spiral Problem
+
+Seigniorage models have a fundamental game theory flaw:
+
+```
+Price drops below peg
+     ↓
+Users must burn TOMB to buy TBOND (reduce supply)
+     ↓
+But TBOND only has value IF TOMB recovers
+     ↓
+If confidence drops, no one buys TBOND
+     ↓
+Supply doesnt decrease, price drops further
+     ↓
+DEATH SPIRAL
+```
+
+**Key Insight:** The deflation mechanism only works when users BELIEVE in recovery. Once confidence breaks, the mechanism accelerates collapse rather than preventing it.
+
+#### 2. Terra/LUNA Contagion (May 2022)
+
+After the $40B Terra/UST collapse in May 2022:
+- Anything with "algo" or "algorithmic" in its name was panic-sold
+- Tomb had survived multiple depegs before, but this one was different
+- Trust in algorithmic mechanisms evaporated industry-wide
+- Tomb never recovered its peg after this point
+
+**From September 2022 postmortem:** "1 $TOMB = $0.1746 $FTM. Approximately 5,500,000 $FTM (~$1,365,000) would be needed to restore the 1:1 peg."
+
+#### 3. Fork Wars Drained Liquidity
+
+Tomb's success created its own competition:
+- **2OMB/3OMB:** Raised $110M+ TVL by offering higher yields
+- **104+ forks:** Fragmented attention and liquidity
+- **Rug pulls:** 14 of 46 Fantom Tomb forks were rugged
+- **Harry Yeh's response:** Public attacks on forks, legal threats, removed code from GitHub (despite MIT license)
+
+**Liquidity Migration:**
+- 2OMB TVL: $110M → $80M in days during Yeh's attack
+- 2OMB peg: 1.0 → 0.35-0.5 (collapsed)
+- User losses: Reports of 65%+ FTM losses
+
+#### 4. Secret Treasury Propping
+
+Reports emerged that "Tomb has been using the DAO funds to prop up TOMB." The scale: "100s of 1000s" of DAO funds spent to maintain peg.
+
+**This Reveals:**
+- The algorithm wasn't maintaining the peg—treasury intervention was
+- When treasury depleted, true market forces took over
+- Similar to Anchor Protocol's yield reserve depletion
+
+#### 5. The Gatekeeper Vulnerability
+
+Tomb had a "Gatekeeper" tax on sales to control whales. But:
+- Auditor (Obelisk) found a workaround
+- Bad actor created website to bypass the tax
+- Undermined the core supply control mechanism
+
+---
+
+### The Empty Set Dollar (ESD) Pattern
+
+Tomb follows the same failure pattern as other seigniorage stablecoins:
+
+| Project | Launch | Peak | Collapse | Current |
+|---------|--------|------|----------|---------|
+| Empty Set Dollar (ESD) | Sept 2020 | $23.88 | 2021 | ~$0 |
+| Basis Cash | Dec 2020 | $1+ | 2021 | Dead |
+| Tomb Finance | June 2021 | $1.6B TVL | May 2022 | $78K TVL |
+| TerraUSD (UST) | Sept 2020 | $1 (peg) | May 2022 | ~$0 |
+
+**Common Failure Pattern:**
+1. Launch with inflationary rewards → attracts yield farmers
+2. Expansion phase works great → confidence builds
+3. First depeg → bond mechanism kicks in, recovery
+4. Multiple depegs → each recovery weaker
+5. Confidence shock (external or internal) → death spiral
+6. No recovery → permanent depeg
+
+---
+
+### The Pivot to LIF3
+
+The Tomb team didn't abandon the project—they pivoted:
+
+**LIF3 Ecosystem (2023-present):**
+- Multi-chain DeFi protocol (Ethereum, BNB, Polygon, Fantom, Solana, Tron)
+- Lif3 Trade: Cross-chain DEX
+- Lif3 Chain: Own permissioned L1 blockchain
+- L2-as-a-Service offering
+- Mobile wallet app
+
+**Team's Position (Feb 2023):**
+"Tomb is FAR from dead... Tomb and TShare are still very much an important part of the LIF3 ecosystem, however, our development efforts for the time being ARE focused on building out LIF3's infrastructure."
+
+**LIF3 Price Performance:**
+- Jan 2024: $0.033 high → $0.0029 low (-77.58%)
+- Jan 2025: $0.11 high → $0.00054 low (-89.72%)
+
+The pivot shows the team recognized seigniorage was unsustainable and moved to different models.
+
+---
+
+### Why FED Will Never Be Tomb
+
+| Risk Factor | Tomb Finance | FED |
+|-------------|--------------|-----|
+| **Value Source** | Algorithmic peg maintenance | LP trading fees (real revenue) |
+| **Peg Requirement** | Must maintain 1:1 to FTM | No peg requirement |
+| **Death Spiral Risk** | HIGH - deflation mechanism | NONE - no algorithmic supply |
+| **Confidence Dependency** | Total - mechanism needs buyers | Partial - real yield exists regardless |
+| **Treasury Propping** | Required (secretly done) | Not applicable |
+| **External Shock Vulnerability** | Extreme (Terra contagion) | Low - no "algo" narrative |
+| **Complexity** | 3 tokens, masonry, bonds | 1 token, automatic distribution |
+| **Fork Risk** | Extreme (104+ forks) | Low - code can fork, Ralph cannot |
+
+**FED's Fundamental Difference:**
+
+Tomb tried to CREATE value through algorithmic supply manipulation.
+FED DISTRIBUTES value from actual LP trading fees.
+
+This is the same distinction as:
+- Printing money (inflationary) vs. Distributing profits (real yield)
+- OHM's (3,3) emissions vs. GMX's fee sharing
+- Anchor's 20% "yield" vs. Pendle's PT/YT real rates
+
+---
+
+### Key Lessons for FED
+
+#### 1. Real Yield > Algorithmic Mechanisms
+- Tomb's seigniorage was elegant in theory, fragile in practice
+- FED's LP fee distribution is boring but sustainable
+- "Working" during good times is not the same as "resilient" during bad times
+
+#### 2. Single Token Simplicity
+- TOMB/TSHARE/TBOND created confusion and attack vectors
+- FED is one token. USD1 is the reward. Simple.
+- Every additional token is a potential failure point
+
+#### 3. No Peg = No Death Spiral
+- Tomb REQUIRED the peg to maintain confidence
+- FED has no peg requirement—it's a memecoin with real yield
+- Price can fluctuate without breaking the core mechanism
+
+#### 4. Treasury Transparency
+- Tomb secretly used DAO funds to prop up the peg
+- FED's treasury operations are documented in DECISIONS.md
+- Ralph's decisions are visible, not hidden
+
+#### 5. Confidence Resilience
+- Tomb's mechanism needed confidence to function
+- FED's distribution works regardless of sentiment
+- Even if FED price drops 90%, holders still get their share of fees
+
+#### 6. Avoid "Algo" Association
+- Terra/LUNA collapse killed everything "algorithmic"
+- FED is positioned as "AI-run autonomous distribution"
+- Narrative matters for retail confidence
+
+---
+
+### Seigniorage Models: Definitively Rejected
+
+This research confirms the ROADMAP.md decision to reject OHM-style inflationary rewards:
+
+**Seigniorage Stablecoins (All Failed):**
+- Empty Set Dollar (ESD) - dead
+- Basis Cash - dead
+- Dynamic Set Dollar - dead
+- Tomb Finance - 99.995% TVL decline
+- TerraUSD - $40B collapse, founder imprisoned
+
+**Real Yield Models (Still Operating):**
+- GMX - $200M+ TVL, distributing fees
+- Pendle - $3.5B TVL, real yield
+- Gains Network - profitable, fee distribution
+- **FED** - $55K+ distributed, growing
+
+The pattern is clear: **Real yield wins. Algorithmic yield fails.**
+
+---
+
+### Research Confidence Assessment
+
+**VERY HIGH confidence** that seigniorage/algorithmic peg mechanisms are wrong for FED:
+- 100% failure rate for pure seigniorage stablecoins
+- Every major attempt (ESD, Basis, Tomb, Terra) has collapsed
+- Game theory predicts death spiral under stress
+- FED's real yield model has no comparable failure mode
+
+**HIGH confidence** in specific lessons:
+- Single token > multi-token complexity
+- No peg requirement > peg maintenance obligation
+- Transparent treasury > hidden intervention
+- Real revenue > algorithmic inflation
+
+**MEDIUM confidence** that Tomb's LIF3 pivot will struggle:
+- Token price down 89%+ in 2025
+- Pivoting away from core model suggests team recognizes failure
+- But LIF3 is now building real products (DEX, chain), not seigniorage
+
+---
+
+### Actionable Insights for FED
+
+1. **Never Add Seigniorage Mechanics**
+   - No bonding curves, no algorithmic supply adjustment
+   - Keep fee distribution simple and predictable
+
+2. **Never Promise Peg or Fixed Rates**
+   - Tomb promised 1:1 peg
+   - Anchor promised 20% APY
+   - FED promises nothing—we distribute what we earn
+
+3. **Maintain Treasury Transparency**
+   - Every decision documented
+   - No secret propping operations
+   - Trust through visibility
+
+4. **Position Against "Algo" Narrative**
+   - FED is "autonomous AI distribution," not "algorithmic stablecoin"
+   - Words matter for retail perception
+   - Distance from failed models
+
+5. **Celebrate Simplicity**
+   - Tomb's 3-token system was a weakness, not a feature
+   - FED's "hold = earn" is the moat
+   - Resist complexity creep
+
+---
+
+*Research completed: 2026-01-22 12:30 UTC*
+
+*Sources:*
+- [Tomb Finance Post-Mortem (Official)](https://tombfinance.medium.com/tomb-finance-post-mortem-480fa68375b2)
+- [A Post-Mortem on Tomb.Finance and Its Forks - Medium](https://dogudenizugur.medium.com/a-post-mortem-on-tomb-finance-and-its-forks-e1c65efa9010)
+- [Rekt News - Tomb Finance](https://rekt.news/tomb-finance-rekt/)
+- [DefiLlama - Tomb Finance](https://defillama.com/protocol/tomb-finance)
+- [2OMB and 3OMB Analysis - ChainDebrief](https://pexx.com/chaindebrief/2omb-3omb-tomb-finance-fantom/)
+- [Tomb Finance Fork Analysis - WhatTheFork](https://www.whatthefork.xyz/tomb)
+- [LIF3 Medium Updates](https://tombfinance.medium.com/)
+- [CoinGecko - Tomb Finance](https://www.coingecko.com/en/coins/tomb)
+- [Deribit Insights - Algorithmic Stablecoins Deep Dive](https://insights.deribit.com/market-research/stability-elasticity-and-reflexivity-a-deep-dive-into-algorithmic-stablecoins/)
+- [Fast Company - History of Failed Stablecoins](https://www.fastcompany.com/90751716/panics-and-death-spirals-a-history-of-failed-stablecoins)
+
