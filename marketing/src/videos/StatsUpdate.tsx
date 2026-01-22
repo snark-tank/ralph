@@ -132,61 +132,62 @@ const IntroScene = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Phase 0: Extended pure black creates anticipation (0.15s of nothing)
-  // Then flicker sequence builds tension before the reveal
-  const flicker = frame < fps * 0.15 ? 0 :
-    frame < fps * 0.17 ? 0.06 :
-    frame < fps * 0.19 ? 0.02 :
-    frame < fps * 0.21 ? 0.12 :
-    frame < fps * 0.23 ? 0.04 :
-    frame < fps * 0.25 ? 0.18 : 1;
+  // Phase 0: Extended pure black creates anticipation (0.12s of nothing)
+  // Then smooth power-on sequence with elegant fade-through-grey
+  const powerOnPhase = frame < fps * 0.12 ? 0 :
+    frame < fps * 0.14 ? 0.03 :
+    frame < fps * 0.16 ? 0.08 :
+    frame < fps * 0.18 ? 0.04 :
+    frame < fps * 0.20 ? 0.15 :
+    frame < fps * 0.22 ? 0.08 :
+    frame < fps * 0.24 ? 0.25 : 1;
 
   const darknessFade = interpolate(
     frame,
-    [fps * 0.25, fps * 0.5],
+    [fps * 0.24, fps * 0.48],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  ) * (frame < fps * 0.25 ? flicker : 1);
+  ) * (frame < fps * 0.24 ? powerOnPhase : 1);
 
-  // Initial light burst - appears as a sharp point, then EXPLODES outward
+  // Initial light burst - appears as a sharp point, then EXPLODES outward with refined opacity curve
   const burstOpacity = interpolate(
     frame,
-    [fps * 0.15, fps * 0.2, fps * 0.28, fps * 0.6, fps * 0.95],
-    [0, 0.95, 0.75, 0.28, 0],
+    [fps * 0.12, fps * 0.18, fps * 0.26, fps * 0.55, fps * 0.9],
+    [0, 0.92, 0.72, 0.25, 0],
     { extrapolateRight: "clamp" }
   );
   const burstScale = interpolate(
     frame,
-    [fps * 0.15, fps * 0.9],
-    [0.01, 4.0],
+    [fps * 0.12, fps * 0.85],
+    [0.008, 3.8],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Secondary burst ring for depth - slightly delayed for layered effect
   const ring2BurstOpacity = interpolate(
     frame,
-    [fps * 0.2, fps * 0.3, fps * 0.65, fps * 1.0],
-    [0, 0.5, 0.18, 0],
+    [fps * 0.16, fps * 0.26, fps * 0.6, fps * 0.95],
+    [0, 0.48, 0.16, 0],
     { extrapolateRight: "clamp" }
   );
   const ring2BurstScale = interpolate(
     frame,
-    [fps * 0.2, fps * 1.0],
-    [0.01, 4.8],
+    [fps * 0.16, fps * 0.95],
+    [0.008, 4.5],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Third burst ring - creates more depth in the explosion
   const ring3BurstOpacity = interpolate(
     frame,
-    [fps * 0.25, fps * 0.35, fps * 0.7, fps * 1.1],
-    [0, 0.3, 0.1, 0],
+    [fps * 0.2, fps * 0.32, fps * 0.65, fps * 1.05],
+    [0, 0.28, 0.09, 0],
     { extrapolateRight: "clamp" }
   );
   const ring3BurstScale = interpolate(
     frame,
-    [fps * 0.25, fps * 1.1],
-    [0.01, 5.5],
+    [fps * 0.2, fps * 1.05],
+    [0.008, 5.2],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
@@ -332,14 +333,14 @@ const IntroScene = () => {
   // Horizontal reveal line - cinematic wipe effect, timed with light burst
   const revealLineWidth = interpolate(
     frame,
-    [fps * 0.15, fps * 0.6],
-    [0, 700],
+    [fps * 0.1, fps * 0.55],
+    [0, 720],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
   const revealLineOpacity = interpolate(
     frame,
-    [fps * 0.15, fps * 0.25, fps * 0.75, fps * 1.1],
-    [0, 0.55, 0.25, 0],
+    [fps * 0.1, fps * 0.2, fps * 0.7, fps * 1.0],
+    [0, 0.58, 0.22, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
@@ -598,31 +599,45 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Double shockwave effect when BRRR lands - more layered
+  // Triple shockwave effect when BRRR lands - maximum layered impact
   const shockwaveOpacity = interpolate(
     frame,
-    [(brrrDelay + 0.08) * fps, (brrrDelay + 0.18) * fps, (brrrDelay + 0.5) * fps],
-    [0, 0.55, 0],
+    [(brrrDelay + 0.06) * fps, (brrrDelay + 0.14) * fps, (brrrDelay + 0.48) * fps],
+    [0, 0.6, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const shockwaveScale = interpolate(
     frame,
-    [(brrrDelay + 0.08) * fps, (brrrDelay + 0.5) * fps],
-    [0.2, 3.2],
+    [(brrrDelay + 0.06) * fps, (brrrDelay + 0.48) * fps],
+    [0.18, 3.0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Second shockwave ring - staggered for depth
   const shockwave2Opacity = interpolate(
     frame,
-    [(brrrDelay + 0.14) * fps, (brrrDelay + 0.26) * fps, (brrrDelay + 0.6) * fps],
-    [0, 0.35, 0],
+    [(brrrDelay + 0.12) * fps, (brrrDelay + 0.22) * fps, (brrrDelay + 0.58) * fps],
+    [0, 0.38, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const shockwave2Scale = interpolate(
     frame,
-    [(brrrDelay + 0.14) * fps, (brrrDelay + 0.6) * fps],
-    [0.15, 4.0],
+    [(brrrDelay + 0.12) * fps, (brrrDelay + 0.58) * fps],
+    [0.14, 3.8],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Third shockwave ring - outermost ripple
+  const shockwave3Opacity = interpolate(
+    frame,
+    [(brrrDelay + 0.18) * fps, (brrrDelay + 0.3) * fps, (brrrDelay + 0.68) * fps],
+    [0, 0.22, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+  const shockwave3Scale = interpolate(
+    frame,
+    [(brrrDelay + 0.18) * fps, (brrrDelay + 0.68) * fps],
+    [0.12, 4.6],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
@@ -644,7 +659,7 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
     <AbsoluteFill style={{ opacity: sceneFade }}>
       <CinematicBackground accentColor="#00ff88" intensity={bgGlow} focusY={48} />
 
-      {/* Dual shockwave effect behind BRRR - layered impact */}
+      {/* Triple shockwave effect behind BRRR - maximum layered impact */}
       <AbsoluteFill
         style={{
           justifyContent: "center",
@@ -652,30 +667,42 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
           pointerEvents: "none",
         }}
       >
-        {/* Outer shockwave */}
+        {/* Outermost shockwave - subtle ripple */}
+        <div
+          style={{
+            width: 220,
+            height: 220,
+            borderRadius: "50%",
+            border: "1px solid rgba(0, 255, 136, 0.28)",
+            opacity: shockwave3Opacity,
+            transform: `scale(${shockwave3Scale})`,
+            position: "absolute",
+          }}
+        />
+        {/* Middle shockwave */}
         <div
           style={{
             width: 200,
             height: 200,
             borderRadius: "50%",
-            border: "1.5px solid rgba(0, 255, 136, 0.4)",
+            border: "1.5px solid rgba(0, 255, 136, 0.42)",
             opacity: shockwave2Opacity,
             transform: `scale(${shockwave2Scale})`,
             position: "absolute",
-            boxShadow: "0 0 20px rgba(0, 255, 136, 0.2)",
+            boxShadow: "0 0 18px rgba(0, 255, 136, 0.18)",
           }}
         />
-        {/* Inner shockwave - sharper */}
+        {/* Inner shockwave - sharper, most intense */}
         <div
           style={{
             width: 180,
             height: 180,
             borderRadius: "50%",
-            border: "2.5px solid rgba(0, 255, 136, 0.6)",
+            border: "2.5px solid rgba(0, 255, 136, 0.62)",
             opacity: shockwaveOpacity,
             transform: `scale(${shockwaveScale})`,
             position: "absolute",
-            boxShadow: "0 0 35px rgba(0, 255, 136, 0.35)",
+            boxShadow: "0 0 32px rgba(0, 255, 136, 0.38)",
           }}
         />
       </AbsoluteFill>
@@ -904,24 +931,24 @@ const StatCard: React.FC<{
   // Number "lands" with a satisfying scale pulse - THE celebration moment
   const landedPulse = hasLanded ? interpolate(
     frame,
-    [landTime - fps * 0.04, landTime + fps * 0.1, landTime + fps * 0.22],
-    [1, 1.08, 1],
+    [landTime - fps * 0.03, landTime + fps * 0.08, landTime + fps * 0.2],
+    [1, 1.1, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
   // Card gets a subtle lift and glow burst when number lands - more dramatic
   const landGlowBurst = hasLanded ? interpolate(
     frame,
-    [landTime, landTime + fps * 0.12, landTime + fps * 0.5],
-    [0, 1.3, 0.6],
+    [landTime, landTime + fps * 0.1, landTime + fps * 0.45],
+    [0, 1.5, 0.65],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   ) : 0;
 
   // Card subtle lift on landing
   const landLift = hasLanded ? interpolate(
     frame,
-    [landTime, landTime + fps * 0.12, landTime + fps * 0.35],
-    [0, -4, 0],
+    [landTime, landTime + fps * 0.1, landTime + fps * 0.32],
+    [0, -5, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 0;
 
@@ -954,19 +981,33 @@ const StatCard: React.FC<{
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   ) : 1;
 
-  // Landing celebration ring - expands outward
+  // Landing celebration ring - expands outward with dual layers
   const celebrationRingOpacity = hasLanded ? interpolate(
     frame,
-    [landTime, landTime + fps * 0.1, landTime + fps * 0.45],
-    [0.5, 0.25, 0],
+    [landTime, landTime + fps * 0.08, landTime + fps * 0.42],
+    [0.55, 0.28, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   ) : 0;
   const celebrationRingScale = hasLanded ? interpolate(
     frame,
-    [landTime, landTime + fps * 0.45],
-    [0.8, 2.2],
+    [landTime, landTime + fps * 0.42],
+    [0.75, 2.4],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  ) : 0.8;
+  ) : 0.75;
+
+  // Second celebration ring - staggered for depth
+  const celebrationRing2Opacity = hasLanded ? interpolate(
+    frame,
+    [landTime + fps * 0.05, landTime + fps * 0.15, landTime + fps * 0.52],
+    [0, 0.35, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : 0;
+  const celebrationRing2Scale = hasLanded ? interpolate(
+    frame,
+    [landTime + fps * 0.05, landTime + fps * 0.52],
+    [0.7, 2.8],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  ) : 0.7;
 
   // Label fades in after card settles
   const labelOpacity = interpolate(
@@ -991,7 +1032,21 @@ const StatCard: React.FC<{
         position: "relative",
       }}
     >
-      {/* Celebration ring on landing */}
+      {/* Celebration rings on landing - dual layer for depth */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          width: 160,
+          height: 160,
+          borderRadius: "50%",
+          border: `1.5px solid ${accentColor}`,
+          transform: `translate(-50%, -50%) scale(${celebrationRing2Scale})`,
+          opacity: celebrationRing2Opacity,
+          pointerEvents: "none",
+        }}
+      />
       <div
         style={{
           position: "absolute",
@@ -1004,6 +1059,7 @@ const StatCard: React.FC<{
           transform: `translate(-50%, -50%) scale(${celebrationRingScale})`,
           opacity: celebrationRingOpacity,
           pointerEvents: "none",
+          boxShadow: `0 0 12px ${accentColor}40`,
         }}
       />
       <div
@@ -1723,8 +1779,8 @@ export const StatsUpdate: React.FC<StatsUpdateProps> = ({
 }) => {
   const { fps } = useVideoConfig();
 
-  // Clean, professional fades (0.22s - smooth but purposeful)
-  const transitionFrames = Math.round(0.22 * fps);
+  // Clean, professional fades (0.2s - snappy but smooth)
+  const transitionFrames = Math.round(0.2 * fps);
 
   return (
     <TransitionSeries>
