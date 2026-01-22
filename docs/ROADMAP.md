@@ -10,8 +10,8 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $59,129+ Distributed (553 runs)
-**Status:** IN PROGRESS (59.1%)
+**Current:** $59,174+ Distributed (555 runs)
+**Status:** IN PROGRESS (59.2%)
 
 ### Active Systems
 
@@ -734,6 +734,9 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Pendle sPENDLE transition | vePENDLE abandonment, liquid staking shift, complexity failures | **COMPLETE** - Jan 22 research (MAJOR VALIDATION - $5.7B protocol admits complexity failed) |
 | Distribution frequency benchmark | Compare FED 2-min vs industry (GMX, Curve, Pendle, Hyperliquid, Aerodrome) | **COMPLETE** - Jan 22 research (FED is fastest real-yield distributor) |
 | Ethena USDe funding rate model | Funding rate vs LP fee yield, Oct 2025 crisis, leverage cascade risk | **COMPLETE** - Jan 22 research (MAJOR VALIDATION - FED's LP fees > funding rates) |
+| Hyperliquid airdrop success analysis | Points system, no-VC model, 97% buyback, staking tiers | **COMPLETE** - Jan 22 research (VALIDATES FED community-first approach) |
+| PENGU airdrop failure analysis | One-time distribution dumps, speculation dynamics | **COMPLETE** - Jan 22 research (VALIDATES FED continuous model) |
+| Airdrop fatigue & sustainable models | 88% crash rate, continuous rewards vs one-time | **COMPLETE** - Jan 22 research (MAJOR VALIDATION - FED is post-airdrop evolution) |
 
 ### Research Findings Summary (Jan 22, 2026)
 
@@ -989,6 +992,21 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - **Recommendation:** DO NOT change to rebasing or price appreciation model
 - **QE4 Consideration:** Research yield boost mechanic (OUSD's non-rebasing wallet bonus model)
 - See TOKENOMICS-RESEARCH.md for full stablecoin yield analysis
+
+**Hyperliquid Airdrop & Continuous Distribution Analysis (Jan 22, 2026):**
+- Hyperliquid's Genesis Event: 310M HYPE (31% of supply) to 94K users, +500% post-airdrop rally
+- **Success factors:** Zero VC allocation, skill-based points, product quality, 97% fee buyback
+- **PENGU failure:** -50% post-airdrop, -48% NFT floor in 24h, speculation-driven dump
+- **Industry data:** 88% of airdropped tokens crash within 3 months
+- **FED positioning:** "Continuous distribution is the airdrop that never ends - and never dumps"
+- FED advantages over Hyperliquid model:
+  1. No points farming required (simpler)
+  2. No staking required (zero friction)
+  3. Direct USD1 payments (more tangible than buybacks)
+  4. Same community-first ethos (0% VC for both)
+- **MAJOR VALIDATION:** Industry trend toward continuous rewards validates FED's 2-minute model
+- **Recommendation:** FED represents post-airdrop evolution - maintain continuous distribution as core differentiator
+- See TOKENOMICS-RESEARCH.md for full Hyperliquid/PENGU analysis
 
 ---
 
