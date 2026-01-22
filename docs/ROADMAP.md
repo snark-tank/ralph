@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $52,295+ Distributed
+**Current:** $52,525+ Distributed (401 runs)
 **Status:** IN PROGRESS
 
 ### Active Systems
@@ -198,6 +198,18 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - FED holders expect immediate gratification; breaking this expectation would harm trust
 - Our 100% distribution model is more generous than Gains' 54% burn allocation
 - **Recommendation:** Keep direct USD1 distribution; buyback remains discretionary during dips
+
+### Inflationary Staking / Rebasing (OlympusDAO OHM model)
+- **Why Rejected:** OHM's (3,3) model offered 7,000%+ APY through token emissions (minting new tokens)
+- **2026-01-22 Postmortem Research:**
+  - OHM crashed 98%+ from peak ($1,415 → $7.54)
+  - APY was funded by inflation, not real revenue - Ponzi-like dynamics
+  - Forks (TIME, KLIMA) collapsed even harder (-97% to -99.5%)
+  - Users who leveraged against staked positions caused cascading liquidations ($150M in 30 days)
+  - Token price wildly detached from treasury backing value
+- **FED's Superiority:** Real yield from LP fees, not inflationary emissions
+- **Key Lesson:** "A 5% real yield beats a 7,000% inflationary yield every time"
+- **Confidence:** HIGH that FED's fundamentals are sound vs. OHM-style models
 
 ---
 
