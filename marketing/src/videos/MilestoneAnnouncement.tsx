@@ -108,252 +108,261 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Phase 0: Total darkness with subtle flicker before reveal - builds anticipation
-  const flicker = frame < fps * 0.1 ? 0 :
-    frame < fps * 0.12 ? 0.1 :
-    frame < fps * 0.14 ? 0.03 :
-    frame < fps * 0.16 ? 0.15 :
-    frame < fps * 0.18 ? 0.05 : 1;
+  // Phase 0: Total darkness with precise flicker timing - builds maximum anticipation
+  const flicker = frame < fps * 0.08 ? 0 :
+    frame < fps * 0.10 ? 0.08 :
+    frame < fps * 0.12 ? 0.02 :
+    frame < fps * 0.14 ? 0.12 :
+    frame < fps * 0.16 ? 0.03 :
+    frame < fps * 0.18 ? 0.18 : 1;
 
   const darknessFade = interpolate(
     frame,
-    [fps * 0.18, fps * 0.45],
+    [fps * 0.18, fps * 0.48],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) * (frame < fps * 0.18 ? flicker : 1);
 
-  // Initial light burst - a single bright point that expands with more drama
+  // Initial light burst - a brilliant point that expands cinematically
   const burstOpacity = interpolate(
     frame,
-    [fps * 0.1, fps * 0.18, fps * 0.55, fps * 0.85],
-    [0, 0.75, 0.25, 0],
+    [fps * 0.08, fps * 0.16, fps * 0.5, fps * 0.8],
+    [0, 0.85, 0.3, 0],
     { extrapolateRight: "clamp" }
   );
   const burstScale = interpolate(
     frame,
-    [fps * 0.1, fps * 0.8],
-    [0.03, 3.5],
+    [fps * 0.08, fps * 0.75],
+    [0.02, 4.0],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Secondary outer burst ring for depth
+  // Secondary outer burst ring - layered depth
   const ring2BurstOpacity = interpolate(
     frame,
-    [fps * 0.14, fps * 0.24, fps * 0.6, fps * 0.9],
-    [0, 0.4, 0.15, 0],
+    [fps * 0.12, fps * 0.22, fps * 0.55, fps * 0.85],
+    [0, 0.5, 0.18, 0],
     { extrapolateRight: "clamp" }
   );
   const ring2BurstScale = interpolate(
     frame,
-    [fps * 0.14, fps * 0.9],
-    [0.02, 4.2],
+    [fps * 0.12, fps * 0.85],
+    [0.01, 4.8],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Horizontal reveal line - cinematic wipe effect
   const revealLineWidth = interpolate(
     frame,
-    [fps * 0.08, fps * 0.5],
-    [0, 620],
+    [fps * 0.06, fps * 0.45],
+    [0, 680],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
   const revealLineOpacity = interpolate(
     frame,
-    [fps * 0.08, fps * 0.16, fps * 0.7, fps * 1.0],
-    [0, 0.5, 0.22, 0],
+    [fps * 0.06, fps * 0.14, fps * 0.6, fps * 0.9],
+    [0, 0.6, 0.25, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  // Pre-title - "APPROACHING" sets the tension
-  const preDelay = 0.48;
+  // Pre-title - "APPROACHING MILESTONE" sets the tension
+  const preDelay = 0.42;
   const preOpacity = interpolate(
     frame,
-    [preDelay * fps, (preDelay + 0.25) * fps],
+    [preDelay * fps, (preDelay + 0.22) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const preY = interpolate(
     frame,
-    [preDelay * fps, (preDelay + 0.35) * fps],
-    [14, 0],
+    [preDelay * fps, (preDelay + 0.32) * fps],
+    [16, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Pulsing indicator dot - adds life with ring expansion
-  const dotPulse = frame > fps * 0.68 ? interpolate(
-    (frame - fps * 0.68) % (fps * 1.5),
-    [0, fps * 0.35, fps * 1.5],
+  // Pulsing indicator dot - refined timing with ring expansion
+  const dotPulse = frame > fps * 0.65 ? interpolate(
+    (frame - fps * 0.65) % (fps * 1.4),
+    [0, fps * 0.32, fps * 1.4],
     [0.5, 1, 0.5],
-    { extrapolateLeft: "clamp" }
-  ) : interpolate(frame, [preDelay * fps, fps * 0.68], [0, 0.5], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+    { extrapolateLeft: "clamp", easing: Easing.inOut(Easing.sin) }
+  ) : interpolate(frame, [preDelay * fps, fps * 0.65], [0, 0.5], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
-  // Ring pulse around dot
-  const dotRingScale = frame > fps * 0.68 ? interpolate(
-    (frame - fps * 0.68) % (fps * 1.5),
-    [0, fps * 0.35, fps * 1.5],
-    [1, 2.0, 1],
+  // Ring pulse around dot - sophisticated expansion
+  const dotRingScale = frame > fps * 0.65 ? interpolate(
+    (frame - fps * 0.65) % (fps * 1.4),
+    [0, fps * 0.32, fps * 1.4],
+    [1, 2.2, 1],
     { extrapolateLeft: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
-  const dotRingOpacity = frame > fps * 0.68 ? interpolate(
-    (frame - fps * 0.68) % (fps * 1.5),
-    [0, fps * 0.3, fps * 1.5],
-    [0.55, 0, 0],
+  const dotRingOpacity = frame > fps * 0.65 ? interpolate(
+    (frame - fps * 0.65) % (fps * 1.4),
+    [0, fps * 0.28, fps * 1.4],
+    [0.6, 0, 0],
     { extrapolateLeft: "clamp" }
   ) : 0;
 
   // Main milestone "QE2" - THE hero moment with commanding weight
-  const heroDelay = 0.85;
+  const heroDelay = 0.78;
   const heroProgress = spring({
     frame: frame - heroDelay * fps,
     fps,
-    config: { damping: 180, stiffness: 45, mass: 1.6 },
+    config: { damping: 200, stiffness: 40, mass: 1.8 },
   });
   const heroOpacity = interpolate(
     frame,
-    [heroDelay * fps, (heroDelay + 0.3) * fps],
+    [heroDelay * fps, (heroDelay + 0.28) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const heroY = interpolate(heroProgress, [0, 1], [55, 0]);
-  const heroScale = interpolate(heroProgress, [0, 1], [0.88, 1]);
+  const heroY = interpolate(heroProgress, [0, 1], [60, 0]);
+  const heroScale = interpolate(heroProgress, [0, 1], [0.85, 1]);
 
-  // Q and E animate separately from 2 for visual interest
-  const qeDelay = heroDelay;
-  const numDelay = heroDelay + 0.12;
+  // Q and E animate separately from 2 for visual interest - the "2" pops
+  const numDelay = heroDelay + 0.14;
   const numProgress = spring({
     frame: frame - numDelay * fps,
     fps,
-    config: { damping: 160, stiffness: 100, mass: 1.2 },
+    config: { damping: 150, stiffness: 120, mass: 1.1 },
   });
   const numOpacity = interpolate(
     frame,
-    [numDelay * fps, (numDelay + 0.25) * fps],
+    [numDelay * fps, (numDelay + 0.22) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const numScale = interpolate(numProgress, [0, 1], [0.8, 1]);
+  const numScale = interpolate(numProgress, [0, 1], [0.75, 1]);
+
+  // "2" lands with a satisfying scale pulse
+  const numLandTime = (numDelay + 0.35) * fps;
+  const numLandPulse = frame > numLandTime ? interpolate(
+    frame,
+    [numLandTime, numLandTime + fps * 0.08, numLandTime + fps * 0.22],
+    [1, 1.08, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  ) : 1;
 
   // Glow builds majestically after text lands - more dramatic intensity
   const glowIntensity = interpolate(
     frame,
-    [fps * 1.3, fps * 2.2, fps * 3.2],
-    [0, 95, 75],
+    [fps * 1.2, fps * 2.0, fps * 3.0],
+    [0, 100, 80],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Dual concentric rings expanding from milestone - creates depth
-  const ring1Delay = 0.95;
+  const ring1Delay = 0.9;
   const ring1Opacity = interpolate(
     frame,
-    [ring1Delay * fps, (ring1Delay + 0.18) * fps, fps * 2.0, fps * 2.5],
-    [0, 0.22, 0.12, 0],
+    [ring1Delay * fps, (ring1Delay + 0.16) * fps, fps * 1.9, fps * 2.4],
+    [0, 0.25, 0.12, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const ring1Scale = interpolate(
     frame,
-    [ring1Delay * fps, fps * 2.5],
-    [0.55, 2.6],
+    [ring1Delay * fps, fps * 2.4],
+    [0.5, 2.8],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  const ring2Delay = 1.15;
+  const ring2Delay = 1.08;
   const ring2Opacity = interpolate(
     frame,
-    [ring2Delay * fps, (ring2Delay + 0.18) * fps, fps * 2.3, fps * 2.8],
-    [0, 0.16, 0.08, 0],
+    [ring2Delay * fps, (ring2Delay + 0.16) * fps, fps * 2.2, fps * 2.7],
+    [0, 0.18, 0.08, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const ring2Scale = interpolate(
     frame,
-    [ring2Delay * fps, fps * 2.8],
-    [0.45, 3.2],
+    [ring2Delay * fps, fps * 2.7],
+    [0.4, 3.4],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Background glow intensifies with reveal - energy builds
   const bgIntensity = interpolate(
     frame,
-    [fps * 0.45, fps * 2.2],
-    [0.015, 0.07],
+    [fps * 0.4, fps * 2.0],
+    [0.012, 0.075],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Percentage badge - appears dramatically after milestone with celebration energy
-  const percentDelay = 1.6;
+  const percentDelay = 1.5;
   const percentProgress = spring({
     frame: frame - percentDelay * fps,
     fps,
-    config: { damping: 140, stiffness: 150, mass: 0.9 },
+    config: { damping: 130, stiffness: 180, mass: 0.85 },
   });
   const percentOpacity = interpolate(
     frame,
-    [percentDelay * fps, (percentDelay + 0.18) * fps],
+    [percentDelay * fps, (percentDelay + 0.16) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const percentScale = interpolate(percentProgress, [0, 1], [0.7, 1]);
+  const percentScale = interpolate(percentProgress, [0, 1], [0.65, 1]);
 
-  // Progress number counts up with satisfying quintic ease-out
+  // Progress number counts up with luxurious quintic ease-out
   const displayProgress = interpolate(
     frame,
-    [(percentDelay + 0.1) * fps, (percentDelay + 0.75) * fps],
+    [(percentDelay + 0.08) * fps, (percentDelay + 0.65) * fps],
     [0, progress],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: (t) => 1 - Math.pow(1 - t, 5) }
   );
 
   // Badge "lands" with a satisfying scale pulse when number finishes
-  const badgeLandTime = (percentDelay + 0.75) * fps;
+  const badgeLandTime = (percentDelay + 0.65) * fps;
   const hasLanded = displayProgress >= progress - 1;
   const badgeLandPulse = hasLanded ? interpolate(
     frame,
-    [badgeLandTime - fps * 0.04, badgeLandTime + fps * 0.1, badgeLandTime + fps * 0.28],
-    [1, 1.15, 1],
+    [badgeLandTime - fps * 0.03, badgeLandTime + fps * 0.08, badgeLandTime + fps * 0.24],
+    [1, 1.18, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
-  // Badge glow bursts on landing then settles
+  // Badge glow bursts on landing then settles - more dramatic
   const percentGlow = hasLanded ? interpolate(
     frame,
-    [badgeLandTime - fps * 0.15, badgeLandTime, badgeLandTime + fps * 0.12, badgeLandTime + fps * 0.45],
-    [0.3, 0.6, 1.4, 0.9],
+    [badgeLandTime - fps * 0.12, badgeLandTime, badgeLandTime + fps * 0.1, badgeLandTime + fps * 0.4],
+    [0.3, 0.7, 1.5, 0.95],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : interpolate(
     frame,
-    [(percentDelay + 0.25) * fps, (percentDelay + 0.7) * fps],
-    [0, 0.6],
+    [(percentDelay + 0.2) * fps, (percentDelay + 0.6) * fps],
+    [0, 0.7],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Underline accent draws elegantly
+  // Underline accent draws elegantly - tighter timing
   const underlineWidth = interpolate(
     frame,
-    [fps * 2.1, fps * 2.65],
-    [0, 280],
+    [fps * 2.0, fps * 2.5],
+    [0, 300],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
   const underlineOpacity = interpolate(
     frame,
-    [fps * 2.1, fps * 2.4],
-    [0, 0.6],
+    [fps * 2.0, fps * 2.3],
+    [0, 0.65],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const underlineGlow = interpolate(
     frame,
-    [fps * 2.3, fps * 2.8],
+    [fps * 2.2, fps * 2.7],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Tagline - final beat of anticipation
+  // Tagline - final beat of anticipation - tighter timing
   const taglineOpacity = interpolate(
     frame,
-    [fps * 2.55, fps * 2.9],
+    [fps * 2.45, fps * 2.75],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const taglineY = interpolate(
     frame,
-    [fps * 2.55, fps * 3.0],
+    [fps * 2.45, fps * 2.85],
     [14, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
@@ -361,10 +370,39 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
   // Decorative side lines - frame the tagline
   const sideLineWidth = interpolate(
     frame,
-    [fps * 2.7, fps * 3.1],
-    [0, 65],
+    [fps * 2.6, fps * 3.0],
+    [0, 70],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
+
+  // Screen shake effect when the "2" lands - adds weight and impact
+  const shakeTime = numLandTime;
+  const shakeX = frame > shakeTime && frame < shakeTime + fps * 0.18 ? interpolate(
+    frame,
+    [shakeTime, shakeTime + fps * 0.04, shakeTime + fps * 0.08, shakeTime + fps * 0.12, shakeTime + fps * 0.18],
+    [0, 3, -2, 1, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : 0;
+  const shakeY = frame > shakeTime && frame < shakeTime + fps * 0.18 ? interpolate(
+    frame,
+    [shakeTime, shakeTime + fps * 0.04, shakeTime + fps * 0.08, shakeTime + fps * 0.12, shakeTime + fps * 0.18],
+    [0, -2, 1, -0.5, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : 0;
+
+  // Celebration ring on badge land - adds celebration energy
+  const badgeRingOpacity = hasLanded ? interpolate(
+    frame,
+    [badgeLandTime, badgeLandTime + fps * 0.1, badgeLandTime + fps * 0.45],
+    [0.6, 0.25, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : 0;
+  const badgeRingScale = hasLanded ? interpolate(
+    frame,
+    [badgeLandTime, badgeLandTime + fps * 0.45],
+    [0.8, 2.5],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  ) : 0.8;
 
   return (
     <AbsoluteFill>
@@ -449,13 +487,14 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
         />
       </AbsoluteFill>
 
-      {/* Main content container */}
+      {/* Main content container with subtle shake on landing */}
       <AbsoluteFill
         style={{
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
           opacity: darknessFade,
+          transform: `translate(${shakeX}px, ${shakeY}px)`,
         }}
       >
         {/* Pre-title - builds tension */}
@@ -529,36 +568,36 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
           >
             <span
               style={{
-                fontSize: 230,
+                fontSize: 240,
                 fontWeight: 900,
                 color: "#ffffff",
                 fontFamily: "system-ui, -apple-system, sans-serif",
-                letterSpacing: -10,
-                lineHeight: 0.88,
-                textShadow: "0 14px 70px rgba(0, 0, 0, 0.55)",
+                letterSpacing: -12,
+                lineHeight: 0.85,
+                textShadow: "0 16px 80px rgba(0, 0, 0, 0.55)",
               }}
             >
               QE
             </span>
           </div>
-          {/* 2 part - slightly delayed for visual interest */}
+          {/* 2 part - slightly delayed with satisfying land pulse */}
           <div
             style={{
               opacity: numOpacity,
-              transform: `scale(${numScale})`,
-              filter: `drop-shadow(0 0 ${glowIntensity * 0.8}px rgba(0, 255, 136, 0.45))`,
-              marginLeft: -8,
+              transform: `scale(${numScale * numLandPulse})`,
+              filter: `drop-shadow(0 0 ${glowIntensity * 0.85}px rgba(0, 255, 136, 0.5))`,
+              marginLeft: -10,
             }}
           >
             <span
               style={{
-                fontSize: 230,
+                fontSize: 240,
                 fontWeight: 900,
                 color: "#00ff88",
                 fontFamily: "system-ui, -apple-system, sans-serif",
-                letterSpacing: -10,
-                lineHeight: 0.88,
-                textShadow: `0 14px 70px rgba(0, 0, 0, 0.55), 0 0 ${glowIntensity * 0.4}px rgba(0, 255, 136, 0.4)`,
+                letterSpacing: -12,
+                lineHeight: 0.85,
+                textShadow: `0 16px 80px rgba(0, 0, 0, 0.55), 0 0 ${glowIntensity * 0.45}px rgba(0, 255, 136, 0.45)`,
               }}
             >
               2
@@ -575,6 +614,21 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
               transform: `scale(${percentScale * badgeLandPulse})`,
             }}
           >
+            {/* Celebration ring on landing */}
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                width: 80,
+                height: 80,
+                borderRadius: "50%",
+                border: "2px solid rgba(0, 255, 136, 0.6)",
+                transform: `translate(-50%, -50%) scale(${badgeRingScale})`,
+                opacity: badgeRingOpacity,
+                pointerEvents: "none",
+              }}
+            />
             <div
               style={{
                 padding: "14px 22px",
@@ -745,63 +799,63 @@ const ProgressScene: React.FC<{
   // Scene entrance with subtle scale
   const sceneOpacity = interpolate(
     frame,
-    [0, fps * 0.1],
+    [0, fps * 0.08],
     [0, 1],
     { extrapolateRight: "clamp" }
   );
   const sceneScale = interpolate(
     frame,
-    [0, fps * 0.16],
-    [0.988, 1],
+    [0, fps * 0.14],
+    [0.985, 1],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Header with decorative lines - pulsing indicator
   const headerOpacity = interpolate(
     frame,
-    [fps * 0.04, fps * 0.25],
+    [fps * 0.03, fps * 0.22],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const headerY = interpolate(
     frame,
-    [fps * 0.04, fps * 0.32],
-    [12, 0],
+    [fps * 0.03, fps * 0.28],
+    [14, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
   const lineWidth = interpolate(
     frame,
-    [fps * 0.05, fps * 0.42],
-    [0, 60],
+    [fps * 0.04, fps * 0.38],
+    [0, 65],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Live indicator pulse - refined timing
-  const livePulse = frame > fps * 0.32 ? interpolate(
-    (frame - fps * 0.32) % (fps * 1.8),
-    [0, fps * 0.4, fps * 1.8],
+  const livePulse = frame > fps * 0.28 ? interpolate(
+    (frame - fps * 0.28) % (fps * 1.6),
+    [0, fps * 0.35, fps * 1.6],
     [0.5, 1, 0.5],
     { easing: Easing.inOut(Easing.sin) }
-  ) : interpolate(frame, [fps * 0.08, fps * 0.32], [0, 0.5], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  ) : interpolate(frame, [fps * 0.06, fps * 0.28], [0, 0.5], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
   // Hero percentage - dramatic entrance with weight
-  const percentDelay = 0.16;
+  const percentDelay = 0.12;
   const percentProgress = spring({
     frame: frame - percentDelay * fps,
     fps,
-    config: { damping: 180, stiffness: 60, mass: 1.25 },
+    config: { damping: 200, stiffness: 55, mass: 1.3 },
   });
   const percentOpacity = interpolate(
     frame,
-    [percentDelay * fps, (percentDelay + 0.2) * fps],
+    [percentDelay * fps, (percentDelay + 0.18) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  // Percentage counts up with luxurious quintic ease-out
+  // Percentage counts up with luxurious quintic ease-out - tighter timing
   const displayPercent = interpolate(
     frame,
-    [fps * 0.38, fps * 2.5],
+    [fps * 0.32, fps * 2.3],
     [0, progress],
     {
       extrapolateLeft: "clamp",
@@ -812,46 +866,46 @@ const ProgressScene: React.FC<{
 
   // Has the percentage finished counting?
   const hasFinishedCounting = displayPercent >= progress - 0.5;
-  const countEndTime = fps * 2.5;
+  const countEndTime = fps * 2.3;
 
   // Percentage glow builds as number climbs, then BURSTS when landing
   const percentGlow = hasFinishedCounting ? interpolate(
     frame,
-    [countEndTime - fps * 0.25, countEndTime, countEndTime + fps * 0.15, countEndTime + fps * 0.55],
-    [30, 40, 70, 45],
+    [countEndTime - fps * 0.2, countEndTime, countEndTime + fps * 0.12, countEndTime + fps * 0.5],
+    [35, 45, 80, 50],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : interpolate(
     frame,
-    [fps * 1.0, fps * 2.4],
-    [0, 40],
+    [fps * 0.9, fps * 2.2],
+    [0, 45],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Percentage scale pulse on landing - more celebratory
   const percentLandPulse = hasFinishedCounting ? interpolate(
     frame,
-    [countEndTime - fps * 0.04, countEndTime + fps * 0.12, countEndTime + fps * 0.32],
-    [1, 1.06, 1],
+    [countEndTime - fps * 0.03, countEndTime + fps * 0.1, countEndTime + fps * 0.28],
+    [1, 1.08, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
   // Percentage symbol animates slightly separately for visual interest
   const percentSymbolGlow = hasFinishedCounting ? interpolate(
     frame,
-    [countEndTime, countEndTime + fps * 0.18, countEndTime + fps * 0.5],
-    [0.5, 1.2, 0.8],
+    [countEndTime, countEndTime + fps * 0.15, countEndTime + fps * 0.45],
+    [0.5, 1.3, 0.85],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : interpolate(
     frame,
-    [fps * 1.5, fps * 2.4],
-    [0.3, 0.6],
+    [fps * 1.3, fps * 2.2],
+    [0.3, 0.65],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  // Progress bar - smooth fill with energy
+  // Progress bar - smooth fill with energy - tighter timing
   const barProgress = interpolate(
     frame,
-    [fps * 0.5, fps * 2.7],
+    [fps * 0.4, fps * 2.5],
     [0, progress],
     {
       extrapolateLeft: "clamp",
@@ -863,53 +917,53 @@ const ProgressScene: React.FC<{
   // Bar glow intensity builds with fill - more dramatic
   const barGlow = interpolate(
     frame,
-    [fps * 0.7, fps * 2.4],
-    [0, 1.2],
+    [fps * 0.6, fps * 2.2],
+    [0, 1.4],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Leading edge particle effect - adds energy
-  const edgePulse = frame > fps * 0.7 ? interpolate(
-    (frame - fps * 0.7) % (fps * 0.5),
-    [0, fps * 0.12, fps * 0.5],
+  const edgePulse = frame > fps * 0.6 ? interpolate(
+    (frame - fps * 0.6) % (fps * 0.45),
+    [0, fps * 0.1, fps * 0.45],
     [0.7, 1, 0.7]
   ) : 0.7;
 
-  // Multiple expanding ring effects for more energy
-  const ringCycle1 = (frame - fps * 0.7) % (fps * 0.7);
-  const ringCycle2 = (frame - fps * 0.7 + fps * 0.35) % (fps * 0.7);
+  // Multiple expanding ring effects for more energy - faster cycles
+  const ringCycle1 = (frame - fps * 0.6) % (fps * 0.6);
+  const ringCycle2 = (frame - fps * 0.6 + fps * 0.3) % (fps * 0.6);
 
   const ringOpacity1 = barProgress > 10 ? interpolate(
     ringCycle1,
-    [0, fps * 0.1, fps * 0.5],
-    [0.6, 0.22, 0],
+    [0, fps * 0.08, fps * 0.45],
+    [0.7, 0.25, 0],
     { extrapolateRight: "clamp" }
   ) : 0;
   const ringScale1 = interpolate(
     ringCycle1,
-    [0, fps * 0.5],
-    [1, 3.0],
+    [0, fps * 0.45],
+    [1, 3.2],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   const ringOpacity2 = barProgress > 15 ? interpolate(
     ringCycle2,
-    [0, fps * 0.1, fps * 0.5],
-    [0.4, 0.14, 0],
+    [0, fps * 0.08, fps * 0.45],
+    [0.5, 0.16, 0],
     { extrapolateRight: "clamp" }
   ) : 0;
   const ringScale2 = interpolate(
     ringCycle2,
-    [0, fps * 0.5],
-    [1, 2.4],
+    [0, fps * 0.45],
+    [1, 2.6],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Current amount counter
+  // Current amount counter - tighter timing
   const currentValue = parseFloat(current.replace(/[$,]/g, "")) || 0;
   const displayCurrent = interpolate(
     frame,
-    [fps * 0.5, fps * 2.5],
+    [fps * 0.4, fps * 2.3],
     [0, currentValue],
     {
       extrapolateLeft: "clamp",
@@ -918,79 +972,79 @@ const ProgressScene: React.FC<{
     }
   );
 
-  // Stats row with stagger - slide up with bounce
+  // Stats row with stagger - slide up with bounce - faster entrances
   const stat1Progress = spring({
-    frame: frame - fps * 0.65,
+    frame: frame - fps * 0.55,
     fps,
-    config: { damping: 200, stiffness: 95 },
+    config: { damping: 190, stiffness: 100 },
   });
   const stat1Opacity = interpolate(
     frame,
-    [fps * 0.65, fps * 0.9],
+    [fps * 0.55, fps * 0.78],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const stat1Y = interpolate(stat1Progress, [0, 1], [20, 0]);
+  const stat1Y = interpolate(stat1Progress, [0, 1], [22, 0]);
 
   const stat2Progress = spring({
-    frame: frame - fps * 0.8,
+    frame: frame - fps * 0.7,
     fps,
-    config: { damping: 200, stiffness: 95 },
+    config: { damping: 190, stiffness: 100 },
   });
   const stat2Opacity = interpolate(
     frame,
-    [fps * 0.8, fps * 1.05],
+    [fps * 0.7, fps * 0.93],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const stat2Y = interpolate(stat2Progress, [0, 1], [20, 0]);
+  const stat2Y = interpolate(stat2Progress, [0, 1], [22, 0]);
 
   // Current value glow intensifies and BURSTS on landing
   const currentHasLanded = displayCurrent >= currentValue - 100;
   const currentGlow = currentHasLanded ? interpolate(
     frame,
-    [fps * 2.45, fps * 2.55, fps * 2.75, fps * 3.1],
-    [18, 30, 45, 25],
+    [fps * 2.25, fps * 2.35, fps * 2.55, fps * 2.9],
+    [20, 35, 55, 30],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : interpolate(
     frame,
-    [fps * 1.5, fps * 2.4],
-    [0, 18],
+    [fps * 1.3, fps * 2.2],
+    [0, 22],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Current value scale pulse on landing - more satisfying
   const currentLandPulse = currentHasLanded ? interpolate(
     frame,
-    [fps * 2.48, fps * 2.65, fps * 2.88],
-    [1, 1.045, 1],
+    [fps * 2.28, fps * 2.45, fps * 2.68],
+    [1, 1.055, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
   // Background glow intensifies as numbers climb
   const bgIntensity = interpolate(
     frame,
-    [fps * 0.35, fps * 2.2],
-    [0.02, 0.065],
+    [fps * 0.3, fps * 2.0],
+    [0.02, 0.07],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Progress bar shimmer effect - more dramatic sweep
-  const shimmerDelay = 1.1;
+  // Progress bar shimmer effect - more dramatic sweep - tighter timing
+  const shimmerDelay = 0.9;
   const shimmerProgress = interpolate(
     frame,
-    [shimmerDelay * fps, (shimmerDelay + 1.4) * fps],
+    [shimmerDelay * fps, (shimmerDelay + 1.2) * fps],
     [-25, 125],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.cubic) }
   );
   const shimmerOpacity = interpolate(
     frame,
-    [shimmerDelay * fps, (shimmerDelay + 0.25) * fps, (shimmerDelay + 1.1) * fps, (shimmerDelay + 1.4) * fps],
-    [0, 0.25, 0.25, 0],
+    [shimmerDelay * fps, (shimmerDelay + 0.2) * fps, (shimmerDelay + 0.95) * fps, (shimmerDelay + 1.2) * fps],
+    [0, 0.3, 0.3, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  const barWidthPx = 840; // Approximate width for particle positioning
+  const barWidthPx = 860; // Approximate width for particle positioning
 
   return (
     <AbsoluteFill style={{ opacity: sceneOpacity }}>
@@ -1071,33 +1125,33 @@ const ProgressScene: React.FC<{
             style={{
               transform: `scale(${percentProgress * percentLandPulse})`,
               opacity: percentOpacity,
-              marginBottom: 48,
-              filter: `drop-shadow(0 0 ${percentGlow}px rgba(0, 255, 136, 0.38))`,
+              marginBottom: 45,
+              filter: `drop-shadow(0 0 ${percentGlow}px rgba(0, 255, 136, 0.42))`,
               display: "flex",
               alignItems: "baseline",
             }}
           >
             <span
               style={{
-                fontSize: 180,
+                fontSize: 195,
                 fontWeight: 900,
                 color: "#ffffff",
                 fontFamily: "system-ui, -apple-system, sans-serif",
-                letterSpacing: -10,
+                letterSpacing: -12,
                 lineHeight: 1,
-                textShadow: "0 10px 55px rgba(0, 0, 0, 0.45)",
+                textShadow: "0 12px 60px rgba(0, 0, 0, 0.5)",
               }}
             >
               {Math.round(displayPercent)}
             </span>
             <span
               style={{
-                fontSize: 90,
+                fontSize: 95,
                 fontWeight: 900,
                 color: "#00ff88",
                 fontFamily: "system-ui, -apple-system, sans-serif",
-                textShadow: `0 0 ${percentGlow * percentSymbolGlow}px rgba(0, 255, 136, 0.5)`,
-                marginLeft: 4,
+                textShadow: `0 0 ${percentGlow * percentSymbolGlow}px rgba(0, 255, 136, 0.55)`,
+                marginLeft: 5,
               }}
             >
               %
@@ -1116,13 +1170,13 @@ const ProgressScene: React.FC<{
             <div
               style={{
                 width: "100%",
-                height: 16,
-                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.018) 0%, rgba(255, 255, 255, 0.04) 100%)",
-                borderRadius: 8,
+                height: 18,
+                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.015) 0%, rgba(255, 255, 255, 0.038) 100%)",
+                borderRadius: 9,
                 overflow: "visible",
                 position: "relative",
-                border: "1px solid rgba(255, 255, 255, 0.035)",
-                boxShadow: "inset 0 2px 10px rgba(0, 0, 0, 0.35)",
+                border: "1px solid rgba(255, 255, 255, 0.04)",
+                boxShadow: "inset 0 2px 12px rgba(0, 0, 0, 0.4)",
               }}
             >
               {/* Fill - rich gradient with inner glow */}
@@ -1130,13 +1184,13 @@ const ProgressScene: React.FC<{
                 style={{
                   width: `${barProgress}%`,
                   height: "100%",
-                  background: "linear-gradient(90deg, rgba(0,255,136,0.3) 0%, rgba(0,255,136,0.6) 30%, #00ff88 75%, #00ffaa 100%)",
-                  borderRadius: 8,
+                  background: "linear-gradient(90deg, rgba(0,255,136,0.25) 0%, rgba(0,255,136,0.55) 25%, #00ff88 65%, #00ffcc 90%, #00ffdd 100%)",
+                  borderRadius: 9,
                   boxShadow: `
-                    0 0 ${32 * barGlow}px rgba(0, 255, 136, 0.55),
-                    0 0 ${16 * barGlow}px rgba(0, 255, 136, 0.35),
-                    inset 0 2px 0 rgba(255, 255, 255, 0.2),
-                    inset 0 -1px 0 rgba(0, 0, 0, 0.12)
+                    0 0 ${38 * barGlow}px rgba(0, 255, 136, 0.6),
+                    0 0 ${18 * barGlow}px rgba(0, 255, 136, 0.4),
+                    inset 0 2px 0 rgba(255, 255, 255, 0.25),
+                    inset 0 -1px 0 rgba(0, 0, 0, 0.1)
                   `,
                   position: "relative",
                   overflow: "hidden",
@@ -1238,7 +1292,7 @@ const ProgressScene: React.FC<{
               display: "flex",
               justifyContent: "space-between",
               width: "100%",
-              padding: "0 20px",
+              padding: "0 25px",
             }}
           >
             <div
@@ -1250,12 +1304,12 @@ const ProgressScene: React.FC<{
             >
               <div
                 style={{
-                  fontSize: 10,
-                  color: "#3a3a3a",
+                  fontSize: 11,
+                  color: "#404040",
                   fontFamily: "system-ui, -apple-system, sans-serif",
-                  letterSpacing: 5,
+                  letterSpacing: 5.5,
                   textTransform: "uppercase",
-                  marginBottom: 12,
+                  marginBottom: 14,
                   fontWeight: 600,
                 }}
               >
@@ -1263,12 +1317,12 @@ const ProgressScene: React.FC<{
               </div>
               <div
                 style={{
-                  fontSize: 56,
+                  fontSize: 62,
                   fontWeight: 900,
                   color: "#00ff88",
                   fontFamily: "system-ui, -apple-system, sans-serif",
-                  letterSpacing: -2.5,
-                  filter: `drop-shadow(0 0 ${currentGlow}px rgba(0, 255, 136, 0.5))`,
+                  letterSpacing: -3,
+                  filter: `drop-shadow(0 0 ${currentGlow}px rgba(0, 255, 136, 0.55))`,
                   transform: `scale(${currentLandPulse})`,
                   transformOrigin: "left center",
                 }}
@@ -1286,12 +1340,12 @@ const ProgressScene: React.FC<{
             >
               <div
                 style={{
-                  fontSize: 10,
-                  color: "#3a3a3a",
+                  fontSize: 11,
+                  color: "#404040",
                   fontFamily: "system-ui, -apple-system, sans-serif",
-                  letterSpacing: 5,
+                  letterSpacing: 5.5,
                   textTransform: "uppercase",
-                  marginBottom: 12,
+                  marginBottom: 14,
                   fontWeight: 600,
                 }}
               >
@@ -1299,11 +1353,11 @@ const ProgressScene: React.FC<{
               </div>
               <div
                 style={{
-                  fontSize: 56,
+                  fontSize: 62,
                   fontWeight: 900,
                   color: "#4a4a4a",
                   fontFamily: "system-ui, -apple-system, sans-serif",
-                  letterSpacing: -2.5,
+                  letterSpacing: -3,
                 }}
               >
                 {target}
@@ -1324,7 +1378,7 @@ const CTAScene: React.FC<{ nextMilestone?: string }> = ({ nextMilestone }) => {
   // Scene scale and fade
   const sceneFade = interpolate(
     frame,
-    [0, fps * 0.1],
+    [0, fps * 0.08],
     [0, 1],
     { extrapolateRight: "clamp" }
   );
@@ -1333,162 +1387,162 @@ const CTAScene: React.FC<{ nextMilestone?: string }> = ({ nextMilestone }) => {
   const logoProgress = spring({
     frame,
     fps,
-    config: { damping: 200, stiffness: 70, mass: 1.15 },
+    config: { damping: 190, stiffness: 75, mass: 1.1 },
   });
   const logoOpacity = interpolate(
     frame,
-    [0, fps * 0.24],
+    [0, fps * 0.22],
     [0, 1],
     { extrapolateRight: "clamp" }
   );
-  const logoScale = interpolate(logoProgress, [0, 1], [0.85, 1]);
+  const logoScale = interpolate(logoProgress, [0, 1], [0.82, 1]);
 
   // Logo glow builds confidently then settles
   const logoGlow = interpolate(
     frame,
-    [fps * 0.12, fps * 0.55, fps * 0.9],
-    [0, 55, 45],
+    [fps * 0.1, fps * 0.5, fps * 0.85],
+    [0, 60, 50],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Dual expanding rings - creates depth and sophistication
   const ring1Opacity = interpolate(
     frame,
-    [fps * 0.08, fps * 0.25, fps * 0.9, fps * 1.3],
-    [0, 0.25, 0.12, 0],
+    [fps * 0.06, fps * 0.22, fps * 0.85, fps * 1.2],
+    [0, 0.28, 0.12, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const ring1Scale = interpolate(
     frame,
-    [fps * 0.08, fps * 1.3],
-    [0.65, 2.3],
+    [fps * 0.06, fps * 1.2],
+    [0.6, 2.4],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   const ring2Opacity = interpolate(
     frame,
-    [fps * 0.15, fps * 0.32, fps * 1.1, fps * 1.5],
-    [0, 0.18, 0.08, 0],
+    [fps * 0.12, fps * 0.28, fps * 1.0, fps * 1.4],
+    [0, 0.2, 0.08, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const ring2Scale = interpolate(
     frame,
-    [fps * 0.15, fps * 1.5],
-    [0.55, 2.8],
+    [fps * 0.12, fps * 1.4],
+    [0.5, 3.0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // "Almost There" badge - builds excitement with glow
-  const badgeDelay = 0.28;
+  const badgeDelay = 0.24;
   const badgeProgress = spring({
     frame: frame - badgeDelay * fps,
     fps,
-    config: { damping: 180, stiffness: 120 },
+    config: { damping: 170, stiffness: 130 },
   });
   const badgeOpacity = interpolate(
     frame,
-    [badgeDelay * fps, (badgeDelay + 0.2) * fps],
+    [badgeDelay * fps, (badgeDelay + 0.18) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const badgeY = interpolate(badgeProgress, [0, 1], [15, 0]);
-  const badgeScale = interpolate(badgeProgress, [0, 1], [0.92, 1]);
+  const badgeY = interpolate(badgeProgress, [0, 1], [16, 0]);
+  const badgeScale = interpolate(badgeProgress, [0, 1], [0.9, 1]);
 
   // Badge glow pulses gently
   const badgeGlow = interpolate(
     frame,
-    [(badgeDelay + 0.15) * fps, fps * 1.0],
+    [(badgeDelay + 0.12) * fps, fps * 0.9],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
-  const badgePulse = frame > fps * 0.9 ? interpolate(
-    (frame - fps * 0.9) % (fps * 2.2),
-    [0, fps * 1.1, fps * 2.2],
-    [0.9, 1, 0.9],
+  const badgePulse = frame > fps * 0.85 ? interpolate(
+    (frame - fps * 0.85) % (fps * 2.0),
+    [0, fps * 1.0, fps * 2.0],
+    [0.92, 1, 0.92],
     { easing: Easing.inOut(Easing.sin) }
   ) : 1;
 
   // Next milestone section - dramatic entrance
-  const nextDelay = 0.48;
+  const nextDelay = 0.42;
   const nextProgress = spring({
     frame: frame - nextDelay * fps,
     fps,
-    config: { damping: 180, stiffness: 90, mass: 1.1 },
+    config: { damping: 175, stiffness: 95, mass: 1.05 },
   });
   const nextOpacity = interpolate(
     frame,
-    [nextDelay * fps, (nextDelay + 0.22) * fps],
+    [nextDelay * fps, (nextDelay + 0.2) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const nextY = interpolate(nextProgress, [0, 1], [20, 0]);
-  const nextScale = interpolate(nextProgress, [0, 1], [0.95, 1]);
+  const nextY = interpolate(nextProgress, [0, 1], [22, 0]);
+  const nextScale = interpolate(nextProgress, [0, 1], [0.94, 1]);
 
   // Next milestone glow
   const nextGlow = interpolate(
     frame,
-    [(nextDelay + 0.2) * fps, fps * 1.2],
-    [0, 20],
+    [(nextDelay + 0.18) * fps, fps * 1.1],
+    [0, 22],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Divider line draws elegantly
   const lineWidth = interpolate(
     frame,
-    [fps * 0.8, fps * 1.2],
-    [0, 140],
+    [fps * 0.7, fps * 1.05],
+    [0, 150],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // CTA button - THE action moment with commanding presence
-  const ctaDelay = 0.95;
+  const ctaDelay = 0.85;
   const ctaProgress = spring({
     frame: frame - ctaDelay * fps,
     fps,
-    config: { damping: 180, stiffness: 85, mass: 1.1 },
+    config: { damping: 175, stiffness: 90, mass: 1.05 },
   });
   const ctaOpacity = interpolate(
     frame,
-    [ctaDelay * fps, (ctaDelay + 0.22) * fps],
+    [ctaDelay * fps, (ctaDelay + 0.2) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const ctaY = interpolate(ctaProgress, [0, 1], [25, 0]);
-  const ctaScale = interpolate(ctaProgress, [0, 1], [0.93, 1]);
+  const ctaY = interpolate(ctaProgress, [0, 1], [28, 0]);
+  const ctaScale = interpolate(ctaProgress, [0, 1], [0.92, 1]);
 
   // CTA glow builds dramatically then pulses with confidence
   const ctaGlow = interpolate(
     frame,
-    [(ctaDelay + 0.15) * fps, fps * 1.8, fps * 2.2],
-    [0, 1.15, 1],
+    [(ctaDelay + 0.12) * fps, fps * 1.6, fps * 2.0],
+    [0, 1.2, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
-  const ctaPulse = frame > fps * 1.7 ? interpolate(
-    (frame - fps * 1.7) % (fps * 2.4),
-    [0, fps * 1.2, fps * 2.4],
-    [0.92, 1, 0.92],
+  const ctaPulse = frame > fps * 1.55 ? interpolate(
+    (frame - fps * 1.55) % (fps * 2.2),
+    [0, fps * 1.1, fps * 2.2],
+    [0.93, 1, 0.93],
     { easing: Easing.inOut(Easing.sin) }
   ) : 1;
 
   // Inner shine animation on CTA
-  const innerPulse = frame > fps * 1.6 ? interpolate(
-    (frame - fps * 1.6) % (fps * 2.2),
-    [0, fps * 1.1, fps * 2.2],
-    [0.18, 0.32, 0.18],
+  const innerPulse = frame > fps * 1.5 ? interpolate(
+    (frame - fps * 1.5) % (fps * 2.0),
+    [0, fps * 1.0, fps * 2.0],
+    [0.18, 0.35, 0.18],
     { easing: Easing.inOut(Easing.sin) }
   ) : 0.18;
 
   // Bottom text - final beat with decorative lines
-  const subDelay = 1.4;
+  const subDelay = 1.25;
   const subOpacity = interpolate(
     frame,
-    [subDelay * fps, (subDelay + 0.3) * fps],
+    [subDelay * fps, (subDelay + 0.28) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const subY = interpolate(
     frame,
-    [subDelay * fps, (subDelay + 0.4) * fps],
+    [subDelay * fps, (subDelay + 0.35) * fps],
     [12, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
@@ -1496,16 +1550,16 @@ const CTAScene: React.FC<{ nextMilestone?: string }> = ({ nextMilestone }) => {
   // Decorative lines for bottom - draw outward
   const bottomLineWidth = interpolate(
     frame,
-    [(subDelay + 0.1) * fps, (subDelay + 0.5) * fps],
-    [0, 65],
+    [(subDelay + 0.08) * fps, (subDelay + 0.42) * fps],
+    [0, 70],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Background glow intensifies throughout
   const bgIntensity = interpolate(
     frame,
-    [0, fps * 1.5],
-    [0.025, 0.055],
+    [0, fps * 1.4],
+    [0.025, 0.06],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
@@ -1748,13 +1802,13 @@ export const MilestoneAnnouncement: React.FC<MilestoneAnnouncementProps> = ({
 }) => {
   const { fps } = useVideoConfig();
 
-  // Clean, quick fades - 0.25s sweet spot
-  const transitionFrames = Math.round(0.25 * fps);
+  // Clean, quick fades - 0.22s for snappy but smooth transitions
+  const transitionFrames = Math.round(0.22 * fps);
 
   return (
     <TransitionSeries>
-      {/* Reveal: 3.6s - Build anticipation, deliver milestone with percentage badge */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(3.6 * fps)}>
+      {/* Reveal: 3.4s - Build anticipation, deliver milestone with percentage badge */}
+      <TransitionSeries.Sequence durationInFrames={Math.round(3.4 * fps)}>
         <RevealScene milestone={milestone} progress={progress} />
       </TransitionSeries.Sequence>
 
@@ -1763,8 +1817,8 @@ export const MilestoneAnnouncement: React.FC<MilestoneAnnouncementProps> = ({
         timing={linearTiming({ durationInFrames: transitionFrames })}
       />
 
-      {/* Progress: 4.6s - Satisfying data visualization with counting */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(4.6 * fps)}>
+      {/* Progress: 4.4s - Satisfying data visualization with counting */}
+      <TransitionSeries.Sequence durationInFrames={Math.round(4.4 * fps)}>
         <ProgressScene target={target} current={current} progress={progress} />
       </TransitionSeries.Sequence>
 
@@ -1773,8 +1827,8 @@ export const MilestoneAnnouncement: React.FC<MilestoneAnnouncementProps> = ({
         timing={linearTiming({ durationInFrames: transitionFrames })}
       />
 
-      {/* CTA: 3.3s - Confident close with momentum */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(3.3 * fps)}>
+      {/* CTA: 3.8s - Confident close with momentum and breathing room */}
+      <TransitionSeries.Sequence durationInFrames={Math.round(3.8 * fps)}>
         <CTAScene nextMilestone={nextMilestone} />
       </TransitionSeries.Sequence>
     </TransitionSeries>
