@@ -6,9 +6,7 @@ import {
   interpolate,
   spring,
   Easing,
-  Sequence,
 } from "remotion";
-import { FedLogo } from "../components/visuals";
 
 export interface FiftyKHypeProps {
   totalDistributed?: string;
@@ -18,1533 +16,1006 @@ export interface FiftyKHypeProps {
 }
 
 // ============================================================================
-// DESIGN SYSTEM - Premium palette matching StatsUpdate quality
+// DESIGN SYSTEM - Premium dark theme with refined Apple-style aesthetics
 // ============================================================================
 const COLORS = {
-  // Backgrounds - deep blacks
-  black: "#000000",
-  nearBlack: "#030303",
-  darkGray: "#080808",
+  // Deep backgrounds
+  bgDeep: "#050506",
+  bgDark: "#0a0a0c",
+  bgMid: "#111114",
 
-  // Primary - FED green (refined)
-  primary: "#00d070",
-  primaryMuted: "#00a858",
-  primaryGlow: "rgba(0, 208, 112, 0.45)",
+  // Terminal
+  terminalBg: "#0c0c0e",
+  terminalBorder: "#1a1a1e",
+  terminalHeaderBg: "#141416",
+  terminalText: "#e8e8ec",
+  terminalGray: "#6e6e78",
+  terminalMuted: "#48484f",
 
-  // Secondary - cyan
-  secondary: "#00b8d4",
-
-  // Accent - amber for Claude branding
-  amber: "#f59e0b",
-  amberMuted: "#d97706",
+  // Accent colors
+  green: "#00d46a",
+  greenMuted: "#00b858",
+  greenGlow: "rgba(0, 212, 106, 0.5)",
+  cyan: "#00c8e8",
+  cyanGlow: "rgba(0, 200, 232, 0.4)",
+  purple: "#a855f7",
+  purpleGlow: "rgba(168, 85, 247, 0.4)",
+  orange: "#f59e0b",
+  orangeGlow: "rgba(245, 158, 11, 0.4)",
+  blue: "#3b82f6",
+  blueGlow: "rgba(59, 130, 246, 0.4)",
+  red: "#ef4444",
 
   // Text
   white: "#ffffff",
-  offWhite: "#f5f5f5",
-  grayLight: "#909090",
-  grayMid: "#606060",
-  grayDark: "#404040",
+  offWhite: "#f0f0f4",
+  grayLight: "#9898a4",
+  grayMid: "#58585f",
 };
 
-// Utility to convert hex to rgba
 const hexToRgba = (hex: string, alpha: number) => {
   const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  if (!result) return `rgba(0, 216, 120, ${alpha})`;
-  const r = parseInt(result[1], 16);
-  const g = parseInt(result[2], 16);
-  const b = parseInt(result[3], 16);
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  if (!result) return `rgba(0, 212, 106, ${alpha})`;
+  return `rgba(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}, ${alpha})`;
 };
 
 // ============================================================================
-// FILM GRAIN - Ultra-subtle texture
-// ============================================================================
-const FilmGrain: React.FC<{ opacity?: number }> = ({ opacity = 0.012 }) => {
-  const frame = useCurrentFrame();
-  const offsetX = (frame * 17) % 100;
-  const offsetY = (frame * 23) % 100;
-
-  return (
-    <AbsoluteFill
-      style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
-        backgroundPosition: `${offsetX}px ${offsetY}px`,
-        opacity,
-        mixBlendMode: "overlay",
-        pointerEvents: "none",
-      }}
-    />
-  );
-};
-
-// ============================================================================
-// CINEMATIC BACKGROUND - Deep, refined, atmospheric
+// PREMIUM BACKGROUND - Deep cinematic with subtle atmospheric glow
 // ============================================================================
 const CinematicBackground: React.FC<{
   intensity?: number;
   focusY?: number;
   color?: string;
-}> = ({ intensity = 0.025, focusY = 50, color = COLORS.primary }) => {
+}> = ({ intensity = 0.015, focusY = 50, color = COLORS.green }) => {
   const frame = useCurrentFrame();
 
-  const drift = interpolate(frame, [0, 600], [0, 1.2], {
-    extrapolateRight: "clamp",
+  const drift = interpolate(frame, [0, 660], [0, 2], {
+    extrapolateRight: "extend",
   });
 
   return (
     <AbsoluteFill>
-      <AbsoluteFill style={{ background: COLORS.black }} />
+      {/* Pure deep black base */}
+      <AbsoluteFill style={{ background: COLORS.bgDeep }} />
+
+      {/* Subtle noise texture layer */}
       <AbsoluteFill
         style={{
-          background: `radial-gradient(ellipse 100% 100% at 50% 50%, ${COLORS.nearBlack} 0%, ${COLORS.black} 100%)`,
+          background: `radial-gradient(ellipse 120% 80% at 50% 100%, ${COLORS.bgDark} 0%, ${COLORS.bgDeep} 70%)`,
         }}
       />
+
+      {/* Primary ambient glow */}
       <AbsoluteFill
         style={{
-          background: `radial-gradient(ellipse 68% 48% at 50% ${focusY + drift}%, ${hexToRgba(color, intensity)} 0%, transparent 52%)`,
+          background: `radial-gradient(ellipse 80% 50% at 50% ${focusY + drift}%, ${hexToRgba(color, intensity)} 0%, transparent 60%)`,
         }}
       />
-      <AbsoluteFill
-        style={{
-          background: `radial-gradient(ellipse 90% 16% at 50% 0%, ${hexToRgba(color, intensity * 0.1)} 0%, transparent 38%)`,
-        }}
-      />
+
+      {/* Deep cinematic vignette */}
       <AbsoluteFill
         style={{
           background:
-            "radial-gradient(ellipse 82% 72% at 50% 50%, transparent 22%, rgba(0,0,0,0.75) 100%)",
+            "radial-gradient(ellipse 90% 80% at 50% 50%, transparent 20%, rgba(0,0,0,0.7) 100%)",
         }}
       />
-      <FilmGrain opacity={0.006} />
     </AbsoluteFill>
   );
 };
 
 // ============================================================================
-// SCENE 1: TERMINAL BOOT - Cinematic, minimal, elegant
+// TERMINAL WINDOW - Premium glass morphism design
 // ============================================================================
-const TerminalScene: React.FC = () => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  // Scene fade in
-  const sceneFade = interpolate(frame, [0, fps * 0.15], [0, 1], {
-    extrapolateRight: "clamp",
-    easing: Easing.out(Easing.cubic),
-  });
-
-  // Terminal window animation - premium spring
-  const terminalProgress = spring({
-    frame,
-    fps,
-    config: { damping: 180, stiffness: 80, mass: 1.2 },
-  });
-  const terminalScale = interpolate(terminalProgress, [0, 1], [0.92, 1]);
-  const terminalOpacity = interpolate(frame, [0, fps * 0.2], [0, 1], {
-    extrapolateRight: "clamp",
-  });
-
-  // Terminal glow builds
-  const terminalGlow = interpolate(
-    frame,
-    [fps * 0.2, fps * 1.5, fps * 3],
-    [0, 35, 25],
-    { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  );
-
-  // Typing animation - refined timing
-  const command = "./ralph-fed.sh";
-  const typingStart = fps * 0.5;
-  const typingSpeed = 0.12; // chars per frame
-  const typedChars = Math.min(
-    command.length,
-    Math.max(0, Math.floor((frame - typingStart) * typingSpeed))
-  );
-  const displayedCommand = command.slice(0, typedChars);
-
-  // Cursor blink - elegant timing
-  const cursorVisible =
-    Math.floor((frame * 1.8) / fps) % 2 === 0 ||
-    frame < typingStart + command.length / typingSpeed;
-
-  // Enter timing
-  const enterFrame = typingStart + command.length / typingSpeed + fps * 0.4;
-  const enterPressed = frame >= enterFrame;
-
-  // Output animation
-  const outputOpacity = interpolate(
-    frame,
-    [enterFrame, enterFrame + fps * 0.15],
-    [0, 1],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-  const outputY = interpolate(
-    frame,
-    [enterFrame, enterFrame + fps * 0.25],
-    [8, 0],
-    {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-      easing: Easing.out(Easing.cubic),
-    }
-  );
-
-  // Processing indicator
-  const dotsFrame = frame - enterFrame;
-  const dotCount = enterPressed ? Math.floor((dotsFrame / fps) * 3) % 4 : 0;
-  const dots = ".".repeat(dotCount);
-
-  // Background glow
-  const bgGlow = interpolate(
-    frame,
-    [0, fps * 1, fps * 3],
-    [0.008, 0.025, 0.02],
-    { extrapolateRight: "clamp" }
-  );
-
-  return (
-    <AbsoluteFill style={{ opacity: sceneFade }}>
-      <CinematicBackground intensity={bgGlow} focusY={50} />
-
-      <AbsoluteFill
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          fontFamily: "'SF Mono', 'Menlo', 'Monaco', monospace",
-        }}
-      >
-        {/* Terminal Window */}
-        <div
-          style={{
-            opacity: terminalOpacity,
-            transform: `scale(${terminalScale})`,
-            width: 720,
-            backgroundColor: "rgba(10, 10, 15, 0.95)",
-            borderRadius: 16,
-            border: "1px solid rgba(255, 255, 255, 0.08)",
-            boxShadow: `
-              0 50px 100px rgba(0, 0, 0, 0.6),
-              0 20px 40px rgba(0, 0, 0, 0.4),
-              0 0 ${terminalGlow}px ${hexToRgba(COLORS.primary, 0.25)},
-              inset 0 1px 0 rgba(255, 255, 255, 0.06)
-            `,
-            overflow: "hidden",
-          }}
-        >
-          {/* Terminal Header - macOS style */}
-          <div
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(60, 60, 70, 0.9) 0%, rgba(40, 40, 50, 0.95) 100%)",
-              padding: "14px 18px",
-              display: "flex",
-              alignItems: "center",
-              gap: 8,
-              borderBottom: "1px solid rgba(0, 0, 0, 0.3)",
-            }}
-          >
-            <div
-              style={{
-                width: 12,
-                height: 12,
-                borderRadius: "50%",
-                backgroundColor: "#ff5f57",
-                boxShadow: "inset 0 -1px 1px rgba(0,0,0,0.2)",
-              }}
-            />
-            <div
-              style={{
-                width: 12,
-                height: 12,
-                borderRadius: "50%",
-                backgroundColor: "#ffbd2e",
-                boxShadow: "inset 0 -1px 1px rgba(0,0,0,0.2)",
-              }}
-            />
-            <div
-              style={{
-                width: 12,
-                height: 12,
-                borderRadius: "50%",
-                backgroundColor: "#28ca41",
-                boxShadow: "inset 0 -1px 1px rgba(0,0,0,0.2)",
-              }}
-            />
-            <span
-              style={{
-                marginLeft: 14,
-                color: COLORS.grayMid,
-                fontSize: 12,
-                fontWeight: 500,
-              }}
-            >
-              ralph@fed — zsh
-            </span>
-          </div>
-
-          {/* Terminal Content */}
-          <div style={{ padding: "28px 24px", minHeight: 180 }}>
-            {/* Command line */}
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                marginBottom: 20,
-              }}
-            >
-              <span
-                style={{
-                  color: COLORS.primary,
-                  marginRight: 10,
-                  fontSize: 15,
-                }}
-              >
-                ➜
-              </span>
-              <span
-                style={{
-                  color: COLORS.secondary,
-                  marginRight: 14,
-                  fontSize: 14,
-                }}
-              >
-                ~/fed
-              </span>
-              <span style={{ color: COLORS.white, fontSize: 14 }}>
-                {displayedCommand}
-              </span>
-              {!enterPressed && cursorVisible && (
-                <span
-                  style={{
-                    display: "inline-block",
-                    width: 8,
-                    height: 18,
-                    backgroundColor: COLORS.primary,
-                    marginLeft: 2,
-                    opacity: 0.85,
-                  }}
-                />
-              )}
-            </div>
-
-            {/* Output */}
-            {enterPressed && (
-              <div
-                style={{
-                  opacity: outputOpacity,
-                  transform: `translateY(${outputY}px)`,
-                }}
-              >
-                <div
-                  style={{
-                    color: COLORS.primary,
-                    fontSize: 13,
-                    marginBottom: 12,
-                    fontWeight: 500,
-                  }}
-                >
-                  [RALPH] Initializing Federal Reserve System{dots}
-                </div>
-                <div
-                  style={{
-                    color: COLORS.grayMid,
-                    fontSize: 12,
-                    display: "flex",
-                    alignItems: "center",
-                    gap: 8,
-                  }}
-                >
-                  <span
-                    style={{
-                      width: 6,
-                      height: 6,
-                      borderRadius: "50%",
-                      backgroundColor: COLORS.amber,
-                      display: "inline-block",
-                    }}
-                  />
-                  Powered by Claude Opus 4.5
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </AbsoluteFill>
-    </AbsoluteFill>
-  );
-};
-
-// ============================================================================
-// SCENE 2: AGENT BOOT - Premium card design, refined animations
-// ============================================================================
-interface AgentCardProps {
-  name: string;
-  icon: React.ReactNode;
-  color: string;
-  delay: number;
-}
-
-const AgentCard: React.FC<AgentCardProps> = ({ name, icon, color, delay }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  // Entry animation - smooth spring
-  const entryProgress = spring({
-    frame: frame - delay,
-    fps,
-    config: { damping: 180, stiffness: 70, mass: 1.2 },
-  });
-
-  const scale = interpolate(entryProgress, [0, 1], [0.85, 1]);
-  const opacity = interpolate(
-    frame,
-    [delay, delay + fps * 0.15],
-    [0, 1],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-  const y = interpolate(entryProgress, [0, 1], [25, 0]);
-
-  // Online state
-  const onlineDelay = delay + fps * 0.5;
-  const isOnline = frame > onlineDelay;
-
-  // Status pulse - subtle
-  const pulseFrame = frame - onlineDelay;
-  const pulse = isOnline
-    ? 1 +
-      0.15 *
-        Math.sin((pulseFrame / fps) * Math.PI * 2) *
-        interpolate(pulseFrame, [0, fps * 0.5], [1, 0.3], {
-          extrapolateRight: "clamp",
-        })
-    : 1;
-
-  // Border glow transition
-  const borderOpacity = interpolate(
-    frame,
-    [onlineDelay, onlineDelay + fps * 0.2],
-    [0.06, 0.2],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-
-  // Card glow
-  const cardGlow = isOnline
-    ? interpolate(
-        frame,
-        [onlineDelay, onlineDelay + fps * 0.15, onlineDelay + fps * 0.4],
-        [0, 25, 12],
-        { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-      )
-    : 0;
-
+const TerminalWindow: React.FC<{
+  children: React.ReactNode;
+  scale?: number;
+  opacity?: number;
+  width?: number;
+  glowIntensity?: number;
+  glowColor?: string;
+}> = ({
+  children,
+  scale = 1,
+  opacity = 1,
+  width = 920,
+  glowIntensity = 0,
+  glowColor = COLORS.green,
+}) => {
   return (
     <div
       style={{
         opacity,
-        transform: `scale(${scale}) translateY(${y}px)`,
+        transform: `scale(${scale})`,
+        width,
+        backgroundColor: COLORS.terminalBg,
+        borderRadius: 16,
+        border: `1px solid ${COLORS.terminalBorder}`,
+        boxShadow: `
+          0 60px 120px rgba(0, 0, 0, 0.6),
+          0 25px 50px rgba(0, 0, 0, 0.4),
+          0 0 ${glowIntensity}px ${hexToRgba(glowColor, 0.3)},
+          inset 0 1px 0 rgba(255, 255, 255, 0.04)
+        `,
+        overflow: "hidden",
+        fontFamily: "'SF Mono', 'Menlo', 'Monaco', 'Consolas', monospace",
       }}
     >
+      {/* Terminal Header - macOS style with subtle glass effect */}
       <div
         style={{
-          background: `linear-gradient(165deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.018) 35%, rgba(255,255,255,0.006) 100%)`,
-          border: `1px solid ${hexToRgba(isOnline ? color : "#ffffff", borderOpacity)}`,
-          borderRadius: 14,
-          padding: "18px 22px",
+          background: `linear-gradient(180deg, ${COLORS.terminalHeaderBg} 0%, ${COLORS.terminalBg} 100%)`,
+          padding: "14px 18px",
           display: "flex",
           alignItems: "center",
-          gap: 14,
-          minWidth: 185,
-          boxShadow: `
-            0 20px 50px rgba(0, 0, 0, 0.4),
-            0 8px 20px rgba(0, 0, 0, 0.25),
-            ${isOnline ? `0 0 ${cardGlow}px ${hexToRgba(color, 0.3)}` : ""},
-            inset 0 1px 0 rgba(255, 255, 255, 0.06)
-          `,
-          position: "relative",
-          overflow: "hidden",
+          gap: 8,
+          borderBottom: `1px solid ${COLORS.terminalBorder}`,
         }}
       >
-        {/* Top accent line */}
         <div
           style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: isOnline ? "100%" : "0%",
-            height: 1.5,
-            background: `linear-gradient(90deg, ${color} 0%, ${hexToRgba(color, 0.5)} 60%, transparent 100%)`,
-            transition: "width 0.3s ease-out",
+            width: 13,
+            height: 13,
+            borderRadius: "50%",
+            backgroundColor: "#ff5f57",
+            boxShadow: "inset 0 -1px 1px rgba(0,0,0,0.2)",
           }}
         />
-
-        {/* Icon container */}
         <div
           style={{
-            width: 40,
-            height: 40,
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            backgroundColor: isOnline
-              ? hexToRgba(color, 0.15)
-              : "rgba(255,255,255,0.05)",
-            borderRadius: 10,
-            fontSize: 18,
-            transition: "background-color 0.3s",
+            width: 13,
+            height: 13,
+            borderRadius: "50%",
+            backgroundColor: "#febc2e",
+            boxShadow: "inset 0 -1px 1px rgba(0,0,0,0.2)",
+          }}
+        />
+        <div
+          style={{
+            width: 13,
+            height: 13,
+            borderRadius: "50%",
+            backgroundColor: "#28c840",
+            boxShadow: "inset 0 -1px 1px rgba(0,0,0,0.2)",
+          }}
+        />
+        <span
+          style={{
+            marginLeft: 16,
+            color: COLORS.terminalMuted,
+            fontSize: 13,
+            fontWeight: 500,
+            letterSpacing: 0.3,
           }}
         >
-          {icon}
-        </div>
-
-        {/* Info */}
-        <div>
-          <div
-            style={{
-              color: COLORS.white,
-              fontSize: 14,
-              fontWeight: 600,
-              marginBottom: 4,
-              letterSpacing: -0.3,
-            }}
-          >
-            {name}
-          </div>
-          <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-            <div
-              style={{
-                width: 6,
-                height: 6,
-                borderRadius: "50%",
-                backgroundColor: isOnline ? color : COLORS.grayDark,
-                transform: `scale(${pulse})`,
-                boxShadow: isOnline ? `0 0 8px ${color}` : "none",
-                transition: "background-color 0.2s",
-              }}
-            />
-            <span
-              style={{
-                color: isOnline ? color : COLORS.grayDark,
-                fontSize: 10,
-                fontWeight: 600,
-                letterSpacing: 1.5,
-                transition: "color 0.2s",
-              }}
-            >
-              {isOnline ? "ONLINE" : "BOOTING"}
-            </span>
-          </div>
-        </div>
+          ralph@fed-mainnet — zsh
+        </span>
       </div>
+
+      {/* Terminal Content */}
+      <div style={{ padding: "24px 28px", minHeight: 420 }}>{children}</div>
     </div>
   );
 };
 
-// SVG Icons for agents (cleaner than emojis)
-const TreasuryIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill={COLORS.primary}>
-    <path d="M4 10V21H8V14H16V21H20V10L12 3L4 10ZM12 6L18 11V19H18V12H6V11L12 6Z" />
-    <rect x="10" y="16" width="4" height="5" />
-  </svg>
-);
-
-const MarketingIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="#ff6b9d">
-    <path d="M18 11V8L21 5V19L18 16V13H14V11H18ZM5 9V15H8L13 20V4L8 9H5ZM11 8.83V15.17L9.17 13H7V11H9.17L11 8.83Z" />
-  </svg>
-);
-
-const TwitterIcon = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill={COLORS.secondary}>
-    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-  </svg>
-);
-
-const WebsiteIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="#a855f7">
-    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM11 19.93C7.05 19.44 4 16.08 4 12C4 11.38 4.08 10.79 4.21 10.21L9 15V16C9 17.1 9.9 18 11 18V19.93ZM17.9 17.39C17.64 16.58 16.9 16 16 16H15V13C15 12.45 14.55 12 14 12H8V10H10C10.55 10 11 9.55 11 9V7H13C14.1 7 15 6.1 15 5V4.59C17.93 5.78 20 8.65 20 12C20 14.08 19.2 15.97 17.9 17.39Z" />
-  </svg>
-);
-
-const EconomistIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill={COLORS.amber}>
-    <path d="M3.5 18.49L9.5 12.48L13.5 16.48L22 6.92L20.59 5.51L13.5 13.48L9.5 9.48L2 16.99L3.5 18.49Z" />
-  </svg>
-);
-
-const AgentBootScene: React.FC = () => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  const agents = [
-    { name: "Treasury", icon: <TreasuryIcon />, color: COLORS.primary, delay: 0 },
-    { name: "Marketing", icon: <MarketingIcon />, color: "#ff6b9d", delay: fps * 0.18 },
-    { name: "Twitter/X", icon: <TwitterIcon />, color: COLORS.secondary, delay: fps * 0.36 },
-    { name: "Website", icon: <WebsiteIcon />, color: "#a855f7", delay: fps * 0.54 },
-    { name: "Economist", icon: <EconomistIcon />, color: COLORS.amber, delay: fps * 0.72 },
-  ];
-
-  // Scene fade
-  const sceneFade = interpolate(frame, [0, fps * 0.1], [0, 1], {
-    extrapolateRight: "clamp",
-  });
-
-  // Title animation
-  const titleProgress = spring({
-    frame,
-    fps,
-    config: { damping: 180, stiffness: 60, mass: 1.2 },
-  });
-  const titleOpacity = interpolate(frame, [0, fps * 0.15], [0, 1], {
-    extrapolateRight: "clamp",
-  });
-  const titleY = interpolate(titleProgress, [0, 1], [15, 0]);
-
-  // Background glow - builds as agents come online
-  const bgGlow = interpolate(
-    frame,
-    [0, fps * 1.5, fps * 3],
-    [0.01, 0.035, 0.028],
-    { extrapolateRight: "clamp" }
-  );
-
-  // Claude badge
-  const badgeOpacity = interpolate(
-    frame,
-    [fps * 1.2, fps * 1.5],
-    [0, 1],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-  const badgeY = interpolate(
-    frame,
-    [fps * 1.2, fps * 1.6],
-    [10, 0],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  );
+// ============================================================================
+// COMMAND PROMPT WITH REALISTIC TYPING
+// ============================================================================
+const PromptLine: React.FC<{
+  command: string;
+  typedChars: number;
+  showCursor: boolean;
+  cursorBlink: boolean;
+}> = ({ command, typedChars, showCursor, cursorBlink }) => {
+  const displayed = command.slice(0, typedChars);
 
   return (
-    <AbsoluteFill style={{ opacity: sceneFade }}>
-      <CinematicBackground intensity={bgGlow} focusY={48} />
-
-      <AbsoluteFill
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          fontFamily: "system-ui, -apple-system, sans-serif",
-        }}
-      >
-        {/* Title */}
-        <div
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        marginBottom: 10,
+        fontSize: 15,
+        lineHeight: 1.5,
+      }}
+    >
+      <span style={{ color: COLORS.green, marginRight: 10, fontWeight: 600 }}>
+        ➜
+      </span>
+      <span style={{ color: COLORS.cyan, marginRight: 14 }}>~/fed</span>
+      <span style={{ color: COLORS.terminalText }}>{displayed}</span>
+      {showCursor && (
+        <span
           style={{
-            position: "absolute",
-            top: 85,
-            opacity: titleOpacity,
-            transform: `translateY(${titleY}px)`,
-            textAlign: "center",
-          }}
-        >
-          <div
-            style={{
-              color: COLORS.primary,
-              fontSize: 10,
-              fontWeight: 600,
-              letterSpacing: 4,
-              marginBottom: 10,
-            }}
-          >
-            INITIALIZING
-          </div>
-          <div
-            style={{
-              color: COLORS.white,
-              fontSize: 30,
-              fontWeight: 700,
-              letterSpacing: -1,
-            }}
-          >
-            Ralph Agent Network
-          </div>
-        </div>
-
-        {/* Agent Grid */}
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: 16,
-            justifyContent: "center",
-            maxWidth: 820,
-            marginTop: 35,
-          }}
-        >
-          {agents.map((agent) => (
-            <AgentCard
-              key={agent.name}
-              name={agent.name}
-              icon={agent.icon}
-              color={agent.color}
-              delay={agent.delay}
-            />
-          ))}
-        </div>
-
-        {/* Claude Badge */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 65,
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-            opacity: badgeOpacity,
-            transform: `translateY(${badgeY}px)`,
-          }}
-        >
-          <div
-            style={{
-              width: 28,
-              height: 28,
-              borderRadius: 8,
-              background: `linear-gradient(135deg, ${COLORS.amberMuted} 0%, ${COLORS.amber} 100%)`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              boxShadow: `0 4px 12px ${hexToRgba(COLORS.amber, 0.3)}`,
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="#000">
-              <circle cx="12" cy="12" r="10" />
-              <circle cx="8" cy="10" r="1.5" fill="#fff" />
-              <circle cx="16" cy="10" r="1.5" fill="#fff" />
-              <path
-                d="M8 15C8 15 9.5 17 12 17C14.5 17 16 15 16 15"
-                stroke="#fff"
-                strokeWidth="1.5"
-                fill="none"
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
-          <span style={{ color: COLORS.grayMid, fontSize: 12 }}>
-            Powered by{" "}
-            <span style={{ color: COLORS.amber, fontWeight: 600 }}>
-              Claude Opus 4.5
-            </span>
-          </span>
-        </div>
-      </AbsoluteFill>
-    </AbsoluteFill>
-  );
-};
-
-// ============================================================================
-// SCENE 3: PHASE TRANSITION - Cinematic, momentous
-// ============================================================================
-const PhaseTransitionScene: React.FC = () => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  // Scene fade
-  const sceneFade = interpolate(frame, [0, fps * 0.1], [0, 1], {
-    extrapolateRight: "clamp",
-  });
-
-  // Phase 1 - enters and holds
-  const phase1Opacity = interpolate(
-    frame,
-    [0, fps * 0.25, fps * 1.4, fps * 1.8],
-    [0, 1, 1, 0],
-    { extrapolateRight: "clamp" }
-  );
-  const phase1Scale = interpolate(
-    frame,
-    [fps * 1.4, fps * 1.8],
-    [1, 0.9],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.in(Easing.cubic) }
-  );
-  const phase1X = interpolate(
-    frame,
-    [fps * 1.4, fps * 1.8],
-    [0, -80],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.in(Easing.cubic) }
-  );
-
-  // Transition flash
-  const flashOpacity = interpolate(
-    frame,
-    [fps * 1.7, fps * 1.85, fps * 2.1],
-    [0, 0.8, 0],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-
-  // Phase 2 - enters with power
-  const phase2Start = fps * 2.0;
-  const phase2Progress = spring({
-    frame: frame - phase2Start,
-    fps,
-    config: { damping: 150, stiffness: 60, mass: 1.3 },
-  });
-  const phase2Opacity = interpolate(
-    frame,
-    [phase2Start, phase2Start + fps * 0.2],
-    [0, 1],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-  const phase2Scale = interpolate(phase2Progress, [0, 1], [1.15, 1]);
-
-  // Phase 2 glow - builds majestically
-  const phase2Glow = interpolate(
-    frame,
-    [phase2Start, phase2Start + fps * 0.3, phase2Start + fps * 1],
-    [0, 80, 45],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-
-  // Background intensity
-  const bgGlow = interpolate(
-    frame,
-    [0, fps * 1.5, fps * 1.85, fps * 2.2, fps * 3.5],
-    [0.015, 0.02, 0.08, 0.055, 0.04],
-    { extrapolateRight: "clamp" }
-  );
-
-  // Expanding ring on Phase 2 reveal
-  const ringOpacity = interpolate(
-    frame,
-    [phase2Start, phase2Start + fps * 0.1, phase2Start + fps * 0.6],
-    [0, 0.6, 0],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-  const ringScale = interpolate(
-    frame,
-    [phase2Start, phase2Start + fps * 0.6],
-    [0.5, 4],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  );
-
-  // Subtitle fade in
-  const subtitleOpacity = interpolate(
-    frame,
-    [phase2Start + fps * 0.5, phase2Start + fps * 0.8],
-    [0, 1],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-  const subtitleY = interpolate(
-    frame,
-    [phase2Start + fps * 0.5, phase2Start + fps * 0.9],
-    [10, 0],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  );
-
-  return (
-    <AbsoluteFill style={{ opacity: sceneFade }}>
-      <CinematicBackground intensity={bgGlow} focusY={50} />
-
-      {/* Transition flash */}
-      <AbsoluteFill
-        style={{
-          background: `radial-gradient(circle, ${hexToRgba(COLORS.primary, 0.9)} 0%, transparent 70%)`,
-          opacity: flashOpacity,
-          pointerEvents: "none",
-        }}
-      />
-
-      {/* Expanding ring */}
-      <AbsoluteFill
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          pointerEvents: "none",
-        }}
-      >
-        <div
-          style={{
-            width: 120,
-            height: 120,
-            borderRadius: "50%",
-            border: `2px solid ${hexToRgba(COLORS.primary, 0.5)}`,
-            opacity: ringOpacity,
-            transform: `scale(${ringScale})`,
-            boxShadow: `0 0 30px ${hexToRgba(COLORS.primary, 0.3)}`,
+            display: "inline-block",
+            width: 9,
+            height: 18,
+            backgroundColor: cursorBlink ? COLORS.green : "transparent",
+            marginLeft: 2,
+            borderRadius: 1,
           }}
         />
-      </AbsoluteFill>
-
-      <AbsoluteFill
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          fontFamily: "system-ui, -apple-system, sans-serif",
-        }}
-      >
-        {/* Phase 1 */}
-        <div
-          style={{
-            position: "absolute",
-            opacity: phase1Opacity,
-            transform: `translateX(${phase1X}px) scale(${phase1Scale})`,
-            textAlign: "center",
-          }}
-        >
-          <div
-            style={{
-              color: COLORS.grayDark,
-              fontSize: 11,
-              letterSpacing: 4,
-              marginBottom: 16,
-              fontWeight: 600,
-            }}
-          >
-            COMPLETED
-          </div>
-          <div
-            style={{
-              fontSize: 68,
-              fontWeight: 800,
-              color: COLORS.grayDark,
-              letterSpacing: -3,
-            }}
-          >
-            PHASE 1
-          </div>
-          <div
-            style={{
-              color: COLORS.grayDark,
-              fontSize: 16,
-              marginTop: 14,
-              fontWeight: 400,
-            }}
-          >
-            $0 → $25,000 Distributed
-          </div>
-        </div>
-
-        {/* Phase 2 */}
-        <div
-          style={{
-            position: "absolute",
-            opacity: phase2Opacity,
-            transform: `scale(${phase2Scale})`,
-            textAlign: "center",
-          }}
-        >
-          <div
-            style={{
-              color: COLORS.primary,
-              fontSize: 11,
-              letterSpacing: 4,
-              marginBottom: 16,
-              fontWeight: 600,
-            }}
-          >
-            NOW ENTERING
-          </div>
-          <div
-            style={{
-              fontSize: 78,
-              fontWeight: 800,
-              background: `linear-gradient(135deg, ${COLORS.primary} 0%, ${COLORS.secondary} 100%)`,
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              letterSpacing: -3,
-              filter: `drop-shadow(0 0 ${phase2Glow}px ${hexToRgba(COLORS.primary, 0.4)})`,
-            }}
-          >
-            PHASE 2
-          </div>
-          <div
-            style={{
-              color: COLORS.grayLight,
-              fontSize: 16,
-              marginTop: 16,
-              fontWeight: 400,
-              opacity: subtitleOpacity,
-              transform: `translateY(${subtitleY}px)`,
-            }}
-          >
-            $50,000+ Distributed • Full Autonomy
-          </div>
-        </div>
-      </AbsoluteFill>
-    </AbsoluteFill>
+      )}
+    </div>
   );
 };
 
 // ============================================================================
-// SCENE 4: STATS SHOWCASE - Premium counters with satisfying animations
+// LOG LINE - Clean terminal output
 // ============================================================================
-interface StatItemProps {
+const LogLine: React.FC<{
+  text: string;
+  color?: string;
+  indent?: number;
+  opacity?: number;
+  prefix?: React.ReactNode;
+  prefixColor?: string;
+  bold?: boolean;
+}> = ({
+  text,
+  color = COLORS.terminalText,
+  indent = 0,
+  opacity = 1,
+  prefix,
+  prefixColor,
+  bold = false,
+}) => (
+  <div
+    style={{
+      color,
+      fontSize: 14,
+      marginBottom: 5,
+      marginLeft: indent * 20,
+      opacity,
+      display: "flex",
+      alignItems: "center",
+      gap: 10,
+      fontWeight: bold ? 600 : 400,
+      lineHeight: 1.5,
+    }}
+  >
+    {prefix && (
+      <span style={{ color: prefixColor || color, minWidth: 20 }}>{prefix}</span>
+    )}
+    <span>{text}</span>
+  </div>
+);
+
+// ============================================================================
+// ANIMATED SPINNER
+// ============================================================================
+const Spinner: React.FC<{ frame: number; color?: string }> = ({
+  frame,
+  color = COLORS.cyan,
+}) => {
+  const chars = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
+  const idx = Math.floor(frame / 2) % chars.length;
+  return <span style={{ color, fontWeight: 600 }}>{chars[idx]}</span>;
+};
+
+// ============================================================================
+// PROGRESS BAR - Smooth animated fill
+// ============================================================================
+const ProgressBar: React.FC<{
+  progress: number;
+  label: string;
+  color?: string;
+}> = ({ progress, label, color = COLORS.green }) => {
+  const filled = Math.floor((progress / 100) * 24);
+  const empty = 24 - filled;
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 14,
+        fontSize: 13,
+        marginBottom: 6,
+      }}
+    >
+      <span style={{ color: COLORS.terminalMuted, minWidth: 110 }}>{label}</span>
+      <span style={{ color: COLORS.terminalGray }}>▐</span>
+      <span style={{ color, letterSpacing: -2, fontWeight: 600 }}>
+        {"█".repeat(filled)}
+      </span>
+      <span style={{ color: COLORS.terminalGray, letterSpacing: -2 }}>
+        {"░".repeat(empty)}
+      </span>
+      <span style={{ color: COLORS.terminalGray }}>▌</span>
+      <span style={{ color: COLORS.terminalText, minWidth: 40 }}>
+        {progress.toFixed(0)}%
+      </span>
+    </div>
+  );
+};
+
+// ============================================================================
+// AGENT STATUS ROW - With animated entrance and glow
+// ============================================================================
+const AgentStatus: React.FC<{
+  name: string;
+  status: "booting" | "online" | "ready";
+  icon: string;
+  color: string;
+  opacity?: number;
+  scale?: number;
+  glowIntensity?: number;
+}> = ({ name, status, icon, color, opacity = 1, scale = 1, glowIntensity = 0 }) => {
+  const statusText = {
+    booting: "INIT",
+    online: "SYNC",
+    ready: "READY",
+  }[status];
+
+  const statusColor = {
+    booting: COLORS.orange,
+    online: COLORS.cyan,
+    ready: COLORS.green,
+  }[status];
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: 14,
+        fontSize: 14,
+        opacity,
+        transform: `scale(${scale})`,
+        marginBottom: 8,
+        padding: "6px 0",
+      }}
+    >
+      <span style={{ color: COLORS.terminalGray }}>│</span>
+      <span
+        style={{
+          minWidth: 28,
+          filter: glowIntensity > 0 ? `drop-shadow(0 0 ${glowIntensity}px ${color})` : "none",
+        }}
+      >
+        {icon}
+      </span>
+      <span style={{ color, minWidth: 110, fontWeight: 500 }}>{name}</span>
+      <span style={{ color: COLORS.terminalMuted }}>···</span>
+      <span
+        style={{
+          color: statusColor,
+          fontWeight: 700,
+          letterSpacing: 1,
+          fontSize: 11,
+          padding: "2px 8px",
+          borderRadius: 4,
+          backgroundColor: hexToRgba(statusColor, 0.12),
+          border: `1px solid ${hexToRgba(statusColor, 0.25)}`,
+        }}
+      >
+        {statusText}
+      </span>
+    </div>
+  );
+};
+
+// ============================================================================
+// STAT CARD - Premium glass morphism with glow and counting animation
+// ============================================================================
+const StatCard: React.FC<{
+  label: string;
   value: string;
   numericValue: number;
   prefix?: string;
   suffix?: string;
-  label: string;
   color: string;
-  delay: number;
-}
-
-const StatItem: React.FC<StatItemProps> = ({
+  opacity: number;
+  scale: number;
+  glowIntensity: number;
+  countProgress: number;
+}> = ({
+  label,
   numericValue,
   prefix = "",
   suffix = "",
-  label,
   color,
-  delay,
+  opacity,
+  scale,
+  glowIntensity,
+  countProgress,
 }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  // Card entry
-  const entryProgress = spring({
-    frame: frame - delay,
-    fps,
-    config: { damping: 180, stiffness: 55, mass: 1.3 },
-  });
-  const opacity = interpolate(
-    frame,
-    [delay, delay + fps * 0.18],
-    [0, 1],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-  const y = interpolate(entryProgress, [0, 1], [35, 0]);
-  const scale = interpolate(entryProgress, [0, 1], [0.9, 1]);
-
-  // Number counting - premium easing
-  const countDuration = 1.2;
-  const countStart = delay + fps * 0.1;
-  const numberProgress = interpolate(
-    frame,
-    [countStart, countStart + countDuration * fps],
-    [0, 1],
-    {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-      easing: (t) => {
-        if (t < 0.1) return t * t * 10;
-        if (t < 0.8) return 0.1 + (t - 0.1) * 1.286;
-        const x = (t - 0.8) / 0.2;
-        return 1 - Math.pow(1 - x, 4) * 0.1;
-      },
-    }
-  );
+  // Cinematic counting with elegant ease-out
+  const easedProgress =
+    countProgress < 0.1
+      ? countProgress * countProgress * 10 // Smooth start
+      : countProgress < 0.75
+      ? 0.1 + (countProgress - 0.1) * 1.38 // Fast middle
+      : (() => {
+          // Luxurious deceleration at the end
+          const x = (countProgress - 0.75) / 0.25;
+          return 0.997 + (1 - Math.pow(1 - x, 5)) * 0.003;
+        })();
 
   const displayValue =
-    numberProgress > 0.995
+    easedProgress >= 0.99
       ? numericValue
-      : Math.floor(numericValue * numberProgress);
+      : Math.floor(numericValue * Math.min(easedProgress, 1));
 
-  // Landing state
-  const hasLanded = numberProgress >= 0.995;
-  const landTime = countStart + countDuration * fps;
-
-  // Land pulse
-  const landPulse = hasLanded
-    ? interpolate(
-        frame,
-        [landTime, landTime + fps * 0.05, landTime + fps * 0.12, landTime + fps * 0.22],
-        [1, 1.05, 0.98, 1],
-        { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-      )
-    : 1;
-
-  // Number glow
-  const numberGlow = hasLanded
-    ? interpolate(
-        frame,
-        [landTime, landTime + fps * 0.06, landTime + fps * 0.3],
-        [8, 35, 15],
-        { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-      )
-    : interpolate(
-        frame,
-        [countStart + fps * 0.1, landTime],
-        [0, 8],
-        { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-      );
+  // Landing pulse effect
+  const landPulse =
+    countProgress >= 0.99
+      ? 1 + Math.max(0, 0.05 * (1 - (countProgress - 0.99) * 50))
+      : 1;
 
   return (
     <div
       style={{
         opacity,
-        transform: `translateY(${y}px) scale(${scale})`,
-        textAlign: "center",
+        transform: `scale(${scale})`,
+        padding: "16px 24px",
+        backgroundColor: hexToRgba(color, 0.06),
+        borderRadius: 12,
+        border: `1px solid ${hexToRgba(color, 0.15)}`,
+        minWidth: 160,
+        boxShadow: `0 0 ${glowIntensity}px ${hexToRgba(color, 0.3)}`,
       }}
     >
       <div
         style={{
-          fontSize: 52,
-          fontWeight: 800,
-          color: COLORS.white,
-          letterSpacing: -2.5,
-          marginBottom: 10,
-          transform: `scale(${landPulse})`,
-          filter: `drop-shadow(0 0 ${numberGlow}px ${hexToRgba(color, 0.5)})`,
-          fontFamily: "system-ui, -apple-system, sans-serif",
-        }}
-      >
-        <span style={{ color, marginRight: -2 }}>{prefix}</span>
-        {displayValue.toLocaleString()}
-        <span style={{ color: COLORS.grayMid, fontSize: 20, fontWeight: 700, marginLeft: 2 }}>
-          {suffix}
-        </span>
-      </div>
-      <div
-        style={{
-          color: COLORS.grayMid,
-          fontSize: 10,
-          fontWeight: 600,
-          letterSpacing: 2.5,
+          color: COLORS.terminalMuted,
+          fontSize: 11,
           textTransform: "uppercase",
+          letterSpacing: 1.5,
+          marginBottom: 6,
+          fontWeight: 500,
         }}
       >
         {label}
+      </div>
+      <div
+        style={{
+          color,
+          fontSize: 26,
+          fontWeight: 700,
+          fontFamily: "system-ui, -apple-system, sans-serif",
+          letterSpacing: -1,
+          filter: `drop-shadow(0 0 ${glowIntensity * 0.5}px ${color})`,
+          transform: `scale(${landPulse})`,
+          transformOrigin: "left center",
+        }}
+      >
+        <span style={{ opacity: 0.9 }}>{prefix}</span>
+        {displayValue.toLocaleString()}
+        <span style={{ opacity: 0.6, fontSize: 18, marginLeft: 2 }}>{suffix}</span>
       </div>
     </div>
   );
 };
 
-const StatsShowcaseScene: React.FC<{
-  totalDistributed: string;
-  distributions: number;
-  holders: number;
-}> = ({ totalDistributed, distributions, holders }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  // Parse the total distributed value
-  const numericTotal = parseFloat(totalDistributed.replace(/[^0-9.]/g, "")) || 50000;
-
-  // Scene fade
-  const sceneFade = interpolate(frame, [0, fps * 0.08], [0, 1], {
-    extrapolateRight: "clamp",
-  });
-
-  // Title
-  const titleOpacity = interpolate(frame, [fps * 0.02, fps * 0.15], [0, 1], {
-    extrapolateRight: "clamp",
-  });
-  const titleY = interpolate(
-    frame,
-    [fps * 0.02, fps * 0.2],
-    [12, 0],
-    { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  );
-
-  // Background
-  const bgGlow = interpolate(
-    frame,
-    [0, fps * 1.5, fps * 3],
-    [0.012, 0.04, 0.032],
-    { extrapolateRight: "clamp" }
-  );
-
-  // Bottom line
-  const lineWidth = interpolate(
-    frame,
-    [fps * 1.2, fps * 2],
-    [0, 550],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  );
-  const lineOpacity = interpolate(
-    frame,
-    [fps * 1.2, fps * 1.5],
-    [0, 0.5],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-
-  return (
-    <AbsoluteFill style={{ opacity: sceneFade }}>
-      <CinematicBackground intensity={bgGlow} focusY={48} />
-
-      <AbsoluteFill
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          fontFamily: "system-ui, -apple-system, sans-serif",
-          flexDirection: "column",
-        }}
-      >
-        {/* Title */}
-        <div
-          style={{
-            position: "absolute",
-            top: 95,
-            opacity: titleOpacity,
-            transform: `translateY(${titleY}px)`,
-            textAlign: "center",
-          }}
-        >
-          <div
-            style={{
-              color: COLORS.primary,
-              fontSize: 10,
-              letterSpacing: 4.5,
-              marginBottom: 12,
-              fontWeight: 600,
-            }}
-          >
-            MILESTONE ACHIEVED
-          </div>
-          <div
-            style={{
-              color: COLORS.white,
-              fontSize: 34,
-              fontWeight: 700,
-              letterSpacing: -1,
-            }}
-          >
-            The Numbers Speak
-          </div>
-        </div>
-
-        {/* Stats */}
-        <div
-          style={{
-            display: "flex",
-            gap: 70,
-            marginTop: 30,
-          }}
-        >
-          <StatItem
-            value={totalDistributed}
-            numericValue={numericTotal}
-            prefix="$"
-            suffix="+"
-            label="USD1 Distributed"
-            color={COLORS.primary}
-            delay={fps * 0.2}
-          />
-          <StatItem
-            value={`${distributions}+`}
-            numericValue={distributions}
-            suffix="+"
-            label="Distributions"
-            color={COLORS.secondary}
-            delay={fps * 0.4}
-          />
-          <StatItem
-            value={`${holders.toLocaleString()}+`}
-            numericValue={holders}
-            suffix="+"
-            label="Holders Earning"
-            color="#ff6b9d"
-            delay={fps * 0.6}
-          />
-        </div>
-
-        {/* Bottom line */}
-        <div
-          style={{
-            position: "absolute",
-            bottom: 140,
-            width: lineWidth,
-            height: 1.5,
-            background: `linear-gradient(90deg, transparent, ${COLORS.primary}, ${COLORS.secondary}, transparent)`,
-            opacity: lineOpacity,
-          }}
-        />
-      </AbsoluteFill>
-    </AbsoluteFill>
-  );
-};
-
 // ============================================================================
-// SCENE 5: CTA - Commanding, confident close
-// ============================================================================
-const CTAScene: React.FC<{ githubUrl: string }> = ({ githubUrl }) => {
-  const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
-
-  // Scene fade
-  const sceneFade = interpolate(frame, [0, fps * 0.1], [0, 1], {
-    extrapolateRight: "clamp",
-  });
-
-  // Main content
-  const mainProgress = spring({
-    frame,
-    fps,
-    config: { damping: 180, stiffness: 55, mass: 1.3 },
-  });
-  const mainOpacity = interpolate(frame, [0, fps * 0.18], [0, 1], {
-    extrapolateRight: "clamp",
-  });
-  const mainScale = interpolate(mainProgress, [0, 1], [0.95, 1]);
-
-  // Verified badge
-  const badgeDelay = fps * 0.3;
-  const badgeProgress = spring({
-    frame: frame - badgeDelay,
-    fps,
-    config: { damping: 150, stiffness: 100, mass: 1 },
-  });
-  const badgeOpacity = interpolate(
-    frame,
-    [badgeDelay, badgeDelay + fps * 0.15],
-    [0, 1],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-  const badgeScale = interpolate(badgeProgress, [0, 1], [0.8, 1]);
-
-  // Badge glow pulse
-  const badgeGlow = interpolate(
-    frame,
-    [badgeDelay + fps * 0.15, badgeDelay + fps * 0.4, badgeDelay + fps * 1],
-    [0, 20, 12],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-
-  // Headline
-  const headlineDelay = fps * 0.5;
-  const headlineOpacity = interpolate(
-    frame,
-    [headlineDelay, headlineDelay + fps * 0.2],
-    [0, 1],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-  const headlineY = interpolate(
-    frame,
-    [headlineDelay, headlineDelay + fps * 0.3],
-    [20, 0],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  );
-
-  // CTA button
-  const ctaDelay = fps * 1.0;
-  const ctaProgress = spring({
-    frame: frame - ctaDelay,
-    fps,
-    config: { damping: 150, stiffness: 70, mass: 1.2 },
-  });
-  const ctaOpacity = interpolate(
-    frame,
-    [ctaDelay, ctaDelay + fps * 0.18],
-    [0, 1],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-  const ctaY = interpolate(ctaProgress, [0, 1], [15, 0]);
-  const ctaScale = interpolate(ctaProgress, [0, 1], [0.95, 1]);
-
-  // CTA glow
-  const ctaGlow = interpolate(
-    frame,
-    [ctaDelay + fps * 0.2, ctaDelay + fps * 0.6, ctaDelay + fps * 1.5],
-    [0, 35, 25],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-
-  // GitHub
-  const githubDelay = ctaDelay + fps * 0.4;
-  const githubOpacity = interpolate(
-    frame,
-    [githubDelay, githubDelay + fps * 0.2],
-    [0, 0.6],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  );
-  const githubY = interpolate(
-    frame,
-    [githubDelay, githubDelay + fps * 0.25],
-    [8, 0],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  );
-
-  // Background
-  const bgGlow = interpolate(
-    frame,
-    [0, fps * 1, fps * 2.5],
-    [0.015, 0.045, 0.035],
-    { extrapolateRight: "clamp" }
-  );
-
-  return (
-    <AbsoluteFill style={{ opacity: sceneFade }}>
-      <CinematicBackground intensity={bgGlow} focusY={50} />
-
-      <AbsoluteFill
-        style={{
-          justifyContent: "center",
-          alignItems: "center",
-          fontFamily: "system-ui, -apple-system, sans-serif",
-        }}
-      >
-        <div
-          style={{
-            opacity: mainOpacity,
-            transform: `scale(${mainScale})`,
-            textAlign: "center",
-          }}
-        >
-          {/* Verified Badge */}
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 10,
-              backgroundColor: hexToRgba(COLORS.primary, 0.1),
-              border: `1px solid ${hexToRgba(COLORS.primary, 0.3)}`,
-              borderRadius: 100,
-              padding: "10px 22px",
-              marginBottom: 28,
-              opacity: badgeOpacity,
-              transform: `scale(${badgeScale})`,
-              boxShadow: `0 0 ${badgeGlow}px ${hexToRgba(COLORS.primary, 0.3)}`,
-            }}
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill={COLORS.primary}>
-              <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z" />
-            </svg>
-            <span
-              style={{
-                color: COLORS.primary,
-                fontSize: 12,
-                fontWeight: 600,
-                letterSpacing: 2,
-              }}
-            >
-              100% AI-OPERATED
-            </span>
-          </div>
-
-          {/* Headline */}
-          <div
-            style={{
-              opacity: headlineOpacity,
-              transform: `translateY(${headlineY}px)`,
-            }}
-          >
-            <div
-              style={{
-                fontSize: 46,
-                fontWeight: 800,
-                color: COLORS.white,
-                marginBottom: 8,
-                lineHeight: 1.15,
-                letterSpacing: -1.5,
-              }}
-            >
-              The First AI-Run
-            </div>
-            <div
-              style={{
-                fontSize: 46,
-                fontWeight: 800,
-                background: `linear-gradient(135deg, ${COLORS.primary} 0%, ${COLORS.secondary} 100%)`,
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                letterSpacing: -1.5,
-              }}
-            >
-              Token Project
-            </div>
-            <div
-              style={{
-                color: COLORS.grayMid,
-                fontSize: 16,
-                marginTop: 14,
-                fontWeight: 400,
-              }}
-            >
-              Built, operated, and distributed by Ralph
-            </div>
-          </div>
-
-          {/* CTA */}
-          <div
-            style={{
-              marginTop: 36,
-              opacity: ctaOpacity,
-              transform: `translateY(${ctaY}px) scale(${ctaScale})`,
-            }}
-          >
-            <div
-              style={{
-                display: "inline-block",
-                background: `linear-gradient(135deg, ${COLORS.primary} 0%, ${COLORS.primaryMuted} 100%)`,
-                color: COLORS.black,
-                fontSize: 18,
-                fontWeight: 700,
-                padding: "14px 42px",
-                borderRadius: 12,
-                boxShadow: `0 0 ${ctaGlow}px ${hexToRgba(COLORS.primary, 0.4)}, 0 8px 25px rgba(0, 0, 0, 0.3)`,
-                letterSpacing: -0.3,
-              }}
-            >
-              fed.markets
-            </div>
-          </div>
-
-          {/* GitHub */}
-          <div
-            style={{
-              marginTop: 28,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 8,
-              opacity: githubOpacity,
-              transform: `translateY(${githubY}px)`,
-            }}
-          >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill={COLORS.grayMid}>
-              <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z" />
-            </svg>
-            <span style={{ color: COLORS.grayMid, fontSize: 13 }}>
-              Verify on GitHub
-            </span>
-          </div>
-        </div>
-      </AbsoluteFill>
-    </AbsoluteFill>
-  );
-};
-
-// ============================================================================
-// MAIN COMPOSITION - 22 seconds with refined scene timing
+// MAIN COMPOSITION - Cinematic terminal boot sequence
 // ============================================================================
 export const FiftyKHype: React.FC<FiftyKHypeProps> = ({
-  totalDistributed = "$50,000+",
+  totalDistributed = "$51,000",
   distributions = 400,
-  holders = 1800,
-  githubUrl = "github.com/anthropics/fed",
+  holders = 1828,
 }) => {
+  const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Scene timing (total 22 seconds)
-  // Scene 1: Terminal (0-3.5s)
-  // Scene 2: Agent Boot (3-7.5s) - overlaps for smooth transition
-  // Scene 3: Phase Transition (7-12s)
-  // Scene 4: Stats (11.5-17s)
-  // Scene 5: CTA (16.5-22s)
+  // ========== TIMING CONSTANTS ==========
+  const POWER_ON_DURATION = fps * 0.6;
+  const TYPING_START = fps * 0.8;
+  const TYPING_SPEED = 0.22; // chars per frame - slightly faster for snappier feel
+  const COMMAND = "./ralph-fed.sh";
+  const ENTER_FRAME = TYPING_START + COMMAND.length / TYPING_SPEED + fps * 0.4;
+
+  // Boot sequence timing
+  const BOOT_START = ENTER_FRAME + fps * 0.4;
+  const AGENT_INTERVAL = fps * 0.65; // Tighter interval for more energy
+
+  // Stats display timing
+  const STATS_START = BOOT_START + 5 * AGENT_INTERVAL + fps * 0.8;
+
+  // Final message timing
+  const FINAL_START = STATS_START + fps * 3.2;
+
+  // ========== POWER ON SEQUENCE ==========
+  // Cinematic flicker like a monitor turning on
+  const flicker =
+    frame < fps * 0.05 ? 0 :
+    frame < fps * 0.08 ? 0.15 :
+    frame < fps * 0.12 ? 0.03 :
+    frame < fps * 0.16 ? 0.4 :
+    frame < fps * 0.2 ? 0.08 :
+    frame < fps * 0.25 ? 0.7 : 1;
+
+  const powerOnOpacity = interpolate(
+    frame,
+    [fps * 0.25, POWER_ON_DURATION],
+    [0.7, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) * flicker;
+
+  // ========== TERMINAL ANIMATIONS ==========
+  const terminalProgress = spring({
+    frame: frame - fps * 0.15,
+    fps,
+    config: { damping: 120, stiffness: 90, mass: 1.1 },
+  });
+  const terminalScale = interpolate(terminalProgress, [0, 1], [0.92, 1]);
+  const terminalOpacity = interpolate(frame, [fps * 0.2, fps * 0.5], [0, 1], {
+    extrapolateRight: "clamp",
+  }) * powerOnOpacity;
+
+  // Terminal glow pulses during boot
+  const terminalGlow = frame >= BOOT_START
+    ? interpolate(
+        frame,
+        [BOOT_START, BOOT_START + fps * 2, STATS_START, STATS_START + fps * 1],
+        [0, 25, 25, 40],
+        { extrapolateRight: "clamp" }
+      )
+    : 0;
+
+  // Typing animation with realistic variation
+  const baseTypedChars = Math.max(0, (frame - TYPING_START) * TYPING_SPEED);
+  const typedChars = Math.min(COMMAND.length, Math.floor(baseTypedChars));
+  const cursorBlink = Math.floor(frame / 12) % 2 === 0;
+  const showCursor = frame >= TYPING_START - fps * 0.2 && frame < ENTER_FRAME + fps * 0.3;
+
+  const enterPressed = frame >= ENTER_FRAME;
+
+  // Agent data
+  const agents = [
+    { name: "Treasury", icon: "🏦", color: COLORS.green },
+    { name: "Marketing", icon: "📢", color: COLORS.purple },
+    { name: "Twitter/X", icon: "𝕏", color: COLORS.cyan },
+    { name: "Website", icon: "🌐", color: COLORS.blue },
+    { name: "Economist", icon: "📊", color: COLORS.orange },
+  ];
+
+  // Agent status calculations with spring animations
+  const getAgentStatus = (index: number): "booting" | "online" | "ready" => {
+    const agentStart = BOOT_START + index * AGENT_INTERVAL;
+    const onlineFrame = agentStart + fps * 0.35;
+    const readyFrame = agentStart + fps * 0.55;
+
+    if (frame < agentStart) return "booting";
+    if (frame < onlineFrame) return "booting";
+    if (frame < readyFrame) return "online";
+    return "ready";
+  };
+
+  const getAgentAnimations = (index: number) => {
+    const agentStart = BOOT_START + index * AGENT_INTERVAL;
+
+    const progress = spring({
+      frame: frame - agentStart,
+      fps,
+      config: { damping: 80, stiffness: 120, mass: 0.8 },
+    });
+
+    const opacity = interpolate(progress, [0, 0.5], [0, 1], {
+      extrapolateRight: "clamp",
+    });
+
+    const scale = interpolate(progress, [0, 1], [0.9, 1]);
+
+    const status = getAgentStatus(index);
+    const glowIntensity = status === "ready" ? 8 : status === "online" ? 4 : 0;
+
+    return { opacity, scale, glowIntensity };
+  };
+
+  // Progress bars
+  const systemProgress = interpolate(
+    frame,
+    [BOOT_START, BOOT_START + fps * 1.8],
+    [0, 100],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  const networkProgress = interpolate(
+    frame,
+    [BOOT_START + fps * 0.3, BOOT_START + fps * 2.2],
+    [0, 100],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // All agents ready
+  const allReady = frame >= BOOT_START + 5 * AGENT_INTERVAL + fps * 0.55;
+
+  // Stats animations
+  const statsProgress = spring({
+    frame: frame - STATS_START,
+    fps,
+    config: { damping: 100, stiffness: 80, mass: 1 },
+  });
+
+  const statsOpacity = interpolate(statsProgress, [0, 0.5], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+
+  // Parse numeric value from totalDistributed string (e.g., "$51,000" -> 51000)
+  const parsedTotal = parseInt(totalDistributed.replace(/[^0-9]/g, ""), 10) || 51000;
+
+  const statCards = [
+    {
+      label: "Total Distributed",
+      numericValue: parsedTotal,
+      prefix: "$",
+      suffix: "+",
+      color: COLORS.green,
+    },
+    {
+      label: "Distributions",
+      numericValue: distributions,
+      prefix: "",
+      suffix: "+",
+      color: COLORS.cyan,
+    },
+    {
+      label: "Holders Earning",
+      numericValue: holders,
+      prefix: "",
+      suffix: "+",
+      color: COLORS.purple,
+    },
+  ];
+
+  const getStatAnimation = (index: number) => {
+    const delay = 0.18 * index; // Slightly longer stagger for breathing room
+    const progress = spring({
+      frame: frame - STATS_START - delay * fps,
+      fps,
+      config: { damping: 80, stiffness: 100, mass: 0.9 },
+    });
+
+    const opacity = interpolate(progress, [0, 0.5], [0, 1], {
+      extrapolateRight: "clamp",
+    });
+
+    const scale = interpolate(progress, [0, 1], [0.85, 1]);
+
+    // Count animation - starts after card appears, runs for 1.2 seconds
+    const countStart = STATS_START + delay * fps + fps * 0.2;
+    const countDuration = fps * 1.2;
+    const countProgress = interpolate(
+      frame,
+      [countStart, countStart + countDuration],
+      [0, 1],
+      { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+    );
+
+    // Glow pulse intensifies as count completes
+    const landFrame = countStart + countDuration;
+    const glowIntensity =
+      frame > landFrame - fps * 0.1
+        ? interpolate(
+            frame,
+            [landFrame - fps * 0.1, landFrame + fps * 0.1, landFrame + fps * 0.6],
+            [5, 25, 10],
+            { extrapolateRight: "clamp" }
+          )
+        : interpolate(
+            frame,
+            [STATS_START + delay * fps, countStart],
+            [0, 5],
+            { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+          );
+
+    return { opacity, scale, glowIntensity, countProgress };
+  };
+
+  // Final message animation
+  const finalProgress = spring({
+    frame: frame - FINAL_START,
+    fps,
+    config: { damping: 100, stiffness: 70, mass: 1.1 },
+  });
+
+  const finalOpacity = interpolate(finalProgress, [0, 0.5], [0, 1], {
+    extrapolateRight: "clamp",
+  });
+
+  const finalScale = interpolate(finalProgress, [0, 1], [0.95, 1]);
+
+  // Background color shift during stats reveal
+  const bgColor = frame >= STATS_START
+    ? COLORS.green
+    : COLORS.cyan;
+
+  const bgIntensity = interpolate(
+    frame,
+    [0, BOOT_START, STATS_START, FINAL_START],
+    [0.008, 0.015, 0.025, 0.02],
+    { extrapolateRight: "clamp" }
+  );
 
   return (
-    <AbsoluteFill style={{ backgroundColor: COLORS.black }}>
-      {/* Scene 1: Terminal (0-3.5s) */}
-      <Sequence from={0} durationInFrames={Math.round(3.5 * fps)}>
-        <TerminalScene />
-      </Sequence>
+    <AbsoluteFill>
+      <CinematicBackground intensity={bgIntensity} focusY={55} color={bgColor} />
 
-      {/* Scene 2: Agent Boot (3-7.5s) */}
-      <Sequence from={Math.round(3 * fps)} durationInFrames={Math.round(4.5 * fps)}>
-        <AgentBootScene />
-      </Sequence>
+      {/* Subtle scan line effect */}
+      <AbsoluteFill
+        style={{
+          background: `repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 2px,
+            rgba(0, 0, 0, 0.02) 2px,
+            rgba(0, 0, 0, 0.02) 4px
+          )`,
+          pointerEvents: "none",
+          opacity: 0.5,
+        }}
+      />
 
-      {/* Scene 3: Phase Transition (7-12s) */}
-      <Sequence from={Math.round(7 * fps)} durationInFrames={Math.round(5 * fps)}>
-        <PhaseTransitionScene />
-      </Sequence>
+      <AbsoluteFill
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <TerminalWindow
+          scale={terminalScale}
+          opacity={terminalOpacity}
+          width={900}
+          glowIntensity={terminalGlow}
+          glowColor={bgColor}
+        >
+          {/* Command prompt */}
+          <PromptLine
+            command={COMMAND}
+            typedChars={typedChars}
+            showCursor={showCursor}
+            cursorBlink={cursorBlink}
+          />
 
-      {/* Scene 4: Stats Showcase (11.5-17s) */}
-      <Sequence from={Math.round(11.5 * fps)} durationInFrames={Math.round(5.5 * fps)}>
-        <StatsShowcaseScene
-          totalDistributed={totalDistributed}
-          distributions={distributions}
-          holders={holders}
-        />
-      </Sequence>
+          {/* After enter - boot sequence */}
+          {enterPressed && (
+            <>
+              {/* Initial boot message with dramatic reveal */}
+              <div style={{ marginTop: 18, marginBottom: 18 }}>
+                <LogLine
+                  text="Federal Reserve System v2.0"
+                  color={COLORS.green}
+                  prefix="[RALPH]"
+                  prefixColor={COLORS.cyan}
+                  bold
+                />
+                <LogLine
+                  text="Powered by Claude Opus 4.5 • Autonomous Protocol"
+                  color={COLORS.terminalMuted}
+                  indent={1}
+                />
+              </div>
 
-      {/* Scene 5: CTA (16.5-22s) */}
-      <Sequence from={Math.round(16.5 * fps)} durationInFrames={Math.round(5.5 * fps)}>
-        <CTAScene githubUrl={githubUrl} />
-      </Sequence>
+              {/* System initialization */}
+              {frame >= BOOT_START && (
+                <div style={{ marginBottom: 18 }}>
+                  <LogLine
+                    text="Initializing core subsystems..."
+                    color={COLORS.terminalText}
+                    prefix={
+                      systemProgress < 100 ? (
+                        <Spinner frame={frame} />
+                      ) : (
+                        "✓"
+                      )
+                    }
+                    prefixColor={
+                      systemProgress < 100 ? COLORS.cyan : COLORS.green
+                    }
+                  />
+                  <div style={{ marginLeft: 30, marginTop: 10 }}>
+                    <ProgressBar
+                      progress={systemProgress}
+                      label="Core engine"
+                      color={COLORS.green}
+                    />
+                    <ProgressBar
+                      progress={networkProgress}
+                      label="Network sync"
+                      color={COLORS.cyan}
+                    />
+                  </div>
+                </div>
+              )}
+
+              {/* Agent boot sequence */}
+              {frame >= BOOT_START + fps * 0.8 && (
+                <div style={{ marginTop: 22, marginBottom: 18 }}>
+                  <LogLine
+                    text="Spawning autonomous agents..."
+                    color={COLORS.terminalText}
+                    prefix={allReady ? "✓" : <Spinner frame={frame} color={COLORS.purple} />}
+                    prefixColor={allReady ? COLORS.green : COLORS.purple}
+                  />
+                  <div style={{ marginTop: 14, marginLeft: 10 }}>
+                    {agents.map((agent, i) => {
+                      const anim = getAgentAnimations(i);
+                      return (
+                        <AgentStatus
+                          key={agent.name}
+                          name={agent.name}
+                          icon={agent.icon}
+                          color={agent.color}
+                          status={getAgentStatus(i)}
+                          opacity={anim.opacity}
+                          scale={anim.scale}
+                          glowIntensity={anim.glowIntensity}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Stats display */}
+              {frame >= STATS_START && (
+                <div style={{ marginTop: 26, opacity: statsOpacity }}>
+                  <LogLine
+                    text="Treasury state loaded successfully"
+                    color={COLORS.green}
+                    prefix="✓"
+                    prefixColor={COLORS.green}
+                    bold
+                  />
+                  <div
+                    style={{
+                      marginTop: 16,
+                      display: "flex",
+                      gap: 16,
+                      justifyContent: "flex-start",
+                    }}
+                  >
+                    {statCards.map((stat, i) => {
+                      const anim = getStatAnimation(i);
+                      return (
+                        <StatCard
+                          key={stat.label}
+                          label={stat.label}
+                          numericValue={stat.numericValue}
+                          prefix={stat.prefix}
+                          suffix={stat.suffix}
+                          color={stat.color}
+                          opacity={anim.opacity}
+                          scale={anim.scale}
+                          glowIntensity={anim.glowIntensity}
+                          countProgress={anim.countProgress}
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Final ready message - triumphant conclusion */}
+              {frame >= FINAL_START && (
+                <div
+                  style={{
+                    marginTop: 28,
+                    opacity: finalOpacity,
+                    transform: `scale(${finalScale})`,
+                  }}
+                >
+                  <div
+                    style={{
+                      padding: "20px 28px",
+                      backgroundColor: hexToRgba(COLORS.green, 0.1),
+                      borderRadius: 14,
+                      border: `1px solid ${hexToRgba(COLORS.green, 0.25)}`,
+                      boxShadow: `
+                        0 0 40px ${hexToRgba(COLORS.green, 0.2)},
+                        inset 0 1px 0 ${hexToRgba(COLORS.green, 0.1)}
+                      `,
+                    }}
+                  >
+                    <div
+                      style={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 12,
+                        marginBottom: 14,
+                      }}
+                    >
+                      <span style={{ fontSize: 20 }}>🏛️</span>
+                      <span
+                        style={{
+                          color: COLORS.green,
+                          fontSize: 16,
+                          fontWeight: 700,
+                          letterSpacing: 0.3,
+                        }}
+                      >
+                        All systems operational
+                      </span>
+                    </div>
+                    <div
+                      style={{
+                        marginLeft: 32,
+                        color: COLORS.terminalText,
+                        fontSize: 15,
+                        fontWeight: 500,
+                        marginBottom: 16,
+                      }}
+                    >
+                      The money printer is ready.
+                    </div>
+                    <div
+                      style={{
+                        marginLeft: 32,
+                        display: "flex",
+                        gap: 24,
+                        alignItems: "center",
+                        flexWrap: "wrap",
+                      }}
+                    >
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 8,
+                          padding: "6px 12px",
+                          backgroundColor: hexToRgba(COLORS.purple, 0.12),
+                          borderRadius: 6,
+                          border: `1px solid ${hexToRgba(COLORS.purple, 0.2)}`,
+                        }}
+                      >
+                        <span style={{ fontSize: 12 }}>🤖</span>
+                        <span
+                          style={{
+                            color: COLORS.purple,
+                            fontSize: 11,
+                            fontWeight: 600,
+                            letterSpacing: 0.8,
+                            textTransform: "uppercase",
+                          }}
+                        >
+                          100% AI-operated
+                        </span>
+                      </div>
+                      <div
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: 8,
+                          padding: "6px 12px",
+                          backgroundColor: hexToRgba(COLORS.cyan, 0.12),
+                          borderRadius: 6,
+                          border: `1px solid ${hexToRgba(COLORS.cyan, 0.2)}`,
+                        }}
+                      >
+                        <span style={{ fontSize: 12 }}>⚡</span>
+                        <span
+                          style={{
+                            color: COLORS.cyan,
+                            fontSize: 11,
+                            fontWeight: 600,
+                            letterSpacing: 0.8,
+                            textTransform: "uppercase",
+                          }}
+                        >
+                          Verifiable on GitHub
+                        </span>
+                      </div>
+                      <span
+                        style={{
+                          color: COLORS.white,
+                          fontSize: 16,
+                          fontWeight: 700,
+                          letterSpacing: -0.3,
+                          textShadow: `0 0 20px ${hexToRgba(COLORS.green, 0.4)}`,
+                        }}
+                      >
+                        fed.markets
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </>
+          )}
+        </TerminalWindow>
+      </AbsoluteFill>
     </AbsoluteFill>
   );
 };
