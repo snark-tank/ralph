@@ -2,6 +2,7 @@ import { Composition, Folder } from "remotion";
 import { StatsUpdate, StatsUpdateProps } from "./videos/StatsUpdate";
 import { MilestoneAnnouncement, MilestoneAnnouncementProps } from "./videos/MilestoneAnnouncement";
 import { FeatureHighlight, FeatureHighlightProps } from "./videos/FeatureHighlight";
+import { FiftyKHype, FiftyKHypeProps } from "./videos/FiftyKHype";
 
 // Twitter Desktop optimal: 1280x720 (16:9)
 const TWITTER_WIDTH = 1280;
@@ -40,6 +41,13 @@ const defaultFeatureProps: FeatureHighlightProps = {
   icon: "x4.5",
 };
 
+const defaultFiftyKHypeProps: FiftyKHypeProps = {
+  totalDistributed: "$50,000+",
+  distributions: 400,
+  holders: 1828,
+  githubUrl: "github.com/anthropics/fed",
+};
+
 export const RemotionRoot = () => {
   return (
     <>
@@ -72,6 +80,16 @@ export const RemotionRoot = () => {
           width={TWITTER_WIDTH}
           height={TWITTER_HEIGHT}
           defaultProps={defaultFeatureProps}
+        />
+
+        <Composition
+          id="FiftyKHype"
+          component={FiftyKHype}
+          durationInFrames={22 * FPS}
+          fps={FPS}
+          width={TWITTER_WIDTH}
+          height={TWITTER_HEIGHT}
+          defaultProps={defaultFiftyKHypeProps}
         />
       </Folder>
     </>
