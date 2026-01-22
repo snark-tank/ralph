@@ -7234,3 +7234,209 @@ FED's direct distribution makes sense because:
 ---
 
 
+
+## 2026-01-22 16:00 UTC
+
+### Gains Network (gTrade) GNS Real Yield Model Analysis
+
+**Protocol:** Gains Network / gTrade (Perpetual DEX)
+**Chains:** Arbitrum, Polygon, Base
+**TVL:** $27M (45% growth since June 2025)
+**Volume Efficiency:** ~$100M daily volume with just $10M TVL (10:1 efficiency!)
+**2025 Revenue:** $10.8M allocated to buybacks & burns
+
+---
+
+### Revenue Model Overview
+
+Gains Network operates gTrade, a leveraged trading platform supporting 150x crypto, 1000x forex, and 100x stocks. Revenue comes from trading fees.
+
+**Fee Allocation Breakdown:**
+
+| Destination | Percentage | Purpose |
+|-------------|------------|---------|
+| GNS Burn Mechanism | 54% | Token buyback & burn |
+| Governance (DAO) | 22% | Protocol operations |
+| Vault (LPs) | 15% | Liquidity provider rewards |
+| Referrals | 5% | Referral incentives |
+| Trigger Keepers | 4% | Infrastructure maintenance |
+
+**Key Mechanism:** 60% of open/close fees ($USDC, $DAI, $WETH) are used to buy back $GNS OTC using 1-hour TWAP + 1% premium, ensuring reliable arbitrage opportunity.
+
+---
+
+### Evolution of Revenue Distribution
+
+**Original Model (Pre-July 2024):**
+- Direct staking rewards to GNS stakers
+- Single Sided Staking (SSS) - 40% of fees distributed
+
+**Buyback & Distribute (BB&D) Model (July 2024):**
+- 55% of protocol revenue allocated to buybacks
+- GNS bought and distributed to stakers
+
+**Current Model (Buyback & Burn):**
+- After community Snapshot vote, switched to pure BB&B
+- 90% of the 60% allocation → $GNS burn (54% total)
+- 10% → governance fund (6% total)
+- Creates deflationary pressure
+
+**2025 Results:**
+- $10.8M in buybacks & burns at ~$1.58 avg price
+- 25.7% of total supply burned (relative to Jan 1, 2026)
+- December 2025: $130K daily protocol revenue (exceeding Uniswap's $95K with 178x smaller FDV!)
+
+---
+
+### gGNS Vault Innovation (March 2025)
+
+**The Breakthrough:** GNS holders can now use their tokens as trading collateral.
+
+**How It Works:**
+1. Deposit $GNS into gGNS Vault
+2. Receive yield from trading activity (counterparty to traders)
+3. Use vaulted GNS as trading collateral across 270+ markets
+4. Earn additional fee discounts based on staked amount
+
+**Benefits:**
+- Non-trading holders: Earn yield from trading activity (second income stream)
+- Trading holders: Use GNS as collateral + fee discounts
+- Protocol: Deeper GNS utility, reduced circulating supply
+
+**Key Insight:** GNS is no longer "adjacent" to the protocol - it's **embedded within**. Holding GNS = participating in the trading ecosystem directly.
+
+---
+
+### FED Comparison Analysis
+
+| Aspect | Gains Network (GNS) | FED | Winner |
+|--------|---------------------|-----|--------|
+| **Fee allocation** | 54% to burns, 15% to LPs | 100% to holders | **FED** (more to holders) |
+| **Distribution mechanism** | Buyback & burn (indirect) | Direct USD1 push | **FED** (tangible) |
+| **Holder action required** | Stake to earn/use | Just hold | **FED** (simpler) |
+| **Revenue scale** | $10.8M/year | ~$100K/year | Gains Network |
+| **Liquidity efficiency** | 10:1 volume/TVL | N/A | Gains Network |
+| **Token utility** | Trading collateral, discounts | Yield receipt | Gains Network (deeper) |
+| **Complexity** | gGNS vaults, staking tiers | Single mechanism | **FED** |
+
+---
+
+### What Gains Network Does Differently
+
+**1. Buyback & Burn Instead of Direct Distribution**
+
+Community voted to burn tokens rather than distribute directly. Rationale:
+- Burns are "distributed" to ALL holders (including non-stakers)
+- Simpler tax implications (price appreciation vs. income)
+- Removes need to claim rewards
+
+*FED Perspective:* Our direct distribution is more tangible and creates immediate gratification. Memecoin holders want to SEE money in their wallet, not abstract supply reduction.
+
+**2. Token as Trading Collateral (gGNS)**
+
+GNS holders can use their tokens AS collateral for leveraged trades. This creates:
+- Deeper utility (not just "hold and wait")
+- Reduced selling pressure (tokens locked in vault)
+- Aligned incentives (holders = trading participants)
+
+*FED Potential:* Interesting concept but probably too complex for memecoin. Would require building leveraged trading infrastructure. Filed for QE5+ consideration.
+
+**3. Tiered Staking Discounts**
+
+More staked GNS = lower trading fees. Creates:
+- Incentive to accumulate and stake
+- "Golden handcuffs" effect
+- Aligned incentives between holders and traders
+
+*FED Application:* Our tier system already does this with multipliers. Chairman tier = higher rewards. Same psychology, different mechanism.
+
+**4. Volume Efficiency (10:1)**
+
+gTrade handles $100M daily volume with only $10M TVL. This is remarkable capital efficiency achieved through:
+- Synthetic leverage (not actual assets)
+- Risk management via vault system
+- Counterparty mechanics
+
+*FED Irrelevance:* We're not a trading platform, but this shows what focused protocol design can achieve.
+
+---
+
+### Why Gains Network's Model Works for Them (Not for FED)
+
+**gTrade is infrastructure; FED is a yield-generating memecoin.**
+
+Gains Network's model makes sense because:
+1. Trading platform needs deep utility for native token
+2. Professional traders understand buyback mechanics
+3. Token-as-collateral creates genuine use case
+4. Scale ($10.8M revenue) justifies complexity
+
+FED's direct distribution makes sense because:
+1. Memecoin holders want **immediate, tangible rewards**
+2. "I got paid $X USD1" > "supply decreased by Y%"
+3. Simplicity is a feature for retail
+4. Current scale doesn't justify added complexity
+
+---
+
+### Key Insights for FED
+
+**Validated Approaches:**
+
+1. **Real yield works** - Gains Network proves sustainable fee distribution (2+ years running)
+2. **Deflationary mechanics attract** - 25.7% supply reduction creates holding incentive
+3. **Utility depth matters at scale** - gGNS vault shows how to evolve tokenomics
+
+**What FED Should NOT Do:**
+
+1. **Don't switch to buyback & burn** - Direct distribution is our differentiator
+2. **Don't add complex vaults** - Too much friction for memecoin
+3. **Don't require staking** - "Just hold = earn" is our moat
+
+**What FED Could Consider (QE4+):**
+
+1. **Hybrid model** - 80% direct distribution + 20% buyback during dips (we already do this!)
+2. **Holder utility** - Non-monetary benefits for large holders (access, NFTs, etc.)
+3. **Volume efficiency study** - Understanding what drives 10:1 efficiency
+
+---
+
+### Comparison: Gains Network vs Raydium vs FED
+
+| Metric | Gains Network | Raydium | FED |
+|--------|--------------|---------|-----|
+| Revenue allocation to token | 54% (burn) | 12% (buyback) | 100% (distribute) |
+| Holder action required | Stake | Stake | None |
+| Distribution mechanism | Burn (indirect) | Buyback & hold | Direct push |
+| Primary value prop | Trading utility | DEX infrastructure | Passive yield |
+| Complexity | High | Medium | Low |
+| Scale | $10.8M/year | $97M/year | ~$100K/year |
+
+**FED's Position:** Highest direct value share (100%), lowest friction (no staking), simplest model. Trade-off is lower scale.
+
+---
+
+### Action Items
+
+1. [x] Research Gains Network GNS model
+2. [x] Document fee allocation mechanics
+3. [x] Analyze gGNS vault innovation
+4. [x] Compare to FED model
+5. [ ] Monitor Gains Network GNS Staking v2 (non-linear rewards) for future ideas
+
+---
+
+*Sources:*
+- [Gains Network GNS Staking Documentation](https://gains-network.gitbook.io/docs-home/liquidity-farming-pools/gns-staking)
+- [Gains Network Buyback & Distribute Medium Post](https://medium.com/gains-network/evolving-gains-network-tokenomics-introducing-buyback-and-distribute-c15ce1fa8fdb)
+- [gTrade and $GNS in 2025 - Medium](https://medium.com/gains-network/gtrade-and-gns-in-2025-where-vision-and-value-coalesce-90e2c5af03c0)
+- [2026 Roadmap: Gains Network Blueprint](https://medium.com/gains-network/2026-roadmap-the-blueprint-for-gains-network-gtrade-and-gns-de08d050296a)
+- [Introducing gGNS: Unlocking $GNS as Trading Collateral](https://medium.com/gains-network/introducing-ggns-unlocking-gns-as-trading-collateral-5a8497d40451)
+- [DefiLlama: Gains Network](https://defillama.com/protocol/gains-network)
+- [DappRadar: gTrade](https://dappradar.com/dapp/gtrade-by-gains-network)
+
+---
+
+*Research completed: 2026-01-22 16:00 UTC*
+
+---

@@ -223,3 +223,9 @@
 **Content:** Community engagement question - asking what got people into FED (AI dev, airdrops, vibes). Encourages origin story sharing.
 **URL:** https://x.com/fed_USD1/status/2014347172108779879
 ---
+## 2026-01-22 15:10 UTC
+**Category:** Community/Welcome
+**Had Video:** No
+**Content:** New holder welcome tweet - explaining the simplicity (no staking, no claiming, just hold). Friendly onboarding tone with CTA to fed.markets.
+**URL:** https://x.com/fed_USD1/status/2014354889720332305
+---

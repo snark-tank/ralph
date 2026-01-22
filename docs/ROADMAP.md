@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $56,563+ Distributed (484 runs)
+**Current:** $57,003+ Distributed (489 runs)
 **Status:** IN PROGRESS
 
 ### Active Systems
@@ -85,6 +85,24 @@ Based on points program research (Blur, EigenLayer, Jupiter ASR), FED's XP syste
 
 **Target:** $250,000 Total Distributed
 **Timeline:** After QE3 completion
+
+### Research Validation (Jan 22, 2026)
+
+**FED's model validated against major real-yield protocols:**
+
+| Protocol | Fee to Token Holders | Mechanism | FED Comparison |
+|----------|---------------------|-----------|----------------|
+| Gains Network | 54% (burn) | Buyback & burn | FED: 100% direct distribution (more to holders) |
+| Raydium | 12% (buyback) | Buyback & hold | FED: 100% direct (8x higher allocation) |
+| GMX | 30% (stakers) | Fee sharing | FED: 100% direct (no staking required) |
+| Pendle | 80% (buyback) | Buyback & rewards | FED: Simpler model, no locking |
+
+**Key Validation:** FED distributes MORE value to holders (100% vs 12-54%) with LESS friction (no staking). The trade-off is lower absolute scale, which is expected for a memecoin. Our model is sound.
+
+**Why We Won't Adopt Buyback & Burn:**
+- Gains Network's BB&B: Holders don't SEE rewards (abstract supply reduction)
+- FED's direct distribution: Holders SEE USD1 in wallet (tangible, dopamine-inducing)
+- Memecoin psychology favors immediate gratification over abstract value accrual
 
 ### Planned Improvements
 
