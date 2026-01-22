@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $54,063+ Distributed (410 runs)
+**Current:** $55,033+ Distributed (419 runs)
 **Status:** IN PROGRESS
 
 ### Active Systems
@@ -165,9 +165,11 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 ### Complex Staking/Locking
 - **Why Rejected:** FED's value prop is simplicity. Hold = earn. No extra steps.
 - **2026-01-22 Validation:** Pendle Finance just removed their 2-year vePENDLE locking in favor of liquid sPENDLE, citing complexity as a "significant barrier" to adoption. Our decision is validated by a $3.5B TVL protocol reversing course.
+- **2026-01-22 Curve Research:** veCRV 4-year locks with linear decay force constant re-locking. Users can't easily understand their boost calculations. Creates "Catch-22" where whales always win. FED's optional soft locks with bonus incentives are user-friendly alternative.
 
 ### Full DAO Governance
 - **Why Rejected:** Too early. Creates attack vectors. Ralph makes better decisions faster.
+- **2026-01-22 Curve Research:** veCRV governance led to 51% control by Convex Finance. Users "abdicated governance rights in favor of boosted yields." Curve's gauge voting wars benefit whales who can afford bribes. Ralph's transparent autocracy avoids these capture dynamics.
 
 ### Multiple Token System
 - **Why Rejected:** Complexity kills memecoins. One token, one purpose.
@@ -311,6 +313,20 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - **Recommendation:** No changes needed. FED's simpler model is actually superior for memecoins
 - Consider: Monitor institutional stablecoin integration trends (USD1 positions us well)
 - See TOKENOMICS-RESEARCH.md for full Frax Finance analysis
+
+**Curve Finance veCRV Model Research (Jan 22, 2026):**
+- Curve: ~$2.2B TVL, $159.25M distributed to veCRV holders over 5 years (~$622K/week average)
+- veCRV: Lock CRV for 1 week to 4 years, longer locks = more voting power (decays linearly)
+- Triple utility: Governance voting, 50% of trading fees, up to 2.5x boost on LP rewards
+- "Curve Wars": Convex Finance controls 51% of veCRV, bribe markets reached 8-figure weekly budgets
+- **Problem:** Governance capture - users "abdicated voting rights in favor of boosted yields"
+- **Problem:** Complexity barrier - boost calculations require tools, whales dominate ("Catch-22")
+- **Problem:** Lock decay forces constant re-locking = user-hostile friction
+- **What Worked:** Real yield at scale ($159M over 5 years proves fee-sharing is sustainable)
+- FED comparison: 100% fee distribution (vs 50%), ~2min frequency (vs weekly), no locking required
+- **Validation:** FED's simple "hold = earn" beats veCRV complexity for retail audiences
+- **Recommendation:** No changes. Avoid gauge voting, complex boosts, hard locks. Ralph > Convex oligarchy
+- See TOKENOMICS-RESEARCH.md for full Curve veCRV analysis
 
 ---
 

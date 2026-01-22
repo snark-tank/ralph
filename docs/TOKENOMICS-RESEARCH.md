@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $54,063+ USD1
-- **Distribution Count:** 410 distributions
+- **Total Distributed:** $55,033+ USD1
+- **Distribution Count:** 419 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -2475,3 +2475,259 @@ Frax launched with a groundbreaking hybrid model:
 
 ---
 
+
+## 2026-01-22: Curve Finance veCRV Model Deep Dive
+
+### Research Focus
+Curve Finance pioneered the vote-escrowed (ve) tokenomics model that has been cloned by dozens of protocols. What can FED learn from the most influential tokenomics design in DeFi history?
+
+---
+
+### Protocol Overview
+
+**Curve Finance Stats (Jan 2026):**
+- **TVL:** ~$2.2B (down from $2.86B peak in Aug 2025)
+- **Total CRV Supply:** 3.03 billion (gradual emission)
+- **Fee Distribution:** $159.25 million to veCRV holders over 5 years
+- **Average Weekly Distribution:** ~$622,070
+- **Fee Split:** 50% to veCRV holders (as crvUSD)
+- **veCRV Control:** ~51% held by Convex Finance
+
+---
+
+### How veCRV Works
+
+**The Vote-Escrow Mechanism:**
+
+veCRV is NOT a transferable token. It represents voting power acquired by locking CRV tokens for 1 week to 4 years.
+
+| Lock Duration | veCRV per 1 CRV |
+|---------------|-----------------|
+| 4 years | 1.0 veCRV |
+| 2 years | 0.5 veCRV |
+| 1 year | 0.25 veCRV |
+| 1 week | ~0.005 veCRV |
+
+**Key Mechanic:** veCRV decays linearly over time, reaching 0 when the lock ends. To maintain voting power, users must constantly extend their locks.
+
+**Triple Utility of veCRV:**
+
+1. **Governance** - Vote on gauge weights (where CRV emissions go)
+2. **Protocol Fees** - 50% of trading fees distributed to veCRV holders
+3. **Boost Multiplier** - Up to 2.5x boost on CRV rewards for LPs
+
+---
+
+### The Curve Wars Phenomenon
+
+**What Happened:**
+Curve's gauge weight voting became so valuable that protocols started "bribing" veCRV holders to direct emissions to their pools.
+
+**Key Players:**
+
+| Protocol | Role | veCRV Control |
+|----------|------|---------------|
+| Convex Finance | Meta-governance aggregator | ~51% of total |
+| Yearn Finance | Yield optimizer | Significant |
+| StakeDAO | Alternative aggregator | Growing |
+| Votium | Bribe marketplace | Facilitation |
+
+**The Bribe Market:**
+- Protocols pay veCRV holders to vote for their pools
+- Peak bribe budgets reached **8-figure sums per week**
+- Abracadabra spent >$10M in MIM tokens per vote cycle
+- At peak, $1 in bribes = $4+ in CRV emissions (4x ROI)
+
+**Current State (2025-2026):**
+What started as informal "wars" has evolved into a "mature liquidity coordination market" with dashboards, order books, and gamified participation.
+
+---
+
+### veCRV Criticisms & Problems
+
+**1. Governance Centralization**
+- 51% of veCRV controlled by Convex
+- Single entity can dominate gauge voting
+- Systemic risk from concentration
+
+**2. The "Catch-22" Problem**
+- More veCRV = more rewards
+- More LP deposits = need more veCRV for max boost
+- Creates plutocratic dynamics where whales always win
+
+**3. Complexity Barrier**
+- Understanding gauge weights, bribes, boost calculations requires expertise
+- Average users "abdicated governance rights in favor of boosted yields"
+- Quote: "If tokenomics require a PhD to understand, question whether complexity hides flaws"
+
+**4. Lock-in Doesn't Buy Loyalty**
+- Locking tokens secures capital but not behavioral commitment
+- "Dissatisfied stakers make bad governance decisions"
+- Forced locks can breed resentment
+
+**5. Governance Abdication**
+- Users delegate to Convex for yield, giving up voting rights
+- Original vision of "thoughtful governance" failed
+- Protocol controlled by aggregators, not individual holders
+
+---
+
+### What Curve Got Right
+
+Despite criticisms, veCRV has proven durable:
+
+1. **Real Yield, Not Inflation**
+   - 50% of actual trading fees goes to holders
+   - $159M distributed over 5 years is REAL revenue
+   - Sustainable vs. inflationary rewards
+
+2. **Long-Term Alignment**
+   - 4-year locks filter out short-term speculators
+   - Remaining holders are genuinely invested
+   - Created "cult-like" community dedication
+
+3. **Deflationary Pressure**
+   - veCRV locks 3x more tokens than comparable burns would remove
+   - Massive supply locked = reduced sell pressure
+   - Creates artificial scarcity
+
+4. **Composability**
+   - veCRV model spawned entire ecosystem (Convex, Votium, etc.)
+   - "Curve Wars" generated massive attention and TVL
+   - Model has been forked 50+ times
+
+---
+
+### FED vs veCRV Comparison
+
+| Aspect | Curve (veCRV) | FED |
+|--------|---------------|-----|
+| **Lock Required** | Yes (up to 4 years) | No (optional soft locks) |
+| **Complexity** | High (gauges, boosts, bribes) | Low (hold = earn) |
+| **Fee Distribution** | 50% of fees | 100% of fees |
+| **Distribution Frequency** | Weekly (Thursdays) | ~2 minutes |
+| **Governance** | Heavy (gauge voting) | Minimal (Ralph decides) |
+| **Boost Mechanics** | Up to 2.5x (complex calculation) | Up to 4.5x (simple tiers) |
+| **Token Transferability** | CRV yes, veCRV no | Full transferability |
+| **Centralization Risk** | High (Convex owns 51%) | Low (Ralph is transparent) |
+| **Target User** | DeFi power users | Retail/memecoin holders |
+
+---
+
+### What FED Should NOT Copy
+
+**1. Hard Time Locks**
+- 4-year locks are extreme
+- Creates governance abdication (users go to Convex instead)
+- Pendle JUST removed long locks for this reason
+- **FED Status:** Our optional soft locks with bonuses are better
+
+**2. Complex Boost Calculations**
+- Curve's boost depends on veCRV share vs LP share
+- Requires calculator tools to understand
+- Average user can't compute their actual rewards
+- **FED Status:** Our tier system is intuitive (hold more = earn more)
+
+**3. Gauge Voting Wars**
+- Creates bribe economy that favors whales
+- Governance becomes pay-to-play
+- Average holder can't compete
+- **FED Status:** No gauge voting needed - all pools treated equally
+
+**4. Weekly Distribution**
+- Curve distributes fees weekly (Thursdays)
+- FED's 2-minute distributions are a MASSIVE differentiator
+- Immediate gratification >> weekly claims
+
+**5. Non-Transferable Governance Token**
+- veCRV can't be transferred or sold
+- Creates liquidity lock (people go to Convex for liquidity)
+- **FED Status:** Full token transferability is simpler
+
+---
+
+### What FED Can Learn
+
+**1. Real Yield Works at Scale**
+- $159M distributed over 5 years proves fee-sharing is sustainable
+- Even at 50% fee distribution, it created sticky capital
+- FED's 100% distribution is MORE generous
+
+**2. Simple Tiers Beat Complex Boosts**
+- Curve's boost calculation is a barrier
+- FED's Chairman/Cabinet/Senator tiers are intuitive
+- **Validation:** Our approach is more user-friendly
+
+**3. Lock Decay Creates Friction**
+- veCRV linear decay forces constant re-locking
+- This is user-hostile (engagement through friction)
+- FED's streak bonuses reward loyalty positively (not negatively)
+
+**4. Governance Can Be Captured**
+- 51% Convex control shows governance risks
+- FED's "Ralph decides" model avoids capture
+- For memecoins, benevolent autocracy > plutocratic democracy
+
+**5. Distribution Frequency Matters**
+- Weekly distributions = weekly engagement
+- 2-minute distributions = constant engagement
+- FED's frequency is a competitive moat
+
+---
+
+### Curve 2025 Developments
+
+**L2 vs Mainnet Debate (Aug 2025):**
+- Proposal to halt L2 development and focus on Ethereum mainnet
+- L2 deployments generated only ~$1,500/day vs $28,000+ on mainnet
+- 93% of Curve's fees come from Ethereum
+- **Lesson:** Expansion doesn't always create value
+
+**Yield Basis Project:**
+- Curve founder developing new protocol for IL mitigation
+- $5M raised at $50M FDV (Feb 2025)
+- Uses crvUSD with 200% overcollateralization
+- **Lesson:** Even Curve is evolving beyond its original model
+
+---
+
+### Application to FED Roadmap
+
+**No changes needed.** Research validates FED's design choices:
+
+1. ✅ **Simple > Complex** - veCRV complexity created governance abdication
+2. ✅ **100% Distribution** - More generous than Curve's 50%
+3. ✅ **Frequent Distribution** - 2-min beats weekly Thursday claims
+4. ✅ **Optional Locks** - Soft bonuses beat forced 4-year locks
+5. ✅ **No Gauge Voting** - Avoids bribe market dynamics
+6. ✅ **Transparent Control** - Ralph > Convex oligarchy
+
+**The veCRV model was revolutionary in 2020, but FED's simpler model is better suited for 2026 retail audiences.**
+
+---
+
+### Key Takeaways
+
+1. **veCRV Pioneered Real Yield** - But at the cost of massive complexity
+2. **Curve Wars Showed Governance Capture** - 51% Convex control is a warning
+3. **Lock Mechanics Have Downsides** - Forced locks don't buy loyalty
+4. **Fee Distribution Works at Scale** - $159M proves the model
+5. **Simplicity Wins for Retail** - FED's "just hold" beats gauge voting
+
+**Research Confidence:** HIGH - Curve is the most-studied DeFi protocol with 5+ years of data.
+
+---
+
+*Sources:*
+- [Curve Finance veCRV Overview (Official)](https://resources.curve.finance/vecrv/overview/)
+- [Curve Fee Distribution Docs](https://resources.curve.finance/vecrv/fee-collection-distribution/)
+- [Nansen: Curve Finance veCRV Tokenomics](https://research.nansen.ai/articles/curve-finance-and-vecrv-tokenomics)
+- [DefiLlama: Curve Finance](https://defillama.com/protocol/curve-finance)
+- [Mitosis: veTokenomics & Bribe Markets](https://university.mitosis.org/vetokenomics-bribe-markets-gauge-voting-incentives-and-curve-wars-mechanics/)
+- [TokenBrice: CRV Wars](https://tokenbrice.xyz/crv-wars/)
+- [CoinGecko: veTokens Explained](https://www.coingecko.com/learn/vetokens-and-vetokenomics)
+- [OneKey: CRV Deep Dive](https://onekey.so/blog/ecosystem/crv-deep-dive-token-fundamentals-governance-dynamics-and-future-outlook/)
+- [Switchere: CRV Strategic Guide](https://switchere.com/guides/crv-transaction)
+- [Crypto-Reporter: Curve 2025 Review](https://www.crypto-reporter.com/press-releases/curve-finance-closes-2025-with-stable-volumes-and-a-stronger-infrastructure-role-121000/)
+
+---
