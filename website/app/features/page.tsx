@@ -87,7 +87,7 @@ export default function FeaturesPage() {
   const qeMilestones = [
     { milestone: '$10,000', event: 'QE1', bonus: '1.5x', status: 'achieved' },
     { milestone: '$25,000', event: 'QE1.5', bonus: '1.25x', status: 'achieved' },
-    { milestone: '$50,000', event: 'QE2', bonus: '1.5x', status: 'upcoming' },
+    { milestone: '$50,000', event: 'QE2', bonus: '1.5x', status: 'achieved' },
     { milestone: '$100,000', event: 'QE3', bonus: '2.0x', status: 'upcoming' },
     { milestone: '$250,000', event: 'QE4', bonus: '2.0x', status: 'upcoming' },
     { milestone: '$500,000', event: 'QE5', bonus: '2.5x', status: 'upcoming' },
