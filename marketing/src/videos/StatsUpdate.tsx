@@ -95,81 +95,83 @@ const IntroScene = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Phase 0: Darkness with precise, intentional flicker sequence - builds anticipation
-  const powerOn = frame < fps * 0.05 ? 0 :
-    frame < fps * 0.07 ? 0.04 :
-    frame < fps * 0.085 ? 0.01 :
-    frame < fps * 0.1 ? 0.1 :
-    frame < fps * 0.115 ? 0.02 :
-    frame < fps * 0.13 ? 0.18 : 1;
+  // Phase 0: CRT warm-up flicker - organic, analog feel like vintage tech powering on
+  const powerOn = frame < fps * 0.04 ? 0 :
+    frame < fps * 0.055 ? 0.03 :
+    frame < fps * 0.07 ? 0.008 :
+    frame < fps * 0.082 ? 0.06 :
+    frame < fps * 0.095 ? 0.015 :
+    frame < fps * 0.11 ? 0.12 :
+    frame < fps * 0.125 ? 0.04 :
+    frame < fps * 0.14 ? 0.22 : 1;
 
   const contentFade = interpolate(
     frame,
-    [fps * 0.13, fps * 0.4],
+    [fps * 0.14, fps * 0.42],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  ) * (frame < fps * 0.13 ? powerOn : 1);
+  ) * (frame < fps * 0.14 ? powerOn : 1);
 
-  // Primary light burst - radiant, centered
+  // Primary light burst - radiant, centered with more organic falloff
   const burstOpacity = interpolate(
     frame,
-    [fps * 0.06, fps * 0.14, fps * 0.4, fps * 0.7],
-    [0, 0.85, 0.35, 0],
+    [fps * 0.05, fps * 0.12, fps * 0.35, fps * 0.65],
+    [0, 0.9, 0.4, 0],
     { extrapolateRight: "clamp" }
   );
   const burstScale = interpolate(
     frame,
-    [fps * 0.06, fps * 0.7],
-    [0.02, 3.5],
+    [fps * 0.05, fps * 0.65],
+    [0.015, 3.2],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Secondary outer burst for depth
+  // Secondary outer burst for depth - slightly more delayed for layering
   const burst2Opacity = interpolate(
     frame,
-    [fps * 0.1, fps * 0.2, fps * 0.5, fps * 0.85],
-    [0, 0.5, 0.2, 0],
+    [fps * 0.08, fps * 0.18, fps * 0.45, fps * 0.8],
+    [0, 0.55, 0.22, 0],
     { extrapolateRight: "clamp" }
   );
   const burst2Scale = interpolate(
     frame,
-    [fps * 0.1, fps * 0.85],
-    [0.01, 4.2],
+    [fps * 0.08, fps * 0.8],
+    [0.008, 4.0],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Horizontal reveal line - cinematic wipe
+  // Horizontal reveal line - cinematic wipe with tighter timing
   const lineWidth = interpolate(
     frame,
-    [fps * 0.04, fps * 0.45],
-    [0, 700],
+    [fps * 0.03, fps * 0.4],
+    [0, 680],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
   const lineOpacity = interpolate(
     frame,
-    [fps * 0.04, fps * 0.12, fps * 0.55, fps * 0.8],
-    [0, 0.6, 0.25, 0],
+    [fps * 0.03, fps * 0.1, fps * 0.5, fps * 0.75],
+    [0, 0.65, 0.28, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  // Logo entrance - authoritative, weighty
-  const logoDelay = 0.38;
+  // Logo entrance - authoritative, weighty with refined spring
+  const logoDelay = 0.36;
   const logoProgress = spring({
     frame: frame - logoDelay * fps,
     fps,
-    config: { damping: 200, stiffness: 45, mass: 1.5 },
+    config: { damping: 180, stiffness: 50, mass: 1.4 },
   });
   const logoOpacity = interpolate(
     frame,
-    [logoDelay * fps, (logoDelay + 0.32) * fps],
+    [logoDelay * fps, (logoDelay + 0.3) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const logoScale = interpolate(logoProgress, [0, 1], [0.72, 1]);
+  const logoScale = interpolate(logoProgress, [0, 1], [0.75, 1]);
   const logoGlow = interpolate(
     frame,
-    [fps * 0.5, fps * 1.0, fps * 1.5],
-    [0, 60, 45],
+    [fps * 0.48, fps * 0.95, fps * 1.4],
+    [0, 55, 42],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
@@ -470,61 +472,62 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
   const brrrDelay = 0.08 + brrrIndex * 0.12;
   const brrrLandTime = (brrrDelay + 0.08) * fps;
 
-  // Screen shake on BRRR - punchy impact with satisfying settle
+  // Screen shake on BRRR - weighty thud with organic settle (no synthetic patterns)
   const shakeIntensity = interpolate(
     frame,
-    [brrrLandTime, brrrLandTime + fps * 0.025, brrrLandTime + fps * 0.06, brrrLandTime + fps * 0.1, brrrLandTime + fps * 0.18],
-    [0, 7, -4, 2, 0],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+    [brrrLandTime, brrrLandTime + fps * 0.02, brrrLandTime + fps * 0.05, brrrLandTime + fps * 0.09, brrrLandTime + fps * 0.14, brrrLandTime + fps * 0.2],
+    [0, 8, -5, 3, -1.5, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
-  const shakeX = shakeIntensity * Math.sin(frame * 5.5);
-  const shakeY = shakeIntensity * 0.55 * Math.cos(frame * 6.2);
+  // Organic shake using different frequencies that don't create visible patterns
+  const shakeX = shakeIntensity * Math.sin(frame * 4.3 + 0.7);
+  const shakeY = shakeIntensity * 0.6 * Math.cos(frame * 5.1 + 1.2);
 
-  // Background glow burst on BRRR - dramatic peak then settle
+  // Background glow burst on BRRR - dramatic peak then settle with longer hold
   const bgGlow = interpolate(
     frame,
-    [fps * 0.15, brrrLandTime - fps * 0.05, brrrLandTime + fps * 0.05, brrrLandTime + fps * 0.2, fps * 1.3],
-    [0.018, 0.022, 0.09, 0.055, 0.04],
+    [fps * 0.12, brrrLandTime - fps * 0.06, brrrLandTime + fps * 0.04, brrrLandTime + fps * 0.18, fps * 1.25],
+    [0.015, 0.02, 0.095, 0.06, 0.042],
     { extrapolateRight: "clamp" }
   );
 
-  // Triple-layered shockwaves for cinematic impact
+  // Triple-layered shockwaves - tighter, punchier timing for more impact
   const shock1Opacity = interpolate(
     frame,
-    [brrrLandTime, brrrLandTime + fps * 0.06, brrrLandTime + fps * 0.35],
-    [0.6, 0.35, 0],
+    [brrrLandTime, brrrLandTime + fps * 0.05, brrrLandTime + fps * 0.3],
+    [0.65, 0.38, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const shock1Scale = interpolate(
     frame,
-    [brrrLandTime, brrrLandTime + fps * 0.35],
-    [0.3, 2.8],
+    [brrrLandTime, brrrLandTime + fps * 0.3],
+    [0.25, 2.6],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   const shock2Opacity = interpolate(
     frame,
-    [brrrLandTime + fps * 0.04, brrrLandTime + fps * 0.12, brrrLandTime + fps * 0.45],
-    [0, 0.4, 0],
+    [brrrLandTime + fps * 0.035, brrrLandTime + fps * 0.1, brrrLandTime + fps * 0.4],
+    [0, 0.42, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const shock2Scale = interpolate(
     frame,
-    [brrrLandTime + fps * 0.04, brrrLandTime + fps * 0.45],
-    [0.2, 3.2],
+    [brrrLandTime + fps * 0.035, brrrLandTime + fps * 0.4],
+    [0.18, 3.0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   const shock3Opacity = interpolate(
     frame,
-    [brrrLandTime + fps * 0.08, brrrLandTime + fps * 0.18, brrrLandTime + fps * 0.55],
-    [0, 0.25, 0],
+    [brrrLandTime + fps * 0.07, brrrLandTime + fps * 0.16, brrrLandTime + fps * 0.5],
+    [0, 0.28, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const shock3Scale = interpolate(
     frame,
-    [brrrLandTime + fps * 0.08, brrrLandTime + fps * 0.55],
-    [0.15, 3.8],
+    [brrrLandTime + fps * 0.07, brrrLandTime + fps * 0.5],
+    [0.12, 3.5],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
@@ -628,18 +631,19 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
 
             const isBrrr = word === "BRRR";
 
-            // BRRR gets explosive treatment - bigger impact, faster settle
+            // BRRR gets explosive treatment - satisfying overshoot then settle
             const brrrScale = isBrrr ? interpolate(
               frame,
-              [delay * fps, (delay + 0.03) * fps, (delay + 0.08) * fps, (delay + 0.14) * fps, (delay + 0.24) * fps],
-              [0.6, 1.22, 0.93, 1.05, 1],
-              { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+              [delay * fps, (delay + 0.025) * fps, (delay + 0.07) * fps, (delay + 0.12) * fps, (delay + 0.2) * fps],
+              [0.55, 1.25, 0.92, 1.04, 1],
+              { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
             ) : 1;
 
+            // BRRR glow builds, bursts on impact, then settles to a confident level
             const brrrGlow = isBrrr ? interpolate(
               frame,
-              [(delay + 0.02) * fps, (delay + 0.08) * fps, (delay + 0.2) * fps, fps * 1.3],
-              [0, 85, 55, 38],
+              [(delay + 0.015) * fps, (delay + 0.06) * fps, (delay + 0.18) * fps, fps * 1.2],
+              [0, 90, 52, 35],
               { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
             ) : 0;
 
@@ -721,9 +725,9 @@ const StatCard: React.FC<{
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Number counting - satisfying quintic ease-out with longer duration for drama
-  const countDuration = 1.7;
-  const countStart = delay + 0.22;
+  // Number counting - satisfying quintic ease-out with refined duration
+  const countDuration = 1.6;
+  const countStart = delay + 0.2;
   const numberProgress = interpolate(
     frame,
     [countStart * fps, (countStart + countDuration) * fps],
@@ -731,7 +735,8 @@ const StatCard: React.FC<{
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
-      easing: (t) => 1 - Math.pow(1 - t, 5),
+      // Custom easing: slow start, fast middle, satisfying deceleration at end
+      easing: (t) => 1 - Math.pow(1 - t, 4.5),
     }
   );
 
@@ -760,66 +765,66 @@ const StatCard: React.FC<{
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  // Scale pulse on landing - punchy with satisfying settle
+  // Scale pulse on landing - punchy overshoot with satisfying settle
   const landPulse = hasLanded ? interpolate(
     frame,
-    [landTime - fps * 0.02, landTime + fps * 0.06, landTime + fps * 0.14, landTime + fps * 0.26],
-    [1, 1.14, 0.96, 1],
+    [landTime - fps * 0.015, landTime + fps * 0.05, landTime + fps * 0.12, landTime + fps * 0.22],
+    [1, 1.12, 0.97, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
-  // Number glow builds as it counts, then BURSTS when landing
+  // Number glow builds as it counts, then BURSTS when landing - more dramatic
   const numberGlow = hasLanded ? interpolate(
     frame,
-    [landTime - fps * 0.12, landTime, landTime + fps * 0.1, landTime + fps * 0.45],
-    [12, 18, 38, 18],
+    [landTime - fps * 0.1, landTime, landTime + fps * 0.08, landTime + fps * 0.4],
+    [14, 20, 42, 20],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : interpolate(
     frame,
-    [(countStart + 0.4) * fps, (countStart + countDuration) * fps],
-    [0, 16],
+    [(countStart + 0.35) * fps, (countStart + countDuration) * fps],
+    [0, 18],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  // Triple celebration rings when number lands - layered for depth
+  // Triple celebration rings when number lands - tighter timing for punch
   const ring1Opacity = hasLanded ? interpolate(
     frame,
-    [landTime, landTime + fps * 0.08, landTime + fps * 0.4],
-    [0.65, 0.35, 0],
+    [landTime, landTime + fps * 0.06, landTime + fps * 0.35],
+    [0.7, 0.38, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   ) : 0;
   const ring1Scale = hasLanded ? interpolate(
     frame,
-    [landTime, landTime + fps * 0.4],
-    [0.6, 2.0],
+    [landTime, landTime + fps * 0.35],
+    [0.55, 1.9],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  ) : 0.6;
+  ) : 0.55;
 
   const ring2Opacity = hasLanded ? interpolate(
     frame,
-    [landTime + fps * 0.05, landTime + fps * 0.15, landTime + fps * 0.5],
-    [0, 0.4, 0],
+    [landTime + fps * 0.04, landTime + fps * 0.12, landTime + fps * 0.45],
+    [0, 0.42, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   ) : 0;
   const ring2Scale = hasLanded ? interpolate(
     frame,
-    [landTime + fps * 0.05, landTime + fps * 0.5],
-    [0.5, 2.5],
+    [landTime + fps * 0.04, landTime + fps * 0.45],
+    [0.45, 2.3],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  ) : 0.5;
+  ) : 0.45;
 
   const ring3Opacity = hasLanded ? interpolate(
     frame,
-    [landTime + fps * 0.1, landTime + fps * 0.22, landTime + fps * 0.6],
-    [0, 0.25, 0],
+    [landTime + fps * 0.08, landTime + fps * 0.2, landTime + fps * 0.55],
+    [0, 0.28, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   ) : 0;
   const ring3Scale = hasLanded ? interpolate(
     frame,
-    [landTime + fps * 0.1, landTime + fps * 0.6],
-    [0.4, 3.0],
+    [landTime + fps * 0.08, landTime + fps * 0.55],
+    [0.38, 2.8],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  ) : 0.4;
+  ) : 0.38;
 
   // Accent bars draw elegantly with stagger
   const accentWidth = interpolate(
@@ -1141,18 +1146,19 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
   );
 
   // Calculate when all stats have landed for coordinated celebration
-  const allStatsLandTime = (0.16 + (stats.length - 1) * 0.24 + 0.22 + 1.7) * fps;
+  const allStatsLandTime = (0.16 + (stats.length - 1) * 0.24 + 0.2 + 1.6) * fps;
   const allStatsLanded = frame >= allStatsLandTime;
 
-  // Coordinated screen shake when final stat lands
+  // Coordinated screen shake when final stat lands - subtle but satisfying
   const finalShakeIntensity = allStatsLanded ? interpolate(
     frame,
-    [allStatsLandTime, allStatsLandTime + fps * 0.03, allStatsLandTime + fps * 0.08, allStatsLandTime + fps * 0.15],
-    [0, 3.5, -2, 0],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+    [allStatsLandTime, allStatsLandTime + fps * 0.025, allStatsLandTime + fps * 0.065, allStatsLandTime + fps * 0.12],
+    [0, 4, -2.5, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 0;
-  const shakeX = finalShakeIntensity * Math.sin(frame * 3.8);
-  const shakeY = finalShakeIntensity * 0.5 * Math.cos(frame * 4.2);
+  // Organic shake frequencies
+  const shakeX = finalShakeIntensity * Math.sin(frame * 4.1 + 0.3);
+  const shakeY = finalShakeIntensity * 0.55 * Math.cos(frame * 4.7 + 0.9);
 
   // Header entrance
   const headerOpacity = interpolate(frame, [fps * 0.04, fps * 0.28], [0, 0.9], {
@@ -1220,16 +1226,16 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  // Background glow intensifies as numbers climb, then BURSTS when all land
+  // Background glow intensifies as numbers climb, then BURSTS when all land - refined
   const bgGlow = allStatsLanded ? interpolate(
     frame,
-    [fps * 0.3, allStatsLandTime - fps * 0.2, allStatsLandTime, allStatsLandTime + fps * 0.1, allStatsLandTime + fps * 0.5],
-    [0.02, 0.045, 0.055, 0.095, 0.065],
+    [fps * 0.28, allStatsLandTime - fps * 0.18, allStatsLandTime, allStatsLandTime + fps * 0.08, allStatsLandTime + fps * 0.45],
+    [0.018, 0.042, 0.052, 0.1, 0.068],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   ) : interpolate(
     frame,
-    [fps * 0.3, fps * 2.5],
-    [0.02, 0.055],
+    [fps * 0.28, fps * 2.4],
+    [0.018, 0.052],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
@@ -1241,25 +1247,39 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
     { easing: Easing.inOut(Easing.sin) }
   ) : 0;
 
-  // Coordinated celebration burst ring when all stats land
+  // Coordinated celebration burst ring when all stats land - stronger presence
   const celebrationRingOpacity = allStatsLanded ? interpolate(
     frame,
-    [allStatsLandTime, allStatsLandTime + fps * 0.08, allStatsLandTime + fps * 0.5],
-    [0.5, 0.25, 0],
+    [allStatsLandTime, allStatsLandTime + fps * 0.06, allStatsLandTime + fps * 0.45],
+    [0.55, 0.28, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   ) : 0;
   const celebrationRingScale = allStatsLanded ? interpolate(
     frame,
-    [allStatsLandTime, allStatsLandTime + fps * 0.5],
-    [0.5, 3.5],
+    [allStatsLandTime, allStatsLandTime + fps * 0.45],
+    [0.45, 3.2],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  ) : 0.5;
+  ) : 0.45;
+
+  // Secondary celebration ring - more depth
+  const celebration2RingOpacity = allStatsLanded ? interpolate(
+    frame,
+    [allStatsLandTime + fps * 0.04, allStatsLandTime + fps * 0.14, allStatsLandTime + fps * 0.55],
+    [0, 0.35, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : 0;
+  const celebration2RingScale = allStatsLanded ? interpolate(
+    frame,
+    [allStatsLandTime + fps * 0.04, allStatsLandTime + fps * 0.55],
+    [0.4, 4.0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  ) : 0.4;
 
   return (
     <AbsoluteFill style={{ opacity: sceneFade }}>
       <CinematicBackground accentColor="#00ff88" intensity={bgGlow + ambientPulse} focusY={44} />
 
-      {/* Coordinated celebration burst when all stats land */}
+      {/* Coordinated celebration burst when all stats land - dual rings */}
       <AbsoluteFill
         style={{
           justifyContent: "center",
@@ -1267,15 +1287,28 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
           pointerEvents: "none",
         }}
       >
+        {/* Outer celebration ring */}
+        <div
+          style={{
+            position: "absolute",
+            width: 180,
+            height: 180,
+            borderRadius: "50%",
+            border: "1.5px solid rgba(0, 255, 136, 0.4)",
+            transform: `scale(${celebration2RingScale})`,
+            opacity: celebration2RingOpacity,
+          }}
+        />
+        {/* Inner celebration ring - brighter */}
         <div
           style={{
             width: 200,
             height: 200,
             borderRadius: "50%",
-            border: "2px solid rgba(0, 255, 136, 0.5)",
+            border: "2px solid rgba(0, 255, 136, 0.55)",
             transform: `scale(${celebrationRingScale})`,
             opacity: celebrationRingOpacity,
-            boxShadow: "0 0 25px rgba(0, 255, 136, 0.3)",
+            boxShadow: "0 0 22px rgba(0, 255, 136, 0.35)",
           }}
         />
       </AbsoluteFill>
@@ -1413,28 +1446,28 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Background glow builds with CTA - more dramatic
+  // Background glow builds with CTA - confident, not overpowering
   const bgIntensity = interpolate(
     frame,
-    [0, fps * 1.6],
-    [0.025, 0.07],
+    [0, fps * 1.5],
+    [0.022, 0.065],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Logo entrance - hero element with commanding presence
+  // Logo entrance - hero element with commanding presence, refined timing
   const logoProgress = spring({
     frame,
     fps,
-    config: { damping: 175, stiffness: 50, mass: 1.3 },
+    config: { damping: 180, stiffness: 55, mass: 1.25 },
   });
-  const logoOpacity = interpolate(frame, [0, fps * 0.3], [0, 1], {
+  const logoOpacity = interpolate(frame, [0, fps * 0.28], [0, 1], {
     extrapolateRight: "clamp",
   });
-  const logoScale = interpolate(logoProgress, [0, 1], [0.8, 1]);
+  const logoScale = interpolate(logoProgress, [0, 1], [0.82, 1]);
   const logoGlow = interpolate(
     frame,
-    [fps * 0.15, fps * 0.7, fps * 1.1],
-    [0, 60, 52],
+    [fps * 0.12, fps * 0.65, fps * 1.0],
+    [0, 55, 48],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
@@ -1517,27 +1550,28 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
-  // CTA glow builds dramatically then pulses with refined breathing - more dramatic
+  // CTA glow builds confidently then settles with gentle breathing
   const ctaGlow = interpolate(
     frame,
-    [ctaDelay + fps * 0.15, fps * 1.4, fps * 1.8],
-    [0, 1.25, 1.05],
+    [ctaDelay + fps * 0.12, fps * 1.35, fps * 1.7],
+    [0, 1.2, 1.0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
-  const ctaPulse = frame > fps * 1.55 ? interpolate(
-    (frame - fps * 1.55) % (fps * 2.2),
-    [0, fps * 1.1, fps * 2.2],
-    [0.94, 1, 0.94],
+  // Gentle breathing pulse - not distracting, just alive
+  const ctaPulse = frame > fps * 1.5 ? interpolate(
+    (frame - fps * 1.5) % (fps * 2.4),
+    [0, fps * 1.2, fps * 2.4],
+    [0.95, 1, 0.95],
     { easing: Easing.inOut(Easing.sin) }
   ) : 1;
 
-  // Inner shine animation on CTA - more visible
-  const innerPulse = frame > fps * 1.5 ? interpolate(
-    (frame - fps * 1.5) % (fps * 2.0),
-    [0, fps * 1.0, fps * 2.0],
-    [0.2, 0.4, 0.2],
+  // Inner shine animation on CTA - subtle but premium
+  const innerPulse = frame > fps * 1.45 ? interpolate(
+    (frame - fps * 1.45) % (fps * 2.2),
+    [0, fps * 1.1, fps * 2.2],
+    [0.18, 0.35, 0.18],
     { easing: Easing.inOut(Easing.sin) }
-  ) : 0.2;
+  ) : 0.18;
 
   // Shimmer effect on CTA button when it lands
   const ctaShimmerDelay = ctaDelay + fps * 0.35;
