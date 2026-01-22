@@ -25,26 +25,27 @@ export type StatsUpdateProps = {
 };
 
 // ============================================================================
-// DESIGN SYSTEM - Unified color palette for sophistication
+// DESIGN SYSTEM - Refined palette for Apple-keynote sophistication
 // ============================================================================
 const COLORS = {
-  // Backgrounds
-  black: "#010101",
-  nearBlack: "#030303",
-  darkGray: "#0a0a0a",
+  // Backgrounds - deeper blacks for premium feel
+  black: "#000000",
+  nearBlack: "#020202",
+  darkGray: "#080808",
 
-  // Primary accent - FED green (use sparingly, at reduced opacity)
-  primary: "#00d878",
-  primaryMuted: "#00b868",
-  primaryGlow: "rgba(0, 216, 120, 0.5)",
+  // Primary accent - FED green (refined, less saturated for elegance)
+  primary: "#00d070",
+  primaryMuted: "#00a858",
+  primaryGlow: "rgba(0, 208, 112, 0.45)",
 
-  // Secondary accent - cyan (very subtle)
-  secondary: "#00c8e0",
+  // Secondary accent - cyan (very subtle, for contrast)
+  secondary: "#00b8d4",
 
-  // Text
+  // Text - pure white headlines, refined grays
   white: "#ffffff",
-  grayLight: "#888888",
-  grayMid: "#555555",
+  offWhite: "#f5f5f5",
+  grayLight: "#909090",
+  grayMid: "#606060",
   grayDark: "#404040",
 };
 
@@ -89,7 +90,7 @@ const CinematicBackground: React.FC<{
   const frame = useCurrentFrame();
 
   // Imperceptible drift for organic feel
-  const drift = interpolate(frame, [0, 600], [0, 1.5], {
+  const drift = interpolate(frame, [0, 600], [0, 1.2], {
     extrapolateRight: "clamp",
   });
 
@@ -108,14 +109,14 @@ const CinematicBackground: React.FC<{
       {/* Primary ambient glow - restrained, centered */}
       <AbsoluteFill
         style={{
-          background: `radial-gradient(ellipse 70% 50% at 50% ${focusY + drift}%, ${hexToRgba(COLORS.primary, intensity)} 0%, transparent 55%)`,
+          background: `radial-gradient(ellipse 68% 48% at 50% ${focusY + drift}%, ${hexToRgba(COLORS.primary, intensity)} 0%, transparent 52%)`,
         }}
       />
 
-      {/* Top edge - barely perceptible warmth */}
+      {/* Secondary subtle top wash - adds depth */}
       <AbsoluteFill
         style={{
-          background: `linear-gradient(180deg, ${hexToRgba(COLORS.primary, intensity * 0.15)} 0%, transparent 20%)`,
+          background: `radial-gradient(ellipse 90% 16% at 50% 0%, ${hexToRgba(COLORS.primary, intensity * 0.1)} 0%, transparent 38%)`,
         }}
       />
 
@@ -123,11 +124,11 @@ const CinematicBackground: React.FC<{
       <AbsoluteFill
         style={{
           background:
-            "radial-gradient(ellipse 85% 75% at 50% 50%, transparent 25%, rgba(0,0,0,0.7) 100%)",
+            "radial-gradient(ellipse 82% 72% at 50% 50%, transparent 22%, rgba(0,0,0,0.75) 100%)",
         }}
       />
 
-      <FilmGrain opacity={0.01} />
+      <FilmGrain opacity={0.008} />
     </AbsoluteFill>
   );
 };
@@ -141,99 +142,119 @@ const IntroScene = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Phase 0: Quicker power-on for stronger hook
+  // Phase 0: Dramatic power-on with subtle flicker - builds anticipation
+  const flicker = frame < fps * 0.03 ? 0 :
+    frame < fps * 0.05 ? 0.15 :
+    frame < fps * 0.07 ? 0.04 :
+    frame < fps * 0.09 ? 0.25 :
+    frame < fps * 0.11 ? 0.08 : 1;
+
   const powerOn = interpolate(
     frame,
-    [fps * 0.05, fps * 0.25],
+    [fps * 0.11, fps * 0.28],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  );
+  ) * (frame < fps * 0.11 ? flicker : 1);
 
-  // Central light point - brighter, faster expansion for drama
+  // Central light point - crisp, brilliant burst
   const lightOpacity = interpolate(
     frame,
-    [fps * 0.03, fps * 0.1, fps * 0.35, fps * 0.55],
-    [0, 0.95, 0.35, 0],
+    [fps * 0.02, fps * 0.08, fps * 0.3, fps * 0.5],
+    [0, 1, 0.4, 0],
     { extrapolateRight: "clamp" }
   );
   const lightScale = interpolate(
     frame,
-    [fps * 0.03, fps * 0.55],
+    [fps * 0.02, fps * 0.5],
+    [0, 4.5],
+    { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Secondary ring burst - adds depth
+  const ring2Opacity = interpolate(
+    frame,
+    [fps * 0.05, fps * 0.12, fps * 0.4, fps * 0.6],
+    [0, 0.5, 0.2, 0],
+    { extrapolateRight: "clamp" }
+  );
+  const ring2Scale = interpolate(
+    frame,
+    [fps * 0.05, fps * 0.6],
     [0, 5.5],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Horizontal reveal line - faster, more dramatic wipe
+  // Horizontal reveal line - crisp, dramatic wipe
   const lineWidth = interpolate(
     frame,
-    [fps * 0.06, fps * 0.35],
-    [0, 850],
+    [fps * 0.04, fps * 0.32],
+    [0, 900],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
   const lineOpacity = interpolate(
     frame,
-    [fps * 0.06, fps * 0.12, fps * 0.45, fps * 0.65],
-    [0, 0.9, 0.3, 0],
+    [fps * 0.04, fps * 0.1, fps * 0.4, fps * 0.58],
+    [0, 0.95, 0.35, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  // Logo entrance - faster, confident
-  const logoDelay = 0.22;
+  // Logo entrance - confident, weighty
+  const logoDelay = 0.2;
   const logoProgress = spring({
     frame: frame - logoDelay * fps,
     fps,
-    config: { damping: 180, stiffness: 55, mass: 1.35 },
+    config: { damping: 200, stiffness: 60, mass: 1.2 },
   });
   const logoOpacity = interpolate(
     frame,
-    [logoDelay * fps, (logoDelay + 0.18) * fps],
+    [logoDelay * fps, (logoDelay + 0.15) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const logoScale = interpolate(logoProgress, [0, 1], [0.7, 1]);
+  const logoScale = interpolate(logoProgress, [0, 1], [0.65, 1]);
   const logoGlow = interpolate(
     frame,
-    [fps * 0.35, fps * 0.7, fps * 1.5],
-    [0, 55, 38],
+    [fps * 0.32, fps * 0.65, fps * 1.4],
+    [0, 50, 35],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // $FED text - enters with authority
-  const textDelay = 0.45;
+  // $FED text - enters with commanding authority
+  const textDelay = 0.4;
   const textProgress = spring({
     frame: frame - textDelay * fps,
     fps,
-    config: { damping: 180, stiffness: 50, mass: 1.45 },
+    config: { damping: 200, stiffness: 55, mass: 1.3 },
   });
   const textOpacity = interpolate(
     frame,
-    [textDelay * fps, (textDelay + 0.2) * fps],
+    [textDelay * fps, (textDelay + 0.18) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const textY = interpolate(textProgress, [0, 1], [22, 0]);
-  const textScale = interpolate(textProgress, [0, 1], [0.92, 1]);
+  const textY = interpolate(textProgress, [0, 1], [20, 0]);
+  const textScale = interpolate(textProgress, [0, 1], [0.9, 1]);
 
-  // Tagline - quicker reveal, but still refined
-  const tagDelay = 0.95;
+  // Tagline - refined reveal
+  const tagDelay = 0.88;
   const tagOpacity = interpolate(
     frame,
-    [tagDelay * fps, (tagDelay + 0.3) * fps],
-    [0, 0.55],
+    [tagDelay * fps, (tagDelay + 0.28) * fps],
+    [0, 0.6],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const tagY = interpolate(
     frame,
-    [tagDelay * fps, (tagDelay + 0.35) * fps],
-    [8, 0],
+    [tagDelay * fps, (tagDelay + 0.32) * fps],
+    [6, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Background glow - builds with content
   const bgGlow = interpolate(
     frame,
-    [fps * 0.15, fps * 1.4],
-    [0.01, 0.035],
+    [fps * 0.12, fps * 1.3],
+    [0.008, 0.032],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
@@ -249,13 +270,26 @@ const IntroScene = () => {
           pointerEvents: "none",
         }}
       >
-        {/* Central light point */}
+        {/* Secondary ring burst */}
         <div
           style={{
-            width: 80,
-            height: 80,
+            width: 100,
+            height: 100,
             borderRadius: "50%",
-            background: `radial-gradient(circle, rgba(255,255,255,0.95) 0%, ${hexToRgba(COLORS.primary, 0.6)} 25%, ${hexToRgba(COLORS.primary, 0.2)} 50%, transparent 70%)`,
+            background: `radial-gradient(circle, ${hexToRgba(COLORS.primary, 0.4)} 0%, ${hexToRgba(COLORS.primary, 0.15)} 40%, transparent 65%)`,
+            opacity: ring2Opacity,
+            transform: `scale(${ring2Scale})`,
+            position: "absolute",
+          }}
+        />
+
+        {/* Central light point - pure white core */}
+        <div
+          style={{
+            width: 70,
+            height: 70,
+            borderRadius: "50%",
+            background: `radial-gradient(circle, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.7) 15%, ${hexToRgba(COLORS.primary, 0.5)} 35%, ${hexToRgba(COLORS.primary, 0.15)} 55%, transparent 70%)`,
             opacity: lightOpacity,
             transform: `scale(${lightScale})`,
             position: "absolute",
@@ -266,11 +300,11 @@ const IntroScene = () => {
         <div
           style={{
             width: lineWidth,
-            height: 2,
-            background: `linear-gradient(90deg, transparent 0%, ${hexToRgba(COLORS.primary, 0.3)} 15%, rgba(255,255,255,0.9) 50%, ${hexToRgba(COLORS.primary, 0.3)} 85%, transparent 100%)`,
+            height: 1.5,
+            background: `linear-gradient(90deg, transparent 0%, ${hexToRgba(COLORS.primary, 0.35)} 12%, rgba(255,255,255,0.95) 50%, ${hexToRgba(COLORS.primary, 0.35)} 88%, transparent 100%)`,
             opacity: lineOpacity,
             position: "absolute",
-            boxShadow: `0 0 30px ${hexToRgba(COLORS.primary, 0.35)}`,
+            boxShadow: `0 0 25px ${hexToRgba(COLORS.primary, 0.4)}`,
           }}
         />
       </AbsoluteFill>
@@ -287,7 +321,7 @@ const IntroScene = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: 14,
+            gap: 12,
           }}
         >
           {/* Logo */}
@@ -295,10 +329,10 @@ const IntroScene = () => {
             style={{
               transform: `scale(${logoScale})`,
               opacity: logoOpacity,
-              filter: `drop-shadow(0 0 ${logoGlow}px ${hexToRgba(COLORS.primary, 0.55)})`,
+              filter: `drop-shadow(0 0 ${logoGlow}px ${hexToRgba(COLORS.primary, 0.5)})`,
             }}
           >
-            <FedLogo size={100} glow={false} />
+            <FedLogo size={95} glow={false} />
           </div>
 
           {/* $FED wordmark */}
@@ -312,24 +346,24 @@ const IntroScene = () => {
           >
             <span
               style={{
-                fontSize: 52,
+                fontSize: 56,
                 fontWeight: 900,
                 color: COLORS.primary,
                 fontFamily: "system-ui, -apple-system, sans-serif",
-                textShadow: `0 0 25px ${hexToRgba(COLORS.primary, 0.45)}`,
-                marginRight: -2,
+                textShadow: `0 0 22px ${hexToRgba(COLORS.primary, 0.5)}`,
+                marginRight: -3,
               }}
             >
               $
             </span>
             <span
               style={{
-                fontSize: 52,
+                fontSize: 56,
                 fontWeight: 900,
                 color: COLORS.white,
                 fontFamily: "system-ui, -apple-system, sans-serif",
-                letterSpacing: -2.5,
-                textShadow: "0 4px 30px rgba(0, 0, 0, 0.5)",
+                letterSpacing: -3,
+                textShadow: "0 5px 35px rgba(0, 0, 0, 0.55)",
               }}
             >
               FED
@@ -341,15 +375,15 @@ const IntroScene = () => {
             style={{
               opacity: tagOpacity,
               transform: `translateY(${tagY}px)`,
-              marginTop: 6,
+              marginTop: 4,
             }}
           >
             <span
               style={{
-                fontSize: 11,
+                fontSize: 10.5,
                 color: COLORS.grayMid,
                 fontFamily: "system-ui, -apple-system, sans-serif",
-                letterSpacing: 4.5,
+                letterSpacing: 5,
                 textTransform: "uppercase",
                 fontWeight: 500,
               }}
@@ -375,73 +409,73 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
   const words = headline.split(" ");
   const brrrIndex = words.findIndex(w => w === "BRRR");
 
-  // Scene fade - quick, confident entrance
-  const sceneFade = interpolate(frame, [0, fps * 0.08], [0, 1], {
+  // Scene fade - crisp entrance
+  const sceneFade = interpolate(frame, [0, fps * 0.06], [0, 1], {
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),
   });
 
-  // Word timing - slower stagger for anticipation, pause before BRRR
-  const wordStagger = 0.16;
-  const brrrExtraDelay = 0.12; // Extra pause before BRRR for anticipation
-  const brrrDelay = 0.06 + brrrIndex * wordStagger + brrrExtraDelay;
-  const brrrLandTime = (brrrDelay + 0.06) * fps;
+  // Word timing - deliberate stagger for anticipation, dramatic pause before BRRR
+  const wordStagger = 0.14;
+  const brrrExtraDelay = 0.18; // Extended pause before BRRR for maximum anticipation
+  const brrrDelay = 0.05 + brrrIndex * wordStagger + brrrExtraDelay;
+  const brrrLandTime = (brrrDelay + 0.05) * fps;
 
-  // Subtle camera push on BRRR - slightly more dramatic
+  // Camera push on BRRR - subtle but impactful
   const cameraScale = interpolate(
     frame,
-    [brrrLandTime - fps * 0.02, brrrLandTime + fps * 0.04, brrrLandTime + fps * 0.35],
-    [1, 1.025, 1],
+    [brrrLandTime - fps * 0.02, brrrLandTime + fps * 0.03, brrrLandTime + fps * 0.32],
+    [1, 1.022, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Background glow - builds tension, then flares dramatically on BRRR
+  // Background glow - builds tension, then flares on BRRR
   const bgGlow = interpolate(
     frame,
-    [fps * 0.04, brrrLandTime - fps * 0.08, brrrLandTime, brrrLandTime + fps * 0.08, brrrLandTime + fps * 0.4, fps * 1.5],
-    [0.012, 0.02, 0.025, 0.1, 0.05, 0.04],
+    [fps * 0.03, brrrLandTime - fps * 0.1, brrrLandTime, brrrLandTime + fps * 0.06, brrrLandTime + fps * 0.35, fps * 1.4],
+    [0.01, 0.018, 0.022, 0.09, 0.045, 0.038],
     { extrapolateRight: "clamp" }
   );
 
-  // Central flash on BRRR impact - brighter, faster
+  // Central flash on BRRR impact - pure white burst
   const flashOpacity = interpolate(
     frame,
-    [brrrLandTime - fps * 0.01, brrrLandTime + fps * 0.02, brrrLandTime + fps * 0.12],
+    [brrrLandTime - fps * 0.01, brrrLandTime + fps * 0.015, brrrLandTime + fps * 0.1],
     [0, 1, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const flashScale = interpolate(
     frame,
-    [brrrLandTime - fps * 0.01, brrrLandTime + fps * 0.12],
-    [0.2, 3.2],
+    [brrrLandTime - fps * 0.01, brrrLandTime + fps * 0.1],
+    [0.15, 3],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Expanding ring - single, elegant, faster expansion
+  // Primary expanding ring - crisp and fast
   const ringOpacity = interpolate(
     frame,
-    [brrrLandTime, brrrLandTime + fps * 0.04, brrrLandTime + fps * 0.4],
-    [0.8, 0.4, 0],
+    [brrrLandTime, brrrLandTime + fps * 0.03, brrrLandTime + fps * 0.35],
+    [0.85, 0.45, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const ringScale = interpolate(
     frame,
-    [brrrLandTime, brrrLandTime + fps * 0.4],
-    [0.15, 4.5],
+    [brrrLandTime, brrrLandTime + fps * 0.35],
+    [0.12, 4.2],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Second ring for depth - slightly delayed
+  // Secondary ring - adds depth
   const ring2Opacity = interpolate(
     frame,
-    [brrrLandTime + fps * 0.03, brrrLandTime + fps * 0.08, brrrLandTime + fps * 0.5],
-    [0, 0.3, 0],
+    [brrrLandTime + fps * 0.025, brrrLandTime + fps * 0.07, brrrLandTime + fps * 0.45],
+    [0, 0.35, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const ring2Scale = interpolate(
     frame,
-    [brrrLandTime + fps * 0.03, brrrLandTime + fps * 0.5],
-    [0.1, 5.5],
+    [brrrLandTime + fps * 0.025, brrrLandTime + fps * 0.45],
+    [0.08, 5.2],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
@@ -460,10 +494,10 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
         {/* Central flash - pure white core */}
         <div
           style={{
-            width: 90,
-            height: 90,
+            width: 80,
+            height: 80,
             borderRadius: "50%",
-            background: `radial-gradient(circle, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.8) 15%, ${hexToRgba(COLORS.primary, 0.5)} 35%, transparent 55%)`,
+            background: `radial-gradient(circle, rgba(255,255,255,0.99) 0%, rgba(255,255,255,0.85) 12%, ${hexToRgba(COLORS.primary, 0.55)} 32%, transparent 52%)`,
             opacity: flashOpacity,
             transform: `scale(${flashScale})`,
             position: "absolute",
@@ -473,24 +507,24 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
         {/* Primary expanding ring */}
         <div
           style={{
-            width: 100,
-            height: 100,
+            width: 90,
+            height: 90,
             borderRadius: "50%",
-            border: `2px solid ${hexToRgba(COLORS.primary, 0.6)}`,
+            border: `1.5px solid ${hexToRgba(COLORS.primary, 0.65)}`,
             opacity: ringOpacity,
             transform: `scale(${ringScale})`,
             position: "absolute",
-            boxShadow: `0 0 25px ${hexToRgba(COLORS.primary, 0.35)}`,
+            boxShadow: `0 0 20px ${hexToRgba(COLORS.primary, 0.4)}`,
           }}
         />
 
         {/* Secondary ring for depth */}
         <div
           style={{
-            width: 80,
-            height: 80,
+            width: 70,
+            height: 70,
             borderRadius: "50%",
-            border: `1px solid ${hexToRgba(COLORS.primary, 0.4)}`,
+            border: `1px solid ${hexToRgba(COLORS.primary, 0.35)}`,
             opacity: ring2Opacity,
             transform: `scale(${ring2Scale})`,
             position: "absolute",
@@ -502,7 +536,7 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
         style={{
           justifyContent: "center",
           alignItems: "center",
-          padding: 60,
+          padding: 55,
           transform: `scale(${cameraScale})`,
         }}
       >
@@ -511,51 +545,51 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
             display: "flex",
             flexWrap: "wrap",
             justifyContent: "center",
-            gap: "0 24px",
-            maxWidth: 950,
+            gap: "0 22px",
+            maxWidth: 920,
           }}
         >
           {words.map((word, index) => {
-            // Add extra delay before BRRR for anticipation
-            const baseDelay = 0.06 + index * wordStagger;
+            // Extra delay before BRRR for anticipation
+            const baseDelay = 0.05 + index * wordStagger;
             const delay = index >= brrrIndex ? baseDelay + brrrExtraDelay : baseDelay;
 
             const wordProgress = spring({
               frame: frame - delay * fps,
               fps,
-              config: { damping: 200, stiffness: 65, mass: 1.35 },
+              config: { damping: 200, stiffness: 70, mass: 1.25 },
             });
             const wordOpacity = interpolate(
               frame,
-              [delay * fps, (delay + 0.18) * fps],
+              [delay * fps, (delay + 0.15) * fps],
               [0, 1],
               { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
             );
-            const wordY = interpolate(wordProgress, [0, 1], [35, 0]);
+            const wordY = interpolate(wordProgress, [0, 1], [32, 0]);
 
             const isBrrr = word === "BRRR";
 
-            // BRRR scale - dramatic entrance with satisfying overshoot then settle
+            // BRRR scale - dramatic pop with refined settle
             const brrrScale = isBrrr ? interpolate(
               frame,
-              [delay * fps, (delay + 0.02) * fps, (delay + 0.08) * fps, (delay + 0.16) * fps, (delay + 0.28) * fps],
-              [0.4, 1.28, 0.94, 1.02, 1],
+              [delay * fps, (delay + 0.015) * fps, (delay + 0.07) * fps, (delay + 0.14) * fps, (delay + 0.25) * fps],
+              [0.35, 1.32, 0.92, 1.03, 1],
               { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
             ) : 1;
 
-            // BRRR glow - intense burst then settle
+            // BRRR glow - intense burst then elegant settle
             const brrrGlow = isBrrr ? interpolate(
               frame,
-              [(delay + 0.01) * fps, (delay + 0.06) * fps, (delay + 0.25) * fps, fps * 1.4],
-              [0, 120, 55, 45],
+              [(delay + 0.008) * fps, (delay + 0.05) * fps, (delay + 0.22) * fps, fps * 1.3],
+              [0, 130, 50, 40],
               { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
             ) : 0;
 
-            // BRRR letter spacing - snaps in tight
+            // BRRR letter spacing - tight snap
             const brrrLetterSpacing = isBrrr ? interpolate(
               frame,
-              [delay * fps, (delay + 0.06) * fps, (delay + 0.16) * fps],
-              [12, -8, -5],
+              [delay * fps, (delay + 0.05) * fps, (delay + 0.14) * fps],
+              [14, -9, -6],
               { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
             ) : -3;
 
@@ -563,7 +597,7 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
               <span
                 key={index}
                 style={{
-                  fontSize: isBrrr ? 88 : 60,
+                  fontSize: isBrrr ? 92 : 58,
                   fontWeight: 900,
                   color: isBrrr ? COLORS.primary : COLORS.white,
                   fontFamily: "system-ui, -apple-system, sans-serif",
@@ -571,10 +605,10 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
                   transform: `translateY(${wordY}px) scale(${brrrScale})`,
                   display: "inline-block",
                   letterSpacing: brrrLetterSpacing,
-                  lineHeight: 1.15,
+                  lineHeight: 1.12,
                   textShadow: isBrrr
-                    ? `0 0 ${brrrGlow}px ${hexToRgba(COLORS.primary, 0.55)}, 0 5px 45px rgba(0, 0, 0, 0.5)`
-                    : "0 4px 35px rgba(0, 0, 0, 0.5)",
+                    ? `0 0 ${brrrGlow}px ${hexToRgba(COLORS.primary, 0.5)}, 0 6px 50px rgba(0, 0, 0, 0.55)`
+                    : "0 5px 40px rgba(0, 0, 0, 0.55)",
                 }}
               >
                 {word}
@@ -603,21 +637,21 @@ const StatCard: React.FC<{
   const cardProgress = spring({
     frame: frame - delay * fps,
     fps,
-    config: { damping: 180, stiffness: 45, mass: 1.5 },
+    config: { damping: 200, stiffness: 50, mass: 1.35 },
   });
 
   const cardOpacity = interpolate(
     frame,
-    [delay * fps, (delay + 0.22) * fps],
+    [delay * fps, (delay + 0.2) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const cardY = interpolate(cardProgress, [0, 1], [45, 0]);
-  const cardScale = interpolate(cardProgress, [0, 1], [0.94, 1]);
+  const cardY = interpolate(cardProgress, [0, 1], [40, 0]);
+  const cardScale = interpolate(cardProgress, [0, 1], [0.92, 1]);
 
-  // Number counting with premium quintic easing - accelerates then decelerates beautifully
-  const countDuration = 1.4;
-  const countStart = delay + 0.15;
+  // Number counting with premium easing - slow start, fast middle, elegant deceleration
+  const countDuration = 1.3;
+  const countStart = delay + 0.12;
   const numberProgress = interpolate(
     frame,
     [countStart * fps, (countStart + countDuration) * fps],
@@ -625,18 +659,20 @@ const StatCard: React.FC<{
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
-      // Custom easing: slow start, fast middle, elegant deceleration at end
+      // Refined custom easing: builds momentum, then elegant brake
       easing: (t) => {
-        if (t < 0.15) return t * t * 4; // Slow acceleration
-        if (t < 0.85) return 0.09 + (t - 0.15) * 1.2; // Fast middle
-        return 0.93 + (1 - Math.pow(1 - (t - 0.85) / 0.15, 3)) * 0.07; // Smooth deceleration
+        if (t < 0.12) return t * t * 6; // Quick acceleration from 0
+        if (t < 0.8) return 0.0864 + (t - 0.12) * 1.28; // Fast, satisfying count
+        // Final 20%: luxurious quintic ease-out
+        const x = (t - 0.8) / 0.2;
+        return 0.9568 + (1 - Math.pow(1 - x, 5)) * 0.0432;
       },
     }
   );
 
   const numericValue = stat.numericValue ?? (parseFloat(stat.value.replace(/[^0-9.]/g, "")) || 0);
-  // Smooth final approach - the last few digits slow down elegantly
-  const displayValue = numberProgress > 0.98
+  // Snap to final value at 99.5% for clean landing
+  const displayValue = numberProgress > 0.995
     ? numericValue
     : Math.floor(numericValue * numberProgress);
 
@@ -644,34 +680,34 @@ const StatCard: React.FC<{
   const suffix = stat.suffix ?? (stat.value.includes("+") ? "+" : "");
 
   // Landing state detection
-  const hasLanded = numberProgress >= 0.98;
+  const hasLanded = numberProgress >= 0.995;
   const landTime = (countStart + countDuration) * fps;
 
-  // Land pulse - satisfying pop with quick settle
+  // Land pulse - satisfying pop with refined settle
   const landPulse = hasLanded ? interpolate(
     frame,
-    [landTime - fps * 0.01, landTime + fps * 0.06, landTime + fps * 0.15, landTime + fps * 0.3],
-    [1, 1.06, 0.98, 1],
+    [landTime - fps * 0.01, landTime + fps * 0.05, landTime + fps * 0.12, landTime + fps * 0.25],
+    [1, 1.055, 0.985, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
-  // Number glow - builds during count, bursts on land, settles to subtle
+  // Number glow - builds during count, bursts on land, settles elegantly
   const numberGlow = hasLanded ? interpolate(
     frame,
-    [landTime - fps * 0.02, landTime + fps * 0.06, landTime + fps * 0.4],
-    [12, 40, 15],
+    [landTime - fps * 0.02, landTime + fps * 0.05, landTime + fps * 0.35],
+    [10, 38, 14],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   ) : interpolate(
     frame,
-    [(countStart + 0.15) * fps, landTime],
-    [0, 12],
+    [(countStart + 0.12) * fps, landTime],
+    [0, 10],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  // Top accent bar - sweeps across with purpose
+  // Top accent bar - elegant sweep
   const accentWidth = interpolate(
     frame,
-    [(delay + 0.1) * fps, (delay + 0.45) * fps],
+    [(delay + 0.08) * fps, (delay + 0.4) * fps],
     [0, 100],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
@@ -679,23 +715,37 @@ const StatCard: React.FC<{
   // Border glow - subtle pulse on land
   const borderOpacity = hasLanded ? interpolate(
     frame,
-    [landTime - fps * 0.02, landTime + fps * 0.08, landTime + fps * 0.35],
-    [0.05, 0.12, 0.06],
+    [landTime - fps * 0.02, landTime + fps * 0.06, landTime + fps * 0.3],
+    [0.04, 0.11, 0.055],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  ) : 0.05;
+  ) : 0.04;
 
   // Label fades in after card settles
   const labelOpacity = interpolate(
     frame,
-    [(delay + 0.25) * fps, (delay + 0.42) * fps],
-    [0, 0.9],
+    [(delay + 0.22) * fps, (delay + 0.38) * fps],
+    [0, 0.95],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+
+  // Shimmer effect - subtle sweep across card
+  const shimmerProgress = interpolate(
+    frame,
+    [(delay + 0.18) * fps, (delay + 0.65) * fps],
+    [-30, 130],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+  const shimmerOpacity = interpolate(
+    frame,
+    [(delay + 0.18) * fps, (delay + 0.35) * fps, (delay + 0.55) * fps, (delay + 0.65) * fps],
+    [0, 0.12, 0.08, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
   // Color mapping - use unified, sophisticated palette
   const accentColor = stat.color === "#00ff88" ? COLORS.primary :
                       stat.color === "#00d4ff" ? COLORS.secondary :
-                      stat.color === "#ff6b9d" ? "#e06090" : stat.color;
+                      stat.color === "#ff6b9d" ? "#e05888" : stat.color;
 
   return (
     <div
@@ -707,17 +757,17 @@ const StatCard: React.FC<{
     >
       <div
         style={{
-          padding: "30px 42px",
-          background: `linear-gradient(168deg, rgba(255,255,255,0.045) 0%, rgba(255,255,255,0.015) 40%, rgba(255,255,255,0.005) 100%)`,
-          borderRadius: 16,
-          minWidth: 275,
+          padding: "28px 40px",
+          background: `linear-gradient(165deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.018) 35%, rgba(255,255,255,0.006) 100%)`,
+          borderRadius: 14,
+          minWidth: 265,
           position: "relative",
           overflow: "hidden",
           border: `1px solid rgba(255, 255, 255, ${borderOpacity})`,
           boxShadow: `
-            0 30px 70px rgba(0, 0, 0, 0.5),
-            0 10px 25px rgba(0, 0, 0, 0.3),
-            inset 0 1px 0 rgba(255, 255, 255, 0.06)
+            0 28px 65px rgba(0, 0, 0, 0.55),
+            0 8px 22px rgba(0, 0, 0, 0.35),
+            inset 0 1px 0 rgba(255, 255, 255, 0.07)
           `,
         }}
       >
@@ -728,10 +778,25 @@ const StatCard: React.FC<{
             top: 0,
             left: 0,
             right: 0,
-            height: "40%",
-            background: "linear-gradient(180deg, rgba(255,255,255,0.035) 0%, transparent 100%)",
-            borderRadius: "16px 16px 0 0",
+            height: "38%",
+            background: "linear-gradient(180deg, rgba(255,255,255,0.04) 0%, transparent 100%)",
+            borderRadius: "14px 14px 0 0",
             pointerEvents: "none",
+          }}
+        />
+
+        {/* Shimmer sweep - premium glass effect */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: `${shimmerProgress}%`,
+            width: "25%",
+            height: "100%",
+            background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.15) 50%, transparent 100%)",
+            opacity: shimmerOpacity,
+            pointerEvents: "none",
+            transform: "skewX(-15deg)",
           }}
         />
 
@@ -743,37 +808,37 @@ const StatCard: React.FC<{
             left: 0,
             width: `${accentWidth}%`,
             height: 2,
-            background: `linear-gradient(90deg, ${accentColor} 0%, ${hexToRgba(accentColor, 0.7)} 60%, transparent 100%)`,
-            borderRadius: "16px 0 0 0",
-            boxShadow: `0 0 14px ${hexToRgba(accentColor, 0.35)}`,
+            background: `linear-gradient(90deg, ${accentColor} 0%, ${hexToRgba(accentColor, 0.65)} 55%, transparent 100%)`,
+            borderRadius: "14px 0 0 0",
+            boxShadow: `0 0 12px ${hexToRgba(accentColor, 0.4)}`,
           }}
         />
 
         {/* Number - the hero element */}
         <div
           style={{
-            fontSize: 54,
+            fontSize: 52,
             fontWeight: 900,
             color: COLORS.white,
             fontFamily: "system-ui, -apple-system, sans-serif",
-            letterSpacing: -2.5,
+            letterSpacing: -2.8,
             lineHeight: 1,
-            marginBottom: 14,
+            marginBottom: 12,
             transform: `scale(${landPulse})`,
             transformOrigin: "left center",
-            filter: `drop-shadow(0 0 ${numberGlow}px ${hexToRgba(accentColor, 0.4)})`,
+            filter: `drop-shadow(0 0 ${numberGlow}px ${hexToRgba(accentColor, 0.45)})`,
           }}
         >
-          <span style={{ color: accentColor, marginRight: -1 }}>
+          <span style={{ color: accentColor, marginRight: -2 }}>
             {prefix}
           </span>
           {displayValue.toLocaleString()}
           <span
             style={{
               color: COLORS.grayMid,
-              fontSize: 20,
+              fontSize: 18,
               fontWeight: 800,
-              marginLeft: 4,
+              marginLeft: 3,
             }}
           >
             {suffix}
@@ -784,11 +849,11 @@ const StatCard: React.FC<{
         <div style={{ opacity: labelOpacity }}>
           <div
             style={{
-              fontSize: 10,
+              fontSize: 9.5,
               color: COLORS.grayMid,
               fontFamily: "system-ui, -apple-system, sans-serif",
               textTransform: "uppercase",
-              letterSpacing: 2.5,
+              letterSpacing: 2.8,
               fontWeight: 600,
             }}
           >
@@ -808,31 +873,31 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Quick, confident entrance
-  const sceneFade = interpolate(frame, [0, fps * 0.08], [0, 1], {
+  // Crisp entrance
+  const sceneFade = interpolate(frame, [0, fps * 0.06], [0, 1], {
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),
   });
 
-  // Slightly tighter stagger for more energy
-  const cardStagger = 0.26;
+  // Tight stagger - each card gets its moment
+  const cardStagger = 0.24;
 
-  // Header - subtle, anchors the stats
-  const headerOpacity = interpolate(frame, [fps * 0.03, fps * 0.16], [0, 0.65], {
+  // Header - subtle anchor
+  const headerOpacity = interpolate(frame, [fps * 0.02, fps * 0.14], [0, 0.7], {
     extrapolateRight: "clamp",
   });
   const headerY = interpolate(
     frame,
-    [fps * 0.03, fps * 0.2],
-    [10, 0],
+    [fps * 0.02, fps * 0.18],
+    [8, 0],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Background glow - builds with card reveals, peaks, then settles
+  // Background glow - builds with card reveals, peaks, then settles elegantly
   const bgGlow = interpolate(
     frame,
-    [fps * 0.08, fps * 1.8, fps * 3.2],
-    [0.012, 0.05, 0.038],
+    [fps * 0.06, fps * 1.6, fps * 3.0],
+    [0.01, 0.048, 0.035],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
@@ -844,9 +909,9 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
         style={{
           justifyContent: "center",
           alignItems: "center",
-          padding: 50,
+          padding: 48,
           flexDirection: "column",
-          gap: 38,
+          gap: 35,
         }}
       >
         {/* Header */}
@@ -858,10 +923,10 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
         >
           <span
             style={{
-              fontSize: 11,
+              fontSize: 10.5,
               color: COLORS.grayMid,
               fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: 5,
+              letterSpacing: 5.5,
               textTransform: "uppercase",
               fontWeight: 600,
             }}
@@ -874,17 +939,17 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
         <div
           style={{
             display: "flex",
-            gap: 24,
+            gap: 22,
             flexWrap: "wrap",
             justifyContent: "center",
-            maxWidth: 920,
+            maxWidth: 900,
           }}
         >
           {stats.map((stat, index) => (
             <StatCard
               key={stat.label}
               stat={stat}
-              delay={0.18 + index * cardStagger}
+              delay={0.15 + index * cardStagger}
               index={index}
             />
           ))}
@@ -903,120 +968,120 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Quick, confident scene entrance
-  const sceneFade = interpolate(frame, [0, fps * 0.1], [0, 1], {
+  // Crisp scene entrance
+  const sceneFade = interpolate(frame, [0, fps * 0.08], [0, 1], {
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),
   });
 
-  // Background glow - builds presence
+  // Background glow - builds presence majestically
   const bgIntensity = interpolate(
     frame,
-    [0, fps * 1.2, fps * 2.2],
-    [0.015, 0.05, 0.04],
+    [0, fps * 1.0, fps * 2.0],
+    [0.012, 0.048, 0.038],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Logo entrance - small, confident, anchors the composition
+  // Logo entrance - confident anchor
   const logoProgress = spring({
-    frame: frame - fps * 0.08,
+    frame: frame - fps * 0.06,
     fps,
-    config: { damping: 200, stiffness: 55, mass: 1.3 },
+    config: { damping: 200, stiffness: 60, mass: 1.2 },
   });
-  const logoOpacity = interpolate(frame, [fps * 0.08, fps * 0.26], [0, 1], {
+  const logoOpacity = interpolate(frame, [fps * 0.06, fps * 0.22], [0, 1], {
     extrapolateRight: "clamp",
   });
-  const logoScale = interpolate(logoProgress, [0, 1], [0.75, 1]);
+  const logoScale = interpolate(logoProgress, [0, 1], [0.7, 1]);
   const logoGlow = interpolate(
     frame,
-    [fps * 0.25, fps * 0.6, fps * 1.5],
-    [0, 35, 28],
+    [fps * 0.2, fps * 0.55, fps * 1.4],
+    [0, 32, 25],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Hero domain name - THE moment of the entire video
-  const domainDelay = fps * 0.32;
+  const domainDelay = fps * 0.28;
   const domainProgress = spring({
     frame: frame - domainDelay,
     fps,
-    config: { damping: 170, stiffness: 50, mass: 1.4 },
+    config: { damping: 180, stiffness: 55, mass: 1.3 },
   });
   const domainOpacity = interpolate(
     frame,
-    [domainDelay, domainDelay + fps * 0.22],
+    [domainDelay, domainDelay + fps * 0.2],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const domainY = interpolate(domainProgress, [0, 1], [30, 0]);
-  const domainScale = interpolate(domainProgress, [0, 1], [0.88, 1]);
+  const domainY = interpolate(domainProgress, [0, 1], [28, 0]);
+  const domainScale = interpolate(domainProgress, [0, 1], [0.85, 1]);
 
   // Domain land pulse - satisfying settle
-  const domainLandTime = domainDelay + fps * 0.32;
+  const domainLandTime = domainDelay + fps * 0.28;
   const domainLandPulse = frame > domainLandTime ? interpolate(
     frame,
-    [domainLandTime, domainLandTime + fps * 0.06, domainLandTime + fps * 0.14, domainLandTime + fps * 0.28],
-    [1, 1.04, 0.99, 1],
+    [domainLandTime, domainLandTime + fps * 0.05, domainLandTime + fps * 0.12, domainLandTime + fps * 0.24],
+    [1, 1.038, 0.992, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
   // Domain glow - builds majestically
   const domainGlow = interpolate(
     frame,
-    [domainDelay + fps * 0.18, fps * 1.0, fps * 2.0],
-    [0, 50, 38],
+    [domainDelay + fps * 0.15, fps * 0.9, fps * 1.8],
+    [0, 45, 35],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Underline - elegant sweep from center
-  const underlineDelay = domainDelay + fps * 0.25;
+  const underlineDelay = domainDelay + fps * 0.22;
   const underlineWidth = interpolate(
     frame,
-    [underlineDelay, underlineDelay + fps * 0.35],
+    [underlineDelay, underlineDelay + fps * 0.32],
     [0, 100],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
   const underlineOpacity = interpolate(
     frame,
-    [underlineDelay, underlineDelay + fps * 0.15],
-    [0, 0.6],
+    [underlineDelay, underlineDelay + fps * 0.12],
+    [0, 0.65],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
   // Tagline - the value prop
-  const taglineDelay = domainDelay + fps * 0.4;
+  const taglineDelay = domainDelay + fps * 0.38;
   const taglineOpacity = interpolate(
     frame,
-    [taglineDelay, taglineDelay + fps * 0.25],
-    [0, 0.85],
+    [taglineDelay, taglineDelay + fps * 0.22],
+    [0, 0.9],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const taglineY = interpolate(
     frame,
-    [taglineDelay, taglineDelay + fps * 0.3],
-    [10, 0],
+    [taglineDelay, taglineDelay + fps * 0.28],
+    [8, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Bottom text - the differentiator
-  const bottomDelay = taglineDelay + fps * 0.28;
+  const bottomDelay = taglineDelay + fps * 0.25;
   const bottomOpacity = interpolate(
     frame,
-    [bottomDelay, bottomDelay + fps * 0.25],
-    [0, 0.6],
+    [bottomDelay, bottomDelay + fps * 0.22],
+    [0, 0.65],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const bottomY = interpolate(
     frame,
-    [bottomDelay, bottomDelay + fps * 0.3],
-    [8, 0],
+    [bottomDelay, bottomDelay + fps * 0.28],
+    [6, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Side lines - frame the bottom text elegantly
   const sideLineWidth = interpolate(
     frame,
-    [bottomDelay + fps * 0.1, bottomDelay + fps * 0.45],
-    [0, 80],
+    [bottomDelay + fps * 0.08, bottomDelay + fps * 0.4],
+    [0, 75],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
@@ -1028,20 +1093,20 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
         style={{
           justifyContent: "center",
           alignItems: "center",
-          gap: 16,
+          gap: 14,
           flexDirection: "column",
         }}
       >
-        {/* Logo - small anchor */}
-        <div style={{ marginBottom: 16 }}>
+        {/* Logo - confident anchor */}
+        <div style={{ marginBottom: 14 }}>
           <div
             style={{
               transform: `scale(${logoScale})`,
               opacity: logoOpacity,
-              filter: `drop-shadow(0 0 ${logoGlow}px ${hexToRgba(COLORS.primary, 0.45)})`,
+              filter: `drop-shadow(0 0 ${logoGlow}px ${hexToRgba(COLORS.primary, 0.5)})`,
             }}
           >
-            <FedLogo size={56} glow={false} />
+            <FedLogo size={52} glow={false} />
           </div>
         </div>
 
@@ -1055,12 +1120,12 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
         >
           <span
             style={{
-              fontSize: 62,
+              fontSize: 66,
               fontWeight: 900,
               color: COLORS.white,
               fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: -2,
-              textShadow: `0 0 ${domainGlow}px ${hexToRgba(COLORS.primary, 0.35)}, 0 8px 40px rgba(0, 0, 0, 0.5)`,
+              letterSpacing: -2.5,
+              textShadow: `0 0 ${domainGlow}px ${hexToRgba(COLORS.primary, 0.4)}, 0 10px 45px rgba(0, 0, 0, 0.55)`,
             }}
           >
             {cta}
@@ -1069,15 +1134,15 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
           <div
             style={{
               position: "absolute",
-              bottom: -6,
+              bottom: -5,
               left: "50%",
               transform: "translateX(-50%)",
               width: `${underlineWidth}%`,
-              height: 2.5,
-              background: `linear-gradient(90deg, transparent 0%, ${hexToRgba(COLORS.primary, 0.5)} 20%, ${hexToRgba(COLORS.primary, 0.65)} 50%, ${hexToRgba(COLORS.primary, 0.5)} 80%, transparent 100%)`,
+              height: 2,
+              background: `linear-gradient(90deg, transparent 0%, ${hexToRgba(COLORS.primary, 0.55)} 18%, ${hexToRgba(COLORS.primary, 0.7)} 50%, ${hexToRgba(COLORS.primary, 0.55)} 82%, transparent 100%)`,
               opacity: underlineOpacity,
-              borderRadius: 2,
-              boxShadow: `0 0 14px ${hexToRgba(COLORS.primary, 0.2)}`,
+              borderRadius: 1.5,
+              boxShadow: `0 0 12px ${hexToRgba(COLORS.primary, 0.25)}`,
             }}
           />
         </div>
@@ -1087,16 +1152,16 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
           style={{
             opacity: taglineOpacity,
             transform: `translateY(${taglineY}px)`,
-            marginTop: 18,
+            marginTop: 16,
           }}
         >
           <span
             style={{
-              fontSize: 18,
+              fontSize: 17,
               color: COLORS.grayLight,
               fontFamily: "system-ui, -apple-system, sans-serif",
               fontWeight: 400,
-              letterSpacing: 0.3,
+              letterSpacing: 0.4,
             }}
           >
             {tagline}
@@ -1108,25 +1173,25 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
           style={{
             opacity: bottomOpacity,
             transform: `translateY(${bottomY}px)`,
-            marginTop: 28,
+            marginTop: 26,
             display: "flex",
             alignItems: "center",
-            gap: 18,
+            gap: 16,
           }}
         >
           <div
             style={{
               width: sideLineWidth,
               height: 1,
-              background: `linear-gradient(270deg, ${hexToRgba(COLORS.primary, 0.28)}, transparent)`,
+              background: `linear-gradient(270deg, ${hexToRgba(COLORS.primary, 0.32)}, transparent)`,
             }}
           />
           <span
             style={{
-              fontSize: 10,
+              fontSize: 9.5,
               color: COLORS.grayMid,
               fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: 4.5,
+              letterSpacing: 5,
               textTransform: "uppercase",
               fontWeight: 600,
             }}
@@ -1137,7 +1202,7 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
             style={{
               width: sideLineWidth,
               height: 1,
-              background: `linear-gradient(90deg, ${hexToRgba(COLORS.primary, 0.28)}, transparent)`,
+              background: `linear-gradient(90deg, ${hexToRgba(COLORS.primary, 0.32)}, transparent)`,
             }}
           />
         </div>
