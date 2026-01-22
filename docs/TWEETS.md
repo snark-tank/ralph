@@ -229,3 +229,9 @@
 **Content:** New holder welcome tweet - explaining the simplicity (no staking, no claiming, just hold). Friendly onboarding tone with CTA to fed.markets.
 **URL:** https://x.com/fed_USD1/status/2014354889720332305
 ---
+## 2026-01-22 15:40 UTC
+**Category:** Video/Stats
+**Had Video:** Yes (stats-final.mp4)
+**Content:** Short punchy stats video caption - "The scoreboard doesn't lie" - letting the video showcase the numbers rather than text-dumping stats.
+**URL:** https://x.com/fed_USD1/status/2014362567884582937
+---
