@@ -6,11 +6,11 @@ Ralph's brainstorm board for making $FED the ultimate rewards flywheel.
 
 ## High Priority Ideas
 
-### 1. Diamond Hands Streak Tracker ✅ IMPLEMENTED
+### 1. Diamond Hands Streak Tracker  IMPLEMENTED
 
 **Inspired by:** HEX Time-Lock + NaaS Daily Engagement
 
-**Status:** ✅ **LIVE IN PRODUCTION** (Jan 21, 2026)
+**Status:**  **LIVE IN PRODUCTION** (Jan 21, 2026)
 
 **The Concept:**
 Track how long holders continuously hold $FED and reward loyalty with bonus multipliers. Unlike HEX's harsh penalties for early exit, we simply reward consistency.
@@ -18,21 +18,21 @@ Track how long holders continuously hold $FED and reward loyalty with bonus mult
 **Streak Tiers:**
 | Tier | Days | Multiplier | Title |
 |------|------|------------|-------|
-| 🏛️ Founding Father | 365+ | 1.25x | Elite OG status |
-| 💎 OG Fed | 180+ | 1.2x | Six-month diamond hands |
-| 🔷 Fed Loyalist | 90+ | 1.15x | Quarterly commitment |
-| 💠 Diamond Hands | 30+ | 1.1x | Monthly holder |
-| 🤝 Holder | 7+ | 1.05x | Weekly commitment |
-| 🆕 Newcomer | 0+ | 1.0x | Welcome aboard |
+|  Founding Father | 365+ | 1.25x | Elite OG status |
+|  OG Fed | 180+ | 1.2x | Six-month diamond hands |
+|  Fed Loyalist | 90+ | 1.15x | Quarterly commitment |
+|  Diamond Hands | 30+ | 1.1x | Monthly holder |
+|  Holder | 7+ | 1.05x | Weekly commitment |
+|  Newcomer | 0+ | 1.0x | Welcome aboard |
 
-**Implementation:** ✅ DONE
-- ✅ Created `streak-tracker.ts` standalone utility
-- ✅ Tracks first seen date, streak length, peak balance
-- ✅ Tier calculation with multipliers
-- ✅ Leaderboard generation for top diamond hands
-- ✅ Individual address lookup
-- ✅ JSON output for API/website integration
-- ✅ **Streak multipliers integrated into distribution** (Jan 21, 2026)
+**Implementation:**  DONE
+-  Created `streak-tracker.ts` standalone utility
+-  Tracks first seen date, streak length, peak balance
+-  Tier calculation with multipliers
+-  Leaderboard generation for top diamond hands
+-  Individual address lookup
+-  JSON output for API/website integration
+-  **Streak multipliers integrated into distribution** (Jan 21, 2026)
   - Streak multipliers now STACK with tier multipliers
   - Combined multiplier = tier × streak (e.g., 1.5x Chairman × 1.25x Founding Father = 1.875x)
   - Full stats logging for both tier and streak distributions
@@ -60,7 +60,7 @@ npx ts-node streak-tracker.ts --json
 - Encourages long-term holding behavior
 - Provides leaderboard for community competition
 
-**Effort:** ✅ Complete
+**Effort:**  Complete
 **Impact:** High (retention + engagement)
 
 ---
@@ -85,7 +85,7 @@ Sell      (-1,1)    (-3,-3)
 - Website widget showing current "community stance" based on holder behavior
 - Daily/weekly "BRRR Score" based on net holder count change
 - Discord role for diamond hands: "Federal Reserve Board Members"
-- Leaderboard for longest holding streaks ✅ (via streak-tracker.ts)
+- Leaderboard for longest holding streaks  (via streak-tracker.ts)
 
 **Why It Works for $FED:**
 - OHM used this for ponzi pressure; we use it for community building
@@ -97,11 +97,11 @@ Sell      (-1,1)    (-3,-3)
 
 ---
 
-### 3. "Fed Funds Rate" Dynamic APY Display ✅ IMPLEMENTED
+### 3. "Fed Funds Rate" Dynamic APY Display  IMPLEMENTED
 
 **Inspired by:** Actual Federal Reserve + OHM's APY marketing
 
-**Status:** ✅ **LIVE IN PRODUCTION** (Jan 21, 2026)
+**Status:**  **LIVE IN PRODUCTION** (Jan 21, 2026)
 
 **The Concept:**
 Display an estimated "Fed Funds Rate" showing projected annual return based on:
@@ -109,12 +109,12 @@ Display an estimated "Fed Funds Rate" showing projected annual return based on:
 - Your $FED holdings
 - Historical distribution data
 
-**Implementation:** ✅ DONE
-- ✅ Created `fed-funds-rate.ts` standalone calculator utility
-- ✅ Integrated Fed Funds Rate display into distribution summary
-- ✅ Multiple time period rates (24h, 7d, 30d)
-- ✅ Tier-aware calculations with multiplier support
-- ✅ Estimated reward projections (daily/monthly/yearly)
+**Implementation:**  DONE
+-  Created `fed-funds-rate.ts` standalone calculator utility
+-  Integrated Fed Funds Rate display into distribution summary
+-  Multiple time period rates (24h, 7d, 30d)
+-  Tier-aware calculations with multiplier support
+-  Estimated reward projections (daily/monthly/yearly)
 - 🔜 Add to website dashboard (future)
 
 **Usage:**
@@ -139,11 +139,11 @@ npx ts-node fed-funds-rate.ts --json
 
 ---
 
-### 4. Holder Tier System: "Federal Reserve Ranks" ✅ IMPLEMENTED
+### 4. Holder Tier System: "Federal Reserve Ranks"  IMPLEMENTED
 
 **Inspired by:** Olympus DAO + HEX
 
-**Status:** ✅ **LIVE IN PRODUCTION** (Jan 21, 2026)
+**Status:**  **LIVE IN PRODUCTION** (Jan 21, 2026)
 
 **The Concept:**
 Create tiered multipliers for reward distribution:
@@ -156,8 +156,8 @@ Create tiered multipliers for reward distribution:
 | Member | 100K+ $FED | 1.05x | Board Member |
 | Citizen | <100K $FED | 1.0x | Fed Citizen |
 
-**Implementation:** ✅ DONE
-- ✅ Modified distribution script to apply multipliers
+**Implementation:**  DONE
+-  Modified distribution script to apply multipliers
 - 🔜 Add tier display to website (future)
 - 🔜 Create shareable "Fed ID Card" NFT for each tier (future)
 
@@ -177,11 +177,11 @@ Create tiered multipliers for reward distribution:
 
 ---
 
-### 5. "Quantitative Easing" Events ✅ IMPLEMENTED
+### 5. "Quantitative Easing" Events  IMPLEMENTED
 
 **Inspired by:** Actual Fed policy + marketing psychology
 
-**Status:** ✅ **LIVE IN PRODUCTION** (Jan 21, 2026)
+**Status:**  **LIVE IN PRODUCTION** (Jan 21, 2026)
 
 **The Concept:**
 Special distribution events when milestones are hit:
@@ -211,15 +211,15 @@ Special distribution events when milestones are hit:
 - **OPS4:** 500 distributions
 - **OPS5:** 1,000 distributions
 
-**Implementation:** ✅ DONE
-- ✅ Created `milestone-tracker.ts` standalone utility
-- ✅ Tracks distribution amount, holder count, and distribution count
-- ✅ Generates FOMC-style celebration announcements
-- ✅ Twitter-ready posts for social media
-- ✅ Progress bars for upcoming milestones
-- ✅ JSON output for API/website integration
-- ✅ Auto-save announcements to milestone-announcements/ folder
-- ✅ Bonus multipliers integrated into distribution logic (Jan 21, 2026)
+**Implementation:**  DONE
+-  Created `milestone-tracker.ts` standalone utility
+-  Tracks distribution amount, holder count, and distribution count
+-  Generates FOMC-style celebration announcements
+-  Twitter-ready posts for social media
+-  Progress bars for upcoming milestones
+-  JSON output for API/website integration
+-  Auto-save announcements to milestone-announcements/ folder
+-  Bonus multipliers integrated into distribution logic (Jan 21, 2026)
 - 🔜 Add milestone display to website (future)
 
 **Usage:**
@@ -241,7 +241,7 @@ npx ts-node milestone-tracker.ts --check-only
 - Professional Fed-style announcements
 - Ready for Twitter/social sharing
 
-**Effort:** ✅ Complete
+**Effort:**  Complete
 **Impact:** Medium (engagement + marketing)
 
 ---
@@ -295,11 +295,11 @@ Real-time dashboard showing:
 
 ---
 
-### 7. Auto-Compound Option ✅ IMPLEMENTED (Phase 1)
+### 7. Auto-Compound Option  IMPLEMENTED (Phase 1)
 
 **Inspired by:** Titano / LIBERO
 
-**Status:** ✅ **PREFERENCE SYSTEM LIVE** (Jan 21, 2026)
+**Status:**  **PREFERENCE SYSTEM LIVE** (Jan 21, 2026)
 
 **The Concept:**
 Allow holders to opt-in to auto-reinvest their USD1 rewards back into $FED:
@@ -309,14 +309,14 @@ Allow holders to opt-in to auto-reinvest their USD1 rewards back into $FED:
 3. On distribution, swap USD1 -> $FED
 4. Send $FED instead of USD1
 
-**Implementation (Phase 1):** ✅ DONE
-- ✅ Created `auto-compound.ts` preference manager
-- ✅ Register/unregister addresses for auto-compound
-- ✅ Preference persistence in JSON file
-- ✅ Address validation (valid Solana addresses only)
-- ✅ Statistics tracking (total registered, compound history)
-- ✅ JSON output for API/website integration
-- ✅ Comprehensive CLI interface
+**Implementation (Phase 1):**  DONE
+-  Created `auto-compound.ts` preference manager
+-  Register/unregister addresses for auto-compound
+-  Preference persistence in JSON file
+-  Address validation (valid Solana addresses only)
+-  Statistics tracking (total registered, compound history)
+-  JSON output for API/website integration
+-  Comprehensive CLI interface
 - 🔜 Phase 2: Jupiter swap integration in distribution script
 - 🔜 Phase 3: Website UI for preference management
 
@@ -344,7 +344,7 @@ npx ts-node auto-compound.ts --stats
 - Compounds holder positions automatically
 - Savings on gas (one swap vs many small ones)
 
-**Effort:** Phase 1 ✅ Complete, Phase 2 Pending (swap integration)
+**Effort:** Phase 1  Complete, Phase 2 Pending (swap integration)
 **Impact:** High (price support + holder growth)
 
 ---
@@ -416,11 +416,11 @@ Don't keep all operational funds in one place. Consider:
 
 ---
 
-### 10. "Rate Decision" Announcements ✅ IMPLEMENTED
+### 10. "Rate Decision" Announcements  IMPLEMENTED
 
 **Inspired by:** Actual Federal Reserve FOMC meetings
 
-**Status:** ✅ **LIVE IN PRODUCTION** (Jan 21, 2026)
+**Status:**  **LIVE IN PRODUCTION** (Jan 21, 2026)
 
 **The Concept:**
 Weekly or monthly "Fed Rate Decision" announcements:
@@ -429,16 +429,16 @@ Weekly or monthly "Fed Rate Decision" announcements:
 - Any protocol updates or changes
 - Holder milestone celebrations
 
-**Implementation:** ✅ DONE
-- ✅ Created `rate-decision.ts` standalone announcement generator
-- ✅ Supports daily, weekly, and monthly periods
-- ✅ Full FOMC-style official announcement formatting
-- ✅ Twitter-ready short posts (280 chars)
-- ✅ Tier breakdown statistics
-- ✅ Policy stance determination (accommodative/neutral/tightening)
-- ✅ Printer status indicator (BRRR/brrr/brr/idle)
-- ✅ JSON output for API integration
-- ✅ Auto-save to rate-decisions/ folder
+**Implementation:**  DONE
+-  Created `rate-decision.ts` standalone announcement generator
+-  Supports daily, weekly, and monthly periods
+-  Full FOMC-style official announcement formatting
+-  Twitter-ready short posts (280 chars)
+-  Tier breakdown statistics
+-  Policy stance determination (accommodative/neutral/tightening)
+-  Printer status indicator (BRRR/brrr/brr/idle)
+-  JSON output for API integration
+-  Auto-save to rate-decisions/ folder
 
 **Usage:**
 ```bash
@@ -461,7 +461,7 @@ npx ts-node rate-decision.ts --save
 **Example Output:**
 ```
 ╔══════════════════════════════════════════════════════════════════╗
-║                   🏛️ FEDERAL RESERVE BOARD 🏛️                    ║
+║                    FEDERAL RESERVE BOARD                     ║
 ║                      RATE DECISION STATEMENT                     ║
 ╚══════════════════════════════════════════════════════════════════╝
 
@@ -476,12 +476,12 @@ of monetary conditions, has maintained the Fed Funds Rate.
                     │       28.45%  APY           │
                     └─────────────────────────────┘
 
-📊 WEEKLY DISTRIBUTION SUMMARY
-  💵 Total Distributed:     $142.34 USD1
-  📦 Distribution Events:   18
-  👥 Avg Recipients/Dist:   309
+ WEEKLY DISTRIBUTION SUMMARY
+   Total Distributed:     $142.34 USD1
+   Distribution Events:   18
+   Avg Recipients/Dist:   309
 
-🖨️ PRINTER STATUS: brrr brrr 💵💵
+🖨️ PRINTER STATUS: brrr brrr 
 
                             - Ralph, Chairman of the Fed
 ```
@@ -493,7 +493,7 @@ of monetary conditions, has maintained the Fed Funds Rate.
 - Builds anticipation for announcements
 - Twitter-ready for social engagement
 
-**Effort:** ✅ Complete
+**Effort:**  Complete
 **Impact:** High (community engagement)
 
 ---
@@ -648,7 +648,7 @@ Other projects can PAY $FED holders to add liquidity to their tokens on Meteora.
 
 **Inspired by:** Jupiter's Active Staking Rewards (ASR), Trust Wallet Premium XP
 
-**Status:** ✅ **IMPLEMENTED** (Jan 21, 2026)
+**Status:**  **IMPLEMENTED** (Jan 21, 2026)
 
 **The Concept:**
 Reward holders who actively engage with the protocol, not just passive hodlers. BUT don't require voting (learned from Jupiter's governance pause).
@@ -664,11 +664,11 @@ Reward holders who actively engage with the protocol, not just passive hodlers. 
 **Engagement Tiers (14-day cycles):**
 | Tier | XP Required | Multiplier | Title |
 |------|-------------|------------|-------|
-| 🏆 Fed Elite | 500+ XP | 1.2x | Maximum engagement |
-| ⭐ Fed Veteran | 250+ XP | 1.15x | High engagement |
-| 🔥 Fed Active | 100+ XP | 1.1x | Active engagement |
-| 📊 Fed Regular | 50+ XP | 1.05x | Regular engagement |
-| 🆕 Fed Newcomer | 0+ XP | 1.0x | Base rewards |
+|  Fed Elite | 500+ XP | 1.2x | Maximum engagement |
+|  Fed Veteran | 250+ XP | 1.15x | High engagement |
+|  Fed Active | 100+ XP | 1.1x | Active engagement |
+|  Fed Regular | 50+ XP | 1.05x | Regular engagement |
+|  Fed Newcomer | 0+ XP | 1.0x | Base rewards |
 
 **Why It Works:**
 - Jupiter's ASR proved engagement > passive holding
@@ -678,14 +678,14 @@ Reward holders who actively engage with the protocol, not just passive hodlers. 
 - XP multiplies REAL rewards (not inflation)
 - 14-day cycles create urgency and fresh starts
 
-**Implementation:** ✅ DONE
-- ✅ Created `engagement-score.ts` standalone utility
-- ✅ Check-in system with streak tracking
-- ✅ 5 engagement tiers with multipliers
-- ✅ 14-day cycle system with auto-reset
-- ✅ Leaderboard generation
-- ✅ JSON output for API/website integration
-- ✅ **Integrated into distribution script** (Jan 21, 2026)
+**Implementation:**  DONE
+-  Created `engagement-score.ts` standalone utility
+-  Check-in system with streak tracking
+-  5 engagement tiers with multipliers
+-  14-day cycle system with auto-reset
+-  Leaderboard generation
+-  JSON output for API/website integration
+-  **Integrated into distribution script** (Jan 21, 2026)
   - Engagement multiplier now STACKS with tier + streak
   - Combined: tier × streak × engagement (max 2.25x)
   - +5 XP awarded per distribution received
@@ -707,7 +707,7 @@ npx ts-node engagement-score.ts --leaderboard 20
 npx ts-node engagement-score.ts --stats --json
 ```
 
-**Effort:** ✅ Complete (Phase 1)
+**Effort:**  Complete (Phase 1)
 **Impact:** High (engagement + virality)
 
 ---
@@ -743,11 +743,11 @@ Annual bonus distribution event celebrating $FED's anniversary. Creates massive 
 
 ## Low Priority / Future Ideas
 
-### 18. Referral Program ✅ IMPLEMENTED
+### 18. Referral Program  IMPLEMENTED
 
 **Inspired by:** DRIP Network, Bybit, KuCoin, Crypto.com
 
-**Status:** ✅ **LIVE IN PRODUCTION** (Jan 21, 2026)
+**Status:**  **LIVE IN PRODUCTION** (Jan 21, 2026)
 
 **The Concept:**
 Multi-level referral tracking that rewards $FED holders for bringing new members into the ecosystem. Referrers earn bonus multipliers on their own distributions plus a percentage of their referrals' rewards.
@@ -755,20 +755,20 @@ Multi-level referral tracking that rewards $FED holders for bringing new members
 **Referral Tiers:**
 | Tier | Min Referrals | Multiplier | L1 Bonus | L2 Bonus |
 |------|---------------|------------|----------|----------|
-| 👑 Fed Ambassador | 50+ | 1.25x | 5% | 1% |
-| ⭐ Fed Recruiter | 20+ | 1.15x | 4% | 0.5% |
-| 🔥 Fed Advocate | 10+ | 1.1x | 3% | - |
-| 💪 Fed Supporter | 5+ | 1.05x | 2% | - |
-| 🤝 Fed Member | 1+ | 1.02x | 1% | - |
+|  Fed Ambassador | 50+ | 1.25x | 5% | 1% |
+|  Fed Recruiter | 20+ | 1.15x | 4% | 0.5% |
+|  Fed Advocate | 10+ | 1.1x | 3% | - |
+|  Fed Supporter | 5+ | 1.05x | 2% | - |
+|  Fed Member | 1+ | 1.02x | 1% | - |
 
-**Implementation:** ✅ DONE
-- ✅ Created `referral-bonus.ts` standalone utility
-- ✅ Multi-level referral tracking (L1 and L2)
-- ✅ Bonus multipliers on own distributions
-- ✅ Network bonus: % of referrals' rewards
-- ✅ Retention rate tracking per referrer
-- ✅ Leaderboard generation for top referrers
-- ✅ JSON API output for website integration
+**Implementation:**  DONE
+-  Created `referral-bonus.ts` standalone utility
+-  Multi-level referral tracking (L1 and L2)
+-  Bonus multipliers on own distributions
+-  Network bonus: % of referrals' rewards
+-  Retention rate tracking per referrer
+-  Leaderboard generation for top referrers
+-  JSON API output for website integration
 - 🔜 Website referral link generator (future)
 - 🔜 Integration into distribution script (next iteration)
 
@@ -794,7 +794,7 @@ npx ts-node referral-bonus.ts --json
 - Real USD1 rewards (not points) make it tangible
 - Stacks with existing tier/streak/engagement multipliers
 
-**Effort:** ✅ Phase 1 Complete
+**Effort:**  Phase 1 Complete
 **Impact:** High (organic growth + network effects)
 
 ### 19. DAO Governance
@@ -826,22 +826,22 @@ Bridge $FED to other chains. Major undertaking, future consideration.
 
 ## Next Steps
 
-1. ~~**Implement Tier System**~~ - ✅ **DONE!** Holder tiers now live in distribution script
-2. ~~**Build Fed Funds Rate Display**~~ - ✅ **DONE!** Calculator + distribution integration complete
-3. ~~**Implement "Rate Decision" Communications**~~ - ✅ **DONE!** FOMC-style announcements generator
-4. ~~**Implement QE/Milestone Tracker**~~ - ✅ **DONE!** Milestone tracking with celebration announcements
-5. ~~**Build Auto-Compound Preferences**~~ - ✅ **DONE!** Phase 1 preference manager complete
+1. ~~**Implement Tier System**~~ -  **DONE!** Holder tiers now live in distribution script
+2. ~~**Build Fed Funds Rate Display**~~ -  **DONE!** Calculator + distribution integration complete
+3. ~~**Implement "Rate Decision" Communications**~~ -  **DONE!** FOMC-style announcements generator
+4. ~~**Implement QE/Milestone Tracker**~~ -  **DONE!** Milestone tracking with celebration announcements
+5. ~~**Build Auto-Compound Preferences**~~ -  **DONE!** Phase 1 preference manager complete
 6. **Integrate Auto-Compound Swaps** - Jupiter integration for actual swaps (Phase 2)
 7. **Create (3,3) Community Campaign** - Free, high engagement
 8. **Launch Transparency Dashboard** - Builds trust
 9. **Build "Fed Auto-BRRR" Dashboard** - Titano-style engagement with real rewards
-10. ~~**Website Fed Funds Rate Widget**~~ - ✅ **DONE!** (Jan 21, 2026) Display current 7d/30d APY on dashboard
-11. ~~**Integrate Milestone Bonuses**~~ - ✅ **DONE!** QE events now detected and announced during distributions
+10. ~~**Website Fed Funds Rate Widget**~~ -  **DONE!** (Jan 21, 2026) Display current 7d/30d APY on dashboard
+11. ~~**Integrate Milestone Bonuses**~~ -  **DONE!** QE events now detected and announced during distributions
 
 ### New Items from 2025 Research (Jan 21, 2026)
 
 12. **Implement "Fed Discount Tiers"** - Trading fee discounts based on holdings (inspired by Hyperliquid)
-13. ~~**Build "Fed Citizen Engagement Bonus"**~~ - ✅ **DONE!** Engagement score system fully integrated (Jan 21, 2026)
+13. ~~**Build "Fed Citizen Engagement Bonus"**~~ -  **DONE!** Engagement score system fully integrated (Jan 21, 2026)
 14. **Plan "Feduary" Event** - Annual celebration airdrop for Feb 2027 (inspired by Jupuary)
 15. **Research "Fed Lobbyist" Marketplace** - External incentives for liquidity direction (inspired by Aerodrome bribes)
 
@@ -850,16 +850,16 @@ Bridge $FED to other chains. Major undertaking, future consideration.
 16. **"Fed Buyback & Burn" Optional Mechanism** - Small % of fees to buy/burn $FED (inspired by Uniswap UNIfication)
 17. **"FedUSD" Yield-Bearing Wrapper** - Wrapper for USD1 rewards that auto-compounds (inspired by JupUSD)
 18. **"Fed Treasury Dashboard"** - Public dashboard showing all fee metrics, distribution history (inspired by Uniswap's transparency)
-19. ~~**"Fed Season Pass"**~~ - ✅ **DONE!** Seasonal loyalty bonuses with tier system, achievements, and leaderboards (Jan 21, 2026)
+19. ~~**"Fed Season Pass"**~~ -  **DONE!** Seasonal loyalty bonuses with tier system, achievements, and leaderboards (Jan 21, 2026)
 
 ### New Items from 2026 Reputation Research (Jan 21, 2026)
 
-20. ~~**"Fed Credit Score"**~~ - ✅ **DONE!** Unified reputation scoring system (300-850 scale) aggregating all holder metrics (Jan 21, 2026)
-21. ~~**"Fed Referral Bonus System"**~~ - ✅ **DONE!** Multi-level referral tracking with tier bonuses (Jan 21, 2026)
+20. ~~**"Fed Credit Score"**~~ -  **DONE!** Unified reputation scoring system (300-850 scale) aggregating all holder metrics (Jan 21, 2026)
+21. ~~**"Fed Referral Bonus System"**~~ -  **DONE!** Multi-level referral tracking with tier bonuses (Jan 21, 2026)
 
 ### New Items from 2026 Gamification Research (Jan 21, 2026)
 
-22. ~~**"Fed Quests"**~~ - ✅ **DONE!** Gamified onboarding and engagement quest system with badges and XP (Jan 21, 2026)
+22. ~~**"Fed Quests"**~~ -  **DONE!** Gamified onboarding and engagement quest system with badges and XP (Jan 21, 2026)
 23. **"Fed Predictions"** - Prediction markets for $FED metrics (inspired by Polymarket, Drift BET)
 24. **"Time-Weighted Voting"** - Lock $FED for increased voting power (inspired by Curve veCRV)
 
@@ -871,7 +871,7 @@ Bridge $FED to other chains. Major undertaking, future consideration.
 
 **Inspired by:** Uniswap UNIfication
 
-**Status:** ✅ **IMPLEMENTED** (Jan 21, 2026)
+**Status:**  **IMPLEMENTED** (Jan 21, 2026)
 
 **The Concept:**
 Optionally allocate a small percentage of collected fees to buy and burn $FED tokens, creating deflationary pressure alongside USD1 distributions.
@@ -881,14 +881,14 @@ Optionally allocate a small percentage of collected fees to buy and burn $FED to
 - 10% of fees → $FED buyback and burn (optional, manual trigger)
 - 5% of fees → Treasury reserve
 
-**Implementation:** ✅ DONE
-- ✅ Created `treasury-buyback.ts` standalone utility
-- ✅ Uses Jupiter Ultra Swap API for USD1 → $FED swaps
-- ✅ SPL Token burn instruction for permanent supply reduction
-- ✅ Configurable amount (fixed or % of balance)
-- ✅ Simulation mode for quote-only checks
-- ✅ Stats tracking (total burned, average price, history)
-- ✅ Safety limits (min amount, max % per buyback)
+**Implementation:**  DONE
+-  Created `treasury-buyback.ts` standalone utility
+-  Uses Jupiter Ultra Swap API for USD1 → $FED swaps
+-  SPL Token burn instruction for permanent supply reduction
+-  Configurable amount (fixed or % of balance)
+-  Simulation mode for quote-only checks
+-  Stats tracking (total burned, average price, history)
+-  Safety limits (min amount, max % per buyback)
 - 🔜 Auto-scheduled buybacks (future consideration)
 - 🔜 Governance voting for buyback % (future)
 
@@ -920,7 +920,7 @@ npx ts-node treasury-buyback.ts --status
 - Burns are OPTIONAL - core model remains USD1 distribution
 - Best used for special occasions or strategic price support
 
-**Effort:** ✅ Complete
+**Effort:**  Complete
 **Impact:** Medium (strategic tool for price support and community events)
 
 ---
@@ -994,38 +994,38 @@ Public, real-time dashboard showing every aspect of $FED's economics:
 
 ---
 
-### 21. "Fed Season Pass" - Seasonal Loyalty Bonuses ✅ IMPLEMENTED
+### 21. "Fed Season Pass" - Seasonal Loyalty Bonuses  IMPLEMENTED
 
 **Inspired by:** Meteora S1 (Season 1) distribution model
 
-**Status:** ✅ **LIVE IN PRODUCTION** (Jan 21, 2026)
+**Status:**  **LIVE IN PRODUCTION** (Jan 21, 2026)
 
 **The Concept:**
 Create quarterly "seasons" with bonus multipliers for consistent participation. Holders who stay through an entire season earn bonus distributions.
 
-**Season Structure:** ✅ IMPLEMENTED
+**Season Structure:**  IMPLEMENTED
 - **Q1 2026 (Jan-Mar)**: Season 1 - "Founding Season" (5% bonus pool)
 - **Q2 2026 (Apr-Jun)**: Season 2 - "Expansion Era" (5% bonus pool)
 - **Q3 2026 (Jul-Sep)**: Season 3 - "Growth Quarter" (5% bonus pool)
 - **Q4 2026 (Oct-Dec)**: Season 4 - "Year One Finale" (7% bonus pool - bigger year-end!)
 
-**Season Tiers:** ✅ IMPLEMENTED
+**Season Tiers:**  IMPLEMENTED
 | Tier | Requirements | Season Bonus |
 |------|-------------|--------------|
-| 🏆 Season Champion | 100% participation + top 10 engagement | 3x bonus share |
-| 🥇 Season All-Star | 90%+ participation + engaged | 2x bonus share |
-| 🥈 Season Player | 75%+ participation | 1.5x bonus share |
-| 🥉 Season Participant | 50%+ participation | 1x bonus share |
-| 🌱 Season Rookie | <50% participation | 0.5x bonus share |
+|  Season Champion | 100% participation + top 10 engagement | 3x bonus share |
+|  Season All-Star | 90%+ participation + engaged | 2x bonus share |
+|  Season Player | 75%+ participation | 1.5x bonus share |
+|  Season Participant | 50%+ participation | 1x bonus share |
+|  Season Rookie | <50% participation | 0.5x bonus share |
 
-**Season Achievements (Stackable Bonuses):** ✅ IMPLEMENTED
+**Season Achievements (Stackable Bonuses):**  IMPLEMENTED
 | Achievement | Requirement | Bonus |
 |-------------|-------------|-------|
-| ✨ Perfect Attendance | 100% distributions | 1.2x |
+|  Perfect Attendance | 100% distributions | 1.2x |
 | 🐦 Early Bird | First week of season | 1.1x |
-| 💎 Diamond Season | No sells all season | 1.15x |
-| 🎯 Engaged Citizen | 50+ check-ins | 1.1x |
-| 🏛️ Founding Member | Season 1 participant | 1.25x |
+|  Diamond Season | No sells all season | 1.15x |
+|  Engaged Citizen | 50+ check-ins | 1.1x |
+|  Founding Member | Season 1 participant | 1.25x |
 
 **Why It Works:**
 - Meteora's season model creates clear milestones
@@ -1035,14 +1035,14 @@ Create quarterly "seasons" with bonus multipliers for consistent participation. 
 - Generates marketing moments (season ends, new season starts)
 - Founding Member achievement creates permanent FOMO for S1
 
-**Implementation:** ✅ DONE
-- ✅ Created `season-tracker.ts` standalone utility
-- ✅ Quarterly season definitions (S1-S4 for 2026)
-- ✅ Tier calculation based on participation percentage
-- ✅ Achievement system with stackable bonuses
-- ✅ Season leaderboard generation
-- ✅ Individual status lookup
-- ✅ JSON output for API/website integration
+**Implementation:**  DONE
+-  Created `season-tracker.ts` standalone utility
+-  Quarterly season definitions (S1-S4 for 2026)
+-  Tier calculation based on participation percentage
+-  Achievement system with stackable bonuses
+-  Season leaderboard generation
+-  Individual status lookup
+-  JSON output for API/website integration
 - 🔜 Integrate season tracking into distribution script
 - 🔜 Add season progress widget to website dashboard
 - 🔜 Create season-end celebration announcements
@@ -1064,16 +1064,16 @@ npx ts-node season-tracker.ts --json
 
 **File Created:** `/home/ubuntu/fed/script/season-tracker.ts`
 
-**Effort:** ✅ Complete
+**Effort:**  Complete
 **Impact:** High (retention + engagement)
 
 ---
 
-### 22. "Fed Credit Score" - Unified Reputation System ✅ IMPLEMENTED
+### 22. "Fed Credit Score" - Unified Reputation System  IMPLEMENTED
 
 **Inspired by:** Providence (Andre Cronje), Soulbound Tokens, zkCredit
 
-**Status:** ✅ **LIVE IN PRODUCTION** (Jan 21, 2026)
+**Status:**  **LIVE IN PRODUCTION** (Jan 21, 2026)
 
 **The Concept:**
 Create a unified on-chain reputation score (300-850 scale, like traditional FICO credit) that aggregates all holder metrics into a single "Fed Credit Score" representing trustworthiness and engagement.
@@ -1083,7 +1083,7 @@ Create a unified on-chain reputation score (300-850 scale, like traditional FICO
 - Even if you sell all $FED, your reputation persists
 - Inspired by 2026's trend toward soulbound reputation systems
 
-**Score Components:** ✅ IMPLEMENTED
+**Score Components:**  IMPLEMENTED
 | Component | Weight | What It Measures |
 |-----------|--------|------------------|
 | Holdings | 25% | How much $FED you hold |
@@ -1092,7 +1092,7 @@ Create a unified on-chain reputation score (300-850 scale, like traditional FICO
 | Loyalty | 15% | Season participation |
 | Consistency | 15% | Balance stability (not panic selling) |
 
-**Reputation Tiers:** ✅ IMPLEMENTED
+**Reputation Tiers:**  IMPLEMENTED
 | Score | Tier | Multiplier | Title |
 |-------|------|------------|-------|
 | 800-850 | Exceptional | 1.30x | Fed Prime Member |
@@ -1128,7 +1128,7 @@ npx ts-node reputation-score.ts --stats --json
 **Example Credit Report:**
 ```
 ╔══════════════════════════════════════════════════════════════════╗
-║                  🏛️ FED CREDIT REPORT 🏛️                          ║
+║                   FED CREDIT REPORT                           ║
 ╚══════════════════════════════════════════════════════════════════╝
 
 Address: 4Br5iKfR...AdL4P
@@ -1136,10 +1136,10 @@ Report Date: 2026-01-21
 
 ┌─────────────────────────────────────────┐
 │  FED CREDIT SCORE: 785                  │
-│  🏆 Fed Elite                           │
+│   Fed Elite                           │
 └─────────────────────────────────────────┘
 
-📊 COMPONENT SCORES
+ COMPONENT SCORES
 ────────────────────────────────────────
   Holdings:    █████████████████░░░ 85/100
   Longevity:   ██████████████░░░░░░ 70/100
@@ -1154,10 +1154,10 @@ Report Date: 2026-01-21
 
 🎖️ BADGES
 ────────────────────────────────────────
-  💎 Diamond Hands (30+ days)
-  🔥 Engaged Member (100+ XP)
+   Diamond Hands (30+ days)
+   Engaged Member (100+ XP)
 
-💰 BENEFITS AT THIS TIER
+ BENEFITS AT THIS TIER
 ────────────────────────────────────────
   ✓ High distribution multiplier (1.2x)
   ✓ Early access to new features
@@ -1179,7 +1179,7 @@ Report Date: 2026-01-21
 
 **File Created:** `/home/ubuntu/fed/script/reputation-score.ts`
 
-**Effort:** ✅ Complete
+**Effort:**  Complete
 **Impact:** Very High (trust + differentiation + future lending)
 
 ---
@@ -1215,31 +1215,31 @@ After analyzing **12 major protocols/sectors**, clear patterns emerge:
 - Yield-bearing stablecoins emerging
 
 **Why $FED is Positioned Correctly:**
-- ✅ Rewards from REAL trading fees (sustainable)
-- ✅ USD1 stablecoin rewards (no inflation)
-- ✅ Simple mechanics (8% fee → distribute)
-- ✅ No fake APY promises (honest variable rates)
-- ✅ Protocol owns liquidity (no rug risk)
-- ✅ Tier multipliers (like Hyperliquid)
-- ✅ Streak bonuses (like HEX, but better)
+-  Rewards from REAL trading fees (sustainable)
+-  USD1 stablecoin rewards (no inflation)
+-  Simple mechanics (8% fee → distribute)
+-  No fake APY promises (honest variable rates)
+-  Protocol owns liquidity (no rug risk)
+-  Tier multipliers (like Hyperliquid)
+-  Streak bonuses (like HEX, but better)
 
 **Best Mechanics to Adopt:**
 | Protocol | Good Idea | Adaptation for $FED |
 |----------|-----------|---------------------|
 | OHM | (3,3) game theory framing | "BRRR Together" community messaging |
 | SafeMoon | Simple "hold and earn" UX | Already implemented |
-| HEX | Time-lock loyalty bonuses | ✅ Diamond Hands streaks (done) |
+| HEX | Time-lock loyalty bonuses |  Diamond Hands streaks (done) |
 | DRIP | Daily visible rewards | Live accumulation counter |
 | Titano | Addictive balance visibility | "Fed Auto-BRRR" dashboard |
 | **Hyperliquid** | Tiered fee discounts | "Fed Discount Tiers" (to implement) |
 | **Aerodrome** | Bribe marketplace | "Fed Lobbyist" system (to implement) |
-| **Jupiter** | Active staking rewards | ✅ Engagement Bonus (done) |
+| **Jupiter** | Active staking rewards |  Engagement Bonus (done) |
 | **Jupiter** | Annual celebration events | "Feduary" event (to implement) |
 | **Uniswap** | Fee switch + burns | "Fed Buyback & Burn" (optional) |
-| **Meteora** | Seasonal distributions | ✅ "Fed Season Pass" (done) |
-| **Providence** | On-chain credit scoring | ✅ "Fed Credit Score" (done) |
-| **Soulbound Tokens** | Non-transferable reputation | ✅ Fed reputation (done) |
-| **Zealy/TaskOn** | Gamified quests | ✅ "Fed Quests" (done) |
+| **Meteora** | Seasonal distributions |  "Fed Season Pass" (done) |
+| **Providence** | On-chain credit scoring |  "Fed Credit Score" (done) |
+| **Soulbound Tokens** | Non-transferable reputation |  Fed reputation (done) |
+| **Zealy/TaskOn** | Gamified quests |  "Fed Quests" (done) |
 
 $FED has already learned from the 2021-2023 failures and is adopting the 2025-2026 winner playbook. The fee switch revolution validates our approach - we were early! The money printer goes BRRR - sustainably.
 
@@ -1251,7 +1251,7 @@ $FED has already learned from the 2021-2023 failures and is adopting the 2025-20
 
 **Inspired by:** Zealy, TaskOn, RadQuest, BitDegree Web3 quests
 
-**Status:** ✅ **IMPLEMENTED** (Jan 21, 2026)
+**Status:**  **IMPLEMENTED** (Jan 21, 2026)
 
 **The Concept:**
 A comprehensive quest system that rewards holders for completing various tasks, from onboarding activities to long-term achievements. Integrates with existing engagement score for XP rewards and introduces a badge system with permanent multiplier bonuses.
@@ -1260,10 +1260,10 @@ A comprehensive quest system that rewards holders for completing various tasks, 
 | Category | Purpose | Example Quests |
 |----------|---------|----------------|
 | 🎓 Onboarding | First-time actions | Hold $FED, First distribution, Enable auto-compound |
-| 📅 Daily | Repeatable engagement | Daily check-in (+10 XP) |
-| 🏆 Achievement | Milestones | 7/30/90/365-day streaks, tier achievements |
-| 👥 Social | Community building | Referrals, season participation |
-| ⚡ Challenge | Time-limited events | Special events, Feduary |
+|  Daily | Repeatable engagement | Daily check-in (+10 XP) |
+|  Achievement | Milestones | 7/30/90/365-day streaks, tier achievements |
+|  Social | Community building | Referrals, season participation |
+|  Challenge | Time-limited events | Special events, Feduary |
 
 **Badge System with Multipliers:**
 | Badge | Quest | Multiplier Bonus |
@@ -1283,15 +1283,15 @@ A comprehensive quest system that rewards holders for completing various tasks, 
 | Fed Legend | 50 referrals | +15% |
 | Season Champion | 100% season participation | +10% |
 
-**Implementation:** ✅ DONE
-- ✅ Created `fed-quests.ts` standalone utility
-- ✅ 25+ quests across 5 categories
-- ✅ Badge system with permanent multipliers
-- ✅ Quest progress tracking per wallet
-- ✅ Prerequisite system (unlock paths)
-- ✅ Repeatable daily quests with cooldowns
-- ✅ Global leaderboard and stats
-- ✅ JSON API output for website integration
+**Implementation:**  DONE
+-  Created `fed-quests.ts` standalone utility
+-  25+ quests across 5 categories
+-  Badge system with permanent multipliers
+-  Quest progress tracking per wallet
+-  Prerequisite system (unlock paths)
+-  Repeatable daily quests with cooldowns
+-  Global leaderboard and stats
+-  JSON API output for website integration
 - 🔜 Integrate quest completion into distribution script
 - 🔜 Add quest board widget to website dashboard
 - 🔜 Create challenge quests for special events
@@ -1331,7 +1331,7 @@ A holder with all top achievements could reach:
 
 **File Created:** `/home/ubuntu/fed/script/fed-quests.ts`
 
-**Effort:** ✅ Complete
+**Effort:**  Complete
 **Impact:** Very High (engagement + retention + onboarding)
 
 ---
@@ -1340,7 +1340,7 @@ A holder with all top achievements could reach:
 
 **Inspired by:** Polymarket, Drift BET, MetaMask Prediction Markets
 
-**Status:** 📋 **PLANNED** (Future)
+**Status:**  **PLANNED** (Future)
 
 **The Concept:**
 Let holders make predictions about $FED metrics and earn rewards for accuracy. Creates engagement through speculation on protocol growth.
@@ -1362,11 +1362,11 @@ Let holders make predictions about $FED metrics and earn rewards for accuracy. C
 
 ---
 
-### 25. "Fed Time Lock" - Boosted Rewards Through Voluntary Commitment ✅ IMPLEMENTED
+### 25. "Fed Time Lock" - Boosted Rewards Through Voluntary Commitment  IMPLEMENTED
 
 **Inspired by:** Curve's veCRV, Pendle vePENDLE, 2026 soft lock trends
 
-**Status:** ✅ **LIVE IN PRODUCTION** (Jan 21, 2026)
+**Status:**  **LIVE IN PRODUCTION** (Jan 21, 2026)
 
 **The Concept:**
 A voluntary commitment system where holders can "lock" their intention to hold for a specified period in exchange for additional reward multipliers. Unlike veCRV, this is a "soft lock" - tokens remain in the user's wallet.
@@ -1380,12 +1380,12 @@ A voluntary commitment system where holders can "lock" their intention to hold f
 **Time Lock Tiers:**
 | Tier | Name | Duration | Multiplier | CS Bonus | CS Penalty |
 |------|------|----------|------------|----------|------------|
-| 📝 | Fed Pledge | 7 days | 1.05x | +5 | -10 |
-| 🤝 | Fed Promise | 30 days | 1.15x | +15 | -25 |
+|  | Fed Pledge | 7 days | 1.05x | +5 | -10 |
+|  | Fed Promise | 30 days | 1.15x | +15 | -25 |
 | ⚖️ | Fed Oath | 90 days | 1.3x | +35 | -50 |
 | 💍 | Fed Vow | 180 days | 1.5x | +60 | -80 |
 | 📜 | Fed Covenant | 365 days | 1.75x | +100 | -120 |
-| 🏛️ | Fed Bond | 730 days | 2.0x | +200 | -250 |
+|  | Fed Bond | 730 days | 2.0x | +200 | -250 |
 
 *CS = Credit Score*
 
@@ -1440,7 +1440,7 @@ npx ts-node time-lock.ts --leaderboard 20
 
 **File Created:** `/home/ubuntu/fed/script/time-lock.ts`
 
-**Effort:** ✅ Complete
+**Effort:**  Complete
 **Impact:** Very High (token velocity reduction + massive multiplier stacking)
 
 ---
@@ -1449,7 +1449,7 @@ npx ts-node time-lock.ts --leaderboard 20
 
 **Inspired by:** Curve's veCRV governance voting
 
-**Status:** 📋 **PLANNED** (Future)
+**Status:**  **PLANNED** (Future)
 
 **The Concept:**
 Lock $FED for longer periods to gain more voting power on protocol decisions. Creates stronger commitment and reduces sell pressure.
@@ -1467,7 +1467,7 @@ Lock $FED for longer periods to gain more voting power on protocol decisions. Cr
 
 **Inspired by:** Nomis Protocol, Jupiter Anti-Sybil, Bubblemaps behavioral analysis
 
-**Status:** ✅ **IMPLEMENTED** (Jan 21, 2026)
+**Status:**  **IMPLEMENTED** (Jan 21, 2026)
 
 **The Concept:**
 A comprehensive wallet analysis system that detects potential Sybil attackers by analyzing behavioral patterns. Assigns a "legitimacy score" (0-100) to each holder based on multiple factors.
@@ -1491,10 +1491,10 @@ A comprehensive wallet analysis system that detects potential Sybil attackers by
 **Risk Levels:**
 | Risk Level | Score | Action |
 |------------|-------|--------|
-| ✅ Low | 80-100 | Full rewards |
-| ⚠️ Medium | 50-79 | Monitor |
-| 🚨 High | 25-49 | Reduced rewards |
-| 🔴 Critical | 0-24 | Consider exclusion |
+|  Low | 80-100 | Full rewards |
+|  Medium | 50-79 | Monitor |
+|  High | 25-49 | Reduced rewards |
+|  Critical | 0-24 | Consider exclusion |
 
 **Detection Flags:**
 - `YOUNG_WALLET` - Under 7 days old (danger)
@@ -1506,15 +1506,15 @@ A comprehensive wallet analysis system that detects potential Sybil attackers by
 - `ZERO_BALANCE` - No longer holds $FED (warning)
 - `STREAK_BROKEN` - Holding streak was broken (info)
 
-**Implementation:** ✅ DONE
-- ✅ Created `sybil-detector.ts` standalone analyzer
-- ✅ 5-component legitimacy scoring system
-- ✅ 4 risk levels with clear action recommendations
-- ✅ 8 detection flag types
-- ✅ Funding cluster detection
-- ✅ Individual wallet analysis
-- ✅ Full holder report generation
-- ✅ JSON API output for website integration
+**Implementation:**  DONE
+-  Created `sybil-detector.ts` standalone analyzer
+-  5-component legitimacy scoring system
+-  4 risk levels with clear action recommendations
+-  8 detection flag types
+-  Funding cluster detection
+-  Individual wallet analysis
+-  Full holder report generation
+-  JSON API output for website integration
 - 🔜 Integrate into distribution script for reward penalties
 - 🔜 Add sybil status to website dashboard
 - 🔜 Implement funding cluster auto-detection from blockchain
@@ -1547,7 +1547,7 @@ npx ts-node sybil-detector.ts --stats --json
 4. Prepares for any future token events
 5. No KYC required - purely behavioral analysis
 
-**Effort:** ✅ Complete
+**Effort:**  Complete
 **Impact:** High (security + trust + fair distribution)
 
 ---
@@ -1556,15 +1556,15 @@ npx ts-node sybil-detector.ts --stats --json
 
 **Inspired by:** Nomis SBTs, X/Twitter verification, Discord verification
 
-**Status:** 📋 **PLANNED**
+**Status:**  **PLANNED**
 
 **The Concept:**
 Award "Fed Verified" badges to wallets that pass anti-sybil checks with high legitimacy scores. Badges visible on dashboard and potentially as on-chain attestations.
 
 **Badge Tiers:**
 - 🔵 Fed Verified (80+ legitimacy)
-- ⭐ Fed Trusted (90+ legitimacy + 30+ days)
-- 👑 Fed OG (95+ legitimacy + 90+ days + Chairman tier)
+-  Fed Trusted (90+ legitimacy + 30+ days)
+-  Fed OG (95+ legitimacy + 90+ days + Chairman tier)
 
 **Why It Works:**
 - Creates social proof for legitimate holders
