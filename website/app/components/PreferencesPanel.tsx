@@ -96,7 +96,7 @@ export default function PreferencesPanel() {
 
   if (!connected) {
     return (
-      <div className="bg-gray-900 rounded-xl p-6 border border-gray-800">
+      <div className="bg-[#111] rounded-xl p-6 border border-[#222]">
         <h3 className="text-xl font-bold text-white mb-4">Your Preferences</h3>
         <p className="text-gray-400 mb-4">Connect your wallet to manage your $FED preferences on-chain.</p>
         <WalletMultiButton />
@@ -105,7 +105,7 @@ export default function PreferencesPanel() {
   }
 
   return (
-    <div className="bg-gray-900 rounded-xl p-6 border border-gray-800">
+    <div className="bg-[#111] rounded-xl p-6 border border-[#222]">
       <h3 className="text-xl font-bold text-white mb-4">Your Preferences</h3>
 
       {txStatus && (
@@ -122,7 +122,7 @@ export default function PreferencesPanel() {
           <button
             onClick={handleInitialize}
             disabled={loading}
-            className="px-6 py-3 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 rounded-lg font-semibold text-white transition-colors"
+            className="px-6 py-3 bg-green-600 hover:bg-green-700 disabled:bg-[#333] rounded-lg font-semibold text-white transition-colors"
           >
             {loading ? 'Initializing...' : 'Initialize Account'}
           </button>
@@ -136,7 +136,7 @@ export default function PreferencesPanel() {
           </div>
 
           {/* Auto-Compound Toggle */}
-          <div className="border-t border-gray-800 pt-4">
+          <div className="border-t border-[#222] pt-4">
             <div className="flex justify-between items-center mb-2">
               <div>
                 <h4 className="text-white font-semibold">Auto-Compound</h4>
@@ -148,7 +148,7 @@ export default function PreferencesPanel() {
                 className={`px-4 py-2 rounded-lg font-semibold transition-colors ${
                   preferences?.autoCompound
                     ? 'bg-green-600 hover:bg-green-700 text-white'
-                    : 'bg-gray-700 hover:bg-gray-600 text-gray-300'
+                    : 'bg-[#222] hover:bg-[#333] text-gray-300'
                 }`}
               >
                 {preferences?.autoCompound ? 'ON' : 'OFF'}
@@ -157,7 +157,7 @@ export default function PreferencesPanel() {
           </div>
 
           {/* Time Lock */}
-          <div className="border-t border-gray-800 pt-4">
+          <div className="border-t border-[#222] pt-4">
             <h4 className="text-white font-semibold mb-2">Time Lock Commitment</h4>
             <p className="text-gray-400 text-sm mb-3">Lock for longer = higher distribution multiplier</p>
 
@@ -178,7 +178,7 @@ export default function PreferencesPanel() {
                   className={`p-3 rounded-lg text-center transition-colors ${
                     preferences?.timeLockDays === option.days
                       ? 'bg-green-600 text-white'
-                      : 'bg-gray-800 hover:bg-gray-700 text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed'
+                      : 'bg-[#1a1a1a] hover:bg-[#222] text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed'
                   }`}
                 >
                   <div className="font-semibold">{option.label}</div>
@@ -189,7 +189,7 @@ export default function PreferencesPanel() {
           </div>
 
           {/* Stats */}
-          <div className="border-t border-gray-800 pt-4 grid grid-cols-2 gap-4 text-sm">
+          <div className="border-t border-[#222] pt-4 grid grid-cols-2 gap-4 text-sm">
             <div>
               <span className="text-gray-400">Streak:</span>
               <span className="text-white ml-2">{preferences?.streakCount || 0} claims</span>
