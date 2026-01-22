@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $56,372+ USD1
-- **Distribution Count:** 479 distributions
+- **Total Distributed:** $57,132+ USD1
+- **Distribution Count:** 498 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -7868,6 +7868,219 @@ FED's approach - same 100% fee distribution, but with simpler mechanics (no lock
 - [The Defiant: Dromos Labs Merger](https://thedefiant.io/news/defi/dromos-labs-merges-aerodrome-and-velodrome-into-new-dex-aero)
 - [Crypto Briefing: Aero DEX Merger](https://cryptobriefing.com/aero-dex-merger-ethereum-expansion/)
 - [AInvest: Aerodrome Liquidity Automation](https://www.ainvest.com/news/aerodrome-finance-aero-phase-liquidity-automation-base-2601/)
+
+---
+
+## 2026-01-22 16:25 UTC
+
+### Camelot Finance: xGRAIL Plugin System Deep Dive
+
+**Protocol Overview:**
+- Largest native DEX on Arbitrum
+- Deployed on 15+ Orbit chains
+- TVL: ~$42M total ($35M on Arbitrum mainnet)
+- Cumulative Fees: $54.41M all-time
+- Cumulative Holders Revenue: $12.53M all-time
+
+**Core Model: Dual Token System (GRAIL + xGRAIL)**
+
+| Token | Type | Purpose |
+|-------|------|---------|
+| GRAIL | Liquid | Tradeable governance token |
+| xGRAIL | Escrowed (non-transferable) | Staking/allocation token |
+
+---
+
+#### xGRAIL Mechanics
+
+**Acquisition:**
+- Convert GRAIL → xGRAIL (1:1, instant)
+- Earn from farming (spNFT positions)
+
+**Redemption (xGRAIL → GRAIL):**
+This is where Camelot adds friction - a vesting system with burn penalties:
+
+| Vesting Period | GRAIL Output | Excess Burned |
+|----------------|--------------|---------------|
+| 15 days (min)  | 50%          | 50%           |
+| 90 days        | ~72%         | ~28%          |
+| 180 days (max) | 100%         | 0%            |
+
+**Key Insight:** Converting GRAIL to xGRAIL is instant and free. Converting back costs you 0-50% depending on patience. This is a "golden handcuffs" mechanism.
+
+**During Redemption:**
+- 50% of redeeming xGRAIL is auto-staked in yield plugin
+- Earns rewards during vesting period
+- Can cancel anytime (recovers xGRAIL, loses progress)
+
+---
+
+#### Plugin Allocation System
+
+xGRAIL must be **allocated** to plugins to earn benefits. This is active participation, not passive holding.
+
+| Plugin | Benefit | Deallocation Fee |
+|--------|---------|------------------|
+| Real Yield Staking | Share of trading fees | 0.5% |
+| Yield Booster | Up to 2.5x farming boost | 0.5% |
+| Launchpad | Early access to new launches | 0.5% |
+
+**Critical Observation:** Users must CHOOSE where to allocate. Forgetting to allocate = missing rewards. This adds friction and complexity.
+
+---
+
+#### Fee Distribution Structure
+
+**Camelot V2 (0.3% swap fee):**
+- 40% total to protocol + holders
+  - 17.5% → Protocol treasury
+  - 22.5% → xGRAIL Real Yield Staking plugin
+
+**Camelot V3 (dynamic fees):**
+- 20% total to protocol + holders
+  - 3% → Protocol treasury
+  - 17% → xGRAIL Real Yield Staking plugin
+
+**Distribution Mechanics:**
+- Weekly epochs
+- Rewards accrue per-second during epoch
+- Distributed proportionally to xGRAIL allocation
+- Users can claim continuously (no waiting for epoch end)
+
+---
+
+#### Current Performance (Jan 2026)
+
+| Metric | Value |
+|--------|-------|
+| TVL | $42M (down from $120M+ peak) |
+| Fees 24h | $3,077 |
+| Fees 7d | $6,479 |
+| Fees 30d | $38,371 |
+| Holders Revenue (annualized) | $93,379 |
+| Cumulative Holders Revenue | $12.53M |
+
+**Note:** TVL and fees have declined significantly from peak. This is an Arbitrum ecosystem trend, not Camelot-specific.
+
+---
+
+#### Comparison: Camelot vs FED
+
+| Dimension | Camelot (xGRAIL) | FED |
+|-----------|------------------|-----|
+| **Fee to Holders** | 17-22.5% of fees | 100% of fees |
+| **Lock Mechanism** | Soft lock via vesting penalty (50% burn if 15d) | None |
+| **Distribution Frequency** | Continuous (within weekly epochs) | ~2 minutes |
+| **Allocation Required** | Yes (must choose plugin) | No (automatic) |
+| **Complexity** | High (GRAIL→xGRAIL→allocate→earn) | Low (hold→earn) |
+| **Multiplier System** | Yield Booster up to 2.5x | Tier/streak/XP up to 4.5x |
+| **Exit Penalty** | Up to 50% burn on early redemption | None |
+| **Plugin Deallocation** | 0.5% fee | N/A |
+| **Chain** | Arbitrum + Orbit chains | Solana |
+| **Target User** | DeFi power users | Retail memecoin holders |
+
+---
+
+#### Key Insights for FED
+
+**What Camelot Does Well:**
+
+1. **Real Yield is Proven:**
+   - $12.53M distributed to holders over protocol lifetime
+   - Demonstrates fee-sharing at scale works
+
+2. **Multi-Chain Expansion:**
+   - 15+ Orbit chains capturing fees
+   - Revenue from all chains flows to GRAIL stakers
+   - FED could consider similar model at scale (QE5+)
+
+3. **Plugin Architecture:**
+   - Modular system allows new utilities over time
+   - Users can direct xGRAIL to different benefits
+   - Interesting for future FED evolution
+
+**What FED Should NOT Copy:**
+
+1. **Exit Penalties (Burns on Redemption):**
+   - 50% penalty for 15-day exit feels punitive
+   - Creates negative UX, resentment
+   - FED's positive incentive model (bonuses for holding) is better
+   - **Verdict:** REJECT for FED
+
+2. **Required Allocation:**
+   - Users must actively allocate xGRAIL to earn
+   - Forgetting = missing rewards
+   - Adds friction that hurts retail users
+   - FED's automatic distribution is superior
+   - **Verdict:** REJECT for FED
+
+3. **Deallocation Fees:**
+   - 0.5% fee to move xGRAIL between plugins
+   - Creates friction, feels nickel-and-diming
+   - FED should never charge for flexibility
+   - **Verdict:** REJECT for FED
+
+4. **Dual Token Complexity:**
+   - GRAIL + xGRAIL requires education
+   - Conversion mechanics confuse new users
+   - One token simplicity is FED's strength
+   - **Verdict:** REJECT for FED
+
+**What FED Already Does Better:**
+
+| FED Advantage | Why It's Better |
+|---------------|-----------------|
+| 100% to holders | Camelot: 17-22.5% (rest to protocol) |
+| No exit penalty | Camelot: Up to 50% burn |
+| Auto distribution | Camelot: Requires allocation |
+| No deallocation fee | Camelot: 0.5% fee |
+| Single token | Camelot: Dual token complexity |
+| 2-min frequency | Camelot: Epoch-based |
+
+---
+
+#### Validation for FED
+
+Camelot validates several FED decisions:
+
+1. **Real yield works** - $12.53M distributed proves the model
+2. **Plugin modularity is interesting** - Future consideration for FED
+3. **Multi-chain can scale revenue** - QE5+ consideration
+
+Camelot also validates what FED AVOIDED:
+
+1. **Exit penalties hurt UX** - We correctly rejected this
+2. **Required allocation adds friction** - We correctly use auto-distribution
+3. **Dual tokens confuse users** - We correctly kept one token
+4. **Protocol-first fee splits** - FED's 100% to holders is more generous
+
+---
+
+#### Conclusion
+
+Camelot represents a sophisticated DeFi-native approach to real yield with plugin architecture and governance mechanisms. It's well-designed for power users who actively manage their positions.
+
+FED's approach—100% fee distribution, automatic push, no penalties, no allocation requirements—is the correct simplification for retail memecoin holders.
+
+**Key Quote from Research:**
+> "xGRAIL must be allocated to plugins to earn benefits. This is active participation, not passive holding."
+
+FED's passive "just hold = earn" is our competitive advantage against protocols that require active management.
+
+**Confidence Level:** HIGH that FED's model is superior for our target audience. Camelot's complexity suits DeFi natives; FED's simplicity suits retail.
+
+---
+
+*Sources:*
+- [Camelot xGRAIL Token Docs](https://docs.camelot.exchange/tokenomics/xgrail-token)
+- [Camelot Real Yield Staking Docs](https://docs.camelot.exchange/protocol/xgrail-plugins/real-yield-staking)
+- [Camelot Conversion/Redeeming Docs](https://docs.camelot.exchange/tokenomics/xgrail-token/conversion-redeeming/)
+- [DefiLlama: Camelot](https://defillama.com/protocol/camelot)
+- [CamelotDEX on X](https://x.com/CamelotDEX/status/1888944451571085690)
+
+---
+
+*Research completed: 2026-01-22 16:25 UTC*
 
 ---
 

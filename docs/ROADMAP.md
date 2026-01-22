@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $57,084+ Distributed (495 runs)
+**Current:** $57,132+ Distributed (498 runs)
 **Status:** IN PROGRESS
 
 ### Active Systems
@@ -306,15 +306,20 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 
 ### Exit Penalties (Camelot xGRAIL-style)
 - **Why Rejected:** Camelot burns up to 50% of GRAIL for early xGRAIL redemption
-- **2026-01-22 Analysis:** Penalties feel punitive and create negative UX
+- **2026-01-22 Deep Dive:** Camelot's vesting system: 15-day exit = 50% burn, 90-day = 28% burn, 180-day = 0% burn
+- Penalties feel punitive and create negative UX ("golden handcuffs" that feel like punishment)
 - FED's positive incentive model (bonuses for holding longer) is better for memecoin psychology
 - Holders should be rewarded for loyalty, not punished for leaving
+- Camelot also charges 0.5% deallocation fees - nickel-and-diming that FED avoids
 
 ### Active Allocation Requirements (Plugin System)
 - **Why Rejected:** Camelot requires users to "allocate" xGRAIL to plugins to earn
-- **2026-01-22 Analysis:** Adds friction, complexity; users forget to allocate
+- **2026-01-22 Deep Dive:** Camelot's plugin system (Real Yield, Yield Booster, Launchpad) requires active management
+- Users must choose where to allocate, remember to reallocate, pay 0.5% deallocation fees
+- Forgetting to allocate = missing rewards entirely
 - FED's passive "just hold = earn" model is simpler and more inclusive
-- Complexity kills memecoin adoption (validated by Pendle's pivot)
+- Complexity kills memecoin adoption (validated by Pendle's pivot away from vePENDLE)
+- Camelot only sends 17-22.5% of fees to holders vs FED's 100%
 
 ### Buyback & Burn Model (Gains Network BB&B style)
 - **Why Rejected:** Gains Network evolved from direct rewards to buyback & burn
@@ -437,6 +442,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | ve-tokenomics comprehensive | Curve Wars, Convex, failures & alternatives | **COMPLETE** - Jan 22 research (VALIDATES FED simplicity) |
 | Raydium RAY buyback model | Solana DEX fee distribution, LaunchLab analysis | **COMPLETE** - Jan 22 research (VALIDATES FED 100% distribution) |
 | Aerodrome ve(3,3) at scale | Base DEX fee distribution, Slipstream, merger strategy | **COMPLETE** - Jan 22 research (VALIDATES FED simplicity) |
+| Camelot xGRAIL plugin system | Arbitrum DEX real yield, exit penalties, allocation | **COMPLETE** - Jan 22 research (VALIDATES FED simplicity) |
 
 ### Research Findings Summary (Jan 22, 2026)
 
