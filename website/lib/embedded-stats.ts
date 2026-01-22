@@ -1,13 +1,25 @@
 // Embedded stats - updated at build time or via script
 // This provides fallback data when the local JSON file is not accessible (e.g., on Vercel)
-// Last updated: 2026-01-22T10:52:17.690Z
+// Last updated: 2026-01-22T11:20:25.691Z
 
 export const EMBEDDED_STATS = {
-  totalDistributed: 55479.57,
-  distributionCount: 438,
+  totalDistributed: 55506.55,
+  distributionCount: 440,
   maxRecipients: 1828,
-  lastUpdated: "2026-01-22T10:52:17.690Z",
+  lastUpdated: "2026-01-22T11:20:25.691Z",
   recentDistributions: [
+      {
+          "date": "2026-01-22T11:20:25.691Z",
+          "amount": 12.5,
+          "recipients": 224,
+          "txSignature": "2unNVEAhGceHR3CDH8tt1mJeFH6NUapNMMu1dSSHp9mQE4e7qNe21FotG8b1pNyD8v4smcKzD3vdmxzobJWmSPbz"
+      },
+      {
+          "date": "2026-01-22T11:18:22.599Z",
+          "amount": 14.47,
+          "recipients": 242,
+          "txSignature": "5YfqFi4yEmWLxPh4QnSpiAVh9ZweHGmYJfzNfS6pCwYSLn7AMrqpNNzyZj5fvawZQZCYip7VfPzXxHnQBfGkhoHV"
+      },
       {
           "date": "2026-01-22T10:52:17.690Z",
           "amount": 9.69,
@@ -55,18 +67,6 @@ export const EMBEDDED_STATS = {
           "amount": 23.8,
           "recipients": 318,
           "txSignature": "4PdiDuMpTyBqNyHHyDG3aUY6Vdq6U8TGRW2dZmiqgY56EuDQA1bTsnSnHdMaKGQBcyAbmZfJqj7zG3fmLo2kiieg"
-      },
-      {
-          "date": "2026-01-22T10:02:32.656Z",
-          "amount": 32.93,
-          "recipients": 368,
-          "txSignature": "wSmxPcwytdW3YQGzviNDbXdtkvJuea442aQgaEroNqwbmhLTZ8QiutBRnShTS7o9gSm4sJxh7XDVTPRzdZFhqH5"
-      },
-      {
-          "date": "2026-01-22T09:56:29.968Z",
-          "amount": 28.3,
-          "recipients": 347,
-          "txSignature": "5nsfhYLmYq8ikT5DkfDyxsWqqutaBd5nGyKiqmv7fwHy4U3XByeQAAipXZY9aNyG1RzwfeQwUddEeUKxoG3hXBBj"
       }
   ]
 };
