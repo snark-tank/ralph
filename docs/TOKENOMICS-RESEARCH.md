@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $51,683+ USD1
-- **Distribution Count:** 378 distributions
+- **Total Distributed:** $51,735+ USD1
+- **Distribution Count:** 380 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -484,7 +484,7 @@ The research confirms FED's approach is sound:
 
 The gap is in **engagement and identity amplification**, not mechanics. We have the systems (streaks, XP, quests) - they need activation and visibility.
 
-**Next Research Topic:** Scaling challenges at 10K+ holders (gas optimization, batching strategies)
+**Next Research Topic:** ~~Scaling challenges at 10K+ holders (gas optimization, batching strategies)~~ **COMPLETE** - See below
 
 ---
 
@@ -495,4 +495,331 @@ The gap is in **engagement and identity amplification**, not mechanics. We have 
 - [Memecoin Marketing Coinbound](https://coinbound.io/memecoin-marketing/)
 - [CoinTracker Diamond Hands](https://www.cointracker.io/learn/diamond-hands)
 - [GMX DefiLlama](https://defillama.com/protocol/gmx)
+
+---
+
+## 2026-01-22: Scaling Challenges at 10K+ Holders
+
+### Research Focus
+How does FED scale to 10,000+ holders without exploding gas costs? What optimizations exist? What do other protocols do?
+
+---
+
+### Current FED Distribution Model Analysis
+
+**Current State:**
+- ~1,800 holders receiving distributions
+- Every ~2 minutes distribution cycle
+- Push-based model (Ralph sends USD1 directly to all holders)
+- Each holder requires individual SPL token transfer
+
+**Estimated Current Cost:**
+- ~5 transfers per batch transaction
+- ~360 batch transactions per distribution cycle (1,800 holders / 5)
+- At ~0.000005 SOL base fee per tx + priority fees
+- Roughly 0.002-0.01 SOL per full distribution cycle
+
+**Scaling Problem:**
+At 10,000 holders:
+- ~2,000 batch transactions per cycle
+- 5-10x current gas cost
+- More network congestion risk
+- Longer distribution time per cycle
+
+At 100,000 holders:
+- ~20,000 batch transactions per cycle
+- Current push model becomes impractical
+
+---
+
+### Solana Transaction Constraints
+
+**Hard Limits:**
+| Constraint | Limit | Impact |
+|------------|-------|--------|
+| Transaction size | 1,232 bytes | Limits recipients per tx |
+| Compute units (default) | 200,000 CU | Can be increased |
+| Compute units (max) | 1,400,000 CU | Hard ceiling |
+| Base fee | 0.000005 SOL/signature | Fixed cost |
+| Priority fee | Variable | Congestion-dependent |
+
+**SPL Token Transfer Requirements:**
+- Each transfer needs recipient's ATA (Associated Token Account)
+- Creating new ATA costs ~0.002 SOL (rent-exempt)
+- Existing ATA: only transfer cost
+- Practical batch size: ~5 transfers per transaction
+
+**Source:** [RareSkills Solana Compute Units](https://rareskills.io/post/solana-compute-unit-price)
+
+---
+
+### Distribution Model Comparison
+
+#### 1. Push-Based (FED Current Model)
+
+**How it works:** Ralph sends tokens directly to all holders every cycle
+
+**Pros:**
+- Best UX - tokens appear automatically
+- No user action required
+- "Set and forget" for holders
+- Creates "always earning" feeling
+
+**Cons:**
+- O(n) cost scaling - gas grows linearly with holders
+- Network congestion during high-holder periods
+- ATA creation costs for new holders
+- Distribution time grows linearly
+
+**Cost at scale:**
+| Holders | Est. Transactions | Est. Gas (SOL) |
+|---------|-------------------|----------------|
+| 1,800 | 360 | 0.002-0.01 |
+| 10,000 | 2,000 | 0.01-0.05 |
+| 100,000 | 20,000 | 0.1-0.5 |
+
+**FED Relevance:** This is our current model. Works great at 1,800 holders, needs optimization at 10K+.
+
+#### 2. Claim-Based (Merkle Distribution)
+
+**How it works:**
+- Protocol publishes Merkle root on-chain with all eligible rewards
+- Users claim their rewards by submitting Merkle proof
+- Only claiming users pay gas
+
+**Pros:**
+- O(1) cost for protocol (only publish root)
+- Users pay their own gas
+- Unclaimed tokens can be recycled
+- Highly scalable (Slinky targeted 27M wallets)
+
+**Cons:**
+- Worse UX - requires user action
+- Many users never claim (engagement loss)
+- Breaks "passive income" narrative
+- FED's differentiator is automatic distributions
+
+**Implementations:**
+- Jito Foundation Merkle Distributor
+- Jupiter Merkle Distributor
+- Saber Merkle Distributor (widely used)
+
+**FED Relevance:** NOT RECOMMENDED - breaks our core value prop of automatic distributions
+
+**Source:** [Sablier Airdrop Distribution Models 2025](https://blog.sablier.com/airdrop-distribution-models-comparison-2025/)
+
+#### 3. ZK Compression (Emerging Solution)
+
+**How it works:**
+- Store token data off-chain with on-chain Merkle root
+- Use zero-knowledge proofs to verify transfers
+- 2,500x cheaper than standard SPL tokens
+- Decompression available when needed (DeFi, transfers)
+
+**Pros:**
+- Massive cost reduction (0.01 SOL for 10,000 recipients vs 20+ SOL traditional)
+- Maintains Solana L1 security
+- Supported by Phantom, Backpack wallets
+- Can be decompressed to regular SPL when needed
+
+**Cons:**
+- Newer technology (launched 2024)
+- Requires specialized RPC (Helius Photon)
+- Users need to decompress for some DeFi uses
+- Recipient experience slightly different
+
+**Key Stats:**
+- Traditional 10K airdrop: ~20 SOL
+- ZK compressed 10K airdrop: ~0.01 SOL
+- Cost reduction: ~99.95%
+
+**Tools:**
+- Helius AirShip (free, open-source)
+- Light Protocol (underlying ZK infrastructure)
+- Photon Indexer (state queries)
+
+**FED Relevance:** HIGHLY RELEVANT for QE4/QE5. Could enable push distributions to 100K+ holders affordably.
+
+**Sources:**
+- [Helius ZK Compression](https://www.helius.dev/zk-compression)
+- [Helius AirShip](https://www.helius.dev/blog/solana-airdrop)
+- [Light Protocol GitHub](https://github.com/Lightprotocol/light-protocol)
+
+#### 4. Hybrid: Push + Batched Claiming
+
+**How it works:**
+- Push small distributions to top-tier holders (high value)
+- Batch smaller holders into Merkle claims
+- Tiers determine push vs claim threshold
+
+**Pros:**
+- Best UX for whales (who matter most for price)
+- Cost-efficient for dust holders
+- Maintains "always earning" for core community
+
+**Cons:**
+- Two-tier UX (some get pushed, some must claim)
+- More complex implementation
+- May feel unfair to smaller holders
+
+**FED Relevance:** POSSIBLE for intermediate scaling. Keeps whales happy while managing costs.
+
+---
+
+### GMX Fee Distribution Model (Deep Dive)
+
+**How GMX handles 100K+ stakers:**
+
+GMX uses a **rewards accrual model** rather than push distributions:
+- Fees accumulate in RewardRouter contract
+- Users claim rewards when they want
+- Claiming is gas-efficient (one tx regardless of accumulated amount)
+- Rewards auto-compound for GLP holders
+
+**Smart Contract Architecture:**
+```
+RewardRouter
+  ├── FeeGlpTracker (distributes ETH/AVAX)
+  └── StakedGlpTracker (distributes esGMX)
+```
+
+**Key Insight:** GMX doesn't push to all holders. Rewards accrue and users claim. This is fundamentally different from FED's model but highly scalable.
+
+**2024 Update:** GMX now uses permissionless buybacks:
+- FeeHandler.sol manages fees
+- Anyone can trigger buybacks by depositing GMX
+- Fully automated, no manual distribution
+
+**FED Learning:** If we ever need to scale past push distributions, the accrual model is proven. But it sacrifices our "automatic income" UX.
+
+**Source:** [GMX Tokenomics Docs](https://gmxio.gitbook.io/gmx/tokenomics)
+
+---
+
+### Solana Network Optimizations (2026)
+
+**Upcoming improvements that help FED scale:**
+
+#### Firedancer (Q2 2026)
+- Jump Crypto's alternative validator client
+- 1.2M TPS in controlled tests (vs ~65K current)
+- Already on 207 validators as "Frankendancer"
+- More throughput = less congestion for mass distributions
+
+#### Alpenglow (Q1 2026)
+- New consensus mechanism
+- Sub-150ms finality
+- 80% reduction in voting fees
+- Faster, cheaper transactions overall
+
+#### Local Fee Markets
+- Already live on Solana
+- Congestion isolated to specific apps
+- FED distributions won't be affected by NFT mints
+- Our fees stay low even during network-wide pumps
+
+**FED Relevance:** Solana's roadmap naturally helps our scaling. Firedancer alone could 10x our throughput capacity.
+
+**Source:** [Solana Roadmap 2025-2026](https://www.btcc.com/en-US/square/D3V1L/1183808)
+
+---
+
+### Recommended Scaling Strategy for FED
+
+#### Phase 1: Current (1,800 holders) - QE3
+**Status:** Working well
+**Action:** No changes needed
+**Cost:** ~0.005 SOL per distribution cycle
+
+#### Phase 2: 5,000-10,000 holders - QE4
+**Challenge:** 3-5x gas increase
+**Recommended Actions:**
+1. **Batch optimization** - Maximize transfers per tx (currently ~5, could push to ~8-10 with compute optimization)
+2. **Smart batching** - Distribute during low-congestion periods (already built: smart-timing.ts)
+3. **ATA caching** - Pre-create ATAs for known holders to avoid rent costs
+4. **Priority fee tuning** - Dynamic priority based on network state
+
+**Estimated Cost:** 0.02-0.05 SOL per distribution
+**Feasibility:** Current model works with optimizations
+
+#### Phase 3: 10,000-50,000 holders - QE5
+**Challenge:** Push model becomes expensive
+**Recommended Actions:**
+1. **ZK Compression adoption** - Migrate to compressed USD1 distributions
+2. **Helius AirShip integration** - Use their proven infrastructure
+3. **Hybrid model consideration** - Push to top 20% of holders, compress for rest
+
+**Estimated Cost with ZK:** 0.01-0.1 SOL per distribution (vs 0.5+ SOL traditional)
+**Feasibility:** Requires script changes but proven technology
+
+#### Phase 4: 50,000+ holders - QE6+
+**Challenge:** Even ZK compression may need optimization
+**Options:**
+1. **Full ZK compression** - All distributions via compressed tokens
+2. **Claims + auto-claim bots** - Let users opt-in to auto-claiming
+3. **Accrual model pivot** - GMX-style (last resort, sacrifices UX)
+
+**Note:** This is long-term planning. Focus on Phase 2/3 optimizations first.
+
+---
+
+### Technical Recommendations for Treasury Agent
+
+**Immediate (No Script Changes):**
+1. Monitor gas costs per distribution cycle
+2. Track failed distributions due to missing ATAs
+3. Log batch sizes and transaction success rates
+
+**QE4 Preparation (Script Research):**
+1. Investigate compute unit optimization
+2. Research ATA pre-creation for repeat recipients
+3. Prototype dynamic priority fee calculation
+
+**QE5 Preparation (Future):**
+1. Research ZK compressed USD1 requirements
+2. Test Helius AirShip with small distribution
+3. Evaluate decompression UX for holders
+
+---
+
+### Key Research Conclusions
+
+**What FED Should Do:**
+1. **Keep push model** - It's our differentiator and works at current scale
+2. **Optimize batching** - More recipients per transaction
+3. **Plan ZK migration** - For 10K+ holder phase
+4. **Monitor Solana upgrades** - Firedancer/Alpenglow help us naturally
+
+**What FED Should NOT Do:**
+1. **Don't switch to claims** - Breaks our UX and value prop
+2. **Don't over-engineer early** - 1,800 holders doesn't need ZK yet
+3. **Don't ignore ATA costs** - New holder onboarding friction is real
+4. **Don't wait too long** - Research ZK now, implement at 5K holders
+
+**Critical Insight:**
+FED's push distribution model scales to ~10K holders with optimization. Beyond that, ZK compression becomes essential. The technology exists (Helius, Light Protocol) and is proven (Slinky 27M wallet airdrop). We're not blazing new trails - we're following a path that works.
+
+---
+
+### Action Items
+
+1. [x] Document scaling research findings
+2. [ ] Track gas costs per distribution (Treasury agent)
+3. [ ] Research ATA pre-creation strategies
+4. [ ] Test Helius AirShip with small amount (Treasury agent, QE4)
+5. [ ] Monitor Firedancer rollout progress
+6. [ ] Update roadmap with scaling milestones
+
+---
+
+*Sources:*
+- [Helius ZK Compression](https://www.helius.dev/zk-compression)
+- [Helius AirShip Blog](https://www.helius.dev/blog/solana-airdrop)
+- [RareSkills Solana Compute Units](https://rareskills.io/post/solana-compute-unit-price)
+- [RareSkills Solana Multicall/Batching](https://rareskills.io/post/solana-multiple-transactions)
+- [Sablier Distribution Models 2025](https://blog.sablier.com/airdrop-distribution-models-comparison-2025/)
+- [Light Protocol GitHub](https://github.com/Lightprotocol/light-protocol)
+- [GMX Tokenomics](https://gmxio.gitbook.io/gmx/tokenomics)
+- [Solana Roadmap 2025-2026](https://www.btcc.com/en-US/square/D3V1L/1183808)
+- [Solana Fees Documentation](https://solana.com/docs/core/fees)
 

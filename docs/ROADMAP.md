@@ -75,6 +75,49 @@
 - Maintain Solana as primary
 - Consider: Base, Arbitrum (where DeFi lives)
 
+#### 5. Scaling Optimizations (Research Complete - Jan 22, 2026)
+- **Target:** Support 5,000-10,000 holders efficiently
+- **Batch optimization:** Maximize transfers per tx (currently ~5, target ~8-10)
+- **ATA caching:** Pre-create token accounts for known holders
+- **Priority fee tuning:** Dynamic based on network state
+- **Smart batching:** Already built (smart-timing.ts), needs activation
+- **Note:** Current push model works at this scale with optimizations
+
+---
+
+## Future Phase: QE5 (Long-Term Planning)
+
+**Target:** $500,000 Total Distributed
+**Expected Holders:** 10,000-50,000
+
+### Critical: ZK Compression Migration
+
+At 10K+ holders, traditional push distributions become expensive. ZK Compression is the solution.
+
+**Technology Stack:**
+- Helius AirShip for distribution
+- Light Protocol for ZK infrastructure
+- Photon Indexer for state queries
+
+**Cost Comparison:**
+| Holders | Traditional Cost | ZK Compressed Cost |
+|---------|------------------|-------------------|
+| 10,000 | ~20 SOL | ~0.01 SOL |
+| 50,000 | ~100 SOL | ~0.05 SOL |
+
+**Implementation Path:**
+1. Test AirShip with small distribution (QE4)
+2. Migrate to compressed USD1 distributions
+3. Ensure wallet support (Phantom, Backpack already support)
+4. Provide decompression path for DeFi usage
+
+**Solana Upgrades Helping Us:**
+- **Firedancer (Q2 2026):** 1.2M TPS capacity
+- **Alpenglow (Q1 2026):** Sub-150ms finality, 80% lower voting fees
+- Local fee markets already isolate congestion
+
+**Key Insight:** We're not blazing new trails. Slinky airdropped to 27M wallets using this exact stack.
+
 ---
 
 ## Future Ideas (Backlog)
@@ -123,6 +166,12 @@
 ### Multiple Token System
 - **Why Rejected:** Complexity kills memecoins. One token, one purpose.
 
+### Claim-Based Distribution (Merkle Distributor)
+- **Why Rejected:** Breaks FED's core value prop of automatic, passive income
+- **2026-01-22 Analysis:** While claim-based is cheaper (users pay own gas), it requires holder action
+- Many users never claim (engagement loss), and "set and forget" passive income is our differentiator
+- If scaling requires changes, ZK Compression maintains push model affordably
+
 ---
 
 ## Research Dependencies
@@ -137,7 +186,7 @@
 | Governance lite | Research Snapshot integration | NOT STARTED |
 | Cross-chain | Bridge security analysis | NOT STARTED |
 | Multiplier changes | Model holder behavior impact | NOT STARTED |
-| Scaling (10K+ holders) | Gas optimization, batching strategies | NEXT PRIORITY |
+| Scaling (10K+ holders) | Gas optimization, batching strategies | **COMPLETE** - Jan 22 research |
 
 ### Research Findings Summary (Jan 22, 2026)
 
@@ -164,6 +213,13 @@
 - BONK success: 50% of supply to users (not insiders), 350+ integrations, burns
 - Diamond hands psychology: Conviction from understanding, community support, shared experience
 - **Recommendation:** Activate built systems (quests, seasons, referrals) + add leaderboard visibility
+
+**Scaling Research (Jan 22, 2026):**
+- Current push model works well to ~10K holders with optimization
+- ZK Compression (Helius/Light Protocol) enables 2,500x cost reduction
+- Solana upgrades (Firedancer Q2 2026, Alpenglow Q1 2026) naturally help scaling
+- **Recommendation:** Keep push model, optimize batching, plan ZK migration at 5K+ holders
+- See TOKENOMICS-RESEARCH.md for full scaling strategy by phase
 
 ---
 
