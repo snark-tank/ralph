@@ -97,66 +97,66 @@ const IntroScene = () => {
   const { fps } = useVideoConfig();
 
   // Phase 0: Extended darkness, then controlled power-on
-  // First few frames are near-black to build tension
+  // Longer darkness to build tension - the anticipation before the reveal
   const powerOn = interpolate(
     frame,
-    [0, fps * 0.1, fps * 0.18, fps * 0.28],
-    [0, 0.02, 0.1, 1],
+    [0, fps * 0.15, fps * 0.22, fps * 0.35],
+    [0, 0.01, 0.08, 1],
     { extrapolateRight: "clamp" }
   );
 
-  // Phase 1: Single point of light emerges from center
+  // Phase 1: Single point of light emerges from center - the spark
   const pointLightOpacity = interpolate(
     frame,
-    [fps * 0.05, fps * 0.15, fps * 0.4, fps * 0.6],
-    [0, 1, 0.55, 0],
+    [fps * 0.08, fps * 0.18, fps * 0.45, fps * 0.65],
+    [0, 1, 0.6, 0],
     { extrapolateRight: "clamp" }
   );
   const pointLightScale = interpolate(
     frame,
-    [fps * 0.05, fps * 0.6],
-    [0, 4],
+    [fps * 0.08, fps * 0.65],
+    [0, 4.5],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.quad) }
   );
 
-  // Horizontal line of light - the "reveal" moment
+  // Horizontal line of light - the "reveal" moment - more dramatic expansion
   const lineWidth = interpolate(
     frame,
-    [fps * 0.08, fps * 0.45],
-    [0, 800],
+    [fps * 0.12, fps * 0.5],
+    [0, 900],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
   const lineOpacity = interpolate(
     frame,
-    [fps * 0.08, fps * 0.15, fps * 0.55, fps * 0.8],
-    [0, 0.85, 0.25, 0],
+    [fps * 0.12, fps * 0.2, fps * 0.6, fps * 0.85],
+    [0, 0.9, 0.3, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const lineThickness = interpolate(
     frame,
-    [fps * 0.08, fps * 0.2, fps * 0.5],
-    [0.5, 2, 1],
+    [fps * 0.12, fps * 0.25, fps * 0.55],
+    [0.5, 2.5, 1.5],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  // Logo entrance - emerges from the light with weight
-  const logoDelay = 0.28;
+  // Logo entrance - emerges from the light with weight and presence
+  const logoDelay = 0.32;
   const logoProgress = spring({
     frame: frame - logoDelay * fps,
     fps,
-    config: { damping: 180, stiffness: 40, mass: 1.6 },
+    config: { damping: 160, stiffness: 45, mass: 1.5 },
   });
   const logoOpacity = interpolate(
     frame,
-    [logoDelay * fps, (logoDelay + 0.18) * fps],
+    [logoDelay * fps, (logoDelay + 0.2) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const logoScale = interpolate(logoProgress, [0, 1], [0.7, 1]);
+  const logoScale = interpolate(logoProgress, [0, 1], [0.65, 1]);
   const logoGlow = interpolate(
     frame,
-    [fps * 0.35, fps * 0.7, fps * 1.5],
-    [0, 45, 30],
+    [fps * 0.38, fps * 0.75, fps * 1.6],
+    [0, 50, 35],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
@@ -532,15 +532,15 @@ const StatCard: React.FC<{
   const prefix = stat.prefix ?? (stat.value.startsWith("$") ? "$" : "");
   const suffix = stat.suffix ?? (stat.value.includes("+") ? "+" : "");
 
-  // Landing celebration - the moment of payoff
+  // Landing celebration - the moment of payoff (more dramatic)
   const hasLanded = numberProgress >= 0.97;
   const landTime = (countStart + countDuration) * fps;
 
-  // Scale pulse on landing - satisfying, noticeable pop
+  // Scale pulse on landing - more satisfying, noticeable pop with slight overshoot
   const landPulse = hasLanded ? interpolate(
     frame,
-    [landTime - fps * 0.03, landTime + fps * 0.06, landTime + fps * 0.22],
-    [1, 1.055, 1],
+    [landTime - fps * 0.03, landTime + fps * 0.05, landTime + fps * 0.12, landTime + fps * 0.28],
+    [1, 1.08, 0.985, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
@@ -548,13 +548,13 @@ const StatCard: React.FC<{
   const countGlow = interpolate(
     frame,
     [(countStart + 0.2) * fps, (countStart + countDuration * 0.7) * fps, landTime],
-    [0, 14, 18],
+    [0, 16, 20],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const landGlow = hasLanded ? interpolate(
     frame,
-    [landTime - fps * 0.05, landTime + fps * 0.08, landTime + fps * 0.4],
-    [18, 42, 16],
+    [landTime - fps * 0.05, landTime + fps * 0.06, landTime + fps * 0.45],
+    [20, 55, 18],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   ) : 0;
   const numberGlow = hasLanded ? landGlow : countGlow;
@@ -562,16 +562,16 @@ const StatCard: React.FC<{
   // Top accent bar - draws across elegantly with landing glow
   const accentWidth = interpolate(
     frame,
-    [(delay + 0.08) * fps, (delay + 0.45) * fps],
+    [(delay + 0.08) * fps, (delay + 0.5) * fps],
     [0, 100],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
   const accentGlow = hasLanded ? interpolate(
     frame,
-    [landTime - fps * 0.03, landTime + fps * 0.1, landTime + fps * 0.35],
-    [12, 28, 14],
+    [landTime - fps * 0.03, landTime + fps * 0.08, landTime + fps * 0.4],
+    [14, 35, 16],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
-  ) : 12;
+  ) : 14;
 
   // Card border glow - refined ambient with landing burst
   const borderOpacity = hasLanded ? interpolate(
@@ -802,33 +802,33 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const sceneFade = interpolate(frame, [0, fps * 0.12], [0, 1], {
+  const sceneFade = interpolate(frame, [0, fps * 0.15], [0, 1], {
     extrapolateRight: "clamp",
     easing: Easing.out(Easing.cubic),
   });
 
-  // Background glow - subtle, building
+  // Background glow - subtle, building with breathing room
   const bgIntensity = interpolate(
     frame,
-    [0, fps * 1.2],
-    [0.012, 0.04],
+    [0, fps * 1.4],
+    [0.015, 0.045],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Logo entrance - commanding presence
+  // Logo entrance - commanding presence with more weight
   const logoProgress = spring({
-    frame,
+    frame: frame - fps * 0.05,
     fps,
-    config: { damping: 200, stiffness: 50, mass: 1.3 },
+    config: { damping: 180, stiffness: 45, mass: 1.4 },
   });
-  const logoOpacity = interpolate(frame, [0, fps * 0.2], [0, 1], {
+  const logoOpacity = interpolate(frame, [fps * 0.05, fps * 0.25], [0, 1], {
     extrapolateRight: "clamp",
   });
-  const logoScale = interpolate(logoProgress, [0, 1], [0.8, 1]);
+  const logoScale = interpolate(logoProgress, [0, 1], [0.75, 1]);
   const logoGlow = interpolate(
     frame,
-    [fps * 0.15, fps * 0.6, fps * 1.0],
-    [0, 42, 32],
+    [fps * 0.18, fps * 0.65, fps * 1.1],
+    [0, 48, 35],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
@@ -860,28 +860,28 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // CTA button - the hero moment
-  const ctaDelay = fps * 0.5;
+  // CTA button - the hero moment with more dramatic entrance
+  const ctaDelay = fps * 0.55;
   const ctaProgress = spring({
     frame: frame - ctaDelay,
     fps,
-    config: { damping: 200, stiffness: 60, mass: 1.2 },
+    config: { damping: 170, stiffness: 55, mass: 1.3 },
   });
   const ctaOpacity = interpolate(
     frame,
-    [ctaDelay, ctaDelay + fps * 0.22],
+    [ctaDelay, ctaDelay + fps * 0.25],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const ctaY = interpolate(ctaProgress, [0, 1], [28, 0]);
-  const ctaScale = interpolate(ctaProgress, [0, 1], [0.9, 1]);
+  const ctaY = interpolate(ctaProgress, [0, 1], [35, 0]);
+  const ctaScale = interpolate(ctaProgress, [0, 1], [0.85, 1]);
 
-  // CTA land pulse - satisfying pop that draws attention
-  const ctaLandTime = ctaDelay + fps * 0.32;
+  // CTA land pulse - satisfying pop with slight overshoot for impact
+  const ctaLandTime = ctaDelay + fps * 0.35;
   const ctaLandPulse = frame > ctaLandTime ? interpolate(
     frame,
-    [ctaLandTime, ctaLandTime + fps * 0.09, ctaLandTime + fps * 0.24],
-    [1, 1.045, 1],
+    [ctaLandTime, ctaLandTime + fps * 0.08, ctaLandTime + fps * 0.15, ctaLandTime + fps * 0.28],
+    [1, 1.06, 0.99, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
@@ -1078,7 +1078,7 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
 };
 
 // Main composition - 10 seconds with perfect scene timing
-// Total: 2.0 + 1.4 + 4.0 + 2.6 = 10s (transitions overlap so duration adds up)
+// Optimized pacing for maximum impact: hook, punch, showcase, close
 export const StatsUpdate: React.FC<StatsUpdateProps> = ({
   headline,
   stats,
@@ -1087,13 +1087,13 @@ export const StatsUpdate: React.FC<StatsUpdateProps> = ({
 }) => {
   const { fps } = useVideoConfig();
 
-  // Transition timing - quick, elegant
-  const transitionFrames = Math.round(0.25 * fps);
+  // Transition timing - quick, elegant crossfades
+  const transitionFrames = Math.round(0.3 * fps);
 
   return (
     <TransitionSeries>
-      {/* Intro: 2.0s - dramatic logo reveal with breathing room */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(2.0 * fps)}>
+      {/* Intro: 2.1s - dramatic logo reveal with cinematic breathing room */}
+      <TransitionSeries.Sequence durationInFrames={Math.round(2.1 * fps)}>
         <IntroScene />
       </TransitionSeries.Sequence>
 
@@ -1102,8 +1102,8 @@ export const StatsUpdate: React.FC<StatsUpdateProps> = ({
         timing={linearTiming({ durationInFrames: transitionFrames })}
       />
 
-      {/* Headline: 1.4s - punchy BRRR moment */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(1.4 * fps)}>
+      {/* Headline: 1.5s - punchy BRRR moment with satisfying impact */}
+      <TransitionSeries.Sequence durationInFrames={Math.round(1.5 * fps)}>
         <HeadlineScene headline={headline} />
       </TransitionSeries.Sequence>
 
@@ -1112,8 +1112,8 @@ export const StatsUpdate: React.FC<StatsUpdateProps> = ({
         timing={linearTiming({ durationInFrames: transitionFrames })}
       />
 
-      {/* Stats: 4.0s - numbers count up and land satisfyingly */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(4.0 * fps)}>
+      {/* Stats: 3.9s - numbers count up and land with payoff */}
+      <TransitionSeries.Sequence durationInFrames={Math.round(3.9 * fps)}>
         <StatsScene stats={stats} />
       </TransitionSeries.Sequence>
 
@@ -1122,8 +1122,8 @@ export const StatsUpdate: React.FC<StatsUpdateProps> = ({
         timing={linearTiming({ durationInFrames: transitionFrames })}
       />
 
-      {/* CTA: 2.6s - confident, memorable close */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(2.6 * fps)}>
+      {/* CTA: 2.5s - confident, memorable close with call to action */}
+      <TransitionSeries.Sequence durationInFrames={Math.round(2.5 * fps)}>
         <CTAScene tagline={tagline} cta={cta} />
       </TransitionSeries.Sequence>
     </TransitionSeries>
