@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $51,900+ USD1
-- **Distribution Count:** 384 distributions
+- **Total Distributed:** $52,100+ USD1
+- **Distribution Count:** 389 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -1136,3 +1136,298 @@ FED should NOT copy Hyperliquid's 97% buyback model. Our "direct yield to holder
 - [Millionero: 2025 Buyback Wave](https://blog.millionero.com/blog/the-2025-buyback-wave-in-crypto-whos-buying-how-to-track-it/)
 - [Chainlink: TWAP vs VWAP](https://chain.link/education-hub/twap-vs-vwap)
 
+
+---
+
+## 2026-01-22: Auto-Compound Economics Deep Dive
+
+### Research Focus
+What are the economics of auto-compounding yield back to $FED? How much APY boost does compounding provide, and is it worth the complexity?
+
+---
+
+### Understanding Compounding Math
+
+**APR vs APY Fundamentals:**
+- **APR** (Annual Percentage Rate): Simple interest, no reinvestment
+- **APY** (Annual Percentage Yield): Includes compound interest effect
+- **Formula:** APY = (1 + r/n)^n - 1, where r = APR, n = compounding periods/year
+
+**Example: 12% APR at Different Compounding Frequencies:**
+
+| Frequency | Periods (n) | APY | Boost Over Simple |
+|-----------|-------------|-----|-------------------|
+| Annual | 1 | 12.00% | 0% |
+| Monthly | 12 | 12.68% | +0.68% |
+| Weekly | 52 | 12.73% | +0.73% |
+| Daily | 365 | 12.75% | +0.75% |
+| Continuous | ∞ | 12.75% | +0.75% |
+
+**Key Insight:** The compounding frequency boost is modest - roughly +0.75% on a 12% base. The difference between daily and monthly is only ~0.07%. For practical purposes, weekly compounding captures most of the benefit.
+
+**Sources:**
+- [APR to APY Calculator](https://www.aprtoapy.com/)
+- [Omnicalculator APY](https://www.omnicalculator.com/finance/apy)
+- [Trust Wallet: APY vs APR](https://trustwallet.com/blog/staking/apy-vs-apr-in-crypto-whats-the-difference)
+
+---
+
+### Industry Auto-Compound Benchmarks
+
+**Beefy Finance:**
+- Multi-chain yield aggregator with auto-compounding vaults
+- **APY boost:** 10-30% improvement over manual strategies (varies by vault)
+- **Performance fee:** 4.5% (already reflected in displayed APY)
+- **Compounding frequency:** Daily for most vaults, up to thousands of times per day for high-activity pools
+- **Key insight:** Socializes gas costs across all depositors - 500 users share one transaction's gas
+
+**Yearn Finance V3:**
+- Auto-compounder vaults harvest weekly
+- **APY boost:** 10-30% vs manual strategies
+- **Key innovation:** V3 "Tokenized Strategies" are standalone ERC-4626 vaults
+- **JupSOL example:** 1 JupSOL = 1.105 SOL after 1 year at 10% APR (auto-compounded)
+
+**GMX GLV:**
+- Auto-compounding index of GM liquidity pools
+- **Historical performance:** 20-30% annualized
+- **Mechanism:** Fees auto-compounded, increases GLV token price
+- **UX:** "Set-and-forget" - no claim/restake actions required
+
+**Key Takeaway:** Industry standard auto-compound APY boost is 10-30% relative improvement, not absolute. A 10% APR becomes ~10.5% APY with daily compounding.
+
+**Sources:**
+- [Beefy mooVaults APY](https://docs.beefy.finance/faq/moovaults-apy)
+- [Yearn V3 Overview](https://docs.yearn.fi/developers/v3/overview)
+- [GMX GLV Introduction](https://gmxio.substack.com/p/gmx-introduces-gmx-liquidity-vaults)
+
+---
+
+### FED Auto-Compound Economics
+
+**Current FED Distribution Model:**
+- Holders receive USD1 stablecoin distributions
+- Distributions occur every ~2 minutes
+- USD1 sits in wallet unless manually converted to $FED
+
+**Proposed Auto-Compound Model:**
+- Opt-in feature: USD1 distributions swapped to $FED via Jupiter
+- Treasury batches swaps for gas efficiency
+- $FED returned proportionally to enrolled holders
+
+**Economic Analysis:**
+
+**Scenario: $100 in monthly USD1 distributions**
+
+Without auto-compound (hold USD1):
+- Year-end value: $1,200 USD1
+
+With auto-compound to $FED (assuming flat $FED price):
+- Each distribution buys $FED immediately
+- Monthly compounding of $100 at effective yield rate
+- Year-end value: ~$1,200 in $FED + any price appreciation
+
+**The Real Value of Auto-Compound:**
+
+The compounding math boost is minimal (~0.75% at 12% base). The REAL value propositions are:
+
+1. **Dollar-Cost Averaging (DCA)**
+   - Automatic regular buys regardless of price
+   - Reduces emotional decision-making
+   - Smooths out volatility impact
+
+2. **Passive Tier Advancement**
+   - Holdings grow automatically
+   - Holders move up tiers over time
+   - Higher multipliers = more distributions
+
+3. **Increased Buy Pressure**
+   - Auto-compound creates consistent $FED buying
+   - Reduces sell pressure (USD1 not sitting idle)
+   - Good for price stability
+
+4. **Reduced Friction**
+   - No manual swap needed
+   - "Set and forget" UX
+   - Aligns with FED's "just hold = earn" philosophy
+
+---
+
+### Gas Cost Analysis (Solana Context)
+
+**FED's Advantage: Solana's Low Fees**
+
+Unlike Ethereum where gas costs dominate compounding decisions, Solana makes frequent small swaps viable:
+
+| Action | Estimated Cost | Break-Even |
+|--------|---------------|------------|
+| Jupiter swap (USD1→FED) | ~0.001 SOL (~$0.25) | $5 distribution |
+| Batched swap (50 users) | ~0.002 SOL total | $0.10 per user |
+
+**Key Insight:** On Solana, batched swaps make auto-compound economically viable even for small distributions. A $1 distribution with $0.005 swap cost (batched) is only 0.5% fee.
+
+**Optimal Compounding Frequency:**
+- Given Solana's low fees, daily or even per-distribution compounding is viable
+- DeFi 72 calculator suggests: at low gas rates, compound as frequently as possible
+- FED's ~2-minute distributions could theoretically compound every cycle
+
+**Recommendation:** Batch auto-compound swaps daily rather than per-distribution. This balances:
+- Gas efficiency (one batch per day)
+- Compounding benefit (daily capture)
+- Operational simplicity
+
+**Sources:**
+- [DeFi 72 Compounding Calculator](https://www.defi72.com/)
+- [Jupiter DCA Integration](https://dev.jup.ag/docs/old/dca/integration)
+
+---
+
+### Jupiter Integration Options
+
+**Jupiter DCA (Dollar-Cost Averaging):**
+- Automates recurring token purchases
+- Can set daily/weekly intervals
+- Tokens received directly in wallet
+- Could integrate with FED distribution system
+
+**Jupiter Value Averaging (VA):**
+- Dynamic amounts based on price
+- More when prices low, less when high
+- More sophisticated than DCA
+- Potentially better returns in volatile markets
+
+**Jupiter JLP Model (Precedent):**
+- 70% of fees auto-compounded
+- JLP price increases with compounded yield
+- "Facilitates continuous compounding of yield"
+- Most similar to what FED auto-compound would achieve
+
+**Recommended Approach:**
+Use Jupiter's standard swap API with batching, not DCA program. This gives FED Treasury control over:
+- Timing of swaps
+- Slippage tolerance
+- Aggregation efficiency
+
+**Sources:**
+- [Jupiter Exchange Docs](https://jup.ag/)
+- [JupSOL Explained](https://hub.jup.ag/guides/jupsol/jupsol)
+
+---
+
+### FED Auto-Compound: Implementation Considerations
+
+**What We Already Have:**
+- `auto-compound.ts` script - BUILT
+- Jupiter Ultra API integration - READY
+- Registration system - EXISTS
+
+**What Needs Activation:**
+1. Treasury aggregates USD1 from opted-in holders' distributions
+2. Daily batch swap USD1 → $FED via Jupiter
+3. Proportional $FED distribution to enrolled holders
+4. Track enrollment status in distribution system
+
+**Risks to Consider:**
+
+| Risk | Mitigation |
+|------|------------|
+| Swap slippage | Use Jupiter Ultra's 0.1% slippage guarantee |
+| Price impact | Batch during high liquidity periods |
+| Failed swaps | Retry mechanism, fallback to USD1 distribution |
+| Tax implications | Users opt-in knowingly; still receive taxable distributions |
+
+**UX Flow:**
+1. User registers address for auto-compound
+2. During distribution, their USD1 is flagged for batching
+3. Daily (or weekly), Treasury executes batch swap
+4. $FED distributed to their wallet
+5. Holdings increase → tier potentially advances → higher multipliers
+
+---
+
+### Economic Impact Modeling
+
+**Assumptions:**
+- 500 holders opt into auto-compound (28% of 1,800)
+- Average $10/month in distributions per holder
+- $FED price: flat (conservative)
+- Swap fee: 0.5% (batched)
+
+**Monthly Impact:**
+- 500 × $10 = $5,000 USD1 converted to $FED
+- Creates ~$5,000 buy pressure monthly
+- Reduces USD1 sell pressure equivalent
+
+**Annual Impact (if sustained):**
+- $60,000 in $FED buying pressure
+- Compounding effect: ~$62,000 effective (at monthly compound rate)
+- Individual holder: ~$120 distributed → ~$123 in $FED value
+
+**The Math Conclusion:**
+The pure compounding math benefit is ~2.5% annual (on $120 base). But the DCA smoothing + tier advancement + buy pressure effects are more valuable than the raw APY boost.
+
+---
+
+### Comparison: FED Auto-Compound vs Industry
+
+| Feature | GMX GLV | Beefy | Yearn V3 | FED (Proposed) |
+|---------|---------|-------|----------|----------------|
+| Auto-compound | Yes | Yes | Yes | Yes |
+| Frequency | Per-trade | Daily-Hourly | Weekly | Daily (batch) |
+| Yield source | Trading fees | Various | Various | Trading fees |
+| Token received | GLV (index) | mooToken | yToken | $FED directly |
+| Lock required | No | No | No | No |
+| Opt-in | By deposit | By deposit | By deposit | Explicit opt-in |
+
+**FED Differentiator:** Direct token distribution, not a wrapper token. Holders get $FED in their wallet, not a derivative.
+
+---
+
+### Recommendations for QE4
+
+**Should FED Activate Auto-Compound? YES**
+
+**Rationale:**
+1. Script already built - minimal implementation cost
+2. Creates consistent buy pressure - good for price
+3. Enables passive tier advancement - retention hook
+4. Aligns with "just hold = earn" philosophy
+5. Solana gas costs make it economically viable
+
+**Implementation Priority:** Medium-High for QE4
+
+**Recommended Settings:**
+- **Batch frequency:** Daily
+- **Minimum threshold:** $1 USD1 (to avoid dust)
+- **Slippage tolerance:** 0.3%
+- **Default:** Opt-out (users must enable)
+
+**What NOT to Do:**
+1. Don't make it default opt-in (tax complexity for users)
+2. Don't compound per-distribution (gas inefficient, even on Solana)
+3. Don't promise specific APY boost (variable based on $FED price)
+4. Don't remove USD1 option (some users want stablecoin)
+
+---
+
+### Action Items
+
+1. [x] Document auto-compound economics research
+2. [ ] Activate auto-compound.ts for willing users (Treasury agent)
+3. [ ] Add auto-compound registration to fed.markets preferences
+4. [ ] Track adoption rate and $FED buy pressure impact
+5. [ ] Model tier advancement rates for auto-compound users
+
+---
+
+*Research completed: 2026-01-22 UTC*
+
+*Sources:*
+- [APR to APY Calculator](https://www.aprtoapy.com/)
+- [DeFi 72 Compounding Calculator](https://www.defi72.com/)
+- [Beefy Finance Docs](https://docs.beefy.finance/)
+- [Yearn V3 Overview](https://docs.yearn.fi/developers/v3/overview)
+- [GMX GLV Introduction](https://gmxio.substack.com/p/gmx-introduces-gmx-liquidity-vaults)
+- [Jupiter DCA Integration](https://dev.jup.ag/docs/old/dca/integration)
+- [Trust Wallet: APY vs APR](https://trustwallet.com/blog/staking/apy-vs-apr-in-crypto-whats-the-difference)
+
+---

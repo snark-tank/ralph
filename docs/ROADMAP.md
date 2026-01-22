@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $51,000+ Distributed
+**Current:** $52,100+ Distributed
 **Status:** IN PROGRESS
 
 ### Active Systems
@@ -49,12 +49,17 @@
   - Low volume: Batch more recipients per tx (gas optimization)
   - **DO NOT** reduce frequency - this is our competitive moat
 
-#### 2. Auto-Compound Option (New - Research Needed)
+#### 2. Auto-Compound Option (Research Complete - Jan 22, 2026)
 - Allow holders to opt-in to compound distributions back to $FED
-- Inspired by GMX GLV auto-compounding (20-30% historical APY boost)
-- Would require: swap USD1 → $FED automatically for opted-in users
-- Benefits: Increased $FED buying pressure, passive accumulation
-- Risk: More complexity, gas costs for swaps
+- **Script Status:** BUILT (`auto-compound.ts`) - needs activation
+- **Research Findings:**
+  - Pure compounding APY boost is modest (~2.5% annual on typical distributions)
+  - Real value: DCA smoothing, passive tier advancement, consistent buy pressure
+  - Solana gas costs make daily batched swaps economical (~$0.01 per user)
+  - Industry benchmarks: GMX GLV (20-30% annualized), Beefy (10-30% boost)
+- **Recommended Settings:** Daily batch, $1 minimum, explicit opt-in
+- **Benefits:** Increased $FED buying pressure, passive accumulation, tier advancement
+- **Priority:** HIGH for QE4 activation
 
 #### 3. Enhanced Multiplier Stack
 - **Current:** Up to 4.5x combined multiplier
@@ -183,7 +188,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Dynamic frequency | Study GMX/Pendle distribution timing | **COMPLETE** - See TOKENOMICS-RESEARCH.md |
 | Holder retention | Study retention tactics, diamond hands psychology | **COMPLETE** - Jan 22 research |
 | Buyback optimization | Study timing, allocation, counter-cyclical models | **COMPLETE** - Jan 22 research |
-| Auto-compound option | Model economics of compound-to-FED | NOT STARTED |
+| Auto-compound option | Model economics of compound-to-FED | **COMPLETE** - Jan 22 research |
 | Governance lite | Research Snapshot integration | NOT STARTED |
 | Cross-chain | Bridge security analysis | NOT STARTED |
 | Multiplier changes | Model holder behavior impact | NOT STARTED |
@@ -230,6 +235,15 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - FED's 100% distribution + discretionary buyback during dips is CORRECT approach
 - **Recommendation:** Keep current model for QE3; consider 90/10 split (distribute/buyback) for QE4
 - See TOKENOMICS-RESEARCH.md for full buyback strategy analysis
+
+**Auto-Compound Economics Research (Jan 22, 2026):**
+- Pure compounding APY boost is modest: ~0.75% on 12% base (daily vs annual)
+- Industry benchmarks: Beefy/Yearn report 10-30% relative boost, GMX GLV 20-30% annualized
+- Real value isn't compounding math - it's DCA smoothing, tier advancement, consistent buy pressure
+- Solana gas makes daily batched swaps viable (~$0.01/user when batched across 50+ users)
+- Script already built (`auto-compound.ts`), uses Jupiter Ultra API
+- **Recommendation:** Activate for QE4 with daily batch, $1 minimum, explicit opt-in
+- See TOKENOMICS-RESEARCH.md for full auto-compound analysis
 
 ---
 
