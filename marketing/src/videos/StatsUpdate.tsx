@@ -5,6 +5,7 @@ import {
   spring,
   interpolate,
   Easing,
+  random,
 } from "remotion";
 import { TransitionSeries, linearTiming } from "@remotion/transitions";
 import { fade } from "@remotion/transitions/fade";
@@ -24,12 +25,51 @@ export type StatsUpdateProps = {
   cta: string;
 };
 
+// Premium film grain overlay - adds texture and warmth
+const FilmGrain: React.FC<{ opacity?: number }> = ({ opacity = 0.03 }) => {
+  const frame = useCurrentFrame();
+  // Offset changes every frame for grain effect
+  const offsetX = (frame * 17) % 100;
+  const offsetY = (frame * 23) % 100;
+
+  return (
+    <AbsoluteFill
+      style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+        backgroundPosition: `${offsetX}px ${offsetY}px`,
+        opacity,
+        mixBlendMode: "overlay",
+        pointerEvents: "none",
+      }}
+    />
+  );
+};
+
+// Subtle scan line effect for CRT aesthetic
+const ScanLines: React.FC<{ opacity?: number }> = ({ opacity = 0.015 }) => {
+  return (
+    <AbsoluteFill
+      style={{
+        background: `repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 2px,
+          rgba(0, 0, 0, ${opacity}) 2px,
+          rgba(0, 0, 0, ${opacity}) 4px
+        )`,
+        pointerEvents: "none",
+      }}
+    />
+  );
+};
+
 // Minimal cinematic background - barely perceptible, supremely elegant
 const CinematicBackground: React.FC<{
   accentColor?: string;
   intensity?: number;
   focusY?: number;
-}> = ({ accentColor = "#00ff88", intensity = 0.02, focusY = 50 }) => {
+  showGrain?: boolean;
+}> = ({ accentColor = "#00ff88", intensity = 0.02, focusY = 50, showGrain = true }) => {
   const frame = useCurrentFrame();
 
   // Extremely slow, imperceptible drift - creates subtle life
@@ -50,7 +90,14 @@ const CinematicBackground: React.FC<{
   return (
     <AbsoluteFill>
       {/* Pure black base - premium foundation */}
-      <AbsoluteFill style={{ background: "#010101" }} />
+      <AbsoluteFill style={{ background: "#050505" }} />
+
+      {/* Subtle noise texture base */}
+      <AbsoluteFill
+        style={{
+          background: `radial-gradient(circle at 50% 50%, #080808 0%, #020202 100%)`,
+        }}
+      />
 
       {/* Primary glow - whisper-quiet presence, centered */}
       <AbsoluteFill
@@ -73,6 +120,9 @@ const CinematicBackground: React.FC<{
             "radial-gradient(ellipse 82% 72% at 50% 50%, transparent 30%, rgba(0,0,0,0.6) 100%)",
         }}
       />
+
+      {/* Film grain for texture */}
+      {showGrain && <FilmGrain opacity={0.025} />}
     </AbsoluteFill>
   );
 };
@@ -82,25 +132,44 @@ const IntroScene = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Phase 0: Total darkness for 0.15s - creates anticipation
+  // Phase 0: Total darkness with a subtle flicker before the reveal
+  const flicker = frame < fps * 0.12 ? 0 :
+    frame < fps * 0.14 ? 0.15 :
+    frame < fps * 0.16 ? 0.05 :
+    frame < fps * 0.18 ? 0.2 : 1;
+
   const darknessFade = interpolate(
     frame,
-    [fps * 0.15, fps * 0.4],
+    [fps * 0.18, fps * 0.4],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  );
+  ) * (frame < fps * 0.18 ? flicker : 1);
 
   // Initial light burst - a single bright point that expands
   const burstOpacity = interpolate(
     frame,
-    [fps * 0.15, fps * 0.25, fps * 0.55, fps * 0.85],
-    [0, 0.6, 0.25, 0],
+    [fps * 0.12, fps * 0.22, fps * 0.55, fps * 0.85],
+    [0, 0.7, 0.25, 0],
     { extrapolateRight: "clamp" }
   );
   const burstScale = interpolate(
     frame,
-    [fps * 0.15, fps * 0.8],
-    [0.1, 3.5],
+    [fps * 0.12, fps * 0.8],
+    [0.05, 3.5],
+    { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Secondary burst ring for depth
+  const ring2BurstOpacity = interpolate(
+    frame,
+    [fps * 0.18, fps * 0.28, fps * 0.6, fps * 0.9],
+    [0, 0.4, 0.15, 0],
+    { extrapolateRight: "clamp" }
+  );
+  const ring2BurstScale = interpolate(
+    frame,
+    [fps * 0.18, fps * 0.9],
+    [0.02, 4.0],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
@@ -212,6 +281,20 @@ const IntroScene = () => {
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
+  // Horizontal reveal line - cinematic wipe effect
+  const revealLineWidth = interpolate(
+    frame,
+    [fps * 0.08, fps * 0.5],
+    [0, 600],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+  const revealLineOpacity = interpolate(
+    frame,
+    [fps * 0.08, fps * 0.2, fps * 0.7, fps * 1.0],
+    [0, 0.4, 0.2, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+
   // Background glow intensifies with logo
   const bgGlow = interpolate(
     frame,
@@ -232,12 +315,36 @@ const IntroScene = () => {
           pointerEvents: "none",
         }}
       >
+        {/* Horizontal reveal line - cinematic wipe */}
+        <div
+          style={{
+            width: revealLineWidth,
+            height: 1,
+            background: "linear-gradient(90deg, transparent 0%, rgba(0,255,136,0.6) 25%, rgba(255,255,255,0.8) 50%, rgba(0,255,136,0.6) 75%, transparent 100%)",
+            opacity: revealLineOpacity,
+            position: "absolute",
+            boxShadow: "0 0 20px rgba(0, 255, 136, 0.3)",
+          }}
+        />
+        {/* Secondary outer burst - creates depth */}
+        <div
+          style={{
+            width: 200,
+            height: 200,
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(0,255,136,0.35) 0%, rgba(0,212,255,0.15) 40%, transparent 60%)",
+            opacity: ring2BurstOpacity,
+            transform: `scale(${ring2BurstScale})`,
+            position: "absolute",
+          }}
+        />
+        {/* Primary burst */}
         <div
           style={{
             width: 180,
             height: 180,
             borderRadius: "50%",
-            background: "radial-gradient(circle, rgba(0,255,136,0.6) 0%, rgba(0,255,180,0.2) 40%, transparent 65%)",
+            background: "radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(0,255,136,0.6) 25%, rgba(0,255,180,0.2) 50%, transparent 70%)",
             opacity: burstOpacity,
             transform: `scale(${burstScale})`,
             position: "absolute",
@@ -398,6 +505,16 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
   const brrrWordIndex = words.findIndex(w => w === "BRRR");
   const brrrDelay = 0.1 + brrrWordIndex * 0.1;
 
+  // Screen shake when BRRR lands - adds impact
+  const shakeIntensity = interpolate(
+    frame,
+    [(brrrDelay + 0.08) * fps, (brrrDelay + 0.12) * fps, (brrrDelay + 0.25) * fps],
+    [0, 4, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+  const shakeX = shakeIntensity * Math.sin(frame * 2.5);
+  const shakeY = shakeIntensity * Math.cos(frame * 3.2);
+
   // Background glow EXPLODES when BRRR lands
   const bgGlow = interpolate(
     frame,
@@ -466,6 +583,7 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
           alignItems: "center",
           padding: 80,
           flexDirection: "column",
+          transform: `translate(${shakeX}px, ${shakeY}px)`,
         }}
       >
         {/* Headline - word by word with perfect rhythm */}
@@ -586,12 +704,20 @@ const StatCard: React.FC<{
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Card entrance - deliberate, weighty spring
+  // Card entrance - deliberate, weighty spring with slight rotation for depth
   const cardProgress = spring({
     frame: frame - delay * fps,
     fps,
-    config: { damping: 180, stiffness: 65, mass: 1.15 },
+    config: { damping: 200, stiffness: 70, mass: 1.2 },
   });
+
+  // Slight rotation that settles
+  const cardRotate = interpolate(
+    frame,
+    [delay * fps, (delay + 0.5) * fps],
+    [index % 2 === 0 ? -2 : 2, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
 
   // Number counting with exponential deceleration for maximum satisfaction
   const countDuration = 1.6;
@@ -606,6 +732,21 @@ const StatCard: React.FC<{
       // Quintic ease-out for that "slowing to a stop" feel
       easing: (t) => 1 - Math.pow(1 - t, 5),
     }
+  );
+
+  // Shimmer effect - sweeps across the card after it settles
+  const shimmerDelay = delay + 0.6;
+  const shimmerProgress = interpolate(
+    frame,
+    [shimmerDelay * fps, (shimmerDelay + 0.8) * fps],
+    [-100, 200],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.inOut(Easing.cubic) }
+  );
+  const shimmerOpacity = interpolate(
+    frame,
+    [shimmerDelay * fps, (shimmerDelay + 0.2) * fps, (shimmerDelay + 0.6) * fps, (shimmerDelay + 0.8) * fps],
+    [0, 0.15, 0.15, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
   // Parse value
@@ -720,7 +861,7 @@ const StatCard: React.FC<{
   return (
     <div
       style={{
-        transform: `translateY(${cardY}px) scale(${cardScale})`,
+        transform: `translateY(${cardY}px) scale(${cardScale}) rotate(${cardRotate}deg)`,
         opacity: cardOpacity,
       }}
     >
@@ -728,7 +869,7 @@ const StatCard: React.FC<{
         style={{
           padding: "28px 38px",
           background:
-            "linear-gradient(165deg, rgba(255,255,255,0.035) 0%, rgba(255,255,255,0.008) 100%)",
+            "linear-gradient(165deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.008) 100%)",
           borderRadius: 16,
           minWidth: 280,
           position: "relative",
@@ -737,10 +878,24 @@ const StatCard: React.FC<{
           boxShadow: `
             0 30px 65px rgba(0, 0, 0, 0.5),
             0 0 ${45 * cardGlow + 35 * landGlowBurst}px rgba(${accentRgb}, ${0.08 * cardGlow + 0.15 * landGlowBurst}),
-            inset 0 1px 0 rgba(255, 255, 255, 0.04)
+            inset 0 1px 0 rgba(255, 255, 255, 0.05)
           `,
         }}
       >
+        {/* Shimmer overlay - sweeps across on entrance */}
+        <div
+          style={{
+            position: "absolute",
+            top: 0,
+            left: `${shimmerProgress}%`,
+            width: "50%",
+            height: "100%",
+            background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.5) 50%, transparent 100%)",
+            opacity: shimmerOpacity,
+            pointerEvents: "none",
+          }}
+        />
+
         {/* Top accent line - full width draw */}
         <div
           style={{
@@ -854,7 +1009,7 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
   });
 
   // Section header - smaller, less competing with cards
-  const headerOpacity = interpolate(frame, [fps * 0.05, fps * 0.28], [0, 0.7], {
+  const headerOpacity = interpolate(frame, [fps * 0.05, fps * 0.28], [0, 0.8], {
     extrapolateRight: "clamp",
   });
   const headerY = interpolate(
@@ -867,19 +1022,33 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
     }
   );
 
-  // Live indicator with elegant pulse
+  // Live indicator with elegant pulse - refined timing
   const pulseBase = interpolate(
-    (frame - fps * 0.35) % (fps * 2.2),
-    [0, fps * 0.45, fps * 2.2],
-    [0.45, 1, 0.45],
-    { extrapolateLeft: "clamp" }
+    (frame - fps * 0.35) % (fps * 2.0),
+    [0, fps * 0.5, fps * 2.0],
+    [0.5, 1, 0.5],
+    { extrapolateLeft: "clamp", easing: Easing.inOut(Easing.sin) }
   );
   const indicatorOpacity = frame > fps * 0.3 ? pulseBase : interpolate(
     frame,
     [fps * 0.1, fps * 0.3],
-    [0, 0.45],
+    [0, 0.5],
     { extrapolateRight: "clamp" }
   );
+
+  // Subtle ring around the live indicator
+  const ringPulse = frame > fps * 0.35 ? interpolate(
+    (frame - fps * 0.35) % (fps * 2.0),
+    [0, fps * 0.5, fps * 2.0],
+    [1, 1.5, 1],
+    { extrapolateLeft: "clamp", easing: Easing.out(Easing.cubic) }
+  ) : 1;
+  const ringOpacity = frame > fps * 0.35 ? interpolate(
+    (frame - fps * 0.35) % (fps * 2.0),
+    [0, fps * 0.3, fps * 2.0],
+    [0.5, 0, 0],
+    { extrapolateLeft: "clamp" }
+  ) : 0;
 
   // Accent lines - draw outward symmetrically (subtle)
   const lineWidth = interpolate(
@@ -931,17 +1100,35 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
             }}
           />
 
-          {/* Live indicator with glow */}
-          <div
-            style={{
-              width: 5,
-              height: 5,
-              borderRadius: "50%",
-              background: "#00ff88",
-              opacity: indicatorOpacity,
-              boxShadow: `0 0 ${8 + 6 * indicatorOpacity}px rgba(0, 255, 136, ${0.35 + 0.25 * indicatorOpacity})`,
-            }}
-          />
+          {/* Live indicator with glow and pulsing ring */}
+          <div style={{ position: "relative" }}>
+            {/* Pulsing ring */}
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                width: 5,
+                height: 5,
+                borderRadius: "50%",
+                border: "1px solid #00ff88",
+                transform: `translate(-50%, -50%) scale(${ringPulse})`,
+                opacity: ringOpacity,
+                pointerEvents: "none",
+              }}
+            />
+            {/* Main dot */}
+            <div
+              style={{
+                width: 5,
+                height: 5,
+                borderRadius: "50%",
+                background: "#00ff88",
+                opacity: indicatorOpacity,
+                boxShadow: `0 0 ${8 + 6 * indicatorOpacity}px rgba(0, 255, 136, ${0.35 + 0.25 * indicatorOpacity})`,
+              }}
+            />
+          </div>
 
           <span
             style={{
@@ -1100,12 +1287,21 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
     }
   );
 
-  // Subtle pulsing glow on CTA after it settles - breathing effect
+  // Subtle pulsing glow on CTA after it settles - refined breathing effect
   const ctaPulse = frame > fps * 1.5 ? interpolate(
-    (frame - fps * 1.5) % (fps * 2.4),
-    [0, fps * 1.2, fps * 2.4],
-    [0.92, 1, 0.92]
+    (frame - fps * 1.5) % (fps * 3.0),
+    [0, fps * 1.5, fps * 3.0],
+    [0.95, 1, 0.95],
+    { easing: Easing.inOut(Easing.sin) }
   ) : 1;
+
+  // Inner glow pulse - creates depth
+  const innerPulse = frame > fps * 1.5 ? interpolate(
+    (frame - fps * 1.5) % (fps * 2.5),
+    [0, fps * 1.25, fps * 2.5],
+    [0.2, 0.35, 0.2],
+    { easing: Easing.inOut(Easing.sin) }
+  ) : 0.2;
 
   // Bottom text - final beat with gravitas
   const bottomOpacity = interpolate(
@@ -1223,16 +1419,31 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
           <div
             style={{
               padding: "18px 58px",
-              background: "linear-gradient(145deg, #00ff88 0%, #00ffcc 45%, #00ff88 100%)",
+              background: "linear-gradient(145deg, #00ff88 0%, #00ffdd 45%, #00ff88 100%)",
               borderRadius: 50,
+              position: "relative",
+              overflow: "hidden",
               boxShadow: `
                 0 8px 32px rgba(0, 255, 136, ${(0.28 + 0.18 * ctaGlow) * ctaPulse}),
                 0 0 ${45 * ctaGlow * ctaPulse}px rgba(0, 255, 136, ${0.15 * ctaGlow * ctaPulse}),
-                inset 0 2px 0 rgba(255, 255, 255, 0.22),
+                inset 0 2px 0 rgba(255, 255, 255, ${innerPulse}),
                 inset 0 -2px 0 rgba(0, 0, 0, 0.08)
               `,
             }}
           >
+            {/* Inner shine animation */}
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                right: 0,
+                height: "50%",
+                background: `linear-gradient(180deg, rgba(255,255,255,${innerPulse * 0.8}) 0%, transparent 100%)`,
+                borderRadius: "50px 50px 0 0",
+                pointerEvents: "none",
+              }}
+            />
             <span
               style={{
                 fontSize: 36,
@@ -1241,6 +1452,7 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
                 fontFamily: "system-ui, -apple-system, sans-serif",
                 letterSpacing: -0.5,
                 textShadow: "0 1px 0 rgba(255, 255, 255, 0.2)",
+                position: "relative",
               }}
             >
               {cta}
