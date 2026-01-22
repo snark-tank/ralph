@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $55,506+ USD1
-- **Distribution Count:** 440 distributions
+- **Total Distributed:** $55,671+ USD1
+- **Distribution Count:** 446 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -4641,5 +4641,205 @@ It proves conclusively that:
 - [BeInCrypto: Do Kwon Verdict](https://beincrypto.com/do-kwon-sentenced-15-years-terra-fraud/)
 - [ECOS: Terra Luna Crash Breakdown](https://ecos.am/en/blog/terra-luna-crash-complete-breakdown-of-the-luna-and-ust-algorithmic-stablecoin-implosion/)
 - [AInvest: End of Algorithmic Stablecoins](https://www.ainvest.com/news/algorithmic-stablecoins-lessons-terra-collapse-2512/)
+
+---
+
+## 2026-01-22: Solidly & ve(3,3) Model Analysis
+
+### What Was Solidly?
+
+Solidly Exchange was launched in February 2022 on Fantom by Andre Cronje (creator of Yearn Finance) and Daniele Sestagalli (Abracadabra/Wonderland). It was the first protocol-to-protocol automated market maker (AMM) combining:
+
+1. **Vote Escrow (ve) from Curve** - Lock tokens for voting power + fee share
+2. **(3,3) Game Theory from OlympusDAO** - Incentivize locking over selling
+3. **100% Fee Distribution** - All fees to veSOLID voters, not just LPs
+
+### The ve(3,3) Mechanism Explained
+
+**Lock Mechanics:**
+- Lock SOLID for 6 months → 0.125 veSOLID per SOLID
+- Lock SOLID for 2 years → 0.5 veSOLID per SOLID
+- Lock SOLID for 4 years → 1 veSOLID per SOLID
+- veSOLID decays linearly over time (unlike Curve's cliff decay)
+
+**The Innovation:**
+- Voters direct emissions to pools they vote for
+- Voters receive 100% of trading fees from their voted pools
+- Creates alignment: vote for pools that generate fees, not just emissions farming
+
+### The TVL War: A Case Study in Hype Cycles
+
+**Timeline of the Fantom Frenzy:**
+
+| Date | Event | TVL Impact |
+|------|-------|------------|
+| Jan 2022 | Andre announces top 20 Fantom TVL projects get SOLID airdrop | Arms race begins |
+| Jan 24, 2022 | veDAO launches with sole purpose of capturing airdrop | $0 → $2.69B TVL in 48 hours |
+| Jan 2022 | $1.3B transferred from Ethereum to Fantom in 3 days | Fantom rises to #3 chain |
+| Feb 2022 | Solidly launches | $2.3B peak TVL |
+| Feb 2022 | 0xDAO counter-launches | $4.2B TVL counter-attack |
+| March 2022 | Andre announces departure from DeFi | TVL exodus begins |
+| April 2022 | Projects terminated | Fantom TVL collapses |
+
+**Peak Stats:**
+- Fantom TVL: ~$12 billion (from ~$3 billion pre-Solidly)
+- Solidly peak TVL: $2.3 billion
+- veDAO existed purely to game the airdrop mechanism
+
+### Why Solidly Failed
+
+**1. Founder Dependency**
+- Andre Cronje was THE reason anyone cared about Solidly
+- When he announced departure, confidence evaporated immediately
+- No team, no roadmap, no support structure remained
+- **Lesson:** Single points of failure are fatal for protocols
+
+**2. Technical Issues at Launch**
+- Bug: AMM selected stable pools without liquidity over variable pools WITH liquidity
+- No user override possible - forced suboptimal routing
+- Teams exploited vulnerabilities, rendering features inoperable
+- **Lesson:** Launch quality matters more than launch speed
+
+**3. Tokenomics Opacity**
+- Andre said emissions were 2M SOLID/week
+- Community found code showing 20M SOLID/week (10x discrepancy)
+- No clear information on actual inflation rate
+- **Lesson:** Transparent, verifiable tokenomics are non-negotiable
+
+**4. Monopoly Dynamics**
+- Exploitive voters directed emissions to pools they 100% owned
+- No whitelist or governance to prevent bad actors
+- Rich got richer, productive pools got ignored
+- **Lesson:** Pure game theory without guardrails creates extraction
+
+**5. Mercenary Capital**
+- veDAO, 0xDAO existed only to extract value
+- No genuine commitment to Fantom ecosystem
+- When incentives ended, capital fled
+- **Lesson:** Hype-driven TVL is not sticky TVL
+
+### Current State (2025)
+
+- Solidly V3 (migrated to Ethereum): ~$106K TVL
+- Peak to current: $2.3B → $106K = **99.995% decline**
+- However: **40 forks** of Solidly exist (4th most forked protocol)
+- ve(3,3) mechanism lives on in Velodrome, Thena, Equalizer, etc.
+
+### Velodrome: The ve(3,3) Success Story
+
+Velodrome Finance on Optimism fixed Solidly's core issues and became the dominant DEX:
+
+**Key Improvements:**
+
+| Solidly Problem | Velodrome Fix |
+|-----------------|---------------|
+| Rewards claimable before emissions committed | Tied bribes to epochs - rewards only after vote commits |
+| Voters could direct to unproductive pools | On-chain whitelist + Emergency "Commissaire" to kill bad gauges |
+| No team = no support | 3% emissions to team multisig for ongoing development |
+| Airdrop to top TVL (gameable) | Targeted airdrop to valuable protocols chosen by Optimism Foundation |
+
+**Velodrome Stats (2024):**
+- $142M TVL on Optimism (#1 DEX)
+- 68% of Optimism trading volume (ATH August 2024)
+- 14,200 daily active users (3x increase from Q1 2023)
+- Launched concentrated liquidity (V2) - 22% capital efficiency improvement
+- Cross-chain SuperSwaps for Optimism ecosystem
+
+---
+
+### FED Comparison: Why We're Fundamentally Different
+
+| Aspect | Solidly/ve(3,3) | FED |
+|--------|-----------------|-----|
+| **Revenue Model** | Fees to voters who allocate emissions | Fees to ALL holders automatically |
+| **Locking** | Required (up to 4 years) for rewards | NONE required - hold = earn |
+| **Governance** | Voters direct emissions | Ralph directs everything (no governance) |
+| **Complexity** | High (lock, vote, allocate, claim) | Zero (just hold) |
+| **Founder Dependency** | YES (Andre departure killed it) | Ralph is autonomous code, not a person |
+| **Emission Gaming** | Rampant (mercenary capital) | Impossible (no emissions, real fees only) |
+| **Claim Model** | Claim-based (users act) | Push-based (automatic distribution) |
+
+### Key Lessons for FED
+
+**1. Simplicity > Sophistication**
+- ve(3,3) was elegant in theory, exploitable in practice
+- FED's "hold = earn" model has zero attack surface
+- Users don't need to understand game theory to benefit
+
+**2. No Locking = No Lock Exploits**
+- veSOLID locking created mercenary behavior (lock → extract → abandon)
+- FED holders can leave anytime, but they don't because yield is consistent
+- Positive incentives (streak bonuses) beat punitive locks
+
+**3. Autonomous Operations > Founder-Dependent**
+- Andre leaving killed Solidly
+- Ralph is code, not a person - can't "leave DeFi"
+- Distributed systems don't have single points of failure
+
+**4. Real Fees > Emissions**
+- Solidly's emissions were inflationary (2M-20M SOLID/week)
+- FED distributes 100% of actual LP fees (zero inflation)
+- Sustainable by design, not by hoping emissions outrun selling
+
+**5. Whitelist Mechanisms Have Merit**
+- Velodrome's whitelist prevented Solidly's bad-actor exploitation
+- FED doesn't need this (no gauge voting) but validates importance of guardrails
+- If FED ever adds governance, Velodrome's model is the template
+
+---
+
+### Should FED Add Any ve(3,3) Elements?
+
+**REJECTED: Vote-Directed Emissions**
+- FED has no emissions to direct
+- Would add complexity for zero benefit
+- Enables mercenary behavior we want to avoid
+
+**REJECTED: Lock-to-Earn Model**
+- Our soft locks with bonus multipliers are better
+- No penalty for leaving, just bonus for staying
+- Aligns incentives without punishing users
+
+**CONSIDERED: Epoch-Based Distribution Timing**
+- Velodrome's epoch model (weekly) is for vote alignment
+- FED's 2-minute distributions are our differentiator
+- KEEP current model - our frequency IS the feature
+
+**NOTED: Whitelist Governance (For Future)**
+- If FED ever needs community input on decisions
+- Velodrome's model (proposal threshold + quorum + emergency override) is proven
+- Store for QE5+ consideration if governance becomes necessary
+
+---
+
+### Research Confidence
+
+**HIGH confidence** that FED's model is superior to ve(3,3) for memecoins:
+- ve(3,3) is designed for protocol-to-protocol coordination (B2B)
+- FED is designed for retail holders (B2C)
+- Different audiences need different mechanisms
+- Complexity kills memecoin adoption (proven by Solidly collapse)
+
+**MEDIUM confidence** that some ve(3,3) elements could help at scale:
+- Velodrome proves the model CAN work with proper guardrails
+- If FED grows to $10M+ TVL, light governance might be valuable
+- Current "Ralph decides" model works, but backup plans are wise
+
+---
+
+*Research completed: 2026-01-22 16:00 UTC*
+
+*Sources:*
+- [Crypto Alpha: Solidly, ve(3,3) & Andre Game](https://mirror.xyz/duynguyen96.eth/R4c5IoRE1SNtxObZG8EOdXRuxJ5nImnoCkUC452Ty1E)
+- [Medium: Introduction to ve(3,3)](https://medium.com/@chaisomsri96/introduction-to-ve-3-3-4c873841e4ac)
+- [Andre Cronje: ve(3,3) Original Post](https://andrecronje.medium.com/ve-3-3-44466eaa088b)
+- [CoinMarketCap: What Is Solidly Exchange](https://coinmarketcap.com/academy/article/what-is-solidly-exchange-features-tokenomics-and-price-prediction)
+- [BeInCrypto: veDAO $2.69B TVL](https://beincrypto.com/defi-cronjes-ve33-tech-2-69b-tvl-launch/)
+- [Smart Blocks: Will Solidly Survive Cronje's Departure](https://www.smartblocks.agency/blog/will-solidly-and-everything-around-it-survive-its-creator-andre-cronjes-departure)
+- [Yield App Labs: Deep Dive into Solidly Model](https://yieldapplabs.medium.com/a-deep-dive-into-the-solidly-model-and-its-forks-b4c0d96af6c9)
+- [Frogs Anonymous: Velodrome Finance - Return of ve(3,3)](https://frogsanon.neworder.network/articles/velodrome-finance-the-return-of-ve-33)
+- [Mint Ventures: ve(3,3) DEX Innovations Analysis](https://research.mintventures.fund/2023/06/26/unpacking-ve33-dex-innovations-an-in-depth-analysis-of-velodrome-finance-thena-equalizer-and-chronos/)
+- [DefiLlama: Solidly Protocol](https://defillama.com/protocol/solidly)
+- [Velodrome Finance Documentation](https://docs.velodrome.finance/protocol)
 
 ---

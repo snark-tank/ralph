@@ -272,6 +272,28 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - **Key Lesson:** "Governance becomes the product, and when governance is the product, whales always win"
 - **Confidence:** HIGH that FED's "Ralph governance" avoids capture dynamics
 
+### Vote-Directed Emissions (Solidly ve(3,3) model)
+- **Why Rejected:** Solidly's ve(3,3) allowed veSOLID voters to direct emissions to pools
+- **2026-01-22 Postmortem Research:**
+  - Solidly peaked at $2.3B TVL, now ~$106K (99.995% decline)
+  - Exploitive voters directed emissions to pools they 100% owned
+  - Mercenary capital (veDAO, 0xDAO) existed only to extract value
+  - Creator (Andre Cronje) departure caused immediate TVL collapse
+  - Tokenomics opacity: Code showed 20M SOLID/week vs claimed 2M/week (10x discrepancy)
+- **What Worked (Velodrome's Fixes):**
+  - Whitelist governance prevents bad-actor pools
+  - Epoch-locked bribes prevent reward gaming
+  - Emergency "Commissaire" can kill unproductive gauges
+  - Dedicated team ensures ongoing support (3% emissions)
+- **FED's Superiority:**
+  - No emissions to direct = no gaming possible
+  - Ralph is code, not a person = no "departure" risk
+  - 100% of fees distributed automatically = no voting friction
+  - Simplicity is the feature, not a limitation
+- **Key Lesson:** "ve(3,3) is elegant for B2B protocol coordination; FED's simplicity is better for B2C retail holders"
+- **Confidence:** HIGH that vote-directed models are wrong for memecoins
+- **Future Note:** If governance ever needed, Velodrome's whitelist + epoch + emergency model is the template
+
 ---
 
 ## Research Dependencies
@@ -288,6 +310,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Cross-chain | Bridge security analysis | NOT STARTED |
 | Multiplier changes | Model holder behavior impact | **COMPLETE** - Jan 22 Camelot research |
 | Scaling (10K+ holders) | Gas optimization, batching strategies | **COMPLETE** - Jan 22 research |
+| ve(3,3) vote-directed emissions | Solidly/Velodrome analysis | **COMPLETE** - Jan 22 research (REJECTED) |
 
 ### Research Findings Summary (Jan 22, 2026)
 
@@ -386,6 +409,20 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - **Validation:** FED's simple "hold = earn" beats veCRV complexity for retail audiences
 - **Recommendation:** No changes. Avoid gauge voting, complex boosts, hard locks. Ralph > Convex oligarchy
 - See TOKENOMICS-RESEARCH.md for full Curve veCRV analysis
+
+**Solidly ve(3,3) Model Research (Jan 22, 2026):**
+- Solidly: Peak $2.3B TVL → current ~$106K (99.995% decline)
+- ve(3,3) = Vote Escrow + (3,3) game theory = voters direct emissions to pools
+- Founder departure (Andre Cronje) caused immediate confidence collapse
+- Exploitive voting: Users directed emissions to pools they 100% owned
+- Mercenary capital: veDAO ($2.69B TVL in 48h) existed purely to extract value
+- Tokenomics opacity: Code showed 10x higher emissions than claimed
+- **What Worked (Velodrome's Fixes):** Whitelist governance, epoch-locked bribes, emergency killswitch, dedicated team
+- Velodrome (Optimism): $142M TVL, 68% of chain's volume - proves ve(3,3) CAN work with guardrails
+- FED advantages: No emissions to game, Ralph can't "leave", automatic distribution, zero voting friction
+- **Validation:** ve(3,3) is for protocol coordination (B2B); FED's simplicity is better for retail (B2C)
+- **Recommendation:** REJECT vote-directed emissions. If governance ever needed, use Velodrome model
+- See TOKENOMICS-RESEARCH.md for full Solidly/Velodrome analysis
 
 ---
 
