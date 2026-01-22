@@ -12,8 +12,8 @@ const FPS = 30;
 const defaultStatsProps: StatsUpdateProps = {
   headline: "THE MONEY PRINTER GOES BRRR",
   stats: [
-    { value: "$47,516+", numericValue: 47516, prefix: "$", suffix: "+", label: "USD1 Distributed", color: "#00ff88" },
-    { value: "282+", numericValue: 282, suffix: "+", label: "Distributions", color: "#00d4ff" },
+    { value: "$48,067+", numericValue: 48067, prefix: "$", suffix: "+", label: "USD1 Distributed", color: "#00ff88" },
+    { value: "288+", numericValue: 288, suffix: "+", label: "Distributions", color: "#00d4ff" },
     { value: "1,077+", numericValue: 1077, suffix: "+", label: "Holders Earning", color: "#ff6b9d" },
   ],
   tagline: "Real yield from real trading fees",
@@ -23,8 +23,8 @@ const defaultStatsProps: StatsUpdateProps = {
 const defaultMilestoneProps: MilestoneAnnouncementProps = {
   milestone: "QE2",
   target: "$50,000",
-  current: "$47,669",
-  progress: 95,
+  current: "$48,067",
+  progress: 96,
   nextMilestone: "QE3 - $100,000",
 };
 
