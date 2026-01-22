@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $56,042+ Distributed (464 runs)
+**Current:** $56,154+ Distributed (471 runs)
 **Status:** IN PROGRESS
 
 ### Active Systems
@@ -186,6 +186,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - [ ] Milestone NFTs (achievement badges)
 - [ ] Leaderboard with rewards - **HIGH PRIORITY** (social proof drives retention per research)
 - [ ] Holder benefit partnerships - Early access to partner token launches (Camelot launchpad-inspired)
+- [ ] Allocation share display - Show holders "your share of next distribution: X%" (Camelot plugin transparency model)
 - [x] Referral bonus system - **BUILT** (needs activation)
 - [x] Quest system - **BUILT** (needs activation)
 - [x] Seasonal rewards - **BUILT** (needs activation)

@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $56,111+ USD1
-- **Distribution Count:** 468 distributions
+- **Total Distributed:** $56,154+ USD1
+- **Distribution Count:** 471 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -6357,3 +6357,226 @@ GNS generates MORE daily revenue than Uniswap with 178x smaller FDV. This is bec
 ---
 
 *Research completed: 2026-01-22 14:15 UTC*
+
+## 2026-01-22 13:51 UTC
+
+### Camelot DEX xGRAIL Model Deep Dive
+
+**Protocol:** Camelot - Arbitrum Native DEX
+**TVL:** ~$50M+ (deployed across 15+ Orbit chains)
+**Token Model:** Dual token (GRAIL + xGRAIL)
+**Real Yield Source:** Trading fees from DEX operations
+
+---
+
+### The Dual Token Architecture
+
+**GRAIL Token:**
+- Liquid ERC20 with fixed max supply (100,000 GRAIL)
+- Transferable, tradeable
+- Can be converted 1:1 to xGRAIL (irreversible lock)
+
+**xGRAIL Token:**
+- **Non-transferable** escrowed governance token
+- Obtained through GRAIL conversion OR farming rewards
+- Must be allocated to "Plugins" to earn benefits
+- Redemption back to GRAIL requires vesting
+
+---
+
+### The Plugin System (Key Innovation)
+
+xGRAIL holders allocate their tokens to different "Plugins" for different benefits:
+
+| Plugin | Benefit | FED Equivalent |
+|--------|---------|----------------|
+| **Dividends** | 22.5% of trading fees (real yield) | Our USD1 distribution |
+| **Yield Booster** | Up to 2.5x boost on LP farming | Our tier multipliers |
+| **Launchpad** | Early access to new token launches | No equivalent |
+| **Gauges** (coming) | Bribe rewards for voting | No equivalent |
+
+**Key Mechanics:**
+- 0.5% deallocation fee when removing from any plugin (burned)
+- Weekly epoch distribution (rewards stream per-second)
+- Proportional allocation: 2% of total xGRAIL = 2% of rewards
+
+---
+
+### Fee Distribution Breakdown
+
+**Camelot V2 (Uni V2 fork):**
+- Total swap fee: 0.3%
+- **60%** → Liquidity Providers
+- **22.5%** → xGRAIL holders (dividends)
+- **12.5%** → Buyback & Burn (GRAIL)
+- **5%** → Core Contributors
+
+**Camelot V3 (Algebra/concentrated liquidity):**
+- Dynamic fees based on volatility
+- **17%** → xGRAIL holders
+- **3%** → Protocol
+
+---
+
+### The Vesting Mechanism (Critical Insight)
+
+Converting xGRAIL back to GRAIL requires vesting:
+
+| Vesting Duration | GRAIL Output | Effective Rate |
+|-----------------|--------------|----------------|
+| 15 days (minimum) | 50% | Heavy penalty |
+| 90 days | 72.3% | Moderate penalty |
+| 180 days (maximum) | 100% | No penalty |
+
+**Why This Matters:**
+- Creates "soft lock" without hard-locking tokens
+- Users choose their exit cost vs speed tradeoff
+- Excess GRAIL from early exits is **burned** (deflationary)
+- During vesting, 50% of xGRAIL is auto-staked in dividends plugin (still earning!)
+
+**Example:** User with 100 xGRAIL who chooses 90-day vesting:
+- Receives 72.3 GRAIL after 90 days
+- 27.7 GRAIL is burned
+- During vesting, 50 xGRAIL earns dividend yield
+
+---
+
+### Multi-Chain Expansion Model
+
+Camelot deployed to 15+ Arbitrum Orbit chains:
+- **All chain revenue flows to GRAIL stakers**
+- Creates network effect: more chains = more fees
+- "Liquidity infrastructure for L2 ecosystem"
+
+**This is significant:** Single staking token captures fees from entire network of deployments.
+
+---
+
+### Key Insights for FED
+
+#### What Camelot Does Well:
+
+1. **Plugin Flexibility**
+   - Users choose how to use their stake (dividends vs boost vs launchpad)
+   - Different utility for different holder types
+   - FED could explore: different "modes" for distributions?
+
+2. **Soft Lock via Vesting**
+   - No hard lock, but economic cost to exit quickly
+   - Creates stickiness without restricting liquidity
+   - Burns tokens on early exit (deflationary)
+   - **FED Lesson:** Our time-lock commitments are similar but less elegant
+
+3. **Continuous Rewards**
+   - Per-second distribution within weekly epochs
+   - Smooth reward experience (not lumpy)
+   - FED's 2-minute distribution is even better (more granular)
+
+4. **Deallocation Fees**
+   - 0.5% fee to move between plugins (burned)
+   - Creates small friction against mercenary behavior
+   - **FED Consideration:** Should we have any "movement" fees?
+
+#### What FED Does Better:
+
+1. **Simplicity**
+   - Camelot requires understanding plugins, allocation, vesting
+   - FED: "Just hold = earn USD1"
+   - Our simplicity is a competitive advantage for memecoin audience
+
+2. **Distribution Frequency**
+   - Camelot: Weekly epochs with per-second streaming
+   - FED: Every 2 minutes, direct to wallet
+   - Our approach is more visceral and immediate
+
+3. **No Lock Penalty**
+   - Camelot punishes early exits (up to 50% slash)
+   - FED: Hold or sell, your choice
+   - Lower friction, more accessible
+
+4. **Stablecoin Rewards**
+   - Camelot distributes in multiple tokens (ETH, USDC, etc.)
+   - FED: Always USD1 (predictable, easy to understand)
+   - Users know exactly what they're getting
+
+---
+
+### Should FED Adopt Any Camelot Mechanics?
+
+**YES (Consider):**
+
+1. **Soft Deallocation Fee Concept**
+   - Not for holding FED, but for breaking time-lock commitments
+   - Currently we "remove bonus retroactively" - could add small burn
+   - Creates deflationary pressure from commitment-breakers
+
+2. **Proportional Allocation Display**
+   - Camelot clearly shows "you have X% of total allocation"
+   - FED could show "your share of next distribution: X%"
+   - Transparency builds trust and engagement
+
+**NO (Don't Copy):**
+
+1. **Plugin System**
+   - Too complex for memecoin audience
+   - Our tier/streak/XP multipliers already provide differentiation
+   - Keep the "just hold" simplicity
+
+2. **Vesting Penalties**
+   - 50% slash for fast exit is harsh
+   - Memecoins need liquidity, not lockups
+   - Would hurt adoption
+
+3. **Multiple Reward Tokens**
+   - USD1 simplicity is a feature
+   - Don't fragment the reward experience
+
+4. **Weekly Epochs**
+   - Our 2-minute cadence is a differentiator
+   - Don't slow down to "standard" DeFi pace
+
+---
+
+### Quantitative Comparison
+
+| Metric | Camelot | FED |
+|--------|---------|-----|
+| Holder Share of Fees | 22.5% | 100%* |
+| Distribution Frequency | Weekly (streaming) | Every 2 minutes |
+| Lock Requirement | None (but vesting penalty) | None |
+| Max Multiplier | 2.5x (yield booster) | 4.5x (stacking) |
+| Deallocation Fee | 0.5% (burned) | None |
+| Reward Token | Multiple (ETH, USDC, etc.) | USD1 only |
+
+*FED distributes 100% of collected fees to holders (no protocol cut)
+
+---
+
+### Research Conclusions
+
+**Camelot validates several FED design choices:**
+1. Real yield from trading fees works at scale
+2. Multiplier systems drive engagement
+3. Continuous distribution > monthly batches
+
+**Camelot challenges us to consider:**
+1. Should commitment-breakers pay a penalty? (burns)
+2. Could allocation transparency be improved?
+3. Is there value in multiple "modes" of participation?
+
+**Recommendation:** No major changes needed. FED's simplicity is an advantage over Camelot's complexity. The only potential adoption: small burn penalty for breaking time-lock commitments (creates deflationary pressure).
+
+---
+
+### Sources
+
+- [Camelot Real Yield Staking Docs](https://docs.camelot.exchange/protocol/xgrail-plugins/real-yield-staking)
+- [Camelot xGRAIL Token Docs](https://docs.camelot.exchange/tokenomics/xgrail-token)
+- [Camelot Conversion/Redemption Docs](https://docs.camelot.exchange/tokenomics/xgrail-token/conversion-redeeming/)
+- [Camelot Yield Booster Plugin](https://docs.camelot.exchange/protocol/xgrail-plugins/yield-booster)
+- [Camelot DefiLlama](https://defillama.com/protocol/camelot)
+- [Camelot Twitter](https://x.com/CamelotDEX)
+
+---
+
+*Research completed: 2026-01-22 13:51 UTC*
