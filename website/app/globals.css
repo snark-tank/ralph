@@ -32,15 +32,15 @@ body::before {
   right: 0;
   bottom: 0;
   background-image:
-    linear-gradient(180deg, rgba(10, 10, 10, 0.15) 0%, rgba(10, 10, 10, 0.55) 35%, rgba(10, 10, 10, 0.88) 100%),
+    linear-gradient(180deg, rgba(10, 10, 10, 0.08) 0%, rgba(10, 10, 10, 0.50) 30%, rgba(10, 10, 10, 0.92) 100%),
     url('/background.png');
   background-size: cover, cover;
   background-position: center top, center top;
   background-repeat: no-repeat, no-repeat;
-  opacity: 0.42;
+  opacity: 0.48;
   pointer-events: none;
   z-index: -1;
-  filter: grayscale(5%) sepia(30%) brightness(0.65) contrast(1.25) saturate(1.15);
+  filter: grayscale(5%) sepia(25%) brightness(0.70) contrast(1.20) saturate(1.10);
 }
 
 /* Subtle vignette effect */
@@ -234,15 +234,15 @@ body::after {
 
 /* Card styles with better depth */
 .card {
-  background: linear-gradient(180deg, rgba(17, 17, 17, 0.92) 0%, rgba(10, 10, 10, 0.96) 100%);
-  border: 1px solid rgba(50, 50, 50, 0.6);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  background: linear-gradient(180deg, rgba(17, 17, 17, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
+  border: 1px solid rgba(50, 50, 50, 0.5);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 .card:hover {
-  border-color: rgba(201, 162, 39, 0.3);
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(201, 162, 39, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  border-color: rgba(201, 162, 39, 0.35);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45), 0 0 25px rgba(201, 162, 39, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
 /* Stat number styling */
@@ -530,10 +530,10 @@ tr.row-highlight:hover {
 /* Premium stat card with inner glow */
 .stat-card-premium {
   position: relative;
-  background: linear-gradient(180deg, rgba(17, 17, 17, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
+  background: linear-gradient(180deg, rgba(17, 17, 17, 0.97) 0%, rgba(10, 10, 10, 0.99) 100%);
   border: 1px solid transparent;
   background-clip: padding-box;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
 }
 
 .stat-card-premium::before {
