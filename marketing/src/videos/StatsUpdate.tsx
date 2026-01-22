@@ -95,20 +95,20 @@ const IntroScene = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  // Phase 0: Darkness with subtle, intentional flicker sequence - builds anticipation
-  const powerOn = frame < fps * 0.06 ? 0 :
-    frame < fps * 0.08 ? 0.03 :
-    frame < fps * 0.1 ? 0.01 :
-    frame < fps * 0.12 ? 0.08 :
-    frame < fps * 0.14 ? 0.02 :
-    frame < fps * 0.16 ? 0.15 : 1;
+  // Phase 0: Darkness with precise, intentional flicker sequence - builds anticipation
+  const powerOn = frame < fps * 0.05 ? 0 :
+    frame < fps * 0.07 ? 0.04 :
+    frame < fps * 0.085 ? 0.01 :
+    frame < fps * 0.1 ? 0.1 :
+    frame < fps * 0.115 ? 0.02 :
+    frame < fps * 0.13 ? 0.18 : 1;
 
   const contentFade = interpolate(
     frame,
-    [fps * 0.16, fps * 0.45],
+    [fps * 0.13, fps * 0.4],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  ) * (frame < fps * 0.16 ? powerOn : 1);
+  ) * (frame < fps * 0.13 ? powerOn : 1);
 
   // Primary light burst - radiant, centered
   const burstOpacity = interpolate(
@@ -470,15 +470,15 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
   const brrrDelay = 0.08 + brrrIndex * 0.12;
   const brrrLandTime = (brrrDelay + 0.08) * fps;
 
-  // Screen shake on BRRR - punchy but controlled
+  // Screen shake on BRRR - punchy impact with satisfying settle
   const shakeIntensity = interpolate(
     frame,
-    [brrrLandTime, brrrLandTime + fps * 0.03, brrrLandTime + fps * 0.07, brrrLandTime + fps * 0.12, brrrLandTime + fps * 0.2],
-    [0, 5, -3, 1.5, 0],
+    [brrrLandTime, brrrLandTime + fps * 0.025, brrrLandTime + fps * 0.06, brrrLandTime + fps * 0.1, brrrLandTime + fps * 0.18],
+    [0, 7, -4, 2, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const shakeX = shakeIntensity * Math.sin(frame * 4.2);
-  const shakeY = shakeIntensity * 0.6 * Math.cos(frame * 5.1);
+  const shakeX = shakeIntensity * Math.sin(frame * 5.5);
+  const shakeY = shakeIntensity * 0.55 * Math.cos(frame * 6.2);
 
   // Background glow burst on BRRR - dramatic peak then settle
   const bgGlow = interpolate(
@@ -628,11 +628,11 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
 
             const isBrrr = word === "BRRR";
 
-            // BRRR gets explosive treatment
+            // BRRR gets explosive treatment - bigger impact, faster settle
             const brrrScale = isBrrr ? interpolate(
               frame,
-              [delay * fps, (delay + 0.04) * fps, (delay + 0.1) * fps, (delay + 0.18) * fps, (delay + 0.28) * fps],
-              [0.65, 1.18, 0.95, 1.04, 1],
+              [delay * fps, (delay + 0.03) * fps, (delay + 0.08) * fps, (delay + 0.14) * fps, (delay + 0.24) * fps],
+              [0.6, 1.22, 0.93, 1.05, 1],
               { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
             ) : 1;
 
@@ -745,26 +745,26 @@ const StatCard: React.FC<{
   const hasLanded = numberProgress >= 0.98;
   const landTime = (countStart + countDuration) * fps;
 
-  // Shimmer effect - sweeps across when number lands for celebration
-  const shimmerDelay = countStart + countDuration - 0.15;
+  // Shimmer effect - sweeps across when number lands for celebration - more prominent
+  const shimmerDelay = countStart + countDuration - 0.12;
   const shimmerProgress = interpolate(
     frame,
-    [shimmerDelay * fps, (shimmerDelay + 0.65) * fps],
-    [-30, 130],
+    [shimmerDelay * fps, (shimmerDelay + 0.55) * fps],
+    [-40, 140],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
   const shimmerOpacity = interpolate(
     frame,
-    [shimmerDelay * fps, (shimmerDelay + 0.1) * fps, (shimmerDelay + 0.5) * fps, (shimmerDelay + 0.65) * fps],
-    [0, 0.35, 0.25, 0],
+    [shimmerDelay * fps, (shimmerDelay + 0.08) * fps, (shimmerDelay + 0.4) * fps, (shimmerDelay + 0.55) * fps],
+    [0, 0.5, 0.35, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  // Scale pulse on landing - more dramatic with overshoot
+  // Scale pulse on landing - punchy with satisfying settle
   const landPulse = hasLanded ? interpolate(
     frame,
-    [landTime - fps * 0.03, landTime + fps * 0.08, landTime + fps * 0.18, landTime + fps * 0.32],
-    [1, 1.12, 0.97, 1],
+    [landTime - fps * 0.02, landTime + fps * 0.06, landTime + fps * 0.14, landTime + fps * 0.26],
+    [1, 1.14, 0.96, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
@@ -978,15 +978,15 @@ const StatCard: React.FC<{
           `,
         }}
       >
-        {/* Shimmer - synced with number landing */}
+        {/* Shimmer - synced with number landing - more prominent sweep */}
         <div
           style={{
             position: "absolute",
             top: 0,
             left: `${shimmerProgress}%`,
-            width: "50%",
+            width: "45%",
             height: "100%",
-            background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.6) 50%, transparent 100%)",
+            background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.75) 50%, transparent 100%)",
             opacity: shimmerOpacity,
             pointerEvents: "none",
           }}
@@ -1123,31 +1123,45 @@ const StatCard: React.FC<{
   );
 };
 
-// Scene 3: Stats showcase - premium data visualization
+// Scene 3: Stats showcase - premium data visualization with cinematic energy
 const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
-  const sceneFade = interpolate(frame, [0, fps * 0.12], [0, 1], {
+  const sceneFade = interpolate(frame, [0, fps * 0.1], [0, 1], {
     extrapolateRight: "clamp",
   });
 
   // Scene scale entrance - subtle zoom in
   const sceneScale = interpolate(
     frame,
-    [0, fps * 0.18],
-    [0.985, 1],
+    [0, fps * 0.16],
+    [0.988, 1],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
+  // Calculate when all stats have landed for coordinated celebration
+  const allStatsLandTime = (0.16 + (stats.length - 1) * 0.24 + 0.22 + 1.7) * fps;
+  const allStatsLanded = frame >= allStatsLandTime;
+
+  // Coordinated screen shake when final stat lands
+  const finalShakeIntensity = allStatsLanded ? interpolate(
+    frame,
+    [allStatsLandTime, allStatsLandTime + fps * 0.03, allStatsLandTime + fps * 0.08, allStatsLandTime + fps * 0.15],
+    [0, 3.5, -2, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : 0;
+  const shakeX = finalShakeIntensity * Math.sin(frame * 3.8);
+  const shakeY = finalShakeIntensity * 0.5 * Math.cos(frame * 4.2);
+
   // Header entrance
-  const headerOpacity = interpolate(frame, [fps * 0.04, fps * 0.32], [0, 0.85], {
+  const headerOpacity = interpolate(frame, [fps * 0.04, fps * 0.28], [0, 0.9], {
     extrapolateRight: "clamp",
   });
   const headerY = interpolate(
     frame,
-    [fps * 0.04, fps * 0.35],
-    [12, 0],
+    [fps * 0.04, fps * 0.32],
+    [10, 0],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
@@ -1206,8 +1220,13 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  // Background glow intensifies as numbers climb - more dramatic
-  const bgGlow = interpolate(
+  // Background glow intensifies as numbers climb, then BURSTS when all land
+  const bgGlow = allStatsLanded ? interpolate(
+    frame,
+    [fps * 0.3, allStatsLandTime - fps * 0.2, allStatsLandTime, allStatsLandTime + fps * 0.1, allStatsLandTime + fps * 0.5],
+    [0.02, 0.045, 0.055, 0.095, 0.065],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : interpolate(
     frame,
     [fps * 0.3, fps * 2.5],
     [0.02, 0.055],
@@ -1218,13 +1237,48 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
   const ambientPulse = frame > fps * 0.8 && frame < fps * 2.8 ? interpolate(
     (frame - fps * 0.8) % (fps * 0.5),
     [0, fps * 0.15, fps * 0.5],
-    [0, 0.015, 0],
+    [0, 0.012, 0],
     { easing: Easing.inOut(Easing.sin) }
   ) : 0;
+
+  // Coordinated celebration burst ring when all stats land
+  const celebrationRingOpacity = allStatsLanded ? interpolate(
+    frame,
+    [allStatsLandTime, allStatsLandTime + fps * 0.08, allStatsLandTime + fps * 0.5],
+    [0.5, 0.25, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : 0;
+  const celebrationRingScale = allStatsLanded ? interpolate(
+    frame,
+    [allStatsLandTime, allStatsLandTime + fps * 0.5],
+    [0.5, 3.5],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  ) : 0.5;
 
   return (
     <AbsoluteFill style={{ opacity: sceneFade }}>
       <CinematicBackground accentColor="#00ff88" intensity={bgGlow + ambientPulse} focusY={44} />
+
+      {/* Coordinated celebration burst when all stats land */}
+      <AbsoluteFill
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          pointerEvents: "none",
+        }}
+      >
+        <div
+          style={{
+            width: 200,
+            height: 200,
+            borderRadius: "50%",
+            border: "2px solid rgba(0, 255, 136, 0.5)",
+            transform: `scale(${celebrationRingScale})`,
+            opacity: celebrationRingOpacity,
+            boxShadow: "0 0 25px rgba(0, 255, 136, 0.3)",
+          }}
+        />
+      </AbsoluteFill>
 
       <AbsoluteFill
         style={{
@@ -1233,7 +1287,7 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
           padding: 50,
           flexDirection: "column",
           gap: 48,
-          transform: `scale(${sceneScale})`,
+          transform: `scale(${sceneScale}) translate(${shakeX}px, ${shakeY}px)`,
         }}
       >
         {/* Header with live indicator */}
@@ -1454,12 +1508,12 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
   const ctaY = interpolate(ctaProgress, [0, 1], [32, 0]);
   const ctaScale = interpolate(ctaProgress, [0, 1], [0.9, 1]);
 
-  // CTA lands with a satisfying scale pulse
-  const ctaLandTime = ctaDelay + fps * 0.4;
+  // CTA lands with a satisfying scale pulse - more punch
+  const ctaLandTime = ctaDelay + fps * 0.35;
   const ctaLandPulse = frame > ctaLandTime ? interpolate(
     frame,
-    [ctaLandTime, ctaLandTime + fps * 0.1, ctaLandTime + fps * 0.25],
-    [1, 1.06, 1],
+    [ctaLandTime, ctaLandTime + fps * 0.08, ctaLandTime + fps * 0.2],
+    [1, 1.08, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
