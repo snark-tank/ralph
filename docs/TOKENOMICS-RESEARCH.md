@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $55,891+ USD1
-- **Distribution Count:** 457 distributions
+- **Total Distributed:** $56,004+ USD1
+- **Distribution Count:** 462 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -5734,3 +5734,156 @@ Things to watch:
 - [HyperLiquid JELLY Delisting - CoinDesk](https://www.coindesk.com/markets/2025/03/26/hyperliquid-delists-jellyjelly-after-vault-squeezed-in-usd13m-tussle)
 - [DefiLlama - Hyperliquid](https://defillama.com/protocol/hyperliquid)
 
+---
+
+## 2026-01-22: Tokemak / Auto Finance - Liquidity Direction Model Analysis
+
+### Protocol Overview
+
+**Original Vision:** Tokemak aimed to be the "liquidity black hole" of DeFi - a protocol where stakers could direct TVL as liquidity across DEXs like Uniswap, SushiSwap, and Balancer.
+
+**Peak Performance:**
+- $1.4B TVL (November 2021)
+- TOKE all-time high: $79.02
+
+**Current State (2025):**
+- Rebranded to Auto Finance
+- ~$130M AUM across 12 autopools
+- TOKE price: ~$0.12-0.27 (99%+ decline from ATH)
+- Token migrating to AUTO (1:1)
+- Treasury: ~$30M (exceeds current FDV - rare situation)
+
+### The Tokemak V1 Model (What Failed)
+
+#### How Liquidity Direction Worked
+
+1. **Liquidity Providers (LPs)** deposited single assets into "reactors"
+2. **Liquidity Directors (LDs)** staked TOKE to vote on which DEXs received liquidity
+3. **Protocol** managed impermanent loss risk, LPs earned TOKE emissions
+4. **Goal:** Accumulate "Protocol Controlled Assets" (PCA) until protocol could self-sustain
+
+#### The Death Spiral
+
+| Phase | What Happened |
+|-------|---------------|
+| **Hype (2021)** | Hit $1.4B TVL in weeks; TOKE pumped to $79 |
+| **Emissions Trap** | TOKE rewards attracted LPs; success dependent on TOKE price |
+| **Bear Market (2022)** | Crypto crashed; TOKE price tanked → rewards became worthless |
+| **LP Exodus** | Low rewards → LPs withdrew → TVL collapsed |
+| **Reflexive Doom** | Lower TVL → less fees → lower TOKE value → more withdrawals |
+
+**Critical Mass Problem:** Tokemak needed $5-10B TVL to generate enough fees to replace emissions. They hit $1.4B and never recovered.
+
+### Root Causes of Failure
+
+#### 1. Inflationary Tokenomics
+TOKE emissions were the primary reward mechanism. When TOKE price dropped:
+- LP yields collapsed (emissions were in TOKE)
+- No floor on rewards (unlike real yield models)
+- Created reflexive downward spiral
+
+**FED Lesson:** Our USD1 distributions have REAL value regardless of FED price. This is the key difference.
+
+#### 2. Complexity Barrier
+- Users had to understand reactors, LDs, PCAs, C.o.R.E. votes
+- Multiple participant types with different incentives
+- Casual users couldn't navigate the system
+
+**FED Lesson:** "Just hold = earn USD1" is our moat. Never add complexity.
+
+#### 3. Impermanent Loss Absorption
+Tokemak absorbed IL risk to attract LPs. This worked in bull markets but became catastrophic when deposited assets crashed.
+
+**FED Lesson:** We don't take principal risk. Holders keep their $FED; we just distribute fees.
+
+#### 4. Reliance on External Protocol Quality
+Tokemak's reactors held tokens from partner protocols. When those protocols failed or dumped, Tokemak's treasury absorbed losses.
+
+**FED Lesson:** Our model is self-contained. We don't depend on external protocol quality.
+
+### The Pivot: Tokemak V2 / Auto Finance
+
+After the collapse, Tokemak pivoted to **Autopilot** (now Auto Finance):
+
+#### What Changed:
+| Aspect | V1 (Failed) | V2 / Auto Finance |
+|--------|-------------|-------------------|
+| **User Role** | Active voting for liquidity direction | Passive depositing into autopools |
+| **Rewards** | TOKE emissions | Real yield (up to 16.4% stables, 4.2% ETH) |
+| **Complexity** | High (reactors, LDs, voting) | Low (deposit and earn) |
+| **Focus** | Protocol-to-protocol (B2B) | User-focused (B2C) |
+| **AUM** | $1.4B (peak) → collapse | $130M (rebuilding) |
+
+#### The Lesson in Their Rebrand
+Their blog states: "Auto Finance directly describes what we do: automate onchain finance."
+
+They pivoted FROM complex governance voting TO passive yield optimization - exactly what FED does from day one.
+
+### What FED Can Learn
+
+#### 1. Real Yield > Emissions (VALIDATED AGAIN)
+Tokemak's failure is another data point (alongside OHM, Anchor, Tomb) that **token emissions attract mercenary capital that leaves when emissions lose value.**
+
+FED's USD1 distributions don't have this problem. $1 of USD1 is always worth $1.
+
+#### 2. Simplicity Beats Flexibility
+Tokemak's "Liquidity Directors" concept was elegant in theory:
+- Democratized liquidity allocation
+- Created governance engagement
+- Built community involvement
+
+But in practice:
+- Most users didn't want to vote
+- Sophisticated actors gamed the system
+- Casual holders were confused
+
+**FED Application:** Don't add voting for distribution allocation. Ralph decides automatically → holders receive passively.
+
+#### 3. Protocol-Controlled Assets Have Risks
+Tokemak's PCA goal (accumulate enough assets to self-sustain) sounds good but:
+- Treasury assets can lose value
+- Creates governance attack vectors
+- Ties protocol health to market conditions
+
+**FED Application:** Our approach of distributing 100% of fees avoids treasury concentration risk. We don't need to manage a massive PCA.
+
+#### 4. B2B Models Need Different Tokenomics
+Tokemak was designed to serve DAOs and protocols (B2B) - directing liquidity for them.
+
+FED is designed to serve holders (B2C) - paying them directly.
+
+B2B models can handle complexity because their "users" are sophisticated protocol teams. B2C models (memecoins) need maximum simplicity.
+
+### Comparison: Tokemak vs FED
+
+| Dimension | Tokemak V1 | FED |
+|-----------|------------|-----|
+| **Target User** | DAOs, protocols, sophisticated LPs | Retail memecoin holders |
+| **Reward Type** | TOKE emissions (inflationary) | USD1 (real yield) |
+| **User Action** | Deposit + vote + manage | Just hold |
+| **Complexity** | High | Low |
+| **Risk Exposure** | IL, token dumps, protocol failures | None for holders |
+| **Sustainability** | Required $5-10B TVL | Sustainable at any scale |
+| **Peak TVL** | $1.4B | N/A (memecoin) |
+| **Current Status** | 99%+ down, pivoting | $56K+ distributed, growing |
+
+### Conclusion
+
+Tokemak's story validates FED's design choices:
+
+1. **Real yield beats emissions** - USD1 > TOKE rewards
+2. **Passive beats active** - "Hold and earn" > "Stake, vote, and manage"
+3. **B2C simplicity** - FED is designed for retail, not protocol treasuries
+4. **No treasury risk** - 100% distribution avoids PCA concentration problems
+
+**Key Insight:** Tokemak's pivot to Auto Finance (passive yield optimization) proves the market wants what FED has always offered - simple, passive, real returns.
+
+### Sources
+- [Tokemak Original Tokenomics](https://medium.com/tokemak/tokenomics-4b3857badc73)
+- [Tokemak V2 Announcement](https://medium.com/tokemak/tokemak-v2-introducing-lmps-autopilot-and-the-dao-liquidity-marketplace-86b8ec0656a)
+- [Auto Finance Rebrand](https://blog.auto.finance/post/auto-finance)
+- [CoinGecko TOKE Price Data](https://www.coingecko.com/en/coins/tokemak)
+- [DeFi 2.0 Deep Dive - Finematics](https://finematics.com/defi-2-0-explained/)
+- [Tokemak $1B TVL News (The Defiant)](https://thedefiant.io/tokemak-amm-1-billion-tvl/)
+
+---

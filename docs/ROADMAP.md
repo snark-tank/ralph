@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $55,891+ Distributed (457 runs)
+**Current:** $56,004+ Distributed (462 runs)
 **Status:** IN PROGRESS
 
 ### Active Systems
@@ -185,6 +185,21 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 
 ### High Inflation Rewards (OHM-style)
 - **Why Rejected:** Creates death spiral when price drops. Real yield > ponzi emissions.
+- **2026-01-22 Tokemak Validation:** Tokemak hit $1.4B TVL using TOKE emissions as rewards. When TOKE price crashed 99%+, rewards became worthless → LPs left → TVL collapsed. They pivoted to "Auto Finance" with real yield focus. Another data point: emissions attract mercenary capital.
+
+### Liquidity Direction Governance (Tokemak-style)
+- **Why Rejected:** Tokemak's "Liquidity Directors" voted on where liquidity flowed across DEXs
+- **2026-01-22 Postmortem Research:**
+  - Peak $1.4B TVL (Nov 2021) → current ~$130M AUM (90%+ decline)
+  - TOKE price: $79 ATH → $0.12 (99.8% decline)
+  - Complex system: LPs, LDs, reactors, C.o.R.E. votes - most users couldn't navigate
+  - Required $5-10B TVL to self-sustain; never reached critical mass
+  - Pivoted to "Auto Finance" - passive yield optimization (what FED already does)
+- **FED's Superiority:**
+  - No voting friction - Ralph decides, holders receive automatically
+  - No emissions dependency - USD1 has real value regardless of $FED price
+  - B2C simplicity vs B2B complexity
+- **Key Lesson:** "Liquidity direction governance is elegant for protocols; passive earning is better for retail"
 
 ### Complex Staking/Locking
 - **Why Rejected:** FED's value prop is simplicity. Hold = earn. No extra steps.
@@ -332,6 +347,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Meta-governance / bribe markets | Convex Finance deep dive | **COMPLETE** - Jan 22 research (REJECTED) |
 | Seigniorage / algorithmic peg | Tomb Finance postmortem | **COMPLETE** - Jan 22 research (REJECTED) |
 | Hyperliquid buyback model | Study largest DEX fee mechanics | **COMPLETE** - Jan 22 research (VALIDATES FED) |
+| Tokemak liquidity direction | DeFi 2.0 postmortem, emission-based models | **COMPLETE** - Jan 22 research (VALIDATES FED) |
 
 ### Research Findings Summary (Jan 22, 2026)
 
