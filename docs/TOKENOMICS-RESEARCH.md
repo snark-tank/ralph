@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $52,295+ USD1
-- **Distribution Count:** 395 distributions
+- **Total Distributed:** $52,311+ USD1
+- **Distribution Count:** 396 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -1694,5 +1694,286 @@ Camelot creates value through multiple utility pathways:
 - [Camelot Token Distribution](https://docs.camelot.exchange/tokenomics/token-distribution)
 - [DefiLlama - Camelot](https://defillama.com/protocol/camelot)
 - [Camelot Medium Overview](https://camelotdex.medium.com/camelot-dex-general-overview-af92f1e6f186)
+
+---
+
+## 2026-01-22: Gains Network (gTrade) & Trader Joe Real Yield Deep Dive
+
+### Research Focus
+How do Gains Network and Trader Joe handle fee distribution to token holders? What can FED learn from their evolution from direct rewards to buyback mechanisms?
+
+---
+
+### Gains Network (gTrade) Overview
+
+**Protocol Stats (2025-2026):**
+- **Daily Protocol Revenue:** ~$130K (Dec 2025) - exceeds Uniswap's $95K at 178x smaller FDV
+- **Lifetime Volume:** $85B+ (added $32.5B in 2024)
+- **2024 Revenue:** $24.5M total
+- **Staker Revenue:** $17M returned to GNS holders in 2024 (~30% of market cap)
+- **Supply:** Reduced to 28.4M GNS (down 10M since inception - net deflationary)
+- **Chains:** Polygon, Arbitrum, Base
+
+**Key Insight:** Gains Network generates exceptional revenue relative to FDV, proving capital-efficient perp DEX models can outperform larger protocols.
+
+**Sources:**
+- [Gains Network 2026 Roadmap](https://medium.com/gains-network/2026-roadmap-the-blueprint-for-gains-network-gtrade-and-gns-de08d050296a)
+- [CoinMarketCap GNS](https://coinmarketcap.com/currencies/gains-network/)
+
+---
+
+### Gains Network Tokenomics Evolution
+
+**Phase 1: Direct Staking Rewards (Original)**
+- Stakers earned trading fees directly in collateral tokens (USDC, DAI, WETH)
+- Simple, transparent, but created sell pressure on collateral
+
+**Phase 2: Buyback and Distribute (BB&D) - July 2024**
+- 55% of protocol revenue used to buy GNS from market
+- Bought GNS distributed to stakers
+- Key change: "Rewards for staking are distributed in $GNS (bought back using the underlying collaterals, not minted)"
+- Created "sustained buy pressure and a more stable price floor"
+
+**Phase 3: Buyback and Burn (BB&B) - Current**
+- Following community Snapshot vote
+- 55% of revenue → GNS buyback → burn (not distribute)
+- 90% of staking allocation → burn
+- 10% → governance fund
+- "Over 1 million $GNS has been permanently removed from the supply"
+
+**Why They Evolved:**
+The shift from BB&D (distribute) to BB&B (burn) was a community governance decision, suggesting holders preferred supply reduction over direct rewards. This indicates mature DeFi users may value long-term supply dynamics over immediate income.
+
+**Source:** [Gains Network Tokenomics Update](https://medium.com/gains-network/evolving-gains-network-tokenomics-introducing-buyback-and-distribute-c15ce1fa8fdb)
+
+---
+
+### Gains Network Fee Structure
+
+**Current Fee Distribution:**
+
+| Recipient | Percentage | Purpose |
+|-----------|------------|---------|
+| GNS Burn Mechanism | 54% | Supply reduction, token utility |
+| Governance (DAO) | 22% | Protocol operations, incentives |
+| Vault (LPs) | 15% | Underwriting trades |
+| Referrals | 5% | Growth incentives |
+| Trigger Keepers | 4% | Infrastructure |
+
+**Fee Collection Method:**
+- ~60% of open/close fees collected in USDC, DAI, WETH
+- Used to buy GNS OTC at 1-hour TWAP + 1% premium
+- Creates reliable arbitrage opportunity
+- Ensures consistent buy pressure regardless of market conditions
+
+**FED Comparison:**
+- FED distributes 100% of fees (vs Gains' 54% to burn)
+- FED uses direct distribution (vs buyback intermediary)
+- FED has no governance allocation (all to holders)
+
+**Source:** [Gains Network GNS Staking Docs](https://docs.gains.trade/liquidity-farming-pools/gns-staking)
+
+---
+
+### gToken Vault Mechanics (Counterparty System)
+
+**How gToken Vaults Work:**
+Gains Network uses ERC-4626 tokenized vaults as trading counterparty:
+
+1. **Trader Wins:** Vault pays out winnings from accumulated fees
+2. **Trader Losses:** Losses flow into vault, strengthening position
+3. **Vault earns:** Proportional share of trading fees
+
+**Exchange Rate Model:**
+```
+gToken Price = 1 + accRewardsPerToken - Max(0, accPnlPerTokenUsed)
+```
+- `accRewardsPerToken` always increases (fees)
+- `accPnlPerTokenUsed` fluctuates (trader PnL)
+- Losses shared equally among all stakers (not just last to withdraw)
+
+**Collateralization States:**
+
+| State | Condition | Action |
+|-------|-----------|--------|
+| Overcollateralized | ≥100% | Trader losses → GNS buyback → burn |
+| Undercollateralized | <100% | GNS minted (max 0.05%/day) → sold → vault replenished |
+
+**Key Safety:** Maximum minting capped at 0.05% of supply per 24h (18.25% annual cap), ensuring protocol can't hyperinflate.
+
+**FED Relevance:** FED doesn't have counterparty risk (we're not a perp DEX), but the concept of algorithmic value accrual with safety caps is relevant.
+
+**Source:** [gToken Vaults Documentation](https://docs.gains.trade/liquidity-farming-pools/gtoken-vaults)
+
+---
+
+### 2025 gGNS Vault Innovation
+
+**New in 2025:**
+- GNS holders can deploy tokens directly as trading collateral
+- Non-traders can stake into gGNS vault for yield from trading activity
+- Creates "second income stream on top of buybacks and burns"
+- Staked GNS unlocks trading fee discounts
+
+**Capital Efficiency:**
+"gTrade routinely handling around $100 million in daily volume with just $10 million in TVL" - exceptional 10:1 volume:TVL ratio.
+
+**FED Learning:** Multiple income streams (direct distribution + buyback appreciation) could be considered, but adds complexity. FED's single-stream model is simpler.
+
+**Source:** [gTrade and GNS in 2025](https://medium.com/gains-network/gtrade-and-gns-in-2025-where-vision-and-value-coalesce-90e2c5af03c0)
+
+---
+
+### Trader Joe sJOE Model
+
+**Protocol Stats:**
+- **Max Supply:** 500M JOE (fixed)
+- **Circulating:** ~341M JOE
+- **Chains:** Avalanche, Arbitrum, BNB Chain
+- **Launch:** Fair launch 2021 (no pre-sale, no VC allocation)
+
+**sJOE Staking Mechanics:**
+
+| Feature | Detail |
+|---------|--------|
+| Fee Source | 0.05% of all swap fees |
+| Reward Token | USDC (stablecoins) |
+| Deposit Fee | 1% |
+| Lock Period | None |
+| Multi-chain | Yes (Avalanche, Arbitrum, BNB) |
+
+**Key Differentiator:** sJOE pays rewards in USDC (stablecoin), not protocol token. This is "real yield" - derived from actual platform usage, not emissions.
+
+**Modular Staking Evolution:**
+Trader Joe split staking into separate functions:
+1. **sJOE** → Protocol fee share (USDC)
+2. **veJOE** → Boosted yields
+3. **rJOE** → Launchpad access
+
+**Retired:** Original xJOE (all-in-one token)
+
+**FED Comparison:**
+- FED also pays in stablecoin (USD1) - same "real yield" approach
+- FED has no deposit fee (Trader Joe charges 1%)
+- FED has no lock period (same as sJOE)
+- FED distribution is automatic (sJOE requires staking action)
+
+**Source:** [Real Yield on Avalanche - sJOE](https://medium.com/@harry.avax/real-yield-on-avalanche-5-staking-joe-with-trader-joe-24f60dc92b2a)
+
+---
+
+### Direct Distribution vs Buyback: Analysis
+
+**Three Models Compared:**
+
+| Model | Example | Holder Receives | Pros | Cons |
+|-------|---------|-----------------|------|------|
+| **Direct Distribution** | FED, sJOE | Stablecoin | Immediate, tangible, no price dependency | No supply reduction, creates sell pressure on reward |
+| **Buyback & Distribute** | Gains BB&D (legacy) | Protocol token | Creates buy pressure, holders get more tokens | Token price volatility affects real value |
+| **Buyback & Burn** | Gains BB&B, Pendle | Nothing directly | Supply reduction, long-term value | No immediate income, requires faith in appreciation |
+
+**Why Gains Network Moved from Distribution to Burn:**
+1. Community voted for long-term value over immediate rewards
+2. Mature DeFi users understood supply dynamics
+3. Burn creates "permanent" value vs distributable rewards
+4. Reduces complexity (no claiming, no tax events per distribution)
+
+**Why FED Should STAY with Direct Distribution:**
+1. Memecoin holders want immediate gratification
+2. "I got paid" > "supply decreased by 0.001%"
+3. USD1 is stable - no price volatility concern
+4. Creates strong narrative ("hold FED = get paid every 2 minutes")
+5. Community expectation is already set
+
+---
+
+### Key Research Findings
+
+**What Gains Network Does Well:**
+1. **Capital efficiency** - $100M daily volume on $10M TVL (10:1 ratio)
+2. **Adaptive tokenomics** - Evolved from direct → BB&D → BB&B based on community
+3. **Safety mechanisms** - Capped minting prevents hyperinflation
+4. **Multi-product utility** - gGNS vault, staking discounts, governance
+
+**What Trader Joe Does Well:**
+1. **Real yield simplicity** - USDC rewards from real trading fees
+2. **Fair launch** - No VC allocation created loyal community
+3. **Multi-chain expansion** - sJOE works across Avalanche, Arbitrum, BNB
+4. **Modular design** - Separated staking benefits for flexibility
+
+**FED's Competitive Position:**
+
+| Metric | FED | Gains Network | Trader Joe |
+|--------|-----|---------------|------------|
+| Fee to Holders | **100%** | 54% (to burn) | 0.05% of swaps |
+| Distribution Method | **Direct push** | Buyback & burn | Staking claim |
+| Frequency | **~2 minutes** | Continuous burn | Variable |
+| Lock Required | **No** | No | No |
+| Reward Currency | **USD1 (stable)** | GNS (volatile) | USDC (stable) |
+| Action Required | **None (hold)** | Stake | Stake |
+
+**FED wins on:** Generosity (100%), Frequency (~2 min), Simplicity (no action)
+**FED loses on:** Total revenue (smaller protocol), Multi-chain (Solana only)
+
+---
+
+### Implications for FED Roadmap
+
+**Validate Current Approach:**
+1. ✅ Direct stablecoin distribution is proven (sJOE model)
+2. ✅ No lock requirement matches market expectation
+3. ✅ "Just hold = earn" is simpler than staking requirement
+
+**Not Recommended for FED:**
+1. ❌ Switching to buyback & burn (would break holder expectations)
+2. ❌ Adding deposit fees (1% sJOE-style - creates friction)
+3. ❌ Modular staking (complexity kills memecoins)
+4. ❌ Counterparty vault system (FED isn't a perp DEX)
+
+**Consider for QE4:**
+1. **Hybrid option:** 95% distribute / 5% buyback during dips (preserve narrative, add support)
+2. **Multi-chain research:** If FED expands, sJOE's multi-chain model is reference
+3. **Trading fee discounts:** For large holders (Gains model) - requires DEX integration
+
+**Lower Priority:**
+1. Governance fund allocation (FED is too small currently)
+2. gToken-style vault (different product category)
+
+---
+
+### Conclusion
+
+The research confirms FED's distribution model is sound and competitive:
+
+- **vs Gains Network:** FED is more generous (100% vs 54%) and simpler (no burn intermediary)
+- **vs Trader Joe:** FED is automatic (vs requires staking) and more frequent (~2 min vs claim-based)
+
+Gains Network's evolution from direct rewards → buyback → burn reflects mature DeFi users preferring supply dynamics. This is NOT the memecoin audience. FED holders want visible, tangible rewards ("I got $5 today!"), not abstract supply reduction.
+
+**Key Takeaway:** FED's "hold = get paid in stablecoins every 2 minutes" is a stronger value prop for memecoins than sophisticated buyback mechanisms. Keep it simple.
+
+---
+
+### Action Items
+
+1. [x] Document Gains Network and Trader Joe research
+2. [ ] Monitor Gains Network's BB&B vs BB&D community sentiment over time
+3. [ ] Research multi-chain USD1 feasibility (if expansion considered)
+4. [ ] Track sJOE APY trends for stablecoin yield benchmarks
+
+---
+
+*Research completed: 2026-01-22 UTC*
+
+*Sources:*
+- [Gains Network 2026 Roadmap](https://medium.com/gains-network/2026-roadmap-the-blueprint-for-gains-network-gtrade-and-gns-de08d050296a)
+- [Gains Network Tokenomics Update](https://medium.com/gains-network/evolving-gains-network-tokenomics-introducing-buyback-and-distribute-c15ce1fa8fdb)
+- [Gains Network GNS Staking](https://docs.gains.trade/liquidity-farming-pools/gns-staking)
+- [gToken Vaults Documentation](https://docs.gains.trade/liquidity-farming-pools/gtoken-vaults)
+- [gTrade and GNS in 2025](https://medium.com/gains-network/gtrade-and-gns-in-2025-where-vision-and-value-coalesce-90e2c5af03c0)
+- [DefiLlama - Gains Network](https://defillama.com/protocol/gains-network)
+- [Trader Joe sJOE Overview](https://medium.com/@harry.avax/real-yield-on-avalanche-5-staking-joe-with-trader-joe-24f60dc92b2a)
+- [JOE Tokenomics Revamp](https://joecontent.substack.com/p/joe-tokenomics-revamp)
+- [Staking Rewards - GNS](https://www.stakingrewards.com/asset/gains-network)
 
 ---

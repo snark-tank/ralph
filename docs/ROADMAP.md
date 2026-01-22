@@ -190,6 +190,15 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - FED's passive "just hold = earn" model is simpler and more inclusive
 - Complexity kills memecoin adoption (validated by Pendle's pivot)
 
+### Buyback & Burn Model (Gains Network BB&B style)
+- **Why Rejected:** Gains Network evolved from direct rewards to buyback & burn
+- **2026-01-22 Analysis:** Their community voted for supply reduction over direct income
+- Mature DeFi users may prefer this, but memecoins need visible, tangible rewards
+- "I got paid $5 today" is stronger memecoin narrative than "supply decreased 0.001%"
+- FED holders expect immediate gratification; breaking this expectation would harm trust
+- Our 100% distribution model is more generous than Gains' 54% burn allocation
+- **Recommendation:** Keep direct USD1 distribution; buyback remains discretionary during dips
+
 ---
 
 ## Research Dependencies
@@ -268,6 +277,16 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - Consider: Holder benefit partnerships (early access to partner launches) for QE4
 - Consider: Increase time-lock multiplier ceiling from 2x to 2.5x for 6-month locks
 - See TOKENOMICS-RESEARCH.md for full Camelot analysis
+
+**Gains Network & Trader Joe Research (Jan 22, 2026):**
+- Gains Network: $130K daily revenue on 178x smaller FDV than Uniswap - exceptional capital efficiency
+- Evolution: Direct rewards → Buyback & Distribute → Buyback & Burn (community chose supply reduction)
+- 55% of Gains fees go to burn mechanism; FED distributes 100% (more generous)
+- Trader Joe sJOE: Pays 0.05% of swaps in USDC (real yield), requires staking action
+- FED advantages: 100% distribution, ~2min frequency, no staking required, automatic push
+- **Validation:** Direct stablecoin distribution (like sJOE) is proven model; FED's automatic push is superior UX
+- **Recommendation:** Do NOT switch to buyback & burn (breaks holder expectations for memecoins)
+- See TOKENOMICS-RESEARCH.md for full Gains Network and Trader Joe analysis
 
 ---
 
