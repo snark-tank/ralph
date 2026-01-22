@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $57,132+ USD1
-- **Distribution Count:** 498 distributions
+- **Total Distributed:** $57,556+ USD1
+- **Distribution Count:** 506 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -8084,3 +8084,282 @@ FED's passive "just hold = earn" is our competitive advantage against protocols 
 
 ---
 
+
+
+## 2026-01-22: Trader Joe sJOE Model Deep Dive
+
+### Research Focus
+How does Trader Joe's sJOE staking model work? What can FED learn from their real-yield approach and multi-chain fee distribution?
+
+---
+
+### Trader Joe Protocol Overview
+
+**Protocol Stats (January 2026):**
+- **TVL:** ~$150M across all chains
+- **24h Volume:** ~$175M
+- **Chains:** Avalanche (primary), Arbitrum, BNB Chain, Monad (expansion)
+- **Total JOE Supply:** 500M (hard cap)
+- **Cumulative Fees to Holders:** $14.22M+ (Joe V2.2 alone)
+
+**Key Insight:** Trader Joe maintains high capital efficiency (~$175M daily volume on ~$150M TVL), demonstrating that real-yield models attract active trading.
+
+**Source:** [DefiLlama - Joe DEX](https://defillama.com/protocol/joe-dex)
+
+---
+
+### The JOE Token Ecosystem
+
+**Dual Staking System:**
+
+| Token | Purpose | Lock Period | Reward Type |
+|-------|---------|-------------|-------------|
+| **sJOE** | Fee sharing | None (liquid) | USDC stablecoins |
+| **veJOE** | Boost + governance | Accrual-based | Enhanced JOE farming |
+
+**Why Two Options?**
+Trader Joe separates yield seekers (sJOE) from governance participants (veJOE):
+- sJOE: Simple, liquid, real yield in USDC
+- veJOE: Complex, requires time to accrue, boosts farming rewards
+
+**FED Comparison:**
+- FED has single mechanism: hold $FED → receive USD1
+- Simpler than dual-token, dual-purpose model
+- No choice paralysis for users
+
+**Source:** [LFJ Review 2025 - Coin Bureau](https://coinbureau.com/review/trader-joe/)
+
+---
+
+### sJOE Deep Dive
+
+#### How sJOE Works
+
+1. **Deposit:** Stake JOE → receive sJOE (1:1, used to cost 1% fee, now free)
+2. **Earn:** 0.05% of ALL platform swaps collected
+3. **Distribution:** Fees converted to USDC, distributed daily
+4. **Withdraw:** Unstake anytime, no penalty, no lock
+
+**Fee Flow:**
+```
+Platform Swaps (0.3% total fee)
+    ├── 0.25% → Liquidity Providers
+    └── 0.05% → sJOE Stakers (in USDC)
+```
+
+**Key Numbers:**
+- 0.05% of swap volume → sJOE pool
+- Historical APR range: 1% - 81% (highly variable based on volume)
+- Average APY: ~6-18% during active periods
+- No minimum stake, no lock period
+
+**Source:** [Weiss Ratings - 3 Ways to Earn with Trader Joe](https://weissratings.com/en/weiss-crypto-daily/3-ways-to-earn-real-yield-with-trader-joe)
+
+---
+
+#### sJOE Multi-Chain Mechanics
+
+**Chain-Specific Fee Sharing:**
+- sJOE on Avalanche → earns Avalanche fees only
+- sJOE on Arbitrum → earns Arbitrum fees only
+- sJOE on BNB → earns BNB fees only
+
+**User Choice:** Stakers must decide WHERE to stake based on expected volume.
+
+**FED Comparison:**
+- FED is Solana-only (simpler)
+- All fees from single LP go to all holders
+- No chain selection complexity
+
+**Implication for Future:**
+If FED ever expands multi-chain (QE5+), Trader Joe's chain-specific approach is one model. Alternative: aggregate all chain fees to all holders (simpler UX).
+
+**Source:** [Joe Tokenomics Revamp](https://joecontent.substack.com/p/joe-tokenomics-revamp)
+
+---
+
+### veJOE System Analysis
+
+#### How veJOE Works
+
+1. **Deposit:** Stake JOE → accrue veJOE over time
+2. **Accrual:** Takes 365 days to reach max veJOE allocation
+3. **Speed-Up:** Top up 5%+ of stake every 15 days → 2x accrual rate
+4. **Boost:** Up to 2.5x (150% bonus) on JOE farming rewards
+5. **Governance:** 1 veJOE = 1 vote
+
+**Critical Mechanic - Loss on Exit:**
+Upon unstaking, ALL accumulated veJOE is lost. This creates golden handcuffs.
+
+**Declining Relevance:**
+> "Due to a reduced emissions schedule, veJOE's appeal has waned over time"
+
+The boost only applies to JOE farming emissions. As emissions decrease, veJOE becomes less valuable.
+
+**FED Comparison:**
+- FED's streak/multiplier system achieves similar loyalty incentive
+- BUT: FED doesn't punish exit (you lose bonus going forward, not retroactively)
+- FED's approach is psychologically healthier (positive reinforcement > punishment)
+
+**Source:** [Understanding veJOE - SteakHut](https://whitepaper-old.steakhut.finance/getting-started/ve-joe-farms/vejoe-boosted-farms/understanding-vejoe)
+
+---
+
+### Fee Distribution Comparison
+
+| Dimension | Trader Joe (sJOE) | FED |
+|-----------|-------------------|-----|
+| **Fee to Holders** | 0.05% of swaps (~17% of total) | 100% of LP fees |
+| **Distribution Currency** | USDC | USD1 |
+| **Distribution Frequency** | Daily | ~2 minutes |
+| **Lock Required** | No | No |
+| **Deposit Fee** | 0% (removed) | 0% |
+| **Withdrawal Fee** | 0% | 0% |
+| **Chain Selection** | Must choose chain | Single chain (Solana) |
+| **APR Variability** | 1-81% (high variance) | Volume-dependent |
+
+**Key Insight:** FED distributes 100% of collected fees to holders. Trader Joe only distributes 0.05%/0.30% = 16.7% of swap fees to sJOE stakers (rest to LPs and protocol).
+
+---
+
+### What FED Does Better
+
+1. **Higher Fee Share:**
+   - FED: 100% of LP fees to holders
+   - Trader Joe: 16.7% to sJOE stakers
+   
+2. **Faster Distribution:**
+   - FED: Every ~2 minutes (real-time feel)
+   - Trader Joe: Daily batches
+
+3. **No Chain Fragmentation:**
+   - FED: Single source, single pool
+   - Trader Joe: Must choose which chain to stake on
+
+4. **No Dual-Token Complexity:**
+   - FED: Hold token → earn
+   - Trader Joe: sJOE vs veJOE decision paralysis
+
+5. **No Staking Action Required:**
+   - FED: Holding IS staking (automatic)
+   - Trader Joe: Must actively stake to sJOE
+
+---
+
+### What Trader Joe Does Well
+
+1. **Stablecoin Payouts:**
+   - USDC is widely accepted, highly liquid
+   - USD1 (FED) is smaller market but also stable
+   
+2. **Multi-Chain Revenue:**
+   - Capture fees from multiple chains
+   - More volume sources = more fees (potential)
+
+3. **Long Track Record:**
+   - $14M+ cumulative holders revenue
+   - Proves model works at scale
+
+4. **Liquidity Book V2.1 Innovation:**
+   - Dynamic fees (0.01% - 0.8%) based on volatility
+   - Higher fees during volatile periods = more revenue
+   - Auto-compounding for LPs
+
+---
+
+### Key Learnings for FED
+
+#### Validated FED Decisions:
+
+1. **No Deposit Fees - CORRECT**
+   - Trader Joe removed their 1% fee
+   - Fees create friction, hurt adoption
+   
+2. **Instant Withdrawal - CORRECT**
+   - No lock period is user-friendly
+   - veJOE's "lose all on exit" is punitive
+
+3. **Single Token Simplicity - CORRECT**
+   - Dual-token systems confuse users
+   - sJOE vs veJOE choice adds cognitive load
+
+4. **Real Yield Focus - CORRECT**
+   - Both protocols derive value from actual fees
+   - Not inflationary emissions
+
+#### Potential Future Considerations:
+
+1. **Dynamic Fee Structure (QE4+):**
+   - Trader Joe's variable 0.01-0.8% fees capture more during volatility
+   - FED could research dynamic LP fee adjustment
+   - Higher fees during pumps = more distribution
+
+2. **Multi-Chain Expansion (QE5+):**
+   - Trader Joe's chain-specific sJOE is one approach
+   - Alternative for FED: aggregate all chain fees to all holders
+   - Simpler UX but requires bridge infrastructure
+
+3. **Auto-Compound for LPs:**
+   - Trader Joe V2.1 auto-compounds LP fees
+   - FED could offer auto-compound USD1→$FED (already researched)
+
+---
+
+### sJOE Popularity Analysis
+
+**Adoption Stats:**
+- 85M JOE staked in sJOE (41% of circulating supply)
+- 15M JOE locked in veJOE
+- sJOE 5.6x more popular than veJOE
+
+**Why sJOE Wins:**
+1. Simplicity (no accrual mechanics)
+2. Liquidity (can exit anytime)
+3. Real yield (USDC, not emissions)
+4. No punishment for exit
+
+**FED Takeaway:** Simple + liquid + real yield = adoption. This validates FED's approach.
+
+---
+
+### Conclusion
+
+Trader Joe's sJOE model is a proven real-yield mechanism with $14M+ distributed to stakers. Their approach validates several FED design decisions:
+
+**Validated:**
+- No lock periods (sJOE has none)
+- Real yield in stablecoins (USDC/USD1)
+- Simplicity wins (sJOE 5.6x more popular than complex veJOE)
+
+**Where FED is Superior:**
+- 100% fee share vs 16.7%
+- 2-minute distributions vs daily
+- No staking action required (hold = earn)
+- Single chain simplicity
+
+**Where Trader Joe Leads:**
+- Multi-chain fee capture
+- Longer track record ($14M+)
+- Dynamic fee structure
+
+**Confidence Level:** HIGH that FED's simpler, more generous model is correct for memecoin audience. Trader Joe's complexity suits DeFi power users; FED's simplicity suits retail.
+
+**Key Quote:**
+> "sJOE is incredibly popular with 85m JOE staked (41% of circulating supply)" - demonstrating that simple real-yield models drive massive adoption.
+
+---
+
+*Sources:*
+- [DefiLlama - Joe DEX](https://defillama.com/protocol/joe-dex)
+- [LFJ Review 2025 - Coin Bureau](https://coinbureau.com/review/trader-joe/)
+- [Weiss Ratings - Real Yield with Trader Joe](https://weissratings.com/en/weiss-crypto-daily/3-ways-to-earn-real-yield-with-trader-joe)
+- [Joe Tokenomics Revamp](https://joecontent.substack.com/p/joe-tokenomics-revamp)
+- [Understanding veJOE - SteakHut](https://whitepaper-old.steakhut.finance/getting-started/ve-joe-farms/vejoe-boosted-farms/understanding-vejoe)
+- [Liquidity Book V2.1 Launch](https://joecontent.substack.com/p/introducing-liquidity-book-v21)
+- [CoinMarketCap - Trader Joe](https://coinmarketcap.com/academy/article/what-is-trader-joe-liquidity-book-dex)
+
+---
+
+*Research completed: 2026-01-22 16:50 UTC*
+
+---

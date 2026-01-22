@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $57,132+ Distributed (498 runs)
+**Current:** $57,556+ Distributed (506 runs)
 **Status:** IN PROGRESS
 
 ### Active Systems
@@ -132,6 +132,8 @@ Based on points program research (Blur, EigenLayer, Jupiter ASR), FED's XP syste
 | Raydium | 12% (buyback) | Buyback & hold | FED: 100% direct (8x higher allocation) |
 | GMX | 30% (stakers) | Fee sharing | FED: 100% direct (no staking required) |
 | Pendle | 80% (buyback) | Buyback & rewards | FED: Simpler model, no locking |
+| Trader Joe (sJOE) | 17% (USDC) | Daily distribution | FED: 100% + 2-min frequency (6x higher % + faster) |
+| Camelot (xGRAIL) | 17-22% (fee share) | Plugin allocation | FED: Auto distribution (no allocation friction) |
 
 **Key Validation:** FED distributes MORE value to holders (100% vs 12-54%) with LESS friction (no staking). The trade-off is lower absolute scale, which is expected for a memecoin. Our model is sound.
 
