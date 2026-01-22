@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $55,480+ Distributed (438 runs)
+**Current:** $55,506+ Distributed (440 runs)
 **Status:** IN PROGRESS
 
 ### Active Systems

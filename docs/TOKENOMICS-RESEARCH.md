@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $55,480+ USD1
-- **Distribution Count:** 438 distributions
+- **Total Distributed:** $55,506+ USD1
+- **Distribution Count:** 440 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -4315,5 +4315,331 @@ FED sidesteps this entirely by having no governance layer to capture. Ralph's tr
 - Accountable (all decisions documented)
 
 **Confidence Level:** HIGH that FED's governance-free model is correct for a memecoin. Convex proves that governance markets benefit sophisticated players, not retail holders.
+
+---
+
+## 2026-01-22: Anchor Protocol / Terra Luna Postmortem - The $40 Billion "Fixed APY" Catastrophe
+
+### Research Focus
+Anchor Protocol's "stable 20% APY" on UST deposits led to the largest catastrophic failure in DeFi history - wiping out $40-60 billion in value within days. What can FED learn from this ultimate cautionary tale about promising fixed yields?
+
+---
+
+### The Terra Ecosystem Overview
+
+**What Terra Was:**
+- Terra launched in 2018 with an algorithmic stablecoin (UST) backed by its native token (LUNA)
+- Unlike USDC/USDT which hold dollar reserves, UST's peg relied on a mint/burn mechanism with LUNA
+- Arbitrage mechanism: 1 UST could always be exchanged for $1 worth of LUNA (and vice versa)
+- This created a circular dependency where UST stability depended on LUNA market confidence
+
+**Peak Stats (Before Collapse):**
+- UST Market Cap: ~$18.7 billion (3rd largest stablecoin)
+- LUNA Price: $119.18 (April 5, 2022)
+- Anchor Protocol TVL: $14-17 billion (75% of all UST)
+- Combined Market Cap: ~$60 billion
+
+**The Collapse:**
+- UST: $1.00 → $0.02 (98% loss)
+- LUNA: $87 → $0.00005 (99.999% loss)
+- Total Value Lost: $40-60 billion
+- Timeframe: 5 days (May 7-13, 2022)
+
+---
+
+### The Anchor Protocol Death Trap
+
+**What Anchor Offered:**
+- 19.5-20% APY on UST deposits - marketed as "stable" and "sustainable"
+- Positioned as a "high-yield savings account" for crypto
+- Attracted 75% of all circulating UST ($14+ billion in deposits)
+
+**How The Yield Was Supposed to Work:**
+
+Revenue Sources (Theory):
+1. **Borrowing interest** - Interest paid by borrowers taking loans
+2. **Staking rewards** - Yield from borrowers' bonded collateral (bLUNA, bETH)
+3. **Liquidation fees** - Penalties from defaulted loans
+
+**The Yield Formula:**
+```
+If realized_yield > target_rate (20%):
+    Excess → Yield Reserve (buffer)
+    
+If realized_yield < target_rate (20%):
+    Shortfall → Paid from Yield Reserve
+    Borrowers incentivized with ANC token rewards
+```
+
+---
+
+### Why The Math Never Worked
+
+**The Deposit/Borrow Imbalance:**
+
+| Period | Total Deposits | Total Borrowed | Utilization |
+|--------|---------------|----------------|-------------|
+| Early 2022 | $2.3 billion | $1.2 billion | 52% |
+| 60 days later | $6.1 billion | $1.5 billion | 25% |
+| Peak (April) | $14 billion | ~$3 billion | ~21% |
+
+**The Core Problem:**
+- Anchor needed borrowers paying interest to fund deposit yields
+- But 75% of UST was DEPOSITED, not borrowed
+- Protocol earned ~9-10% from actual activity
+- Paid out 20% APY to depositors
+- **Difference (10%) came from reserves = pure subsidy**
+
+**Yield Reserve Depletion Timeline:**
+
+| Date | Yield Reserve | Status |
+|------|---------------|--------|
+| July 2021 | 1.1M UST | Near depletion |
+| July 2021 | +70M UST | Terraform Labs bailout |
+| Feb 2022 | Depleting fast | Second warning |
+| Feb 2022 | +$450M UST | Luna Foundation Guard bailout |
+| April 2022 | Depleting at $4-6M/day | Final warning |
+| May 2022 | Near zero | Collapse trigger |
+
+**Key Stat:** By April 2022, approximately **70% of the yield was subsidized** - only 30% came from actual protocol revenue.
+
+**Source:** [Anchor Protocol Burns Through Reserves](https://thedefiant.io/anchor-yield-reserve), [CoinDesk: Reserves Slide](https://www.coindesk.com/markets/2022/01/28/anchor-protocol-reserves-slide-as-money-markets-founder-talks-down-concerns)
+
+---
+
+### The Death Spiral Mechanism
+
+**Phase 1: Confidence Erosion (April 2022)**
+- LUNA price began declining with broader crypto market
+- Anchor announced rate reduction plan (1.5%/month starting May 1)
+- Smart money began withdrawing from Anchor
+- Exit rate exceeded entry rate
+
+**Phase 2: The Depeg Begins (May 7, 2022)**
+- Two large addresses withdrew 375M UST from Anchor
+- Massive UST selling on Curve's 3pool
+- UST depegged to $0.91
+- First signs of panic
+
+**Phase 3: Failed Defense (May 8-9)**
+- Luna Foundation Guard deployed reserves (including Bitcoin)
+- Temporarily restored peg to ~$0.995
+- But selling pressure continued unabated
+
+**Phase 4: Full Death Spiral (May 10-12)**
+```
+UST selling pressure increases
+    → UST depegs further
+    → Holders burn UST to mint LUNA (arbitrage)
+    → LUNA supply explodes
+    → LUNA price crashes
+    → Confidence in UST backing collapses
+    → More UST selling
+    → Repeat at accelerating pace
+```
+
+**LUNA Supply Hyperinflation:**
+- Pre-collapse: ~350 million LUNA
+- Post-collapse: **6.5 TRILLION LUNA** (18,500x increase in 3 days)
+- This is the most extreme hyperinflation in crypto history
+
+**Phase 5: Capitulation (May 13)**
+- UST: $0.02 (down 98%)
+- LUNA: $0.00005 (down 99.999%)
+- LFG reserves: <$100 million remaining (from $4+ billion)
+- Total destruction: $40-60 billion
+
+**Source:** [Harvard: Anatomy of a Run](https://corpgov.law.harvard.edu/2023/05/22/anatomy-of-a-run-the-terra-luna-crash/)
+
+---
+
+### Who Lost and Who Escaped
+
+**Critical Research Finding: Sophisticated Investors Ran First**
+
+Academic analysis of blockchain data revealed:
+- Wealthier and more sophisticated investors were **first to run** and experienced much smaller losses
+- Poorer and less sophisticated investors not only ran later and had larger losses...
+- **...but a significant fraction of them attempted to BUY INTO the run**
+- The blockchain's transparency allowed well-connected investors to monitor each other's actions and amplify the speed of the run
+
+**Translation:** Retail investors who trusted the "stable 20% APY" marketing were left holding the bag while insiders exited.
+
+**Source:** [MIT Sloan: Anatomy of a Run](https://mitsloan.mit.edu/shared/ods/documents?PublicationDocumentID=9764)
+
+---
+
+### The Criminal Aftermath
+
+**Do Kwon's Prosecution:**
+
+| Date | Event |
+|------|-------|
+| Sept 2022 | Interpol red notice, South Korea arrest warrant |
+| March 2023 | Arrested in Montenegro with fake passport |
+| Aug 2025 | Pleaded guilty to fraud, wire fraud conspiracy |
+| **Dec 11, 2025** | **Sentenced to 15 years in prison** |
+
+**The Fraud Revealed:**
+- Kwon claimed Terra's algorithm alone restored UST's peg in May 2021 depeg
+- **This was a lie** - Kwon secretly paid a high-frequency trading firm to artificially support the peg
+- Judge called it "a fraud on an epic, generational scale"
+- "In the history of federal prosecutions, there are few frauds that have caused as much harm as you have, Mr. Kwon"
+
+**Financial Penalties:**
+- $19 million forfeiture (from plea deal)
+- $80 million civil fine to SEC
+- $4.55 billion settlement (Terraform Labs total)
+- Banned from crypto transactions
+
+**Source:** [CNN: Do Kwon Sentenced](https://www.cnn.com/2025/12/11/business/cryptocurrency-do-kwon-fraud-sentencing-intl-hnk), [DOJ Press Release](https://www.justice.gov/usao-sdny/pr/crypto-enabled-fraudster-sentenced-orchestrating-40-billion-fraud)
+
+---
+
+### Why FED Will Never Be Terra
+
+**Fundamental Differences:**
+
+| Aspect | Anchor/Terra | FED |
+|--------|-------------|-----|
+| **Yield Source** | Subsidized (70% fake) | 100% from LP trading fees |
+| **APY Promise** | "Stable 20%" (lie) | No APY promise - variable based on volume |
+| **Backing** | Circular LUNA dependency | External stablecoin (USD1) |
+| **Reserve Model** | Yield reserve depleting | No reserve to deplete |
+| **When Volume Low** | Still paid 20% (unsustainable) | Lower distributions (honest) |
+| **Death Spiral Risk** | YES (proven) | NO (no circular dependency) |
+| **Redemption Model** | Bank run vulnerable | Push-based (no run possible) |
+
+**The Critical Distinction:**
+
+**Anchor:** "We promise 20% APY regardless of actual revenue"
+- This is **lying** - the yield wasn't real
+- Required constant bailouts
+- Bank run destroyed everything
+
+**FED:** "We distribute whatever LP fees are generated"
+- This is **honest** - yield reflects reality
+- No subsidy to run out
+- No bank run possible (push model, not claim model)
+
+---
+
+### Key Lessons for FED
+
+**1. NEVER Promise Fixed APY**
+- FED does NOT promise any APY
+- Distributions vary with trading volume (honest)
+- High volume = more distributions; low volume = fewer
+- This is sustainable; fixed promises are not
+
+**2. Real Revenue > Subsidized Returns**
+- FED distributions come from actual LP trading fees
+- There is no "yield reserve" to deplete
+- When trading activity is low, distributions are low
+- This is HONEST and SUSTAINABLE
+
+**3. Avoid Circular Dependencies**
+- Terra: UST backed by LUNA backed by UST demand... circular
+- FED: $FED generates fees → USD1 distributed → no circular loop
+- USD1 is an independent stablecoin, not dependent on $FED price
+
+**4. Push Model Prevents Bank Runs**
+- Anchor: Users had to WITHDRAW (created bank run vulnerability)
+- FED: Ralph PUSHES distributions automatically (no withdrawal queue)
+- You can't "bank run" a push distribution model
+
+**5. Transparency > Marketing**
+- Terra marketed "stable" and "sustainable" (both lies)
+- FED documents everything - actual distributions, actual fees, actual decisions
+- Honest variable yield beats dishonest "stable" yield
+
+---
+
+### The "Stable APY" Red Flag
+
+**Why Fixed Yield Promises Are Always Lies:**
+
+If a protocol promises a fixed high yield regardless of market conditions, there are only three possibilities:
+
+1. **It's unsustainable** - Eventually, reserves run out (Anchor)
+2. **It's inflationary** - Paid through token emissions (OlympusDAO)
+3. **It's fraudulent** - Ponzi dynamics with new investor capital
+
+**There is no fourth option.** Real yield from economic activity is ALWAYS variable.
+
+**FED's Position:**
+- We don't promise APY
+- We report actuals: "$55,000+ distributed across 440 distributions"
+- Distribution amounts vary - this is honest
+- Anyone claiming "stable high yield" is lying
+
+---
+
+### Contagion Warning
+
+**What Terra Caused:**
+The Terra collapse triggered a cascade of failures:
+- **Three Arrows Capital** - Bankrupt (exposure to LUNA)
+- **Celsius Network** - Bankrupt (customer funds locked)
+- **BlockFi** - Bankrupt (contagion effects)
+- **Voyager Digital** - Bankrupt (3AC exposure)
+- Market-wide crash - Bitcoin fell from $40K to $17K
+
+**Total Damage:** $200+ billion in market cap across crypto
+
+**FED Risk Assessment:**
+- FED has no leverage positions
+- FED doesn't custody user funds
+- FED distributions don't create counterparty exposure
+- Isolated failure scenario: If $FED went to zero, USD1 already distributed is still safe
+
+---
+
+### Why This Research Matters
+
+**The Terra/Anchor collapse is the most important case study in DeFi history.**
+
+It proves conclusively that:
+1. Fixed yield promises are unsustainable
+2. Algorithmic stability mechanisms can death spiral
+3. Sophisticated investors will exit first during runs
+4. Subsidized yields attract mercenary capital that will flee
+5. Transparency and honest reporting are essential
+
+**FED was designed with these lessons in mind:**
+- Variable yield (honest)
+- Real fees (not subsidized)
+- Push distributions (no bank run)
+- Fixed supply (no hyperinflation)
+- External stablecoin (USD1, not circular)
+
+**Confidence Level:** VERY HIGH that FED's fundamentals are sound. Terra's failure validates every design decision we made.
+
+---
+
+### Action Items
+
+1. [x] Document Anchor Protocol / Terra Luna postmortem
+2. [ ] Consider FAQ entry: "How is FED different from Anchor/Terra?"
+3. [ ] Ensure all marketing avoids "stable APY" language
+4. [ ] Document that FED distributions are variable (honest)
+
+---
+
+*Research completed: 2026-01-22 UTC*
+
+*Sources:*
+- [Harvard Law: Anatomy of a Run](https://corpgov.law.harvard.edu/2023/05/22/anatomy-of-a-run-the-terra-luna-crash/)
+- [MIT Sloan: Terra Luna Crash Research Paper](https://mitsloan.mit.edu/shared/ods/documents?PublicationDocumentID=9764)
+- [ScienceDirect: Anatomy of a Stablecoin's Failure](https://www.sciencedirect.com/science/article/abs/pii/S1544612322005359)
+- [WantFI: Anchor Protocol's Unsustainable Yield](https://wantfi.com/terra-luna-anchor-protocol-savings-account.html)
+- [The Defiant: Anchor Yield Reserve](https://thedefiant.io/anchor-yield-reserve)
+- [CoinDesk: Anchor Reserves Slide](https://www.coindesk.com/markets/2022/01/28/anchor-protocol-reserves-slide-as-money-markets-founder-talks-down-concerns)
+- [Cointelegraph: Reserve Depletion](https://cointelegraph.com/news/anchor-protocol-s-reserves-head-toward-depletion-due-to-lack-of-borrowing-demand)
+- [CNN: Do Kwon Sentenced to 15 Years](https://www.cnn.com/2025/12/11/business/cryptocurrency-do-kwon-fraud-sentencing-intl-hnk)
+- [DOJ: Kwon Sentencing Press Release](https://www.justice.gov/usao-sdny/pr/crypto-enabled-fraudster-sentenced-orchestrating-40-billion-fraud)
+- [BeInCrypto: Do Kwon Verdict](https://beincrypto.com/do-kwon-sentenced-15-years-terra-fraud/)
+- [ECOS: Terra Luna Crash Breakdown](https://ecos.am/en/blog/terra-luna-crash-complete-breakdown-of-the-luna-and-ust-algorithmic-stablecoin-implosion/)
+- [AInvest: End of Algorithmic Stablecoins](https://www.ainvest.com/news/algorithmic-stablecoins-lessons-terra-collapse-2512/)
 
 ---
