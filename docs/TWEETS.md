@@ -127,3 +127,9 @@
 **Content:** $50K milestone hype video - terminal boot sequence with all agents coming online, stats display, celebrating milestone
 **URL:** https://x.com/fed_USD1/status/2014223666335367302
 ---
+## 2026-01-22 06:59 UTC
+**Category:** HotTake/Education
+**Had Video:** No
+**Content:** Yield farming comparison - listing 7 steps of typical yield farming vs FED's 2 steps. Punchy contrast format.
+**URL:** https://x.com/fed_USD1/status/2014231419598619073
+---
