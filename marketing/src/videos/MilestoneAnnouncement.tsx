@@ -181,6 +181,8 @@ const RevealScene: React.FC<{ milestone: string; progress: number; current?: str
   const isAlmostThere = progress >= 95;
   // Critical urgency at 98%+
   const isCritical = progress >= 98;
+  // IMMINENT - 99%+ is THE moment, maximum drama
+  const isImminent = progress >= 99;
 
   // Phase 0: Total darkness with refined flicker timing - organic, not mechanical
   // The flicker creates anticipation like a projector warming up
@@ -252,7 +254,7 @@ const RevealScene: React.FC<{ milestone: string; progress: number; current?: str
   );
 
   // Pre-title - text varies based on how close we are to milestone
-  const preText = isCritical ? "The Final Push" : isAlmostThere ? "Almost There" : isNearComplete ? "Final Stretch" : "Approaching Milestone";
+  const preText = isImminent ? "One Percent Away" : isCritical ? "The Final Push" : isAlmostThere ? "Almost There" : isNearComplete ? "Final Stretch" : "Approaching Milestone";
   const preDelay = 0.38;
   const preOpacity = interpolate(
     frame,
@@ -268,7 +270,7 @@ const RevealScene: React.FC<{ milestone: string; progress: number; current?: str
   );
 
   // Pulsing indicator dot - faster pulse when near complete for urgency
-  const pulseSpeed = isCritical ? 0.7 : isNearComplete ? 0.9 : 1.4;
+  const pulseSpeed = isImminent ? 0.55 : isCritical ? 0.7 : isNearComplete ? 0.9 : 1.4;
   const dotPulse = frame > fps * 0.6 ? interpolate(
     (frame - fps * 0.6) % (fps * pulseSpeed),
     [0, fps * pulseSpeed * 0.25, fps * pulseSpeed],
@@ -326,7 +328,7 @@ const RevealScene: React.FC<{ milestone: string; progress: number; current?: str
   const numLandPulse = frame > numLandTime ? interpolate(
     frame,
     [numLandTime, numLandTime + fps * 0.07, numLandTime + fps * 0.2],
-    [1, isCritical ? 1.12 : 1.08, 1],
+    [1, isImminent ? 1.18 : isCritical ? 1.12 : 1.08, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
@@ -334,7 +336,7 @@ const RevealScene: React.FC<{ milestone: string; progress: number; current?: str
   const glowIntensity = interpolate(
     frame,
     [fps * 1.1, fps * 1.8, fps * 2.8],
-    [0, isCritical ? 110 : 90, isCritical ? 85 : 70],
+    [0, isImminent ? 130 : isCritical ? 110 : 90, isImminent ? 100 : isCritical ? 85 : 70],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
@@ -386,12 +388,12 @@ const RevealScene: React.FC<{ milestone: string; progress: number; current?: str
   const bgIntensity = interpolate(
     frame,
     [fps * 0.35, fps * 1.8],
-    [0.015, isCritical ? 0.08 : 0.065],
+    [0.015, isImminent ? 0.1 : isCritical ? 0.08 : 0.065],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Urgency pulse for critical progress
-  const urgencyFactor = isCritical ? 1 : isAlmostThere ? 0.6 : isNearComplete ? 0.3 : 0;
+  const urgencyFactor = isImminent ? 1.3 : isCritical ? 1 : isAlmostThere ? 0.6 : isNearComplete ? 0.3 : 0;
 
   // Percentage badge - appears dramatically after milestone with celebration energy
   // For high progress, make this more dramatic with a bigger scale effect
@@ -399,7 +401,7 @@ const RevealScene: React.FC<{ milestone: string; progress: number; current?: str
   const percentProgress = spring({
     frame: frame - percentDelay * fps,
     fps,
-    config: { damping: isCritical ? 100 : isNearComplete ? 120 : 130, stiffness: isCritical ? 220 : isNearComplete ? 200 : 180, mass: 0.8 },
+    config: { damping: isImminent ? 80 : isCritical ? 100 : isNearComplete ? 120 : 130, stiffness: isImminent ? 250 : isCritical ? 220 : isNearComplete ? 200 : 180, mass: 0.8 },
   });
   const percentOpacity = interpolate(
     frame,
@@ -407,7 +409,7 @@ const RevealScene: React.FC<{ milestone: string; progress: number; current?: str
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const percentScale = interpolate(percentProgress, [0, 1], [isCritical ? 0.5 : isNearComplete ? 0.55 : 0.65, 1]);
+  const percentScale = interpolate(percentProgress, [0, 1], [isImminent ? 0.45 : isCritical ? 0.5 : isNearComplete ? 0.55 : 0.65, 1]);
 
   // Progress number counts up with luxurious ease-out - faster for critical to build excitement
   const countDuration = isCritical ? 0.55 : 0.65;
@@ -424,7 +426,7 @@ const RevealScene: React.FC<{ milestone: string; progress: number; current?: str
   const badgeLandPulse = hasLanded ? interpolate(
     frame,
     [badgeLandTime - fps * 0.02, badgeLandTime + fps * 0.07, badgeLandTime + fps * 0.22],
-    [1, isCritical ? 1.3 : isNearComplete ? 1.22 : 1.15, 1],
+    [1, isImminent ? 1.4 : isCritical ? 1.3 : isNearComplete ? 1.22 : 1.15, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
@@ -432,7 +434,7 @@ const RevealScene: React.FC<{ milestone: string; progress: number; current?: str
   const percentGlow = hasLanded ? interpolate(
     frame,
     [badgeLandTime - fps * 0.1, badgeLandTime, badgeLandTime + fps * 0.08, badgeLandTime + fps * 0.35],
-    [0.35, 0.75, isCritical ? 2.0 : isNearComplete ? 1.7 : 1.4, isCritical ? 1.2 : isNearComplete ? 1.0 : 0.85],
+    [0.35, 0.75, isImminent ? 2.5 : isCritical ? 2.0 : isNearComplete ? 1.7 : 1.4, isImminent ? 1.5 : isCritical ? 1.2 : isNearComplete ? 1.0 : 0.85],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : interpolate(
     frame,
@@ -726,13 +728,15 @@ const RevealScene: React.FC<{ milestone: string; progress: number; current?: str
           </div>
           <span
             style={{
-              fontSize: isCritical ? 13 : 12,
-              fontWeight: isCritical ? 800 : 700,
-              color: isCritical ? "#00ff88" : isNearComplete ? "#00ff88" : "#505050",
+              fontSize: isImminent ? 14 : isCritical ? 13 : 12,
+              fontWeight: isImminent ? 900 : isCritical ? 800 : 700,
+              color: isImminent ? "#00ff88" : isCritical ? "#00ff88" : isNearComplete ? "#00ff88" : "#505050",
               fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: isCritical ? 7 : 6,
+              letterSpacing: isImminent ? 8 : isCritical ? 7 : 6,
               textTransform: "uppercase",
-              textShadow: isCritical
+              textShadow: isImminent
+                ? "0 0 35px rgba(0, 255, 136, 0.6)"
+                : isCritical
                 ? "0 0 25px rgba(0, 255, 136, 0.45)"
                 : isNearComplete
                 ? "0 0 18px rgba(0, 255, 136, 0.3)"
@@ -860,21 +864,23 @@ const RevealScene: React.FC<{ milestone: string; progress: number; current?: str
             />
             <div
               style={{
-                padding: isCritical ? "15px 24px" : "14px 22px",
-                background: isCritical
+                padding: isImminent ? "18px 28px" : isCritical ? "15px 24px" : "14px 22px",
+                background: isImminent
+                  ? "linear-gradient(145deg, #00ff88 0%, #00ffdd 40%, #00ffcc 70%, #00ff88 100%)"
+                  : isCritical
                   ? "linear-gradient(145deg, #00ff88 0%, #00ffcc 50%, #00ff88 100%)"
                   : "linear-gradient(145deg, #00ff88 0%, #00ffbb 100%)",
                 borderRadius: 40,
                 boxShadow: `
-                  0 ${isCritical ? 10 : 8}px ${isCritical ? 35 : 30}px rgba(0, 255, 136, ${0.4 + 0.35 * percentGlow}),
-                  0 0 ${(isCritical ? 50 : 40) * percentGlow}px rgba(0, 255, 136, ${(isCritical ? 0.3 : 0.25) * percentGlow}),
-                  inset 0 2px 0 rgba(255, 255, 255, ${isCritical ? 0.28 : 0.22})
+                  0 ${isImminent ? 12 : isCritical ? 10 : 8}px ${isImminent ? 42 : isCritical ? 35 : 30}px rgba(0, 255, 136, ${0.4 + 0.35 * percentGlow}),
+                  0 0 ${(isImminent ? 65 : isCritical ? 50 : 40) * percentGlow}px rgba(0, 255, 136, ${(isImminent ? 0.38 : isCritical ? 0.3 : 0.25) * percentGlow}),
+                  inset 0 2px 0 rgba(255, 255, 255, ${isImminent ? 0.32 : isCritical ? 0.28 : 0.22})
                 `,
               }}
             >
               <span
                 style={{
-                  fontSize: isCritical ? 34 : 32,
+                  fontSize: isImminent ? 38 : isCritical ? 34 : 32,
                   fontWeight: 900,
                   color: "#010101",
                   fontFamily: "system-ui, -apple-system, sans-serif",
@@ -1089,6 +1095,8 @@ const ProgressScene: React.FC<{
   const isAlmostThere = progress >= 95;
   // Critical at 98%+
   const isCritical = progress >= 98;
+  // IMMINENT - 99%+ is THE moment, maximum drama
+  const isImminent = progress >= 99;
 
   // Scene entrance with subtle scale
   const sceneOpacity = interpolate(
@@ -1105,9 +1113,9 @@ const ProgressScene: React.FC<{
   );
 
   // Ambient "tension" pulse when almost there - the whole scene subtly breathes
-  // More intense for critical progress
-  const tensionPulseSpeed = isCritical ? 0.65 : 0.8;
-  const tensionPulseIntensity = isCritical ? 0.02 : 0.015;
+  // More intense for critical progress, maximum for imminent
+  const tensionPulseSpeed = isImminent ? 0.5 : isCritical ? 0.65 : 0.8;
+  const tensionPulseIntensity = isImminent ? 0.028 : isCritical ? 0.02 : 0.015;
   const tensionPulse = isAlmostThere && frame > fps * 1.8 ? interpolate(
     (frame - fps * 1.8) % (fps * tensionPulseSpeed),
     [0, fps * tensionPulseSpeed * 0.5, fps * tensionPulseSpeed],
@@ -1135,8 +1143,8 @@ const ProgressScene: React.FC<{
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Live indicator pulse - faster when near complete, even faster at critical
-  const indicatorPulseSpeed = isCritical ? 0.75 : isNearComplete ? 1.0 : 1.6;
+  // Live indicator pulse - faster when near complete, even faster at critical, maximum for imminent
+  const indicatorPulseSpeed = isImminent ? 0.55 : isCritical ? 0.75 : isNearComplete ? 1.0 : 1.6;
   const livePulse = frame > fps * 0.25 ? interpolate(
     (frame - fps * 0.25) % (fps * indicatorPulseSpeed),
     [0, fps * indicatorPulseSpeed * 0.25, fps * indicatorPulseSpeed],
@@ -1178,7 +1186,7 @@ const ProgressScene: React.FC<{
   const percentGlow = hasFinishedCounting ? interpolate(
     frame,
     [countEndTime - fps * 0.2, countEndTime, countEndTime + fps * 0.12, countEndTime + fps * 0.5],
-    [35, 45, isNearComplete ? 100 : 80, isNearComplete ? 60 : 50],
+    [35, 45, isImminent ? 130 : isNearComplete ? 100 : 80, isImminent ? 80 : isNearComplete ? 60 : 50],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : interpolate(
     frame,
@@ -1191,7 +1199,7 @@ const ProgressScene: React.FC<{
   const percentLandPulse = hasFinishedCounting ? interpolate(
     frame,
     [countEndTime - fps * 0.03, countEndTime + fps * 0.1, countEndTime + fps * 0.28],
-    [1, isNearComplete ? 1.12 : 1.08, 1],
+    [1, isImminent ? 1.18 : isNearComplete ? 1.12 : 1.08, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
@@ -1433,13 +1441,15 @@ const ProgressScene: React.FC<{
             </div>
             <span
               style={{
-                fontSize: isCritical ? 12 : 11,
+                fontSize: isImminent ? 13 : isCritical ? 12 : 11,
                 color: isNearComplete ? "#00ff88" : "#505050",
                 fontFamily: "system-ui, -apple-system, sans-serif",
-                letterSpacing: isCritical ? 6.5 : isAlmostThere ? 6 : 5.5,
+                letterSpacing: isImminent ? 7 : isCritical ? 6.5 : isAlmostThere ? 6 : 5.5,
                 textTransform: "uppercase",
-                fontWeight: isCritical ? 800 : isAlmostThere ? 700 : 600,
-                textShadow: isCritical
+                fontWeight: isImminent ? 900 : isCritical ? 800 : isAlmostThere ? 700 : 600,
+                textShadow: isImminent
+                  ? "0 0 32px rgba(0, 255, 136, 0.7)"
+                  : isCritical
                   ? "0 0 25px rgba(0, 255, 136, 0.6)"
                   : isAlmostThere
                   ? "0 0 20px rgba(0, 255, 136, 0.5)"
@@ -1448,7 +1458,7 @@ const ProgressScene: React.FC<{
                   : "none",
               }}
             >
-              {isCritical ? "The Final Push" : isAlmostThere ? "Almost There" : isNearComplete ? "Nearly Done" : "QE2 Progress"}
+              {isImminent ? "One Percent Away" : isCritical ? "The Final Push" : isAlmostThere ? "Almost There" : isNearComplete ? "Nearly Done" : "QE2 Progress"}
             </span>
             <div style={{ width: lineWidth, height: 1, background: "linear-gradient(90deg, rgba(0,255,136,0.28), transparent)" }} />
           </div>
@@ -1518,17 +1528,21 @@ const ProgressScene: React.FC<{
             <div
               style={{
                 width: "100%",
-                height: isCritical ? 20 : 18,
+                height: isImminent ? 22 : isCritical ? 20 : 18,
                 background: "linear-gradient(180deg, rgba(255, 255, 255, 0.012) 0%, rgba(255, 255, 255, 0.035) 100%)",
-                borderRadius: isCritical ? 10 : 9,
+                borderRadius: isImminent ? 11 : isCritical ? 10 : 9,
                 overflow: "visible",
                 position: "relative",
-                border: isCritical
+                border: isImminent
+                  ? `2px solid rgba(0, 255, 136, ${0.18 + tensionPulse * 5})`
+                  : isCritical
                   ? `1.5px solid rgba(0, 255, 136, ${0.12 + tensionPulse * 4})`
                   : isAlmostThere
                   ? `1px solid rgba(0, 255, 136, ${0.08 + tensionPulse * 3})`
                   : "1px solid rgba(255, 255, 255, 0.04)",
-                boxShadow: isCritical
+                boxShadow: isImminent
+                  ? `inset 0 2px 16px rgba(0, 0, 0, 0.4), 0 0 ${40 + tensionPulse * 150}px rgba(0, 255, 136, ${0.28 + tensionPulse * 1.5})`
+                  : isCritical
                   ? `inset 0 2px 14px rgba(0, 0, 0, 0.4), 0 0 ${30 + tensionPulse * 120}px rgba(0, 255, 136, ${0.2 + tensionPulse * 1.2})`
                   : isAlmostThere
                   ? `inset 0 2px 12px rgba(0, 0, 0, 0.4), 0 0 ${25 + tensionPulse * 100}px rgba(0, 255, 136, ${0.15 + tensionPulse})`
@@ -1800,6 +1814,8 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
   const isAlmostThere = progress >= 95;
   // Critical urgency at 98%+
   const isCritical = progress >= 98;
+  // IMMINENT - 99%+ is THE moment, maximum drama
+  const isImminent = progress >= 99;
 
   // Scene scale and fade
   const sceneFade = interpolate(
@@ -1859,14 +1875,14 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
   );
 
   // Badge text varies based on progress - more urgency at higher %
-  const badgeText = isCritical ? "The Final Push!" : isAlmostThere ? "So Close!" : isNearComplete ? "Almost There!" : "Almost There";
+  const badgeText = isImminent ? "History in the Making!" : isCritical ? "The Final Push!" : isAlmostThere ? "So Close!" : isNearComplete ? "Almost There!" : "Almost There";
 
-  // "Almost There" / "So Close!" / "The Final Push!" badge - builds excitement with glow - more intense for high progress
+  // "Almost There" / "So Close!" / "The Final Push!" / "History in the Making!" badge - builds excitement with glow - more intense for high progress
   const badgeDelay = 0.22;
   const badgeProgress = spring({
     frame: frame - badgeDelay * fps,
     fps,
-    config: { damping: isCritical ? 120 : isNearComplete ? 150 : 170, stiffness: isCritical ? 200 : isNearComplete ? 160 : 130 },
+    config: { damping: isImminent ? 100 : isCritical ? 120 : isNearComplete ? 150 : 170, stiffness: isImminent ? 240 : isCritical ? 200 : isNearComplete ? 160 : 130 },
   });
   const badgeOpacity = interpolate(
     frame,
@@ -1875,20 +1891,20 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const badgeY = interpolate(badgeProgress, [0, 1], [16, 0]);
-  const badgeScale = interpolate(badgeProgress, [0, 1], [isCritical ? 0.8 : isNearComplete ? 0.85 : 0.9, 1]);
+  const badgeScale = interpolate(badgeProgress, [0, 1], [isImminent ? 0.75 : isCritical ? 0.8 : isNearComplete ? 0.85 : 0.9, 1]);
 
   // Badge glow pulses more energetically for high progress
   const badgeGlow = interpolate(
     frame,
     [(badgeDelay + 0.1) * fps, fps * 0.85],
-    [0, isCritical ? 1.5 : isNearComplete ? 1.3 : 1],
+    [0, isImminent ? 1.8 : isCritical ? 1.5 : isNearComplete ? 1.3 : 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
-  const badgePulseSpeed = isCritical ? 1.1 : isNearComplete ? 1.4 : 2.0;
+  const badgePulseSpeed = isImminent ? 0.9 : isCritical ? 1.1 : isNearComplete ? 1.4 : 2.0;
   const badgePulse = frame > fps * 0.8 ? interpolate(
     (frame - fps * 0.8) % (fps * badgePulseSpeed),
     [0, fps * badgePulseSpeed * 0.5, fps * badgePulseSpeed],
-    [isCritical ? 0.9 : 0.92, 1, isCritical ? 0.9 : 0.92],
+    [isImminent ? 0.88 : isCritical ? 0.9 : 0.92, 1, isImminent ? 0.88 : isCritical ? 0.9 : 0.92],
     { easing: Easing.inOut(Easing.sin) }
   ) : 1;
 
@@ -1929,7 +1945,7 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
   const ctaProgress = spring({
     frame: frame - ctaDelay * fps,
     fps,
-    config: { damping: isCritical ? 150 : 175, stiffness: isCritical ? 110 : 90, mass: 1.05 },
+    config: { damping: isImminent ? 130 : isCritical ? 150 : 175, stiffness: isImminent ? 130 : isCritical ? 110 : 90, mass: 1.05 },
   });
   const ctaOpacity = interpolate(
     frame,
@@ -1938,20 +1954,20 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const ctaY = interpolate(ctaProgress, [0, 1], [28, 0]);
-  const ctaScale = interpolate(ctaProgress, [0, 1], [isCritical ? 0.88 : 0.92, 1]);
+  const ctaScale = interpolate(ctaProgress, [0, 1], [isImminent ? 0.85 : isCritical ? 0.88 : 0.92, 1]);
 
   // CTA glow builds dramatically then pulses with confidence - more dramatic for critical
   const ctaGlow = interpolate(
     frame,
     [(ctaDelay + 0.1) * fps, fps * 1.5, fps * 1.9],
-    [0, isCritical ? 1.4 : 1.2, isCritical ? 1.1 : 1],
+    [0, isImminent ? 1.7 : isCritical ? 1.4 : 1.2, isImminent ? 1.3 : isCritical ? 1.1 : 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
-  const ctaPulseSpeed = isCritical ? 1.8 : 2.2;
+  const ctaPulseSpeed = isImminent ? 1.5 : isCritical ? 1.8 : 2.2;
   const ctaPulse = frame > fps * 1.5 ? interpolate(
     (frame - fps * 1.5) % (fps * ctaPulseSpeed),
     [0, fps * ctaPulseSpeed * 0.5, fps * ctaPulseSpeed],
-    [isCritical ? 0.91 : 0.93, 1, isCritical ? 0.91 : 0.93],
+    [isImminent ? 0.89 : isCritical ? 0.91 : 0.93, 1, isImminent ? 0.89 : isCritical ? 0.91 : 0.93],
     { easing: Easing.inOut(Easing.sin) }
   ) : 1;
 
@@ -2054,13 +2070,15 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
           </div>
         </div>
 
-        {/* "Almost There" / "So Close!" / "The Final Push!" badge with glow */}
+        {/* "Almost There" / "So Close!" / "The Final Push!" / "History in the Making!" badge with glow */}
         <div
           style={{
             opacity: badgeOpacity,
             transform: `translateY(${badgeY}px) scale(${badgeScale * badgePulse})`,
-            padding: isCritical ? "16px 36px" : isAlmostThere ? "14px 32px" : isNearComplete ? "12px 28px" : "11px 24px",
-            background: isCritical
+            padding: isImminent ? "18px 42px" : isCritical ? "16px 36px" : isAlmostThere ? "14px 32px" : isNearComplete ? "12px 28px" : "11px 24px",
+            background: isImminent
+              ? "linear-gradient(165deg, rgba(0, 255, 136, 0.35) 0%, rgba(0, 255, 200, 0.18) 50%, rgba(0, 255, 136, 0.12) 100%)"
+              : isCritical
               ? "linear-gradient(165deg, rgba(0, 255, 136, 0.28) 0%, rgba(0, 255, 136, 0.1) 100%)"
               : isAlmostThere
               ? "linear-gradient(165deg, rgba(0, 255, 136, 0.22) 0%, rgba(0, 255, 136, 0.08) 100%)"
@@ -2068,25 +2086,29 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
               ? "linear-gradient(165deg, rgba(0, 255, 136, 0.15) 0%, rgba(0, 255, 136, 0.06) 100%)"
               : "linear-gradient(165deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 255, 136, 0.04) 100%)",
             borderRadius: 34,
-            border: isCritical
+            border: isImminent
+              ? "3px solid rgba(0, 255, 136, 0.6)"
+              : isCritical
               ? "2.5px solid rgba(0, 255, 136, 0.5)"
               : isAlmostThere
               ? "2px solid rgba(0, 255, 136, 0.4)"
               : isNearComplete
               ? "1.5px solid rgba(0, 255, 136, 0.28)"
               : "1px solid rgba(0, 255, 136, 0.18)",
-            boxShadow: `0 0 ${(isCritical ? 42 : isAlmostThere ? 35 : isNearComplete ? 28 : 22) * badgeGlow}px rgba(0, 255, 136, ${(isCritical ? 0.25 : isAlmostThere ? 0.2 : isNearComplete ? 0.15 : 0.1) * badgeGlow})`,
+            boxShadow: `0 0 ${(isImminent ? 55 : isCritical ? 42 : isAlmostThere ? 35 : isNearComplete ? 28 : 22) * badgeGlow}px rgba(0, 255, 136, ${(isImminent ? 0.32 : isCritical ? 0.25 : isAlmostThere ? 0.2 : isNearComplete ? 0.15 : 0.1) * badgeGlow})`,
           }}
         >
           <span
             style={{
-              fontSize: isCritical ? 18 : isAlmostThere ? 16 : isNearComplete ? 14 : 12,
+              fontSize: isImminent ? 20 : isCritical ? 18 : isAlmostThere ? 16 : isNearComplete ? 14 : 12,
               fontWeight: 900,
               color: "#00ff88",
               fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: isCritical ? 6 : isAlmostThere ? 5.5 : isNearComplete ? 5 : 4.5,
+              letterSpacing: isImminent ? 7 : isCritical ? 6 : isAlmostThere ? 5.5 : isNearComplete ? 5 : 4.5,
               textTransform: "uppercase",
-              textShadow: isCritical
+              textShadow: isImminent
+                ? "0 0 38px rgba(0, 255, 136, 0.75)"
+                : isCritical
                 ? "0 0 30px rgba(0, 255, 136, 0.65)"
                 : isAlmostThere
                 ? "0 0 25px rgba(0, 255, 136, 0.55)"
@@ -2156,8 +2178,8 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
             position: "relative",
           }}
         >
-          {/* Pulsing energy ring behind CTA for critical progress */}
-          {isCritical && frame > fps * 1.2 && (
+          {/* Pulsing energy ring behind CTA for critical/imminent progress */}
+          {(isCritical || isImminent) && frame > fps * 1.2 && (
             <>
               <div
                 style={{
