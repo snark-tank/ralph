@@ -8,12 +8,12 @@ const TWITTER_WIDTH = 1280;
 const TWITTER_HEIGHT = 720;
 const FPS = 30;
 
-// Default props for each video type - Updated with latest stats (2026-01-22 02:00)
+// Default props for each video type - Updated with latest stats (2026-01-22 02:32)
 const defaultStatsProps: StatsUpdateProps = {
   headline: "THE MONEY PRINTER GOES BRRR",
   stats: [
-    { value: "$49,077+", numericValue: 49077, prefix: "$", suffix: "+", label: "USD1 Distributed", color: "#00ff88" },
-    { value: "314+", numericValue: 314, suffix: "+", label: "Distributions", color: "#00d4ff" },
+    { value: "$49,265+", numericValue: 49265, prefix: "$", suffix: "+", label: "USD1 Distributed", color: "#00ff88" },
+    { value: "322+", numericValue: 322, suffix: "+", label: "Distributions", color: "#00d4ff" },
     { value: "1,077+", numericValue: 1077, suffix: "+", label: "Holders Earning", color: "#ff6b9d" },
   ],
   tagline: "Real yield from real trading fees",
@@ -23,7 +23,7 @@ const defaultStatsProps: StatsUpdateProps = {
 const defaultMilestoneProps: MilestoneAnnouncementProps = {
   milestone: "QE2",
   target: "$50,000",
-  current: "$49,077",
+  current: "$49,265",
   progress: 98,
   nextMilestone: "QE3 - $100,000",
 };

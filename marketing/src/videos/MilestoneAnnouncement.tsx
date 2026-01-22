@@ -171,7 +171,7 @@ const CinematicBackground: React.FC<{
 };
 
 // Scene 1: The Big Reveal - Apple-keynote style dramatic reveal with cinematic energy
-const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milestone, progress }) => {
+const RevealScene: React.FC<{ milestone: string; progress: number; current?: string; target?: string }> = ({ milestone, progress, current, target }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -510,6 +510,40 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
     [0, 70],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
+
+  // Calculate remaining amount for urgency display (only for critical progress)
+  const targetValue = target ? parseFloat(target.replace(/[$,]/g, "")) : 50000;
+  const currentValue = current ? parseFloat(current.replace(/[$,]/g, "")) : targetValue * (progress / 100);
+  const remainingAmount = Math.max(0, targetValue - currentValue);
+
+  // "Only $X to go!" - dramatic urgency counter for critical progress
+  const remainingDelay = 2.85;
+  const remainingOpacity = isCritical ? interpolate(
+    frame,
+    [remainingDelay * fps, (remainingDelay + 0.2) * fps],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : 0;
+  const remainingY = interpolate(
+    frame,
+    [remainingDelay * fps, (remainingDelay + 0.3) * fps],
+    [12, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+  // Remaining amount counts DOWN dramatically
+  const displayRemaining = interpolate(
+    frame,
+    [(remainingDelay + 0.05) * fps, (remainingDelay + 0.4) * fps],
+    [remainingAmount * 1.8, remainingAmount],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: (t) => 1 - Math.pow(1 - t, 3.5) }
+  );
+  // Remaining glow pulses with urgency
+  const remainingGlow = isCritical && frame > (remainingDelay + 0.25) * fps ? interpolate(
+    (frame - (remainingDelay + 0.25) * fps) % (fps * 0.8),
+    [0, fps * 0.2, fps * 0.8],
+    [0.7, 1.2, 0.7],
+    { easing: Easing.inOut(Easing.sin) }
+  ) : 0.7;
 
   // Screen shake effect when the "2" lands - adds weight and impact
   const shakeTime = numLandTime;
@@ -905,6 +939,62 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
             }}
           />
         </div>
+
+        {/* "Only $X to go!" urgency counter - only shows for critical progress */}
+        {isCritical && (
+          <div
+            style={{
+              opacity: remainingOpacity,
+              transform: `translateY(${remainingY}px) scale(${0.98 + 0.04 * remainingGlow})`,
+              marginTop: 22,
+              display: "flex",
+              alignItems: "center",
+              gap: 12,
+              padding: "14px 28px",
+              background: "linear-gradient(165deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)",
+              borderRadius: 40,
+              border: "1px solid rgba(255, 255, 255, 0.08)",
+              boxShadow: `0 0 ${25 * remainingGlow}px rgba(0, 255, 136, ${0.1 * remainingGlow})`,
+            }}
+          >
+            <span
+              style={{
+                fontSize: 14,
+                fontWeight: 600,
+                color: "#555555",
+                fontFamily: "system-ui, -apple-system, sans-serif",
+                letterSpacing: 3,
+                textTransform: "uppercase",
+              }}
+            >
+              Only
+            </span>
+            <span
+              style={{
+                fontSize: 32,
+                fontWeight: 900,
+                color: "#00ff88",
+                fontFamily: "system-ui, -apple-system, sans-serif",
+                letterSpacing: -1.5,
+                textShadow: `0 0 ${25 * remainingGlow}px rgba(0, 255, 136, ${0.5 * remainingGlow})`,
+              }}
+            >
+              ${Math.round(displayRemaining).toLocaleString()}
+            </span>
+            <span
+              style={{
+                fontSize: 14,
+                fontWeight: 600,
+                color: "#555555",
+                fontFamily: "system-ui, -apple-system, sans-serif",
+                letterSpacing: 3,
+                textTransform: "uppercase",
+              }}
+            >
+              to go
+            </span>
+          </div>
+        )}
       </AbsoluteFill>
     </AbsoluteFill>
   );
@@ -1537,6 +1627,60 @@ const ProgressScene: React.FC<{
                 />
               ))}
 
+              {/* Electric arc sparks between bar edge and 100% marker for critical progress */}
+              {isCritical && barProgress > 92 && (
+                <>
+                  {/* Arc 1 - vertical zigzag */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      right: Math.max(2, (100 - barProgress) / 100 * barWidthPx - 4),
+                      top: -8,
+                      width: 2,
+                      height: 16 + 8 * Math.sin(frame * 0.35),
+                      background: `linear-gradient(180deg, rgba(0, 255, 136, ${0.6 + 0.4 * Math.sin(frame * 0.5)}) 0%, rgba(0, 255, 230, 0.95) 50%, rgba(0, 255, 136, ${0.6 + 0.4 * Math.cos(frame * 0.4)}) 100%)`,
+                      borderRadius: 1,
+                      opacity: 0.6 + 0.4 * Math.sin(frame * 0.7 + 1),
+                      filter: `blur(${0.5 + 0.5 * Math.sin(frame * 0.4)}px)`,
+                      boxShadow: `0 0 ${8 + 4 * Math.sin(frame * 0.6)}px rgba(0, 255, 136, 0.8)`,
+                      pointerEvents: "none",
+                    }}
+                  />
+                  {/* Arc 2 - offset timing */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      right: Math.max(3, (100 - barProgress) / 100 * barWidthPx - 2),
+                      bottom: -6,
+                      width: 1.5,
+                      height: 12 + 6 * Math.cos(frame * 0.45 + 2),
+                      background: `linear-gradient(180deg, rgba(0, 212, 255, 0.9) 0%, rgba(255, 255, 255, 0.95) 50%, rgba(0, 212, 255, 0.9) 100%)`,
+                      borderRadius: 1,
+                      opacity: 0.5 + 0.5 * Math.sin(frame * 0.55 + 1.5),
+                      filter: `blur(${0.3 + 0.3 * Math.cos(frame * 0.5)}px)`,
+                      boxShadow: `0 0 ${6 + 3 * Math.cos(frame * 0.5)}px rgba(0, 212, 255, 0.7)`,
+                      pointerEvents: "none",
+                    }}
+                  />
+                  {/* Arc 3 - horizontal spark */}
+                  <div
+                    style={{
+                      position: "absolute",
+                      right: Math.max(1, (100 - barProgress) / 100 * barWidthPx - 8),
+                      top: "50%",
+                      transform: "translateY(-50%)",
+                      width: 10 + 6 * Math.sin(frame * 0.38),
+                      height: 1.5,
+                      background: `linear-gradient(90deg, rgba(0, 255, 136, 0.3), rgba(255, 255, 255, ${0.85 + 0.15 * Math.sin(frame * 0.4)}), rgba(0, 255, 230, 0.6))`,
+                      borderRadius: 1,
+                      opacity: (frame % 8 < 5) ? 0.7 + 0.3 * Math.sin(frame * 0.8) : 0.2,
+                      boxShadow: `0 0 ${5 + 3 * Math.sin(frame * 0.6)}px rgba(0, 255, 200, 0.6)`,
+                      pointerEvents: "none",
+                    }}
+                  />
+                </>
+              )}
+
               {/* Target marker at 100% - pulses with anticipation for high progress */}
               <div
                 style={{
@@ -2009,8 +2153,42 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
           style={{
             opacity: ctaOpacity,
             transform: `translateY(${ctaY}px) scale(${ctaScale})`,
+            position: "relative",
           }}
         >
+          {/* Pulsing energy ring behind CTA for critical progress */}
+          {isCritical && frame > fps * 1.2 && (
+            <>
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  width: 280,
+                  height: 65,
+                  borderRadius: 50,
+                  border: "1.5px solid rgba(0, 255, 136, 0.25)",
+                  transform: `translate(-50%, -50%) scale(${1 + 0.15 * ((frame - fps * 1.2) % (fps * 1.5) / (fps * 1.5))})`,
+                  opacity: Math.max(0, 0.5 - 0.5 * ((frame - fps * 1.2) % (fps * 1.5) / (fps * 1.5))),
+                  pointerEvents: "none",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  width: 280,
+                  height: 65,
+                  borderRadius: 50,
+                  border: "1px solid rgba(0, 255, 136, 0.18)",
+                  transform: `translate(-50%, -50%) scale(${1 + 0.12 * (((frame - fps * 1.2) + fps * 0.5) % (fps * 1.5) / (fps * 1.5))})`,
+                  opacity: Math.max(0, 0.35 - 0.35 * (((frame - fps * 1.2) + fps * 0.5) % (fps * 1.5) / (fps * 1.5))),
+                  pointerEvents: "none",
+                }}
+              />
+            </>
+          )}
           <div
             style={{
               padding: "19px 60px",
@@ -2115,7 +2293,7 @@ export const MilestoneAnnouncement: React.FC<MilestoneAnnouncementProps> = ({
     <TransitionSeries>
       {/* Reveal: 3.4s - Build anticipation, deliver milestone with percentage badge */}
       <TransitionSeries.Sequence durationInFrames={Math.round(3.4 * fps)}>
-        <RevealScene milestone={milestone} progress={progress} />
+        <RevealScene milestone={milestone} progress={progress} current={current} target={target} />
       </TransitionSeries.Sequence>
 
       <TransitionSeries.Transition
