@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $56,004+ Distributed (462 runs)
+**Current:** $56,042+ Distributed (464 runs)
 **Status:** IN PROGRESS
 
 ### Active Systems
@@ -48,6 +48,36 @@ Based on memecoin success research (BONK, PEPE, WIF), FED's gap is **lack of gro
 1. **Referral first** - Creates organic growth without marketing spend
 2. **Quests second** - Drives engagement and social sharing
 3. **Plan a community campaign** - "QE3 Distribution Party" at $75K milestone?
+
+### XP System Enhancement Priority (Research Update: Jan 22, 2026)
+
+Based on points program research (Blur, EigenLayer, Jupiter ASR), FED's XP system is **fundamentally healthier** than industry-standard points programs:
+
+**Why FED's XP System is Anti-Points-Fatigue:**
+| Problem with Points Programs | FED's Solution |
+|------------------------------|----------------|
+| 88% of airdropped tokens crash | Continuous USD1 flow (no TGE cliff) |
+| Sybil farmers dominate genuine users | Require real holdings + time + activity |
+| Uncertain rewards → disappointment | Guaranteed multiplier on guaranteed distributions |
+| Whale linear scaling dominates | Max 4.5x multiplier caps whale advantage |
+| Complex eligibility excludes users | Automatic - just hold = earn |
+
+**XP System Gaps to Address (All Built, Need Website/Activation):**
+
+| Enhancement | Status | Priority | Rationale |
+|-------------|--------|----------|-----------|
+| **XP Leaderboard** | Website change needed | **HIGH** | Blur/Hyperliquid leaderboards create social proof & competition |
+| **Quest-based XP earning** | `fed-quests.ts` built | **HIGH** | Jupiter ASR requires action (voting); quests add meaningful engagement |
+| **Referral → XP integration** | `referral-bonus.ts` built | **HIGH** | Jupiter referrals give initial + ongoing XP as referrals engage |
+| **Seasonal XP events** | `season-tracker.ts` built | MEDIUM | Blur seasons created urgency without TGE anxiety |
+
+**Key Research Insight:** "FED's XP system is a loyalty multiplier, not an airdrop proxy. This is fundamentally healthier than points-to-token conversion."
+
+**What to Avoid (Industry Failures):**
+- ❌ No points → token conversion (creates disappointment)
+- ❌ No linear scaling with capital (whale trap)
+- ❌ No opaque allocation rules (destroys trust)
+- ❌ No time-limited claim windows (creates anxiety)
 
 ---
 
@@ -348,6 +378,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Seigniorage / algorithmic peg | Tomb Finance postmortem | **COMPLETE** - Jan 22 research (REJECTED) |
 | Hyperliquid buyback model | Study largest DEX fee mechanics | **COMPLETE** - Jan 22 research (VALIDATES FED) |
 | Tokemak liquidity direction | DeFi 2.0 postmortem, emission-based models | **COMPLETE** - Jan 22 research (VALIDATES FED) |
+| Points programs / XP systems | Blur, EigenLayer, Jupiter ASR analysis | **COMPLETE** - Jan 22 research (VALIDATES FED XP) |
 
 ### Research Findings Summary (Jan 22, 2026)
 
@@ -374,6 +405,16 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - BONK success: 50% of supply to users (not insiders), 350+ integrations, burns
 - Diamond hands psychology: Conviction from understanding, community support, shared experience
 - **Recommendation:** Activate built systems (quests, seasons, referrals) + add leaderboard visibility
+
+**Points Programs & Airdrop Analysis (Jan 22, 2026):**
+- Industry experiencing "points fatigue": 88% of airdropped tokens crash within 15 days
+- Blur captured market share but volume declined post-seasons (mercenary capital)
+- EigenLayer/Ethena succeeded by layering points atop REAL value (not promises)
+- Jupiter ASR model: Rewards require action (voting), funded by real revenue (launchpad fees)
+- Sybil farming dominates: One 2024 airdrop saw 70% claimed by fake accounts
+- **Key Insight:** "FED's XP system is a loyalty multiplier, not an airdrop proxy—fundamentally healthier"
+- FED advantages: No TGE cliff, no uncertain rewards, continuous USD1 flow, multiplier caps
+- **Recommendation:** Add leaderboard visibility, activate quests for XP, integrate referrals with XP
 
 **Scaling Research (Jan 22, 2026):**
 - Current push model works well to ~10K holders with optimization
