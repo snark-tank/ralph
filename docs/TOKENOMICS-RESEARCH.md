@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $59,049+ USD1
-- **Distribution Count:** 551 distributions
+- **Total Distributed:** $59,129+ USD1
+- **Distribution Count:** 553 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -12514,3 +12514,246 @@ Based on this research, FED's positioning should emphasize:
 - [DefiLlama: Anchor Protocol](https://defillama.com/protocol/anchor)
 
 ---
+
+## 2026-01-22 22:30 UTC: Real Yield Protocol Comparison - Trader Joe, Camelot, and Industry Best Practices
+
+### Research Focus
+How do the leading real yield protocols structure their fee distribution? What can FED learn from Trader Joe's sJOE model and Camelot's xGRAIL system?
+
+---
+
+### Trader Joe sJOE Model Analysis
+
+**Protocol Overview:**
+- Leading DEX on Avalanche, Arbitrum, and BNB Chain
+- Current TVL: ~$150M
+- 24h Volume: ~$175M
+- JOE Token Price: ~$0.06
+
+**Fee Distribution Mechanism:**
+
+| Metric | Value |
+|--------|-------|
+| Swap Fee | 0.3% total |
+| LP Share | 0.25% |
+| sJOE Stakers | 0.05% |
+| Distribution Token | USDC (not JOE) |
+| Staking Required | Yes (stake JOE → sJOE) |
+| Deposit Fee | 1% |
+
+**How sJOE Works:**
+1. Users stake JOE tokens to receive sJOE
+2. Protocol collects 0.05% of all swap fees
+3. Fees converted to USDC (real yield, not token emissions)
+4. USDC distributed to sJOE stakers proportionally
+5. Harvest available at any time
+6. Multi-chain: Stake on any supported chain, earn from all chains
+
+**Key Innovation: Modular Staking**
+
+Trader Joe split staking into independent functions:
+- **sJOE** → Share of protocol revenue (real yield)
+- **veJOE** → Boosted farming rewards (up to 2.5x)
+- **rJOE** → Launchpad access (deprecated)
+
+Quote from GBV Capital: "People want their DEX tokens to be modular in their function, and they want to price those functions independently."
+
+**veJOE Mechanics:**
+- Lock JOE → receive veJOE
+- Longer locks = more veJOE
+- Up to +150% (2.5x) farming yield boost
+- **Critical:** Unstaking ANY JOE = lose ALL veJOE
+- Creates "golden handcuffs" for committed holders
+
+**FED Application:**
+- FED's tier system achieves similar modularity (holding amount → multiplier)
+- We DON'T require staking (simpler UX, our differentiator)
+- Our 4.5x max multiplier is comparable to veJOE's 2.5x
+- Key difference: FED distributes to ALL holders; Trader Joe only to stakers
+
+**Sources:**
+- [Trader Joe Analytics](https://analytics.traderjoexyz.com/)
+- [JOE Tokenomics Revamp - Blue](https://joecontent.substack.com/p/joe-tokenomics-revamp)
+- [Weiss Ratings: 3 Ways to Earn Real Yield with Trader Joe](https://weissratings.com/en/weiss-crypto-daily/3-ways-to-earn-real-yield-with-trader-joe)
+- [Exponential DeFi: Trader Joe](https://exponential.fi/protocols/trader-joe/c4b5e7f5-0800-40ef-ba5e-8502ffad73bf)
+
+---
+
+### Camelot xGRAIL Model Analysis
+
+**Protocol Overview:**
+- Native Arbitrum DEX, deployed on 15+ Orbit chains
+- 30-day Volume: ~$2.04B
+- Strong Arbitrum ecosystem integration
+- Revenue from ALL chains flows to GRAIL stakers
+
+**Fee Distribution Mechanism:**
+
+| Metric | Value |
+|--------|-------|
+| Real Yield Plugin | Majority of protocol earnings |
+| Distribution | Continuous (reward/second) |
+| Epoch Duration | Weekly |
+| Deallocation Fee | 0.5% |
+| Lock Required | Convert GRAIL → xGRAIL |
+
+**How xGRAIL Works:**
+1. Convert GRAIL → xGRAIL (1:1, instant)
+2. Allocate xGRAIL to "Real Yield Staking" plugin
+3. Receive continuous distributions (per-second)
+4. To convert back: 14 days to 6 months vesting
+
+**Key Innovation: Plugin Architecture**
+
+xGRAIL isn't just for yield - it's an allocation token for multiple plugins:
+- **Real Yield Staking** → Share of protocol revenue
+- **Yield Booster** → Boost farming positions (spNFTs)
+- **Governance** → Voting rights
+- **Future plugins** → Extensible system
+
+**Recent Development (Jan 2025):**
+"Now deployed on over 15 Orbit chains, revenue from the entire network is captured by $GRAIL stakers."
+
+This is significant - Camelot aggregates revenue from an entire L2 ecosystem, not just one DEX.
+
+**FED Application:**
+- Camelot's per-second distribution mirrors FED's ~2-minute model
+- Weekly epochs vs FED's continuous - we're MORE frequent
+- Plugin architecture is complex; FED's simplicity is intentional
+- Their multi-chain revenue aggregation is interesting for future (if FED expands)
+
+**Sources:**
+- [Camelot Docs: Real Yield Staking](https://docs.camelot.exchange/protocol/xgrail-plugins/real-yield-staking)
+- [Camelot xGRAIL App](https://app.camelot.exchange/xgrail/staking)
+- [CamelotDEX Twitter](https://x.com/CamelotDEX/status/1888944451571085690)
+
+---
+
+### Industry Real Yield Comparison (2025 Metrics)
+
+| Protocol | Model | TVL | Fee Share | Distribution | Notes |
+|----------|-------|-----|-----------|--------------|-------|
+| **GMX** | GLP/GLV | $2.5B | 70% to LPs, 30% to stakers | ETH/AVAX (real yield) | Gold standard for perp DEX |
+| **Pendle** | sPENDLE | $8.27B | Up to 80% buybacks | PENDLE | Yield tokenization leader |
+| **Trader Joe** | sJOE | $150M | 0.05% of swaps | USDC | Multi-chain, modular |
+| **Camelot** | xGRAIL | ~$100M | Majority of fees | Multi-token | Plugin architecture |
+| **FED** | Direct | ~$60K dist | 100% to holders | USD1 | No staking required |
+
+**Key Insight:** FED's "no staking required" model is UNIQUE among real yield protocols. Every other project requires an additional action (stake, lock, convert). FED just pays holders.
+
+---
+
+### 2025 Real Yield Best Practices (Industry Consensus)
+
+**What Defines "Real Yield":**
+1. Returns from genuine protocol activity (fees, interest)
+2. Not dependent on token emissions/inflation
+3. Paid in established assets (ETH, USDC, stablecoins)
+4. Sustainable through market cycles
+
+**Sustainable Tokenomics Principles:**
+
+| Principle | Description | FED Status |
+|-----------|-------------|------------|
+| Revenue-backed | Tie rewards to actual protocol income | ✅ LP fees |
+| Emission caps | Limit or eliminate inflationary rewards | ✅ No emissions |
+| Transparent | On-chain verifiable distributions | ✅ Every 2 min |
+| Governance adaptable | Community can adjust parameters | ❌ Ralph-controlled |
+| Multi-cycle viable | Works in bull AND bear markets | ✅ Fee-based |
+
+**Quote from Binance Academy:**
+"Real yield is generally considered less risky than traditional DeFi yield because it is backed by actual revenue rather than newly minted tokens."
+
+**The DeFi 3.0 Shift:**
+> "Rather than attracting short-term capital with high emissions, DeFi 2.0/3.0 aims to own liquidity, increase capital efficiency, reduce user friction, and connect to real-world value."
+
+FED aligns with this philosophy - we're not competing on APY promises, we're distributing actual generated fees.
+
+**Sources:**
+- [Binance Academy: What Is Real Yield in DeFi](https://academy.binance.com/en/articles/what-is-real-yield-in-defi)
+- [Digitap: The Rise of DeFi 3.0](https://digitap.app/news/market-analysis/the-rise-of-defi-3-0-sustainable-yield-models-explained)
+- [Smart Liquidity: Tokenomics in DeFi](https://smartliquidity.info/2025/09/12/tokenomics-in-defi-incentive-designs-impact-on-protocol-growth/)
+- [Zeebu: Understanding Real Yield](https://www.zeebu.com/blog/understanding-real-yield-in-defi)
+
+---
+
+### FED Competitive Position Analysis
+
+**Where FED Excels:**
+
+1. **Zero-Friction Distribution**
+   - Trader Joe: Stake → earn
+   - Camelot: Convert → allocate → earn
+   - GMX: Stake → earn
+   - **FED: Hold → earn** (simplest in industry)
+
+2. **Distribution Frequency**
+   - Industry standard: Weekly/Monthly claims
+   - Camelot: Per-second (continuous)
+   - **FED: Push every ~2 minutes** (best UX for holders)
+
+3. **Stablecoin Yield**
+   - GMX: ETH/AVAX (volatile)
+   - Trader Joe: USDC (stable)
+   - **FED: USD1 (stable)** - holders receive immediate, liquid value
+
+4. **No Lock-Up Required**
+   - veJOE/xGRAIL: Locking = better rewards
+   - **FED: No locking** - but tier multipliers reward size
+
+**Where FED Could Improve:**
+
+1. **Multi-Chain Aggregation** (Camelot model)
+   - If FED expands to other chains, aggregate all revenue to holders
+
+2. **Yield Boosting Options** (veJOE model)
+   - Time-lock system is BUILT but not heavily utilized
+   - Could make time-locks more attractive (higher multipliers)
+
+3. **Governance** (Industry standard)
+   - Most protocols have token-holder governance
+   - FED: Ralph decides (simpler, but less decentralized)
+   - Note: For a memecoin, Ralph-controlled may be BETTER (faster decisions, no governance attacks)
+
+---
+
+### Research Conclusions
+
+**Validation of FED Design:**
+
+1. **"Just hold = earn" is correct** - We're the ONLY major real yield protocol that doesn't require staking
+2. **2-minute distributions are differentiating** - No one else pushes this frequently
+3. **USD1 (stablecoin) payments are correct** - Same as Trader Joe's USDC model
+4. **Tier multipliers are industry-standard** - veJOE, xGRAIL all have tiered benefits
+
+**What NOT to Copy:**
+
+1. **Don't add mandatory staking** - Our simplicity is the moat
+2. **Don't add complex plugin systems** - Camelot's plugins are powerful but complex
+3. **Don't add long vesting** - xGRAIL's 6-month max vesting would hurt memecoin holders
+
+**Potential QE4+ Considerations:**
+
+1. **Enhanced Time-Lock Rewards** - Make existing time-lock feature more attractive
+2. **Multi-Chain Preparation** - If FED ever expands, aggregate all chain revenue
+3. **Yield Boost for Engagement** - XP/Quest system could provide temporary boost periods
+
+**Bottom Line:**
+FED's model is validated by industry comparison. We've achieved "real yield" status with the SIMPLEST user experience in the sector. Complexity is not needed - simplicity IS our competitive advantage.
+
+---
+
+### Action Items
+
+1. [x] Research Trader Joe sJOE model
+2. [x] Research Camelot xGRAIL model
+3. [x] Compare real yield industry standards
+4. [ ] Consider time-lock enhancement proposal (low priority)
+5. [ ] Monitor Camelot multi-chain revenue model as reference
+6. [ ] Update roadmap: Note FED's competitive position vs industry
+
+---
+
+*Research completed: 2026-01-22 22:30 UTC*
+*Next research topic: Consider Gains Network gDAI or Curve veCRV bribe markets*
+

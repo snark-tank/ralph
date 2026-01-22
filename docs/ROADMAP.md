@@ -10,8 +10,8 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $59,049+ Distributed (551 runs)
-**Status:** IN PROGRESS (59.0%)
+**Current:** $59,129+ Distributed (553 runs)
+**Status:** IN PROGRESS (59.1%)
 
 ### Active Systems
 
@@ -306,8 +306,23 @@ Based on points program research (Blur, EigenLayer, Jupiter ASR), FED's XP syste
 | Raydium | 12% (buyback) | Buyback & hold | FED: 100% direct (8x higher allocation) |
 | GMX | 30% (stakers) | Fee sharing | FED: 100% direct (no staking required) |
 | Pendle | 80% (buyback) | Buyback & rewards | FED: Simpler model, no locking |
-| Trader Joe (sJOE) | 17% (USDC) | Daily distribution | FED: 100% + 2-min frequency (6x higher % + faster) |
-| Camelot (xGRAIL) | 17-22% (fee share) | Plugin allocation | FED: Auto distribution (no allocation friction) |
+| Trader Joe (sJOE) | 0.05% swap fee to USDC | Stake JOE → sJOE | FED: No staking required, 100% to holders |
+| Camelot (xGRAIL) | Revenue share via plugins | Convert GRAIL → xGRAIL → allocate | FED: Auto distribution (no conversion/allocation) |
+
+**Industry Comparison Update (Jan 22, 2026 Research):**
+
+FED's competitive position vs leading real yield protocols:
+
+| Feature | Trader Joe | Camelot | GMX | **FED** |
+|---------|------------|---------|-----|---------|
+| **Staking Required?** | Yes (JOE → sJOE) | Yes (GRAIL → xGRAIL) | Yes (stake GMX/GLP) | **NO** |
+| **Lock-up Required?** | veJOE: Optional but loses all on unstake | 14d-6mo vesting out | esGMX vesting | **NONE** |
+| **Distribution Frequency** | USDC every few days | Per-second (weekly epochs) | Continuous accrual | **Every ~2 min (push)** |
+| **Claim Action Needed?** | Yes (harvest) | Yes (claim) | Yes (claim) | **NO (auto-push)** |
+| **Distribution Token** | USDC | Various | ETH/AVAX | **USD1** |
+| **Complexity** | Modular (3 stake types) | Plugin architecture | GLP/GLV pools | **Simple (just hold)** |
+
+**Key Competitive Insight:** FED is the ONLY major real yield protocol that requires zero user action. No staking, no locking, no claiming, no conversion. "Just hold = earn" is our moat.
 
 **Key Validation:** FED distributes MORE value to holders (100% vs 12-54%) with LESS friction (no staking). The trade-off is lower absolute scale, which is expected for a memecoin. Our model is sound.
 
