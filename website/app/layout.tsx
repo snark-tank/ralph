@@ -19,8 +19,22 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Ralph's $FED Dashboard",
-  description: "The Federal Reserve Money Printer - Live Progress & Research",
+  title: "Ralph's $FED Dashboard | Real Yield Distribution on Solana",
+  description: "The autonomous money printer distributing real USD1 yield to $FED holders. No inflation, no ponzinomics - just trading fees distributed every 2 minutes on Solana.",
+  keywords: ["FED", "Solana", "DeFi", "yield", "USD1", "stablecoin", "rewards", "distribution"],
+  openGraph: {
+    title: "Ralph's Federal Reserve | $FED",
+    description: "Autonomous agent distributing real yield to $FED holders every 2 minutes",
+    url: "https://fed.markets",
+    siteName: "fed.markets",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Ralph's Federal Reserve | $FED",
+    description: "Real yield from trading fees, distributed automatically every 2 minutes",
+    creator: "@fed_USD1",
+  },
 };
 
 function Navigation() {
