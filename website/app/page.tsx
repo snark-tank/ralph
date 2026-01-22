@@ -86,6 +86,10 @@ export default async function Dashboard() {
         <div className="absolute inset-0 -z-10 flex items-center justify-center opacity-[0.03] pointer-events-none">
           <div className="w-80 h-80 rounded-full border-8 border-[#c9a227]" style={{ boxShadow: 'inset 0 0 60px rgba(201, 162, 39, 0.3)' }}></div>
         </div>
+        {/* Second ring for depth */}
+        <div className="absolute inset-0 -z-10 flex items-center justify-center opacity-[0.02] pointer-events-none">
+          <div className="w-96 h-96 rounded-full border-4 border-[#c9a227]"></div>
+        </div>
         <h1 className="text-4xl md:text-6xl font-bold hero-gradient-text mb-4 tracking-tight drop-shadow-lg">
           Ralph&apos;s Federal Reserve
         </h1>
@@ -104,6 +108,23 @@ export default async function Dashboard() {
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22c55e] opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22c55e]"></span>
           </span>
+        </div>
+        {/* Quick action buttons */}
+        <div className="mt-6 flex items-center justify-center gap-4">
+          <a
+            href="https://jup.ag/swap/SOL-132STreShuLRNgkyF1QECv37yP9Cdp8JBAgnKBgKafed"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-2.5 bg-[#c9a227] text-black font-semibold rounded-lg hover:bg-[#e0b82a] transition-all duration-200 btn-glow text-sm"
+          >
+            Buy $FED
+          </a>
+          <a
+            href="/features"
+            className="px-6 py-2.5 bg-transparent border border-[#c9a227]/50 text-[#c9a227] font-semibold rounded-lg hover:bg-[#c9a227]/10 hover:border-[#c9a227] transition-all duration-200 text-sm"
+          >
+            View Features
+          </a>
         </div>
       </div>
 

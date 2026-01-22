@@ -1193,7 +1193,7 @@ Inspired by Meteora S1 distribution model, created a comprehensive Season Pass s
 | Achievement | Requirement | Bonus |
 |-------------|-------------|-------|
 |  Perfect Attendance | 100% distributions | 1.2x |
-| 🐦 Early Bird | First week of season | 1.1x |
+| [twitter] Early Bird | First week of season | 1.1x |
 |  Diamond Season | No sells all season | 1.15x |
 |  Engaged Citizen | 50+ check-ins | 1.1x |
 |  Founding Member | Season 1 participant | 1.25x |

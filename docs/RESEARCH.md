@@ -2731,9 +2731,9 @@ Unlike veCRV (hard lock), Fed Time Lock is a "soft commitment" system:
 |------|------|----------|------------|----------|------------|
 |  | Fed Pledge | 7 days | 1.05x | +5 | -10 |
 |  | Fed Promise | 30 days | 1.15x | +15 | -25 |
-| ⚖️ | Fed Oath | 90 days | 1.3x | +35 | -50 |
-| 💍 | Fed Vow | 180 days | 1.5x | +60 | -80 |
-| 📜 | Fed Covenant | 365 days | 1.75x | +100 | -120 |
+| [Oath] | Fed Oath | 90 days | 1.3x | +35 | -50 |
+| [Vow] | Fed Vow | 180 days | 1.5x | +60 | -80 |
+| [Covenant] | Fed Covenant | 365 days | 1.75x | +100 | -120 |
 |  | Fed Bond | 730 days | 2.0x | +200 | -250 |
 
 *CS = Credit Score*
@@ -3035,7 +3035,7 @@ Applications cover gas fees while monetizing through other channels. $FED's all-
   "projectedMonthly": 0.103,
   "projectedYearly": 1.24,
   "printerStatus": "brrr",
-  "printerEmoji": "🖨️",
+  "printerEmoji": "[printer]",
   "calculationMethod": "Real yield from trading fees - no inflation, no promises"
 }
 ```
@@ -3055,7 +3055,7 @@ Applications cover gas fees while monetizing through other channels. $FED's all-
 | Transparent Metrics | On-chain verifiable |  API + dashboard |
 | Sustainable Tokenomics | No inflation |  Fixed supply |
 | User Experience | Simple interface |  Auto-distribution |
-| Governance | Token voting | 🔜 Future consideration |
+| Governance | Token voting | -> Future consideration |
 | Cross-Chain | Multi-chain |  Solana-focused (simpler) |
 
 ### Sources
@@ -3179,7 +3179,7 @@ npx ts-node sybil-detector.ts --stats --json
 **Example Analysis Output:**
 ```
 ╔══════════════════════════════════════════════════════════════════╗
-║                   🔍 FED SYBIL ANALYSIS REPORT 🔍                 ║
+║                   [search] FED SYBIL ANALYSIS REPORT [search]                 ║
 ╚══════════════════════════════════════════════════════════════════╝
 
  Analysis Date: 1/21/2026, 3:45:00 PM

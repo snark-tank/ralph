@@ -36,7 +36,7 @@ Track how long holders continuously hold $FED and reward loyalty with bonus mult
   - Streak multipliers now STACK with tier multipliers
   - Combined multiplier = tier × streak (e.g., 1.5x Chairman × 1.25x Founding Father = 1.875x)
   - Full stats logging for both tier and streak distributions
-- 🔜 Add streak display to website dashboard
+- -> Add streak display to website dashboard
 
 **Usage:**
 ```bash
@@ -115,7 +115,7 @@ Display an estimated "Fed Funds Rate" showing projected annual return based on:
 -  Multiple time period rates (24h, 7d, 30d)
 -  Tier-aware calculations with multiplier support
 -  Estimated reward projections (daily/monthly/yearly)
-- 🔜 Add to website dashboard (future)
+- -> Add to website dashboard (future)
 
 **Usage:**
 ```bash
@@ -158,8 +158,8 @@ Create tiered multipliers for reward distribution:
 
 **Implementation:**  DONE
 -  Modified distribution script to apply multipliers
-- 🔜 Add tier display to website (future)
-- 🔜 Create shareable "Fed ID Card" NFT for each tier (future)
+- -> Add tier display to website (future)
+- -> Create shareable "Fed ID Card" NFT for each tier (future)
 
 **Technical Details:**
 - Weighted share calculation: `baseShare * multiplier / totalWeightedShare`
@@ -220,7 +220,7 @@ Special distribution events when milestones are hit:
 -  JSON output for API/website integration
 -  Auto-save announcements to milestone-announcements/ folder
 -  Bonus multipliers integrated into distribution logic (Jan 21, 2026)
-- 🔜 Add milestone display to website (future)
+- -> Add milestone display to website (future)
 
 **Usage:**
 ```bash
@@ -317,8 +317,8 @@ Allow holders to opt-in to auto-reinvest their USD1 rewards back into $FED:
 -  Statistics tracking (total registered, compound history)
 -  JSON output for API/website integration
 -  Comprehensive CLI interface
-- 🔜 Phase 2: Jupiter swap integration in distribution script
-- 🔜 Phase 3: Website UI for preference management
+- -> Phase 2: Jupiter swap integration in distribution script
+- -> Phase 3: Website UI for preference management
 
 **Usage:**
 ```bash
@@ -381,7 +381,7 @@ Titano's genius was making balance growth VISIBLE and addictive. We can adopt th
 │  Current BRRR Rate: 32.5% APY        │
 │  Next Distribution: ~1h 23m          │
 │                                      │
-│  [🖨️ BRRR BRRR BRRR...]             │ ← animation
+│  [[printer] BRRR BRRR BRRR...]             │ ← animation
 └──────────────────────────────────────┘
 ```
 
@@ -481,7 +481,7 @@ of monetary conditions, has maintained the Fed Funds Rate.
    Distribution Events:   18
    Avg Recipients/Dist:   309
 
-🖨️ PRINTER STATUS: brrr brrr 
+[printer] PRINTER STATUS: brrr brrr 
 
                             - Ralph, Chairman of the Fed
 ```
@@ -509,7 +509,7 @@ Borrow the engaging "node" terminology from NaaS without the broken economics. I
 ```
 Your Fed Reserve Status
 ═══════════════════════════════════════
-Active Nodes: 3 🖨️
+Active Nodes: 3 [printer]
 ├── Regional Reserve (100K $FED) - $0.42/day
 ├── Regional Reserve (100K $FED) - $0.42/day
 └── District Bank (500K $FED) - $2.31/day
@@ -690,7 +690,7 @@ Reward holders who actively engage with the protocol, not just passive hodlers. 
   - Combined: tier × streak × engagement (max 2.25x)
   - +5 XP awarded per distribution received
   - Full engagement tier stats in distribution logs
-- 🔜 Add engagement widget to website dashboard
+- -> Add engagement widget to website dashboard
 
 **Usage:**
 ```bash
@@ -769,8 +769,8 @@ Multi-level referral tracking that rewards $FED holders for bringing new members
 -  Retention rate tracking per referrer
 -  Leaderboard generation for top referrers
 -  JSON API output for website integration
-- 🔜 Website referral link generator (future)
-- 🔜 Integration into distribution script (next iteration)
+- -> Website referral link generator (future)
+- -> Integration into distribution script (next iteration)
 
 **Usage:**
 ```bash
@@ -889,8 +889,8 @@ Optionally allocate a small percentage of collected fees to buy and burn $FED to
 -  Simulation mode for quote-only checks
 -  Stats tracking (total burned, average price, history)
 -  Safety limits (min amount, max % per buyback)
-- 🔜 Auto-scheduled buybacks (future consideration)
-- 🔜 Governance voting for buyback % (future)
+- -> Auto-scheduled buybacks (future consideration)
+- -> Governance voting for buyback % (future)
 
 **Usage:**
 ```bash
@@ -1022,7 +1022,7 @@ Create quarterly "seasons" with bonus multipliers for consistent participation. 
 | Achievement | Requirement | Bonus |
 |-------------|-------------|-------|
 |  Perfect Attendance | 100% distributions | 1.2x |
-| 🐦 Early Bird | First week of season | 1.1x |
+| [twitter] Early Bird | First week of season | 1.1x |
 |  Diamond Season | No sells all season | 1.15x |
 |  Engaged Citizen | 50+ check-ins | 1.1x |
 |  Founding Member | Season 1 participant | 1.25x |
@@ -1043,9 +1043,9 @@ Create quarterly "seasons" with bonus multipliers for consistent participation. 
 -  Season leaderboard generation
 -  Individual status lookup
 -  JSON output for API/website integration
-- 🔜 Integrate season tracking into distribution script
-- 🔜 Add season progress widget to website dashboard
-- 🔜 Create season-end celebration announcements
+- -> Integrate season tracking into distribution script
+- -> Add season progress widget to website dashboard
+- -> Create season-end celebration announcements
 
 **Usage:**
 ```bash
@@ -1147,21 +1147,21 @@ Report Date: 2026-01-21
   Loyalty:     ████████████░░░░░░░░ 60/100
   Consistency: █████████████████░░░ 85/100
 
-🔐 TRUSTWORTHINESS INDEX
+[lock] TRUSTWORTHINESS INDEX
 ────────────────────────────────────────
   Index: 82/100
   High trustworthiness - Reliable community member
 
-🎖️ BADGES
+[badge] BADGES
 ────────────────────────────────────────
    Diamond Hands (30+ days)
    Engaged Member (100+ XP)
 
  BENEFITS AT THIS TIER
 ────────────────────────────────────────
-  ✓ High distribution multiplier (1.2x)
-  ✓ Early access to new features
-  ✓ Fed Elite badge on dashboard
+  [done] High distribution multiplier (1.2x)
+  [done] Early access to new features
+  [done] Fed Elite badge on dashboard
 ```
 
 **Why This Works:**
@@ -1259,7 +1259,7 @@ A comprehensive quest system that rewards holders for completing various tasks, 
 **Quest Categories:**
 | Category | Purpose | Example Quests |
 |----------|---------|----------------|
-| 🎓 Onboarding | First-time actions | Hold $FED, First distribution, Enable auto-compound |
+| [graduate] Onboarding | First-time actions | Hold $FED, First distribution, Enable auto-compound |
 |  Daily | Repeatable engagement | Daily check-in (+10 XP) |
 |  Achievement | Milestones | 7/30/90/365-day streaks, tier achievements |
 |  Social | Community building | Referrals, season participation |
@@ -1292,9 +1292,9 @@ A comprehensive quest system that rewards holders for completing various tasks, 
 -  Repeatable daily quests with cooldowns
 -  Global leaderboard and stats
 -  JSON API output for website integration
-- 🔜 Integrate quest completion into distribution script
-- 🔜 Add quest board widget to website dashboard
-- 🔜 Create challenge quests for special events
+- -> Integrate quest completion into distribution script
+- -> Add quest board widget to website dashboard
+- -> Create challenge quests for special events
 
 **Usage:**
 ```bash
@@ -1382,9 +1382,9 @@ A voluntary commitment system where holders can "lock" their intention to hold f
 |------|------|----------|------------|----------|------------|
 |  | Fed Pledge | 7 days | 1.05x | +5 | -10 |
 |  | Fed Promise | 30 days | 1.15x | +15 | -25 |
-| ⚖️ | Fed Oath | 90 days | 1.3x | +35 | -50 |
-| 💍 | Fed Vow | 180 days | 1.5x | +60 | -80 |
-| 📜 | Fed Covenant | 365 days | 1.75x | +100 | -120 |
+| [Oath] | Fed Oath | 90 days | 1.3x | +35 | -50 |
+| [Vow] | Fed Vow | 180 days | 1.5x | +60 | -80 |
+| [Covenant] | Fed Covenant | 365 days | 1.75x | +100 | -120 |
 |  | Fed Bond | 730 days | 2.0x | +200 | -250 |
 
 *CS = Credit Score*
@@ -1515,9 +1515,9 @@ A comprehensive wallet analysis system that detects potential Sybil attackers by
 -  Individual wallet analysis
 -  Full holder report generation
 -  JSON API output for website integration
-- 🔜 Integrate into distribution script for reward penalties
-- 🔜 Add sybil status to website dashboard
-- 🔜 Implement funding cluster auto-detection from blockchain
+- -> Integrate into distribution script for reward penalties
+- -> Add sybil status to website dashboard
+- -> Implement funding cluster auto-detection from blockchain
 
 **Usage:**
 ```bash
@@ -1562,7 +1562,7 @@ npx ts-node sybil-detector.ts --stats --json
 Award "Fed Verified" badges to wallets that pass anti-sybil checks with high legitimacy scores. Badges visible on dashboard and potentially as on-chain attestations.
 
 **Badge Tiers:**
-- 🔵 Fed Verified (80+ legitimacy)
+- - Fed Verified (80+ legitimacy)
 -  Fed Trusted (90+ legitimacy + 30+ days)
 -  Fed OG (95+ legitimacy + 90+ days + Chairman tier)
 
