@@ -482,6 +482,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Raydium RAY buyback model | Solana DEX fee distribution, LaunchLab analysis | **COMPLETE** - Jan 22 research (VALIDATES FED 100% distribution) |
 | Aerodrome ve(3,3) at scale | Base DEX fee distribution, Slipstream, merger strategy | **COMPLETE** - Jan 22 research (VALIDATES FED simplicity) |
 | Camelot xGRAIL plugin system | Arbitrum DEX real yield, exit penalties, allocation | **COMPLETE** - Jan 22 research (VALIDATES FED simplicity) |
+| OlympusDAO (3,3) postmortem | Rebase tokenomics, death spiral, Wonderland scandal | **COMPLETE** - Jan 22 research (VALIDATES FED real yield) |
 
 ### Research Findings Summary (Jan 22, 2026)
 

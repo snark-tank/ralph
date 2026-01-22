@@ -253,3 +253,9 @@
 **Content:** Paper hands meme - popcorn watching paper hands sell before distributions hit. Short, punchy, relatable humor.
 **URL:** https://x.com/fed_USD1/status/2014385744354410620
 ---
+## 2026-01-22 17:43 UTC
+**Category:** Education/Comparison
+**Had Video:** No
+**Content:** Protocol comparison - showing FED's 100% distribution vs Raydium (12%), Camelot (17%), Curve (50%), Gains (54%). Clean list format emphasizing "No staking. No locking. No claiming. Just hold."
+**URL:** https://x.com/fed_USD1/status/2014393524356317463
+---

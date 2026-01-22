@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $58,243+ USD1
-- **Distribution Count:** 518 distributions
+- **Total Distributed:** $58,292+ USD1
+- **Distribution Count:** 521 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -8973,4 +8973,280 @@ Distribution: 50% of collected fees → holders
 ---
 
 *Research completed: 2026-01-22 ~17:30 UTC*
+
+## 2026-01-22 17:26 UTC: OlympusDAO (OHM) & Rebase Token Postmortem
+
+### Research Focus
+Deep analysis of OlympusDAO's (3,3) model, its collapse, the Wonderland (TIME) scandal, and lessons for FED's tokenomics design.
+
+---
+
+### OlympusDAO Background
+
+**Peak Stats (Nov 2021):**
+- ATH Price: $1,415 per OHM
+- Market Cap: $4.4B
+- APY Offered: 7,000%+ (at peak)
+- Forks: 100+ clones across chains
+
+**Current State (Jan 2026):**
+- Price: ~$21 (97% decline from ATH)
+- Market Cap: ~$354M
+- TVL: ~$237M
+- Treasury: $159M
+- Circulating Supply: 16.4M OHM (now DEFLATIONARY at -4.58%/year)
+- Team: 8 employees
+
+**Key Observation:** OlympusDAO still exists and has pivoted significantly. They've deployed on Ethereum, Arbitrum, Base, Berachain, and Solana via Chainlink CCIP (June 2025). But the "DeFi 2.0" dream is dead—they're now just another yield protocol.
+
+---
+
+### The (3,3) Game Theory Model Explained
+
+**How It Worked:**
+
+The model borrowed from game theory's prisoner's dilemma:
+
+| Action | Both Stake | One Stakes, One Bonds | One Stakes, One Sells | Both Sell |
+|--------|------------|----------------------|----------------------|-----------|
+| Outcome | (3,3) | (3,1) or (1,3) | (3,-1) or (-1,3) | (-3,-3) |
+
+**The Intended Dynamic:**
+1. If everyone stakes, price rises (reduced sell pressure, high APY)
+2. Bonding (buying OHM with LP tokens) adds to treasury
+3. Selling hurts both the seller and other holders
+4. "Coordination game" meant to keep everyone aligned
+
+**The Flawed Assumption:**
+- Assumed rational actors would cooperate infinitely
+- Ignored: Whale accumulation → whale dumps
+- Ignored: High APY requires constant NEW capital inflows
+- Ignored: Leveraged stakers using OHM as collateral
+
+---
+
+### The Death Spiral Mechanics
+
+**How OHM Collapsed:**
+
+```
+January 2022 Cascade:
+1. Whale "shotta" dumps $11M OHM → 25% slippage
+2. Price drops 40% in 2 hours
+3. Leveraged positions hit liquidation triggers
+4. $150M liquidated in 30 days
+5. Liquidations = forced sells = more price drop
+6. More price drop = more liquidations
+7. Death spiral: $1,415 → $32 (97.7% decline)
+```
+
+**Key Statistics:**
+- January 17, 2022: OHM plummeted 50% in single day (whale dump)
+- March 9, 2022: OHM hit $32 (97.7% from ATH)
+- $600M market cap wiped in hours
+- Trading volume exploded $62M → $300M during crash
+
+**The Critical Flaw:**
+The (3,3) model ONLY works in bull markets. The moment big holders decide to (sell,sell), it becomes (-3,-3) for everyone. There was no mechanism to prevent coordination breakdown.
+
+---
+
+### Wonderland (TIME) Scandal - The Fork That Exploded
+
+**Background:**
+- Largest OHM fork on Avalanche
+- Peak TVL: ~$1B
+- Founder: Daniele Sestagalli (DeFi darling at the time)
+- CFO: 0xSifu (real identity hidden)
+
+**The 0xSifu Revelation (January 27, 2022):**
+
+On-chain sleuth ZachXBT unmasked 0xSifu as **Michael Patryn** (aka Omar Dhanani):
+- Co-founder of QuadrigaCX (infamous crypto exchange that "lost" $190M)
+- Pleaded guilty to: credit card fraud, burglary, grand larceny, computer fraud
+- This man was managing Wonderland's BILLION-DOLLAR treasury
+
+**Daniele's Response:**
+- Admitted he KNEW for a month before the reveal
+- Called Patryn "a good man" and "family"
+- Said Patryn shouldn't be "judged by his early mistakes"
+- (His "early mistakes" included fraud convictions)
+
+**Market Impact:**
+- TIME: $879 → $384 (56% crash in one week), then to $390 from ATH of $14,185 (97.26% total decline)
+- SPELL (Abracadabra): -15%
+- MIM stablecoin: Depegged to $0.98
+
+**Community Vote Drama:**
+- 88% of community voted to REMOVE Sifu (done immediately)
+- Community voted to KEEP Wonderland alive
+- Daniele ignored the vote, announced shutdown anyway
+- 14 hours later, reversed course and said "people reached out to help"
+- Eventually returned with profanity-laden statement: "I am back. And I don't f***ing care if you like it or not."
+
+**Lesson:** Treasury management requires trust. One bad actor can destroy a project overnight.
+
+---
+
+### Why Rebase Tokens Failed as a Category
+
+**The Rebase Mechanism:**
+- Supply adjusts automatically based on price
+- If price > target: supply increases (dilutes holders)
+- If price < target: supply decreases (concentrates holdings)
+- Goal: Price stability through elastic supply
+
+**The Death Spiral Threshold:**
+When rebase tokens drop below ~60-70% of peg, all incentives disappear:
+1. Holding = losses as supply contracts
+2. Buying = catching a falling knife
+3. Staking = earning inflationary tokens that keep losing value
+4. Result: "Death spiral" where 90%+ value evaporates
+
+**Notable Rebase Failures:**
+- **OlympusDAO (OHM):** -97% from ATH
+- **Wonderland (TIME):** -97% from ATH, scandal-ridden
+- **Yam Finance:** Bug in rebase mechanism, emergency relaunch
+- **Tomb Finance:** -99.995% TVL decline (covered in prior research)
+- **KLIMA:** OHM fork with carbon credits, collapsed similarly
+
+**What Rebase Got Wrong:**
+1. **Inflation ≠ Yield** - Printing more tokens isn't real value creation
+2. **APY Theater** - 7,000% APY means nothing if token price drops 97%
+3. **Coordination Fantasy** - Game theory assumes rational actors; markets aren't
+4. **Leverage Cascade** - Allowing staked tokens as collateral created ticking time bomb
+5. **Whale Concentration** - Large holders can unilaterally destroy the game
+
+---
+
+### FED vs OHM Model Comparison
+
+| Aspect | OlympusDAO (OHM) | FED |
+|--------|------------------|-----|
+| **Yield Source** | Token inflation (printing OHM) | Real LP fees (USD1) |
+| **APY** | 7,000%+ (inflationary) | Variable (real yield) |
+| **Mechanism** | Rebase + bonding + staking | Direct distribution |
+| **Complexity** | Very high (sOHM, gOHM, bonds, etc.) | Simple (hold = earn) |
+| **Death Spiral Risk** | HIGH (proven) | LOW (no inflation) |
+| **Treasury Model** | Protocol-owned liquidity | LP fee collection |
+| **Peak/Current** | $4.4B → $354M (-92%) | Growing |
+| **Price Support** | None (just math) | Buyback during dips |
+
+**Key Insight:** OHM's yield was a MATHEMATICAL ILLUSION. You could have 50x more tokens, but if the token is worth 97% less, you lost money. FED's yield is REAL—actual stablecoins in your wallet.
+
+---
+
+### What OlympusDAO's Pivot Teaches Us
+
+**What They Pivoted To:**
+1. **Range Bound Stability (RBS):** Algorithm tries to keep price in range
+2. **Cooler Loans:** Use OHM as collateral without liquidation risk
+3. **Cross-Chain via CCIP:** Now on 5+ networks (June 2025)
+4. **Deflationary Supply:** -4.58% yearly (burned 752K OHM last year)
+5. **Real Yield Focus:** sUSDS lending vault on Morpho (April 2025)
+
+**The Irony:** OlympusDAO is NOW moving toward what FED ALREADY DOES:
+- Real yield from actual protocol revenue
+- Sustainable, non-inflationary tokenomics
+- Simple staking without complex rebasing
+
+**Validation:** FED's original design was correct. OHM spent 4 years and billions in lost market cap to arrive at the model FED started with.
+
+---
+
+### Industry Lessons from the Rebase Era
+
+**1. Real Yield > Inflationary APY**
+- 5% real yield beats 7,000% token inflation every time
+- Users holding sOHM with "500% APY" lost 97% in USD terms
+- FED's USD1 distributions are REAL money
+
+**2. Simplicity > Complexity**
+- OHM: sOHM, gOHM, wsOHM, bonds, rebases, epochs...
+- FED: Just hold, receive USD1
+- Complexity enabled exploitation and confusion
+
+**3. Coordination Games Break**
+- (3,3) works until one whale goes (-3,-3)
+- No mechanism prevented defection
+- FED doesn't require coordination—you get paid regardless
+
+**4. Leverage Creates Cascades**
+- $150M liquidations in 30 days accelerated OHM's crash
+- FED has no staking/collateral mechanism = no liquidation cascades
+
+**5. Treasury Management Trust**
+- Wonderland: Convicted fraudster managing $1B
+- Ralph: On-chain, transparent, verifiable
+- Trust comes from transparency, not charisma
+
+**6. Forks Amplify Failure**
+- 100+ OHM forks, most rugged or collapsed
+- Each failure tainted the model's reputation
+- FED is original design, not a fork
+
+---
+
+### Key Research Conclusions
+
+**FED's Model is Validated by OHM's Failure:**
+
+1. **No Inflation:** FED doesn't print tokens. APY comes from real trading fees.
+2. **No Rebasing:** Token supply is fixed. No elastic supply manipulation.
+3. **No Staking Complexity:** Hold = earn. No wrapping, no epochs.
+4. **No Coordination Requirement:** You get paid regardless of what others do.
+5. **No Leverage Cascade Risk:** No staking mechanism = no liquidation spirals.
+6. **Transparent Treasury:** Ralph's decisions are logged, on-chain, verifiable.
+
+**What NOT to Do (Reinforced):**
+- ❌ Inflationary rewards (already rejected)
+- ❌ High APY promises (already rejected)
+- ❌ Complex staking/bonding (already rejected)
+- ❌ Protocol-owned liquidity through bonds (not our model)
+- ❌ Allow tokens as collateral elsewhere (no control, but awareness)
+
+**What TO Keep Doing:**
+- ✅ Real yield from LP fees
+- ✅ Simple "hold = earn" model
+- ✅ Direct stablecoin distribution
+- ✅ Transparent buyback decisions
+- ✅ On-chain verifiable operations
+
+---
+
+### FED Confidence Assessment
+
+This research SIGNIFICANTLY strengthens confidence in FED's approach:
+
+| Category | Confidence | Reason |
+|----------|------------|--------|
+| No inflation | VERY HIGH | OHM's inflation model catastrophically failed |
+| Real yield | VERY HIGH | FED already does what OHM pivoted to |
+| Simplicity | VERY HIGH | OHM's complexity enabled exploitation |
+| No death spiral | VERY HIGH | No rebase = no spiral mechanics |
+| Treasury trust | HIGH | Ralph > convicted fraudsters |
+
+**Summary:** OlympusDAO was a $4B experiment that proved FED's model correct. They spent 4 years and 97% of their value learning what we knew from day one: real yield beats mathematical illusions.
+
+---
+
+### Sources
+
+- [Medium: Olympus Has Fallen - A Postmortem on the (3,3) Experiment](https://medium.com/@juicyarbol/olympus-has-fallen-a-postmortem-on-the-3-3-experiment-87c316791612)
+- [The Defiant: OlympusDAO Down 93%, Called a Ponzi](https://thedefiant.io/olympus-under-fire)
+- [NewsBTC: How OlympusDAO Whale Sank Price by 44%](https://www.newsbtc.com/news/ohm-holders-wake-up-to-blood-how-this-olympusdao-whale-sank-its-price-by-44/)
+- [Rekt News: Sifu Scandal](https://rekt.news/sifu-scandal)
+- [Pontem: Wonderland TIME and MIM Scandal](https://pontem.network/posts/wonderland-time-and-mim-scandal-what-you-need-to-know)
+- [CoinGecko: OlympusDAO Explained](https://www.coingecko.com/research/publications/what-is-olympusdao-and-how-does-it-work)
+- [CoinCodex: Olympus Current Price](https://coincodex.com/crypto/olympus/)
+- [DefiLlama: Olympus DAO](https://defillama.com/protocol/olympus-dao)
+- [Messari: Olympus DAO](https://messari.io/project/olympus-dao)
+- [BeInCrypto: Rebase Tokens Explained](https://beincrypto.com/learn/rebase-tokens/)
+- [Chiliz: Rebase Tokens - How They Work](https://www.chiliz.com/rebase-tokens-explained-what-they-are-and-how-they-work/)
+
+---
+
+*Research completed: 2026-01-22 ~17:26 UTC*
+
+---
 
