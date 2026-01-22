@@ -9553,3 +9553,181 @@ Proposed FED (Complete Loop):
 *Research completed: 2026-01-22 ~18:15 UTC*
 
 ---
+
+## 2026-01-22: Stablecoin Yield Distribution Models Analysis
+
+### Research Focus
+
+FED distributes USD1 stablecoins to holders every ~2 minutes via direct "push" transfers. This research examines how other protocols distribute stablecoin yields and validates FED's distribution model choice.
+
+### Yield-Bearing Stablecoin Market Context (2026)
+
+**Market Scale:**
+- Yield-bearing stablecoins: $9.5B (start 2025) → $20B+ (Jan 2026)
+- Total stablecoin supply: $314B (2025)
+- USDT + USDC = 85% of market
+- Average yields: ~5% (slightly above traditional money markets)
+
+**Major Players:**
+| Protocol | TVL/Supply | Yield | Mechanism | Backing |
+|----------|------------|-------|-----------|---------|
+| Ethena (sUSDe) | $11.89B TVL | 4.7-10% | Value appreciation | Delta-neutral hedging |
+| Sky (sUSDS) | $4B TVL | 4.25-5% | Rebasing | Treasuries + lending |
+| OUSD | ~$200M | Variable | Rebasing | USDC/USDT/DAI → DeFi |
+| USDY (Ondo) | ~$500M | ~5% | Price appreciation | Treasuries |
+| BUIDL (BlackRock) | $500M+ | ~5% | Monthly airdrop | Treasuries |
+
+### Three Yield Distribution Models
+
+#### 1. Rebasing Model (OUSD, USDM, sUSDS)
+- **How it works:** Token balance in wallet increases automatically; token stays ~$1
+- **Example:** Hold 100 OUSD → Tomorrow you have 100.01 OUSD
+- **Pros:** No claiming required, compound effect visible, familiar "savings account" UX
+- **Cons:** DeFi compatibility issues (AMMs break), tax complexity (each rebase = taxable event)
+
+#### 2. Price Appreciation Model (sUSDe, USDY)
+- **How it works:** Token balance stays fixed; token price increases over time
+- **Example:** Hold 100 sUSDe worth $100 → Tomorrow still 100 sUSDe worth $100.01
+- **Pros:** DeFi compatible, simpler tax (only taxed on sale), cleaner accounting
+- **Cons:** Less visible yield, "why isn't my balance growing?" confusion
+
+#### 3. Direct Distribution/Airdrop Model (BUIDL monthly, FED every 2 min)
+- **How it works:** Separate tokens sent directly to wallet
+- **Example:** Hold $FED → Every 2 min receive USD1 tokens in wallet
+- **Pros:** Highly visible, tangible "I got paid" feeling, separate yield token
+- **Cons:** Gas costs at scale, requires push transactions
+
+### FED's Model: Direct USD1 Distribution
+
+**Why FED Uses Direct Distribution:**
+1. **Tangibility:** Holders SEE USD1 hitting their wallet (dopamine hit every 2 min)
+2. **Simplicity:** No wrapping, no claiming, no staking
+3. **Flexibility:** Yield is in stable USD1, not volatile $FED
+4. **Memecoin psychology:** Immediate gratification > abstract value accrual
+
+**Comparison to Industry:**
+
+| Feature | FED | OUSD (Rebase) | sUSDe (Appreciation) | BUIDL (Airdrop) |
+|---------|-----|---------------|----------------------|-----------------|
+| **Yield Visibility** | ✅ VERY HIGH | ✅ High (balance grows) | ❌ Low (price grows) | ⚠️ Medium (monthly) |
+| **Distribution Freq** | Every 2 min | Every few hours | Continuous | Monthly |
+| **Claiming Required** | ❌ No | ❌ No | ❌ No | ❌ No |
+| **DeFi Compatible** | ✅ Yes (separate token) | ⚠️ Limited | ✅ Yes | ✅ Yes |
+| **Tax Simplicity** | ⚠️ Each distribution taxable | ⚠️ Each rebase taxable | ✅ Taxed on sale only | ⚠️ Monthly taxable |
+| **Yield Source** | LP trading fees (real) | DeFi strategies (real) | Funding rates (volatile) | Treasuries (real) |
+| **Gas Cost to Protocol** | ⚠️ High (push model) | ⚠️ Medium (rebase tx) | ✅ Low | ✅ Low |
+
+### Key Insight: Ethena's Sustainability Risk
+
+Ethena's sUSDe ($11.89B TVL) is the largest yield-bearing stablecoin, but relies on **perpetual futures funding rates**:
+
+**Risk Factors:**
+- Funding rates are volatile - can flip negative during market stress
+- October 2025 "Black Friday" crash: $1.9B redeemed in 2 days, 40% market cap drop
+- $4.2B locked in leveraged Pendle/Aave positions - 20% crypto price drop could trigger $1.2B liquidations
+- Regulatory pressure: Banned in EU/EEA under MiCA
+
+**FED's Advantage:**
+- FED's yield source = LP trading fees (consistent, real, not funding rate dependent)
+- No leverage in FED's model
+- No bank run vulnerability (push model, not withdrawal model)
+- Simpler regulatory profile (fee sharing, not synthetic dollar)
+
+### Key Insight: OUSD's Rebase vs FED's Push
+
+OUSD (Origin Dollar) is the closest model to FED conceptually:
+- Both distribute yield to holders automatically
+- Both source yield from DeFi (OUSD: lending/LP, FED: LP fees)
+- Both require no claiming action
+
+**Key Differences:**
+| Aspect | OUSD (Rebase) | FED (Push) |
+|--------|---------------|------------|
+| Yield token | More OUSD | Separate USD1 |
+| Frequency | Every few hours | Every 2 minutes |
+| Smart contract compatibility | Requires opt-in | Full compatibility |
+| "Got paid" feeling | Balance grows | New tokens arrive |
+| At scale gas cost | Lower (1 rebase tx) | Higher (N transfers) |
+
+**OUSD's Yield Bonus mechanic:**
+- OUSD held in smart contracts that don't opt-in = forfeit yield
+- Their yield redistributes to wallet holders
+- 50% in non-rebasing contracts → 2x yield boost for wallets
+- **FED doesn't have this** - everyone gets their share regardless of wallet type
+
+### Key Insight: Sky Protocol's Dual Yield Model
+
+Sky (formerly MakerDAO) offers innovative dual earning:
+1. **SSR (Sky Savings Rate):** ~4.25% APY on USDS (rebasing)
+2. **Sky Token Rewards:** Additional ~4.94% in SKY tokens simultaneously
+
+**Same USDS deposit earns both streams without extra action.**
+
+**FED Application:**
+- FED's XP system is conceptually similar - hold $FED, earn USD1 + earn XP multipliers
+- Could FED add a governance token reward stream? **NO** - conflicts with simplicity principle
+- FED's tier multipliers already provide the "bonus layer" that Sky's dual stream provides
+
+### Industry Yield Ranges (2026 Benchmarks)
+
+| Risk Level | Source | Yield Range |
+|------------|--------|-------------|
+| **Low** | Treasury-backed (BUIDL, USDY) | 4-5% |
+| **Medium** | DeFi lending (Aave, Compound) | 5-8% |
+| **Medium-High** | Liquidity provision (FED, OUSD) | 5-15% |
+| **High** | Delta-neutral (Ethena) | 10-30% |
+| **Very High** | Leveraged strategies | 20%+ |
+
+**FED's Position:**
+- FED yields are **volume-dependent** (higher during pumps, lower during quiet periods)
+- During Jan 21-22 pump: Estimated 10-30% APY annualized
+- During quiet periods: Lower single digits
+- This variability is HONEST - we don't promise fixed APY like failed protocols (Anchor's 20%)
+
+### Research Conclusions
+
+**FED's Distribution Model is VALIDATED:**
+
+1. **Direct distribution creates strongest psychological impact** - Holders SEE USD1 arriving
+2. **Separate yield token (USD1) is cleaner** - No confusion about "is my $FED growing?"
+3. **2-minute frequency is a MOAT** - No other protocol distributes this frequently
+4. **Real yield from LP fees is sustainable** - Unlike Ethena's funding rate dependency
+5. **Push model simplicity beats rebasing complexity** - No opt-in required, no AMM issues
+
+**What NOT to Change:**
+- ❌ Don't switch to rebasing (complexity, AMM incompatibility)
+- ❌ Don't switch to price appreciation (less visible, confuses memecoin holders)
+- ❌ Don't promise fixed APY (Anchor's lesson: promises become liabilities)
+- ❌ Don't add complex yield strategies (Ethena's leverage risk)
+
+**Potential QE4 Enhancement:**
+- Consider **yield boost mechanic** similar to OUSD's non-rebasing bonus
+- If large portion of $FED held in non-participating contracts (CEX cold wallets, etc.), their "share" could boost active wallet holders
+- **Research needed:** Analyze $FED holder distribution - what % is in CEX vs wallets?
+
+**Key Differentiator Confirmed:**
+FED is the ONLY protocol distributing stablecoin yield directly to holders every 2 minutes. This is our competitive moat. Industry standards:
+- BUIDL: Monthly
+- OUSD: Every few hours
+- sUSDe: Continuous but invisible (price appreciation)
+- FED: **Every 2 minutes, visible push**
+
+### Sources
+
+- [Ethena USDe Overview](https://docs.ethena.fi/solution-overview/usde-overview)
+- [Ethena and the Mechanics of USDe - Coin Metrics](https://coinmetrics.io/state-of-the-network/ethena-usde/)
+- [Sky Protocol Docs](https://sky.money/)
+- [Sky Protocol Yield Guide - Gate.com](https://www.gate.com/crypto-wiki/article/in-depth-guide-how-to-earn-yield-using-sky-and-usds-on-sky-money)
+- [OUSD Documentation](https://docs.originprotocol.com/yield-bearing-tokens/ousd)
+- [Origin Protocol - Low Risk Stablecoin Yields](https://www.originprotocol.com/low-risk-stablecoin-yields)
+- [State of DeFi 2025 - DL News](https://www.dlnews.com/research/internal/state-of-defi-2025/)
+- [Stablecoin Yields 2025 - TransFi](https://www.transfi.com/blog/stablecoin-yields-in-2025-mapping-risk-return-and-protocol-dominance)
+- [Yield-Bearing Stablecoins - BeInCrypto](https://beincrypto.com/learn/yield-bearing-stablecoins/)
+- [What Are Yield-Bearing Stablecoins - Crypto.com](https://crypto.com/en/university/what-are-yield-bearing-stablecoins-and-how-do-they-work)
+- [Yield-Bearing vs Traditional Stablecoins - CoinTelegraph](https://cointelegraph.com/learn/articles/yield-bearing-vs-traditional-stablecoins)
+
+---
+
+*Research completed: 2026-01-22 ~18:30 UTC*
+
+---

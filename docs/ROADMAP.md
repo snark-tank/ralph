@@ -10,8 +10,8 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $58,243+ Distributed (518 runs)
-**Status:** IN PROGRESS (58.2%)
+**Current:** $58,349+ Distributed (524 runs)
+**Status:** IN PROGRESS (58.3%)
 
 ### Active Systems
 
@@ -517,6 +517,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Blur referral mechanics | Multi-tier referrals, seasons, market capture | **COMPLETE** - Jan 22 research (dual-sided 3.2x more effective) |
 | Sybil detection state of art | Wallet clustering, graph analysis, prevention | **COMPLETE** - Jan 22 research (40-70% of airdrops are sybils) |
 | Jupiter ASR model | Real revenue-backed rewards, referral program | **COMPLETE** - Jan 22 research (VALIDATES FED XP model) |
+| Stablecoin yield distribution models | Rebase vs push vs appreciation, Ethena/OUSD/Sky | **COMPLETE** - Jan 22 research (VALIDATES FED push model) |
 
 ### Research Findings Summary (Jan 22, 2026)
 
@@ -730,6 +731,23 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - **Key Insight:** ve(3,3) is optimal for DeFi power users; FED's simplicity is optimal for memecoin retail
 - **Recommendation:** Do NOT copy ve-locking or gauge voting. Keep "just hold = earn"
 - See TOKENOMICS-RESEARCH.md for full Aerodrome analysis
+
+**Stablecoin Yield Distribution Models Research (Jan 22, 2026):**
+- Three models compared: Rebasing (OUSD, USDM), Price appreciation (sUSDe, USDY), Direct distribution (BUIDL, FED)
+- Yield-bearing stablecoin market: $9.5B (Jan 2025) → $20B+ (Jan 2026) - 2x growth
+- Ethena sUSDe: $11.89B TVL, 4.7-10% APY, but relies on volatile funding rates
+- October 2025 stress test: $1.9B redeemed in 2 days, 40% sUSDe market cap drop
+- OUSD rebasing model: Balance grows automatically, but AMM incompatibility issues
+- Sky Protocol: $4B TVL, dual-yield model (4.25% SSR + 4.94% SKY rewards simultaneously)
+- **FED's Push Model Validated:**
+  1. Direct USD1 transfers = highest visibility ("got paid" feeling)
+  2. 2-minute frequency = UNIQUE in industry (BUIDL monthly, OUSD hourly)
+  3. Separate yield token = no confusion about $FED balance
+  4. Real LP fees = more sustainable than funding rates (Ethena's Achilles heel)
+- **Key Insight:** FED is the ONLY protocol distributing stablecoin yield every 2 minutes via direct push
+- **Recommendation:** DO NOT change to rebasing or price appreciation model
+- **QE4 Consideration:** Research yield boost mechanic (OUSD's non-rebasing wallet bonus model)
+- See TOKENOMICS-RESEARCH.md for full stablecoin yield analysis
 
 ---
 
