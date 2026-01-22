@@ -80,16 +80,16 @@ export default async function Dashboard() {
 
       {/* Hero Section */}
       <div className="text-center mb-12 relative">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#c9a227]/5 via-transparent to-transparent rounded-3xl blur-3xl"></div>
-        <h1 className="text-4xl md:text-6xl font-bold hero-gradient-text mb-4 tracking-tight">
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#c9a227]/8 via-[#22c55e]/3 to-transparent rounded-3xl blur-3xl"></div>
+        <h1 className="text-4xl md:text-6xl font-bold hero-gradient-text mb-4 tracking-tight drop-shadow-lg">
           Ralph&apos;s Federal Reserve
         </h1>
         <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
-          Autonomous agent building the ultimate rewards flywheel. Research, adapt, evolve.
+          Autonomous agent building the ultimate rewards flywheel. Real yield from trading fees.
         </p>
-        <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-[#0a0a0a] border border-[#222] rounded-full">
+        <div className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#0a0a0a] to-[#111] border border-[#22c55e]/30 rounded-full shadow-lg shadow-[#22c55e]/5">
           <span className="text-gray-500 text-sm uppercase tracking-widest">Status:</span>
-          <span className="text-[#22c55e] font-mono text-sm font-semibold tracking-widest" style={{ textShadow: '0 0 10px rgba(34, 197, 94, 0.5)' }}>
+          <span className="text-[#22c55e] font-mono text-sm font-semibold tracking-widest" style={{ textShadow: '0 0 15px rgba(34, 197, 94, 0.6)' }}>
             MONEY PRINTER ACTIVE
           </span>
           <span className="relative flex h-2 w-2 ml-1">
@@ -101,7 +101,8 @@ export default async function Dashboard() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
-        <div className="stat-card-premium rounded-xl p-6 hover:border-[#22c55e]/30 transition-all duration-300 hover-lift glow-green stat-shine card-depth money-pulse">
+        <div className="stat-card-premium rounded-xl p-6 hover:border-[#22c55e]/30 transition-all duration-300 hover-lift glow-green stat-shine card-depth money-pulse relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#22c55e]/10 to-transparent rounded-bl-full"></div>
           <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs flex items-center gap-1">
             <DollarIcon className="w-3 h-3" />
             Total Distributed
@@ -115,7 +116,8 @@ export default async function Dashboard() {
           </div>
         </div>
 
-        <div className="stat-card-premium rounded-xl p-6 hover:border-[#c9a227]/30 transition-all duration-300 hover-lift glow-gold stat-shine card-depth">
+        <div className="stat-card-premium rounded-xl p-6 hover:border-[#c9a227]/30 transition-all duration-300 hover-lift glow-gold stat-shine card-depth relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#c9a227]/10 to-transparent rounded-bl-full"></div>
           <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs flex items-center gap-1">
             <ChartIcon className="w-3 h-3" />
             Distribution Runs

@@ -35,23 +35,36 @@ body::before {
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
-  opacity: 0.06;
+  opacity: 0.08;
   pointer-events: none;
   z-index: -1;
-  filter: grayscale(50%) sepia(40%) brightness(0.7) contrast(1.1);
+  filter: grayscale(30%) sepia(50%) brightness(0.6) contrast(1.2);
 }
 
 /* Subtle vignette effect */
-body::after {
+body > .vignette {
   content: '';
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 100%);
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.5) 100%);
   pointer-events: none;
   z-index: -1;
+}
+
+/* Golden accent line at top */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.6), rgba(34, 197, 94, 0.4), rgba(201, 162, 39, 0.6), transparent);
+  z-index: 9999;
+  pointer-events: none;
 }
 
 /* Custom scrollbar */
@@ -915,12 +928,29 @@ body::after {
 
 /* Enhanced stat card with micro-interactions */
 .stat-card-premium:hover {
-  transform: translateY(-2px);
-  transition: transform 0.2s ease;
+  transform: translateY(-3px);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(201, 162, 39, 0.1);
 }
 
 .stat-card-premium:hover::before {
   background: linear-gradient(180deg, rgba(201, 162, 39, 0.35) 0%, rgba(34, 197, 94, 0.2) 50%, transparent 100%);
+}
+
+/* Corner accent for stat cards */
+.stat-card-accent {
+  position: relative;
+}
+
+.stat-card-accent::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, transparent 50%, rgba(201, 162, 39, 0.15) 50%);
+  pointer-events: none;
 }
 
 /* Animated money pulse for live stats */

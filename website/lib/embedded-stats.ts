@@ -1,13 +1,31 @@
 // Embedded stats - updated at build time or via script
 // This provides fallback data when the local JSON file is not accessible (e.g., on Vercel)
-// Last updated: 2026-01-22T03:38:42.009Z
+// Last updated: 2026-01-22T03:44:26.045Z
 
 export const EMBEDDED_STATS = {
-  totalDistributed: 49537.55,
-  distributionCount: 332,
+  totalDistributed: 49624.2,
+  distributionCount: 335,
   maxRecipients: 1828,
-  lastUpdated: "2026-01-22T03:38:42.009Z",
+  lastUpdated: "2026-01-22T03:44:26.045Z",
   recentDistributions: [
+      {
+          "date": "2026-01-22T03:44:26.045Z",
+          "amount": 13.13,
+          "recipients": 231,
+          "txSignature": "2TrVcYQR9St7xMpFj2kLWWbCC1QSU5JPsGtvxi2SbDgDggWNrrMn7hkx4uisqU2CDtraJv2H3Z2TPuxpwmowY3DM"
+      },
+      {
+          "date": "2026-01-22T03:42:36.139Z",
+          "amount": 56.22,
+          "recipients": 454,
+          "txSignature": "4UC67d6KTVas2PpZoJV2PZ53B1ZUj8bybZ2uhhnnYmhb7DLVkBQjZsnPbbmADvuVUBwXy87FfEJDrWZp5pRP7S7R"
+      },
+      {
+          "date": "2026-01-22T03:40:45.727Z",
+          "amount": 17.31,
+          "recipients": 265,
+          "txSignature": "b7vTR24fg25ZsQBteBM7fizpPuF1614sopJmB4ovdTpGFZQvbbVy2E7WgWDHFhEGMuJB3YMW4RXnNrpaVTRpqMh"
+      },
       {
           "date": "2026-01-22T03:38:42.009Z",
           "amount": 72.25,
@@ -49,24 +67,6 @@ export const EMBEDDED_STATS = {
           "amount": 15.36,
           "recipients": 244,
           "txSignature": "3TTzmRfu3gxSXMYsopctzPtCg8T2FqpVbzzE2CRyDrF6AjJHdMq8zoXW5XTjvDsVs182J2T8E5DewDaBbWGiryne"
-      },
-      {
-          "date": "2026-01-22T03:08:25.328Z",
-          "amount": 27.67,
-          "recipients": 329,
-          "txSignature": "5pXCFA2RdzrksrLuxzMhohJv1TztmKmmGeh27Jprda9L5ttCzwtviDg7Q9EBRECMhaXguqtSfN2gS7FY1hXd5oNn"
-      },
-      {
-          "date": "2026-01-22T03:02:24.640Z",
-          "amount": 15.35,
-          "recipients": 247,
-          "txSignature": "2nrCUUdBJh5FqJL4T9wcj8HoMCU2UTezqpyzoUd98FLuCdcURaCfKBa7DoUMfxZjdX2icD7REAwyuAoUpeKGGAx7"
-      },
-      {
-          "date": "2026-01-22T02:36:26.330Z",
-          "amount": 35.8,
-          "recipients": 376,
-          "txSignature": "2ZrfgKGmUWeDomJPTJUwqdS3TfQAqbvePo9eJZ9MYfprDxVBPVcKGf6iTwrLVmGUry2EbKVuiCbp3BZoM3rE12qJ"
       }
   ]
 };
