@@ -311,6 +311,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Multiplier changes | Model holder behavior impact | **COMPLETE** - Jan 22 Camelot research |
 | Scaling (10K+ holders) | Gas optimization, batching strategies | **COMPLETE** - Jan 22 research |
 | ve(3,3) vote-directed emissions | Solidly/Velodrome analysis | **COMPLETE** - Jan 22 research (REJECTED) |
+| Meta-governance / bribe markets | Convex Finance deep dive | **COMPLETE** - Jan 22 research (REJECTED) |
 
 ### Research Findings Summary (Jan 22, 2026)
 
@@ -423,6 +424,21 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - **Validation:** ve(3,3) is for protocol coordination (B2B); FED's simplicity is better for retail (B2C)
 - **Recommendation:** REJECT vote-directed emissions. If governance ever needed, use Velodrome model
 - See TOKENOMICS-RESEARCH.md for full Solidly/Velodrome analysis
+
+**Convex Finance Meta-Governance Research (Jan 22, 2026):**
+- Convex: Peak $21B TVL (Jan 2022) → current ~$1B (95% decline)
+- Controls ~53% of all veCRV, making it the dominant Curve governance player
+- "Curve Wars" saw $250M+ in bribes paid through Votium platform
+- Bribe market efficiency declining: $1 spent → $0.83 in CRV emissions (unprofitable)
+- 53% of vlCVX delegated to Votium - users don't want to vote, they want yield
+- 73% of CVX held by top wallets - extreme governance centralization
+- December 2025: Convex-linked addresses blocked $6.2M Curve developer payment
+- **Key Lesson:** "When governance becomes a product, whales always win"
+- FED advantages: No governance to capture, no bribes needed, no lock requirements
+- Convex's 17% fee take vs FED's 100% distribution - we're more generous
+- **Validation:** Ralph's transparent autocracy beats democratic governance capture
+- **Recommendation:** REJECT bribe markets, meta-governance layers. Keep "just hold = earn"
+- See TOKENOMICS-RESEARCH.md for full Convex Finance analysis
 
 ---
 
