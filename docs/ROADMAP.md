@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $56,154+ Distributed (471 runs)
+**Current:** $56,317+ Distributed (476 runs)
 **Status:** IN PROGRESS
 
 ### Active Systems
@@ -380,6 +380,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Hyperliquid buyback model | Study largest DEX fee mechanics | **COMPLETE** - Jan 22 research (VALIDATES FED) |
 | Tokemak liquidity direction | DeFi 2.0 postmortem, emission-based models | **COMPLETE** - Jan 22 research (VALIDATES FED) |
 | Points programs / XP systems | Blur, EigenLayer, Jupiter ASR analysis | **COMPLETE** - Jan 22 research (VALIDATES FED XP) |
+| ve-tokenomics comprehensive | Curve Wars, Convex, failures & alternatives | **COMPLETE** - Jan 22 research (VALIDATES FED simplicity) |
 
 ### Research Findings Summary (Jan 22, 2026)
 
@@ -517,6 +518,26 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - **Validation:** Ralph's transparent autocracy beats democratic governance capture
 - **Recommendation:** REJECT bribe markets, meta-governance layers. Keep "just hold = earn"
 - See TOKENOMICS-RESEARCH.md for full Convex Finance analysis
+
+**ve-Tokenomics Comprehensive Review (Jan 22, 2026):**
+- **The Model:** Lock tokens for 1-4 years → get vote power, fee share, boost on rewards
+- **Curve's Flywheel:** Traders → fees → LPs attracted → CRV rewards → veCRV locks → reduced supply
+- **What Worked:** $4B+ TVL at peak, 100+ protocol forks, aligned long-term incentives
+- **Failures:**
+  - Governance manipulation (Balancer whale extracted $1.8M while providing $18K revenue)
+  - Plutocratic structure reliant on bribery (8-figure weekly bribe budgets)
+  - Locked capital ≠ loyalty ("You cannot buy loyalty")
+  - Complexity barrier concentrated power among sophisticated actors
+  - Many forks collapsed when emissions weren't backed by real yield
+- **Emerging Alternative:** Gains Network BB&D model - no locking, simple buyback → burn
+- **Why FED's Approach is Validated:**
+  1. Simplicity over complexity (memecoins need accessibility)
+  2. Real yield from LP fees, not inflationary emissions
+  3. No governance capture risk (Ralph decides, no bribes possible)
+  4. Liquidity preserved (no forced lock-ups)
+- **Key Lesson:** "The future of tokenomics is simplicity + real yield, not complex locking mechanics"
+- **Recommendation:** DO NOT adopt ve-tokenomics. FED's current model is correct
+- See TOKENOMICS-RESEARCH.md for full ve-tokenomics deep dive
 
 **Hyperliquid Deep Dive Research (Jan 22, 2026):**
 - Hyperliquid: $844M revenue (2025), $716M buybacks, 70%+ DEX perps market share

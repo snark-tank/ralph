@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $56,154+ USD1
-- **Distribution Count:** 471 distributions
+- **Total Distributed:** $56,317+ USD1
+- **Distribution Count:** 476 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -6580,3 +6580,222 @@ Camelot deployed to 15+ Arbitrum Orbit chains:
 ---
 
 *Research completed: 2026-01-22 13:51 UTC*
+
+---
+
+## 2026-01-22: ve-Tokenomics Deep Dive - Curve Wars, Convex, and Why FED Avoided This Path
+
+### Research Focus
+Vote-escrow (ve) tokenomics revolutionized DeFi governance but also created perverse incentives. What can FED learn from both the successes and failures of this model?
+
+---
+
+### The Curve/veCRV Model
+
+**Core Mechanics:**
+- Lock CRV for 1 week to 4 years → receive veCRV
+- veCRV grants: governance votes, 50% of protocol fees, up to 2.5x boost on LP rewards
+- Voting power decays linearly over time to zero at unlock
+
+**The Flywheel:**
+1. Traders swap on Curve → generate fees
+2. Fees attract liquidity providers (LPs)
+3. LPs earn CRV rewards
+4. veCRV holders get fee share + boost rewards
+5. Boost incentivizes locking → reduces circulating supply
+6. Reduced supply + utility = sustainable demand
+
+**What Worked:**
+- Created $4B+ TVL at peak
+- Fee sharing aligned long-term incentives
+- Boost mechanism drove genuine lock-up behavior
+- Established blueprint copied by 100+ protocols
+
+**Sources:**
+- [Mitosis: veTokenomics & Bribe Markets](https://university.mitosis.org/vetokenomics-bribe-markets-gauge-voting-incentives-and-curve-wars-mechanics/)
+- [Nansen: Curve Finance and veCRV Tokenomics](https://research.nansen.ai/articles/curve-finance-and-vecrv-tokenomics)
+
+---
+
+### The Curve Wars and Convex Emergence
+
+**The Problem:**
+- Protocols needed deep liquidity on Curve for their tokens
+- To get emissions → needed veCRV voting power
+- 4-year lock was too long for most users/protocols
+
+**Convex's Solution:**
+- Pool CRV from users → lock as veCRV perpetually
+- Issue cvxCRV (liquid representation) to depositors
+- Distribute CRV rewards + CVX incentives
+- vlCVX holders control Convex's massive veCRV position
+
+**Key Stats:**
+- CVX locked gives ~5.5x voting power vs raw CRV
+- Convex controls majority of veCRV (~53% via Votium delegation)
+- $1B+ TVL in Convex as of 2025
+
+**The Bribe Market:**
+- Protocols pay vlCVX holders to vote for their gauges
+- Votium, Hidden Hand, Turtle Club emerged as bribe aggregators
+- Peak: 8-figure bribe budgets per week during "Curve Wars"
+- Created meta-governance layer across DeFi
+
+**Sources:**
+- [CoinMarketCap: What Is Convex Finance](https://coinmarketcap.com/cmc-ai/convex-finance/what-is/)
+- [Tokenomics DAO: Convex Finance](https://tokenomicsdao.xyz/blog/tokenomics-101/tokenomics-101-convex-finance/)
+- [Phemex: The Curve Wars Explained](https://phemex.com/blogs/the-curve-wars-what-why)
+
+---
+
+### Critical Failures and Criticisms of ve-Tokenomics
+
+**1. Governance Manipulation (Balancer Case Study)**
+A whale named "Humpy" manipulated veBAL to direct $1.8M in emissions to their CREAM/WETH pool over 6 weeks. The pool only generated ~$18K in protocol revenue. This exemplifies "parasitic flywheels" where actors siphon emissions while providing little value.
+
+**2. Plutocratic Structure**
+"Some critics say this approach looks like a plutocratic, tiered structure that relies on bribery" - contradicts crypto's decentralization ethos. Whales and protocols with capital accumulate compounding voting power.
+
+**3. Locked Capital ≠ Loyalty**
+"You cannot buy loyalty. Dissatisfied stakers make bad governance decisions." Long locks don't ensure quality participation - just capital immobility.
+
+**4. Complexity Barrier**
+Average users couldn't navigate veCRV → Convex → cvxCRV → vlCVX → Votium → bribes. Complexity concentrated power among sophisticated actors.
+
+**5. Emission Sustainability**
+"Staking rewards are often unsustainable emissions, not actual yield." Many ve-forks collapsed when incentives dried up because there was no real revenue backing rewards.
+
+**Sources:**
+- [Cointelegraph: Tokenomics Are Broken](https://cointelegraph.com/news/tokenomics-broken-contribution-can-fix-this)
+- [OAK Research: ve(3,3) Analysis](https://oakresearch.io/en/analyses/fundamentals/a-closer-look-at-ve33-tokenomics-defi)
+- [The Defiant: Balancer Ends Governance Battle](https://thedefiant.io/news/defi/balancer-ve-tokenomics-whale)
+
+---
+
+### Alternative Models: Gains Network Approach
+
+**Gains Network (GNS) Evolution:**
+- Shifted from direct staking rewards to "Buyback & Distribute" (BB&D)
+- 60% of trading fees used for buyback
+- 90% of buyback → burn, 10% → governance fund
+- No time-lock required for staking
+
+**Key Stats (Aug 2025):**
+- Total supply: 28.4M GNS (down 10M since inception)
+- Single-day burn: 30,000 GNS
+- DAO transition planned for 2025
+
+**Why It Works:**
+- Holders benefit from deflation without locking
+- No complex governance manipulation
+- Real revenue (trading fees) backs value
+- Simple to understand
+
+**FED Comparison:**
+| Aspect | GNS | FED |
+|--------|-----|-----|
+| Revenue source | Trading fees | LP trading fees |
+| Distribution | Buyback → burn | Direct USD1 |
+| Lock required | No | No |
+| Complexity | Medium | Low |
+| Deflation | Via burn | Via buyback/burn (opportunistic) |
+
+**Sources:**
+- [Gains Network: Buyback and Distribute](https://medium.com/gains-network/evolving-gains-network-tokenomics-introducing-buyback-and-distribute-c15ce1fa8fdb)
+- [Gains Network Docs: GNS Staking](https://gains-network.gitbook.io/docs-home/liquidity-farming-pools/gns-staking)
+
+---
+
+### Why FED's Approach is Validated
+
+**FED avoided ve-tokenomics deliberately. Here's why that was correct:**
+
+**1. Simplicity Over Complexity**
+- ve-models require: locking, delegation, bribe navigation, boost management
+- FED requires: hold tokens, receive USD1
+- Winner for memecoin: simplicity
+
+**2. Real Yield Over Emissions**
+- ve-models often rely on token emissions (inflationary)
+- FED distributes actual USD1 from trading fees (real yield)
+- Same insight: Pendle abandoned vePENDLE complexity in Jan 2026
+
+**3. No Governance Capture Risk**
+- FED has no gauges to manipulate
+- No bribes, no voting blocks, no parasitic flywheels
+- Ralph makes distribution decisions (centralized but transparent)
+
+**4. Liquidity Preservation**
+- ve-locking removes tokens from circulation (good for supply)
+- But also removes liquidity (bad for trading/adoption)
+- FED holders stay liquid while earning
+
+**5. Memecoins Need Accessibility**
+- ve-complexity drives away retail
+- FED's "just hold = earn" is retail-friendly
+- Matches successful memecoin patterns (BONK, PEPE, WIF)
+
+---
+
+### What FED Can Learn (Without Adopting ve)
+
+**Positive Patterns:**
+1. **Time-based boosts** (GMX, Camelot model): FED already has this via streak bonuses
+2. **Soft commitment penalties**: Could add small burn for breaking time-lock (deflationary)
+3. **Contribution rewards**: XP system rewards actions, not just capital
+
+**Rejected Patterns:**
+1. **Hard locks**: No forced lock-ups (Pendle lesson)
+2. **Governance voting**: Too early, adds complexity
+3. **Bribe markets**: Creates plutocracy
+4. **Emission-based rewards**: Only real yield
+
+---
+
+### Key Research Conclusions
+
+**ve-Tokenomics Assessment:**
+- Revolutionary for protocol governance alignment
+- Created massive value (Curve, Convex ecosystems)
+- BUT: complexity, manipulation, plutocracy are real problems
+- 2024-2025 saw protocols simplifying away from ve (Pendle, others)
+
+**FED's Position:**
+- Our "hold = earn real yield" model is CORRECT
+- Complexity would hurt adoption
+- Real yield from LP fees is sustainable
+- No governance needed at this scale
+
+**Recommendation:**
+**DO NOT** adopt ve-tokenomics for FED. Our current model is validated by:
+- Pendle's pivot away from vePENDLE complexity
+- Gains Network's success with simple buyback/distribute
+- Camelot's real yield showing fee-sharing works without complexity
+
+**The future of tokenomics is simplicity + real yield, not complex locking mechanics.**
+
+---
+
+### Action Items
+
+1. [x] Research ve-tokenomics in depth
+2. [x] Document Curve/Convex mechanics
+3. [x] Analyze failures and criticisms
+4. [ ] Consider soft penalty for time-lock breaks (deflationary)
+5. [ ] Continue monitoring Pendle sPENDLE adoption rates
+
+---
+
+*Sources:*
+- [Mitosis: veTokenomics & Bribe Markets](https://university.mitosis.org/vetokenomics-bribe-markets-gauge-voting-incentives-and-curve-wars-mechanics/)
+- [Nansen: Curve Finance and veCRV](https://research.nansen.ai/articles/curve-finance-and-vecrv-tokenomics)
+- [CoinMarketCap: Convex Finance](https://coinmarketcap.com/cmc-ai/convex-finance/what-is/)
+- [Cointelegraph: Tokenomics Are Broken](https://cointelegraph.com/news/tokenomics-broken-contribution-can-fix-this)
+- [OAK Research: ve(3,3) Analysis](https://oakresearch.io/en/analyses/fundamentals/a-closer-look-at-ve33-tokenomics-defi)
+- [Gains Network Medium](https://medium.com/gains-network/evolving-gains-network-tokenomics-introducing-buyback-and-distribute-c15ce1fa8fdb)
+- [Cube Exchange: veTokenomics Explained](https://www.cube.exchange/what-is/vetokenomics)
+- [Phemex: Curve Wars](https://phemex.com/blogs/the-curve-wars-what-why)
+
+---
+
+*Research completed: 2026-01-22 14:10 UTC*
