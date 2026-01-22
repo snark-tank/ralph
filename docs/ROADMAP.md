@@ -10,8 +10,8 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $58,432+ Distributed (527 runs)
-**Status:** IN PROGRESS (58.4%)
+**Current:** $58,527+ Distributed (532 runs)
+**Status:** IN PROGRESS (58.5%)
 
 ### Active Systems
 
@@ -266,21 +266,49 @@ Based on points program research (Blur, EigenLayer, Jupiter ASR), FED's XP syste
 - **Smart batching:** Already built (smart-timing.ts), needs activation
 - **Note:** Current push model works at this scale with optimizations
 
-#### 6. Buyback Strategy Optimization (Research Complete - Jan 22, 2026)
+#### 6. Buyback Strategy Optimization (Research Updated - Jan 22, 2026 19:30 UTC)
 - **Current:** Discretionary buybacks during price dips (Ralph decides)
-- **Research Finding:** FED's current approach is CORRECT for this stage
-  - Hyperliquid's $644M automated buyback requires billions in volume (not applicable to FED scale)
-  - Raydium's 12% automatic allocation works but diverts from holders
-  - FED's 100% to holders is our differentiator
-- **QE4 Consideration:** Add small time-based buyback component
-  - 10% of collected fees → daily programmatic buyback (creates consistent pressure)
-  - 90% → distribution (maintains holder expectation)
-  - Crisis response: Maintain discretionary buyback capability during crashes
-- **What NOT to do:**
-  - Don't automate fully (lose tactical flexibility)
-  - Don't reduce holder distributions (breaks expectation)
-  - Don't copy Hyperliquid (different scale, different audience)
-- **Transparency:** Publish buyback stats on fed.markets (total burned, average price)
+- **All-Time Buyback Stats:** 1,597,435 $FED burned ($656.95 total spent)
+
+**Industry Comparison (2025 Data):**
+| Protocol | Buyback % | 2025 Spending | Model |
+|----------|-----------|---------------|-------|
+| Hyperliquid | 97% | $644M | Continuous + burn |
+| Raydium | 12% | $196M | Continuous + burn |
+| GMX | 27% | $20.9M | Buyback + distribute to stakers |
+| Jupiter | 50% | $70M | Buyback + lock (FAILED - price still -89%) |
+| **FED** | **Strategic only** | **$657** | Discretionary dip-buying + burn |
+
+**Key Research Finding:** FED's 100% distribution model is SUPERIOR for holder value realization.
+- Most protocols: Fees → Buybacks → Hope price goes up (unrealized)
+- FED: Fees → Direct USD1 → Guaranteed value (realized)
+- Jupiter lesson: $70M in buybacks couldn't offset 150% supply increase from unlocks
+
+**FED's Strategic Advantage:**
+- We ARE NOT a buyback protocol - we're a yield protocol
+- Buybacks = price support during corrections (emergency tool)
+- Distributions = primary value accrual (core mechanism)
+- This differentiation should be preserved
+
+**QE4 Consideration: GMX-Style Floor Price Fund**
+- Reserve 5-10% of treasury as "price floor fund"
+- Trigger: If (Fund / Circulating Supply) > Market Price → Buyback
+- Creates psychological price floor without reducing distributions
+- Trade-off: Small reduction in distributable funds
+
+**Optimal Buyback Timing (Research-Based):**
+1. Price correction >30% from recent high ✓ (current approach)
+2. High volume sell-off (profit-taking phase)
+3. After major distributions (convert-and-sell absorption)
+4. Around major unlock events (if applicable)
+
+**What NOT to do:**
+- ❌ Continuous/programmatic buybacks (competes with distributions)
+- ❌ Large % allocation (reduces holder yield)
+- ❌ Buyback-and-distribute (defeats deflationary purpose)
+- ❌ Copy Hyperliquid (97% allocation incompatible with yield model)
+
+**Transparency Enhancement:** Add buyback dashboard to fed.markets (history, avg price, total burned)
 
 ---
 

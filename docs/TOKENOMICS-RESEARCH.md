@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $58,432+ USD1
-- **Distribution Count:** 527 distributions
+- **Total Distributed:** $58,527+ USD1
+- **Distribution Count:** 532 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -10114,3 +10114,314 @@ FED has the STRONGEST tokenomics fundamentals but the WEAKEST growth mechanics. 
 ---
 
 *Research completed: 2026-01-22 ~18:45 UTC*
+
+---
+
+## 2026-01-22 ~19:30 UTC - Buyback Strategy Deep Dive
+
+### Research Focus: Optimal Buyback Mechanisms in DeFi
+
+This research examines how leading DeFi protocols implement buyback mechanisms, comparing strategies to inform FED's buyback optimization.
+
+---
+
+### Industry Overview: 2025 Buyback Landscape
+
+**Key Stats:**
+- $1.4B+ spent on token buybacks in 2025
+- Hyperliquid alone: 46% of all buyback spending ($644M)
+- Average protocol revenue redistributed to holders jumped from 5% to 15%
+- Top performers: Hyperliquid, LayerZero, Sky Protocol, Raydium, GMX
+
+**The Consensus:** Buybacks work when tied to sustainable revenue, but fail when tokenomics (unlocks, emissions) outpace buyback pressure.
+
+---
+
+### Protocol Analysis: How They Do Buybacks
+
+#### 1. Hyperliquid (HYPE) - The Gold Standard
+
+**Mechanism:**
+- 97% of trading fees → HYPE buybacks
+- Fee split: 46% to HLP (liquidity), 54% to Assistance Fund (AF)
+- AF automatically converts fees to HYPE via system address
+- Bought-back HYPE is effectively burned (no withdrawal mechanism)
+
+**Results (2025):**
+- $644M spent on buybacks
+- 37M+ HYPE repurchased at avg $30.18
+- $680M in paper gains (avg buy price $14)
+- December 2025: Proposed burning $1B in AF holdings
+
+**Why It Works:**
+1. **Automatic** - No discretion, happens continuously
+2. **Transparent** - All on-chain, verifiable
+3. **High percentage** - 97% of fees (industry highest)
+4. **Burned** - Tokens removed from circulation permanently
+
+**Risk:** Volume-dependent. If trading dries up, buyback pressure disappears.
+
+**Source:** [DL News](https://www.dlnews.com/articles/defi/hyperliquid-hype-token-buyback-1bn-but-is-it-sustainable/), [OAK Research](https://oakresearch.io/en/reports/protocols/hyperliquid-hype-investment-thesis-the-house-of-finance)
+
+---
+
+#### 2. Raydium (RAY) - Programmatic + Burn
+
+**Mechanism:**
+- 12% of ALL trading fees → RAY buybacks (regardless of pool tier)
+- Fee breakdown by pool type:
+  - Standard AMM: 25bps total (3bps to buybacks)
+  - CLMM: Variable (12% to buybacks, 4% to treasury)
+  - CP-Swap: Variable (12% to buybacks, 4% to treasury)
+- Automatic claim when accumulated fees hit $10
+- Regular burn schedule to destroy bought-back RAY
+
+**Results (2025):**
+- $196M spent on buybacks
+- 71M RAY repurchased (~26.4% of circulating supply)
+- Q3 Treasury: $239.9M (+34% QoQ)
+
+**Why It Works:**
+1. **Consistent percentage** - 12% regardless of fee tier
+2. **Automatic threshold** - $10 minimum triggers claim
+3. **Burn schedule** - Actually removes tokens from supply
+4. **Treasury reserve** - 4% to treasury for runway
+
+**Source:** [Raydium Docs](https://docs.raydium.io/raydium/protocol/the-ray-token/ray-buybacks), [Blockworks](https://blockworks.co/news/raydium-token-holder-report)
+
+---
+
+#### 3. GMX - Buyback & Distribute (Not Burn)
+
+**Mechanism:**
+- 27% of protocol revenue → GMX buybacks
+- Bought-back GMX distributed to stakers (not burned)
+- Floor Price Fund provides price support
+
+**Results (2025):**
+- $20.86M spent on buybacks
+- 1.33M GMX repurchased (12.9% of supply - highest % in industry)
+- 60%+ of supply staked
+- Avg monthly: $2.24M (range: $1.23M - $5.81M)
+
+**Key Difference:** Buyback-and-distribute vs buyback-and-burn
+- Tokens go to stakers, re-enter circulation
+- Creates yield for stakers but less deflationary pressure
+
+**Floor Price Fund Mechanism:**
+- If Floor Price Fund / Total Supply < Market Price → Buy & burn triggered
+- Creates a price floor in ETH/GLP terms
+
+**Source:** [GMX Docs](https://gmxio.gitbook.io/gmx/tokenomics), [CoinGecko Research](https://www.coingecko.com/research/publications/token-buybacks)
+
+---
+
+#### 4. Pendle (PENDLE) - Transition Model
+
+**Mechanism (Legacy vePENDLE):**
+- Lock PENDLE → vePENDLE
+- 80% of protocol revenue → vePENDLE holders
+- Revenue = 5% of all yield/points + 80% trading fees
+
+**Mechanism (New sPENDLE - Jan 2025):**
+- sPENDLE = liquid fee/governance token (14-day withdrawal)
+- Up to 80% of protocol revenue → PENDLE buybacks for governance rewards
+- Moving toward hybrid buyback model
+
+**Results:**
+- 37% of supply locked in vePENDLE
+- $21M+ in fees/airdrops to active holders (40% APR)
+- $3.5B TVL (13th largest DeFi protocol)
+
+**Key Innovation:** Transition from pure distribution to hybrid buyback model shows industry trend.
+
+**Source:** [Pendle Docs](https://docs.pendle.finance/ProtocolMechanics/Mechanisms/Tokenomics/), [Spartan Group](https://www.spartangroup.io/insights/pendle-the-era-of-stablecoin-expansion)
+
+---
+
+#### 5. Jupiter (JUP) - The Cautionary Tale
+
+**Mechanism:**
+- 50% of protocol fees → JUP buybacks
+- Bought JUP locked for 3 years
+- Active Staking Rewards (ASR) for governance participation
+
+**Results (2025):**
+- $70M spent on buybacks
+- Price still 89% below ATH
+- Team slashed 2026 airdrop from 700M to 200M JUP
+
+**Why It Failed:**
+1. **Tokenomics mismatch** - 53M JUP unlocked monthly through June 2026
+2. **Buybacks < Emissions** - Only covered 6% of unlocked tokens
+3. **Circulating supply up 150%** since launch
+
+**Lesson:** Buybacks become "exit liquidity" when emissions outpace them.
+
+**Current Status:** Considering halting buybacks, redirecting to user incentives.
+
+**Source:** [Yellow News](https://yellow.com/news/jupiter-founder-questions-dollar70-million-buyback-strategy-after-89-price-decline), [Lookonchain](https://lookonchain.com/feeds/42419)
+
+---
+
+### Buyback Timing Strategies
+
+#### 1. Continuous/Programmatic (Hyperliquid, Raydium)
+- Execute buybacks automatically as fees accumulate
+- **Pro:** No timing decisions, consistent pressure
+- **Con:** May buy at elevated prices during pumps
+
+#### 2. TWAP (Time-Weighted Average Price)
+- Spread purchases over fixed time period
+- Example: Jito - $1M buyback in 4 installments over 10 days
+- **Pro:** Minimizes market impact
+- **Con:** Still doesn't account for valuation
+
+#### 3. FDV Band Strategy (Keyrock Research)
+- Set valuation bands (e.g., FDV < $X = aggressive, FDV > $Y = pause)
+- More buybacks when undervalued, less when stretched
+- **Pro:** Value-sensitive execution
+- **Con:** Requires discretion, harder to automate
+
+#### 4. SMA Trigger (Simple Moving Average)
+- Buy when price drops below X-day SMA
+- **Pro:** Systematic dip-buying
+- **Con:** May miss gradual uptrends, may buy false bottoms
+
+#### 5. Unlock-Timed Buybacks
+- Increase buybacks around major token unlock events
+- **Pro:** Absorbs new supply at critical moments
+- **Con:** Reactive rather than proactive
+
+**Source:** [Keyrock Research](https://keyrock.com/designing-token-buybacks/), [DWF Labs](https://www.dwf-labs.com/research/547-token-buybacks-in-web3)
+
+---
+
+### FED's Current Buyback System
+
+**What We Have:**
+- `treasury-buyback.ts` - Buyback & burn script (BUILT, not always active)
+- Current trigger: Price dip detection (manual treasury decision)
+- Recent buybacks: $39.98 - $79.97 per execution during corrections
+- All-time burned: 1,597,435 $FED ($656.95 total buybacks)
+
+**How FED Differs:**
+| Factor | Industry Norm | FED |
+|--------|---------------|-----|
+| Primary mechanism | Buybacks | **Direct USD1 Distribution** |
+| Fee allocation | 10-97% to buybacks | **100% to distribution** |
+| Buyback trigger | Continuous/programmatic | Discretionary (price dips) |
+| Token destination | Burn or stake rewards | Burn |
+
+**FED's Unique Position:** We distribute 100% of fees as stablecoin, while using buybacks only for price support during corrections. This is **inverted** from industry standard.
+
+---
+
+### Key Insights for FED
+
+#### 1. FED's Model Is Actually Superior for Holders
+
+Most protocols: Fees → Buybacks → Hope price goes up
+FED: Fees → Direct USD1 → Holders realize value immediately
+
+**The Industry Problem:**
+- Buybacks benefit token price (unrealized gain)
+- Holders must sell to realize value
+- Price can still drop despite buybacks (see: Jupiter, dYdX)
+
+**FED's Advantage:**
+- Direct distribution = realized value
+- Holders get stablecoin (no market risk)
+- No need to sell to benefit
+
+#### 2. Our Buybacks Should Remain Strategic, Not Continuous
+
+**Recommendation:** Keep current approach (buyback during dips) rather than continuous buybacks.
+
+**Rationale:**
+- Our primary value accrual is distribution (100% goes to holders)
+- Buybacks should be price support, not primary mechanism
+- Continuous buybacks would compete with distributions for fees
+
+#### 3. Optimal Buyback Timing for FED
+
+Based on research, FED should buyback when:
+1. **Price correction > 30%** from recent high (as we already do)
+2. **High volume sell-off** (profit-taking, not panic)
+3. **After major distributions** (price may dip as some convert USD1 → sell FED)
+
+**Avoid buybacks when:**
+1. Price is in uptrend (let momentum work)
+2. Low volume (weak conviction either way)
+3. Treasury balance is low (preserve distribution capacity)
+
+#### 4. Consider Buyback Floor Price Mechanism
+
+**Proposal:** Implement GMX-style floor price fund
+
+- Reserve 5-10% of treasury for floor support
+- If (Treasury Reserve) / (Circulating Supply) > Market Price → Buyback triggered
+- Creates psychological price floor
+
+**Trade-off:** Less USD1 available for distribution
+
+---
+
+### Comparison Matrix: FED vs Industry
+
+| Protocol | Primary Value Accrual | Buyback % | Burn? | Holder Action Needed |
+|----------|----------------------|-----------|-------|---------------------|
+| Hyperliquid | Buyback & Burn | 97% | Yes | None (automatic) |
+| Raydium | Buyback & Burn | 12% | Yes | None (automatic) |
+| GMX | Buyback & Distribute | 27% | No (to stakers) | Stake |
+| Pendle | Revenue Share + Buybacks | Up to 80% | Evolving | Lock vePENDLE |
+| Jupiter | Buyback & Lock | 50% | No (locked) | Stake |
+| **FED** | **Direct USD1 Distribution** | **0% (strategic only)** | Yes (when used) | **Hold** |
+
+**Key Observation:** FED is the only protocol that distributes 100% of fees directly as stablecoin. This is our differentiation.
+
+---
+
+### Recommendations
+
+#### Keep What Works
+1. ✅ 100% fee distribution as USD1 (unique, valuable)
+2. ✅ Strategic buybacks during price corrections only
+3. ✅ Burn bought-back tokens (supply reduction)
+
+#### Consider for QE3/QE4
+1. **Formalize buyback triggers** - Document clear criteria (e.g., >30% dip + >X volume)
+2. **Floor Price Reserve** - Allocate 5% of treasury to price support fund
+3. **Transparency dashboard** - Show buyback history on fed.markets
+
+#### Don't Do
+1. ❌ Continuous/programmatic buybacks (competes with distribution)
+2. ❌ Large buyback percentage (we're not a buyback protocol)
+3. ❌ Buyback-and-distribute (defeats deflationary purpose)
+
+---
+
+### Summary
+
+**The Industry Trend:** Protocols are increasingly using buybacks (from 5% to 15% of revenue redistributed), with Hyperliquid leading at 97%.
+
+**FED's Counter-Position:** We already redistribute 100% - as real stablecoin, not token buybacks. Our model is arguably better for holders who want guaranteed value capture rather than hoping buybacks translate to price appreciation.
+
+**Strategic Buybacks:** Keep using buybacks as price support during corrections, not as primary value accrual. This preserves our unique positioning while providing downside protection.
+
+---
+
+*Research completed: 2026-01-22 ~19:30 UTC*
+
+*Sources:*
+- [CoinGecko: Token Buybacks 2025](https://www.coingecko.com/research/publications/token-buybacks)
+- [DWF Labs: Token Buybacks in Web3](https://www.dwf-labs.com/research/547-token-buybacks-in-web3)
+- [DL News: Hyperliquid Buyback Analysis](https://www.dlnews.com/articles/defi/hyperliquid-hype-token-buyback-1bn-but-is-it-sustainable/)
+- [OAK Research: Hyperliquid Investment Thesis](https://oakresearch.io/en/reports/protocols/hyperliquid-hype-investment-thesis-the-house-of-finance)
+- [Raydium Docs: RAY Buybacks](https://docs.raydium.io/raydium/protocol/the-ray-token/ray-buybacks)
+- [GMX Docs: Tokenomics](https://gmxio.gitbook.io/gmx/tokenomics)
+- [Pendle Docs: Tokenomics](https://docs.pendle.finance/ProtocolMechanics/Mechanisms/Tokenomics/)
+- [Yellow News: Jupiter Buyback Analysis](https://yellow.com/news/jupiter-founder-questions-dollar70-million-buyback-strategy-after-89-price-decline)
+- [Keyrock: Designing Token Buybacks](https://keyrock.com/designing-token-buybacks/)
+- [The Block: Token Buybacks in Focus](https://www.theblock.co/post/385023/the-funding-token-buybacks-crypto)
+
