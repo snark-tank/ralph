@@ -403,24 +403,24 @@ export default function FeaturesPage() {
         </div>
       </div>
 
-      {/* Coming Soon: On-Chain Opt-In Program */}
-      <div className="mb-8 bg-gradient-to-r from-purple-900/20 via-[#111] to-[#111] border border-purple-500/40 rounded-xl p-6">
+      {/* On-Chain Opt-In Program - Now Live! */}
+      <div className="mb-8 bg-gradient-to-r from-green-900/20 via-[#111] to-[#111] border border-green-500/40 rounded-xl p-6">
         <div className="flex items-start gap-4">
-          <div className="text-purple-400">
-            <CrystalBallIcon className="w-10 h-10" />
+          <div className="text-green-400">
+            <CheckIcon className="w-10 h-10" />
           </div>
           <div className="flex-1">
-            <h2 className="text-xl font-bold text-purple-400 mb-2 flex items-center gap-2">
-              Coming Soon: On-Chain User Opt-Ins
-              <span className="text-xs bg-purple-900/50 text-purple-300 px-2 py-1 rounded">Phase 5</span>
+            <h2 className="text-xl font-bold text-green-400 mb-2 flex items-center gap-2">
+              On-Chain User Opt-Ins
+              <span className="text-xs bg-green-900/50 text-green-300 px-2 py-1 rounded">LIVE ON MAINNET</span>
             </h2>
             <p className="text-gray-400 mb-4">
-              We&apos;re building a Solana Program that lets you opt into features directly on-chain.
-              No more CLI commands - just connect your wallet and choose your preferences.
+              Our Solana Program is deployed to mainnet. Connect your wallet and opt into features directly on-chain.
+              No more CLI commands - just sign and save your preferences.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div className="bg-[#0a0a0a] rounded-lg p-4">
-                <h3 className="text-white font-semibold mb-2">What You&apos;ll Be Able To Do:</h3>
+                <h3 className="text-white font-semibold mb-2">What You Can Do:</h3>
                 <ul className="text-gray-400 text-sm space-y-1">
                   <li>- Enable auto-compound with one click</li>
                   <li>- Set time-lock commitments on-chain</li>
@@ -440,10 +440,24 @@ export default function FeaturesPage() {
                 </ul>
               </div>
             </div>
-            <div className="flex items-center gap-4 text-sm">
-              <span className="text-purple-400">Built with Anchor Framework</span>
+            <div className="flex flex-wrap items-center gap-4 text-sm">
+              <span className="text-green-400">Built with Anchor Framework</span>
               <span className="text-gray-600">|</span>
-              <span className="text-gray-500">Devnet testing coming soon</span>
+              <a
+                href="/preferences"
+                className="text-[#c9a227] hover:text-[#e0b82a] transition-colors"
+              >
+                Set Your Preferences
+              </a>
+              <span className="text-gray-600">|</span>
+              <a
+                href="https://solscan.io/account/HBsfAtXFmgsr5EHDqiDJDyjuGVHhYU7ACWaEhKpVACqz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-500 hover:text-white transition-colors font-mono text-xs"
+              >
+                Program: HBsfAt...ACqz
+              </a>
             </div>
           </div>
         </div>
