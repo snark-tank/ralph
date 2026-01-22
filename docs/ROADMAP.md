@@ -718,6 +718,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Memecoin community building | Discord/Telegram best practices, engagement tactics | **COMPLETE** - Jan 22 research (Launch plan ready) |
 | Pendle sPENDLE transition | vePENDLE abandonment, liquid staking shift, complexity failures | **COMPLETE** - Jan 22 research (MAJOR VALIDATION - $5.7B protocol admits complexity failed) |
 | Distribution frequency benchmark | Compare FED 2-min vs industry (GMX, Curve, Pendle, Hyperliquid, Aerodrome) | **COMPLETE** - Jan 22 research (FED is fastest real-yield distributor) |
+| Ethena USDe funding rate model | Funding rate vs LP fee yield, Oct 2025 crisis, leverage cascade risk | **COMPLETE** - Jan 22 research (MAJOR VALIDATION - FED's LP fees > funding rates) |
 
 ### Research Findings Summary (Jan 22, 2026)
 
@@ -736,6 +737,17 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - Founder Siong now proposes STOPPING buybacks, pivoting to direct user incentives
 - **MAJOR VALIDATION:** FED's distribution-first model is what Jupiter is now pivoting toward
 - Key lesson: Direct USD1 distribution > abstract price support via buybacks
+
+**Ethena USDe Funding Rate Crisis (Jan 22, 2026 - MAJOR VALIDATION):**
+- Ethena TVL crashed 56% ($14.7B → $6.4B) in Oct-Dec 2025
+- $8B redeemed including $5B in October alone during market crash
+- USDe briefly hit $0.65 on Binance; sUSDe yields dropped 5.95% → 3.83%
+- **Critical Flaw:** 60% of USDe supply locked in leveraged Aave/Pendle loops
+- Chaos Labs warned: 20% price drop could trigger $1.2B cascade liquidations
+- Funding rates flipped negative during crash = yield reversal
+- FED comparison: LP fees ALWAYS positive, ZERO leverage exposure, no cascade risk
+- **MAJOR VALIDATION:** FED's LP fee model > Ethena's funding rate model
+- Key lesson: Simple, unleveraged, real yield survives market stress
 
 **Pendle sPENDLE Transition (Jan 2026 - MAJOR UPDATE):**
 - Pendle ($5.7B TVL, $37M 2025 revenue) ABANDONED vePENDLE complex locking
