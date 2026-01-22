@@ -422,32 +422,41 @@ export default async function Dashboard() {
               <span className="text-[#c9a227] font-mono text-2xl font-bold">$50,000</span>
             </div>
           </div>
-          <div className="w-full bg-[#1a1a1a] rounded-full h-6 overflow-hidden relative border border-[#333]">
-            <div
-              className="bg-gradient-to-r from-[#c9a227] via-[#22c55e] to-[#22c55e] h-full rounded-full transition-all duration-500 relative"
-              style={{
-                width: `${Math.min((parseFloat(stats.totalDistributed.replace(/,/g, '')) / 50000) * 100, 100)}%`,
-                boxShadow: '0 0 30px rgba(34, 197, 94, 0.5), inset 0 1px 0 rgba(255,255,255,0.2)'
-              }}
-            >
-              {/* Animated shine effect */}
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent" style={{ animation: 'stat-shine 3s ease-in-out infinite' }}></div>
-            </div>
-            {/* Percentage label */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-sm font-bold text-white font-mono drop-shadow-lg" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.8)' }}>
-                {Math.min((parseFloat(stats.totalDistributed.replace(/,/g, '')) / 50000) * 100, 100).toFixed(1)}%
-              </span>
-            </div>
-          </div>
-          <div className="mt-4 flex items-center justify-between">
-            <p className="text-gray-500 text-sm">
-              QE2 triggers a <span className="text-[#c9a227] font-semibold">1.5x celebration bonus</span> for all holders
-            </p>
-            <span className="text-[#22c55e] font-mono text-sm">
-              ${(50000 - parseFloat(stats.totalDistributed.replace(/,/g, ''))).toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} to go
-            </span>
-          </div>
+          {(() => {
+            const totalNum = parseFloat(stats.totalDistributed.replace(/,/g, ''));
+            const progressPct = Math.min((totalNum / 50000) * 100, 100);
+            const remaining = Math.max(50000 - totalNum, 0);
+            return (
+              <>
+                <div className="w-full bg-[#1a1a1a] rounded-full h-6 overflow-hidden relative border border-[#333]">
+                  <div
+                    className="bg-gradient-to-r from-[#c9a227] via-[#22c55e] to-[#22c55e] h-full rounded-full transition-all duration-500 relative"
+                    style={{
+                      width: `${progressPct}%`,
+                      boxShadow: '0 0 30px rgba(34, 197, 94, 0.5), inset 0 1px 0 rgba(255,255,255,0.2)'
+                    }}
+                  >
+                    {/* Animated shine effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent" style={{ animation: 'stat-shine 3s ease-in-out infinite' }}></div>
+                  </div>
+                  {/* Percentage label */}
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-sm font-bold text-white font-mono drop-shadow-lg" style={{ textShadow: '0 1px 2px rgba(0,0,0,0.8)' }}>
+                      {progressPct.toFixed(1)}%
+                    </span>
+                  </div>
+                </div>
+                <div className="mt-4 flex items-center justify-between">
+                  <p className="text-gray-500 text-sm">
+                    QE2 triggers a <span className="text-[#c9a227] font-semibold">1.5x celebration bonus</span> for all holders
+                  </p>
+                  <span className="text-[#22c55e] font-mono text-sm">
+                    ${remaining.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} to go
+                  </span>
+                </div>
+              </>
+            );
+          })()}
         </div>
       </div>
 
