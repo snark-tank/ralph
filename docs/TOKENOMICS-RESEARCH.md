@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $55,775+ USD1
-- **Distribution Count:** 453 distributions
+- **Total Distributed:** $55,891+ USD1
+- **Distribution Count:** 457 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -5424,4 +5424,313 @@ The pattern is clear: **Real yield wins. Algorithmic yield fails.**
 - [CoinGecko - Tomb Finance](https://www.coingecko.com/en/coins/tomb)
 - [Deribit Insights - Algorithmic Stablecoins Deep Dive](https://insights.deribit.com/market-research/stability-elasticity-and-reflexivity-a-deep-dive-into-algorithmic-stablecoins/)
 - [Fast Company - History of Failed Stablecoins](https://www.fastcompany.com/90751716/panics-and-death-spirals-a-history-of-failed-stablecoins)
+
+---
+
+## 2026-01-22 14:30 UTC: Hyperliquid Deep Dive - The $27B TVL Giant
+
+### Executive Summary
+
+Hyperliquid is the most successful decentralized perpetuals exchange in crypto history, commanding **70%+ of the DEX perps market**. Their tokenomics feature **97% of fees going to buybacks/community**, making them the most aggressive fee-return protocol in existence. This research analyzes what FED can learn from their model.
+
+### The Numbers (2025 Full Year)
+
+| Metric | Value | Context |
+|--------|-------|---------|
+| **Peak TVL** | $27B | Largest DEX ever |
+| **Current TVL** | ~$4.1B | After correction |
+| **2025 Revenue** | $844M | 2nd only to Solana |
+| **Buyback Spend** | $716M | Largest in DeFi history |
+| **Trading Volume** | $2.95 TRILLION | 2025 cumulative |
+| **Daily Volume Peak** | $32B | Rivals centralized exchanges |
+| **Users Added 2025** | 609,700 | Organic growth |
+| **Total Users** | 1.4M | No paid acquisition |
+| **Team Size** | 11 people | Remarkably lean |
+| **VC Funding** | $0 | Self-funded from trading profits |
+
+### The Hyperliquid Model
+
+#### 1. Fee Flow Architecture
+
+Hyperliquid's fee structure:
+- **Maker Fee:** 0.01% (among lowest in industry)
+- **Taker Fee:** 0.035%
+- **Average Fee:** ~0.0225%
+
+Where fees go:
+- **54%** → Assistance Fund (AF) → Buys HYPE on open market → **Burns HYPE**
+- **46%** → HLP Vault (liquidity providers)
+- **0%** → Team/Treasury
+
+This is fundamentally different from most protocols:
+- GMX: 70% to LPs, 30% to stakers
+- FED: 100% to holders
+- Hyperliquid: 54% burned, 46% to LPs
+
+#### 2. The Assistance Fund (AF)
+
+The AF is Hyperliquid's buyback engine:
+- Converts trading fees to HYPE automatically (L1 execution)
+- Currently holds **1.16% of total supply** (3.74% of circulating)
+- All purchased HYPE is **burned permanently**
+- No manual intervention - fully automated
+
+**2025 Buyback Impact:**
+- $716M spent on buybacks
+- Represents 3.4% of total supply burned
+- **46% of ALL DeFi buybacks in 2025** came from Hyperliquid alone
+
+#### 3. HLP Vault (Community Liquidity)
+
+The Hyperliquidity Provider (HLP) vault is community-owned market making:
+- Users deposit USDC
+- Automated strategies provide liquidity
+- 46% of trading fees flow to HLP depositors
+- **17% APY reported** in good conditions
+- 4-day lockup on deposits
+
+HLP handles:
+- Market making across all trading pairs
+- Liquidation processing
+- Funding rate collection
+
+**Risk Demonstrated:** In March 2025, the JELLY incident caused $13.5M unrealized loss when manipulators exploited liquidation mechanics. Hyperliquid intervened manually, raising centralization concerns.
+
+#### 4. HYPE Staking
+
+Separate from HLP, HYPE holders can stake for network security:
+- **Current APY:** ~2.25%
+- **Staking Ratio:** 45% of supply
+- **Unstaking Period:** 7 days
+- Rewards from **future emissions reserve** (not fees)
+
+This is notably LOW compared to other L1s because:
+- Hyperliquid doesn't rely on inflation for yield
+- Real yield comes from fee buybacks, not staking rewards
+
+#### 5. Token Distribution (No VCs)
+
+| Allocation | Percentage |
+|------------|------------|
+| Genesis Airdrop | 31% |
+| Future Emissions/Community | 38.8% |
+| Core Contributors | 23.8% (1-year cliff, vesting to 2028) |
+| Hyper Foundation | 6% |
+| Grants | 0.3% |
+| VCs/Investors | **0%** |
+
+The 31% airdrop went to 94,000 early users - no presale, no private rounds.
+
+### Founder Philosophy: Jeff Yan
+
+Jeff Yan (Harvard, ex-Google, ex-Hudson River Trading) bootstrapped Hyperliquid using profits from his trading firm Chameleon Trading. Key quotes:
+
+> "I was never really doing it for money. The idea of raising millions from VCs felt fake to me."
+
+> "Ownership should be community-driven. Real progress is users actually getting value, not investors cashing in early."
+
+> "VC involvement creates a scar on the network through misaligned incentives."
+
+The FTX collapse in 2022 catalyzed Hyperliquid's creation - Yan saw that decentralized alternatives couldn't compete on UX. He built Hyperliquid to match centralized exchange speed while preserving self-custody.
+
+### The JELLY Incident (March 2025)
+
+**What Happened:**
+1. Attacker opened $4.1M short on low-cap memecoin JELLY
+2. Same attacker opened $4M in longs via other accounts
+3. Attacker pumped JELLY 400% across exchanges
+4. Short position was liquidated, passed to HLP vault
+5. HLP couldn't clear the large position as price rose
+6. HLP faced $13.5M unrealized loss
+
+**Hyperliquid's Response:**
+- Validators voted within 2 minutes (controversial speed)
+- All JELLY positions settled at $0.0095 (not market price of $0.50)
+- Pair delisted
+- Attacker lost ~$900K vs potential gains
+- HLP actually ended with $700K profit
+
+**Fallout:**
+- Bitget CEO compared Hyperliquid to FTX (centralized intervention)
+- $184M net outflow following day
+- Binance opportunistically listed JELLY futures during incident
+- Long holders later compensated at fair price
+
+**Lessons:**
+- Even highly decentralized protocols have manual override capabilities
+- Low-cap asset manipulation is an ongoing risk for any liquidation system
+- Rapid validator consensus can look like centralized control
+- Community trust survived despite controversy
+
+### Why Hyperliquid Succeeded
+
+#### 1. Product-Market Fit Before Token
+- Built working product for 2 years before HYPE launch
+- Users came for the product, stayed for the token
+- Airdrop rewarded actual users, not speculators
+
+#### 2. Capital Efficiency
+- No VC dilution = 100% of value accrues to community
+- 11-person team = low overhead
+- Self-funded = no runway pressure
+
+#### 3. Aggressive Fee Return
+- 97% of fees to buyback/community (vs industry average ~30-50%)
+- Creates visible, measurable value return
+- Buybacks are transparent, on-chain
+
+#### 4. Custom L1 for Performance
+- Built own blockchain for trading-specific needs
+- 6,502 orders/second (4x entire Ethereum ecosystem)
+- Near-zero slippage on large trades
+
+#### 5. No Staking Complexity
+- Don't need to lock to earn
+- Value comes from holding (buybacks increase per-token value)
+- Simple: hold HYPE → supply decreases → value per token increases
+
+---
+
+### FED vs Hyperliquid Comparison
+
+| Dimension | Hyperliquid | FED | Analysis |
+|-----------|-------------|-----|----------|
+| **Fee Return %** | 97% (54% burn + 46% HLP) | 100% to holders | FED more generous to holders |
+| **Distribution Method** | Buyback & burn | Direct stablecoin distribution | FED gives immediate, tangible rewards |
+| **Frequency** | Continuous buyback | Every ~2 minutes | Both high-frequency |
+| **User Action Needed** | None (hold = benefit from burns) | None (hold = receive USD1) | Tied - both passive |
+| **Visibility** | Burns reduce supply (indirect) | USD1 in wallet (direct) | FED wins on tangibility |
+| **Revenue Source** | Trading fees ($844M/year) | LP trading fees ($55K+ YTD) | Hyperliquid massively larger |
+| **TVL** | $4.1B | N/A (memecoin) | Different categories |
+| **Token Distribution** | 31% airdrop, 0% VCs | Unknown | Hyperliquid very transparent |
+| **Team Funding** | Self-funded | Unknown | Similar bootstrap ethos |
+| **Lockups Required** | None for buyback benefits | None for distribution | Tied - both passive |
+| **Complexity** | Simple (just hold) | Simple (just hold) | Tied |
+
+---
+
+### What FED Can Learn from Hyperliquid
+
+#### 1. Simplicity Wins
+Hyperliquid proves you don't need complex staking, locking, or governance to build a successful tokenomics model. "Just hold" works at $27B TVL scale.
+
+**FED Application:** Continue resisting complexity creep. Our "hold = earn" model is VALIDATED by the largest DEX in crypto.
+
+#### 2. High Fee Return Builds Trust
+97% fee return is extreme, but it works. Users know almost all value flows back to them.
+
+**FED Application:** Our 100% distribution is actually MORE generous than Hyperliquid. This is a selling point worth emphasizing.
+
+#### 3. Buyback vs Distribution: Different Use Cases
+- **Buyback & Burn:** Better for large-cap tokens where supply reduction compounds value
+- **Direct Distribution:** Better for smaller tokens where tangible rewards drive narrative
+
+**FED Application:** At $55K distributed, direct USD1 rewards create "I got paid" moments that drive word-of-mouth. Don't switch to buyback model yet. When FED reaches $1M+ distributed, THEN evaluate hybrid model.
+
+#### 4. Product Before Token
+Hyperliquid built a working exchange for 2 years before HYPE launch. The token amplified existing product-market fit.
+
+**FED Application:** Our distribution system IS the product. We've proven it works ($55K+ distributed). Now activate the engagement systems (quests, referrals, seasons) to amplify.
+
+#### 5. No VC Is a Feature
+Hyperliquid's zero VC allocation is a marketing advantage. "Community-owned" is a real differentiator.
+
+**FED Application:** If FED has similar clean cap table, highlight this. Users increasingly skeptical of VC-backed tokens.
+
+#### 6. Risk Management Matters
+JELLY incident showed that even dominant protocols can be exploited. Hyperliquid survived because they had manual override capability.
+
+**FED Application:** Ralph's centralized control is actually a FEATURE for risk management. We can respond to exploits faster than DAOs. The key is transparency about decisions (DECISIONS.md).
+
+#### 7. Scale Creates Moat
+At $844M annual revenue, Hyperliquid can afford 97% fee return and still cover operations. Smaller protocols can't.
+
+**FED Application:** FED needs to grow revenue before considering major tokenomics changes. Focus on volume growth (marketing, integrations) before optimizing allocation.
+
+---
+
+### Hyperliquid's 2026 Roadmap
+
+Things to watch:
+
+1. **USDH Stablecoin (Q1 2026)**
+   - Native stablecoin with yield-sharing
+   - 95% of reserve interest → HYPE buybacks
+   - Paxos vs Frax competing to manage issuance
+
+2. **HIP-3: Permissionless Perpetuals**
+   - Anyone can list perps
+   - Already enabled global equities (AAPL, NVDA, TSLA, etc.)
+   - NVDA: $1.73B volume, TSLA: $1.15B
+
+3. **HyperEVM Ecosystem**
+   - EVM compatibility for DeFi composability
+   - TVL grew 337% in June 2025
+
+**FED Monitoring:** Hyperliquid expanding into real-world assets and stablecoins. USD1 integration with Hyperliquid ecosystem could be future opportunity.
+
+---
+
+### Confidence Assessment
+
+**HIGH confidence** in Hyperliquid's model validation for FED:
+- "Just hold = earn" works at massive scale
+- High fee return builds community trust
+- No VC is a marketing advantage
+- Simplicity beats complexity
+
+**MEDIUM confidence** on specific recommendations:
+- Direct distribution (FED's model) better for memecoins vs buyback (Hyperliquid's model)
+- This may change as FED scales
+
+**HIGH confidence** Hyperliquid's centralized risk response was correct:
+- JELLY intervention saved $13M
+- Speed of response prevented larger losses
+- Ralph's ability to respond similarly is a feature, not a bug
+
+---
+
+### Actionable Insights
+
+1. **Marketing Opportunity:** Emphasize "100% fee distribution" vs Hyperliquid's 54% burn (46% to LPs)
+   - FED is more generous to holders
+   - "Every fee dollar goes to holders" is strong narrative
+
+2. **No Model Changes Needed:** Hyperliquid validates our core approach
+   - Simple "hold = earn" works
+   - No need for complex staking/locking
+   - No need for governance
+
+3. **Future Consideration:** At $1M+ distributed, evaluate hybrid model
+   - 90% distribute / 10% buyback
+   - Only if community sentiment shifts toward supply reduction
+
+4. **Integration Opportunity:** Monitor USDH launch
+   - If Hyperliquid's stablecoin supports Solana
+   - Potential for FED ↔ Hyperliquid ecosystem connection
+
+5. **Risk Management Validated:** Ralph's centralized control
+   - Hyperliquid's JELLY response shows manual intervention is sometimes necessary
+   - Transparency (DECISIONS.md) is the key to maintaining trust
+
+---
+
+*Research completed: 2026-01-22 14:30 UTC*
+
+*Sources:*
+- [Hyperliquid Tokenomics Deep Dive - Medium](https://medium.com/nonce-classic/hyperliquid-tokenomics-a-fundamentals-driven-deep-dive-52dd57f5705c)
+- [Tokenomist - Hyperliquid](https://tokenomist.ai/hyperliquid)
+- [Hyperliquid 2025 Stats - CryptoBriefing](https://cryptobriefing.com/hyperliquid-strong-growth-2025-revenue-metrics/)
+- [Hyperliquid $844M Revenue - Cryptopolitan](https://www.cryptopolitan.com/hyperliquid-wraps-up-the-844m/)
+- [Top Projects With Buybacks 2025 - Blocmates](https://www.blocmates.com/articles/top-projects-with-buybacks-2025-edition)
+- [Hyperliquid Fees Docs](https://hyperliquid.gitbook.io/hyperliquid-docs/trading/fees)
+- [Hyperliquid Staking Docs](https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/staking)
+- [JELLY Attack Analysis - OAK Research](https://oakresearch.io/en/analyses/investigations/hyperliquid-jelly-attack-context-vulnerability-team-solution)
+- [JELLY Hack Explained - Halborn](https://www.halborn.com/blog/post/explained-the-hyperliquid-hack-march-2025)
+- [Jeff Yan Interview - PANews](https://www.panewslab.com/en/articles/1f6379af-33f3-4601-b711-48eeeffe5ec8)
+- [Jeff Yan No VC Explanation - XT.com](https://www.xt.com/en/blog/post/hyperliquid-founder-jeff-yan-explains-why-he-rejected-vc-funding)
+- [How Hyperliquid Built Binance Onchain - Fortune](https://fortune.com/2026/01/12/hyperliquid-jeff-yan-defi-perpetuals-perps-exchange-defi/)
+- [Hyperliquid Protocol Vaults - Docs](https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/vaults/protocol-vaults)
+- [HyperLiquid JELLY Delisting - CoinDesk](https://www.coindesk.com/markets/2025/03/26/hyperliquid-delists-jellyjelly-after-vault-squeezed-in-usd13m-tussle)
+- [DefiLlama - Hyperliquid](https://defillama.com/protocol/hyperliquid)
 

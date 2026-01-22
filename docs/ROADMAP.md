@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $55,506+ Distributed (440 runs)
+**Current:** $55,891+ Distributed (457 runs)
 **Status:** IN PROGRESS
 
 ### Active Systems
@@ -331,6 +331,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | ve(3,3) vote-directed emissions | Solidly/Velodrome analysis | **COMPLETE** - Jan 22 research (REJECTED) |
 | Meta-governance / bribe markets | Convex Finance deep dive | **COMPLETE** - Jan 22 research (REJECTED) |
 | Seigniorage / algorithmic peg | Tomb Finance postmortem | **COMPLETE** - Jan 22 research (REJECTED) |
+| Hyperliquid buyback model | Study largest DEX fee mechanics | **COMPLETE** - Jan 22 research (VALIDATES FED) |
 
 ### Research Findings Summary (Jan 22, 2026)
 
@@ -458,6 +459,23 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - **Validation:** Ralph's transparent autocracy beats democratic governance capture
 - **Recommendation:** REJECT bribe markets, meta-governance layers. Keep "just hold = earn"
 - See TOKENOMICS-RESEARCH.md for full Convex Finance analysis
+
+**Hyperliquid Deep Dive Research (Jan 22, 2026):**
+- Hyperliquid: $844M revenue (2025), $716M buybacks, 70%+ DEX perps market share
+- Peak $27B TVL (largest DEX ever), currently ~$4.1B
+- Fee model: 54% → Assistance Fund (burns HYPE), 46% → HLP vault (LPs)
+- Total: 97% of fees to community/buyback - most aggressive in DeFi
+- Self-funded (no VCs), 11-person team, 1.4M users
+- JELLY incident (March 2025): $13.5M unrealized loss, manual intervention saved protocol
+- FED comparison: 100% to holders (MORE generous), direct USD1 (more tangible than burns)
+- **Validation:** "Just hold = earn" model works at $27B TVL scale
+- **Validation:** High fee return (97-100%) builds community trust
+- **Validation:** No VC is a marketing advantage
+- **Validation:** Centralized risk response (Ralph-like) can be necessary
+- **Recommendation:** No model changes needed. FED's approach is validated at massive scale
+- **Future:** At $1M+ distributed, evaluate 90/10 hybrid (distribute/buyback)
+- **Opportunity:** Monitor USDH stablecoin launch for ecosystem integration
+- See TOKENOMICS-RESEARCH.md for full Hyperliquid analysis
 
 ---
 
