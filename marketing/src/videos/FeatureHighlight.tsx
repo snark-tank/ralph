@@ -702,13 +702,60 @@ const MultiplierLayer: React.FC<{
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
+  // Celebration ring when shimmer completes - adds a mini celebration for each card
+  const cardCelebTime = (shimmerDelay + 0.35) * fps;
+  const hasCardCelebrated = frame > cardCelebTime;
+  const cardRingOpacity = hasCardCelebrated ? interpolate(
+    frame,
+    [cardCelebTime, cardCelebTime + fps * 0.08, cardCelebTime + fps * 0.35],
+    [0.55, 0.25, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : 0;
+  const cardRingScale = hasCardCelebrated ? interpolate(
+    frame,
+    [cardCelebTime, cardCelebTime + fps * 0.35],
+    [0.8, 2.0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  ) : 0.8;
+
+  // Dot ring expansion for the indicator
+  const dotRingScale = frame > (delay + 0.8) * fps ? interpolate(
+    (frame - (delay + 0.8) * fps) % (fps * 1.8),
+    [0, fps * 0.4, fps * 1.8],
+    [1, 2.2, 1],
+    { easing: Easing.out(Easing.cubic) }
+  ) : 1;
+  const dotRingOpacity = frame > (delay + 0.8) * fps ? interpolate(
+    (frame - (delay + 0.8) * fps) % (fps * 1.8),
+    [0, fps * 0.35, fps * 1.8],
+    [0.5, 0, 0],
+    { extrapolateLeft: "clamp" }
+  ) : 0;
+
   return (
     <div
       style={{
         transform: `translateY(${yOffset}px) scale(${scaleIn}) rotate(${cardRotate}deg)`,
         opacity,
+        position: "relative",
       }}
     >
+      {/* Mini celebration ring for each card */}
+      <div
+        style={{
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          width: 80,
+          height: 80,
+          borderRadius: "50%",
+          border: `1.5px solid ${color}`,
+          transform: `translate(-50%, -50%) scale(${cardRingScale})`,
+          opacity: cardRingOpacity,
+          pointerEvents: "none",
+          boxShadow: `0 0 12px ${color}40`,
+        }}
+      />
       <div
         style={{
           display: "flex",
@@ -720,11 +767,11 @@ const MultiplierLayer: React.FC<{
           borderRadius: 14,
           position: "relative",
           overflow: "hidden",
-          border: "1px solid rgba(255, 255, 255, 0.05)",
+          border: `1px solid rgba(255, 255, 255, ${0.05 + 0.03 * glowIntensity})`,
           boxShadow: `
             0 28px 60px rgba(0, 0, 0, 0.48),
-            0 0 ${35 * glowIntensity}px rgba(${colorRgb}, ${0.08 * glowIntensity}),
-            inset 0 1px 0 rgba(255, 255, 255, 0.03)
+            0 0 ${35 * glowIntensity}px rgba(${colorRgb}, ${0.1 * glowIntensity}),
+            inset 0 1px 0 rgba(255, 255, 255, 0.04)
           `,
         }}
       >
@@ -770,18 +817,35 @@ const MultiplierLayer: React.FC<{
           }}
         />
 
-        {/* Label with animated indicator dot */}
+        {/* Label with animated indicator dot and ring */}
         <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-          <div
-            style={{
-              width: 6,
-              height: 6,
-              borderRadius: "50%",
-              background: color,
-              opacity: 0.4 + 0.5 * dotPulse,
-              boxShadow: `0 0 ${8 * dotPulse}px ${color}`,
-            }}
-          />
+          <div style={{ position: "relative" }}>
+            {/* Dot ring pulse */}
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                width: 6,
+                height: 6,
+                borderRadius: "50%",
+                border: `1px solid ${color}`,
+                transform: `translate(-50%, -50%) scale(${dotRingScale})`,
+                opacity: dotRingOpacity,
+                pointerEvents: "none",
+              }}
+            />
+            <div
+              style={{
+                width: 6,
+                height: 6,
+                borderRadius: "50%",
+                background: color,
+                opacity: 0.4 + 0.5 * dotPulse,
+                boxShadow: `0 0 ${10 * dotPulse}px ${color}`,
+              }}
+            />
+          </div>
           <span
             style={{
               fontSize: 15,
@@ -815,7 +879,7 @@ const MultiplierLayer: React.FC<{
   );
 };
 
-// Scene 2: The Stack - Layers build up with premium reveal timing and celebration
+// Scene 2: The Stack - Layers build up with premium reveal timing and explosive celebration
 const StackScene = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -846,13 +910,27 @@ const StackScene = () => {
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Live indicator pulse
+  // Live indicator pulse - dual rings for depth
   const livePulse = frame > fps * 0.35 ? interpolate(
     (frame - fps * 0.35) % (fps * 1.8),
     [0, fps * 0.4, fps * 1.8],
     [0.5, 1, 0.5],
     { easing: Easing.inOut(Easing.sin) }
   ) : interpolate(frame, [fps * 0.1, fps * 0.35], [0, 0.5], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+
+  // Outer ring pulse
+  const ring1Scale = frame > fps * 0.35 ? interpolate(
+    (frame - fps * 0.35) % (fps * 1.8),
+    [0, fps * 0.4, fps * 1.8],
+    [1, 2.2, 1],
+    { easing: Easing.out(Easing.cubic) }
+  ) : 1;
+  const ring1Opacity = frame > fps * 0.35 ? interpolate(
+    (frame - fps * 0.35) % (fps * 1.8),
+    [0, fps * 0.35, fps * 1.8],
+    [0.55, 0, 0],
+    { extrapolateLeft: "clamp" }
+  ) : 0;
 
   // Decorative lines draw symmetrically
   const lineWidth = interpolate(
@@ -867,7 +945,7 @@ const StackScene = () => {
   const combinedProgress = spring({
     frame: frame - combinedDelay * fps,
     fps,
-    config: { damping: 170, stiffness: 85, mass: 1.15 },
+    config: { damping: 160, stiffness: 75, mass: 1.2 },
   });
   const combinedOpacity = interpolate(
     frame,
@@ -875,33 +953,34 @@ const StackScene = () => {
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const combinedY = interpolate(combinedProgress, [0, 1], [25, 0]);
-  const combinedScale = interpolate(combinedProgress, [0, 1], [0.93, 1]);
+  const combinedY = interpolate(combinedProgress, [0, 1], [30, 0]);
+  const combinedScale = interpolate(combinedProgress, [0, 1], [0.9, 1]);
 
-  // Combined number counts up satisfyingly
+  // Combined number counts up with luxurious quintic ease
   const countStart = combinedDelay + 0.15;
+  const countDuration = 0.65;
   const displayMultiplier = interpolate(
     frame,
-    [countStart * fps, (countStart + 0.55) * fps],
+    [countStart * fps, (countStart + countDuration) * fps],
     [1.0, 4.5],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: (t) => 1 - Math.pow(1 - t, 4) }
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: (t) => 1 - Math.pow(1 - t, 5) }
   );
 
-  // Combined "lands" with a satisfying scale pulse when counting finishes
-  const landTime = (countStart + 0.55) * fps;
+  // Combined "lands" with a satisfying scale pulse - BIGGER impact
+  const landTime = (countStart + countDuration) * fps;
   const hasLanded = displayMultiplier >= 4.45;
   const combinedLandPulse = hasLanded ? interpolate(
     frame,
-    [landTime - fps * 0.05, landTime + fps * 0.1, landTime + fps * 0.28],
-    [1, 1.1, 1],
+    [landTime - fps * 0.02, landTime + fps * 0.08, landTime + fps * 0.2, landTime + fps * 0.35],
+    [1, 1.18, 0.96, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
-  // Combined glow builds dramatically and BURSTS when landing
+  // Combined glow builds dramatically and BURSTS when landing - more intense
   const combinedGlow = hasLanded ? interpolate(
     frame,
-    [(combinedDelay + 0.25) * fps, landTime, landTime + fps * 0.12, landTime + fps * 0.4],
-    [0, 0.6, 1.3, 0.9],
+    [(combinedDelay + 0.25) * fps, landTime - fps * 0.1, landTime, landTime + fps * 0.1, landTime + fps * 0.5],
+    [0, 0.5, 0.8, 1.6, 1.1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : interpolate(
     frame,
@@ -910,45 +989,244 @@ const StackScene = () => {
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Divider line between layers and combined
+  // Screen shake when 4.5x lands - adds weight and impact
+  const shakeIntensity = hasLanded ? interpolate(
+    frame,
+    [landTime, landTime + fps * 0.025, landTime + fps * 0.06, landTime + fps * 0.1, landTime + fps * 0.15],
+    [0, 6, -4, 2, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  ) : 0;
+  // Organic shake using different frequencies
+  const shakeX = shakeIntensity * Math.sin(frame * 4.7 + 0.5);
+  const shakeY = shakeIntensity * 0.6 * Math.cos(frame * 5.3 + 1.1);
+
+  // Divider line between layers and combined - with glow that intensifies
   const dividerWidth = interpolate(
     frame,
     [(combinedDelay - 0.12) * fps, (combinedDelay + 0.05) * fps],
-    [0, 200],
+    [0, 220],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
   const dividerOpacity = interpolate(
     frame,
     [(combinedDelay - 0.12) * fps, (combinedDelay + 0.1) * fps],
-    [0, 0.35],
+    [0, 0.4],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-
-  // Expanding celebration ring when combined lands
-  const ringOpacity = hasLanded ? interpolate(
+  const dividerGlow = hasLanded ? interpolate(
     frame,
-    [landTime, landTime + fps * 0.12, landTime + fps * 0.5],
-    [0.45, 0.2, 0],
+    [landTime, landTime + fps * 0.12, landTime + fps * 0.4],
+    [0, 1, 0.5],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  ) : 0;
+
+  // Triple expanding celebration rings when combined lands - layered for depth
+  const ring1CelebOpacity = hasLanded ? interpolate(
+    frame,
+    [landTime, landTime + fps * 0.08, landTime + fps * 0.45],
+    [0.7, 0.35, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   ) : 0;
-  const ringScale = hasLanded ? interpolate(
+  const ring1CelebScale = hasLanded ? interpolate(
     frame,
-    [landTime, landTime + fps * 0.5],
-    [0.8, 2.5],
+    [landTime, landTime + fps * 0.45],
+    [0.6, 2.4],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  ) : 0.8;
+  ) : 0.6;
 
-  // Background glow intensifies as layers stack
-  const bgIntensity = interpolate(
+  const ring2CelebOpacity = hasLanded ? interpolate(
+    frame,
+    [landTime + fps * 0.04, landTime + fps * 0.14, landTime + fps * 0.55],
+    [0, 0.45, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : 0;
+  const ring2CelebScale = hasLanded ? interpolate(
+    frame,
+    [landTime + fps * 0.04, landTime + fps * 0.55],
+    [0.5, 3.0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  ) : 0.5;
+
+  const ring3CelebOpacity = hasLanded ? interpolate(
+    frame,
+    [landTime + fps * 0.08, landTime + fps * 0.2, landTime + fps * 0.65],
+    [0, 0.3, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : 0;
+  const ring3CelebScale = hasLanded ? interpolate(
+    frame,
+    [landTime + fps * 0.08, landTime + fps * 0.65],
+    [0.45, 3.6],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  ) : 0.45;
+
+  // "All cards loaded" power surge - creates anticipation before combined appears
+  // Last card shimmers at 0.35 + 3*0.22 + 0.55 = ~1.56s, so surge at ~1.42s
+  const surgeTiming = 1.42;
+  const surgeOpacity = interpolate(
+    frame,
+    [surgeTiming * fps, (surgeTiming + 0.06) * fps, (surgeTiming + 0.3) * fps],
+    [0, 0.6, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+  const surgeScale = interpolate(
+    frame,
+    [surgeTiming * fps, (surgeTiming + 0.3) * fps],
+    [0.3, 2.2],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Secondary surge ring for depth
+  const surge2Opacity = interpolate(
+    frame,
+    [(surgeTiming + 0.03) * fps, (surgeTiming + 0.1) * fps, (surgeTiming + 0.38) * fps],
+    [0, 0.4, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+  const surge2Scale = interpolate(
+    frame,
+    [(surgeTiming + 0.03) * fps, (surgeTiming + 0.38) * fps],
+    [0.25, 2.8],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Energy flow lines from cards to combined - appear after all cards loaded
+  const flowDelay = 1.45;
+  const flowOpacity = interpolate(
+    frame,
+    [flowDelay * fps, (flowDelay + 0.15) * fps],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  );
+  const flowProgress = interpolate(
+    frame,
+    [flowDelay * fps, (flowDelay + 0.35) * fps],
+    [0, 100],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+  // Flow glow pulses when combined lands
+  const flowGlow = hasLanded ? interpolate(
+    frame,
+    [landTime, landTime + fps * 0.1, landTime + fps * 0.35],
+    [0.5, 1.2, 0.6],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  ) : 0.5;
+
+  // Background glow intensifies as layers stack, then BURSTS on landing
+  const bgIntensity = hasLanded ? interpolate(
+    frame,
+    [fps * 0.4, fps * 1.5, landTime - fps * 0.1, landTime + fps * 0.08, landTime + fps * 0.5],
+    [0.025, 0.042, 0.048, 0.095, 0.065],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : interpolate(
     frame,
     [fps * 0.4, fps * 2.2],
-    [0.025, 0.048],
+    [0.025, 0.052],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Shimmer effect on combined badge when it lands
+  const shimmerDelay = countStart + countDuration - 0.08;
+  const shimmerProgress = interpolate(
+    frame,
+    [shimmerDelay * fps, (shimmerDelay + 0.6) * fps],
+    [-35, 135],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+  const shimmerOpacity = interpolate(
+    frame,
+    [shimmerDelay * fps, (shimmerDelay + 0.12) * fps, (shimmerDelay + 0.45) * fps, (shimmerDelay + 0.6) * fps],
+    [0, 0.55, 0.35, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
   return (
     <AbsoluteFill style={{ opacity: sceneFade }}>
       <CinematicBackground accentColor="#00ff88" intensity={bgIntensity} focusY={42} secondaryColor="#00d4ff" />
+
+      {/* Power surge when all cards loaded - creates anticipation */}
+      <AbsoluteFill
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          pointerEvents: "none",
+        }}
+      >
+        {/* Secondary surge ring */}
+        <div
+          style={{
+            position: "absolute",
+            width: 180,
+            height: 180,
+            borderRadius: "50%",
+            border: "1px solid rgba(0, 255, 136, 0.35)",
+            transform: `scale(${surge2Scale})`,
+            opacity: surge2Opacity,
+          }}
+        />
+        {/* Primary surge ring */}
+        <div
+          style={{
+            position: "absolute",
+            width: 200,
+            height: 200,
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(0, 255, 136, 0.25) 0%, rgba(0, 255, 136, 0.1) 40%, transparent 70%)",
+            transform: `scale(${surgeScale})`,
+            opacity: surgeOpacity,
+            boxShadow: "0 0 30px rgba(0, 255, 136, 0.3)",
+          }}
+        />
+      </AbsoluteFill>
+
+      {/* Triple celebration rings behind everything */}
+      <AbsoluteFill
+        style={{
+          justifyContent: "center",
+          alignItems: "center",
+          pointerEvents: "none",
+          paddingTop: 180, // Offset to center on combined badge
+        }}
+      >
+        {/* Outermost ring */}
+        <div
+          style={{
+            position: "absolute",
+            width: 140,
+            height: 140,
+            borderRadius: "50%",
+            border: "1px solid rgba(0, 255, 136, 0.35)",
+            transform: `scale(${ring3CelebScale})`,
+            opacity: ring3CelebOpacity,
+          }}
+        />
+        {/* Middle ring */}
+        <div
+          style={{
+            position: "absolute",
+            width: 150,
+            height: 150,
+            borderRadius: "50%",
+            border: "1.5px solid rgba(0, 255, 136, 0.45)",
+            transform: `scale(${ring2CelebScale})`,
+            opacity: ring2CelebOpacity,
+            boxShadow: "0 0 15px rgba(0, 255, 136, 0.2)",
+          }}
+        />
+        {/* Inner ring - brightest */}
+        <div
+          style={{
+            position: "absolute",
+            width: 160,
+            height: 160,
+            borderRadius: "50%",
+            border: "2px solid rgba(0, 255, 136, 0.6)",
+            transform: `scale(${ring1CelebScale})`,
+            opacity: ring1CelebOpacity,
+            boxShadow: "0 0 25px rgba(0, 255, 136, 0.35)",
+          }}
+        />
+      </AbsoluteFill>
 
       <AbsoluteFill
         style={{
@@ -957,6 +1235,7 @@ const StackScene = () => {
           flexDirection: "column",
           gap: 20,
           padding: 50,
+          transform: `translate(${shakeX}px, ${shakeY}px)`,
         }}
       >
         {/* Header with pulsing indicator and decorative lines */}
@@ -978,7 +1257,22 @@ const StackScene = () => {
             }}
           />
           <div style={{ position: "relative" }}>
-            {/* Pulsing ring */}
+            {/* Outer pulsing ring */}
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                width: 6,
+                height: 6,
+                borderRadius: "50%",
+                border: "1px solid #00ff88",
+                transform: `translate(-50%, -50%) scale(${ring1Scale})`,
+                opacity: ring1Opacity,
+                pointerEvents: "none",
+              }}
+            />
+            {/* Inner pulsing ring */}
             <div
               style={{
                 position: "absolute",
@@ -1025,54 +1319,58 @@ const StackScene = () => {
           />
         </div>
 
-        {/* Layers - stack with deliberate timing */}
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 12,
-          }}
-        >
-          {layers.map((layer, index) => (
-            <MultiplierLayer
-              key={layer.label}
-              label={layer.label}
-              multiplier={layer.multiplier}
-              index={index}
-              color={layer.color}
-              totalLayers={layers.length}
-            />
-          ))}
-        </div>
-
-        {/* Divider line */}
-        <div
-          style={{
-            width: dividerWidth,
-            height: 1,
-            background: "linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.14), transparent)",
-            opacity: dividerOpacity,
-            marginTop: 8,
-          }}
-        />
-
-        {/* Combined result - the payoff moment with celebration */}
+        {/* Layers container with flow lines */}
         <div style={{ position: "relative" }}>
-          {/* Celebration ring */}
+          {/* Energy flow lines - converging toward combined */}
           <div
             style={{
               position: "absolute",
-              top: "50%",
+              bottom: -28,
               left: "50%",
-              width: 150,
-              height: 150,
-              borderRadius: "50%",
-              border: "2px solid rgba(0, 255, 136, 0.5)",
-              transform: `translate(-50%, -50%) scale(${ringScale})`,
-              opacity: ringOpacity,
-              pointerEvents: "none",
+              transform: "translateX(-50%)",
+              width: 2,
+              height: `${flowProgress * 0.3}px`,
+              background: `linear-gradient(180deg, rgba(0, 255, 136, ${0.4 * flowGlow}) 0%, rgba(0, 255, 136, ${0.7 * flowGlow}) 100%)`,
+              opacity: flowOpacity,
+              boxShadow: `0 0 ${12 * flowGlow}px rgba(0, 255, 136, ${0.4 * flowGlow})`,
             }}
           />
+
+          {/* Layers - stack with deliberate timing */}
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: 12,
+            }}
+          >
+            {layers.map((layer, index) => (
+              <MultiplierLayer
+                key={layer.label}
+                label={layer.label}
+                multiplier={layer.multiplier}
+                index={index}
+                color={layer.color}
+                totalLayers={layers.length}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Divider line with glow */}
+        <div
+          style={{
+            width: dividerWidth,
+            height: 1.5,
+            background: `linear-gradient(90deg, transparent, rgba(0, 255, 136, ${0.18 + 0.25 * dividerGlow}), transparent)`,
+            opacity: dividerOpacity,
+            marginTop: 8,
+            boxShadow: `0 0 ${14 * dividerGlow}px rgba(0, 255, 136, ${0.3 * dividerGlow})`,
+          }}
+        />
+
+        {/* Combined result - THE payoff moment with premium celebration */}
+        <div style={{ position: "relative" }}>
           <div
             style={{
               opacity: combinedOpacity,
@@ -1080,16 +1378,33 @@ const StackScene = () => {
               display: "flex",
               alignItems: "center",
               gap: 18,
-              padding: "18px 38px",
-              background: "linear-gradient(165deg, rgba(0, 255, 136, 0.08) 0%, rgba(0, 255, 136, 0.02) 100%)",
+              padding: "20px 42px",
+              background: `linear-gradient(165deg, rgba(0, 255, 136, ${0.08 + 0.04 * combinedGlow}) 0%, rgba(0, 255, 136, ${0.02 + 0.02 * combinedGlow}) 100%)`,
               borderRadius: 50,
-              border: "1px solid rgba(0, 255, 136, 0.15)",
+              border: `1px solid rgba(0, 255, 136, ${0.15 + 0.1 * combinedGlow})`,
+              position: "relative",
+              overflow: "hidden",
               boxShadow: `
-                0 18px 50px rgba(0, 0, 0, 0.4),
-                0 0 ${45 * combinedGlow}px rgba(0, 255, 136, ${0.14 * combinedGlow})
+                0 20px 55px rgba(0, 0, 0, 0.45),
+                0 0 ${55 * combinedGlow}px rgba(0, 255, 136, ${0.18 * combinedGlow}),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05)
               `,
             }}
           >
+            {/* Shimmer overlay */}
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: `${shimmerProgress}%`,
+                width: "40%",
+                height: "100%",
+                background: "linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.7) 50%, transparent 100%)",
+                opacity: shimmerOpacity,
+                pointerEvents: "none",
+              }}
+            />
+
             <span
               style={{
                 fontSize: 13,
@@ -1098,19 +1413,19 @@ const StackScene = () => {
                 letterSpacing: 3.5,
                 textTransform: "uppercase",
                 fontWeight: 600,
-                opacity: 0.8,
+                opacity: 0.85,
               }}
             >
               Combined
             </span>
             <span
               style={{
-                fontSize: 36,
+                fontSize: 40,
                 fontWeight: 900,
                 color: "#00ff88",
                 fontFamily: "system-ui, -apple-system, sans-serif",
-                letterSpacing: -1.5,
-                filter: `drop-shadow(0 0 ${16 * combinedGlow}px rgba(0, 255, 136, 0.55))`,
+                letterSpacing: -2,
+                filter: `drop-shadow(0 0 ${20 * combinedGlow}px rgba(0, 255, 136, 0.6))`,
               }}
             >
               {displayMultiplier.toFixed(1)}x
