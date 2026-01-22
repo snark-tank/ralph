@@ -30,6 +30,7 @@
 2. **$100,000 total distributed** - Double our milestone
 3. **Improve holder retention** - Make holding more rewarding
 4. **Optimize gas efficiency** - Better batching at scale
+5. **Activate engagement systems** - Quest system, seasonal rewards, referrals (all built, need activation)
 
 ---
 
@@ -85,11 +86,13 @@
 - [ ] Yield aggregation from multiple sources
 - [ ] IL monitoring and alerts
 
-### Holder Engagement
-- [ ] Distribution notification system
+### Holder Engagement (Research Update: Jan 22, 2026)
+- [ ] Distribution notification system - **HIGH PRIORITY** (engagement hook)
 - [ ] Milestone NFTs (achievement badges)
-- [ ] Leaderboard with rewards
-- [ ] Referral bonus system
+- [ ] Leaderboard with rewards - **HIGH PRIORITY** (social proof drives retention per research)
+- [x] Referral bonus system - **BUILT** (needs activation)
+- [x] Quest system - **BUILT** (needs activation)
+- [x] Seasonal rewards - **BUILT** (needs activation)
 
 ### Protocol Improvements
 - [ ] Auto-ATA creation fund (remove friction for new holders)
@@ -98,8 +101,8 @@
 
 ### Community Features
 - [ ] Governance proposals (lightweight)
-- [ ] Seasonal events/bonuses
-- [ ] Quest system for engagement
+- [x] Seasonal events/bonuses - **BUILT** (needs activation)
+- [x] Quest system for engagement - **BUILT** (needs activation)
 
 ---
 
@@ -129,10 +132,12 @@
 | Feature | Research Needed | Status |
 |---------|-----------------|--------|
 | Dynamic frequency | Study GMX/Pendle distribution timing | **COMPLETE** - See TOKENOMICS-RESEARCH.md |
+| Holder retention | Study retention tactics, diamond hands psychology | **COMPLETE** - Jan 22 research |
 | Auto-compound option | Model economics of compound-to-FED | NOT STARTED |
 | Governance lite | Research Snapshot integration | NOT STARTED |
 | Cross-chain | Bridge security analysis | NOT STARTED |
 | Multiplier changes | Model holder behavior impact | NOT STARTED |
+| Scaling (10K+ holders) | Gas optimization, batching strategies | NEXT PRIORITY |
 
 ### Research Findings Summary (Jan 22, 2026)
 
@@ -151,6 +156,14 @@
 - 70% fees to LPs, 30% to stakers - real yield proven at scale
 - Evolution to auto-compounding GLV shows market demand for passive returns
 - $200K/month buyback discussions validate buyback strategy
+
+**Holder Retention Research (Jan 22, 2026):**
+- DeFi user retention: 63% repeat rate for borrowers (industry benchmark)
+- Revenue redistribution to holders jumped from 5% → 15% in 2025 (validates our approach)
+- Key retention factors: Real yield > Community identity > Holding rewards > Social proof
+- BONK success: 50% of supply to users (not insiders), 350+ integrations, burns
+- Diamond hands psychology: Conviction from understanding, community support, shared experience
+- **Recommendation:** Activate built systems (quests, seasons, referrals) + add leaderboard visibility
 
 ---
 
