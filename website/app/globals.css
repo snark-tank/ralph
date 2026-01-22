@@ -31,14 +31,16 @@ body::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url('/background.png');
-  background-size: cover;
-  background-position: center top;
-  background-repeat: no-repeat;
-  opacity: 0.15;
+  background-image:
+    linear-gradient(180deg, rgba(10, 10, 10, 0.3) 0%, rgba(10, 10, 10, 0.8) 50%, rgba(10, 10, 10, 0.95) 100%),
+    url('/background.png');
+  background-size: cover, cover;
+  background-position: center top, center top;
+  background-repeat: no-repeat, no-repeat;
+  opacity: 0.25;
   pointer-events: none;
   z-index: -1;
-  filter: grayscale(20%) sepia(50%) brightness(0.5) contrast(1.2);
+  filter: grayscale(10%) sepia(30%) brightness(0.6) contrast(1.15);
 }
 
 /* Subtle vignette effect */
@@ -892,6 +894,21 @@ tbody tr:hover {
 .money-value {
   font-variant-numeric: tabular-nums;
   font-feature-settings: 'tnum' on, 'lnum' on;
+}
+
+/* Hero stat glow effect */
+.hero-stat-glow {
+  position: relative;
+}
+
+.hero-stat-glow::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(ellipse at center, rgba(34, 197, 94, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  filter: blur(20px);
 }
 
 /* Improved focus states */
