@@ -298,7 +298,7 @@ const IntroScene = () => {
             </span>
           </div>
 
-          {/* Tagline - subtle, elegant whisper */}
+          {/* Tagline - subtle but readable */}
           <div
             style={{
               opacity: tagOpacity,
@@ -308,10 +308,10 @@ const IntroScene = () => {
           >
             <span
               style={{
-                fontSize: 10,
-                color: "#3d3d3d",
+                fontSize: 11,
+                color: "#555555",
                 fontFamily: "system-ui, -apple-system, sans-serif",
-                letterSpacing: 4.5,
+                letterSpacing: 4,
                 textTransform: "uppercase",
                 fontWeight: 500,
               }}
@@ -672,8 +672,8 @@ const StatCard: React.FC<{
           {displayValue.toLocaleString()}
           <span
             style={{
-              color: "#4a4a4a",
-              fontSize: 22,
+              color: "#5a5a5a",
+              fontSize: 24,
               fontWeight: 800,
               marginLeft: 4,
             }}
@@ -682,7 +682,7 @@ const StatCard: React.FC<{
           </span>
         </div>
 
-        {/* Label - understated elegance */}
+        {/* Label - understated but readable */}
         <div
           style={{
             opacity: labelOpacity,
@@ -690,11 +690,11 @@ const StatCard: React.FC<{
         >
           <div
             style={{
-              fontSize: 9,
-              color: "#3a3a3a",
+              fontSize: 10,
+              color: "#4a4a4a",
               fontFamily: "system-ui, -apple-system, sans-serif",
               textTransform: "uppercase",
-              letterSpacing: 2.8,
+              letterSpacing: 2.5,
               fontWeight: 600,
             }}
           >
@@ -716,8 +716,8 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
     easing: Easing.out(Easing.cubic),
   });
 
-  // Card stagger for rhythm - measured, intentional
-  const cardStagger = 0.28;
+  // Card stagger for rhythm - measured, intentional (slightly slower for breathing)
+  const cardStagger = 0.32;
 
   // Header - refined, appears first
   const headerOpacity = interpolate(frame, [fps * 0.03, fps * 0.18], [0, 0.6], {
@@ -751,7 +751,7 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
           gap: 40,
         }}
       >
-        {/* Header - refined */}
+        {/* Header - refined but visible */}
         <div
           style={{
             opacity: headerOpacity,
@@ -760,8 +760,8 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
         >
           <span
             style={{
-              fontSize: 10,
-              color: "#3a3a3a",
+              fontSize: 11,
+              color: "#505050",
               fontFamily: "system-ui, -apple-system, sans-serif",
               letterSpacing: 5,
               textTransform: "uppercase",
@@ -967,7 +967,7 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
           </div>
         </div>
 
-        {/* Tagline - refined, understated */}
+        {/* Tagline - refined but visible */}
         <div
           style={{
             opacity: taglineOpacity,
@@ -976,8 +976,8 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
         >
           <span
             style={{
-              fontSize: 17,
-              color: "#454545",
+              fontSize: 18,
+              color: "#606060",
               fontFamily: "system-ui, -apple-system, sans-serif",
               fontWeight: 400,
               letterSpacing: 0.3,
@@ -1061,10 +1061,10 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
         >
           <span
             style={{
-              fontSize: 9,
-              color: "#3a3a3a",
+              fontSize: 10,
+              color: "#4a4a4a",
               fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: 4.5,
+              letterSpacing: 4,
               textTransform: "uppercase",
               fontWeight: 500,
             }}
@@ -1102,8 +1102,8 @@ export const StatsUpdate: React.FC<StatsUpdateProps> = ({
         timing={linearTiming({ durationInFrames: transitionFrames })}
       />
 
-      {/* Headline: 1.5s - punchy BRRR moment with satisfying impact */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(1.5 * fps)}>
+      {/* Headline: 1.8s - punchy BRRR moment with satisfying impact */}
+      <TransitionSeries.Sequence durationInFrames={Math.round(1.8 * fps)}>
         <HeadlineScene headline={headline} />
       </TransitionSeries.Sequence>
 
@@ -1112,8 +1112,8 @@ export const StatsUpdate: React.FC<StatsUpdateProps> = ({
         timing={linearTiming({ durationInFrames: transitionFrames })}
       />
 
-      {/* Stats: 3.9s - numbers count up and land with payoff */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(3.9 * fps)}>
+      {/* Stats: 3.8s - numbers count up and land with payoff */}
+      <TransitionSeries.Sequence durationInFrames={Math.round(3.8 * fps)}>
         <StatsScene stats={stats} />
       </TransitionSeries.Sequence>
 
