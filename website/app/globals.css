@@ -32,15 +32,15 @@ body::before {
   right: 0;
   bottom: 0;
   background-image:
-    linear-gradient(180deg, rgba(10, 10, 10, 0.2) 0%, rgba(10, 10, 10, 0.6) 40%, rgba(10, 10, 10, 0.92) 100%),
+    linear-gradient(180deg, rgba(10, 10, 10, 0.15) 0%, rgba(10, 10, 10, 0.55) 35%, rgba(10, 10, 10, 0.88) 100%),
     url('/background.png');
   background-size: cover, cover;
   background-position: center top, center top;
   background-repeat: no-repeat, no-repeat;
-  opacity: 0.35;
+  opacity: 0.42;
   pointer-events: none;
   z-index: -1;
-  filter: grayscale(5%) sepia(25%) brightness(0.7) contrast(1.2) saturate(1.1);
+  filter: grayscale(5%) sepia(30%) brightness(0.65) contrast(1.25) saturate(1.15);
 }
 
 /* Subtle vignette effect */
@@ -1183,4 +1183,116 @@ body::after {
     0 0 10px rgba(201, 162, 39, 0.5),
     0 0 20px rgba(201, 162, 39, 0.3),
     0 0 30px rgba(201, 162, 39, 0.1);
+}
+
+/* Premium hero section with subtle radial glow */
+.hero-section-glow {
+  position: relative;
+}
+
+.hero-section-glow::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse at center, rgba(201, 162, 39, 0.08) 0%, rgba(34, 197, 94, 0.04) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(40px);
+}
+
+/* Ticker item hover effect */
+.ticker-item {
+  transition: transform 0.2s ease;
+}
+
+.ticker-item:hover {
+  transform: scale(1.02);
+}
+
+/* Premium money text with animated gradient */
+@keyframes money-gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.money-text-animated {
+  background: linear-gradient(90deg, #22c55e, #4ade80, #22c55e);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: money-gradient 3s ease-in-out infinite;
+}
+
+/* Subtle card inner light effect */
+.card-inner-light {
+  position: relative;
+}
+
+.card-inner-light::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent);
+  pointer-events: none;
+}
+
+/* Enhanced QE progress bar glow */
+.progress-bar-glow {
+  position: relative;
+}
+
+.progress-bar-glow::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(90deg, rgba(201, 162, 39, 0.3), rgba(34, 197, 94, 0.3));
+  border-radius: inherit;
+  filter: blur(8px);
+  opacity: 0.5;
+  z-index: -1;
+}
+
+/* Premium stat value pulse on load */
+@keyframes stat-load {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.stat-value-load {
+  animation: stat-load 0.4s ease-out forwards;
+}
+
+/* Subtle grid pattern for sections */
+.grid-pattern {
+  background-image:
+    linear-gradient(rgba(201, 162, 39, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 162, 39, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Federal seal watermark effect */
+.federal-watermark {
+  position: relative;
+}
+
+.federal-watermark::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(201, 162, 39, 0.03) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
 }

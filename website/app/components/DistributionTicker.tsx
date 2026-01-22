@@ -37,26 +37,29 @@ export function DistributionTicker({ distributions }: DistributionTickerProps) {
   });
 
   return (
-    <div className="w-full overflow-hidden bg-[#0a0a0a] border-y border-[#1a1a1a] py-2">
+    <div className="w-full overflow-hidden bg-gradient-to-r from-[#0a0a0a] via-[#0d0d0d] to-[#0a0a0a] border-y border-[#1a1a1a] py-3 relative">
+      {/* Subtle gradient glow at edges */}
+      <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-[#0a0a0a] to-transparent z-10 pointer-events-none"></div>
+      <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-[#0a0a0a] to-transparent z-10 pointer-events-none"></div>
       <div className="flex animate-marquee whitespace-nowrap">
         {/* Double the content for seamless loop */}
         <div className="flex items-center text-sm font-mono">
-          <span className="text-gray-400 mx-4 flex items-center gap-1">
+          <span className="text-gray-400 mx-4 flex items-center gap-2">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22c55e] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22c55e]"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22c55e]" style={{ boxShadow: '0 0 8px rgba(34, 197, 94, 0.6)' }}></span>
             </span>
-            LIVE
+            <span className="text-[#22c55e] font-semibold tracking-wider">LIVE</span>
           </span>
           {tickerItems}
         </div>
         <div className="flex items-center text-sm font-mono">
-          <span className="text-gray-400 mx-4 flex items-center gap-1">
+          <span className="text-gray-400 mx-4 flex items-center gap-2">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22c55e] opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22c55e]"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22c55e]" style={{ boxShadow: '0 0 8px rgba(34, 197, 94, 0.6)' }}></span>
             </span>
-            LIVE
+            <span className="text-[#22c55e] font-semibold tracking-wider">LIVE</span>
           </span>
           {tickerItems}
         </div>

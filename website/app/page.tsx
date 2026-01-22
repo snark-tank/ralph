@@ -79,7 +79,7 @@ export default async function Dashboard() {
       </div>
 
       {/* Hero Section */}
-      <div className="text-center mb-12 relative py-4">
+      <div className="text-center mb-12 relative py-4 hero-section-glow">
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#c9a227]/10 via-[#22c55e]/5 to-transparent rounded-3xl blur-3xl"></div>
         <div className="absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-[#c9a227]/30 to-transparent"></div>
         <h1 className="text-4xl md:text-6xl font-bold hero-gradient-text mb-4 tracking-tight drop-shadow-lg">
@@ -102,13 +102,13 @@ export default async function Dashboard() {
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-12">
-        <div className="stat-card-premium rounded-xl p-6 hover:border-[#22c55e]/30 transition-all duration-300 hover-lift glow-green stat-shine card-depth money-pulse relative overflow-hidden hero-stat-glow">
+        <div className="stat-card-premium rounded-xl p-6 hover:border-[#22c55e]/30 transition-all duration-300 hover-lift glow-green stat-shine card-depth money-pulse relative overflow-hidden hero-stat-glow card-inner-light animated-border">
           <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-[#22c55e]/10 to-transparent rounded-bl-full"></div>
           <div className="text-gray-500 text-sm mb-1 uppercase tracking-wider text-xs flex items-center gap-1">
             <DollarIcon className="w-3 h-3" />
             Total Distributed
           </div>
-          <div className="text-3xl font-bold text-[#22c55e] font-mono stat-number money-value distributed-glow">
+          <div className="text-3xl font-bold text-[#22c55e] font-mono stat-number money-value distributed-glow stat-value-load">
             ${stats.totalDistributed}
           </div>
           <div className="text-gray-600 text-xs mt-2 flex items-center gap-1">
@@ -450,7 +450,7 @@ export default async function Dashboard() {
                     <span className="text-[#c9a227] font-mono text-2xl font-bold">${currentTarget.toLocaleString()}</span>
                   </div>
                 </div>
-                <div className="w-full bg-[#1a1a1a] rounded-full h-6 overflow-hidden relative border border-[#333]">
+                <div className="w-full bg-[#1a1a1a] rounded-full h-6 overflow-hidden relative border border-[#333] progress-bar-glow">
                   <div
                     className="bg-gradient-to-r from-[#c9a227] via-[#22c55e] to-[#22c55e] h-full rounded-full transition-all duration-500 relative"
                     style={{
