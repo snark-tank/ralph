@@ -32,15 +32,15 @@ body::before {
   right: 0;
   bottom: 0;
   background-image:
-    linear-gradient(180deg, rgba(10, 10, 10, 0.08) 0%, rgba(10, 10, 10, 0.50) 30%, rgba(10, 10, 10, 0.92) 100%),
+    linear-gradient(180deg, rgba(10, 10, 10, 0.05) 0%, rgba(10, 10, 10, 0.40) 25%, rgba(10, 10, 10, 0.88) 100%),
     url('/background.png');
   background-size: cover, cover;
   background-position: center top, center top;
   background-repeat: no-repeat, no-repeat;
-  opacity: 0.48;
+  opacity: 0.52;
   pointer-events: none;
   z-index: -1;
-  filter: grayscale(5%) sepia(25%) brightness(0.70) contrast(1.20) saturate(1.10);
+  filter: grayscale(0%) sepia(30%) brightness(0.75) contrast(1.15) saturate(1.15);
 }
 
 /* Subtle vignette effect */
@@ -63,10 +63,11 @@ body::after {
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.6), rgba(34, 197, 94, 0.4), rgba(201, 162, 39, 0.6), transparent);
+  height: 3px;
+  background: linear-gradient(90deg, transparent 5%, rgba(201, 162, 39, 0.7), rgba(34, 197, 94, 0.5), rgba(201, 162, 39, 0.7), transparent 95%);
   z-index: 9999;
   pointer-events: none;
+  box-shadow: 0 0 20px rgba(201, 162, 39, 0.3), 0 0 40px rgba(201, 162, 39, 0.15);
 }
 
 /* Custom scrollbar */
@@ -1365,4 +1366,154 @@ button, .btn-glow {
   font-weight: 500;
   background: linear-gradient(135deg, rgba(17, 17, 17, 0.9), rgba(10, 10, 10, 0.95));
   border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Premium seal watermark effect for hero */
+.hero-seal {
+  position: relative;
+}
+
+.hero-seal::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+  border: 3px solid rgba(201, 162, 39, 0.08);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.hero-seal::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 320px;
+  height: 320px;
+  border-radius: 50%;
+  border: 2px solid rgba(201, 162, 39, 0.05);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Enhanced header sticky effect */
+.header-glow {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4), 0 1px 0 rgba(201, 162, 39, 0.1);
+}
+
+/* Premium money display effect */
+.money-display {
+  position: relative;
+  display: inline-block;
+}
+
+.money-display::before {
+  content: '';
+  position: absolute;
+  inset: -4px -8px;
+  background: radial-gradient(ellipse at center, rgba(34, 197, 94, 0.1) 0%, transparent 70%);
+  z-index: -1;
+  filter: blur(8px);
+}
+
+/* Smoother card hover transitions */
+.card, .stat-card-premium {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+/* Enhanced live indicator pulse */
+@keyframes live-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+  }
+}
+
+.live-indicator {
+  animation: live-pulse 2s ease-in-out infinite;
+}
+
+/* Gold shimmer effect for important labels */
+@keyframes gold-shimmer {
+  0% { opacity: 0.8; }
+  50% { opacity: 1; }
+  100% { opacity: 0.8; }
+}
+
+.gold-shimmer {
+  animation: gold-shimmer 2s ease-in-out infinite;
+}
+
+/* Federal seal ring effect */
+.seal-ring {
+  position: relative;
+}
+
+.seal-ring::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid rgba(201, 162, 39, 0.2);
+  pointer-events: none;
+}
+
+/* Subtle scanlines for terminal feel */
+.scanlines {
+  position: relative;
+}
+
+.scanlines::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Premium button press effect */
+.btn-press:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 10px rgba(201, 162, 39, 0.3);
+}
+
+/* Smooth number transitions for stats */
+.stat-value {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.stat-value:hover {
+  transform: scale(1.02);
+}
+
+/* Enhanced card glass effect */
+.glass-premium {
+  background: linear-gradient(
+    135deg,
+    rgba(20, 20, 20, 0.92) 0%,
+    rgba(12, 12, 12, 0.96) 100%
+  );
+  backdrop-filter: blur(24px) saturate(1.5);
+  border: 1px solid rgba(201, 162, 39, 0.15);
+}
+
+/* Subtle glow on important numbers */
+.number-glow {
+  text-shadow:
+    0 0 20px currentColor,
+    0 0 40px currentColor;
 }
