@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $55,230+ Distributed (425 runs)
+**Current:** $55,302+ Distributed (429 runs)
 **Status:** IN PROGRESS
 
 ### Active Systems
@@ -236,6 +236,24 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - **FED's Superiority:** Real yield from LP fees, not inflationary emissions
 - **Key Lesson:** "A 5% real yield beats a 7,000% inflationary yield every time"
 - **Confidence:** HIGH that FED's fundamentals are sound vs. OHM-style models
+
+### Fixed APY Promises (Anchor Protocol model)
+- **Why Rejected:** Anchor Protocol promised "stable 20% APY" on UST deposits - destroyed $40B
+- **2026-01-22 Postmortem Research (Terra/Luna Collapse):**
+  - Anchor TVL peaked at $19.9B with $14B deposits earning "guaranteed" 20% APY
+  - Yield was subsidized: protocol earned ~9%, paid 20%, difference came from reserves
+  - Yield reserve depleted from $73M to $6.5M in weeks, required $450M emergency bailout
+  - When subsidies ran out, bank run triggered death spiral (May 7-13, 2022)
+  - LUNA inflated from 1B to 6.5 TRILLION tokens in 3 days
+  - UST depegged: $1.00 → $0.02; LUNA: $80 → $0.00005
+  - Do Kwon sentenced to 15 years in prison for fraud (Dec 2025)
+- **FED's Superiority:** We NEVER promise APY. We distribute actual fees earned.
+  - No yield reserve to deplete
+  - No subsidies to run out
+  - Variable yield based on trading volume (honest)
+  - Push model = no bank run vulnerability
+- **Key Lesson:** "Fixed yield promises are always lies. Sustainable protocols report actuals, not promises."
+- **Confidence:** VERY HIGH - This is the strongest validation of FED's real-yield model
 
 ---
 
