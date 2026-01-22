@@ -403,33 +403,52 @@ export default async function Dashboard() {
         </div>
       </div>
 
-      {/* QE2 Progress Tracker */}
+      {/* QE Progress Tracker */}
       <div className="mt-8 stat-card-premium rounded-xl p-6 glow-gold relative overflow-hidden">
         {/* Animated background grid */}
         <div className="absolute inset-0 grid-bg opacity-50"></div>
         <div className="relative z-10">
-          <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
-            <DiamondIcon className="w-5 h-5" /> Progress to QE2
-            <span className="ml-auto text-xs font-normal bg-[#c9a227]/20 text-[#c9a227] px-2 py-1 rounded-full">
-              1.5x Bonus Event
-            </span>
-          </h2>
-          <div className="mb-3 flex justify-between items-end">
-            <div>
-              <span className="text-gray-500 text-sm block">Current</span>
-              <span className="font-mono text-2xl text-white font-bold">${stats.totalDistributed}</span>
-            </div>
-            <div className="text-right">
-              <span className="text-gray-500 text-sm block">Target</span>
-              <span className="text-[#c9a227] font-mono text-2xl font-bold">$50,000</span>
-            </div>
-          </div>
           {(() => {
             const totalNum = parseFloat(stats.totalDistributed.replace(/,/g, ''));
-            const progressPct = Math.min((totalNum / 50000) * 100, 100);
-            const remaining = Math.max(50000 - totalNum, 0);
+            const qe2Target = 50000;
+            const qe3Target = 100000;
+            const qe2Reached = totalNum >= qe2Target;
+            const currentTarget = qe2Reached ? qe3Target : qe2Target;
+            const currentQE = qe2Reached ? 'QE3' : 'QE2';
+            const progressPct = Math.min((totalNum / currentTarget) * 100, 100);
+            const remaining = Math.max(currentTarget - totalNum, 0);
+
             return (
               <>
+                {/* QE2 Achieved Banner */}
+                {qe2Reached && (
+                  <div className="mb-4 bg-[#22c55e]/10 border border-[#22c55e]/30 rounded-lg p-3 flex items-center gap-3">
+                    <div className="flex-shrink-0">
+                      <CheckIcon className="w-6 h-6 text-[#22c55e]" />
+                    </div>
+                    <div>
+                      <div className="text-[#22c55e] font-bold">QE2 MILESTONE ACHIEVED</div>
+                      <div className="text-gray-400 text-sm">$50,000 distributed - 1.5x bonus event triggered</div>
+                    </div>
+                  </div>
+                )}
+
+                <h2 className="text-xl font-bold text-[#c9a227] mb-4 flex items-center gap-2">
+                  <DiamondIcon className="w-5 h-5" /> Progress to {currentQE}
+                  <span className="ml-auto text-xs font-normal bg-[#c9a227]/20 text-[#c9a227] px-2 py-1 rounded-full">
+                    {qe2Reached ? '2.0x Bonus Event' : '1.5x Bonus Event'}
+                  </span>
+                </h2>
+                <div className="mb-3 flex justify-between items-end">
+                  <div>
+                    <span className="text-gray-500 text-sm block">Current</span>
+                    <span className="font-mono text-2xl text-white font-bold">${stats.totalDistributed}</span>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-gray-500 text-sm block">Target</span>
+                    <span className="text-[#c9a227] font-mono text-2xl font-bold">${currentTarget.toLocaleString()}</span>
+                  </div>
+                </div>
                 <div className="w-full bg-[#1a1a1a] rounded-full h-6 overflow-hidden relative border border-[#333]">
                   <div
                     className="bg-gradient-to-r from-[#c9a227] via-[#22c55e] to-[#22c55e] h-full rounded-full transition-all duration-500 relative"
@@ -450,7 +469,7 @@ export default async function Dashboard() {
                 </div>
                 <div className="mt-4 flex items-center justify-between">
                   <p className="text-gray-500 text-sm">
-                    QE2 triggers a <span className="text-[#c9a227] font-semibold">1.5x celebration bonus</span> for all holders
+                    {currentQE} triggers a <span className="text-[#c9a227] font-semibold">{qe2Reached ? '2.0x' : '1.5x'} celebration bonus</span> for all holders
                   </p>
                   <span className="text-[#22c55e] font-mono text-sm">
                     ${remaining.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 })} to go
