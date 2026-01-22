@@ -25,7 +25,7 @@ export const metadata: Metadata = {
 
 function Navigation() {
   return (
-    <nav className="border-b border-[#222] bg-[#0d0d0d]/95 backdrop-blur-md header-glow sticky top-0 z-50">
+    <nav className="border-b border-[#333]/50 bg-[#0d0d0d]/90 backdrop-blur-xl header-glow sticky top-0 z-50 shadow-lg shadow-black/20">
       <div className="max-w-6xl mx-auto px-4 py-4">
         <div className="flex items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity flex-shrink-0">
@@ -81,7 +81,7 @@ function Navigation() {
 
 function Footer() {
   return (
-    <footer className="border-t border-[#222] bg-gradient-to-t from-[#080808] to-[#0d0d0d] mt-auto footer-fade">
+    <footer className="border-t border-[#333]/50 bg-gradient-to-t from-[#050505] to-[#0d0d0d]/95 mt-auto footer-fade backdrop-blur-sm">
       <div className="max-w-6xl mx-auto px-4 py-6">
         <div className="flex flex-col gap-4">
           {/* Token Address */}

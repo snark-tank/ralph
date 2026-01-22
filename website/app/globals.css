@@ -32,15 +32,15 @@ body::before {
   right: 0;
   bottom: 0;
   background-image:
-    linear-gradient(180deg, rgba(10, 10, 10, 0.3) 0%, rgba(10, 10, 10, 0.8) 50%, rgba(10, 10, 10, 0.95) 100%),
+    linear-gradient(180deg, rgba(10, 10, 10, 0.2) 0%, rgba(10, 10, 10, 0.6) 40%, rgba(10, 10, 10, 0.92) 100%),
     url('/background.png');
   background-size: cover, cover;
   background-position: center top, center top;
   background-repeat: no-repeat, no-repeat;
-  opacity: 0.25;
+  opacity: 0.35;
   pointer-events: none;
   z-index: -1;
-  filter: grayscale(10%) sepia(30%) brightness(0.6) contrast(1.15);
+  filter: grayscale(5%) sepia(25%) brightness(0.7) contrast(1.2) saturate(1.1);
 }
 
 /* Subtle vignette effect */
@@ -234,13 +234,15 @@ body::after {
 
 /* Card styles with better depth */
 .card {
-  background: linear-gradient(180deg, rgba(17, 17, 17, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
-  border: 1px solid rgba(34, 34, 34, 0.8);
-  backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, rgba(17, 17, 17, 0.92) 0%, rgba(10, 10, 10, 0.96) 100%);
+  border: 1px solid rgba(50, 50, 50, 0.6);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 .card:hover {
-  border-color: rgba(201, 162, 39, 0.2);
+  border-color: rgba(201, 162, 39, 0.3);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(201, 162, 39, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 /* Stat number styling */
@@ -528,9 +530,10 @@ tr.row-highlight:hover {
 /* Premium stat card with inner glow */
 .stat-card-premium {
   position: relative;
-  background: linear-gradient(180deg, rgba(17, 17, 17, 0.98) 0%, rgba(10, 10, 10, 1) 100%);
+  background: linear-gradient(180deg, rgba(17, 17, 17, 0.95) 0%, rgba(10, 10, 10, 0.98) 100%);
   border: 1px solid transparent;
   background-clip: padding-box;
+  backdrop-filter: blur(8px);
 }
 
 .stat-card-premium::before {
@@ -539,7 +542,7 @@ tr.row-highlight:hover {
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(180deg, rgba(201, 162, 39, 0.2) 0%, rgba(34, 197, 94, 0.1) 50%, transparent 100%);
+  background: linear-gradient(180deg, rgba(201, 162, 39, 0.25) 0%, rgba(34, 197, 94, 0.15) 50%, rgba(201, 162, 39, 0.05) 100%);
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
@@ -1088,4 +1091,96 @@ body::after {
   .hero-gradient-text {
     animation: none !important;
   }
+}
+
+/* Premium floating card effect */
+.float-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.float-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow:
+    0 20px 40px -15px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(201, 162, 39, 0.08);
+}
+
+/* Subtle gradient overlay for sections */
+.section-gradient {
+  position: relative;
+}
+
+.section-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(201, 162, 39, 0.02) 0%, transparent 50%, rgba(34, 197, 94, 0.02) 100%);
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Enhanced button styles */
+.btn-primary {
+  background: linear-gradient(135deg, #c9a227 0%, #d4b02e 50%, #c9a227 100%);
+  background-size: 200% 100%;
+  transition: background-position 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-position: 100% 0;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px rgba(201, 162, 39, 0.4);
+}
+
+/* Premium text shadow for important numbers */
+.premium-number {
+  text-shadow:
+    0 0 20px currentColor,
+    0 0 40px currentColor,
+    0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Subtle inner border glow for inputs and interactive elements */
+.inner-glow {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(201, 162, 39, 0.1);
+}
+
+/* Animated background dots pattern */
+.dots-pattern {
+  background-image: radial-gradient(circle at 1px 1px, rgba(201, 162, 39, 0.03) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+/* Enhanced table header styling */
+.premium-table thead th {
+  background: linear-gradient(180deg, rgba(26, 26, 26, 1) 0%, rgba(17, 17, 17, 1) 100%);
+  border-bottom: 1px solid rgba(201, 162, 39, 0.15);
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.premium-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.premium-table tbody tr:hover {
+  background: linear-gradient(90deg, rgba(201, 162, 39, 0.04), rgba(34, 197, 94, 0.02), transparent);
+}
+
+/* Glowing status indicator */
+.status-glow-green {
+  box-shadow:
+    0 0 10px rgba(34, 197, 94, 0.5),
+    0 0 20px rgba(34, 197, 94, 0.3),
+    0 0 30px rgba(34, 197, 94, 0.1);
+}
+
+.status-glow-gold {
+  box-shadow:
+    0 0 10px rgba(201, 162, 39, 0.5),
+    0 0 20px rgba(201, 162, 39, 0.3),
+    0 0 30px rgba(201, 162, 39, 0.1);
 }

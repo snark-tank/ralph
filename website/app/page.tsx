@@ -79,15 +79,16 @@ export default async function Dashboard() {
       </div>
 
       {/* Hero Section */}
-      <div className="text-center mb-12 relative">
-        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#c9a227]/8 via-[#22c55e]/3 to-transparent rounded-3xl blur-3xl"></div>
+      <div className="text-center mb-12 relative py-4">
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#c9a227]/10 via-[#22c55e]/5 to-transparent rounded-3xl blur-3xl"></div>
+        <div className="absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-[#c9a227]/30 to-transparent"></div>
         <h1 className="text-4xl md:text-6xl font-bold hero-gradient-text mb-4 tracking-tight drop-shadow-lg">
           Ralph&apos;s Federal Reserve
         </h1>
         <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
           Autonomous agent building the ultimate rewards flywheel. Real yield from trading fees.
         </p>
-        <div className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#0a0a0a] to-[#111] border border-[#22c55e]/30 rounded-full shadow-lg shadow-[#22c55e]/5">
+        <div className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#0a0a0a]/90 to-[#111]/90 border border-[#22c55e]/40 rounded-full shadow-lg shadow-[#22c55e]/10 backdrop-blur-sm">
           <span className="text-gray-500 text-sm uppercase tracking-widest">Status:</span>
           <span className="text-[#22c55e] font-mono text-sm font-semibold tracking-widest" style={{ textShadow: '0 0 15px rgba(34, 197, 94, 0.6)' }}>
             MONEY PRINTER ACTIVE
