@@ -598,6 +598,8 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Sybil detection state of art | Wallet clustering, graph analysis, prevention | **COMPLETE** - Jan 22 research (40-70% of airdrops are sybils) |
 | Jupiter ASR model | Real revenue-backed rewards, referral program | **COMPLETE** - Jan 22 research (VALIDATES FED XP model) |
 | Stablecoin yield distribution models | Rebase vs push vs appreciation, Ethena/OUSD/Sky | **COMPLETE** - Jan 22 research (VALIDATES FED push model) |
+| Jupiter $70M buyback failure | Buyback vs distribution effectiveness, pivot to user incentives | **COMPLETE** - Jan 22 research (MAJOR VALIDATION for FED distribution model) |
+| Memecoin community building | Discord/Telegram best practices, engagement tactics | **COMPLETE** - Jan 22 research (FED community gap identified) |
 
 ### Research Findings Summary (Jan 22, 2026)
 
@@ -606,6 +608,13 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - Ethereum epochs are ~6.4 minutes
 - FED's 2-minute frequency is a **key differentiator**
 - Recommendation: KEEP current frequency, add dynamic batching
+
+**Jupiter $70M Buyback Failure (Jan 22, 2026):**
+- Jupiter spent $70M on buybacks in 2025; JUP still crashed 89% from ATH
+- 150% supply increase from unlocks negated all buyback impact
+- Founder Siong now proposes STOPPING buybacks, pivoting to direct user incentives
+- **MAJOR VALIDATION:** FED's distribution-first model is what Jupiter is now pivoting toward
+- Key lesson: Direct USD1 distribution > abstract price support via buybacks
 
 **Pendle sPENDLE Transition (Jan 2026):**
 - Pendle removed complex vePENDLE locking in favor of simple liquid staking
