@@ -23,7 +23,7 @@ const defaultStatsProps: StatsUpdateProps = {
 const defaultMilestoneProps: MilestoneAnnouncementProps = {
   milestone: "QE2",
   target: "$50,000",
-  current: "$47,516",
+  current: "$47,669",
   progress: 95,
   nextMilestone: "QE3 - $100,000",
 };
