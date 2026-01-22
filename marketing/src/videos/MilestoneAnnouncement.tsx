@@ -108,6 +108,9 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
+  // Is this a HIGH progress milestone (>90%)? Add extra urgency
+  const isNearComplete = progress >= 90;
+
   // Phase 0: Total darkness with precise flicker timing - builds maximum anticipation
   const flicker = frame < fps * 0.08 ? 0 :
     frame < fps * 0.10 ? 0.08 :
@@ -165,7 +168,8 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
-  // Pre-title - "APPROACHING MILESTONE" sets the tension
+  // Pre-title - text varies based on how close we are to milestone
+  const preText = isNearComplete ? "Final Stretch" : "Approaching Milestone";
   const preDelay = 0.42;
   const preOpacity = interpolate(
     frame,
@@ -180,25 +184,26 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Pulsing indicator dot - refined timing with ring expansion
+  // Pulsing indicator dot - faster pulse when near complete for urgency
+  const pulseSpeed = isNearComplete ? 0.9 : 1.4;
   const dotPulse = frame > fps * 0.65 ? interpolate(
-    (frame - fps * 0.65) % (fps * 1.4),
-    [0, fps * 0.32, fps * 1.4],
+    (frame - fps * 0.65) % (fps * pulseSpeed),
+    [0, fps * pulseSpeed * 0.23, fps * pulseSpeed],
     [0.5, 1, 0.5],
     { extrapolateLeft: "clamp", easing: Easing.inOut(Easing.sin) }
   ) : interpolate(frame, [preDelay * fps, fps * 0.65], [0, 0.5], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
   // Ring pulse around dot - sophisticated expansion
   const dotRingScale = frame > fps * 0.65 ? interpolate(
-    (frame - fps * 0.65) % (fps * 1.4),
-    [0, fps * 0.32, fps * 1.4],
+    (frame - fps * 0.65) % (fps * pulseSpeed),
+    [0, fps * pulseSpeed * 0.23, fps * pulseSpeed],
     [1, 2.2, 1],
     { extrapolateLeft: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
   const dotRingOpacity = frame > fps * 0.65 ? interpolate(
-    (frame - fps * 0.65) % (fps * 1.4),
-    [0, fps * 0.28, fps * 1.4],
-    [0.6, 0, 0],
+    (frame - fps * 0.65) % (fps * pulseSpeed),
+    [0, fps * pulseSpeed * 0.2, fps * pulseSpeed],
+    [0.7, 0, 0],
     { extrapolateLeft: "clamp" }
   ) : 0;
 
@@ -288,11 +293,12 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
   );
 
   // Percentage badge - appears dramatically after milestone with celebration energy
+  // For high progress, make this more dramatic with a bigger scale effect
   const percentDelay = 1.5;
   const percentProgress = spring({
     frame: frame - percentDelay * fps,
     fps,
-    config: { damping: 130, stiffness: 180, mass: 0.85 },
+    config: { damping: isNearComplete ? 120 : 130, stiffness: isNearComplete ? 200 : 180, mass: 0.85 },
   });
   const percentOpacity = interpolate(
     frame,
@@ -300,7 +306,7 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const percentScale = interpolate(percentProgress, [0, 1], [0.65, 1]);
+  const percentScale = interpolate(percentProgress, [0, 1], [isNearComplete ? 0.55 : 0.65, 1]);
 
   // Progress number counts up with luxurious quintic ease-out
   const displayProgress = interpolate(
@@ -310,21 +316,21 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: (t) => 1 - Math.pow(1 - t, 5) }
   );
 
-  // Badge "lands" with a satisfying scale pulse when number finishes
+  // Badge "lands" with a satisfying scale pulse when number finishes - bigger pulse for high progress
   const badgeLandTime = (percentDelay + 0.65) * fps;
   const hasLanded = displayProgress >= progress - 1;
   const badgeLandPulse = hasLanded ? interpolate(
     frame,
     [badgeLandTime - fps * 0.03, badgeLandTime + fps * 0.08, badgeLandTime + fps * 0.24],
-    [1, 1.18, 1],
+    [1, isNearComplete ? 1.25 : 1.18, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
-  // Badge glow bursts on landing then settles - more dramatic
+  // Badge glow bursts on landing then settles - more dramatic for high progress
   const percentGlow = hasLanded ? interpolate(
     frame,
     [badgeLandTime - fps * 0.12, badgeLandTime, badgeLandTime + fps * 0.1, badgeLandTime + fps * 0.4],
-    [0.3, 0.7, 1.5, 0.95],
+    [0.3, 0.7, isNearComplete ? 1.8 : 1.5, isNearComplete ? 1.1 : 0.95],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : interpolate(
     frame,
@@ -332,6 +338,20 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
     [0, 0.7],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
+
+  // Extra celebration ring for high progress milestones
+  const extraRingOpacity = isNearComplete && hasLanded ? interpolate(
+    frame,
+    [badgeLandTime, badgeLandTime + fps * 0.08, badgeLandTime + fps * 0.5],
+    [0.7, 0.35, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : 0;
+  const extraRingScale = isNearComplete && hasLanded ? interpolate(
+    frame,
+    [badgeLandTime, badgeLandTime + fps * 0.5],
+    [0.6, 3.0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  ) : 0.6;
 
   // Underline accent draws elegantly - tighter timing
   const underlineWidth = interpolate(
@@ -540,13 +560,14 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
             style={{
               fontSize: 12,
               fontWeight: 700,
-              color: "#505050",
+              color: isNearComplete ? "#00ff88" : "#505050",
               fontFamily: "system-ui, -apple-system, sans-serif",
               letterSpacing: 6,
               textTransform: "uppercase",
+              textShadow: isNearComplete ? "0 0 20px rgba(0, 255, 136, 0.3)" : "none",
             }}
           >
-            Approaching Milestone
+            {preText}
           </span>
         </div>
 
@@ -614,6 +635,23 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
               transform: `scale(${percentScale * badgeLandPulse})`,
             }}
           >
+            {/* Extra celebration ring for high progress - outer */}
+            {isNearComplete && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  width: 90,
+                  height: 90,
+                  borderRadius: "50%",
+                  border: "1.5px solid rgba(0, 255, 136, 0.4)",
+                  transform: `translate(-50%, -50%) scale(${extraRingScale})`,
+                  opacity: extraRingOpacity,
+                  pointerEvents: "none",
+                }}
+              />
+            )}
             {/* Celebration ring on landing */}
             <div
               style={{
@@ -796,6 +834,9 @@ const ProgressScene: React.FC<{
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
+  // Is this a HIGH progress milestone (>90%)? Add extra urgency
+  const isNearComplete = progress >= 90;
+
   // Scene entrance with subtle scale
   const sceneOpacity = interpolate(
     frame,
@@ -830,10 +871,11 @@ const ProgressScene: React.FC<{
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Live indicator pulse - refined timing
+  // Live indicator pulse - faster when near complete
+  const indicatorPulseSpeed = isNearComplete ? 1.0 : 1.6;
   const livePulse = frame > fps * 0.28 ? interpolate(
-    (frame - fps * 0.28) % (fps * 1.6),
-    [0, fps * 0.35, fps * 1.6],
+    (frame - fps * 0.28) % (fps * indicatorPulseSpeed),
+    [0, fps * indicatorPulseSpeed * 0.22, fps * indicatorPulseSpeed],
     [0.5, 1, 0.5],
     { easing: Easing.inOut(Easing.sin) }
   ) : interpolate(frame, [fps * 0.06, fps * 0.28], [0, 0.5], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
@@ -868,11 +910,11 @@ const ProgressScene: React.FC<{
   const hasFinishedCounting = displayPercent >= progress - 0.5;
   const countEndTime = fps * 2.3;
 
-  // Percentage glow builds as number climbs, then BURSTS when landing
+  // Percentage glow builds as number climbs, then BURSTS when landing - bigger burst for high progress
   const percentGlow = hasFinishedCounting ? interpolate(
     frame,
     [countEndTime - fps * 0.2, countEndTime, countEndTime + fps * 0.12, countEndTime + fps * 0.5],
-    [35, 45, 80, 50],
+    [35, 45, isNearComplete ? 100 : 80, isNearComplete ? 60 : 50],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : interpolate(
     frame,
@@ -881,11 +923,11 @@ const ProgressScene: React.FC<{
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Percentage scale pulse on landing - more celebratory
+  // Percentage scale pulse on landing - more celebratory for high progress
   const percentLandPulse = hasFinishedCounting ? interpolate(
     frame,
     [countEndTime - fps * 0.03, countEndTime + fps * 0.1, countEndTime + fps * 0.28],
-    [1, 1.08, 1],
+    [1, isNearComplete ? 1.12 : 1.08, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
@@ -1108,14 +1150,15 @@ const ProgressScene: React.FC<{
             <span
               style={{
                 fontSize: 11,
-                color: "#505050",
+                color: isNearComplete ? "#00ff88" : "#505050",
                 fontFamily: "system-ui, -apple-system, sans-serif",
                 letterSpacing: 5.5,
                 textTransform: "uppercase",
                 fontWeight: 600,
+                textShadow: isNearComplete ? "0 0 15px rgba(0, 255, 136, 0.3)" : "none",
               }}
             >
-              QE2 Progress
+              {isNearComplete ? "Almost There" : "QE2 Progress"}
             </span>
             <div style={{ width: lineWidth, height: 1, background: "linear-gradient(90deg, rgba(0,255,136,0.28), transparent)" }} />
           </div>
@@ -1271,16 +1314,21 @@ const ProgressScene: React.FC<{
                 />
               ))}
 
-              {/* Target marker at 100% */}
+              {/* Target marker at 100% - pulses with anticipation for high progress */}
               <div
                 style={{
                   position: "absolute",
                   right: 0,
                   top: -12,
                   bottom: -12,
-                  width: 2,
-                  background: "linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.2), transparent)",
+                  width: isNearComplete ? 3 : 2,
+                  background: isNearComplete
+                    ? `linear-gradient(180deg, transparent, rgba(0, 255, 136, ${0.4 + 0.3 * (barProgress > 50 ? Math.sin((frame - fps * 0.6) * 0.15) * 0.5 + 0.5 : 0)}), transparent)`
+                    : "linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.2), transparent)",
                   borderRadius: 1,
+                  boxShadow: isNearComplete && barProgress > 85
+                    ? `0 0 ${15 + 10 * (Math.sin((frame - fps * 0.6) * 0.15) * 0.5 + 0.5)}px rgba(0, 255, 136, ${0.3 + 0.2 * (Math.sin((frame - fps * 0.6) * 0.15) * 0.5 + 0.5)})`
+                    : "none",
                 }}
               />
             </div>
@@ -1371,9 +1419,12 @@ const ProgressScene: React.FC<{
 };
 
 // Scene 3: CTA - Commanding, memorable close with celebration energy
-const CTAScene: React.FC<{ nextMilestone?: string }> = ({ nextMilestone }) => {
+const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nextMilestone, progress = 0 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
+
+  // Is this a HIGH progress milestone? Makes CTA more urgent
+  const isNearComplete = progress >= 90;
 
   // Scene scale and fade
   const sceneFade = interpolate(
@@ -1432,12 +1483,15 @@ const CTAScene: React.FC<{ nextMilestone?: string }> = ({ nextMilestone }) => {
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // "Almost There" badge - builds excitement with glow
+  // Badge text varies based on progress
+  const badgeText = isNearComplete ? "So Close!" : "Almost There";
+
+  // "Almost There" / "So Close!" badge - builds excitement with glow - more intense for high progress
   const badgeDelay = 0.24;
   const badgeProgress = spring({
     frame: frame - badgeDelay * fps,
     fps,
-    config: { damping: 170, stiffness: 130 },
+    config: { damping: isNearComplete ? 150 : 170, stiffness: isNearComplete ? 160 : 130 },
   });
   const badgeOpacity = interpolate(
     frame,
@@ -1446,18 +1500,19 @@ const CTAScene: React.FC<{ nextMilestone?: string }> = ({ nextMilestone }) => {
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const badgeY = interpolate(badgeProgress, [0, 1], [16, 0]);
-  const badgeScale = interpolate(badgeProgress, [0, 1], [0.9, 1]);
+  const badgeScale = interpolate(badgeProgress, [0, 1], [isNearComplete ? 0.85 : 0.9, 1]);
 
-  // Badge glow pulses gently
+  // Badge glow pulses more energetically for high progress
   const badgeGlow = interpolate(
     frame,
     [(badgeDelay + 0.12) * fps, fps * 0.9],
-    [0, 1],
+    [0, isNearComplete ? 1.3 : 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
+  const badgePulseSpeed = isNearComplete ? 1.4 : 2.0;
   const badgePulse = frame > fps * 0.85 ? interpolate(
-    (frame - fps * 0.85) % (fps * 2.0),
-    [0, fps * 1.0, fps * 2.0],
+    (frame - fps * 0.85) % (fps * badgePulseSpeed),
+    [0, fps * badgePulseSpeed * 0.5, fps * badgePulseSpeed],
     [0.92, 1, 0.92],
     { easing: Easing.inOut(Easing.sin) }
   ) : 1;
@@ -1623,29 +1678,32 @@ const CTAScene: React.FC<{ nextMilestone?: string }> = ({ nextMilestone }) => {
           </div>
         </div>
 
-        {/* "Almost There" badge with glow */}
+        {/* "Almost There" / "So Close!" badge with glow */}
         <div
           style={{
             opacity: badgeOpacity,
             transform: `translateY(${badgeY}px) scale(${badgeScale * badgePulse})`,
-            padding: "11px 24px",
-            background: "linear-gradient(165deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 255, 136, 0.04) 100%)",
+            padding: isNearComplete ? "12px 28px" : "11px 24px",
+            background: isNearComplete
+              ? "linear-gradient(165deg, rgba(0, 255, 136, 0.15) 0%, rgba(0, 255, 136, 0.06) 100%)"
+              : "linear-gradient(165deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 255, 136, 0.04) 100%)",
             borderRadius: 32,
-            border: "1px solid rgba(0, 255, 136, 0.18)",
-            boxShadow: `0 0 ${22 * badgeGlow}px rgba(0, 255, 136, ${0.1 * badgeGlow})`,
+            border: isNearComplete ? "1.5px solid rgba(0, 255, 136, 0.28)" : "1px solid rgba(0, 255, 136, 0.18)",
+            boxShadow: `0 0 ${(isNearComplete ? 28 : 22) * badgeGlow}px rgba(0, 255, 136, ${(isNearComplete ? 0.15 : 0.1) * badgeGlow})`,
           }}
         >
           <span
             style={{
-              fontSize: 12,
-              fontWeight: 700,
+              fontSize: isNearComplete ? 14 : 12,
+              fontWeight: isNearComplete ? 800 : 700,
               color: "#00ff88",
               fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: 4.5,
+              letterSpacing: isNearComplete ? 5 : 4.5,
               textTransform: "uppercase",
+              textShadow: isNearComplete ? "0 0 15px rgba(0, 255, 136, 0.4)" : "none",
             }}
           >
-            Almost There
+            {badgeText}
           </span>
         </div>
 
@@ -1829,7 +1887,7 @@ export const MilestoneAnnouncement: React.FC<MilestoneAnnouncementProps> = ({
 
       {/* CTA: 3.8s - Confident close with momentum and breathing room */}
       <TransitionSeries.Sequence durationInFrames={Math.round(3.8 * fps)}>
-        <CTAScene nextMilestone={nextMilestone} />
+        <CTAScene nextMilestone={nextMilestone} progress={progress} />
       </TransitionSeries.Sequence>
     </TransitionSeries>
   );
