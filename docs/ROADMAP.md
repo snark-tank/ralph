@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $58,932+ Distributed (547 runs)
+**Current:** $58,941+ Distributed (548 runs)
 **Status:** IN PROGRESS (58.9%)
 
 ### Active Systems
@@ -562,6 +562,28 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - **Key Lesson:** "A 5% real yield beats a 7,000% inflationary yield every time"
 - **Confidence:** HIGH that FED's fundamentals are sound vs. OHM-style models
 
+### Leveraged Staking / Token as Collateral (OHM (9,9) Strategy)
+- **Why Rejected:** Allowing staked tokens to be used as loan collateral creates cascade risk
+- **2026-01-22 Deep Postmortem Research:**
+  - OHM's Fuse Pool #18 held $101M+ in OHM collateral positions
+  - "(9,9)" strategy: Borrow against sOHM to stake more = 3x leverage yields
+  - When OHM dropped 30%+, liquidations cascaded: $150M liquidated in 30 days
+  - Liquidations forced OHM sales → price drops → more liquidations → death spiral
+  - One DAO leader ("shotta") selling $11M triggered 40% crash in 2 hours
+  - Leveraged positions turned individual defection into systemic collapse
+- **Wonderland Amplification (0xSifu Scandal):**
+  - Treasury manager revealed as convicted fraudster Michael Patryn
+  - TIME dropped 45% in 24 hours on trust collapse
+  - Patryn drained wallet from $450M → $70M via Tornado Cash
+  - 30+ OHM forks collapsed: KLIMA (-97%), TIME (-99.99%), LOBI (-97.4%)
+- **FED's Superiority:**
+  - No staking = nothing to borrow against
+  - No collateral mechanism = no cascade possible
+  - Hold = earn model requires no leverage for yield
+  - Simplicity protects users from self-destructive strategies
+- **Key Lesson:** "Leverage turns individual risk into systemic risk. FED's no-staking design makes cascades impossible."
+- **Confidence:** VERY HIGH - This is a critical safety feature, not a limitation
+
 ### Fixed APY Promises (Anchor Protocol model)
 - **Why Rejected:** Anchor Protocol promised "stable 20% APY" on UST deposits - destroyed $40B
 - **2026-01-22 Postmortem Research (Terra/Luna Collapse):**
@@ -683,6 +705,8 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Aerodrome ve(3,3) at scale | Base DEX fee distribution, Slipstream, merger strategy | **COMPLETE** - Jan 22 research (VALIDATES FED simplicity) |
 | Camelot xGRAIL plugin system | Arbitrum DEX real yield, exit penalties, allocation | **COMPLETE** - Jan 22 research (VALIDATES FED simplicity) |
 | OlympusDAO (3,3) postmortem | Rebase tokenomics, death spiral, Wonderland scandal | **COMPLETE** - Jan 22 research (VALIDATES FED real yield) |
+| Wonderland 0xSifu scandal | Anonymous team risk, leverage cascade, trust collapse | **COMPLETE** - Jan 22 research (VALIDATES Ralph = code) |
+| DeFi 2.0 fork graveyard | 30+ OHM forks, DAOpocalypse, why all failed | **COMPLETE** - Jan 22 research (VALIDATES FED simplicity) |
 | BONK ecosystem integrations | Memecoin integration moat, LetsBonk success | **COMPLETE** - Jan 22 research (350+ integrations = 2+ years work) |
 | BONK ecosystem deep dive | BonkBot revenue, LetsBonk fees, replicability for FED | **COMPLETE** - Jan 22 research (yield moat > integration chase) |
 | Friend.tech viral collapse | SocialFi failure, viral ≠ sustainable | **COMPLETE** - Jan 22 research (VALIDATES FED simplicity) |
