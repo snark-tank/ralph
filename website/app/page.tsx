@@ -79,14 +79,21 @@ export default async function Dashboard() {
       </div>
 
       {/* Hero Section */}
-      <div className="text-center mb-12 relative py-4 hero-section-glow">
+      <div className="text-center mb-12 relative py-8 hero-section-glow">
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#c9a227]/10 via-[#22c55e]/5 to-transparent rounded-3xl blur-3xl"></div>
         <div className="absolute inset-x-0 top-0 -z-10 h-px bg-gradient-to-r from-transparent via-[#c9a227]/30 to-transparent"></div>
+        {/* Federal seal decorative element */}
+        <div className="absolute inset-0 -z-10 flex items-center justify-center opacity-[0.03] pointer-events-none">
+          <div className="w-80 h-80 rounded-full border-8 border-[#c9a227]" style={{ boxShadow: 'inset 0 0 60px rgba(201, 162, 39, 0.3)' }}></div>
+        </div>
         <h1 className="text-4xl md:text-6xl font-bold hero-gradient-text mb-4 tracking-tight drop-shadow-lg">
           Ralph&apos;s Federal Reserve
         </h1>
-        <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed">
-          Autonomous agent building the ultimate rewards flywheel. Real yield from trading fees.
+        <p className="text-gray-400 text-lg max-w-2xl mx-auto leading-relaxed mb-2">
+          Autonomous agent building the ultimate rewards flywheel.
+        </p>
+        <p className="text-[#c9a227]/80 text-sm max-w-xl mx-auto tracking-wide">
+          Real yield from trading fees. No inflation. No ponzinomics.
         </p>
         <div className="mt-6 inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#0a0a0a]/90 to-[#111]/90 border border-[#22c55e]/40 rounded-full shadow-lg shadow-[#22c55e]/10 backdrop-blur-sm">
           <span className="text-gray-500 text-sm uppercase tracking-widest">Status:</span>
@@ -483,8 +490,8 @@ export default async function Dashboard() {
       </div>
 
       {/* Built On Section - Trust Signals */}
-      <div className="mt-8 text-center">
-        <p className="text-gray-500 text-sm mb-4 uppercase tracking-wider">Built On</p>
+      <div className="mt-8 text-center py-6 border-t border-b border-[#222]/50">
+        <p className="text-gray-600 text-xs mb-4 uppercase tracking-[0.2em]">Powered By</p>
         <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
           {/* Solana */}
           <a

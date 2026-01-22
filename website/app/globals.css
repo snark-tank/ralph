@@ -1296,3 +1296,73 @@ body::after {
   border-radius: 50%;
   pointer-events: none;
 }
+
+/* Enhanced typography for premium feel */
+h1, h2, h3 {
+  letter-spacing: -0.02em;
+}
+
+/* Subtle link transitions */
+a {
+  transition: color 0.15s ease, text-shadow 0.15s ease;
+}
+
+/* Enhanced card hover states */
+.card:hover {
+  transform: translateY(-1px);
+}
+
+/* Smooth stat transitions */
+.stat-number {
+  transition: transform 0.15s ease, text-shadow 0.15s ease;
+}
+
+.stat-number:hover {
+  transform: scale(1.02);
+}
+
+/* Premium divider styling */
+.premium-divider {
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(201, 162, 39, 0.15) 20%,
+    rgba(201, 162, 39, 0.3) 50%,
+    rgba(201, 162, 39, 0.15) 80%,
+    transparent 100%
+  );
+}
+
+/* Enhanced button hover feedback */
+button, .btn-glow {
+  transition: all 0.2s ease;
+}
+
+/* Better mobile card spacing */
+@media (max-width: 640px) {
+  .card, .stat-card-premium {
+    padding: 1rem;
+  }
+
+  .stat-number {
+    font-size: 1.75rem;
+  }
+}
+
+/* Improved table hover states */
+.premium-table tbody tr:hover td:first-child {
+  border-left: 2px solid rgba(201, 162, 39, 0.5);
+}
+
+/* Enhanced badge pill styling */
+.badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: linear-gradient(135deg, rgba(17, 17, 17, 0.9), rgba(10, 10, 10, 0.95));
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
