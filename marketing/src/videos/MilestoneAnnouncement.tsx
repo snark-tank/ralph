@@ -39,6 +39,55 @@ const FilmGrain: React.FC<{ opacity?: number }> = ({ opacity = 0.025 }) => {
   );
 };
 
+// CRT scanline effect for vintage tech aesthetic during power-on
+const ScanlineOverlay: React.FC<{ opacity?: number; speed?: number }> = ({ opacity = 0.08, speed = 2.5 }) => {
+  const frame = useCurrentFrame();
+  const { fps, height } = useVideoConfig();
+
+  // Scanline moves down the screen
+  const scanlineY = (frame * speed) % (height + 40);
+
+  return (
+    <AbsoluteFill style={{ pointerEvents: "none", overflow: "hidden" }}>
+      {/* Subtle horizontal lines pattern */}
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          background: `repeating-linear-gradient(
+            0deg,
+            transparent 0px,
+            transparent 2px,
+            rgba(0, 0, 0, ${opacity * 0.5}) 2px,
+            rgba(0, 0, 0, ${opacity * 0.5}) 4px
+          )`,
+          opacity: 0.6,
+        }}
+      />
+      {/* Moving bright scanline */}
+      <div
+        style={{
+          position: "absolute",
+          top: scanlineY - 20,
+          left: 0,
+          right: 0,
+          height: 40,
+          background: `linear-gradient(180deg,
+            transparent 0%,
+            rgba(0, 255, 136, ${opacity * 0.4}) 40%,
+            rgba(255, 255, 255, ${opacity * 0.6}) 50%,
+            rgba(0, 255, 136, ${opacity * 0.4}) 60%,
+            transparent 100%)`,
+          pointerEvents: "none",
+        }}
+      />
+    </AbsoluteFill>
+  );
+};
+
 // Premium cinematic background - depth without distraction
 const CinematicBackground: React.FC<{
   accentColor?: string;
@@ -110,21 +159,35 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
 
   // Is this a HIGH progress milestone (>90%)? Add extra urgency
   const isNearComplete = progress >= 90;
+  // Even more urgent when nearly done
+  const isAlmostThere = progress >= 95;
 
   // Phase 0: Total darkness with precise flicker timing - builds maximum anticipation
-  const flicker = frame < fps * 0.08 ? 0 :
-    frame < fps * 0.10 ? 0.08 :
+  // More dramatic flicker sequence for high-progress milestones
+  const flicker = frame < fps * 0.06 ? 0 :
+    frame < fps * 0.075 ? 0.04 :
+    frame < fps * 0.09 ? 0.01 :
+    frame < fps * 0.105 ? 0.08 :
     frame < fps * 0.12 ? 0.02 :
-    frame < fps * 0.14 ? 0.12 :
-    frame < fps * 0.16 ? 0.03 :
-    frame < fps * 0.18 ? 0.18 : 1;
+    frame < fps * 0.135 ? 0.15 :
+    frame < fps * 0.15 ? 0.05 :
+    frame < fps * 0.165 ? 0.25 :
+    frame < fps * 0.18 ? 0.12 : 1;
 
   const darknessFade = interpolate(
     frame,
-    [fps * 0.18, fps * 0.48],
+    [fps * 0.18, fps * 0.45],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) * (frame < fps * 0.18 ? flicker : 1);
+
+  // CRT scanline visibility - only during power-on phase
+  const scanlineOpacity = interpolate(
+    frame,
+    [0, fps * 0.15, fps * 0.6, fps * 0.9],
+    [0, 0.12, 0.06, 0],
+    { extrapolateRight: "clamp" }
+  );
 
   // Initial light burst - a brilliant point that expands cinematically
   const burstOpacity = interpolate(
@@ -169,7 +232,7 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
   );
 
   // Pre-title - text varies based on how close we are to milestone
-  const preText = isNearComplete ? "Final Stretch" : "Approaching Milestone";
+  const preText = isAlmostThere ? "The Final Push" : isNearComplete ? "Final Stretch" : "Approaching Milestone";
   const preDelay = 0.42;
   const preOpacity = interpolate(
     frame,
@@ -427,6 +490,9 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
   return (
     <AbsoluteFill>
       <CinematicBackground accentColor="#00ff88" intensity={bgIntensity} focusY={48} />
+
+      {/* CRT scanline overlay - vintage tech power-on aesthetic */}
+      {scanlineOpacity > 0 && <ScanlineOverlay opacity={scanlineOpacity} speed={3.5} />}
 
       {/* Opening pulse and light burst - draws attention from black */}
       <AbsoluteFill
@@ -836,6 +902,8 @@ const ProgressScene: React.FC<{
 
   // Is this a HIGH progress milestone (>90%)? Add extra urgency
   const isNearComplete = progress >= 90;
+  // Even more urgent at 95%+
+  const isAlmostThere = progress >= 95;
 
   // Scene entrance with subtle scale
   const sceneOpacity = interpolate(
@@ -850,6 +918,14 @@ const ProgressScene: React.FC<{
     [0.985, 1],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
+
+  // Ambient "tension" pulse when almost there - the whole scene subtly breathes
+  const tensionPulse = isAlmostThere && frame > fps * 2.0 ? interpolate(
+    (frame - fps * 2.0) % (fps * 0.8),
+    [0, fps * 0.4, fps * 0.8],
+    [0, 0.015, 0],
+    { easing: Easing.inOut(Easing.sin) }
+  ) : 0;
 
   // Header with decorative lines - pulsing indicator
   const headerOpacity = interpolate(
@@ -1088,16 +1164,36 @@ const ProgressScene: React.FC<{
 
   const barWidthPx = 860; // Approximate width for particle positioning
 
+  // Heartbeat pulse timing for high-progress dramatic effect
+  const heartbeatPhase = isAlmostThere && frame > fps * 2.0 ?
+    (frame - fps * 2.0) % (fps * 1.2) : 0;
+  const heartbeatPulse = isAlmostThere ? interpolate(
+    heartbeatPhase,
+    [0, fps * 0.08, fps * 0.2, fps * 0.5, fps * 1.2],
+    [0, 0.25, 0.08, 0, 0],
+    { easing: Easing.out(Easing.cubic) }
+  ) : 0;
+
   return (
     <AbsoluteFill style={{ opacity: sceneOpacity }}>
       <CinematicBackground accentColor="#00ff88" intensity={bgIntensity} focusY={40} />
+
+      {/* Heartbeat ambient vignette pulse when almost complete */}
+      {isAlmostThere && frame > fps * 2.0 && (
+        <AbsoluteFill
+          style={{
+            background: `radial-gradient(ellipse 60% 50% at 50% 50%, transparent 0%, transparent 70%, rgba(0, 255, 136, ${heartbeatPulse * 0.1}) 100%)`,
+            pointerEvents: "none",
+          }}
+        />
+      )}
 
       <AbsoluteFill
         style={{
           justifyContent: "center",
           alignItems: "center",
           padding: 60,
-          transform: `scale(${sceneScale})`,
+          transform: `scale(${sceneScale + tensionPulse})`,
         }}
       >
         <div
@@ -1152,13 +1248,17 @@ const ProgressScene: React.FC<{
                 fontSize: 11,
                 color: isNearComplete ? "#00ff88" : "#505050",
                 fontFamily: "system-ui, -apple-system, sans-serif",
-                letterSpacing: 5.5,
+                letterSpacing: isAlmostThere ? 6 : 5.5,
                 textTransform: "uppercase",
-                fontWeight: 600,
-                textShadow: isNearComplete ? "0 0 15px rgba(0, 255, 136, 0.3)" : "none",
+                fontWeight: isAlmostThere ? 700 : 600,
+                textShadow: isAlmostThere
+                  ? "0 0 20px rgba(0, 255, 136, 0.5)"
+                  : isNearComplete
+                  ? "0 0 15px rgba(0, 255, 136, 0.3)"
+                  : "none",
               }}
             >
-              {isNearComplete ? "Almost There" : "QE2 Progress"}
+              {isAlmostThere ? "Final Push" : isNearComplete ? "Almost There" : "QE2 Progress"}
             </span>
             <div style={{ width: lineWidth, height: 1, background: "linear-gradient(90deg, rgba(0,255,136,0.28), transparent)" }} />
           </div>
@@ -1209,6 +1309,21 @@ const ProgressScene: React.FC<{
               position: "relative",
             }}
           >
+            {/* Outer anticipation glow when almost complete - pulses with urgency */}
+            {isAlmostThere && barProgress > 90 && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: -8,
+                  left: -8,
+                  right: -8,
+                  bottom: -8,
+                  borderRadius: 17,
+                  background: `radial-gradient(ellipse 100% 200% at ${barProgress}% 50%, rgba(0, 255, 136, ${0.08 + tensionPulse * 2}) 0%, transparent 50%)`,
+                  pointerEvents: "none",
+                }}
+              />
+            )}
             {/* Track */}
             <div
               style={{
@@ -1218,8 +1333,12 @@ const ProgressScene: React.FC<{
                 borderRadius: 9,
                 overflow: "visible",
                 position: "relative",
-                border: "1px solid rgba(255, 255, 255, 0.04)",
-                boxShadow: "inset 0 2px 12px rgba(0, 0, 0, 0.4)",
+                border: isAlmostThere
+                  ? `1px solid rgba(0, 255, 136, ${0.08 + tensionPulse * 3})`
+                  : "1px solid rgba(255, 255, 255, 0.04)",
+                boxShadow: isAlmostThere
+                  ? `inset 0 2px 12px rgba(0, 0, 0, 0.4), 0 0 ${25 + tensionPulse * 100}px rgba(0, 255, 136, ${0.15 + tensionPulse})`
+                  : "inset 0 2px 12px rgba(0, 0, 0, 0.4)",
               }}
             >
               {/* Fill - rich gradient with inner glow */}
@@ -1319,14 +1438,18 @@ const ProgressScene: React.FC<{
                 style={{
                   position: "absolute",
                   right: 0,
-                  top: -12,
-                  bottom: -12,
-                  width: isNearComplete ? 3 : 2,
-                  background: isNearComplete
+                  top: isAlmostThere ? -16 : -12,
+                  bottom: isAlmostThere ? -16 : -12,
+                  width: isAlmostThere ? 4 : isNearComplete ? 3 : 2,
+                  background: isAlmostThere
+                    ? `linear-gradient(180deg, transparent 5%, rgba(0, 255, 136, ${0.6 + 0.3 * (Math.sin((frame - fps * 0.6) * 0.18) * 0.5 + 0.5)}) 50%, transparent 95%)`
+                    : isNearComplete
                     ? `linear-gradient(180deg, transparent, rgba(0, 255, 136, ${0.4 + 0.3 * (barProgress > 50 ? Math.sin((frame - fps * 0.6) * 0.15) * 0.5 + 0.5 : 0)}), transparent)`
                     : "linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.2), transparent)",
-                  borderRadius: 1,
-                  boxShadow: isNearComplete && barProgress > 85
+                  borderRadius: 2,
+                  boxShadow: isAlmostThere && barProgress > 90
+                    ? `0 0 ${22 + 15 * (Math.sin((frame - fps * 0.6) * 0.18) * 0.5 + 0.5)}px rgba(0, 255, 136, ${0.45 + 0.25 * (Math.sin((frame - fps * 0.6) * 0.18) * 0.5 + 0.5)})`
+                    : isNearComplete && barProgress > 85
                     ? `0 0 ${15 + 10 * (Math.sin((frame - fps * 0.6) * 0.15) * 0.5 + 0.5)}px rgba(0, 255, 136, ${0.3 + 0.2 * (Math.sin((frame - fps * 0.6) * 0.15) * 0.5 + 0.5)})`
                     : "none",
                 }}
@@ -1425,6 +1548,8 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
 
   // Is this a HIGH progress milestone? Makes CTA more urgent
   const isNearComplete = progress >= 90;
+  // Even more urgent at 95%+
+  const isAlmostThere = progress >= 95;
 
   // Scene scale and fade
   const sceneFade = interpolate(
@@ -1483,8 +1608,8 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Badge text varies based on progress
-  const badgeText = isNearComplete ? "So Close!" : "Almost There";
+  // Badge text varies based on progress - more urgency at higher %
+  const badgeText = isAlmostThere ? "Final Push!" : isNearComplete ? "So Close!" : "Almost There";
 
   // "Almost There" / "So Close!" badge - builds excitement with glow - more intense for high progress
   const badgeDelay = 0.24;
@@ -1678,29 +1803,39 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
           </div>
         </div>
 
-        {/* "Almost There" / "So Close!" badge with glow */}
+        {/* "Almost There" / "So Close!" / "Final Push!" badge with glow */}
         <div
           style={{
             opacity: badgeOpacity,
             transform: `translateY(${badgeY}px) scale(${badgeScale * badgePulse})`,
-            padding: isNearComplete ? "12px 28px" : "11px 24px",
-            background: isNearComplete
+            padding: isAlmostThere ? "14px 32px" : isNearComplete ? "12px 28px" : "11px 24px",
+            background: isAlmostThere
+              ? "linear-gradient(165deg, rgba(0, 255, 136, 0.22) 0%, rgba(0, 255, 136, 0.08) 100%)"
+              : isNearComplete
               ? "linear-gradient(165deg, rgba(0, 255, 136, 0.15) 0%, rgba(0, 255, 136, 0.06) 100%)"
               : "linear-gradient(165deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 255, 136, 0.04) 100%)",
             borderRadius: 32,
-            border: isNearComplete ? "1.5px solid rgba(0, 255, 136, 0.28)" : "1px solid rgba(0, 255, 136, 0.18)",
-            boxShadow: `0 0 ${(isNearComplete ? 28 : 22) * badgeGlow}px rgba(0, 255, 136, ${(isNearComplete ? 0.15 : 0.1) * badgeGlow})`,
+            border: isAlmostThere
+              ? "2px solid rgba(0, 255, 136, 0.4)"
+              : isNearComplete
+              ? "1.5px solid rgba(0, 255, 136, 0.28)"
+              : "1px solid rgba(0, 255, 136, 0.18)",
+            boxShadow: `0 0 ${(isAlmostThere ? 35 : isNearComplete ? 28 : 22) * badgeGlow}px rgba(0, 255, 136, ${(isAlmostThere ? 0.2 : isNearComplete ? 0.15 : 0.1) * badgeGlow})`,
           }}
         >
           <span
             style={{
-              fontSize: isNearComplete ? 14 : 12,
-              fontWeight: isNearComplete ? 800 : 700,
+              fontSize: isAlmostThere ? 16 : isNearComplete ? 14 : 12,
+              fontWeight: isAlmostThere ? 900 : isNearComplete ? 800 : 700,
               color: "#00ff88",
               fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: isNearComplete ? 5 : 4.5,
+              letterSpacing: isAlmostThere ? 5.5 : isNearComplete ? 5 : 4.5,
               textTransform: "uppercase",
-              textShadow: isNearComplete ? "0 0 15px rgba(0, 255, 136, 0.4)" : "none",
+              textShadow: isAlmostThere
+                ? "0 0 25px rgba(0, 255, 136, 0.55)"
+                : isNearComplete
+                ? "0 0 15px rgba(0, 255, 136, 0.4)"
+                : "none",
             }}
           >
             {badgeText}
