@@ -4,13 +4,14 @@
 
 ---
 
-## Current State (as of Jan 21, 2026)
+## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $39,139.81 USD1
-- **24h Performance:** 14x+ pump ($0.00005 → $0.0008)
-- **Market Cap:** ~$765,000
-- **Liquidity:** ~$69,000
+- **Total Distributed:** $51,603+ USD1
+- **Distribution Count:** 374 distributions
+- **Holders:** ~1,800+
+- **Tier Multiplier Max:** 4.5x
+- **Distribution Frequency:** Every ~2 minutes
 
 ### Built Tokenomics Systems
 
@@ -120,4 +121,158 @@ These are ideas for future research - NOT immediate implementation:
 
 ---
 
-*Last Updated: 2026-01-21 17:00 UTC*
+*Last Updated: 2026-01-22 UTC*
+
+---
+
+## 2026-01-22: Deep Dive - Pendle sPENDLE & GMX Fee Distribution Models
+
+### Pendle Finance Analysis
+
+**Protocol Size:** $3.5B TVL (13th largest DeFi protocol)
+**2025 Revenue:** $37M+ in fee generation
+
+#### vePENDLE to sPENDLE Transition (January 2026)
+
+Pendle just made a major governance shift that's highly relevant to FED:
+
+**The Problem They Solved:**
+- vePENDLE required multi-year locks (up to 2 years)
+- Complex voting mechanics meant rewards concentrated among sophisticated users
+- Long lock-ups became "significant barriers" for most users
+- Only a tiny fraction of users captured the benefits despite protocol growth
+
+**sPENDLE Solution:**
+- Liquid staking token with 14-day withdrawal (or instant with 5% fee)
+- Up to 80% of protocol revenue used for PENDLE buybacks
+- Buyback tokens distributed as governance rewards
+- Algorithmic emission model reduces overall emissions by ~30%
+
+**Key Insight for FED:**
+Pendle learned that complexity kills adoption. Despite generating $37M in fees, most users couldn't navigate the system. Their solution: simplify access while maintaining value accrual through buybacks.
+
+**FED Application:**
+- FED's "just hold = earn" model is CORRECT - simplicity wins
+- Our buyback mechanism mirrors Pendle's new approach
+- We should NOT add complex staking/locking (validates our rejection)
+- Consider: Could we allocate higher % of fees to buyback during dips?
+
+**Sources:**
+- [Pendle Tokenomics Docs](https://docs.pendle.finance/ProtocolMechanics/Mechanisms/Tokenomics/)
+- [Pendle vePENDLE Docs](https://docs.pendle.finance/ProtocolMechanics/Mechanisms/vePENDLE/)
+- [CoinMarketCap: Pendle sPENDLE Launch](https://coinmarketcap.com/academy/article/pendle-launches-spendle-token-with-flexible-staking)
+
+---
+
+### GMX Fee Distribution Analysis
+
+**Protocol Size:** Major perp DEX on Arbitrum/Avalanche/Solana
+**Model:** Real yield from trading fees (not inflation)
+
+#### GMX V1 (GLP) Model:
+- Multi-asset liquidity pool (30% stables, 25% ETH, 25% BTC, 20% alts)
+- **70% of fees** → GLP holders (liquidity providers)
+- **30% of fees** → GMX stakers
+- Fees paid in ETH/AVAX (real yield, not token emissions)
+
+#### GMX V2 Evolution (GLV):
+- Isolated GM liquidity pools with GLV vaults on top
+- Dynamic rebalancing toward best-performing pools
+- **Auto-compounding** with 20-30% historical annualized performance
+- Significant UX improvement over V1
+
+#### 2025-2026 Updates:
+- Discussion of $200K/month USDC buybacks (Jan-March 2026)
+- Proposal to reallocate 27% of protocol revenue to growth initiatives
+- Expanded to Solana (GMX-Solana) in March 2025
+- GMX Multichain via LayerZero (Base network, Sept 2025)
+
+**Key Insight for FED:**
+GMX proves real yield works at scale. Their 70/30 split (LPs/stakers) creates aligned incentives. The evolution to auto-compounding GLV shows the market wants passive, optimized returns.
+
+**FED Application:**
+- Our 100% distribution to holders model is simpler than GMX (good for memecoin)
+- Consider: Should we reserve any % for protocol treasury/growth?
+- Auto-compounding concept could apply to FED (compound distributions back to more $FED)
+- GMX buyback discussions validate our buyback strategy
+
+**Sources:**
+- [GMX Analytics](https://stats.gmx.io/)
+- [GMX GLP Documentation](https://gmxio.gitbook.io/gmx/glp)
+- [Miracuves: GMX Revenue Breakdown](https://miracuves.com/blog/revenue-model-of-gmx/)
+
+---
+
+### Distribution Frequency Research
+
+**Industry Standards:**
+
+| Protocol | Distribution Frequency | Model |
+|----------|----------------------|-------|
+| Ethereum | Every ~6.4 minutes (epoch) | Block rewards |
+| GMX | Continuous (per-tx fees) | Real-time accrual |
+| Pendle | Per-trade + epoch | Hybrid |
+| Most DeFi | Weekly/Monthly | Batched |
+| **FED** | **Every ~2 minutes** | Real-time distribution |
+
+**Key Findings:**
+
+1. **Weekly/Monthly is standard** - Reduces gas costs, admin overhead
+2. **Real-time is rare** - FED's 2-min frequency is UNUSUAL (differentiator!)
+3. **Ethereum epochs** - 6.4 minutes is the fastest common standard
+4. **Trade-off:** Frequent = better UX but higher gas costs
+
+**FED's Competitive Advantage:**
+Our 2-minute distribution is a major differentiator. Most DeFi makes you wait days/weeks. We deliver yield in near real-time. This creates:
+- Immediate gratification (dopamine on distribution)
+- "Always earning" psychology
+- Strong differentiation from weekly/monthly protocols
+
+**Recommendation:**
+KEEP the ~2 minute frequency. It's a feature, not a bug. The gas cost is worth the UX and differentiation.
+
+**Potential Optimization (QE4):**
+- Dynamic batching: More recipients per tx during low-value periods
+- Priority during pumps: Increase frequency to every 1 minute during high volume
+- Consolidate during quiet: Batch larger during low activity periods
+
+**Sources:**
+- [Figment: Ethereum Staking Rewards](https://www.figment.io/insights/ethereum-staking-rewards/)
+- [Coin Bureau: DeFi Staking Platforms](https://coinbureau.com/analysis/best-defi-staking-platforms/)
+
+---
+
+## Key Research Conclusions (Jan 22, 2026)
+
+### What FED Is Doing Right:
+
+1. **Simplicity** - "Just hold = earn" is validated by Pendle's pivot away from complex locking
+2. **Real Yield** - No inflation, real fee distribution (GMX model proven at scale)
+3. **Frequent Distribution** - 2-min cadence is a differentiator, not a problem
+4. **Buyback Mechanism** - Mirrors what Pendle just adopted (80% revenue to buybacks)
+
+### What to Consider for QE4:
+
+1. **Dynamic Distribution Timing** - Volume-based frequency adjustment
+2. **Buyback Ratio Tuning** - Current threshold-based; consider % allocation approach
+3. **Auto-Compound Option** - Let holders opt-in to compound distributions back to $FED
+4. **Gas Optimization** - Better batching during quiet periods
+
+### What NOT to Do:
+
+1. **Don't add locking** - Pendle just removed it, proving complexity hurts adoption
+2. **Don't reduce frequency** - 2-min distribution is our moat
+3. **Don't complicate multipliers** - Current tier system is intuitive
+4. **Don't add multiple tokens** - One token, one purpose (remains correct)
+
+---
+
+## Action Items
+
+1. [x] Document current systems
+2. [ ] Monitor SOL gas situation
+3. [ ] Research auto-ATA funding solutions
+4. [ ] Track holder retention post-distributions
+5. [x] Analyze optimal distribution timing (see research above)
+6. [ ] Model auto-compound economics
+7. [ ] Research dynamic buyback ratio optimization
