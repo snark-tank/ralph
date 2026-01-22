@@ -269,6 +269,22 @@ const RevealScene: React.FC<{ milestone: string; progress: number; current?: str
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
+  // Pre-text glow for imminent - the text itself pulses with energy
+  const preTextGlow = isImminent ? interpolate(
+    frame,
+    [(preDelay + 0.15) * fps, fps * 0.9, fps * 1.4],
+    [0, 45, 35],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  ) : 0;
+
+  // Pre-text scale pulse for imminent - gentle breathing to draw attention
+  const preTextScale = isImminent && frame > fps * 0.8 ? interpolate(
+    (frame - fps * 0.8) % (fps * 0.9),
+    [0, fps * 0.45, fps * 0.9],
+    [1, 1.05, 1],
+    { easing: Easing.inOut(Easing.sin) }
+  ) : 1;
+
   // Pulsing indicator dot - faster pulse when near complete for urgency
   const pulseSpeed = isImminent ? 0.55 : isCritical ? 0.7 : isNearComplete ? 0.9 : 1.4;
   const dotPulse = frame > fps * 0.6 ? interpolate(
@@ -513,6 +529,28 @@ const RevealScene: React.FC<{ milestone: string; progress: number; current?: str
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
+  // "1%" hero counter for imminent - THE dramatic moment
+  // This shows a massive "1%" that represents how close we are
+  const onePercentDelay = isImminent ? 2.0 : 999;
+  const onePercentOpacity = isImminent ? interpolate(
+    frame,
+    [onePercentDelay * fps, (onePercentDelay + 0.35) * fps],
+    [0, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : 0;
+  const onePercentScale = isImminent ? interpolate(
+    frame,
+    [onePercentDelay * fps, (onePercentDelay + 0.25) * fps, (onePercentDelay + 0.45) * fps],
+    [0.4, 1.15, 1],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  ) : 1;
+  const onePercentGlow = isImminent ? interpolate(
+    frame,
+    [(onePercentDelay + 0.2) * fps, (onePercentDelay + 0.55) * fps],
+    [0, 60],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  ) : 0;
+
   // Calculate remaining amount for urgency display (only for critical progress)
   const targetValue = target ? parseFloat(target.replace(/[$,]/g, "")) : 50000;
   const currentValue = current ? parseFloat(current.replace(/[$,]/g, "")) : targetValue * (progress / 100);
@@ -728,14 +766,16 @@ const RevealScene: React.FC<{ milestone: string; progress: number; current?: str
           </div>
           <span
             style={{
-              fontSize: isImminent ? 14 : isCritical ? 13 : 12,
+              fontSize: isImminent ? 16 : isCritical ? 13 : 12,
               fontWeight: isImminent ? 900 : isCritical ? 800 : 700,
               color: isImminent ? "#00ff88" : isCritical ? "#00ff88" : isNearComplete ? "#00ff88" : "#505050",
               fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: isImminent ? 8 : isCritical ? 7 : 6,
+              letterSpacing: isImminent ? 10 : isCritical ? 7 : 6,
               textTransform: "uppercase",
+              transform: `scale(${preTextScale})`,
+              display: "inline-block",
               textShadow: isImminent
-                ? "0 0 35px rgba(0, 255, 136, 0.6)"
+                ? `0 0 ${35 + preTextGlow * 0.5}px rgba(0, 255, 136, ${0.6 + preTextGlow * 0.008})`
                 : isCritical
                 ? "0 0 25px rgba(0, 255, 136, 0.45)"
                 : isNearComplete
@@ -864,28 +904,29 @@ const RevealScene: React.FC<{ milestone: string; progress: number; current?: str
             />
             <div
               style={{
-                padding: isImminent ? "18px 28px" : isCritical ? "15px 24px" : "14px 22px",
+                padding: isImminent ? "22px 34px" : isCritical ? "15px 24px" : "14px 22px",
                 background: isImminent
-                  ? "linear-gradient(145deg, #00ff88 0%, #00ffdd 40%, #00ffcc 70%, #00ff88 100%)"
+                  ? "linear-gradient(145deg, #00ff88 0%, #00ffee 30%, #00ffcc 60%, #00ff88 100%)"
                   : isCritical
                   ? "linear-gradient(145deg, #00ff88 0%, #00ffcc 50%, #00ff88 100%)"
                   : "linear-gradient(145deg, #00ff88 0%, #00ffbb 100%)",
-                borderRadius: 40,
+                borderRadius: isImminent ? 50 : 40,
                 boxShadow: `
-                  0 ${isImminent ? 12 : isCritical ? 10 : 8}px ${isImminent ? 42 : isCritical ? 35 : 30}px rgba(0, 255, 136, ${0.4 + 0.35 * percentGlow}),
-                  0 0 ${(isImminent ? 65 : isCritical ? 50 : 40) * percentGlow}px rgba(0, 255, 136, ${(isImminent ? 0.38 : isCritical ? 0.3 : 0.25) * percentGlow}),
-                  inset 0 2px 0 rgba(255, 255, 255, ${isImminent ? 0.32 : isCritical ? 0.28 : 0.22})
+                  0 ${isImminent ? 16 : isCritical ? 10 : 8}px ${isImminent ? 55 : isCritical ? 35 : 30}px rgba(0, 255, 136, ${0.4 + 0.4 * percentGlow}),
+                  0 0 ${(isImminent ? 85 : isCritical ? 50 : 40) * percentGlow}px rgba(0, 255, 136, ${(isImminent ? 0.45 : isCritical ? 0.3 : 0.25) * percentGlow}),
+                  inset 0 2px 0 rgba(255, 255, 255, ${isImminent ? 0.38 : isCritical ? 0.28 : 0.22}),
+                  inset 0 -1px 0 rgba(0, 0, 0, 0.08)
                 `,
               }}
             >
               <span
                 style={{
-                  fontSize: isImminent ? 38 : isCritical ? 34 : 32,
+                  fontSize: isImminent ? 48 : isCritical ? 34 : 32,
                   fontWeight: 900,
                   color: "#010101",
                   fontFamily: "system-ui, -apple-system, sans-serif",
-                  letterSpacing: -1,
-                  textShadow: "0 1px 0 rgba(255, 255, 255, 0.2)",
+                  letterSpacing: isImminent ? -2 : -1,
+                  textShadow: "0 1px 0 rgba(255, 255, 255, 0.25)",
                 }}
               >
                 {Math.round(displayProgress)}%
@@ -906,6 +947,33 @@ const RevealScene: React.FC<{ milestone: string; progress: number; current?: str
             boxShadow: `0 0 ${16 * underlineGlow}px rgba(0, 255, 136, ${0.22 * underlineGlow})`,
           }}
         />
+
+        {/* "1%" dramatic counter for imminent milestones - visual emphasis on how close */}
+        {isImminent && (
+          <div
+            style={{
+              position: "absolute",
+              bottom: 85,
+              right: 120,
+              opacity: onePercentOpacity * 0.12,
+              transform: `scale(${onePercentScale})`,
+              pointerEvents: "none",
+            }}
+          >
+            <span
+              style={{
+                fontSize: 320,
+                fontWeight: 900,
+                color: "#00ff88",
+                fontFamily: "system-ui, -apple-system, sans-serif",
+                letterSpacing: -25,
+                filter: `drop-shadow(0 0 ${onePercentGlow}px rgba(0, 255, 136, 0.3))`,
+              }}
+            >
+              1%
+            </span>
+          </div>
+        )}
 
         {/* Tagline with decorative lines */}
         <div
@@ -1227,6 +1295,15 @@ const ProgressScene: React.FC<{
       easing: (t) => 1 - Math.pow(1 - t, 4),
     }
   );
+
+  // "The gap" - the remaining 1% visualized dramatically for imminent
+  const gapVisible = isImminent && barProgress > 90;
+  const gapPulse = gapVisible ? interpolate(
+    (frame - fps * 2.0) % (fps * 0.7),
+    [0, fps * 0.35, fps * 0.7],
+    [0.4, 1, 0.4],
+    { easing: Easing.inOut(Easing.sin) }
+  ) : 0;
 
   // Bar glow intensity builds with fill - more dramatic
   const barGlow = interpolate(
@@ -1700,22 +1777,74 @@ const ProgressScene: React.FC<{
                 style={{
                   position: "absolute",
                   right: 0,
-                  top: isAlmostThere ? -16 : -12,
-                  bottom: isAlmostThere ? -16 : -12,
-                  width: isAlmostThere ? 4 : isNearComplete ? 3 : 2,
-                  background: isAlmostThere
+                  top: isImminent ? -22 : isAlmostThere ? -16 : -12,
+                  bottom: isImminent ? -22 : isAlmostThere ? -16 : -12,
+                  width: isImminent ? 6 : isAlmostThere ? 4 : isNearComplete ? 3 : 2,
+                  background: isImminent
+                    ? `linear-gradient(180deg, transparent 0%, rgba(0, 255, 136, ${0.85 + 0.15 * (Math.sin((frame - fps * 0.6) * 0.25) * 0.5 + 0.5)}) 50%, transparent 100%)`
+                    : isAlmostThere
                     ? `linear-gradient(180deg, transparent 5%, rgba(0, 255, 136, ${0.6 + 0.3 * (Math.sin((frame - fps * 0.6) * 0.18) * 0.5 + 0.5)}) 50%, transparent 95%)`
                     : isNearComplete
                     ? `linear-gradient(180deg, transparent, rgba(0, 255, 136, ${0.4 + 0.3 * (barProgress > 50 ? Math.sin((frame - fps * 0.6) * 0.15) * 0.5 + 0.5 : 0)}), transparent)`
                     : "linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.2), transparent)",
-                  borderRadius: 2,
-                  boxShadow: isAlmostThere && barProgress > 90
+                  borderRadius: 3,
+                  boxShadow: isImminent && barProgress > 92
+                    ? `0 0 ${35 + 25 * (Math.sin((frame - fps * 0.6) * 0.25) * 0.5 + 0.5)}px rgba(0, 255, 136, ${0.65 + 0.35 * (Math.sin((frame - fps * 0.6) * 0.25) * 0.5 + 0.5)})`
+                    : isAlmostThere && barProgress > 90
                     ? `0 0 ${22 + 15 * (Math.sin((frame - fps * 0.6) * 0.18) * 0.5 + 0.5)}px rgba(0, 255, 136, ${0.45 + 0.25 * (Math.sin((frame - fps * 0.6) * 0.18) * 0.5 + 0.5)})`
                     : isNearComplete && barProgress > 85
                     ? `0 0 ${15 + 10 * (Math.sin((frame - fps * 0.6) * 0.15) * 0.5 + 0.5)}px rgba(0, 255, 136, ${0.3 + 0.2 * (Math.sin((frame - fps * 0.6) * 0.15) * 0.5 + 0.5)})`
                     : "none",
                 }}
               />
+
+              {/* "FINISH" label at 100% mark for imminent */}
+              {isImminent && barProgress > 85 && (
+                <div
+                  style={{
+                    position: "absolute",
+                    right: -8,
+                    top: -48,
+                    opacity: interpolate(
+                      barProgress,
+                      [85, 95],
+                      [0, 0.9],
+                      { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+                    ),
+                    transform: `scale(${0.9 + 0.1 * (Math.sin((frame - fps * 0.6) * 0.15) * 0.5 + 0.5)})`,
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: 9,
+                      fontWeight: 900,
+                      color: "#00ff88",
+                      fontFamily: "system-ui, -apple-system, sans-serif",
+                      letterSpacing: 3,
+                      textTransform: "uppercase",
+                      textShadow: `0 0 ${12 + 8 * (Math.sin((frame - fps * 0.6) * 0.2) * 0.5 + 0.5)}px rgba(0, 255, 136, 0.6)`,
+                    }}
+                  >
+                    Finish
+                  </span>
+                </div>
+              )}
+
+              {/* The gap highlight - shows the remaining 1% with pulsing energy */}
+              {gapVisible && (
+                <div
+                  style={{
+                    position: "absolute",
+                    right: 0,
+                    width: `${Math.max(1, 100 - barProgress)}%`,
+                    top: 0,
+                    bottom: 0,
+                    background: `linear-gradient(90deg, transparent 0%, rgba(0, 255, 136, ${0.08 + 0.12 * gapPulse}) 50%, rgba(0, 255, 136, ${0.15 + 0.2 * gapPulse}) 100%)`,
+                    borderRadius: "0 11px 11px 0",
+                    pointerEvents: "none",
+                  }}
+                />
+              )}
             </div>
           </div>
 
@@ -1875,7 +2004,7 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
   );
 
   // Badge text varies based on progress - more urgency at higher %
-  const badgeText = isImminent ? "History in the Making!" : isCritical ? "The Final Push!" : isAlmostThere ? "So Close!" : isNearComplete ? "Almost There!" : "Almost There";
+  const badgeText = isImminent ? "Make History Today" : isCritical ? "The Final Push!" : isAlmostThere ? "So Close!" : isNearComplete ? "Almost There!" : "Almost There";
 
   // "Almost There" / "So Close!" / "The Final Push!" / "History in the Making!" badge - builds excitement with glow - more intense for high progress
   const badgeDelay = 0.22;
@@ -2070,14 +2199,14 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
           </div>
         </div>
 
-        {/* "Almost There" / "So Close!" / "The Final Push!" / "History in the Making!" badge with glow */}
+        {/* "Almost There" / "So Close!" / "The Final Push!" / "Make History Today" badge with glow */}
         <div
           style={{
             opacity: badgeOpacity,
             transform: `translateY(${badgeY}px) scale(${badgeScale * badgePulse})`,
-            padding: isImminent ? "18px 42px" : isCritical ? "16px 36px" : isAlmostThere ? "14px 32px" : isNearComplete ? "12px 28px" : "11px 24px",
+            padding: isImminent ? "20px 48px" : isCritical ? "16px 36px" : isAlmostThere ? "14px 32px" : isNearComplete ? "12px 28px" : "11px 24px",
             background: isImminent
-              ? "linear-gradient(165deg, rgba(0, 255, 136, 0.35) 0%, rgba(0, 255, 200, 0.18) 50%, rgba(0, 255, 136, 0.12) 100%)"
+              ? "linear-gradient(165deg, rgba(0, 255, 136, 0.4) 0%, rgba(0, 255, 220, 0.22) 40%, rgba(0, 255, 170, 0.15) 100%)"
               : isCritical
               ? "linear-gradient(165deg, rgba(0, 255, 136, 0.28) 0%, rgba(0, 255, 136, 0.1) 100%)"
               : isAlmostThere
@@ -2085,9 +2214,9 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
               : isNearComplete
               ? "linear-gradient(165deg, rgba(0, 255, 136, 0.15) 0%, rgba(0, 255, 136, 0.06) 100%)"
               : "linear-gradient(165deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 255, 136, 0.04) 100%)",
-            borderRadius: 34,
+            borderRadius: isImminent ? 40 : 34,
             border: isImminent
-              ? "3px solid rgba(0, 255, 136, 0.6)"
+              ? "3px solid rgba(0, 255, 136, 0.7)"
               : isCritical
               ? "2.5px solid rgba(0, 255, 136, 0.5)"
               : isAlmostThere
@@ -2095,19 +2224,19 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
               : isNearComplete
               ? "1.5px solid rgba(0, 255, 136, 0.28)"
               : "1px solid rgba(0, 255, 136, 0.18)",
-            boxShadow: `0 0 ${(isImminent ? 55 : isCritical ? 42 : isAlmostThere ? 35 : isNearComplete ? 28 : 22) * badgeGlow}px rgba(0, 255, 136, ${(isImminent ? 0.32 : isCritical ? 0.25 : isAlmostThere ? 0.2 : isNearComplete ? 0.15 : 0.1) * badgeGlow})`,
+            boxShadow: `0 0 ${(isImminent ? 70 : isCritical ? 42 : isAlmostThere ? 35 : isNearComplete ? 28 : 22) * badgeGlow}px rgba(0, 255, 136, ${(isImminent ? 0.38 : isCritical ? 0.25 : isAlmostThere ? 0.2 : isNearComplete ? 0.15 : 0.1) * badgeGlow})`,
           }}
         >
           <span
             style={{
-              fontSize: isImminent ? 20 : isCritical ? 18 : isAlmostThere ? 16 : isNearComplete ? 14 : 12,
+              fontSize: isImminent ? 22 : isCritical ? 18 : isAlmostThere ? 16 : isNearComplete ? 14 : 12,
               fontWeight: 900,
               color: "#00ff88",
               fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: isImminent ? 7 : isCritical ? 6 : isAlmostThere ? 5.5 : isNearComplete ? 5 : 4.5,
+              letterSpacing: isImminent ? 8 : isCritical ? 6 : isAlmostThere ? 5.5 : isNearComplete ? 5 : 4.5,
               textTransform: "uppercase",
               textShadow: isImminent
-                ? "0 0 38px rgba(0, 255, 136, 0.75)"
+                ? "0 0 45px rgba(0, 255, 136, 0.8)"
                 : isCritical
                 ? "0 0 30px rgba(0, 255, 136, 0.65)"
                 : isAlmostThere
@@ -2308,13 +2437,16 @@ export const MilestoneAnnouncement: React.FC<MilestoneAnnouncementProps> = ({
 }) => {
   const { fps } = useVideoConfig();
 
-  // Clean, quick fades - 0.22s for snappy but smooth transitions
-  const transitionFrames = Math.round(0.22 * fps);
+  // Is this imminent? If so, adjust timings for maximum dramatic effect
+  const isImminent = progress >= 99;
+
+  // Clean, quick fades - slightly faster for imminent to feel more urgent
+  const transitionFrames = Math.round((isImminent ? 0.18 : 0.22) * fps);
 
   return (
     <TransitionSeries>
-      {/* Reveal: 3.4s - Build anticipation, deliver milestone with percentage badge */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(3.4 * fps)}>
+      {/* Reveal: 3.5s (or 3.6s for imminent) - Build anticipation, deliver milestone with percentage badge */}
+      <TransitionSeries.Sequence durationInFrames={Math.round((isImminent ? 3.6 : 3.5) * fps)}>
         <RevealScene milestone={milestone} progress={progress} current={current} target={target} />
       </TransitionSeries.Sequence>
 
@@ -2323,8 +2455,8 @@ export const MilestoneAnnouncement: React.FC<MilestoneAnnouncementProps> = ({
         timing={linearTiming({ durationInFrames: transitionFrames })}
       />
 
-      {/* Progress: 4.4s - Satisfying data visualization with counting */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(4.4 * fps)}>
+      {/* Progress: 4.3s - Satisfying data visualization with counting */}
+      <TransitionSeries.Sequence durationInFrames={Math.round(4.3 * fps)}>
         <ProgressScene target={target} current={current} progress={progress} />
       </TransitionSeries.Sequence>
 
@@ -2333,8 +2465,8 @@ export const MilestoneAnnouncement: React.FC<MilestoneAnnouncementProps> = ({
         timing={linearTiming({ durationInFrames: transitionFrames })}
       />
 
-      {/* CTA: 3.8s - Confident close with momentum and breathing room */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(3.8 * fps)}>
+      {/* CTA: 3.8s (or 4.0s for imminent) - Confident close with momentum and breathing room */}
+      <TransitionSeries.Sequence durationInFrames={Math.round((isImminent ? 4.0 : 3.8) * fps)}>
         <CTAScene nextMilestone={nextMilestone} progress={progress} />
       </TransitionSeries.Sequence>
     </TransitionSeries>
