@@ -10,8 +10,8 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $57,556+ Distributed (506 runs)
-**Status:** IN PROGRESS
+**Current:** $57,993+ Distributed (513 runs)
+**Status:** IN PROGRESS (58.0%)
 
 ### Active Systems
 
@@ -42,12 +42,24 @@ Based on memecoin success research (BONK, PEPE, WIF), FED's gap is **lack of gro
 | Quest System | `fed-quests.ts` | **HIGH** | Engagement + XP → multiplier; drives social visibility |
 | Seasonal Rewards | `season-tracker.ts` | MEDIUM | Creates event-based engagement (BONK BURNmas model) |
 
-**Key Research Finding:** BONK has 350+ ecosystem integrations, WIF crowdfunded $700K for Las Vegas Sphere, PEPE had viral burn events. **FED has ZERO community campaigns or integrations.** This is our biggest gap.
+**Key Research Finding:** BONK has 200+ ecosystem integrations (LetsBonk launchpad, BonkBot, Bonk Arena). WIF's $702K Sphere campaign FAILED after year-long negotiations (external dependency risk). PEPE built 463K+ holders through pure memetics. **FED has ZERO community campaigns or integrations.** This is our biggest gap.
 
-**Activation Recommendation:**
-1. **Referral first** - Creates organic growth without marketing spend
-2. **Quests second** - Drives engagement and social sharing
-3. **Plan a community campaign** - "QE3 Distribution Party" at $75K milestone?
+**WIF Sphere Lesson (Jan 22, 2026 Research):**
+- Community campaigns with EXTERNAL dependencies (Sphere approval) are high-risk
+- After 1 year of negotiations, refunds issued April 2025
+- **FED approach:** Activate INTERNAL growth loops (referrals, quests) - no external dependency
+
+**Referral Anti-Abuse CRITICAL (Jan 22, 2026 Research):**
+- Lido discontinued referrals due to 60% abuse rate (self-referral cycling)
+- **MUST activate sybil detection BEFORE referrals**
+- Require: 24h minimum hold + 1 distribution received before referral counts
+- Dual-sided rewards are 3.2x more effective than single-sided
+
+**Activation Recommendation (Updated):**
+1. **Sybil detection first** - Prerequisite for safe referral launch
+2. **Referral second** - Creates organic growth without marketing spend
+3. **Quests third** - Drives engagement and social sharing
+4. **"QE3 Party" at $75K** - Internal milestone, no external dependency
 
 ### Community Growth Strategy (Research Update: Jan 22, 2026)
 
@@ -81,9 +93,18 @@ FED Current:
 | **4** | Plan QE3 party at $75K | LOW | MEDIUM | Planning |
 | **5** | Meme contest program | LOW | MEDIUM | Design needed |
 
-**Key Insight from Research:** BONK reached 1M+ holders through 350+ integrations creating a network effect. WIF crowdfunded $702K in 3 days through pure community energy. PEPE built a 463K+ holder base through meme culture alone. FED has better fundamentals but zero community growth loops.
+**Key Insight from Research:** BONK reached 1M+ holders through 200+ integrations (LetsBonk alone: $1.04M daily revenue, 22K token mints). WIF's $702K campaign failed due to external dependency (Sphere never approved). PEPE built 463K+ holders through pure memetics. FED has better fundamentals but zero community growth loops.
 
-**Recommendation:** Activating referrals + quests + leaderboard is the highest-leverage action for QE3. These systems are ALREADY BUILT.
+**Recommendation:** Sybil detection → Referrals → Quests → Leaderboard is the safest, highest-leverage activation path for QE3. These systems are ALREADY BUILT.
+
+**Controllable vs Uncontrollable Growth:**
+| Type | Example | Risk | FED Status |
+|------|---------|------|------------|
+| Controllable | Referral bonuses | LOW | Built |
+| Controllable | Quest system | LOW | Built |
+| Controllable | Milestone party (internal) | LOW | Planning |
+| Uncontrollable | External ad placement | HIGH | AVOID |
+| Uncontrollable | Influencer dependence | MEDIUM | AVOID |
 
 ### XP System Enhancement Priority (Research Update: Jan 22, 2026)
 
