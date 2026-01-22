@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $57,556+ USD1
-- **Distribution Count:** 506 distributions
+- **Total Distributed:** $58,243+ USD1
+- **Distribution Count:** 518 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -8638,4 +8638,339 @@ Holders → Yield → Referral → New Holders → More Yield
 ---
 
 *Research completed: 2026-01-22 ~17:00 UTC*
+
+
+---
+
+## 2026-01-22: Buyback Strategy Deep Dive - Timing, Mechanics & Optimization
+
+### Research Question
+
+**How do successful protocols execute buybacks, and what can FED learn to optimize its buyback strategy?**
+
+FED currently uses discretionary buybacks during price dips. This research examines automated vs manual approaches, timing strategies, and allocation models used by leading protocols.
+
+---
+
+### The 2025-2026 Buyback Wave
+
+**Market Context:**
+- Token buybacks reached **$1.40 billion** in 2025
+- Buybacks evolved from niche mechanism to "central pillar of tokenomics"
+- Protocol revenue redistribution jumped from ~5% to ~15% industry-wide
+- Regulatory shift from hostile to constructive enabled clearer frameworks
+
+**Key Insight:** Buybacks are no longer experimental - they're table stakes for protocols wanting to demonstrate value accrual. FED is already doing this; the question is whether we're doing it optimally.
+
+---
+
+### Leading Buyback Models Compared
+
+| Protocol | 2025 Spend | Model | % of Revenue | Mechanism |
+|----------|------------|-------|--------------|-----------|
+| **Hyperliquid** | $644M | Continuous automated | 97% of fees | Assistance Fund auto-buys |
+| **Uniswap** | $460M/yr projected | Fee switch → token jar | 16-25% of LP fees | Buyback & burn |
+| **Sky (MakerDAO)** | $75M | Daily scheduled | $1M USDS/day | Buyback & burn |
+| **Raydium** | $196M cumulative | Automatic fee-based | 12% of fees | Buy at $10 threshold |
+| **Jupiter** | $100M+/yr projected | % of platform fees | 50% of fees | Buyback & hold |
+| **Aave** | $15.7M | Weekly scheduled | $1M/week pilot | Treasury buyback |
+| **GMX** | $3.3M/month | Revenue % allocation | 27-30% of fees | Distribute to stakers |
+| **FED** | Discretionary | Manual during dips | Variable | Buyback & burn |
+
+---
+
+### Hyperliquid Assistance Fund - The Gold Standard
+
+**Why It's Impressive:**
+- 46% of ALL crypto buybacks in 2025 came from Hyperliquid
+- $644.64M spent → 37M+ HYPE repurchased
+- Fully automated: No human intervention required
+- On-chain: Every transaction verifiable
+
+**How It Works:**
+```
+Trading Fee Revenue (97%)
+    ↓
+Assistance Fund (System Address)
+    ↓
+Automated HYPE Buyback (Real-time)
+    ↓
+Burn or Hold (Validator decision)
+```
+
+**Key Mechanics:**
+1. **System Address:** `0xfefefefefefefefefefefefefefefefefefefefe` - no private key controls it
+2. **Revenue Sources:** Perp fees (primary), HIP-1 auction fees (100% to buyback), spot fees (USDC to buyback, HYPE portion burned directly)
+3. **Execution:** Converts trading fees to HYPE as part of L1 execution - no manual triggers
+4. **December 2025 Burn:** Proposal to recognize 37M HYPE in AF as permanently burned (13% of circulating supply)
+
+**FED Application:**
+- FED's manual buyback is the OPPOSITE of Hyperliquid's automated model
+- Hyperliquid proves full automation works at scale
+- However, Hyperliquid is a perp DEX with $billions in volume - very different scale than FED
+- **Insight:** Automation removes timing discretion but may miss strategic entry points during crashes
+
+---
+
+### Raydium's Threshold-Based Model
+
+**Mechanism:**
+- Trading fees allocated to buybacks are automatically claimed when value reaches **$10**
+- Transferred to intermediary wallets for programmatic RAY purchase
+- Bought RAY held at: `DdHDoz94o2WJmD9myRobHCwtx1bESpHTd4SSPe6VEZaz`
+- Regular burn schedule to public burn address
+
+**Results:**
+- $196M spent cumulatively
+- 71M RAY repurchased (26.4% of circulating supply)
+- 12% of fees → buyback (lower than Hyperliquid but consistent)
+
+**FED Application:**
+- Raydium's $10 threshold trigger is similar to FED's approach
+- Difference: Raydium is ALWAYS buying (programmatic), FED is discretionary (Ralph decides)
+- Raydium separates buy from burn (holds first, burns on schedule)
+- **Insight:** Threshold triggers ensure consistent buying without human intervention
+
+---
+
+### Uniswap's UNIfication Model (Dec 2025)
+
+**The Fee Switch Finally Flipped:**
+- Passed with near unanimity (125M votes, <1,000 opposed)
+- Retroactive burn: 100M UNI (~$596M) burned immediately
+- Annual buyback projection: ~$460M based on current volume
+
+**Revenue Allocation:**
+```
+Trading Fees
+    ↓
+Protocol Fee (16-25% of LP fees)
+    ↓
+Token Jar
+    ↓
+UNI Holders Burn for Equivalent Crypto
+```
+
+**The "Token Jar" Innovation:**
+- Revenue doesn't go directly to holders
+- Instead, holders can BURN their UNI to withdraw equivalent value from the jar
+- Creates deflationary pressure: Only activated when holders want to exit
+- Aligns incentives: Long-term holders don't dilute by claiming
+
+**Fee Structure Details:**
+- V2: 0.3% fee → 0.25% to LPs, 0.05% to protocol
+- V3: 25% of low-fee pool fees, 16.7% of high-volatility pool fees
+
+**FED Application:**
+- Token jar model is interesting but complex for memecoin audience
+- FED's direct distribution is simpler and more immediately gratifying
+- **Insight:** Uniswap proves even dominant protocols adopt value accrual mechanisms; FED was ahead of the curve
+
+---
+
+### Timing Strategy Research
+
+**Three Types of Buyback Triggers:**
+
+| Trigger Type | Mechanism | Best For | Risk |
+|--------------|-----------|----------|------|
+| **Price-based** | Buy when price falls below threshold | Crisis response, floor defense | May buy into falling knife |
+| **Revenue-based** | Buy when fees hit threshold | Sustainable, ties to performance | Misses opportunities in quiet periods |
+| **Time-based** | Buy on schedule (daily/weekly) | Predictable, builds confidence | Ignores market conditions |
+
+**FED's Current Approach:**
+- Price-based (discretionary): Ralph buys during dips
+- This is CORRECT for crisis response
+- But may miss consistent buy pressure benefits
+
+**Industry Best Practice - Hybrid Approach:**
+```
+Base Layer: Time-based (consistent pressure)
+    ↓
+Overlay: Price-based (crisis response)
+    ↓
+Funded By: Revenue-based (sustainability)
+```
+
+**Example from Research:**
+- Sky (MakerDAO): $1M USDS/day scheduled buyback
+- Plus: Reserves for "special situations"
+- Result: Consistent pressure + crisis capability
+
+---
+
+### When to Intensify Buybacks (Research Findings)
+
+**Optimal Timing Windows:**
+
+1. **Heavy Drawdowns:**
+   - After significant price drops (>20% in 24h)
+   - Signal: Ralph already does this correctly
+   - Caution: Ensure buying into support, not falling knife
+
+2. **Around Token Unlocks:**
+   - Absorb new supply entering market
+   - FED: N/A (no scheduled unlocks, fair launch)
+
+3. **Incident-Driven:**
+   - Market-wide corrections (BTC crash)
+   - Project-specific FUD events
+   - Must be transparent and large enough to matter
+
+4. **Low-Volume Consolidation:**
+   - Quiet periods = cheaper accumulation
+   - Less slippage, more tokens per dollar
+   - Often overlooked but highly efficient
+
+**What NOT to Do:**
+- Cosmetic buybacks (too small to matter)
+- Buying at ATH (poor capital efficiency)
+- Inconsistent execution (erodes confidence)
+
+---
+
+### Allocation Ratio Analysis
+
+**Industry Standards:**
+
+| Protocol | % to Buyback | % to Treasury | % to LPs/Stakers |
+|----------|--------------|---------------|------------------|
+| Hyperliquid | 97% | 0% | 3% (HLP) |
+| Pendle | 80% | 20% | 0% (now) |
+| Jupiter | 50% | 50% | 0% |
+| Raydium | 12% | 4% | 84% |
+| GMX | 27-30% | 0% | 70% |
+| Camelot | 17-22.5% | Variable | ~75% |
+| **FED** | Discretionary | 0% | 100% |
+
+**Key Insight:**
+- FED distributes 100% to holders (most generous in industry)
+- Trade-off: No dedicated buyback allocation
+- Question: Should we reserve a % specifically for systematic buybacks?
+
+---
+
+### FED Buyback Optimization Recommendations
+
+#### Option A: Keep Current Model (Discretionary)
+
+**Pros:**
+- Flexibility to respond to market conditions
+- Ralph can make judgment calls (14x pump → 40% crash → buyback was correct)
+- No revenue diverted from holders
+
+**Cons:**
+- Inconsistent buy pressure
+- Depends on Ralph's timing judgment
+- Holders don't know when to expect support
+
+**Recommendation:** This is the CORRECT approach for a memecoin at FED's stage. The research shows:
+1. Hyperliquid's automation works for high-volume perp DEXs
+2. FED's volume doesn't justify complex automated mechanisms
+3. Discretionary buybacks during crashes are the highest-impact use of capital
+
+---
+
+#### Option B: Hybrid Approach (For QE4 Consideration)
+
+**Proposal:**
+```
+Daily Baseline: 10% of collected fees → programmatic buyback
+Crisis Reserve: 40% of collected fees → discretionary buyback pool
+Distribution: 50% of collected fees → holders
+```
+
+**Trigger Rules:**
+1. Baseline buys execute daily regardless of price (time-based)
+2. Crisis reserve activates when price drops >15% in 24h (price-based)
+3. Distribution continues every 2 minutes (unchanged)
+
+**Why This Might Work:**
+- Creates consistent buy pressure (addresses current gap)
+- Maintains crisis response capability
+- Still distributes majority to holders (memecoin expectation)
+- Raydium's 12% buyback model is proven at scale
+
+**Why NOT to Implement Now:**
+- Adds complexity
+- Diverts yield from holders
+- Current model works fine at 1,800 holders
+- Revisit at 5,000+ holders when volume justifies
+
+---
+
+#### Option C: Buyback & Distribute (GMX Model)
+
+**Concept:**
+- Use fees to buy $FED from market
+- Distribute bought $FED to holders instead of USD1
+- Creates buy pressure + rewards holders
+
+**Why NOT for FED:**
+- Holders expect USD1 (established expectation)
+- "I got paid stablecoins" > "I got paid more tokens"
+- Would require major narrative shift
+- GMX does this because they're a utility token; FED is a memecoin
+
+---
+
+### Key Research Conclusions
+
+1. **FED's current discretionary model is CORRECT for this stage**
+   - Automation makes sense at Hyperliquid's scale ($billions), not FED's scale
+   - Ralph's judgment during the 14x pump → 40% crash was sound
+   - Keep the flexibility
+
+2. **Consider time-based baseline at QE4**
+   - When volume justifies, add small daily buyback (10% of fees)
+   - Creates "always buying" narrative
+   - Doesn't require complex automation
+
+3. **Maintain distribution > buyback priority**
+   - 100% to holders is FED's differentiator
+   - Most protocols give 12-30% to buybacks, rest to LPs
+   - FED's generosity is a feature, not a bug
+
+4. **Buyback transparency is crucial**
+   - All buybacks should be on-chain and logged
+   - Publish buyback stats on fed.markets (total burned, average price)
+   - Builds trust that Ralph acts in holders' interest
+
+5. **Don't chase Hyperliquid's model**
+   - $644M in buybacks requires billions in volume
+   - FED should focus on what makes it unique (simplicity, direct yield)
+   - Automation is a distraction at current scale
+
+---
+
+### Buyback Metrics to Track
+
+| Metric | Current | Target |
+|--------|---------|--------|
+| Total Burned | 1.6M+ $FED | Track cumulative |
+| Buyback Value | $657+ | Update per buyback |
+| Average Buy Price | ~$0.0005 | Lower = better |
+| Timing Hit Rate | Good (bought dips) | Maintain |
+| Transparency | Logged in DECISIONS.md | Add to website |
+
+---
+
+### Sources
+
+- [DWF Labs: Token Buybacks in Web3](https://www.dwf-labs.com/research/547-token-buybacks-in-web3)
+- [DL News: State of DeFi 2025](https://www.dlnews.com/research/internal/state-of-defi-2025/)
+- [Blocmates: Top Projects With Buybacks 2025](https://www.blocmates.com/articles/top-projects-with-buybacks-2025-edition)
+- [Nikogosian: Buyback/Burn Without Ponzinomics](https://nikogosian.com/articles/buyback-burn-mechanics)
+- [CoinGecko: Token Buybacks 2025](https://www.coingecko.com/research/publications/token-buybacks)
+- [Hyperliquid Buybacks Dashboard](https://data.asxn.xyz/dashboard/hl-buybacks)
+- [GoPlus: Hyperliquid Buyback Research](https://goplussecurity.medium.com/hyperliquid-buyback-burn-and-staking-mechanism-research-report-72e0e1765fd9)
+- [Raydium Docs: RAY Buybacks](https://docs.raydium.io/raydium/protocol/the-ray-token/ray-buybacks)
+- [Uniswap Blog: UNIfication](https://blog.uniswap.org/unification)
+- [The Defiant: Uniswap Fee Switch](https://thedefiant.io/news/defi/uniswap-passes-unification-fee-switch-proposal)
+- [GMX Governance: Buyback Proposals](https://gov.gmx.io/t/gmx-increasing-buyback-distribute-fee-coverage-from-27-to-90/4175)
+- [Tokenomics.net: Automated Buyback Mechanisms](https://tokenomics.net/blog/automated-token-buyback-mechanisms-explained)
+
+---
+
+*Research completed: 2026-01-22 ~17:30 UTC*
 

@@ -10,8 +10,8 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $57,993+ Distributed (513 runs)
-**Status:** IN PROGRESS (58.0%)
+**Current:** $58,243+ Distributed (518 runs)
+**Status:** IN PROGRESS (58.2%)
 
 ### Active Systems
 
@@ -211,6 +211,22 @@ Based on points program research (Blur, EigenLayer, Jupiter ASR), FED's XP syste
 - **Priority fee tuning:** Dynamic based on network state
 - **Smart batching:** Already built (smart-timing.ts), needs activation
 - **Note:** Current push model works at this scale with optimizations
+
+#### 6. Buyback Strategy Optimization (Research Complete - Jan 22, 2026)
+- **Current:** Discretionary buybacks during price dips (Ralph decides)
+- **Research Finding:** FED's current approach is CORRECT for this stage
+  - Hyperliquid's $644M automated buyback requires billions in volume (not applicable to FED scale)
+  - Raydium's 12% automatic allocation works but diverts from holders
+  - FED's 100% to holders is our differentiator
+- **QE4 Consideration:** Add small time-based buyback component
+  - 10% of collected fees → daily programmatic buyback (creates consistent pressure)
+  - 90% → distribution (maintains holder expectation)
+  - Crisis response: Maintain discretionary buyback capability during crashes
+- **What NOT to do:**
+  - Don't automate fully (lose tactical flexibility)
+  - Don't reduce holder distributions (breaks expectation)
+  - Don't copy Hyperliquid (different scale, different audience)
+- **Transparency:** Publish buyback stats on fed.markets (total burned, average price)
 
 ---
 
