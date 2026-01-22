@@ -432,7 +432,7 @@ const IntroScene = () => {
             <span
               style={{
                 fontSize: 10,
-                color: "#484848",
+                color: "#585858",
                 fontFamily: "system-ui, -apple-system, sans-serif",
                 letterSpacing: 5,
                 textTransform: "uppercase",
@@ -473,15 +473,17 @@ const HeadlineScene: React.FC<{ headline: string }> = ({ headline }) => {
   const brrrLandTime = (brrrDelay + 0.08) * fps;
 
   // Screen shake on BRRR - weighty thud with organic settle (no synthetic patterns)
+  // Refined decay curve for more cinematic feel
   const shakeIntensity = interpolate(
     frame,
-    [brrrLandTime, brrrLandTime + fps * 0.02, brrrLandTime + fps * 0.05, brrrLandTime + fps * 0.09, brrrLandTime + fps * 0.14, brrrLandTime + fps * 0.2],
-    [0, 8, -5, 3, -1.5, 0],
+    [brrrLandTime, brrrLandTime + fps * 0.025, brrrLandTime + fps * 0.06, brrrLandTime + fps * 0.1, brrrLandTime + fps * 0.16, brrrLandTime + fps * 0.24],
+    [0, 9, -5.5, 3.2, -1.2, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
   // Organic shake using different frequencies that don't create visible patterns
-  const shakeX = shakeIntensity * Math.sin(frame * 4.3 + 0.7);
-  const shakeY = shakeIntensity * 0.6 * Math.cos(frame * 5.1 + 1.2);
+  // Slightly reduced multipliers for more subtle, professional feel
+  const shakeX = shakeIntensity * 0.95 * Math.sin(frame * 4.3 + 0.7);
+  const shakeY = shakeIntensity * 0.55 * Math.cos(frame * 5.1 + 1.2);
 
   // Background glow burst on BRRR - dramatic peak then settle with longer hold
   const bgGlow = interpolate(
@@ -725,9 +727,10 @@ const StatCard: React.FC<{
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Number counting - satisfying quintic ease-out with refined duration
-  const countDuration = 1.6;
-  const countStart = delay + 0.2;
+  // Number counting - premium cinematic easing with refined duration
+  // Slightly longer count duration allows for more satisfying anticipation
+  const countDuration = 1.75;
+  const countStart = delay + 0.22;
   const numberProgress = interpolate(
     frame,
     [countStart * fps, (countStart + countDuration) * fps],
@@ -735,8 +738,9 @@ const StatCard: React.FC<{
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
-      // Custom easing: slow start, fast middle, satisfying deceleration at end
-      easing: (t) => 1 - Math.pow(1 - t, 4.5),
+      // Custom easing: quick acceleration, dramatic deceleration - Apple keynote feel
+      // The exponent of 5 creates that satisfying "settling into place" moment
+      easing: (t) => 1 - Math.pow(1 - t, 5),
     }
   );
 
@@ -1146,7 +1150,8 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
   );
 
   // Calculate when all stats have landed for coordinated celebration
-  const allStatsLandTime = (0.16 + (stats.length - 1) * 0.24 + 0.2 + 1.6) * fps;
+  // Updated to match new stagger timing (0.18 base + 0.28 per stat) and count duration (1.75s)
+  const allStatsLandTime = (0.18 + (stats.length - 1) * 0.28 + 0.22 + 1.75) * fps;
   const allStatsLanded = frame >= allStatsLandTime;
 
   // Coordinated screen shake when final stat lands - subtle but satisfying
@@ -1250,30 +1255,30 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
   // Coordinated celebration burst ring when all stats land - stronger presence
   const celebrationRingOpacity = allStatsLanded ? interpolate(
     frame,
-    [allStatsLandTime, allStatsLandTime + fps * 0.06, allStatsLandTime + fps * 0.45],
-    [0.55, 0.28, 0],
+    [allStatsLandTime, allStatsLandTime + fps * 0.07, allStatsLandTime + fps * 0.5],
+    [0.6, 0.32, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   ) : 0;
   const celebrationRingScale = allStatsLanded ? interpolate(
     frame,
-    [allStatsLandTime, allStatsLandTime + fps * 0.45],
-    [0.45, 3.2],
+    [allStatsLandTime, allStatsLandTime + fps * 0.5],
+    [0.4, 3.5],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  ) : 0.45;
+  ) : 0.4;
 
   // Secondary celebration ring - more depth
   const celebration2RingOpacity = allStatsLanded ? interpolate(
     frame,
-    [allStatsLandTime + fps * 0.04, allStatsLandTime + fps * 0.14, allStatsLandTime + fps * 0.55],
-    [0, 0.35, 0],
+    [allStatsLandTime + fps * 0.05, allStatsLandTime + fps * 0.16, allStatsLandTime + fps * 0.6],
+    [0, 0.4, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   ) : 0;
   const celebration2RingScale = allStatsLanded ? interpolate(
     frame,
-    [allStatsLandTime + fps * 0.04, allStatsLandTime + fps * 0.55],
-    [0.4, 4.0],
+    [allStatsLandTime + fps * 0.05, allStatsLandTime + fps * 0.6],
+    [0.35, 4.2],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  ) : 0.4;
+  ) : 0.35;
 
   return (
     <AbsoluteFill style={{ opacity: sceneFade }}>
@@ -1294,9 +1299,10 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
             width: 180,
             height: 180,
             borderRadius: "50%",
-            border: "1.5px solid rgba(0, 255, 136, 0.4)",
+            border: "1.5px solid rgba(0, 255, 136, 0.45)",
             transform: `scale(${celebration2RingScale})`,
             opacity: celebration2RingOpacity,
+            boxShadow: "0 0 15px rgba(0, 255, 136, 0.2)",
           }}
         />
         {/* Inner celebration ring - brighter */}
@@ -1305,10 +1311,10 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
             width: 200,
             height: 200,
             borderRadius: "50%",
-            border: "2px solid rgba(0, 255, 136, 0.55)",
+            border: "2px solid rgba(0, 255, 136, 0.6)",
             transform: `scale(${celebrationRingScale})`,
             opacity: celebrationRingOpacity,
-            boxShadow: "0 0 22px rgba(0, 255, 136, 0.35)",
+            boxShadow: "0 0 28px rgba(0, 255, 136, 0.4)",
           }}
         />
       </AbsoluteFill>
@@ -1386,9 +1392,9 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
           <span
             style={{
               fontSize: 11,
-              color: "#4a4a4a",
+              color: "#555555",
               fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: 5,
+              letterSpacing: 5.5,
               textTransform: "uppercase",
               fontWeight: 600,
             }}
@@ -1405,21 +1411,21 @@ const StatsScene: React.FC<{ stats: StatsUpdateProps["stats"] }> = ({ stats }) =
           />
         </div>
 
-        {/* Stats row - premium spacing */}
+        {/* Stats row - premium spacing with refined gaps */}
         <div
           style={{
             display: "flex",
-            gap: 32,
+            gap: 36,
             flexWrap: "wrap",
             justifyContent: "center",
-            maxWidth: 1000,
+            maxWidth: 1020,
           }}
         >
           {stats.map((stat, index) => (
             <StatCard
               key={stat.label}
               stat={stat}
-              delay={0.16 + index * 0.24}
+              delay={0.18 + index * 0.28}
               index={index}
             />
           ))}
@@ -1721,16 +1727,16 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
         >
           <div
             style={{
-              padding: "20px 62px",
-              background: "linear-gradient(145deg, #00ff88 0%, #00ffcc 45%, #00ff88 100%)",
-              borderRadius: 50,
+              padding: "22px 68px",
+              background: "linear-gradient(155deg, #00ff99 0%, #00ffbb 35%, #00ff88 70%, #00ff99 100%)",
+              borderRadius: 52,
               position: "relative",
               overflow: "hidden",
               boxShadow: `
-                0 10px 38px rgba(0, 255, 136, ${(0.32 + 0.2 * ctaGlow) * ctaPulse}),
-                0 0 ${52 * ctaGlow * ctaPulse}px rgba(0, 255, 136, ${0.16 * ctaGlow * ctaPulse}),
-                inset 0 2px 0 rgba(255, 255, 255, ${innerPulse}),
-                inset 0 -2px 0 rgba(0, 0, 0, 0.08)
+                0 12px 42px rgba(0, 255, 136, ${(0.35 + 0.22 * ctaGlow) * ctaPulse}),
+                0 0 ${58 * ctaGlow * ctaPulse}px rgba(0, 255, 136, ${0.18 * ctaGlow * ctaPulse}),
+                inset 0 2px 0 rgba(255, 255, 255, ${innerPulse * 1.1}),
+                inset 0 -2px 0 rgba(0, 0, 0, 0.06)
               `,
             }}
           >
@@ -1762,12 +1768,12 @@ const CTAScene: React.FC<{ tagline: string; cta: string }> = ({ tagline, cta }) 
             />
             <span
               style={{
-                fontSize: 36,
+                fontSize: 38,
                 fontWeight: 900,
-                color: "#020202",
+                color: "#010101",
                 fontFamily: "system-ui, -apple-system, sans-serif",
-                letterSpacing: -0.5,
-                textShadow: "0 1px 0 rgba(255, 255, 255, 0.25)",
+                letterSpacing: -0.3,
+                textShadow: "0 1px 0 rgba(255, 255, 255, 0.28)",
                 position: "relative",
               }}
             >
@@ -1830,12 +1836,13 @@ export const StatsUpdate: React.FC<StatsUpdateProps> = ({
 }) => {
   const { fps } = useVideoConfig();
 
-  const transitionFrames = Math.round(0.18 * fps);
+  // Refined transition timing - slightly longer for elegance
+  const transitionFrames = Math.round(0.22 * fps);
 
   return (
     <TransitionSeries>
-      {/* Intro: 1.85s */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(1.85 * fps)}>
+      {/* Intro: 1.8s - logo reveal with gravitas */}
+      <TransitionSeries.Sequence durationInFrames={Math.round(1.8 * fps)}>
         <IntroScene />
       </TransitionSeries.Sequence>
 
@@ -1844,8 +1851,8 @@ export const StatsUpdate: React.FC<StatsUpdateProps> = ({
         timing={linearTiming({ durationInFrames: transitionFrames })}
       />
 
-      {/* Headline: 1.65s */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(1.65 * fps)}>
+      {/* Headline: 1.55s - punchy BRRR moment */}
+      <TransitionSeries.Sequence durationInFrames={Math.round(1.55 * fps)}>
         <HeadlineScene headline={headline} />
       </TransitionSeries.Sequence>
 
@@ -1854,8 +1861,8 @@ export const StatsUpdate: React.FC<StatsUpdateProps> = ({
         timing={linearTiming({ durationInFrames: transitionFrames })}
       />
 
-      {/* Stats: 3.65s */}
-      <TransitionSeries.Sequence durationInFrames={Math.round(3.65 * fps)}>
+      {/* Stats: 3.8s - let numbers breathe and land */}
+      <TransitionSeries.Sequence durationInFrames={Math.round(3.8 * fps)}>
         <StatsScene stats={stats} />
       </TransitionSeries.Sequence>
 
@@ -1864,7 +1871,7 @@ export const StatsUpdate: React.FC<StatsUpdateProps> = ({
         timing={linearTiming({ durationInFrames: transitionFrames })}
       />
 
-      {/* CTA: 2.85s */}
+      {/* CTA: 2.85s - confident close */}
       <TransitionSeries.Sequence durationInFrames={Math.round(2.85 * fps)}>
         <CTAScene tagline={tagline} cta={cta} />
       </TransitionSeries.Sequence>
