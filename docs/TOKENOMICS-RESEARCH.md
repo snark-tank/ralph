@@ -11509,3 +11509,199 @@ We are SIMPLER than the industry leader that just admitted simplicity wins.
 - [DL News: State of DeFi 2025](https://www.dlnews.com/research/internal/state-of-defi-2025/)
 
 ---
+
+
+## 2026-01-22 21:06 UTC
+
+### Distribution Frequency Benchmark Analysis - FED's 2-Minute Edge
+
+**Research Focus:** Comparing FED's ~2-minute distribution frequency against industry standards. This analysis validates whether FED's high-frequency model is a genuine differentiator.
+
+---
+
+### Industry Distribution Frequency Comparison
+
+| Protocol | Distribution Frequency | Mechanism | Notes |
+|----------|----------------------|-----------|-------|
+| **FED** | **~2 minutes** | Push (automatic) | Unique - fastest in industry |
+| Hyperliquid | Daily (staking rewards) | Push (auto-compound) | Accrues per minute, settles daily |
+| Trader Joe (sJOE) | Every 24 hours | Claim required | USDC rewards from swap fees |
+| GMX | Daily accrual | Claim required | ETH/AVAX rewards, now GMX buyback |
+| Curve (veCRV) | Weekly (Thursday) | Claim required | 4-day cycle: collect→exchange→forward→distribute |
+| Aerodrome (veAERO) | Weekly (per epoch) | Claim required | Voting + claiming required |
+| Pendle (vePENDLE/sPENDLE) | Every 4-5 weeks | Claim required | YT fees + swap fees |
+| Algorand (native staking) | Every 2.8 seconds | Push (automatic) | Per-block rewards (closest to FED) |
+| Lido (stETH) | Daily accrual | Balance rebase | Visible daily, auto-compound |
+
+---
+
+### Analysis: Why FED's Frequency Matters
+
+**1. Psychological Impact (Dopamine Loop)**
+- FED: ~720 distributions/day → constant engagement
+- Curve: ~52 distributions/year → forgettable
+- Trader Joe: ~365 distributions/year → routine but not exciting
+
+The "-minute micro-distributions create a dopamine loop. Users see USD1 arriving constantly. This is fundamentally different from weekly/monthly claiming.
+
+**2. Passive vs. Active**
+Most protocols require CLAIMING rewards:
+- Curve: Must claim weekly after Thursday
+- Aerodrome: Must vote + claim each epoch
+- Pendle: Must participate in voting to maximize
+
+FED: **Zero action required.** Hold = earn. Automatically.
+
+**3. Gas Efficiency Trade-off**
+| Model | Gas Cost | User Experience | FED Solution |
+|-------|----------|-----------------|--------------|
+| Weekly batch | Low protocol cost | Forgettable, claim friction | N/A |
+| Daily push | Medium protocol cost | Good engagement | N/A |
+| Per-minute push | High protocol cost | Maximum engagement | Smart batching |
+
+FED accepts higher gas costs in exchange for superior UX. At scale, ZK Compression will solve this (QE5 roadmap item).
+
+**4. Visibility Creates Trust**
+- When users SEE rewards arriving every 2 minutes, they TRUST the system
+- Abstract mechanisms (buyback & burn, rebasing) feel less tangible
+- "Got paid" is stronger than "supply decreased 0.001%"
+
+---
+
+### Closest Comparisons
+
+**Algorand Native Staking (~2.8 seconds)**
+- Per-block rewards, fully automatic
+- BUT: This is inflationary staking rewards, not real yield from fees
+- FED's 2-minute distribution is from REAL LP trading fees
+
+**Hyperliquid (accrues per minute, settles daily)**
+- Staking rewards accrue every minute
+- BUT: Settlement/distribution happens once daily
+- FED distributes the actual tokens every 2 minutes
+
+**Lido (daily rebase)**
+- stETH balance grows daily
+- BUT: Balance rebase model, not actual token transfers
+- Users don't "see" rewards arrive - balance just changes
+
+---
+
+### FED's Unique Position
+
+No other protocol identified distributes **real yield (from trading fees) via direct token push every 2 minutes**.
+
+| Claim | Validation |
+|-------|------------|
+| FED has fastest real-yield distribution | **VALIDATED** - No competitor found at 2-min frequency |
+| Push model is rare | **VALIDATED** - Most require claiming |
+| Automatic distribution is rare | **VALIDATED** - Most require voting/staking actions |
+
+**Competitive Moat:**
+1. **Frequency:** 720x faster than weekly protocols (Curve, Aerodrome)
+2. **Friction:** Zero vs. voting/claiming requirements
+3. **Visibility:** Constant "got paid" notifications vs. monthly statements
+
+---
+
+### What This Means for FED Strategy
+
+**1. DO NOT reduce frequency**
+- The 2-minute cadence is a KEY DIFFERENTIATOR
+- No protocol in DeFi matches this for real yield
+- This is our competitive moat - protect it
+
+**2. Scaling strategy must preserve frequency**
+- ZK Compression at 5K+ holders (maintains frequency)
+- Smart batching (increases recipients/tx, not reduces frequency)
+- Never compromise on this
+
+**3. Marketing opportunity**
+- "Get paid every 2 minutes" is unique, memorable
+- Most DeFi users are used to weekly/monthly claiming
+- This is a genuine USP worth emphasizing
+
+**4. Potential improvement: Distribution notifications**
+- If 2-min frequency is our moat, SHOW IT
+- Telegram/Discord bot: "Distribution complete: $X to Y holders"
+- Push notifications for enabled users
+- Make the frequency VISIBLE
+
+---
+
+### Industry Trend Context
+
+**2025 Revenue Share Growth:**
+- Protocol revenue to holders: 5% (pre-2025) → 15% (2025) (3x increase)
+- Real yield protocols outperforming inflationary models
+- FED's 100% fee distribution is best-in-class
+
+**Distribution Model Evolution:**
+- 2020-2022: Inflationary rewards, complex claiming
+- 2023-2024: Real yield emergence, weekly batches
+- 2025-2026: Push models, automated distribution, simplicity wins
+- Pendle's vePENDLE → sPENDLE transition proves complexity is dying
+
+**FED is AHEAD of this curve:**
+- We started with push model (not retrofitting)
+- We started with 100% distribution (not adding later)
+- We started with 2-min frequency (others can't match without rebuild)
+
+---
+
+### Key Quotes from Research
+
+**On User Preferences:**
+> "The greater the compounding frequency—hourly, daily, weekly—the closer realized returns approach the mathematical APY."
+- [WunderTrading DeFi Guide](https://wundertrading.com/journal/en/learn/article/best-yield-farming-tools)
+
+**On Hyperliquid's Daily Model:**
+> "Rewards are accrued every minute and distributed to stakers every day."
+- [Hyperliquid Docs](https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/staking)
+
+**On Curve's Weekly Cycle:**
+> "Fees are distributed to veCRV holders weekly, within 24 hours after Thursday 00:00 UTC."
+- [Curve Resources](https://resources.curve.finance/vecrv/fee-collection-distribution/)
+
+**On Trader Joe's Daily Model:**
+> "Every 24 hours, they distribute this USDC to the sJOE pool."
+- [Altcoin Buzz](https://www.altcoinbuzz.io/defi/staking/trader-joe-how-to-earn-usdc-staking-sjoe/)
+
+---
+
+### Recommendation: Protect & Amplify the 2-Minute Edge
+
+| Action | Priority | Rationale |
+|--------|----------|-----------|
+| Never reduce distribution frequency | **CRITICAL** | Our primary competitive moat |
+| Add distribution notifications | HIGH | Make frequency visible to users |
+| Emphasize in marketing | HIGH | Unique claim vs. all competitors |
+| Plan ZK Compression for scale | MEDIUM | Preserve frequency at 10K+ holders |
+| Document in fed.markets "How It Works" | MEDIUM | Educate users on uniqueness |
+
+---
+
+### Confidence Assessment
+
+| Finding | Confidence |
+|---------|------------|
+| FED has fastest real-yield distribution | **VERY HIGH** - No competitor found |
+| 2-min frequency is sustainable moat | **HIGH** - Requires architecture others lack |
+| Push model is superior UX | **HIGH** - Industry moving this direction |
+| Frequency should never decrease | **VERY HIGH** - Core differentiator |
+
+---
+
+### Sources
+
+- [Hyperliquid Staking Docs](https://hyperliquid.gitbook.io/hyperliquid-docs/hypercore/staking)
+- [Curve Fee Distribution](https://resources.curve.finance/vecrv/fee-collection-distribution/)
+- [Trader Joe sJOE Guide](https://www.altcoinbuzz.io/defi/staking/trader-joe-how-to-earn-usdc-staking-sjoe/)
+- [Aerodrome Finance Guide](https://www.coingecko.com/learn/what-is-aerodrome-finance-aero-base)
+- [Pendle Docs - Fees](https://docs.pendle.finance/ProtocolMechanics/Mechanisms/Fees/)
+- [GMX Buyback Proposal](https://gov.gmx.io/t/gmx-increasing-buyback-distribute-fee-coverage-from-27-to-90/4175)
+- [WunderTrading DeFi Guide](https://wundertrading.com/journal/en/learn/article/best-yield-farming-tools)
+- [Blockchain Magazine - Real Yield 2025](https://blockchainmagazine.com/real-yield-defi-protocols/)
+- [DL News - State of DeFi 2025](https://www.dlnews.com/research/internal/state-of-defi-2025/)
+
+---

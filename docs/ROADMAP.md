@@ -10,8 +10,8 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $58,833+ Distributed (542 runs)
-**Status:** IN PROGRESS (58.8%)
+**Current:** $58,932+ Distributed (547 runs)
+**Status:** IN PROGRESS (58.9%)
 
 ### Active Systems
 
@@ -456,7 +456,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - [ ] IL monitoring and alerts
 
 ### Holder Engagement (Research Update: Jan 22, 2026)
-- [ ] Distribution notification system - **HIGH PRIORITY** (engagement hook)
+- [ ] Distribution notification system - **CRITICAL** (makes 2-min frequency VISIBLE - our competitive moat)
 - [ ] Milestone NFTs (achievement badges)
 - [ ] Leaderboard with rewards - **HIGH PRIORITY** (social proof drives retention per research)
 - [ ] Holder benefit partnerships - Early access to partner token launches (Camelot launchpad-inspired)
@@ -693,14 +693,18 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Jupiter $70M buyback failure | Buyback vs distribution effectiveness, pivot to user incentives | **COMPLETE** - Jan 22 research (MAJOR VALIDATION for FED distribution model) |
 | Memecoin community building | Discord/Telegram best practices, engagement tactics | **COMPLETE** - Jan 22 research (Launch plan ready) |
 | Pendle sPENDLE transition | vePENDLE abandonment, liquid staking shift, complexity failures | **COMPLETE** - Jan 22 research (MAJOR VALIDATION - $5.7B protocol admits complexity failed) |
+| Distribution frequency benchmark | Compare FED 2-min vs industry (GMX, Curve, Pendle, Hyperliquid, Aerodrome) | **COMPLETE** - Jan 22 research (FED is fastest real-yield distributor) |
 
 ### Research Findings Summary (Jan 22, 2026)
 
-**Distribution Frequency:**
-- Industry standard is weekly/monthly (gas optimization)
-- Ethereum epochs are ~6.4 minutes
-- FED's 2-minute frequency is a **key differentiator**
-- Recommendation: KEEP current frequency, add dynamic batching
+**Distribution Frequency Benchmark (Jan 22, 2026 - MAJOR UPDATE):**
+- Comprehensive benchmark completed: FED vs GMX, Curve, Pendle, Hyperliquid, Aerodrome, Trader Joe
+- **FED is the ONLY protocol distributing real yield via push every 2 minutes**
+- Industry standards: Curve (weekly), Pendle (4-5 weeks), Aerodrome (weekly epochs), Trader Joe (daily)
+- Even Hyperliquid (daily settlement) and Algorand (2.8s blocks) don't match FED's model
+- FED's 2-minute push is 720x faster than weekly protocols (Curve, Aerodrome)
+- **This is our PRIMARY competitive moat - NEVER reduce frequency**
+- Recommendation: PROTECT frequency, add distribution notifications to amplify visibility
 
 **Jupiter $70M Buyback Failure (Jan 22, 2026):**
 - Jupiter spent $70M on buybacks in 2025; JUP still crashed 89% from ATH
