@@ -21,15 +21,16 @@ export type MilestoneAnnouncementProps = {
 };
 
 // Premium film grain overlay - adds texture and warmth like high-end cinema
-const FilmGrain: React.FC<{ opacity?: number }> = ({ opacity = 0.025 }) => {
+const FilmGrain: React.FC<{ opacity?: number }> = ({ opacity = 0.02 }) => {
   const frame = useCurrentFrame();
-  const offsetX = (frame * 17) % 100;
-  const offsetY = (frame * 23) % 100;
+  // Slower, more organic movement
+  const offsetX = (frame * 13) % 100;
+  const offsetY = (frame * 19) % 100;
 
   return (
     <AbsoluteFill
       style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
         backgroundPosition: `${offsetX}px ${offsetY}px`,
         opacity,
         mixBlendMode: "overlay",
@@ -39,17 +40,17 @@ const FilmGrain: React.FC<{ opacity?: number }> = ({ opacity = 0.025 }) => {
   );
 };
 
-// CRT scanline effect for vintage tech aesthetic during power-on
-const ScanlineOverlay: React.FC<{ opacity?: number; speed?: number }> = ({ opacity = 0.08, speed = 2.5 }) => {
+// Subtle scanline effect - refined and less distracting
+const ScanlineOverlay: React.FC<{ opacity?: number; speed?: number }> = ({ opacity = 0.06, speed = 2.0 }) => {
   const frame = useCurrentFrame();
-  const { fps, height } = useVideoConfig();
+  const { height } = useVideoConfig();
 
-  // Scanline moves down the screen
-  const scanlineY = (frame * speed) % (height + 40);
+  // Scanline moves down the screen - slower for more elegance
+  const scanlineY = (frame * speed) % (height + 60);
 
   return (
     <AbsoluteFill style={{ pointerEvents: "none", overflow: "hidden" }}>
-      {/* Subtle horizontal lines pattern */}
+      {/* Very subtle horizontal lines - almost imperceptible */}
       <div
         style={{
           position: "absolute",
@@ -60,26 +61,26 @@ const ScanlineOverlay: React.FC<{ opacity?: number; speed?: number }> = ({ opaci
           background: `repeating-linear-gradient(
             0deg,
             transparent 0px,
-            transparent 2px,
-            rgba(0, 0, 0, ${opacity * 0.5}) 2px,
-            rgba(0, 0, 0, ${opacity * 0.5}) 4px
+            transparent 3px,
+            rgba(0, 0, 0, ${opacity * 0.35}) 3px,
+            rgba(0, 0, 0, ${opacity * 0.35}) 4px
           )`,
-          opacity: 0.6,
+          opacity: 0.45,
         }}
       />
-      {/* Moving bright scanline */}
+      {/* Moving highlight scanline - subtle glow effect */}
       <div
         style={{
           position: "absolute",
-          top: scanlineY - 20,
+          top: scanlineY - 30,
           left: 0,
           right: 0,
-          height: 40,
+          height: 60,
           background: `linear-gradient(180deg,
             transparent 0%,
-            rgba(0, 255, 136, ${opacity * 0.4}) 40%,
-            rgba(255, 255, 255, ${opacity * 0.6}) 50%,
-            rgba(0, 255, 136, ${opacity * 0.4}) 60%,
+            rgba(0, 255, 136, ${opacity * 0.25}) 35%,
+            rgba(255, 255, 255, ${opacity * 0.4}) 50%,
+            rgba(0, 255, 136, ${opacity * 0.25}) 65%,
             transparent 100%)`,
           pointerEvents: "none",
         }}
@@ -94,13 +95,23 @@ const CinematicBackground: React.FC<{
   intensity?: number;
   focusY?: number;
   showGrain?: boolean;
-}> = ({ accentColor = "#00ff88", intensity = 0.03, focusY = 50, showGrain = true }) => {
+  urgency?: number; // 0-1, adds pulsing urgency for high-progress states
+}> = ({ accentColor = "#00ff88", intensity = 0.03, focusY = 50, showGrain = true, urgency = 0 }) => {
   const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
 
   // Extremely slow drift - creates subtle life
   const drift = interpolate(frame, [0, 900], [0, 2], {
     extrapolateRight: "clamp",
   });
+
+  // Urgency breathing - subtle pulse that adds tension
+  const urgencyPulse = urgency > 0 ? interpolate(
+    frame % (fps * 1.5),
+    [0, fps * 0.75, fps * 1.5],
+    [0, urgency * 0.015, 0],
+    { easing: Easing.inOut(Easing.sin) }
+  ) : 0;
 
   // Convert hex to rgba for gradient
   const hexToRgba = (hex: string, alpha: number) => {
@@ -115,26 +126,33 @@ const CinematicBackground: React.FC<{
   return (
     <AbsoluteFill>
       {/* Pure black base - premium foundation */}
-      <AbsoluteFill style={{ background: "#030303" }} />
+      <AbsoluteFill style={{ background: "#020202" }} />
 
       {/* Subtle noise texture base for depth */}
       <AbsoluteFill
         style={{
-          background: `radial-gradient(circle at 50% 50%, #060606 0%, #020202 100%)`,
+          background: `radial-gradient(circle at 50% 50%, #050505 0%, #010101 100%)`,
         }}
       />
 
-      {/* Primary glow - centered, focused */}
+      {/* Primary glow - centered, focused with urgency breathing */}
       <AbsoluteFill
         style={{
-          background: `radial-gradient(ellipse 70% 50% at 50% ${focusY + drift}%, ${hexToRgba(accentColor, intensity)} 0%, transparent 60%)`,
+          background: `radial-gradient(ellipse 65% 45% at 50% ${focusY + drift}%, ${hexToRgba(accentColor, intensity + urgencyPulse)} 0%, transparent 55%)`,
         }}
       />
 
       {/* Secondary ambient - subtle top wash */}
       <AbsoluteFill
         style={{
-          background: `radial-gradient(ellipse 100% 20% at 50% 0%, ${hexToRgba(accentColor, intensity * 0.15)} 0%, transparent 45%)`,
+          background: `radial-gradient(ellipse 90% 18% at 50% 0%, ${hexToRgba(accentColor, intensity * 0.12)} 0%, transparent 40%)`,
+        }}
+      />
+
+      {/* Bottom subtle glow - grounds the composition */}
+      <AbsoluteFill
+        style={{
+          background: `radial-gradient(ellipse 80% 25% at 50% 100%, ${hexToRgba(accentColor, intensity * 0.08)} 0%, transparent 50%)`,
         }}
       />
 
@@ -142,12 +160,12 @@ const CinematicBackground: React.FC<{
       <AbsoluteFill
         style={{
           background:
-            "radial-gradient(ellipse 82% 72% at 50% 50%, transparent 30%, rgba(0,0,0,0.65) 100%)",
+            "radial-gradient(ellipse 85% 75% at 50% 50%, transparent 25%, rgba(0,0,0,0.6) 100%)",
         }}
       />
 
       {/* Film grain for texture */}
-      {showGrain && <FilmGrain opacity={0.02} />}
+      {showGrain && <FilmGrain opacity={0.018} />}
     </AbsoluteFill>
   );
 };
@@ -161,260 +179,295 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
   const isNearComplete = progress >= 90;
   // Even more urgent when nearly done
   const isAlmostThere = progress >= 95;
+  // Critical urgency at 98%+
+  const isCritical = progress >= 98;
 
-  // Phase 0: Total darkness with precise flicker timing - builds maximum anticipation
-  // More dramatic flicker sequence for high-progress milestones
-  const flicker = frame < fps * 0.06 ? 0 :
-    frame < fps * 0.075 ? 0.04 :
-    frame < fps * 0.09 ? 0.01 :
-    frame < fps * 0.105 ? 0.08 :
-    frame < fps * 0.12 ? 0.02 :
-    frame < fps * 0.135 ? 0.15 :
-    frame < fps * 0.15 ? 0.05 :
-    frame < fps * 0.165 ? 0.25 :
-    frame < fps * 0.18 ? 0.12 : 1;
+  // Phase 0: Total darkness with refined flicker timing - organic, not mechanical
+  // The flicker creates anticipation like a projector warming up
+  const flicker = frame < fps * 0.05 ? 0 :
+    frame < fps * 0.065 ? 0.03 :
+    frame < fps * 0.08 ? 0.008 :
+    frame < fps * 0.095 ? 0.06 :
+    frame < fps * 0.11 ? 0.015 :
+    frame < fps * 0.125 ? 0.12 :
+    frame < fps * 0.14 ? 0.04 :
+    frame < fps * 0.155 ? 0.2 :
+    frame < fps * 0.17 ? 0.08 : 1;
 
   const darknessFade = interpolate(
     frame,
-    [fps * 0.18, fps * 0.45],
+    [fps * 0.17, fps * 0.42],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  ) * (frame < fps * 0.18 ? flicker : 1);
+  ) * (frame < fps * 0.17 ? flicker : 1);
 
-  // CRT scanline visibility - only during power-on phase
+  // Scanline visibility - only during power-on phase, subtle
   const scanlineOpacity = interpolate(
     frame,
-    [0, fps * 0.15, fps * 0.6, fps * 0.9],
-    [0, 0.12, 0.06, 0],
+    [0, fps * 0.12, fps * 0.5, fps * 0.75],
+    [0, 0.08, 0.04, 0],
     { extrapolateRight: "clamp" }
   );
 
   // Initial light burst - a brilliant point that expands cinematically
   const burstOpacity = interpolate(
     frame,
-    [fps * 0.08, fps * 0.16, fps * 0.5, fps * 0.8],
-    [0, 0.85, 0.3, 0],
+    [fps * 0.06, fps * 0.14, fps * 0.45, fps * 0.72],
+    [0, 0.75, 0.25, 0],
     { extrapolateRight: "clamp" }
   );
   const burstScale = interpolate(
     frame,
-    [fps * 0.08, fps * 0.75],
-    [0.02, 4.0],
+    [fps * 0.06, fps * 0.72],
+    [0.015, 3.5],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Secondary outer burst ring - layered depth
   const ring2BurstOpacity = interpolate(
     frame,
-    [fps * 0.12, fps * 0.22, fps * 0.55, fps * 0.85],
-    [0, 0.5, 0.18, 0],
+    [fps * 0.1, fps * 0.2, fps * 0.5, fps * 0.8],
+    [0, 0.45, 0.15, 0],
     { extrapolateRight: "clamp" }
   );
   const ring2BurstScale = interpolate(
     frame,
-    [fps * 0.12, fps * 0.85],
-    [0.01, 4.8],
+    [fps * 0.1, fps * 0.8],
+    [0.01, 4.2],
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Horizontal reveal line - cinematic wipe effect
   const revealLineWidth = interpolate(
     frame,
-    [fps * 0.06, fps * 0.45],
-    [0, 680],
+    [fps * 0.04, fps * 0.4],
+    [0, 720],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
   const revealLineOpacity = interpolate(
     frame,
-    [fps * 0.06, fps * 0.14, fps * 0.6, fps * 0.9],
-    [0, 0.6, 0.25, 0],
+    [fps * 0.04, fps * 0.12, fps * 0.55, fps * 0.85],
+    [0, 0.55, 0.2, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
 
   // Pre-title - text varies based on how close we are to milestone
-  const preText = isAlmostThere ? "The Final Push" : isNearComplete ? "Final Stretch" : "Approaching Milestone";
-  const preDelay = 0.42;
+  const preText = isCritical ? "The Final Push" : isAlmostThere ? "Almost There" : isNearComplete ? "Final Stretch" : "Approaching Milestone";
+  const preDelay = 0.38;
   const preOpacity = interpolate(
     frame,
-    [preDelay * fps, (preDelay + 0.22) * fps],
+    [preDelay * fps, (preDelay + 0.2) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const preY = interpolate(
     frame,
-    [preDelay * fps, (preDelay + 0.32) * fps],
-    [16, 0],
+    [preDelay * fps, (preDelay + 0.28) * fps],
+    [14, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Pulsing indicator dot - faster pulse when near complete for urgency
-  const pulseSpeed = isNearComplete ? 0.9 : 1.4;
-  const dotPulse = frame > fps * 0.65 ? interpolate(
-    (frame - fps * 0.65) % (fps * pulseSpeed),
-    [0, fps * pulseSpeed * 0.23, fps * pulseSpeed],
-    [0.5, 1, 0.5],
+  const pulseSpeed = isCritical ? 0.7 : isNearComplete ? 0.9 : 1.4;
+  const dotPulse = frame > fps * 0.6 ? interpolate(
+    (frame - fps * 0.6) % (fps * pulseSpeed),
+    [0, fps * pulseSpeed * 0.25, fps * pulseSpeed],
+    [0.45, 1, 0.45],
     { extrapolateLeft: "clamp", easing: Easing.inOut(Easing.sin) }
-  ) : interpolate(frame, [preDelay * fps, fps * 0.65], [0, 0.5], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  ) : interpolate(frame, [preDelay * fps, fps * 0.6], [0, 0.45], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
   // Ring pulse around dot - sophisticated expansion
-  const dotRingScale = frame > fps * 0.65 ? interpolate(
-    (frame - fps * 0.65) % (fps * pulseSpeed),
-    [0, fps * pulseSpeed * 0.23, fps * pulseSpeed],
-    [1, 2.2, 1],
+  const dotRingScale = frame > fps * 0.6 ? interpolate(
+    (frame - fps * 0.6) % (fps * pulseSpeed),
+    [0, fps * pulseSpeed * 0.25, fps * pulseSpeed],
+    [1, 2.4, 1],
     { extrapolateLeft: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
-  const dotRingOpacity = frame > fps * 0.65 ? interpolate(
-    (frame - fps * 0.65) % (fps * pulseSpeed),
-    [0, fps * pulseSpeed * 0.2, fps * pulseSpeed],
-    [0.7, 0, 0],
+  const dotRingOpacity = frame > fps * 0.6 ? interpolate(
+    (frame - fps * 0.6) % (fps * pulseSpeed),
+    [0, fps * pulseSpeed * 0.22, fps * pulseSpeed],
+    [0.65, 0, 0],
     { extrapolateLeft: "clamp" }
   ) : 0;
 
   // Main milestone "QE2" - THE hero moment with commanding weight
-  const heroDelay = 0.78;
+  const heroDelay = 0.72;
   const heroProgress = spring({
     frame: frame - heroDelay * fps,
     fps,
-    config: { damping: 200, stiffness: 40, mass: 1.8 },
+    config: { damping: 180, stiffness: 45, mass: 1.6 },
   });
   const heroOpacity = interpolate(
     frame,
-    [heroDelay * fps, (heroDelay + 0.28) * fps],
+    [heroDelay * fps, (heroDelay + 0.25) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const heroY = interpolate(heroProgress, [0, 1], [60, 0]);
-  const heroScale = interpolate(heroProgress, [0, 1], [0.85, 1]);
+  const heroY = interpolate(heroProgress, [0, 1], [55, 0]);
+  const heroScale = interpolate(heroProgress, [0, 1], [0.88, 1]);
 
   // Q and E animate separately from 2 for visual interest - the "2" pops
-  const numDelay = heroDelay + 0.14;
+  const numDelay = heroDelay + 0.12;
   const numProgress = spring({
     frame: frame - numDelay * fps,
     fps,
-    config: { damping: 150, stiffness: 120, mass: 1.1 },
+    config: { damping: 140, stiffness: 130, mass: 1.0 },
   });
   const numOpacity = interpolate(
     frame,
-    [numDelay * fps, (numDelay + 0.22) * fps],
+    [numDelay * fps, (numDelay + 0.2) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const numScale = interpolate(numProgress, [0, 1], [0.75, 1]);
+  const numScale = interpolate(numProgress, [0, 1], [0.7, 1]);
 
-  // "2" lands with a satisfying scale pulse
-  const numLandTime = (numDelay + 0.35) * fps;
+  // "2" lands with a satisfying scale pulse - bigger for high progress
+  const numLandTime = (numDelay + 0.32) * fps;
   const numLandPulse = frame > numLandTime ? interpolate(
     frame,
-    [numLandTime, numLandTime + fps * 0.08, numLandTime + fps * 0.22],
-    [1, 1.08, 1],
+    [numLandTime, numLandTime + fps * 0.07, numLandTime + fps * 0.2],
+    [1, isCritical ? 1.12 : 1.08, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
   // Glow builds majestically after text lands - more dramatic intensity
   const glowIntensity = interpolate(
     frame,
-    [fps * 1.2, fps * 2.0, fps * 3.0],
-    [0, 100, 80],
+    [fps * 1.1, fps * 1.8, fps * 2.8],
+    [0, isCritical ? 110 : 90, isCritical ? 85 : 70],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Dual concentric rings expanding from milestone - creates depth
-  const ring1Delay = 0.9;
+  // Triple concentric rings expanding from milestone - creates depth
+  const ring1Delay = 0.85;
   const ring1Opacity = interpolate(
     frame,
-    [ring1Delay * fps, (ring1Delay + 0.16) * fps, fps * 1.9, fps * 2.4],
-    [0, 0.25, 0.12, 0],
+    [ring1Delay * fps, (ring1Delay + 0.14) * fps, fps * 1.8, fps * 2.3],
+    [0, 0.28, 0.14, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const ring1Scale = interpolate(
     frame,
-    [ring1Delay * fps, fps * 2.4],
-    [0.5, 2.8],
+    [ring1Delay * fps, fps * 2.3],
+    [0.5, 2.6],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  const ring2Delay = 1.08;
+  const ring2Delay = 1.0;
   const ring2Opacity = interpolate(
     frame,
-    [ring2Delay * fps, (ring2Delay + 0.16) * fps, fps * 2.2, fps * 2.7],
-    [0, 0.18, 0.08, 0],
+    [ring2Delay * fps, (ring2Delay + 0.14) * fps, fps * 2.1, fps * 2.6],
+    [0, 0.2, 0.1, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const ring2Scale = interpolate(
     frame,
-    [ring2Delay * fps, fps * 2.7],
-    [0.4, 3.4],
+    [ring2Delay * fps, fps * 2.6],
+    [0.4, 3.2],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  );
+
+  // Third ring for extra depth at critical progress
+  const ring3Delay = 1.15;
+  const ring3Opacity = isCritical ? interpolate(
+    frame,
+    [ring3Delay * fps, (ring3Delay + 0.14) * fps, fps * 2.4, fps * 2.9],
+    [0, 0.15, 0.06, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : 0;
+  const ring3Scale = interpolate(
+    frame,
+    [ring3Delay * fps, fps * 2.9],
+    [0.35, 3.8],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
   // Background glow intensifies with reveal - energy builds
   const bgIntensity = interpolate(
     frame,
-    [fps * 0.4, fps * 2.0],
-    [0.012, 0.075],
+    [fps * 0.35, fps * 1.8],
+    [0.015, isCritical ? 0.08 : 0.065],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
+  // Urgency pulse for critical progress
+  const urgencyFactor = isCritical ? 1 : isAlmostThere ? 0.6 : isNearComplete ? 0.3 : 0;
+
   // Percentage badge - appears dramatically after milestone with celebration energy
   // For high progress, make this more dramatic with a bigger scale effect
-  const percentDelay = 1.5;
+  const percentDelay = 1.4;
   const percentProgress = spring({
     frame: frame - percentDelay * fps,
     fps,
-    config: { damping: isNearComplete ? 120 : 130, stiffness: isNearComplete ? 200 : 180, mass: 0.85 },
+    config: { damping: isCritical ? 100 : isNearComplete ? 120 : 130, stiffness: isCritical ? 220 : isNearComplete ? 200 : 180, mass: 0.8 },
   });
   const percentOpacity = interpolate(
     frame,
-    [percentDelay * fps, (percentDelay + 0.16) * fps],
+    [percentDelay * fps, (percentDelay + 0.14) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
-  const percentScale = interpolate(percentProgress, [0, 1], [isNearComplete ? 0.55 : 0.65, 1]);
+  const percentScale = interpolate(percentProgress, [0, 1], [isCritical ? 0.5 : isNearComplete ? 0.55 : 0.65, 1]);
 
-  // Progress number counts up with luxurious quintic ease-out
+  // Progress number counts up with luxurious ease-out - faster for critical to build excitement
+  const countDuration = isCritical ? 0.55 : 0.65;
   const displayProgress = interpolate(
     frame,
-    [(percentDelay + 0.08) * fps, (percentDelay + 0.65) * fps],
+    [(percentDelay + 0.06) * fps, (percentDelay + countDuration) * fps],
     [0, progress],
-    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: (t) => 1 - Math.pow(1 - t, 5) }
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: (t) => 1 - Math.pow(1 - t, 4.5) }
   );
 
   // Badge "lands" with a satisfying scale pulse when number finishes - bigger pulse for high progress
-  const badgeLandTime = (percentDelay + 0.65) * fps;
+  const badgeLandTime = (percentDelay + countDuration) * fps;
   const hasLanded = displayProgress >= progress - 1;
   const badgeLandPulse = hasLanded ? interpolate(
     frame,
-    [badgeLandTime - fps * 0.03, badgeLandTime + fps * 0.08, badgeLandTime + fps * 0.24],
-    [1, isNearComplete ? 1.25 : 1.18, 1],
+    [badgeLandTime - fps * 0.02, badgeLandTime + fps * 0.07, badgeLandTime + fps * 0.22],
+    [1, isCritical ? 1.3 : isNearComplete ? 1.22 : 1.15, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : 1;
 
   // Badge glow bursts on landing then settles - more dramatic for high progress
   const percentGlow = hasLanded ? interpolate(
     frame,
-    [badgeLandTime - fps * 0.12, badgeLandTime, badgeLandTime + fps * 0.1, badgeLandTime + fps * 0.4],
-    [0.3, 0.7, isNearComplete ? 1.8 : 1.5, isNearComplete ? 1.1 : 0.95],
+    [badgeLandTime - fps * 0.1, badgeLandTime, badgeLandTime + fps * 0.08, badgeLandTime + fps * 0.35],
+    [0.35, 0.75, isCritical ? 2.0 : isNearComplete ? 1.7 : 1.4, isCritical ? 1.2 : isNearComplete ? 1.0 : 0.85],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   ) : interpolate(
     frame,
-    [(percentDelay + 0.2) * fps, (percentDelay + 0.6) * fps],
-    [0, 0.7],
+    [(percentDelay + 0.18) * fps, (percentDelay + countDuration - 0.08) * fps],
+    [0, 0.65],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Extra celebration ring for high progress milestones
+  // Dual celebration rings for high progress milestones - inner brighter, outer softer
   const extraRingOpacity = isNearComplete && hasLanded ? interpolate(
     frame,
-    [badgeLandTime, badgeLandTime + fps * 0.08, badgeLandTime + fps * 0.5],
-    [0.7, 0.35, 0],
+    [badgeLandTime, badgeLandTime + fps * 0.06, badgeLandTime + fps * 0.45],
+    [isCritical ? 0.8 : 0.65, isCritical ? 0.45 : 0.35, 0],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   ) : 0;
   const extraRingScale = isNearComplete && hasLanded ? interpolate(
     frame,
-    [badgeLandTime, badgeLandTime + fps * 0.5],
-    [0.6, 3.0],
+    [badgeLandTime, badgeLandTime + fps * 0.45],
+    [0.55, isCritical ? 3.2 : 2.8],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
-  ) : 0.6;
+  ) : 0.55;
+
+  // Second outer ring for critical progress
+  const extraRing2Opacity = isCritical && hasLanded ? interpolate(
+    frame,
+    [badgeLandTime + fps * 0.04, badgeLandTime + fps * 0.14, badgeLandTime + fps * 0.55],
+    [0, 0.35, 0],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
+  ) : 0;
+  const extraRing2Scale = isCritical && hasLanded ? interpolate(
+    frame,
+    [badgeLandTime + fps * 0.04, badgeLandTime + fps * 0.55],
+    [0.5, 3.8],
+    { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
+  ) : 0.5;
 
   // Underline accent draws elegantly - tighter timing
   const underlineWidth = interpolate(
@@ -489,10 +542,10 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
 
   return (
     <AbsoluteFill>
-      <CinematicBackground accentColor="#00ff88" intensity={bgIntensity} focusY={48} />
+      <CinematicBackground accentColor="#00ff88" intensity={bgIntensity} focusY={48} urgency={urgencyFactor} />
 
-      {/* CRT scanline overlay - vintage tech power-on aesthetic */}
-      {scanlineOpacity > 0 && <ScanlineOverlay opacity={scanlineOpacity} speed={3.5} />}
+      {/* Scanline overlay - subtle power-on aesthetic */}
+      {scanlineOpacity > 0 && <ScanlineOverlay opacity={scanlineOpacity} speed={2.5} />}
 
       {/* Opening pulse and light burst - draws attention from black */}
       <AbsoluteFill
@@ -547,14 +600,28 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
           pointerEvents: "none",
         }}
       >
+        {/* Outermost ring - only for critical progress */}
+        {isCritical && (
+          <div
+            style={{
+              position: "absolute",
+              width: 250,
+              height: 250,
+              borderRadius: "50%",
+              border: "1px solid rgba(0, 255, 136, 0.15)",
+              transform: `scale(${ring3Scale})`,
+              opacity: ring3Opacity,
+            }}
+          />
+        )}
         {/* Outer ring */}
         <div
           style={{
             position: "absolute",
-            width: 220,
-            height: 220,
+            width: 210,
+            height: 210,
             borderRadius: "50%",
-            border: "1px solid rgba(0, 255, 136, 0.22)",
+            border: "1px solid rgba(0, 255, 136, 0.2)",
             transform: `scale(${ring2Scale})`,
             opacity: ring2Opacity,
           }}
@@ -563,12 +630,13 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
         <div
           style={{
             position: "absolute",
-            width: 195,
-            height: 195,
+            width: 185,
+            height: 185,
             borderRadius: "50%",
-            border: "1px solid rgba(0, 255, 136, 0.28)",
+            border: "1.5px solid rgba(0, 255, 136, 0.28)",
             transform: `scale(${ring1Scale})`,
             opacity: ring1Opacity,
+            boxShadow: "0 0 12px rgba(0, 255, 136, 0.1)",
           }}
         />
       </AbsoluteFill>
@@ -624,13 +692,17 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
           </div>
           <span
             style={{
-              fontSize: 12,
-              fontWeight: 700,
-              color: isNearComplete ? "#00ff88" : "#505050",
+              fontSize: isCritical ? 13 : 12,
+              fontWeight: isCritical ? 800 : 700,
+              color: isCritical ? "#00ff88" : isNearComplete ? "#00ff88" : "#505050",
               fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: 6,
+              letterSpacing: isCritical ? 7 : 6,
               textTransform: "uppercase",
-              textShadow: isNearComplete ? "0 0 20px rgba(0, 255, 136, 0.3)" : "none",
+              textShadow: isCritical
+                ? "0 0 25px rgba(0, 255, 136, 0.45)"
+                : isNearComplete
+                ? "0 0 18px rgba(0, 255, 136, 0.3)"
+                : "none",
             }}
           >
             {preText}
@@ -695,64 +767,85 @@ const RevealScene: React.FC<{ milestone: string; progress: number }> = ({ milest
           <div
             style={{
               position: "absolute",
-              top: -18,
-              right: -75,
+              top: -20,
+              right: -80,
               opacity: percentOpacity,
               transform: `scale(${percentScale * badgeLandPulse})`,
             }}
           >
-            {/* Extra celebration ring for high progress - outer */}
+            {/* Second outer celebration ring for critical progress */}
+            {isCritical && (
+              <div
+                style={{
+                  position: "absolute",
+                  top: "50%",
+                  left: "50%",
+                  width: 95,
+                  height: 95,
+                  borderRadius: "50%",
+                  border: "1px solid rgba(0, 255, 136, 0.3)",
+                  transform: `translate(-50%, -50%) scale(${extraRing2Scale})`,
+                  opacity: extraRing2Opacity,
+                  pointerEvents: "none",
+                }}
+              />
+            )}
+            {/* Extra celebration ring for high progress */}
             {isNearComplete && (
               <div
                 style={{
                   position: "absolute",
                   top: "50%",
                   left: "50%",
-                  width: 90,
-                  height: 90,
+                  width: 88,
+                  height: 88,
                   borderRadius: "50%",
-                  border: "1.5px solid rgba(0, 255, 136, 0.4)",
+                  border: `${isCritical ? 2 : 1.5}px solid rgba(0, 255, 136, ${isCritical ? 0.5 : 0.4})`,
                   transform: `translate(-50%, -50%) scale(${extraRingScale})`,
                   opacity: extraRingOpacity,
                   pointerEvents: "none",
+                  boxShadow: isCritical ? "0 0 15px rgba(0, 255, 136, 0.25)" : "none",
                 }}
               />
             )}
-            {/* Celebration ring on landing */}
+            {/* Inner celebration ring on landing */}
             <div
               style={{
                 position: "absolute",
                 top: "50%",
                 left: "50%",
-                width: 80,
-                height: 80,
+                width: 78,
+                height: 78,
                 borderRadius: "50%",
-                border: "2px solid rgba(0, 255, 136, 0.6)",
+                border: `${isCritical ? 2.5 : 2}px solid rgba(0, 255, 136, ${isCritical ? 0.7 : 0.6})`,
                 transform: `translate(-50%, -50%) scale(${badgeRingScale})`,
                 opacity: badgeRingOpacity,
                 pointerEvents: "none",
+                boxShadow: isCritical ? "0 0 18px rgba(0, 255, 136, 0.35)" : "0 0 10px rgba(0, 255, 136, 0.2)",
               }}
             />
             <div
               style={{
-                padding: "14px 22px",
-                background: "linear-gradient(145deg, #00ff88 0%, #00ffbb 100%)",
+                padding: isCritical ? "15px 24px" : "14px 22px",
+                background: isCritical
+                  ? "linear-gradient(145deg, #00ff88 0%, #00ffcc 50%, #00ff88 100%)"
+                  : "linear-gradient(145deg, #00ff88 0%, #00ffbb 100%)",
                 borderRadius: 40,
                 boxShadow: `
-                  0 8px 30px rgba(0, 255, 136, ${0.4 + 0.3 * percentGlow}),
-                  0 0 ${40 * percentGlow}px rgba(0, 255, 136, ${0.25 * percentGlow}),
-                  inset 0 2px 0 rgba(255, 255, 255, 0.22)
+                  0 ${isCritical ? 10 : 8}px ${isCritical ? 35 : 30}px rgba(0, 255, 136, ${0.4 + 0.35 * percentGlow}),
+                  0 0 ${(isCritical ? 50 : 40) * percentGlow}px rgba(0, 255, 136, ${(isCritical ? 0.3 : 0.25) * percentGlow}),
+                  inset 0 2px 0 rgba(255, 255, 255, ${isCritical ? 0.28 : 0.22})
                 `,
               }}
             >
               <span
                 style={{
-                  fontSize: 32,
+                  fontSize: isCritical ? 34 : 32,
                   fontWeight: 900,
-                  color: "#020202",
+                  color: "#010101",
                   fontFamily: "system-ui, -apple-system, sans-serif",
                   letterSpacing: -1,
-                  textShadow: "0 1px 0 rgba(255, 255, 255, 0.18)",
+                  textShadow: "0 1px 0 rgba(255, 255, 255, 0.2)",
                 }}
               >
                 {Math.round(displayProgress)}%
@@ -904,6 +997,8 @@ const ProgressScene: React.FC<{
   const isNearComplete = progress >= 90;
   // Even more urgent at 95%+
   const isAlmostThere = progress >= 95;
+  // Critical at 98%+
+  const isCritical = progress >= 98;
 
   // Scene entrance with subtle scale
   const sceneOpacity = interpolate(
@@ -920,10 +1015,13 @@ const ProgressScene: React.FC<{
   );
 
   // Ambient "tension" pulse when almost there - the whole scene subtly breathes
-  const tensionPulse = isAlmostThere && frame > fps * 2.0 ? interpolate(
-    (frame - fps * 2.0) % (fps * 0.8),
-    [0, fps * 0.4, fps * 0.8],
-    [0, 0.015, 0],
+  // More intense for critical progress
+  const tensionPulseSpeed = isCritical ? 0.65 : 0.8;
+  const tensionPulseIntensity = isCritical ? 0.02 : 0.015;
+  const tensionPulse = isAlmostThere && frame > fps * 1.8 ? interpolate(
+    (frame - fps * 1.8) % (fps * tensionPulseSpeed),
+    [0, fps * tensionPulseSpeed * 0.5, fps * tensionPulseSpeed],
+    [0, tensionPulseIntensity, 0],
     { easing: Easing.inOut(Easing.sin) }
   ) : 0;
 
@@ -947,14 +1045,14 @@ const ProgressScene: React.FC<{
     { extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
 
-  // Live indicator pulse - faster when near complete
-  const indicatorPulseSpeed = isNearComplete ? 1.0 : 1.6;
-  const livePulse = frame > fps * 0.28 ? interpolate(
-    (frame - fps * 0.28) % (fps * indicatorPulseSpeed),
-    [0, fps * indicatorPulseSpeed * 0.22, fps * indicatorPulseSpeed],
-    [0.5, 1, 0.5],
+  // Live indicator pulse - faster when near complete, even faster at critical
+  const indicatorPulseSpeed = isCritical ? 0.75 : isNearComplete ? 1.0 : 1.6;
+  const livePulse = frame > fps * 0.25 ? interpolate(
+    (frame - fps * 0.25) % (fps * indicatorPulseSpeed),
+    [0, fps * indicatorPulseSpeed * 0.25, fps * indicatorPulseSpeed],
+    [0.45, 1, 0.45],
     { easing: Easing.inOut(Easing.sin) }
-  ) : interpolate(frame, [fps * 0.06, fps * 0.28], [0, 0.5], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  ) : interpolate(frame, [fps * 0.05, fps * 0.25], [0, 0.45], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
 
   // Hero percentage - dramatic entrance with weight
   const percentDelay = 0.12;
@@ -1245,20 +1343,22 @@ const ProgressScene: React.FC<{
             </div>
             <span
               style={{
-                fontSize: 11,
+                fontSize: isCritical ? 12 : 11,
                 color: isNearComplete ? "#00ff88" : "#505050",
                 fontFamily: "system-ui, -apple-system, sans-serif",
-                letterSpacing: isAlmostThere ? 6 : 5.5,
+                letterSpacing: isCritical ? 6.5 : isAlmostThere ? 6 : 5.5,
                 textTransform: "uppercase",
-                fontWeight: isAlmostThere ? 700 : 600,
-                textShadow: isAlmostThere
+                fontWeight: isCritical ? 800 : isAlmostThere ? 700 : 600,
+                textShadow: isCritical
+                  ? "0 0 25px rgba(0, 255, 136, 0.6)"
+                  : isAlmostThere
                   ? "0 0 20px rgba(0, 255, 136, 0.5)"
                   : isNearComplete
                   ? "0 0 15px rgba(0, 255, 136, 0.3)"
                   : "none",
               }}
             >
-              {isAlmostThere ? "Final Push" : isNearComplete ? "Almost There" : "QE2 Progress"}
+              {isCritical ? "The Final Push" : isAlmostThere ? "Almost There" : isNearComplete ? "Nearly Done" : "QE2 Progress"}
             </span>
             <div style={{ width: lineWidth, height: 1, background: "linear-gradient(90deg, rgba(0,255,136,0.28), transparent)" }} />
           </div>
@@ -1310,16 +1410,16 @@ const ProgressScene: React.FC<{
             }}
           >
             {/* Outer anticipation glow when almost complete - pulses with urgency */}
-            {isAlmostThere && barProgress > 90 && (
+            {isAlmostThere && barProgress > 88 && (
               <div
                 style={{
                   position: "absolute",
-                  top: -8,
-                  left: -8,
-                  right: -8,
-                  bottom: -8,
-                  borderRadius: 17,
-                  background: `radial-gradient(ellipse 100% 200% at ${barProgress}% 50%, rgba(0, 255, 136, ${0.08 + tensionPulse * 2}) 0%, transparent 50%)`,
+                  top: -10,
+                  left: -10,
+                  right: -10,
+                  bottom: -10,
+                  borderRadius: 19,
+                  background: `radial-gradient(ellipse 100% 250% at ${barProgress}% 50%, rgba(0, 255, 136, ${isCritical ? 0.12 : 0.08} + ${tensionPulse * 2.5}) 0%, transparent 55%)`,
                   pointerEvents: "none",
                 }}
               />
@@ -1328,15 +1428,19 @@ const ProgressScene: React.FC<{
             <div
               style={{
                 width: "100%",
-                height: 18,
-                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.015) 0%, rgba(255, 255, 255, 0.038) 100%)",
-                borderRadius: 9,
+                height: isCritical ? 20 : 18,
+                background: "linear-gradient(180deg, rgba(255, 255, 255, 0.012) 0%, rgba(255, 255, 255, 0.035) 100%)",
+                borderRadius: isCritical ? 10 : 9,
                 overflow: "visible",
                 position: "relative",
-                border: isAlmostThere
+                border: isCritical
+                  ? `1.5px solid rgba(0, 255, 136, ${0.12 + tensionPulse * 4})`
+                  : isAlmostThere
                   ? `1px solid rgba(0, 255, 136, ${0.08 + tensionPulse * 3})`
                   : "1px solid rgba(255, 255, 255, 0.04)",
-                boxShadow: isAlmostThere
+                boxShadow: isCritical
+                  ? `inset 0 2px 14px rgba(0, 0, 0, 0.4), 0 0 ${30 + tensionPulse * 120}px rgba(0, 255, 136, ${0.2 + tensionPulse * 1.2})`
+                  : isAlmostThere
                   ? `inset 0 2px 12px rgba(0, 0, 0, 0.4), 0 0 ${25 + tensionPulse * 100}px rgba(0, 255, 136, ${0.15 + tensionPulse})`
                   : "inset 0 2px 12px rgba(0, 0, 0, 0.4)",
               }}
@@ -1550,6 +1654,8 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
   const isNearComplete = progress >= 90;
   // Even more urgent at 95%+
   const isAlmostThere = progress >= 95;
+  // Critical urgency at 98%+
+  const isCritical = progress >= 98;
 
   // Scene scale and fade
   const sceneFade = interpolate(
@@ -1609,36 +1715,36 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
   );
 
   // Badge text varies based on progress - more urgency at higher %
-  const badgeText = isAlmostThere ? "Final Push!" : isNearComplete ? "So Close!" : "Almost There";
+  const badgeText = isCritical ? "The Final Push!" : isAlmostThere ? "So Close!" : isNearComplete ? "Almost There!" : "Almost There";
 
-  // "Almost There" / "So Close!" badge - builds excitement with glow - more intense for high progress
-  const badgeDelay = 0.24;
+  // "Almost There" / "So Close!" / "The Final Push!" badge - builds excitement with glow - more intense for high progress
+  const badgeDelay = 0.22;
   const badgeProgress = spring({
     frame: frame - badgeDelay * fps,
     fps,
-    config: { damping: isNearComplete ? 150 : 170, stiffness: isNearComplete ? 160 : 130 },
+    config: { damping: isCritical ? 120 : isNearComplete ? 150 : 170, stiffness: isCritical ? 200 : isNearComplete ? 160 : 130 },
   });
   const badgeOpacity = interpolate(
     frame,
-    [badgeDelay * fps, (badgeDelay + 0.18) * fps],
+    [badgeDelay * fps, (badgeDelay + 0.16) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const badgeY = interpolate(badgeProgress, [0, 1], [16, 0]);
-  const badgeScale = interpolate(badgeProgress, [0, 1], [isNearComplete ? 0.85 : 0.9, 1]);
+  const badgeScale = interpolate(badgeProgress, [0, 1], [isCritical ? 0.8 : isNearComplete ? 0.85 : 0.9, 1]);
 
   // Badge glow pulses more energetically for high progress
   const badgeGlow = interpolate(
     frame,
-    [(badgeDelay + 0.12) * fps, fps * 0.9],
-    [0, isNearComplete ? 1.3 : 1],
+    [(badgeDelay + 0.1) * fps, fps * 0.85],
+    [0, isCritical ? 1.5 : isNearComplete ? 1.3 : 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
-  const badgePulseSpeed = isNearComplete ? 1.4 : 2.0;
-  const badgePulse = frame > fps * 0.85 ? interpolate(
-    (frame - fps * 0.85) % (fps * badgePulseSpeed),
+  const badgePulseSpeed = isCritical ? 1.1 : isNearComplete ? 1.4 : 2.0;
+  const badgePulse = frame > fps * 0.8 ? interpolate(
+    (frame - fps * 0.8) % (fps * badgePulseSpeed),
     [0, fps * badgePulseSpeed * 0.5, fps * badgePulseSpeed],
-    [0.92, 1, 0.92],
+    [isCritical ? 0.9 : 0.92, 1, isCritical ? 0.9 : 0.92],
     { easing: Easing.inOut(Easing.sin) }
   ) : 1;
 
@@ -1675,32 +1781,33 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
   );
 
   // CTA button - THE action moment with commanding presence
-  const ctaDelay = 0.85;
+  const ctaDelay = 0.82;
   const ctaProgress = spring({
     frame: frame - ctaDelay * fps,
     fps,
-    config: { damping: 175, stiffness: 90, mass: 1.05 },
+    config: { damping: isCritical ? 150 : 175, stiffness: isCritical ? 110 : 90, mass: 1.05 },
   });
   const ctaOpacity = interpolate(
     frame,
-    [ctaDelay * fps, (ctaDelay + 0.2) * fps],
+    [ctaDelay * fps, (ctaDelay + 0.18) * fps],
     [0, 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp" }
   );
   const ctaY = interpolate(ctaProgress, [0, 1], [28, 0]);
-  const ctaScale = interpolate(ctaProgress, [0, 1], [0.92, 1]);
+  const ctaScale = interpolate(ctaProgress, [0, 1], [isCritical ? 0.88 : 0.92, 1]);
 
-  // CTA glow builds dramatically then pulses with confidence
+  // CTA glow builds dramatically then pulses with confidence - more dramatic for critical
   const ctaGlow = interpolate(
     frame,
-    [(ctaDelay + 0.12) * fps, fps * 1.6, fps * 2.0],
-    [0, 1.2, 1],
+    [(ctaDelay + 0.1) * fps, fps * 1.5, fps * 1.9],
+    [0, isCritical ? 1.4 : 1.2, isCritical ? 1.1 : 1],
     { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) }
   );
-  const ctaPulse = frame > fps * 1.55 ? interpolate(
-    (frame - fps * 1.55) % (fps * 2.2),
-    [0, fps * 1.1, fps * 2.2],
-    [0.93, 1, 0.93],
+  const ctaPulseSpeed = isCritical ? 1.8 : 2.2;
+  const ctaPulse = frame > fps * 1.5 ? interpolate(
+    (frame - fps * 1.5) % (fps * ctaPulseSpeed),
+    [0, fps * ctaPulseSpeed * 0.5, fps * ctaPulseSpeed],
+    [isCritical ? 0.91 : 0.93, 1, isCritical ? 0.91 : 0.93],
     { easing: Easing.inOut(Easing.sin) }
   ) : 1;
 
@@ -1803,35 +1910,41 @@ const CTAScene: React.FC<{ nextMilestone?: string; progress?: number }> = ({ nex
           </div>
         </div>
 
-        {/* "Almost There" / "So Close!" / "Final Push!" badge with glow */}
+        {/* "Almost There" / "So Close!" / "The Final Push!" badge with glow */}
         <div
           style={{
             opacity: badgeOpacity,
             transform: `translateY(${badgeY}px) scale(${badgeScale * badgePulse})`,
-            padding: isAlmostThere ? "14px 32px" : isNearComplete ? "12px 28px" : "11px 24px",
-            background: isAlmostThere
+            padding: isCritical ? "16px 36px" : isAlmostThere ? "14px 32px" : isNearComplete ? "12px 28px" : "11px 24px",
+            background: isCritical
+              ? "linear-gradient(165deg, rgba(0, 255, 136, 0.28) 0%, rgba(0, 255, 136, 0.1) 100%)"
+              : isAlmostThere
               ? "linear-gradient(165deg, rgba(0, 255, 136, 0.22) 0%, rgba(0, 255, 136, 0.08) 100%)"
               : isNearComplete
               ? "linear-gradient(165deg, rgba(0, 255, 136, 0.15) 0%, rgba(0, 255, 136, 0.06) 100%)"
               : "linear-gradient(165deg, rgba(0, 255, 136, 0.1) 0%, rgba(0, 255, 136, 0.04) 100%)",
-            borderRadius: 32,
-            border: isAlmostThere
+            borderRadius: 34,
+            border: isCritical
+              ? "2.5px solid rgba(0, 255, 136, 0.5)"
+              : isAlmostThere
               ? "2px solid rgba(0, 255, 136, 0.4)"
               : isNearComplete
               ? "1.5px solid rgba(0, 255, 136, 0.28)"
               : "1px solid rgba(0, 255, 136, 0.18)",
-            boxShadow: `0 0 ${(isAlmostThere ? 35 : isNearComplete ? 28 : 22) * badgeGlow}px rgba(0, 255, 136, ${(isAlmostThere ? 0.2 : isNearComplete ? 0.15 : 0.1) * badgeGlow})`,
+            boxShadow: `0 0 ${(isCritical ? 42 : isAlmostThere ? 35 : isNearComplete ? 28 : 22) * badgeGlow}px rgba(0, 255, 136, ${(isCritical ? 0.25 : isAlmostThere ? 0.2 : isNearComplete ? 0.15 : 0.1) * badgeGlow})`,
           }}
         >
           <span
             style={{
-              fontSize: isAlmostThere ? 16 : isNearComplete ? 14 : 12,
-              fontWeight: isAlmostThere ? 900 : isNearComplete ? 800 : 700,
+              fontSize: isCritical ? 18 : isAlmostThere ? 16 : isNearComplete ? 14 : 12,
+              fontWeight: 900,
               color: "#00ff88",
               fontFamily: "system-ui, -apple-system, sans-serif",
-              letterSpacing: isAlmostThere ? 5.5 : isNearComplete ? 5 : 4.5,
+              letterSpacing: isCritical ? 6 : isAlmostThere ? 5.5 : isNearComplete ? 5 : 4.5,
               textTransform: "uppercase",
-              textShadow: isAlmostThere
+              textShadow: isCritical
+                ? "0 0 30px rgba(0, 255, 136, 0.65)"
+                : isAlmostThere
                 ? "0 0 25px rgba(0, 255, 136, 0.55)"
                 : isNearComplete
                 ? "0 0 15px rgba(0, 255, 136, 0.4)"
