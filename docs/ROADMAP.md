@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $52,100+ Distributed
+**Current:** $52,295+ Distributed
 **Status:** IN PROGRESS
 
 ### Active Systems
@@ -138,6 +138,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - [ ] Distribution notification system - **HIGH PRIORITY** (engagement hook)
 - [ ] Milestone NFTs (achievement badges)
 - [ ] Leaderboard with rewards - **HIGH PRIORITY** (social proof drives retention per research)
+- [ ] Holder benefit partnerships - Early access to partner token launches (Camelot launchpad-inspired)
 - [x] Referral bonus system - **BUILT** (needs activation)
 - [x] Quest system - **BUILT** (needs activation)
 - [x] Seasonal rewards - **BUILT** (needs activation)
@@ -177,6 +178,18 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - Many users never claim (engagement loss), and "set and forget" passive income is our differentiator
 - If scaling requires changes, ZK Compression maintains push model affordably
 
+### Exit Penalties (Camelot xGRAIL-style)
+- **Why Rejected:** Camelot burns up to 50% of GRAIL for early xGRAIL redemption
+- **2026-01-22 Analysis:** Penalties feel punitive and create negative UX
+- FED's positive incentive model (bonuses for holding longer) is better for memecoin psychology
+- Holders should be rewarded for loyalty, not punished for leaving
+
+### Active Allocation Requirements (Plugin System)
+- **Why Rejected:** Camelot requires users to "allocate" xGRAIL to plugins to earn
+- **2026-01-22 Analysis:** Adds friction, complexity; users forget to allocate
+- FED's passive "just hold = earn" model is simpler and more inclusive
+- Complexity kills memecoin adoption (validated by Pendle's pivot)
+
 ---
 
 ## Research Dependencies
@@ -191,7 +204,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Auto-compound option | Model economics of compound-to-FED | **COMPLETE** - Jan 22 research |
 | Governance lite | Research Snapshot integration | NOT STARTED |
 | Cross-chain | Bridge security analysis | NOT STARTED |
-| Multiplier changes | Model holder behavior impact | NOT STARTED |
+| Multiplier changes | Model holder behavior impact | **COMPLETE** - Jan 22 Camelot research |
 | Scaling (10K+ holders) | Gas optimization, batching strategies | **COMPLETE** - Jan 22 research |
 
 ### Research Findings Summary (Jan 22, 2026)
@@ -244,6 +257,17 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - Script already built (`auto-compound.ts`), uses Jupiter Ultra API
 - **Recommendation:** Activate for QE4 with daily batch, $1 minimum, explicit opt-in
 - See TOKENOMICS-RESEARCH.md for full auto-compound analysis
+
+**Camelot xGRAIL Model Research (Jan 22, 2026):**
+- Camelot: $75M TVL, $2B+ monthly volume, 17-22.5% of fees to xGRAIL holders
+- xGRAIL = non-transferable staking token requiring active "allocation" to plugins
+- Exit penalty: Up to 50% burn for early redemption (6-month max vesting for 1:1)
+- FED comparison: We distribute 100% of fees (vs 17-22.5%), require no active allocation
+- FED's passive "just hold = earn" model is VALIDATED as simpler and more generous
+- **Recommendation:** Don't copy exit penalties or active allocation requirements
+- Consider: Holder benefit partnerships (early access to partner launches) for QE4
+- Consider: Increase time-lock multiplier ceiling from 2x to 2.5x for 6-month locks
+- See TOKENOMICS-RESEARCH.md for full Camelot analysis
 
 ---
 
