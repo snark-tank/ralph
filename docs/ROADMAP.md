@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $57,041+ Distributed (492 runs)
+**Current:** $57,084+ Distributed (495 runs)
 **Status:** IN PROGRESS
 
 ### Active Systems
@@ -436,6 +436,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Points programs / XP systems | Blur, EigenLayer, Jupiter ASR analysis | **COMPLETE** - Jan 22 research (VALIDATES FED XP) |
 | ve-tokenomics comprehensive | Curve Wars, Convex, failures & alternatives | **COMPLETE** - Jan 22 research (VALIDATES FED simplicity) |
 | Raydium RAY buyback model | Solana DEX fee distribution, LaunchLab analysis | **COMPLETE** - Jan 22 research (VALIDATES FED 100% distribution) |
+| Aerodrome ve(3,3) at scale | Base DEX fee distribution, Slipstream, merger strategy | **COMPLETE** - Jan 22 research (VALIDATES FED simplicity) |
 
 ### Research Findings Summary (Jan 22, 2026)
 
@@ -635,6 +636,20 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - **Future:** At $1M+ distributed, evaluate 90/10 hybrid (distribute/buyback)
 - **Opportunity:** Monitor USDH stablecoin launch for ecosystem integration
 - See TOKENOMICS-RESEARCH.md for full Hyperliquid analysis
+
+**Aerodrome ve(3,3) Research (Jan 22, 2026):**
+- Aerodrome: $602M TVL, ~60% Base DEX volume, $238B cumulative volume
+- 100% of trading fees go to veAERO voters (requires locking up to 4 years)
+- Slipstream V2: 34x capital efficiency, $1M weekly fees from concentrated pools
+- Merger with Velodrome → "Aero" DEX (Q2 2026), cross-chain expansion
+- ~8% annual inflation from emissions (FED has 0% inflation)
+- FED comparison: Same 100% fee distribution, but NO locking, automatic push, 2-min frequency
+- **Validation:** 100% fee distribution proven sustainable at $600M+ TVL
+- **Validation:** Simpler UX (no locking) is better for retail audiences
+- **Validation:** Automatic distribution beats voting/claiming friction
+- **Key Insight:** ve(3,3) is optimal for DeFi power users; FED's simplicity is optimal for memecoin retail
+- **Recommendation:** Do NOT copy ve-locking or gauge voting. Keep "just hold = earn"
+- See TOKENOMICS-RESEARCH.md for full Aerodrome analysis
 
 ---
 

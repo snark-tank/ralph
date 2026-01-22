@@ -7708,3 +7708,166 @@ We have what most memecoins lack (real yield) but lack what most successful meme
 
 ---
 
+## 2026-01-22 16:06 UTC
+
+### Aerodrome Finance: ve(3,3) Done Right
+
+**Protocol Overview:**
+- Launched August 2023 on Base (Coinbase L2)
+- Principal DEX on Base, ~60% of DEX volume
+- TVL: $602M (late 2025), ~$479M at merger announcement
+- Cumulative volume: ~$238B all-time
+
+**Core Model: ve(3,3) with Guardrails**
+
+Aerodrome builds on Solidly's ve(3,3) but fixes the critical flaws:
+
+| Feature | Solidly (Failed) | Aerodrome (Fixed) |
+|---------|------------------|-------------------|
+| TVL Peak → Current | $2.3B → $106K | $602M (stable) |
+| Founder Risk | Andre Cronje left | Dromos Labs team |
+| Token Opacity | 10x emission discrepancy | Transparent, audited |
+| Voter Gaming | 100% self-allocation | Whitelist + bribe epochs |
+| Fee Distribution | Complex | 100% to veAERO voters |
+
+**Tokenomics Mechanics:**
+
+1. **Lock Mechanics:**
+   - Lock AERO for 1 week to 4 years
+   - 100 AERO locked 4 years = 100 veAERO
+   - Auto-max lock feature prevents decay
+   - Linear voting power decay otherwise
+
+2. **Fee Distribution:**
+   - **100% of trading fees go to veAERO holders**
+   - Voters direct fees to pools they vote for
+   - Creates flywheel: votes → liquidity → volume → fees → more votes
+
+3. **Emission Schedule:**
+   - Initial: 10M AERO/week (2% of supply)
+   - Post-Epoch 14: 1% decay per epoch
+   - Post-Epoch 67: "Aero Fed" voter control
+   - Range: 0.52% to 52% annualized inflation
+
+4. **Rebase (Anti-Dilution):**
+   - Formula: rebase = emissions × (1 - veAERO/AERO)² × 0.5
+   - Lower lock rates → higher rebase rewards
+   - Incentivizes new lockers when rates drop
+
+**What Worked:**
+
+1. **Fee Efficiency at Scale:**
+   - $4.6M fees in 7 days (Aug 2025)
+   - $21M revenue in single epoch (Sept 2025)
+   - Outpaces Curve and PancakeSwap with 1/3 the TVL
+
+2. **Slipstream V2 (Concentrated Liquidity):**
+   - 34x capital efficiency improvement
+   - $1M weekly fees from concentrated pools
+   - 40% more fees for LPs with same capital
+   - 90% of concentrated liquidity volume on Base
+
+3. **Merger Strategy (Velodrome + Aerodrome → Aero):**
+   - Dromos Labs merging both DEXs (Q2 2026)
+   - 94.5% to AERO holders, 5.5% to VELO holders
+   - Cross-chain: Base, Optimism, Ethereum mainnet
+   - Circle Arc integration for fiat bridges
+
+4. **Buyback Program:**
+   - PGF (Public Goods Fund) market-aware buybacks
+   - 1.84M AERO locked as veAERO (Nov 2025 alone)
+   - ~150M AERO locked total, reducing liquid supply
+
+**What Didn't Work (Relative Challenges):**
+
+1. **Inflation Pressure:**
+   - Net ~8% annual inflation (2025)
+   - Requires continuous growth to absorb
+   - Early emissions heavy (10M/week at launch)
+
+2. **Complexity Barrier:**
+   - ve-locking mechanics still complex for retail
+   - Bribe markets favor sophisticated players
+   - Boost calculations require tooling
+
+3. **Chain Dependency:**
+   - Base ecosystem success = Aerodrome success
+   - Limited to Coinbase ecosystem until merger
+
+**FED Comparison:**
+
+| Aspect | Aerodrome | FED |
+|--------|-----------|-----|
+| Fee to Holders | 100% (to voters) | 100% (to all holders) |
+| Locking Required | Yes (up to 4 years) | No (just hold) |
+| Distribution Method | Voter-directed | Automatic push |
+| Frequency | Weekly epochs | ~2 minutes |
+| Complexity | High (ve, bribes, gauges) | Low (hold = earn) |
+| Inflation | ~8% annually | None (fixed supply) |
+| Chain | Base | Solana |
+| Target | DeFi power users | Retail memecoin holders |
+
+**Key Insights for FED:**
+
+1. **100% Fee Distribution Works at Scale:**
+   - Aerodrome proves 100% fee return is sustainable
+   - Their $21M/epoch revenue validates the model
+   - FED's approach is correct
+
+2. **Simplicity Beats Complexity for Retail:**
+   - Aerodrome's ve-mechanics suit DeFi natives
+   - FED's "just hold" suits memecoin audience
+   - DON'T copy their locking mechanics
+
+3. **Cross-Chain is Future (But Not Now):**
+   - Aerodrome/Velodrome merger shows consolidation trend
+   - FED should focus on Solana first
+   - Consider Base expansion only at scale (QE5+)
+
+4. **Concentrated Liquidity is Powerful:**
+   - Slipstream's 34x efficiency is impressive
+   - Meteora (FED's LP) has similar model
+   - Our LP choice is validated
+
+5. **Buyback + Lock Works:**
+   - Aerodrome's PGF buybacks reduce supply
+   - FED's discretionary buybacks during dips are similar
+   - Consider locking bought FED in future
+
+**Validation for FED:**
+
+- ✅ 100% fee distribution is proven at $600M+ TVL
+- ✅ Simpler UX (no locking) is better for retail
+- ✅ Automatic distribution beats voting/claiming
+- ✅ 2-minute frequency is a genuine differentiator
+- ✅ Real yield from fees, not emissions, is sustainable
+
+**What FED Should NOT Copy:**
+
+- ❌ ve-locking (too complex for memecoins)
+- ❌ Gauge voting (creates bribe markets)
+- ❌ Emission-based rewards (inflation risk)
+- ❌ Epoch-based distribution (we're faster)
+
+**Research Conclusion:**
+
+Aerodrome represents the "best case" for ve(3,3) tokenomics - it fixed Solidly's failures and achieved sustainable scale. However, its complexity is designed for DeFi power users, not retail memecoin holders.
+
+FED's approach - same 100% fee distribution, but with simpler mechanics (no locking, automatic push, 2-min frequency) - is the correct adaptation for our audience.
+
+**Confidence Level:** HIGH that FED's model is appropriate. Aerodrome validates fee distribution at scale, while FED's simplicity is our competitive advantage.
+
+---
+
+*Sources:*
+- [CoinGecko: What Is Aerodrome Finance](https://www.coingecko.com/learn/what-is-aerodrome-finance-aero-base)
+- [CoinMarketCap: Aerodrome Finance Updates](https://coinmarketcap.com/cmc-ai/aerodrome-finance/latest-updates/)
+- [Aerodrome Official Docs](https://aero.drome.eth.limo/docs)
+- [AerodromeFi Medium: Launch & Tokenomics](https://medium.com/@aerodromefi/aerodrome-launch-tokenomics-30b546654a91)
+- [DWF Labs: Aerodrome Finance Growth](https://www.dwf-labs.com/research/has-aerodrome-finance-become-the-leading-defi-protocol-on-base)
+- [The Defiant: Dromos Labs Merger](https://thedefiant.io/news/defi/dromos-labs-merges-aerodrome-and-velodrome-into-new-dex-aero)
+- [Crypto Briefing: Aero DEX Merger](https://cryptobriefing.com/aero-dex-merger-ethereum-expansion/)
+- [AInvest: Aerodrome Liquidity Automation](https://www.ainvest.com/news/aerodrome-finance-aero-phase-liquidity-automation-base-2601/)
+
+---
+
