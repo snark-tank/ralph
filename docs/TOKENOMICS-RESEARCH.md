@@ -7047,3 +7047,190 @@ Trader Joe's "surge pricing" insight is directly applicable to FED:
 
 *Research completed: 2026-01-22 15:00 UTC*
 
+## 2026-01-22 15:30 UTC
+
+### Raydium RAY Buyback & Fee Distribution Model Analysis
+
+**Protocol:** Raydium (Solana's largest DEX by TVL)
+**TVL:** $2.5B (Q3 2025, +35% QoQ)
+**Q3 2025 Revenue:** $24.3M (+69% QoQ)
+**Trading Volume:** $51.9B quarterly
+
+---
+
+### Revenue Model Overview
+
+Raydium generates revenue from multiple pool types with differentiated fee structures:
+
+| Pool Type | Trading Fee | LP Share | Buyback Share | Treasury |
+|-----------|-------------|----------|---------------|----------|
+| Standard AMM (v4) | 0.25% | 0.22% (88%) | 0.03% (12%) | 0% |
+| CPMM | 0.25%-4% (configurable) | 84% | 12% | 4% |
+| CLMM | 0.01%-2% (configurable) | 84% | 12% | 4% |
+
+**Key Design:** Raydium allocates **12% of ALL trading fees to RAY buybacks**, regardless of pool type or fee tier.
+
+---
+
+### Buyback Mechanism Deep Dive
+
+**How It Works:**
+1. Fees accumulate in intermediary wallets
+2. When balance reaches $10, automatic buyback triggers
+3. RAY purchased programmatically from open market
+4. Bought RAY is **HELD** by protocol (not burned, not distributed)
+
+**Cumulative Buybacks (Aug 2025):**
+- Total spent: ~$196 million
+- RAY acquired: ~71 million tokens
+- Circulating supply bought back: ~26.4%
+
+**Implied Yield (Q2 2025 basis):**
+- Annualized buyback: $42.8M
+- Earnings per token: $0.21
+- At market cap $441.7M = **9.7% yield**
+
+---
+
+### LaunchLab: Vertical Integration Triumph
+
+Raydium's LaunchLab (launched April 2025) became their **dominant revenue stream** by Q3 2025:
+
+**Q3 2025 LaunchLab Performance:**
+- Revenue: $12.8M (53% of total revenue)
+- Growth: +220% QoQ
+- Volume: Billions in bonding curve + graduation swaps
+
+**Fee Structure:**
+- Protocol fee: 0.25% (goes to Raydium)
+- Platform fee: 0.75% (default for Raydium interface)
+- **Creator fee share:** 10% of LP fees post-graduation (incentivizes launches)
+
+**Why This Matters:**
+- Raydium captured token launch → liquidity → trading → fee loop
+- Pump.fun competitor that feeds Raydium AMM pools directly
+- Creator incentives drive launches, which drive volume, which drives fees
+
+---
+
+### FED Comparison Analysis
+
+| Aspect | Raydium | FED | Winner |
+|--------|---------|-----|--------|
+| **Fee allocation to holders** | 12% to buybacks (held) | 100% to direct distribution | **FED** |
+| **Distribution mechanism** | Buyback & hold | Direct USD1 push | **FED** (tangible) |
+| **Distribution frequency** | Programmatic (varies) | Every ~2 minutes | **FED** |
+| **User action required** | Stake RAY for rewards | Just hold $FED | **FED** |
+| **Complexity** | Multiple pool types, variable fees | Single simple model | **FED** |
+| **Scale** | $24.3M quarterly revenue | $56K+ total distributed | Raydium |
+
+**Critical Insight:** Raydium's buyback & hold model benefits from price appreciation but provides NO direct income to token holders. FED's direct distribution is more tangible and aligned with memecoin holder expectations.
+
+---
+
+### What FED Does Better
+
+1. **100% Distribution vs 12%:** FED distributes ALL LP fees; Raydium only allocates 12% to token-value mechanisms
+2. **Direct Income:** FED holders receive actual USD1; RAY holders receive no direct payments
+3. **No Staking Required:** FED's "hold = earn" beats Raydium's staking requirement
+4. **Transparency:** FED distributions are visible per-holder; buybacks are opaque protocol operations
+5. **Frequency:** ~2 minute cycles vs Raydium's $10 threshold triggers
+
+---
+
+### What FED Can Learn From Raydium
+
+**1. Vertical Integration (LaunchLab Model)**
+
+Raydium's genius was integrating token launches with their AMM:
+- Token launches on LaunchLab → graduate to Raydium pools → generate trading fees → fund buybacks
+
+*FED Potential:* Could partner with or create simple token launch features for Solana memecoins that feed into FED ecosystem. Very speculative, but the vertical integration model is proven.
+
+**2. Creator Incentive Alignment**
+
+LaunchLab gives token creators 10% of LP fees post-graduation. This creates aligned incentives:
+- Creators promote their tokens → more volume → more fees → more creator income
+
+*FED Potential:* Consider referral bonuses that give referrers ongoing fee share (already built in `referral-bonus.ts`). Activation priority: HIGH.
+
+**3. Third-Party Integration Support**
+
+Raydium allows external platforms (BONKfun, Cook.meme) to build on LaunchLab with custom fees. This expanded their reach significantly.
+
+*FED Potential:* Long-term consideration for ecosystem partnerships. Not relevant for current phase.
+
+**4. Consistent Fee Allocation Ratio**
+
+Raydium's 12% buyback ratio applies across ALL pool types uniformly. Consistency simplifies understanding.
+
+*FED Validation:* FED's 100% distribution is even simpler and more generous.
+
+---
+
+### Why Raydium's Model Works for Them (But Not for FED)
+
+**Raydium is infrastructure; FED is a yield-generating memecoin.**
+
+Raydium's buyback & hold strategy makes sense because:
+1. RAY is a utility token for staking/governance/launchpad access
+2. Institutional LPs prioritize price appreciation over income
+3. Protocol ownership of RAY creates treasury reserves
+4. They operate at massive scale ($2.5B TVL)
+
+FED's direct distribution makes sense because:
+1. Memecoin holders want **tangible, immediate rewards**
+2. "I got paid" is a stronger narrative than "supply decreased"
+3. No staking complexity aligns with memecoin simplicity
+4. Direct USD1 creates verifiable value
+
+---
+
+### Key Research Conclusions
+
+**Raydium Model Assessment:**
+- Proven at massive scale ($24.3M quarterly revenue)
+- Vertical integration (LaunchLab) is brilliant strategic move
+- 12% buyback allocation is substantial but not distributed
+- Staking requirement adds friction for casual holders
+
+**FED Validation:**
+- 100% fee distribution is MORE generous than Raydium's 12%
+- Direct USD1 > buyback & hold for memecoin psychology
+- No staking required is superior UX for retail
+- ~2 minute distribution is faster than Raydium's threshold-based triggers
+
+**Recommendations:**
+- **DO NOT** adopt buyback & hold model (keeps value in protocol, not holders)
+- **VALIDATE** current 100% distribution model as best-in-class for memecoins
+- **ACTIVATE** referral system (mirrors LaunchLab creator incentive success)
+- **MONITOR** vertical integration opportunities long-term
+
+---
+
+### Action Items
+
+1. [x] Research Raydium RAY buyback mechanism
+2. [x] Document fee allocation model
+3. [x] Analyze LaunchLab vertical integration
+4. [x] Compare to FED model
+5. [ ] Consider referral activation (already built, high priority)
+
+---
+
+*Sources:*
+- [Raydium Protocol Fees Documentation](https://docs.raydium.io/raydium/protocol/the-ray-token/protocol-fees)
+- [Raydium RAY Buybacks Documentation](https://docs.raydium.io/raydium/protocol/the-ray-token/ray-buybacks)
+- [Blockworks: Raydium Q3 2025 Token Holder Report](https://blockworks.co/news/raydium-token-holder-report)
+- [Messari: State of Raydium Q2 2025](https://messari.io/report/state-of-raydium-q2-2025)
+- [Raydium LaunchLab Documentation](https://docs.raydium.io/raydium/pool-creation/launchlab)
+- [OKX: Raydium LaunchLab Guide](https://www.okx.com/en-us/learn/raydium-launchlab-ray-token-creation)
+- [DefiLlama: Raydium](https://defillama.com/protocol/raydium)
+
+---
+
+*Research completed: 2026-01-22 15:30 UTC*
+
+---
+
+

@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $56,372+ Distributed (479 runs)
+**Current:** $56,563+ Distributed (484 runs)
 **Status:** IN PROGRESS
 
 ### Active Systems
@@ -381,6 +381,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Tokemak liquidity direction | DeFi 2.0 postmortem, emission-based models | **COMPLETE** - Jan 22 research (VALIDATES FED) |
 | Points programs / XP systems | Blur, EigenLayer, Jupiter ASR analysis | **COMPLETE** - Jan 22 research (VALIDATES FED XP) |
 | ve-tokenomics comprehensive | Curve Wars, Convex, failures & alternatives | **COMPLETE** - Jan 22 research (VALIDATES FED simplicity) |
+| Raydium RAY buyback model | Solana DEX fee distribution, LaunchLab analysis | **COMPLETE** - Jan 22 research (VALIDATES FED 100% distribution) |
 
 ### Research Findings Summary (Jan 22, 2026)
 
@@ -550,6 +551,19 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - **Key Lesson:** "The future of tokenomics is simplicity + real yield, not complex locking mechanics"
 - **Recommendation:** DO NOT adopt ve-tokenomics. FED's current model is correct
 - See TOKENOMICS-RESEARCH.md for full ve-tokenomics deep dive
+
+**Raydium RAY Buyback Model Research (Jan 22, 2026):**
+- Raydium: $2.5B TVL, $24.3M Q3 2025 revenue, largest Solana DEX
+- Fee allocation: 12% of ALL trading fees go to RAY buybacks (held by protocol)
+- Cumulative buybacks: $196M spent, 71M RAY acquired (26.4% of circulating supply)
+- LaunchLab vertical integration: 53% of Q3 revenue from token launches ($12.8M)
+- Key difference: Raydium HOLDS bought RAY; FED DISTRIBUTES 100% directly
+- **Validation:** FED's 100% distribution is MORE generous than Raydium's 12% allocation
+- **Validation:** Direct USD1 distribution > buyback & hold for memecoin psychology
+- **Validation:** "Just hold = earn" is simpler than Raydium's staking requirement
+- **Key Lesson:** Vertical integration (launch → trade → fees) is powerful but complex
+- **Recommendation:** Activate referral system (mirrors LaunchLab creator incentive success)
+- See TOKENOMICS-RESEARCH.md for full Raydium analysis
 
 **Hyperliquid Deep Dive Research (Jan 22, 2026):**
 - Hyperliquid: $844M revenue (2025), $716M buybacks, 70%+ DEX perps market share
