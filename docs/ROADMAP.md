@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $56,317+ Distributed (476 runs)
+**Current:** $56,372+ Distributed (479 runs)
 **Status:** IN PROGRESS
 
 ### Active Systems
@@ -463,6 +463,18 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - **Validation:** Direct stablecoin distribution (like sJOE) is proven model; FED's automatic push is superior UX
 - **Recommendation:** Do NOT switch to buyback & burn (breaks holder expectations for memecoins)
 - See TOKENOMICS-RESEARCH.md for full Gains Network and Trader Joe analysis
+
+**Trader Joe sJOE Deep Dive (Jan 22, 2026):**
+- Trader Joe 2025 stats: $40.7B volume, $29.3M fees, $3.9M to sJOE stakers (~13% of fees)
+- Modular staking: sJOE (real yield), veJOE (farming boost), rJOE (launchpad - deprecated)
+- Liquidity Book AMM: Bin-based pricing similar to Meteora, surge pricing during volatility
+- Multi-chain adds complexity: Staking rewards are chain-specific (Arbitrum sJOE only earns Arbitrum fees)
+- 24-hour distribution cycle vs FED's 2-minute cycle; 1% deposit fee vs FED's zero fee
+- FED advantages: 100% of LP fees (vs 13%), no staking required, automatic push, simpler UX
+- **Key Insight:** Liquidity Book surge pricing explains FED's fee spikes during volatility (Meteora uses similar model)
+- **Validation:** Trader Joe's friction points (staking, deposit fee, chain selection) validate FED's simplicity
+- **Recommendation:** Keep current model; do NOT add modular staking complexity
+- See TOKENOMICS-RESEARCH.md for full Trader Joe sJOE analysis
 
 **Frax Finance Model Research (Jan 22, 2026):**
 - Frax: $433M TVL, $7.21M annualized revenue, $20.8M projected annual yield to veFXS stakers

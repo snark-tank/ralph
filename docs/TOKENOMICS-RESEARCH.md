@@ -7,8 +7,8 @@
 ## Current State (as of Jan 22, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $56,317+ USD1
-- **Distribution Count:** 476 distributions
+- **Total Distributed:** $56,372+ USD1
+- **Distribution Count:** 479 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
@@ -6799,3 +6799,251 @@ Average users couldn't navigate veCRV → Convex → cvxCRV → vlCVX → Votium
 ---
 
 *Research completed: 2026-01-22 14:10 UTC*
+
+## 2026-01-22: Trader Joe sJOE Model Deep Dive
+
+### Research Focus
+How does Trader Joe's sJOE real-yield staking model work? What can FED learn from their modular staking approach and fee distribution mechanics?
+
+---
+
+### Trader Joe (LFJ) Protocol Overview
+
+**Protocol Stats (2025):**
+- **Annual Volume:** $40.7 Billion
+- **Annual Fees Generated:** $29.3M
+- **Revenue to JOE Holders:** $3.9M distributed to sJOE stakers
+- **Peak TVL:** $4B+ (historically)
+- **Chains:** Avalanche, Arbitrum, BNB Chain
+- **Token Supply:** 500M JOE (hard cap, emissions completed)
+- **Current JOE Price:** ~$0.064 USD
+
+**Key Insight:** Trader Joe generates $40B+ in annual volume with substantial fee generation, proving real-yield DEX models can scale. The $3.9M distributed to holders is ~13% of total fees - similar to FED's 100% distribution but at larger scale.
+
+**Source:** [CoinBureau: LFJ Review 2025](https://coinbureau.com/review/trader-joe/)
+
+---
+
+### The Modular Staking System
+
+Trader Joe introduced "modular staking" to replace their original xJOE mechanism. Users choose between specialized staking options rather than a one-size-fits-all approach.
+
+**The Three Staking Options:**
+
+| Token | Purpose | Rewards | Status |
+|-------|---------|---------|--------|
+| **sJOE** | Revenue share | USDC from trading fees | Active |
+| **veJOE** | Farm boosts + governance | Up to 2.5x yield farming | Active (diminished) |
+| **rJOE** | Launchpad access | Token launch allocations | Deprecated |
+
+**Key Design Decision:** Separating "real yield" (sJOE) from "emission boosts" (veJOE) from "access" (rJOE) lets users self-select based on their goals.
+
+**Source:** [JOE Tokenomics Revamp](https://joecontent.substack.com/p/joe-tokenomics-revamp)
+
+---
+
+### sJOE Deep Dive: Real Yield Mechanics
+
+**How sJOE Works:**
+
+1. **Fee Collection:** 0.05% fee on every swap across all Trader Joe pools
+2. **Conversion:** Collected fees converted to USDC (stablecoin)
+3. **Distribution:** USDC distributed to all sJOE stakers every 24 hours
+4. **Multi-Chain:** sJOE staking available on Avalanche, Arbitrum, BNB Chain
+5. **Deposit Fee:** 1% fee when staking JOE → sJOE
+
+**Critical Design Choice: Chain-Specific Fees**
+
+> "Fee sharing is limited to each chain, therefore, sJOE on Arbitrum will only share fees on Arbitrum, and sJOE on Avalanche will only share fees on Avalanche."
+
+This means users must choose which chain to stake on based on expected volume. It creates arbitrage opportunities but adds friction.
+
+**FED Comparison:**
+- FED is single-chain (Solana) - no chain selection complexity
+- FED distributes every 2 minutes vs Trader Joe's 24 hours
+- FED has no deposit fee (friction reduction)
+- FED distributes USD1 directly (similar to USDC distribution)
+
+**Source:** [Altcoin Buzz: Trader Joe sJOE Staking](https://www.altcoinbuzz.io/defi/staking/trader-joe-how-to-earn-usdc-staking-sjoe/)
+
+---
+
+### veJOE: The Emissions Boost Layer
+
+**How veJOE Works:**
+
+- Stake JOE → earn veJOE over time (not instant)
+- veJOE increases yield farming rewards up to 2.5x (150% boost)
+- Designed for V1 AMM emission farming
+- ~15M JOE tokens currently locked in veJOE
+
+**The Decline:**
+
+> "The attraction of veJOE has diminished over time due to a reducing emissions schedule."
+
+With JOE emissions completed (500M cap reached), veJOE's primary value proposition weakened. This validates FED's approach of NOT relying on emissions for rewards.
+
+**FED Lesson:** Emission-based boosts have finite lifecycles. Real yield (fee sharing) is more sustainable than emission farming boosts.
+
+**Source:** [Trader Joe Documentation](https://joecontent.substack.com/p/joe-tokenomics-revamp)
+
+---
+
+### The Liquidity Book Innovation
+
+Trader Joe's V2 AMM uses "Liquidity Book" - a discretized concentrated liquidity model that's highly relevant to FED because **Meteora (FED's pool) uses similar bin-based architecture**.
+
+**How Liquidity Book Works:**
+
+1. **Discrete Bins:** Liquidity arranged in price bins (not continuous curves)
+2. **Active Bin:** Only one bin determines market price at any time
+3. **Fungible Receipts:** LP positions are fungible tokens (not NFTs like Uniswap V3)
+4. **Surge Pricing:** Dynamic fees based on volatility (higher vol = higher fees)
+
+**Fee Structure:**
+- Base fee (minimum) + Variable fee (volatility-adjusted)
+- "The more volatile the assets are in a Liquidity Pool, the higher the variable fee"
+- Total swap fees range from 0.01% to 0.8% depending on pool
+
+**Why This Matters for FED:**
+
+Meteora's DAMM v2 pools (where FED LP sits) use similar bin-based mechanics. During high volatility (pumps/dumps):
+- More swaps happen
+- Volatility fees kick in (surge pricing)
+- More fees accumulate for distribution
+
+This explains why FED's fee income spikes during price volatility - it's by design.
+
+**Source:** [Avalanche Medium: Trader Joe Liquidity Book](https://medium.com/avalancheavax/trader-joe-presents-liquidity-book-a-new-amm-design-for-defi-39abf87e0d7f)
+
+---
+
+### Economic Analysis: Yield Comparison
+
+**Trader Joe sJOE Yield:**
+- 2025 revenue to holders: $3.9M
+- Total JOE staked in sJOE: ~15-20M JOE (estimated)
+- JOE price: ~$0.064
+- Staked value: ~$960K - $1.28M
+- **Implied APY:** 300-400%+ (varies by chain and volume)
+
+**FED Yield:**
+- Total distributed: $56,372
+- Distribution period: ~3 months
+- Annualized: ~$225K
+- With $50K+ market cap, yield is substantial for holders
+
+**Key Difference:** Trader Joe distributes ~13% of fees to sJOE stakers. FED distributes 100% of LP fees to holders. FED's model is more aggressive on holder returns.
+
+---
+
+### What FED Does Better Than Trader Joe
+
+| Aspect | Trader Joe | FED | Winner |
+|--------|------------|-----|--------|
+| **Distribution frequency** | Every 24 hours | Every 2 minutes | FED |
+| **Fee allocation to holders** | ~13% of fees | 100% of LP fees | FED |
+| **Staking complexity** | Must stake JOE → sJOE | Just hold $FED | FED |
+| **Deposit fee** | 1% to stake | None | FED |
+| **Chain complexity** | Multi-chain, chain-specific rewards | Single chain | FED |
+| **Emissions dependency** | veJOE relies on emissions | No emissions, pure fee share | FED |
+
+**Key Insight:** FED's "just hold = earn" model is simpler and more holder-friendly than Trader Joe's modular system. We capture more of the benefits with less complexity.
+
+---
+
+### What FED Can Learn From Trader Joe
+
+**1. Liquidity Book Economics**
+
+Trader Joe proved that bin-based AMMs with surge pricing generate sustainable fee income. FED benefits from this via Meteora's similar architecture. During volatility:
+- More swaps = more fees
+- Higher volatility fees = more income
+- This is working for FED (see 14x pump fee generation)
+
+**2. Multi-Chain Consideration (QE5+)**
+
+Trader Joe expanded sJOE to three chains. FED could consider multi-chain in the future, but:
+- Complexity increases significantly
+- Chain-specific rewards create arbitrage
+- **Recommendation:** Stay Solana-only for foreseeable future
+
+**3. Emission Independence**
+
+veJOE's decline shows that emission-based rewards have expiration dates. FED's pure fee-share model avoids this trap entirely. 
+
+**4. Modular vs Simple**
+
+Trader Joe's modularity (sJOE/veJOE/rJOE) provides optionality but adds friction. FED's single-token simplicity is better for a memecoin audience. Don't over-engineer.
+
+---
+
+### Surge Pricing Relevance to FED
+
+Trader Joe's "surge pricing" insight is directly applicable to FED:
+
+> "Surge Pricing is possible due to the novel mechanism called The Volatility Accumulator (VA). The VA is able to calculate instantaneous volatility for each Liquidity Pool, without relying on any outside oracles."
+
+**FED Implication:**
+- During price pumps/dumps, Meteora fees increase automatically
+- This is why FED collected massive fees during the 14x pump
+- Volatility = revenue opportunity
+- Our distribution timing during pumps maximizes holder value
+
+**Potential Research:** Could FED implement distribution frequency adjustments based on volatility? (e.g., more frequent during high volatility)
+
+---
+
+### Key Research Conclusions
+
+**Trader Joe Model Assessment:**
+- Proven at scale ($40B annual volume)
+- Real yield model is sustainable
+- Modular staking adds complexity with marginal benefit
+- Multi-chain creates fragmentation challenges
+- Emission dependency (veJOE) is a weakness
+
+**FED Validation:**
+- FED's simpler model is validated by Trader Joe's friction points
+- 100% fee distribution beats 13% allocation
+- 2-minute distributions beat 24-hour distributions
+- No staking required beats deposit fees and lock complexity
+- Single chain focus is appropriate at current scale
+
+**Recommendation:**
+**DO NOT** adopt Trader Joe's modular staking for FED. Our current model is superior for these reasons:
+1. Lower friction (no staking required)
+2. Higher yield share (100% vs 13%)
+3. Faster distributions (2 min vs 24 hours)
+4. Simpler UX (hold = earn)
+
+**What to Consider:**
+1. Monitor surge pricing behavior during volatility
+2. Consider dynamic distribution frequency during high volume periods
+3. Study Liquidity Book bin optimization for Meteora LP positioning
+
+---
+
+### Action Items
+
+1. [x] Research Trader Joe sJOE model
+2. [x] Document Liquidity Book mechanics
+3. [ ] Analyze FED's volatility-based fee generation patterns
+4. [ ] Consider dynamic distribution frequency proposal (PROPOSALS.md)
+5. [ ] Monitor Meteora bin utilization during pumps
+
+---
+
+*Sources:*
+- [CoinBureau: LFJ Review 2025](https://coinbureau.com/review/trader-joe/)
+- [JOE Tokenomics Revamp](https://joecontent.substack.com/p/joe-tokenomics-revamp)
+- [Avalanche Medium: Trader Joe Liquidity Book](https://medium.com/avalancheavax/trader-joe-presents-liquidity-book-a-new-amm-design-for-defi-39abf87e0d7f)
+- [Altcoin Buzz: Trader Joe sJOE Staking](https://www.altcoinbuzz.io/defi/staking/trader-joe-how-to-earn-usdc-staking-sjoe/)
+- [DefiLlama: Joe DEX](https://defillama.com/protocol/joe-dex)
+- [CoinMarketCap: JOE](https://coinmarketcap.com/currencies/joe/)
+- [Yahoo Finance: Trader Joe Modular Staking](https://finance.yahoo.com/news/trader-joes-native-coin-climbs-105933051.html)
+
+---
+
+*Research completed: 2026-01-22 15:00 UTC*
+
