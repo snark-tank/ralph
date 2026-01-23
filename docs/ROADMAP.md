@@ -10,8 +10,8 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $59,234+ Distributed (557 runs)
-**Status:** IN PROGRESS (59.2%)
+**Current:** $59,571+ Distributed (572 runs)
+**Status:** IN PROGRESS (59.6%)
 
 ### Active Systems
 
@@ -49,15 +49,40 @@ Based on memecoin success research (BONK, PEPE, WIF), FED's gap is **lack of gro
 - After 1 year of negotiations, refunds issued April 2025
 - **FED approach:** Activate INTERNAL growth loops (referrals, quests) - no external dependency
 
-**Referral Anti-Abuse CRITICAL (Updated Jan 22, 2026 Research):**
-- Lido discontinued referrals due to 60% abuse rate (self-referral cycling)
-- Linea airdrop: 40% of addresses removed as sybils (1.3M → 780K)
-- Optimism: Thousands of coordinated wallets farmed airdrop
-- One 2024 airdrop: 70% claimed by fake accounts
-- **MUST activate sybil detection BEFORE referrals**
-- Require: 24h minimum hold + 1 distribution received before referral counts
-- Dual-sided rewards are 3.2x more effective than single-sided (Blur validation)
-- Holdings-based referral weighting (Blur's volume weighting concept adapted)
+**Referral Anti-Abuse CRITICAL (Updated Jan 23, 2026 Deep Dive):**
+
+**Industry Sybil Attack Rates (Benchmark):**
+| Project | Abuse Rate | Outcome |
+|---------|------------|---------|
+| Lido Referral | 60% | Program discontinued |
+| Linea Airdrop | 40% filtered | 1.3M → 780K eligible |
+| LayerZero | ~10M ZRO reclaimed | Self-report + bounty hunt |
+| Generic Airdrop (2024) | 70% | Fake accounts dominated |
+| Aptos | 40% | Sybils dumped post-airdrop |
+
+**Anti-Abuse Mechanisms for FED (Research-Based):**
+
+*Tier 1: Prerequisites (BLOCKING)*
+- 24h minimum hold before referral eligibility
+- 1 distribution received (proves genuine holder)
+- Sybil score check via sybil-detector.ts
+- Minimum $FED balance threshold
+
+*Tier 2: Reward Structure (LIMITING)*
+- Dual-sided rewards (3.2x more effective per Blur data)
+- Holdings-weighted referral caps (Citizen: 3, Governor: 10)
+- Decay over volume (100% → 80% → 60% for subsequent referrals)
+- 7-day referee hold requirement for referral to count
+
+*Tier 3: Detection (MONITORING)*
+- Funding source clustering (Wormhole/Allium methodology)
+- Transaction timing analysis (Trusta Phase 2)
+- Circular fund flow detection (self-referral blocking)
+
+**Launch Plan:**
+1. Week 1-2: Conservative launch with tight caps
+2. Week 2-4: Monitor abuse patterns, track retention
+3. After 30 days: Expand if abuse <20%, tighten if >40%
 
 **Activation Recommendation (Updated Jan 22, 2026 - Viral Growth Research):**
 1. **Sybil detection first** - Prerequisite for safe referral launch (Linea removed 40% of addresses as sybils)
