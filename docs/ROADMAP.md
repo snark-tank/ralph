@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $62,450+ Distributed (699 runs)
+**Current:** $62,500+ Distributed (702 runs)
 **Status:** IN PROGRESS (62.5%)
 
 ### Active Systems
@@ -216,7 +216,7 @@ FED Current:
 - 98% of Pump.fun tokens die within 3 months; <1% graduation rate
 - Memecoin market cap crashed 61%: $93.09B (Jan 2025) → $36.5B (Jan 2026)
 - Solana ecosystem: -47% YTD ($330B → $173B)
-- FED: **699 distributions**, months of operation = **TOP 1% SURVIVOR**
+- FED: **702 distributions**, months of operation = **TOP 1% SURVIVOR**
 
 **What Separates Survivors (5-Factor Framework):**
 1. ✅ **Real Utility** - FED: 100% fee distribution (exceeds all memecoins)
@@ -948,6 +948,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Meteora DAMM v2 & DEX fee landscape | Fee sustainability, competitive position, platform health | **COMPLETE** - Jan 23 research (Meteora healthy, $1.1B TVL, 15%+ DEX share) |
 | WIF (dogwifhat) case study | Sphere failure, validator pivot, community growth lessons | **COMPLETE** - Jan 23 research (VALIDATES internal campaigns over external dependencies) |
 | Memecoin survival analysis | 99% failure rate, what separates survivors, Pump.fun statistics | **COMPLETE** - Jan 23 research (FED in TOP 1% already) |
+| Distribution timing during volatility | Priority fees, gas optimization, holder psychology, pump/dump timing | **COMPLETE** - Jan 23 research (VALIDATES current approach - consistency > timing) |
 
 ### Research Findings Summary (Jan 22, 2026)
 
@@ -1218,6 +1219,16 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - **MAJOR VALIDATION:** Industry trend toward continuous rewards validates FED's 2-minute model
 - **Recommendation:** FED represents post-airdrop evolution - maintain continuous distribution as core differentiator
 - See TOKENOMICS-RESEARCH.md for full Hyperliquid/PENGU analysis
+
+**Distribution Timing During Volatility (Jan 23, 2026):**
+- Researched priority fee dynamics, gas optimization strategies, holder psychology during pumps/dumps
+- **Key Finding:** Consistency > timing optimization. FED should distribute during ALL market conditions
+- During pumps: Rewards reinforce positive behavior, holders associate distributions with gains
+- During dumps: USD1 payments counter panic selling ("at least I'm still earning")
+- Solana fees remain sub-$0.01 even during high congestion (local fee markets)
+- **Helius Priority Fee API:** Potential integration for smart-timing.ts dynamic fee adjustment
+- **Conclusion:** Current 2-minute frequency is CORRECT. No changes to timing strategy recommended
+- See TOKENOMICS-RESEARCH.md for full distribution timing analysis
 
 ---
 
