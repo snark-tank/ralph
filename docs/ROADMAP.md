@@ -445,13 +445,36 @@ FED's competitive position vs leading real yield protocols:
 - Maintain Solana as primary
 - Consider: Base, Arbitrum (where DeFi lives)
 
-#### 5. Scaling Optimizations (Research Complete - Jan 22, 2026)
+#### 5. Scaling Optimizations (Research Complete - Jan 23, 2026)
 - **Target:** Support 5,000-10,000 holders efficiently
 - **Batch optimization:** Maximize transfers per tx (currently ~5, target ~8-10)
 - **ATA caching:** Pre-create token accounts for known holders
 - **Priority fee tuning:** Dynamic based on network state
 - **Smart batching:** Already built (smart-timing.ts), needs activation
 - **Note:** Current push model works at this scale with optimizations
+
+**Batching Deep Dive (Jan 23, 2026 Research):**
+
+| Holder Count | Current (5/tx) | Optimized (10/tx) | P-Token (50/tx) | ZK Compressed |
+|--------------|----------------|-------------------|-----------------|---------------|
+| 1,800 | 360 txs, ~20s | 180 txs, ~10s | 36 txs, ~2s | ~0.01 SOL flat |
+| 5,000 | 1,000 txs, ~60s | 500 txs, ~30s | 100 txs, ~6s | ~0.01 SOL flat |
+| 10,000 | 2,000 txs, ~120s | 1,000 txs, ~60s | 200 txs, ~12s | ~0.01 SOL flat |
+
+**Scaling Roadmap:**
+1. **QE3 (Now):** Implement 10 transfers/tx optimization
+2. **QE4 (H2 2026):** Migrate to P-Token (98% CU reduction, 50+ transfers/tx)
+3. **QE5 (10K+ holders):** ZK Compression migration if cost-effective
+
+**P-Token (SIMD-0266) Opportunity:**
+- Expected H2 2026 (audits in progress by Zellic)
+- 98% compute unit reduction
+- New `batch` instruction for multiple transfers in single CPI
+- Full backward compatibility (drop-in replacement)
+- Could enable 50,000 holders at current gas costs
+
+**2-Minute Frequency Protection:**
+All scaling paths maintain the 2-minute distribution frequency - this is our PRIMARY competitive moat and MUST be preserved regardless of holder count
 
 #### 6. Buyback Strategy Optimization (Research Updated - Jan 22, 2026 19:30 UTC)
 - **Current:** Discretionary buybacks during price dips (Ralph decides)
@@ -782,6 +805,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Cross-chain | Bridge security analysis | NOT STARTED |
 | Multiplier changes | Model holder behavior impact | **COMPLETE** - Jan 22 Camelot research |
 | Scaling (10K+ holders) | Gas optimization, batching strategies | **COMPLETE** - Jan 22 research |
+| Distribution batching optimization | P-Token, ZK Compression, tx batching | **COMPLETE** - Jan 23 research (P-Token H2 2026, ZK Compression ready) |
 | ve(3,3) vote-directed emissions | Solidly/Velodrome analysis | **COMPLETE** - Jan 22 research (REJECTED) |
 | Meta-governance / bribe markets | Convex Finance deep dive | **COMPLETE** - Jan 22 research (REJECTED) |
 | Seigniorage / algorithmic peg | Tomb Finance postmortem | **COMPLETE** - Jan 22 research (REJECTED) |
