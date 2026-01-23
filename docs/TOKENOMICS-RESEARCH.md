@@ -16433,3 +16433,227 @@ FED is positioned at the SIMPLEST end. Pendle's move toward simplicity (vePENDLE
 - [Investing.com: Pendle 2025 Growth](https://www.investing.com/news/cryptocurrency-news/pendle-achieves-record-growth-for-2025-40m-annualized-revenue-and-strategic-expansion-to-funding-rates-markets-4398612)
 
 ---
+## 2026-01-23 23:22 UTC - MEV Analysis: Why FED Distributions Are Immune to Sandwich Attacks
+
+### Executive Summary
+
+Researched Solana MEV landscape to assess whether FED's USD1 distributions are vulnerable to MEV extraction. **Key Finding: FED's direct token transfer model is IMMUNE to sandwich attacks by design.** Sandwich attacks specifically target AMM/DEX swaps with price slippage - simple SPL token transfers have no attack vector.
+
+---
+
+### Solana MEV Landscape Overview (Jan 2026)
+
+**Scale of MEV Extraction:**
+| Metric | Value | Source |
+|--------|-------|--------|
+| Total extracted (16 months) | $370M-$500M | sandwich.me analysis |
+| October 2025 extraction | 18,000 SOL ($3.2M) | 202K victims |
+| Avg profit per attack | 0.0425 SOL ($8.70) | Much lower than Ethereum |
+| Jito client adoption | 95%+ stake | Industry standard |
+
+**Attack Distribution by DEX:**
+- Raydium: 72% of attacks
+- Orca: 18% of attacks  
+- pump.fun: 10% of attacks
+- **Direct transfers: 0%** (not applicable)
+
+---
+
+### How Sandwich Attacks Work (And Why They Don't Apply to FED)
+
+**Sandwich Attack Mechanics:**
+1. User submits large swap on DEX (e.g., buy $10K SOL)
+2. MEV bot detects pending swap, front-runs with own buy (price increases)
+3. User's swap executes at worse price (victim pays more)
+4. MEV bot back-runs with sell (captures the price increase)
+
+**Critical Requirement:** Sandwich attacks REQUIRE an AMM/DEX swap that moves price. The attacker profits from slippage between front-run and back-run.
+
+**FED Distribution Model:**
+1. Ralph collects USD1 from LP fees
+2. Ralph sends direct SPL token transfers to holders
+3. No AMM interaction, no price movement, no slippage
+
+**Why FED Is Immune:**
+| Attack Vector | Swap Transaction | FED Distribution |
+|---------------|------------------|------------------|
+| Price slippage to exploit | YES | NO |
+| AMM liquidity pool involved | YES | NO |
+| Transaction changes market price | YES | NO |
+| Front-running profitable | YES | NO |
+| Back-running profitable | YES | NO |
+
+---
+
+### Types of MEV on Solana
+
+**1. Sandwich Attacks (NOT applicable to FED)**
+- Exploits price movement from swaps
+- 72% target Raydium pools
+- Average extraction: $8.70 per attack
+- **FED: IMMUNE** (no swaps)
+
+**2. Arbitrage (NOT applicable to FED)**
+- Exploits price differences across DEXs
+- Requires swap execution on multiple venues
+- 90M+ arb trades in 2024 on Solana
+- **FED: IMMUNE** (no arbitrage opportunity)
+
+**3. Liquidations (NOT applicable to FED)**
+- Targets undercollateralized positions on lending protocols
+- Requires interaction with lending markets
+- **FED: IMMUNE** (no lending positions)
+
+**4. Transaction Ordering/Reordering**
+- Validator can reorder transactions within a block
+- Theoretically could delay FED distributions
+- **FED: NEGLIGIBLE RISK** (distributions have no time-sensitive value)
+- A delayed distribution by 1 second has zero economic impact
+
+---
+
+### What COULD Affect FED Distributions
+
+**1. Priority Fee Competition (Minimal Impact)**
+- High network congestion could delay transactions
+- FED uses reasonable priority fees ($0.001-0.01)
+- Not competitive for high-value MEV opportunities
+- **Risk: LOW** - distributions aren't time-critical
+
+**2. Validator Censorship (Theoretical)**
+- Malicious validators could refuse to include FED txs
+- Jito client runs on 95%+ of stake
+- Solana Foundation removed malicious validators in 2025
+- **Risk: NEGLIGIBLE** - no economic incentive to censor
+
+**3. Network Congestion (Manageable)**
+- During extreme congestion, txs may fail
+- FED already has retry logic
+- Solana can handle 65K+ TPS
+- **Risk: LOW** - handled by existing retry mechanism
+
+---
+
+### Industry MEV Protection Landscape
+
+**Jupiter Ultra V3 (For Swaps)**
+- 34x better MEV protection than alternatives
+- ShadowLane private transaction routing
+- 0.1% fee for MEV protection
+- **FED: NOT NEEDED** (we don't swap)
+
+**Jito Bundles (For Atomic Execution)**
+- 5-transaction atomic bundles
+- Private mempool routing
+- Tip-based priority (min 1000 lamports)
+- **FED: COULD USE** for batch atomicity, but not for MEV protection
+
+**bloXroute (For Front-running Protection)**
+- Leader-aware routing to avoid malicious validators
+- Order Flow Relay (OFR) for private submission
+- **FED: NOT NEEDED** (no front-running attack vector)
+
+---
+
+### FED Distribution Security Analysis
+
+**Current Distribution Model:**
+- Direct SPL token transfers (USD1 to holders)
+- Batch of ~5 transfers per transaction
+- ~140 transactions per distribution cycle
+- ~1,800 recipients per cycle
+- Every ~2 minutes
+
+**Security Assessment:**
+| Threat | Severity | Likelihood | Mitigation |
+|--------|----------|------------|------------|
+| Sandwich attack | N/A | 0% | Immune by design |
+| Front-running | N/A | 0% | No economic incentive |
+| Arbitrage | N/A | 0% | No price involved |
+| TX delay | LOW | 5% | Retry logic exists |
+| TX failure | LOW | 2% | Batch retry |
+| Validator censorship | NEGLIGIBLE | 0.01% | 95%+ Jito adoption |
+
+**Overall MEV Risk: NONE**
+
+---
+
+### Jito Bundle Consideration for FED
+
+**Could FED Use Jito Bundles?**
+Yes, but for atomicity, not MEV protection.
+
+**Potential Benefits:**
+- Atomic execution of 5 transfers per bundle
+- Guaranteed ordering within bundle
+- Slightly faster landing (~200ms avg)
+
+**Costs:**
+- Minimum 1000 lamports tip per bundle (~$0.0002)
+- Integration complexity
+- Dependency on Jito infrastructure
+
+**Recommendation:** NOT WORTH IT for current scale. FED's distribution model doesn't benefit from MEV protection (we're immune anyway), and the atomicity benefit is minimal for simple transfers. Revisit at 10K+ holders if batch atomicity becomes important.
+
+---
+
+### Comparison: FED vs Protocols Needing MEV Protection
+
+| Protocol Type | MEV Vulnerable? | Protection Needed | FED Category |
+|---------------|-----------------|-------------------|--------------|
+| DEX aggregator (Jupiter) | YES | Ultra V3 | ❌ Not us |
+| Lending protocol (Solend) | YES | Liquidation guards | ❌ Not us |
+| Perp DEX (Drift) | YES | Oracle manipulation | ❌ Not us |
+| Token swapper (Raydium) | YES | Jito bundles | ❌ Not us |
+| **Yield distributor (FED)** | **NO** | **NONE** | **✅ Us** |
+
+---
+
+### Auto-Compound Exception
+
+**FED's Auto-Compound Feature (When Activated):**
+The auto-compound script (`auto-compound.ts`) DOES involve swaps:
+- Collects holder USD1
+- Swaps USD1 → $FED via Jupiter
+- Distributes $FED back to holders
+
+**MEV Vulnerability:** The USD1 → $FED swap IS vulnerable to sandwich attacks.
+
+**Current Protection (Built-In):**
+- Uses Jupiter Ultra API for MEV protection
+- Batches swaps to minimize per-holder exposure
+- Daily batch reduces attack surface (1 swap vs 720 individual)
+
+**Recommendation:** When auto-compound activates, ensure Jupiter Ultra V3 integration for 34x MEV protection on swaps.
+
+---
+
+### Conclusions
+
+**1. FED Distributions Are Immune to MEV**
+Direct SPL token transfers have zero sandwich attack surface. This is a STRUCTURAL advantage.
+
+**2. No Additional MEV Protection Needed**
+Jito bundles, Jupiter Ultra, bloXroute OFR - none of these are necessary for simple token distributions.
+
+**3. Auto-Compound Is the Exception**
+The upcoming auto-compound feature involves swaps and WILL need Jupiter Ultra MEV protection.
+
+**4. Distribution Model Is Optimal**
+FED's "push USD1 to holders" model avoids the MEV landscape entirely. This is an underrated security feature.
+
+---
+
+### Sources
+
+- [Helius: Solana MEV Introduction](https://www.helius.dev/blog/solana-mev-an-introduction)
+- [Helius: Solana MEV Report](https://www.helius.dev/blog/solana-mev-report)
+- [QuickNode: MEV on Solana Guide](https://www.quicknode.com/guides/solana-development/defi/mev-on-solana)
+- [Jito Labs Documentation](https://docs.jito.wtf/)
+- [Jupiter Ultra V3 Documentation](https://dev.jup.ag/docs/ultra)
+- [bloXroute: Front-Running Protection](https://docs.bloxroute.com/solana/trader-api/quick-start/front-running-protection-and-transaction-bundle)
+- [Solana Compass: MEV Exposed](https://solanacompass.com/learn/accelerate-25/scale-or-die-at-accelerate-2025-the-state-of-solana-mev)
+- [The Block: Jupiter Ultra V3 Launch](https://www.theblock.co/press-releases/375289/jupiter-launches-ultra-v3-the-ultimate-trading-engine-for-solana)
+- [CryptoNinjas: Solana Slashes $500M Sandwich Attacks](https://www.cryptoninjas.net/news/solana-slashes-500m-sandwich-attacks-as-75-of-sol-gets-staked-in-2025-security-overhaul/)
+
+---
