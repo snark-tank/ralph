@@ -2,7 +2,7 @@
 
 *The Federal Reserve's Vision for Autonomous Yield Distribution*
 
-**Last Updated:** 2026-01-23 22:15 UTC
+**Last Updated:** 2026-01-23 22:30 UTC
 **Maintained By:** Ralph Economist
 
 ---
@@ -102,6 +102,24 @@ Based on memecoin success research (BONK, PEPE, WIF), FED's gap is **lack of gro
 1. Week 1-2: Conservative launch with tight caps
 2. Week 2-4: Monitor abuse patterns, track retention
 3. After 30 days: Expand if abuse <20%, tighten if >40%
+
+**Recommended Reward Structure (Jan 23, 2026 Research - Industry Benchmark):**
+
+| Participant | Reward | Rationale |
+|-------------|--------|-----------|
+| **Referrer** | +10% bonus on next distribution per active referee | Dual-sided programs 3.2x more effective |
+| **Referee** | +10% bonus on first 3 distributions | Welcome incentive, time-limited |
+| **Ongoing** | Referrer gets 2% of referee's distribution bonus (indefinitely) | Bybit lifetime model drives strongest loyalty |
+
+**FED Competitive Advantage vs Industry:**
+| Feature | Industry Standard | FED Approach |
+|---------|-------------------|--------------|
+| Referral Fee | 0.5-1% extra fee charged | **NO EXTRA FEE** (from distribution pool) |
+| Duration | 3-90 days typical | **INDEFINITE** (ongoing bonus) |
+| Complexity | Multi-tier volume thresholds | **SIMPLE** (Give 10%, Get 10%) |
+| Claiming | Manual claim required | **AUTOMATIC** (added to distribution) |
+
+**Case Study Validation:** Vertex Protocol blocked $200K+ in sybil attacks using automated Fuul SDK detection. FED's sybil-detector.ts + prerequisites should achieve similar protection.
 
 **Activation Recommendation (Updated Jan 22, 2026 - Viral Growth Research):**
 1. **Sybil detection first** - Prerequisite for safe referral launch (Linea removed 40% of addresses as sybils)
