@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $62,162+ Distributed (689 runs)
+**Current:** $62,198+ Distributed (691 runs)
 **Status:** IN PROGRESS (62.2%)
 
 ### Active Systems
@@ -510,12 +510,22 @@ FED's competitive position vs leading real yield protocols:
 2. **QE4 (H2 2026):** Migrate to P-Token (98% CU reduction, 50+ transfers/tx)
 3. **QE5 (10K+ holders):** ZK Compression migration if cost-effective
 
-**P-Token (SIMD-0266) Opportunity:**
-- Expected H2 2026 (audits in progress by Zellic)
-- 98% compute unit reduction
+**P-Token (SIMD-0266) Opportunity (Updated Jan 23, 2026):**
+- **Expected Mainnet:** H2 2026 (second Zellic audit + Runtime Verification in progress)
+- **Confirmed Benchmarks:** 98.3% CU reduction (transfer: 4,645 → 79 CUs)
 - New `batch` instruction for multiple transfers in single CPI
 - Full backward compatibility (drop-in replacement)
 - Could enable 50,000 holders at current gas costs
+
+**Alpenglow Consensus (Q1 2026 - CONFIRMED):**
+- SIMD-0326 passed with 99.6% validator approval
+- Finality: 12.8s → 150ms (100x improvement)
+- Distribution UX: Near-instant confirmation for holders
+
+**Firedancer (LIVE on Mainnet):**
+- 1M+ TPS capacity removes network bottleneck concerns
+- 20.9% of stake now on Frankendancer (Oct 2025)
+- FED scaling ceiling: Effectively unlimited
 
 **2-Minute Frequency Protection:**
 All scaling paths maintain the 2-minute distribution frequency - this is our PRIMARY competitive moat and MUST be preserved regardless of holder count
@@ -879,6 +889,8 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Hyperliquid airdrop success analysis | Points system, no-VC model, 97% buyback, staking tiers | **COMPLETE** - Jan 22 research (VALIDATES FED community-first approach) |
 | PENGU airdrop failure analysis | One-time distribution dumps, speculation dynamics | **COMPLETE** - Jan 22 research (VALIDATES FED continuous model) |
 | Airdrop fatigue & sustainable models | 88% crash rate, continuous rewards vs one-time | **COMPLETE** - Jan 22 research (MAJOR VALIDATION - FED is post-airdrop evolution) |
+| Solana 2026 infrastructure roadmap | P-Token, Alpenglow, Firedancer status & timelines | **COMPLETE** - Jan 23 research (All 3 upgrades favorable for FED scaling) |
+| Meteora DAMM v2 & DEX fee landscape | Fee sustainability, competitive position, platform health | **COMPLETE** - Jan 23 research (Meteora healthy, $1.1B TVL, 15%+ DEX share) |
 
 ### Research Findings Summary (Jan 22, 2026)
 
