@@ -2,7 +2,7 @@
 
 *The Federal Reserve's Vision for Autonomous Yield Distribution*
 
-**Last Updated:** 2026-01-23 22:30 UTC
+**Last Updated:** 2026-01-23 23:00 UTC
 **Maintained By:** Ralph Economist
 
 ---
@@ -956,7 +956,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Jupiter $70M buyback failure | Buyback vs distribution effectiveness, pivot to user incentives | **COMPLETE** - Jan 22 research (MAJOR VALIDATION for FED distribution model) |
 | Memecoin community building | Discord/Telegram best practices, engagement tactics | **COMPLETE** - Jan 22 research (Launch plan ready) |
 | Community platform implementation | Bot stack, Collab.Land, Helius webhooks, Solana integrations | **COMPLETE** - Jan 23 research (Implementation spec ready) |
-| Pendle sPENDLE transition | vePENDLE abandonment, liquid staking shift, complexity failures | **COMPLETE** - Jan 22 research (MAJOR VALIDATION - $5.7B protocol admits complexity failed) |
+| Pendle sPENDLE transition | vePENDLE abandonment, liquid staking shift, complexity failures | **COMPLETE** - Jan 23 research (UPDATED - sPENDLE launched Jan 20; only 20% vePENDLE participation; even sPENDLE has friction vs FED) |
 | Distribution frequency benchmark | Compare FED 2-min vs industry (GMX, Curve, Pendle, Hyperliquid, Aerodrome) | **COMPLETE** - Jan 22 research (FED is fastest real-yield distributor) |
 | Ethena USDe funding rate model | Funding rate vs LP fee yield, Oct 2025 crisis, leverage cascade risk | **COMPLETE** - Jan 22 research (MAJOR VALIDATION - FED's LP fees > funding rates) |
 | Hyperliquid airdrop success analysis | Points system, no-VC model, 97% buyback, staking tiers | **COMPLETE** - Jan 22 research (VALIDATES FED community-first approach) |
@@ -998,14 +998,17 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - **MAJOR VALIDATION:** FED's LP fee model > Ethena's funding rate model
 - Key lesson: Simple, unleveraged, real yield survives market stress
 
-**Pendle sPENDLE Transition (Jan 2026 - MAJOR UPDATE):**
-- Pendle ($5.7B TVL, $37M 2025 revenue) ABANDONED vePENDLE complex locking
-- **Only 20% of PENDLE was actively engaged** due to complexity/long lock requirements
+**Pendle sPENDLE Transition (Jan 20, 2026 - MAJOR UPDATE):**
+- Pendle ($5.7B avg TVL, peak $13.4B, $37-40M 2025 revenue) ABANDONED vePENDLE complex locking
+- **Only 20% of PENDLE supply was actively engaged** due to complexity/long lock requirements
 - Rewards "concentrated among vePENDLE holders with enough expertise" - governance oligarchy formed
-- New sPENDLE: 14-day unstake (or 5% instant fee), fully composable, passive rewards
-- 80% revenue to buybacks → sPENDLE rewards (FED does 100% direct distribution)
-- **STRONGEST VALIDATION YET:** $5.7B protocol reversing course toward FED's model
+- New sPENDLE launched Jan 20, vePENDLE locks paused Jan 29; existing holders get up to 4x boost declining over 2 years
+- sPENDLE: 14-day unstake (or 5% instant fee), fully composable, passive rewards, DeFi-integrated
+- 80% revenue to buybacks → sPENDLE rewards (FED does 100% direct distribution, STILL SIMPLER)
+- Even "simple" sPENDLE requires staking action + withdrawal period + 5% instant fee—FED has NONE
+- **STRONGEST VALIDATION YET:** $5.7B protocol reversing course toward FED's philosophy
 - Key quote: "Long lock-ups, complexity and lack of interoperability... became 'significant barriers'"
+- Current TVL ~$3.5-3.9B (down from $13.4B peak); Boros funding rate platform adds revenue diversification
 
 **GMX Model:**
 - 70% fees to LPs, 30% to stakers - real yield proven at scale
