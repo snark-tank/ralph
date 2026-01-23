@@ -221,14 +221,48 @@ FED Current:
 
 ---
 
-### Community Platform Launch Plan (Research Complete: Jan 22, 2026)
+### Community Platform Launch Plan (Research Complete: Jan 22, 2026; Implementation Update: Jan 23, 2026)
+
+**Essential Bot Stack (Research Update: Jan 23, 2026):**
+
+*Discord Bots:*
+| Bot | Purpose | Priority | Notes |
+|-----|---------|----------|-------|
+| **Collab.Land** | Token-gated roles (verify $FED holders) | CRITICAL | Maps to FED tier system |
+| **MEE6 or Dyno** | Moderation, auto-responses, welcome | CRITICAL | Free tier sufficient |
+| **Helius Discord Webhook** | Distribution notifications | HIGH | Zero-code, auto-posts distributions |
+| **Statbot** | Server analytics | MEDIUM | Track engagement metrics |
+| **Carl-bot** | Reaction roles, audit logs | MEDIUM | Free |
+
+*Telegram Bots:*
+| Bot | Purpose | Priority |
+|-----|---------|----------|
+| **Combot** | Moderation, anti-spam, analytics | CRITICAL |
+| **Shieldy** | CAPTCHA verification | CRITICAL |
+| **Collab.Land (Telefrens)** | Token verification | HIGH |
+
+**Collab.Land Token-Gating (Implementation Spec):**
+| Discord Role | $FED Required | Auto-Assignment |
+|--------------|---------------|-----------------|
+| Fed Chairman | 1M+ | Via Collab.Land TGR |
+| Fed Governor | 100K+ | Via Collab.Land TGR |
+| Regional Director | 10K+ | Via Collab.Land TGR |
+| Fed Citizen | 1K+ | Via Collab.Land TGR |
+
+**Distribution Alert System (NEW - Jan 23, 2026):**
+- **Technology:** Helius Discord Webhooks (no-code solution)
+- **Channel:** #distribution-feed (read-only)
+- **Trigger:** Every distribution batch from Ralph's wallet
+- **Impact:** Holders SEE distributions in real-time; reinforces 2-minute frequency moat
+- **Source:** [Helius Webhooks Documentation](https://www.helius.dev/docs/webhooks)
 
 **Phase 1: Soft Launch (Week 1)**
 | Task | Platform | Details |
 |------|----------|---------|
 | Create Discord server | Discord | Minimal 5-channel structure (see below) |
 | Create Telegram group | Telegram | Main group + announcement channel |
-| Configure bots | Both | Captcha.bot, anti-spam, Combot analytics |
+| Configure bots | Both | Collab.Land, MEE6/Combot, Shieldy |
+| Set up Helius webhook | Discord | Distribution notifications |
 | Invite Twitter followers | Both | Controlled initial growth |
 | Test & refine | Both | No public announcement yet |
 
@@ -254,9 +288,10 @@ FED Current:
 | Channel | Purpose | Permissions |
 |---------|---------|-------------|
 | #welcome | Rules, onboarding | Read-only |
-| #announcements | Distributions, milestones | Read-only |
-| #general-chat | Casual conversation | Public |
-| #price-talk | Trading discussion | Public |
+| #announcements | Milestones, news | Read-only |
+| #distribution-feed | Helius webhook posts | Read-only (BOT-FED) |
+| #general-chat | Casual conversation | Verified holders |
+| #price-talk | Trading discussion | Verified holders |
 | #support | Questions, help | Public |
 
 **Discord Roles (Max 8):**
@@ -313,7 +348,8 @@ FED Current:
 **Updated Strategic Priority Matrix (QE3):**
 | Priority | Action | Effort | Impact | Status |
 |----------|--------|--------|--------|--------|
-| **1** | Create Discord/Telegram | LOW | HIGH | **RESEARCH COMPLETE** - Ready to execute |
+| **1** | Create Discord/Telegram | LOW | HIGH | **IMPLEMENTATION READY** - Bot stack specified (Jan 23) |
+| **1a** | Set up Helius distribution webhook | LOW | HIGH | **NEW** - Zero-code, unique FED feature |
 | **2** | Activate referral bonuses | LOW | HIGH | Script ready |
 | **3** | Activate quest system | LOW | HIGH | Script ready |
 | **4** | XP leaderboard on website | MEDIUM | HIGH | Website change |
@@ -828,6 +864,7 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 | Stablecoin yield distribution models | Rebase vs push vs appreciation, Ethena/OUSD/Sky | **COMPLETE** - Jan 22 research (VALIDATES FED push model) |
 | Jupiter $70M buyback failure | Buyback vs distribution effectiveness, pivot to user incentives | **COMPLETE** - Jan 22 research (MAJOR VALIDATION for FED distribution model) |
 | Memecoin community building | Discord/Telegram best practices, engagement tactics | **COMPLETE** - Jan 22 research (Launch plan ready) |
+| Community platform implementation | Bot stack, Collab.Land, Helius webhooks, Solana integrations | **COMPLETE** - Jan 23 research (Implementation spec ready) |
 | Pendle sPENDLE transition | vePENDLE abandonment, liquid staking shift, complexity failures | **COMPLETE** - Jan 22 research (MAJOR VALIDATION - $5.7B protocol admits complexity failed) |
 | Distribution frequency benchmark | Compare FED 2-min vs industry (GMX, Curve, Pendle, Hyperliquid, Aerodrome) | **COMPLETE** - Jan 22 research (FED is fastest real-yield distributor) |
 | Ethena USDe funding rate model | Funding rate vs LP fee yield, Oct 2025 crisis, leverage cascade risk | **COMPLETE** - Jan 22 research (MAJOR VALIDATION - FED's LP fees > funding rates) |
