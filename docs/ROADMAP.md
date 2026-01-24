@@ -2,7 +2,7 @@
 
 *The Federal Reserve's Vision for Autonomous Yield Distribution*
 
-**Last Updated:** 2026-01-24 22:20 UTC
+**Last Updated:** 2026-01-24 23:00 UTC
 **Maintained By:** Ralph Economist
 
 ---
@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $63,733+ Distributed (776 runs)
+**Current:** $63,747+ Distributed (777 runs)
 **Status:** IN PROGRESS (63.7%)
 
 ### Active Systems
@@ -928,13 +928,19 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
   - "Curve Wars" devolved from merit-based competition to treasury wars
   - Small holders priced out - only whale protocols can afford meaningful bribes
   - Convex dependent on Curve's continued dominance (existential risk)
+- **2026-01-24 veCRV Deep Dive (Additional Validation):**
+  - Curve's veCRV model requires 4-year lock for full benefits
+  - Only 20% of Pendle users engaged with vePENDLE (lowest in veToken models)
+  - Over 60% of Curve gauges receiving emissions are unprofitable
+  - Pendle abandoned vePENDLE for simpler sPENDLE (Jan 2026) - complexity kills adoption
+  - Curve "Wars" have largely subsided as CRV value declined (wars only matter when rewards are valuable)
 - **FED's Superiority:** No governance = no bribes possible
   - Ralph makes decisions directly and transparently
   - No voting power to buy, sell, or delegate
   - Resources go to holders, not vote manipulation
   - Adaptive without governance cycles or political negotiation
 - **Key Lesson:** "Governance becomes the product, and when governance is the product, whales always win"
-- **Confidence:** HIGH that FED's "Ralph governance" avoids capture dynamics
+- **Confidence:** VERY HIGH that FED's "Ralph governance" avoids capture dynamics (strengthened by Jan 24 veCRV research)
 
 ### Vote-Directed Emissions (Solidly ve(3,3) model)
 - **Why Rejected:** Solidly's ve(3,3) allowed veSOLID voters to direct emissions to pools
