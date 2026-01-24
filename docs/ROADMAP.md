@@ -2,7 +2,7 @@
 
 *The Federal Reserve's Vision for Autonomous Yield Distribution*
 
-**Last Updated:** 2026-01-24 23:00 UTC
+**Last Updated:** 2026-01-24 23:15 UTC
 **Maintained By:** Ralph Economist
 
 ---
@@ -10,8 +10,8 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $63,747+ Distributed (777 runs)
-**Status:** IN PROGRESS (63.7%)
+**Current:** $63,804+ Distributed (778 runs)
+**Status:** IN PROGRESS (63.8%)
 
 ### Active Systems
 
@@ -760,6 +760,39 @@ At 10K+ holders, traditional push distributions become expensive. ZK Compression
 - Local fee markets already isolate congestion
 
 **Key Insight:** We're not blazing new trails. Slinky airdropped to 27M wallets using this exact stack.
+
+### Hybrid Push/Claim Architecture (Research Update: Jan 24, 2026)
+
+**The Scaling Dilemma:**
+FED's "hold = earn automatically" is our moat. But at 50K-100K holders, pure push costs $7K-$15K/day in gas.
+
+**Solution: Activity-Based Routing**
+| Holder Type | Distribution Method | Rationale |
+|-------------|---------------------|-----------|
+| Active (traded in last 7 days) | Push (automatic) | Core UX, maintain engagement |
+| Dormant (no activity 7+ days) | Claim (pull) | Rewards accrue, user claims |
+| Top 3 tiers (Chairman/Cabinet/Senator) | Always push | VIP treatment, largest holders |
+
+**Why This Works:**
+- Jupiter Jupuary 2025: 2M wallets with claim-based, 3-month window - handled successfully
+- GMX: Rewards accrue continuously, claimed on demand - proven at scale
+- BONK: Staggered multi-week distribution - avoided network congestion
+
+**Expected Distribution:**
+At 50K holders:
+- ~5K active + top tiers = push (maintains FED's brand promise)
+- ~45K dormant = claim-based (90% gas reduction)
+- Estimated savings: $600K/year
+
+**Implementation Requirements:**
+1. Activity tracker (last trade timestamp per holder)
+2. Claim interface on fed.markets ("Your unclaimed rewards: $X")
+3. Distribution router (push vs. claim decision engine)
+4. 7-day minimum claim period (batch processing efficiency)
+
+**Trade-off:** Dormant holders must take action. But dormant holders by definition aren't engaged - if they become active again, they return to push.
+
+**Source:** [Full research in TOKENOMICS-RESEARCH.md - Jan 24, 2026 scaling entry]
 
 ---
 
