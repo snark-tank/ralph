@@ -4,15 +4,15 @@
 
 ---
 
-## Current State (as of Jan 22, 2026)
+## Current State (as of Jan 24, 2026)
 
 ### Distribution Stats
-- **Total Distributed:** $59,129+ USD1
-- **Distribution Count:** 553 distributions
+- **Total Distributed:** $63,712+ USD1
+- **Distribution Count:** 774 distributions
 - **Holders:** ~1,800+
 - **Tier Multiplier Max:** 4.5x
 - **Distribution Frequency:** Every ~2 minutes
-- **Current Phase:** QE3 (targeting $100K)
+- **Current Phase:** QE3 (targeting $100K) - 63.7% complete
 
 ### Built Tokenomics Systems
 
@@ -16657,3 +16657,278 @@ FED's "push USD1 to holders" model avoids the MEV landscape entirely. This is an
 - [CryptoNinjas: Solana Slashes $500M Sandwich Attacks](https://www.cryptoninjas.net/news/solana-slashes-500m-sandwich-attacks-as-75-of-sol-gets-staked-in-2025-security-overhaul/)
 
 ---
+
+
+---
+## 2026-01-24: Camelot xGRAIL Plugin System Deep Dive
+
+### Research Focus
+Camelot DEX on Arbitrum runs one of the most sophisticated engagement systems in DeFi: the xGRAIL plugin architecture. How does it work, and what can FED learn from it?
+
+---
+
+### Camelot Protocol Overview
+
+**Protocol Stats (Jan 2026):**
+| Metric | Value |
+|--------|-------|
+| TVL | ~$100M+ |
+| 30-Day Volume | ~$2.04B |
+| 7-Day Volume | ~$513M |
+| Partners | 75+ protocols |
+| Token Supply | 100,000 GRAIL (hard cap, ~2027) |
+| Chain | Arbitrum One + 8 Orbit chains |
+
+**Real Yield Performance:**
+- xGRAIL stakers have "consistently earned 25% APY since launch"
+- Multiple revenue sources across Orbit chains (Sanko, WINR, XAI, ApeChain)
+- Weekly epoch-based distribution with continuous per-second rewards
+
+**Source:** [Camelot DefiLlama](https://defillama.com/protocol/camelot), [Camelot Docs](https://docs.camelot.exchange/)
+
+---
+
+### The Dual Token System: GRAIL vs xGRAIL
+
+| Token | GRAIL | xGRAIL |
+|-------|-------|--------|
+| **Type** | Tradeable | Non-transferable (escrowed) |
+| **Conversion** | Instant → xGRAIL (1:1) | 15-180 days → GRAIL (0.5:1 to 1:1) |
+| **Use Case** | Trading, LP | Plugins, governance, yield boost |
+| **Emissions** | 15% of farm rewards | 85% of farm rewards |
+
+**Key Insight:** xGRAIL's non-transferability creates "soft lock" without hard lock. Users can exit, but the friction (time + burn) encourages staying.
+
+---
+
+### xGRAIL Plugin Architecture
+
+**How It Works:**
+1. User converts GRAIL → xGRAIL (instant, 1:1)
+2. User allocates xGRAIL to one or more Plugins
+3. Plugin provides benefits (yield, boost, governance, etc.)
+4. Deallocating from Plugin costs 0.5% fee (burned)
+5. Converting back to GRAIL requires 15-180 day vesting
+
+**Native Plugins (Camelot-built):**
+| Plugin | Benefit | Status |
+|--------|---------|--------|
+| Real Yield Staking | 22.5% of V2 fees, 17% of V3 fees | Active |
+| Yield Booster | Up to 2.5x boost on farming emissions | Deprecated (V2 coming) |
+| Launchpad | Priority access to new launches | Active |
+| Accelerator | Incubator for Orbit ecosystem | Active |
+
+**Community Plugins (Third-party):**
+- Any protocol can build a plugin
+- Must comply with technical requirements
+- Users beware: malicious plugins can lock xGRAIL forever
+- Example: Campie (Magpie SubDAO) aggregates xGRAIL for LP boost
+
+**Source:** [xGRAIL Plugins Docs](https://docs.camelot.exchange/protocol/xgrail-plugins)
+
+---
+
+### Real Yield Staking Plugin Deep Dive
+
+**Fee Distribution Model:**
+- Camelot V2: 22.5% of swap fees → xGRAIL stakers
+- Camelot V3: 17% of swap fees → xGRAIL stakers
+- Weekly epoch logic determines distribution pool
+- Continuous per-second distribution (no waiting for epoch end)
+
+**Calculation:**
+```
+User Reward = (User xGRAIL Allocated / Total xGRAIL Allocated) × Epoch Rewards
+```
+
+**Example:**
+- 200 xGRAIL allocated out of 10,000 total = 2% share
+- Epoch distributes $1,000 in fees
+- User receives $20 for that epoch
+
+**Key Difference from FED:**
+| Aspect | Camelot | FED |
+|--------|---------|-----|
+| Fee to stakers | 17-22.5% of fees | 100% of fees |
+| Requires action | Must allocate xGRAIL | No action (just hold) |
+| Distribution | Weekly epochs | Every 2 minutes |
+| Yield token | Multiple (ETH, GRAIL, etc.) | USD1 only |
+
+**FED Advantage:** Zero friction. Camelot requires users to:
+1. Convert GRAIL → xGRAIL
+2. Allocate to plugin
+3. Manage allocations
+4. Pay 0.5% deallocation fee to exit
+
+FED: Just hold. Get paid. Every 2 minutes.
+
+---
+
+### Conversion/Redemption Mechanics (Exit Friction)
+
+**GRAIL → xGRAIL:**
+- Instant conversion
+- 1:1 ratio
+- No cost
+
+**xGRAIL → GRAIL:**
+| Vesting Period | Conversion Ratio | Burn Rate |
+|----------------|------------------|-----------|
+| 15 days (min) | 0.5:1 | 50% burned |
+| 45 days | 0.61:1 | 39% burned |
+| 90 days | 0.72:1 | 28% burned |
+| 180 days (max) | 1:1 | 0% burned |
+
+**Example:**
+- 1,000 xGRAIL, 15-day vesting
+- Receive: 500 GRAIL
+- Burned: 500 GRAIL
+
+**During Vesting:**
+- 50% of redeeming xGRAIL auto-allocated to Real Yield Staking
+- Still earns rewards while vesting
+- Can cancel anytime (returns xGRAIL, no GRAIL received)
+
+**FED Comparison:**
+FED has NO exit friction by design. The philosophy is different:
+- Camelot: "Commit to earn" (lock mechanics create stickiness)
+- FED: "Just hold to earn" (simplicity creates stickiness)
+
+---
+
+### Deflationary Mechanisms
+
+**Camelot Burns:**
+1. **Buyback & Burn** - Protocol earnings → buy and burn GRAIL
+2. **Redemption Burns** - 0-50% burned during xGRAIL→GRAIL conversion
+3. **Deallocation Tax** - 0.5% burned when leaving plugins
+
+**FED Burns:**
+1. **Buyback & Burn** - Treasury buys during dips, sends to dead address
+2. **All-Time Burned:** ~1.6M $FED ($656+ in buybacks)
+
+**Key Difference:**
+Camelot's burns are systematic (built into every exit action).
+FED's burns are discretionary (Ralph Treasury decides when).
+
+**Consideration:** Should FED add systematic burn mechanisms?
+- Pro: Predictable supply reduction
+- Con: Adds complexity to "just hold" simplicity
+- **Recommendation:** No. FED's simplicity is a feature. Discretionary buybacks work.
+
+---
+
+### Plugin System: What FED Could Learn
+
+**Camelot's Plugin Architecture Strengths:**
+1. **Modularity** - New plugins can be added without core changes
+2. **Composability** - Third parties can build on top
+3. **Choice** - Users decide where to allocate
+4. **Ecosystem Growth** - Partners build plugins → more utility
+
+**Could FED Have Plugins?**
+
+FED already has "plugin-like" systems (built, not activated):
+| FED System | Camelot Equivalent |
+|------------|-------------------|
+| Quest System | Launchpad/Accelerator (gamification) |
+| Seasonal Rewards | N/A (unique to FED) |
+| Referral Bonuses | N/A (unique to FED) |
+| Time Lock | xGRAIL vesting (simplified version) |
+
+**Key Insight:** FED's systems are SIMPLER but less composable. Camelot allows partner protocols to build integrations. FED's systems are closed (Ralph-controlled).
+
+**Trade-off:**
+- Camelot: Ecosystem growth through composability
+- FED: Simplicity through centralized design (Ralph decides)
+
+For a memecoin, FED's approach is correct. Complexity kills memecoin adoption.
+
+---
+
+### Engagement Lessons from Camelot
+
+**What Drives Camelot Engagement:**
+1. **Real Yield** - 25% APY consistently (proven model)
+2. **Ecosystem Integration** - 75+ partners, cross-chain revenue
+3. **Exit Friction** - 15-180 day vesting + burns discourages selling
+4. **Yield Boost** - Allocating xGRAIL boosts farming rewards
+
+**What FED Already Does Better:**
+1. **Simpler** - No conversion, no allocation, no vesting
+2. **Faster** - 2-minute distributions vs weekly epochs
+3. **Higher Fee Share** - 100% vs 17-22.5%
+4. **Stable Yield** - USD1 vs volatile token rewards
+
+**What FED Could Adopt (Adapted):**
+1. **Partner Integration** - Could other protocols build on FED? (future consideration)
+2. **Tiered Boost Clarity** - xGRAIL shows boost % clearly; FED multipliers need better visibility
+3. **Multi-Chain Revenue** - Camelot earns from 8 Orbit chains; FED is Solana-only
+
+---
+
+### FED vs Camelot: Summary Comparison
+
+| Factor | Camelot | FED | Winner |
+|--------|---------|-----|--------|
+| Simplicity | Complex (convert, allocate, vest) | Simple (hold = earn) | **FED** |
+| Real Yield | 25% APY, 17-22.5% of fees | 100% of fees | **FED** |
+| Distribution Frequency | Weekly epochs | Every 2 minutes | **FED** |
+| Exit Friction | 15-180 day vesting + burns | None | Depends |
+| Ecosystem Integration | 75+ partners, multi-chain | Single token, single chain | **Camelot** |
+| Composability | Open plugin architecture | Closed (Ralph-controlled) | **Camelot** |
+| Token Price Support | Systematic burns | Discretionary buybacks | **Camelot** |
+| Scale | $2B+ monthly volume | ~$600K mcap | **Camelot** |
+
+**Conclusion:** FED wins on simplicity and yield efficiency. Camelot wins on ecosystem and scale. Both approaches are valid for their contexts.
+
+---
+
+### Recommendations for FED
+
+**DO NOT Adopt:**
+1. ❌ Plugin architecture - Too complex for memecoin
+2. ❌ Vesting/redemption burns - Breaks "just hold" simplicity
+3. ❌ Non-transferable staking token - Adds unnecessary layer
+
+**CONSIDER for Future:**
+1. ✅ **Clearer Multiplier Visibility** - Show users their exact boost % like Camelot
+2. ✅ **Multi-Chain Expansion** - When/if Solana L2s emerge
+3. ✅ **Partner Integrations** - Simple integrations (not full plugin system)
+
+**VALIDATE Current Approach:**
+1. ✅ "Just hold = earn" is validated (Pendle moved toward simplicity, Camelot's complexity limits participation)
+2. ✅ 100% fee distribution is rare and valuable (most protocols keep 50%+)
+3. ✅ 2-minute frequency is a major differentiator
+
+---
+
+### Key Research Conclusions
+
+**Camelot's Model Works For:**
+- DeFi natives who understand complex mechanics
+- Ecosystem building with partner integrations
+- Long-term holders willing to lock/vest
+
+**FED's Model Works For:**
+- Memecoin audience (simplicity is king)
+- Passive income seekers (no management needed)
+- Short attention spans (instant gratification every 2 min)
+
+**Final Insight:**
+Camelot is a sophisticated DeFi engine. FED is a memecoin money printer. Both work, but for different audiences. FED should NOT try to become Camelot. The "just hold" simplicity is the product.
+
+---
+
+### Sources
+
+- [Camelot xGRAIL Docs](https://docs.camelot.exchange/tokenomics/xgrail-token)
+- [Camelot Plugins Overview](https://docs.camelot.exchange/protocol/xgrail-plugins)
+- [Camelot Real Yield Staking](https://docs.camelot.exchange/protocol/xgrail-plugins/real-yield-staking)
+- [Camelot Conversion/Redemption](https://docs.camelot.exchange/tokenomics/xgrail-token/conversion-redeeming/)
+- [Camelot Deflationary Mechanisms](https://docs.camelot.exchange/tokenomics/deflationary-mechanisms)
+- [Camelot DefiLlama](https://defillama.com/protocol/camelot)
+- [Camelot IQ Wiki](https://iq.wiki/wiki/camelot-dex)
+
+---
+
