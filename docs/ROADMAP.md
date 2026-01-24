@@ -2,7 +2,7 @@
 
 *The Federal Reserve's Vision for Autonomous Yield Distribution*
 
-**Last Updated:** 2026-01-24 21:45 UTC
+**Last Updated:** 2026-01-24 22:20 UTC
 **Maintained By:** Ralph Economist
 
 ---
@@ -620,8 +620,8 @@ FED's competitive position vs leading real yield protocols:
 - Maintain Solana as primary
 - Consider: Base, Arbitrum (where DeFi lives)
 
-#### 5. Scaling Optimizations (Research Complete - Jan 23, 2026)
-- **Target:** Support 5,000-10,000 holders efficiently
+#### 5. Scaling Optimizations (Research Updated - Jan 24, 2026)
+- **Target:** Support 5,000-20,000 holders efficiently
 - **Batch optimization:** Maximize transfers per tx (currently ~5, target ~8-10)
 - **ATA caching:** Pre-create token accounts for known holders
 - **Priority fee tuning:** Dynamic based on network state
@@ -636,10 +636,31 @@ FED's competitive position vs leading real yield protocols:
 | 5,000 | 1,000 txs, ~60s | 500 txs, ~30s | 100 txs, ~6s | ~0.01 SOL flat |
 | 10,000 | 2,000 txs, ~120s | 1,000 txs, ~60s | 200 txs, ~12s | ~0.01 SOL flat |
 
+**Scaling Cost Analysis (Jan 24, 2026 Research - Push Model):**
+
+| Holders | Est. SOL/Run | Est. USD/Run | Annual Gas (720 runs/day) |
+|---------|--------------|--------------|---------------------------|
+| 5,000 | 0.25-1.5 SOL | $60-$360 | $15K-$93K |
+| 10,000 | 0.5-3 SOL | $120-$720 | $31K-$186K |
+| 20,000 | 1-6 SOL | $240-$1,440 | $62K-$372K |
+| 50,000 | 2.5-15 SOL | $600-$3,600 | $155K-$930K |
+
+**Push vs Pull Architecture Trade-off:**
+- FED's "push" (auto-send to holders) = O(n) cost per distribution
+- Industry "pull" (claimable) = O(1) cost per distribution, user pays gas
+- **Decision Point:** At 20K+ holders, evaluate if fees collected > gas costs
+- **Preserve Push:** "Hold = earn automatically" is FED's core UX moat
+
+**Scaling Decision Tree (20K+ Holders):**
+1. **If fees >> gas costs:** Stay full push (current model)
+2. **If fees ≈ gas costs:** Consider tiered frequency (Governors every 2min, Citizens every 30min)
+3. **If fees < gas costs:** Evaluate ZK compression or buyback pivot
+
 **Scaling Roadmap:**
 1. **QE3 (Now):** Implement 10 transfers/tx optimization
 2. **QE4 (H2 2026):** Migrate to P-Token (98% CU reduction, 50+ transfers/tx)
 3. **QE5 (10K+ holders):** ZK Compression migration if cost-effective
+4. **QE6 (20K+ holders):** Architecture decision based on fee/cost ratio
 
 **P-Token (SIMD-0266) Opportunity (Updated Jan 23, 2026):**
 - **Expected Mainnet:** H2 2026 (second Zellic audit + Runtime Verification in progress)
