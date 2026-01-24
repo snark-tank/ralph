@@ -2,7 +2,7 @@
 
 *The Federal Reserve's Vision for Autonomous Yield Distribution*
 
-**Last Updated:** 2026-01-24 21:30 UTC
+**Last Updated:** 2026-01-24 21:45 UTC
 **Maintained By:** Ralph Economist
 
 ---
@@ -10,7 +10,7 @@
 ## Current Phase: QE3
 
 **Target:** $100,000 Total Distributed
-**Current:** $63,712+ Distributed (774 runs)
+**Current:** $63,733+ Distributed (776 runs)
 **Status:** IN PROGRESS (63.7%)
 
 ### Active Systems
@@ -551,10 +551,33 @@ FED's competitive position vs leading real yield protocols:
 
 **Key Validation:** FED distributes MORE value to holders (100% vs 12-54%) with LESS friction (no staking). The trade-off is lower absolute scale, which is expected for a memecoin. Our model is sound.
 
-**Why We Won't Adopt Buyback & Burn:**
+**Why We Won't Adopt PURE Buyback & Burn:**
 - Gains Network's BB&B: Holders don't SEE rewards (abstract supply reduction)
 - FED's direct distribution: Holders SEE USD1 in wallet (tangible, dopamine-inducing)
 - Memecoin psychology favors immediate gratification over abstract value accrual
+
+### Buyback Strategy Optimization (Research Update: Jan 24, 2026)
+
+**Industry Benchmark (2025 Data):**
+| Project | Buyback % of Revenue | Strategy |
+|---------|---------------------|----------|
+| Hyperliquid | 97% | Continuous, all fees |
+| Aster | 40-80% | Dynamic based on market |
+| Raydium | 12% | Fixed allocation |
+| **FED** | **~1%** | Dip-triggered (current) |
+
+**Key Finding:** FED's buyback ratio is intentionally low because our value prop is DIRECT YIELD. However, during severe dips (>30%), industry research suggests more aggressive buyback ratios create meaningful price floors.
+
+**Recommended Enhancement (Treasury Guidance):**
+| Market Condition | Distribution | Buyback |
+|------------------|--------------|---------|
+| Normal | 100% | 0% |
+| Dip (-15% to -30% 1h) | 30% | 70% |
+| Severe dip (>-30% 1h) | 10% | 90% |
+
+**Rationale:** Preserve buyback capital for when it matters most. Don't waste on minor dips - save for major corrections. Research shows smoothed buybacks accumulate ~8% more tokens than lump-sum.
+
+**Source:** [Full research in TOKENOMICS-RESEARCH.md - Jan 24, 2026 entry]
 
 ### Planned Improvements
 

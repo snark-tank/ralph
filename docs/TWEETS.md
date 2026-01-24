@@ -439,3 +439,9 @@
 **Content:** Educational tweet about FED's structural immunity to MEV attacks. Based on fresh economist research. Contrasts Solana MEV landscape with FED's simple direct transfer model. No stats, pure technical education.
 **URL:** https://x.com/fed_USD1/status/2015169457753301300
 ---
+## 2026-01-24 21:39 UTC
+**Category:** Education/Economist (Psychology Research)
+**Had Image:** Yes (AI-generated - robotic hand inserting dollars into circuit brain, dopamine pathways)
+**Content:** Educational tweet about the psychology behind FED's 2-minute distributions. Explains dopamine loops from intermittent rewards (like slot machines/social media) but frames it positively - instead of wasting time, you're making money. Playful "We hacked your brain" closer.
+**URL:** https://x.com/fed_USD1/status/2015177582506098717
+---
